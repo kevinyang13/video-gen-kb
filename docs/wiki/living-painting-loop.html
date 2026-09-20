@@ -189,6 +189,8 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </tr>
 </tbody>
 </table></div>
+<p><strong>Result (2026-09-20)</strong>: success on first run. Birds drift across the sky, waves roll, clouds creep, foreground flowers stay put. Painting itself unchanged frame 1 → 81.</p>
+<p><strong>Measured</strong>: <strong>24 min</strong> wall time for 81 frames at 576×1280 (4 steps ≈ 6 min each, plus ~2.5 min model load). The M4 Max is ~3× slower than the earlier guess on <a href="local-open-source-4k-video-pipeline.html">local open source 4k video pipeline</a>. Speed levers: 832×480 (≈2.5× fewer pixels), 49 frames, or the Wan 2.2 5B model.</p>
 <h2>Step 3 — loop + music (ffmpeg)</h2>
 <p>Ping-pong hides the seam; repeat to ~28 s.</p>
 <pre><code class="language-bash">ffmpeg -i clip.mp4 -filter_complex &quot;[0:v]reverse[r];[0:v][r]concat=n=2:v=1[pp];[pp]loop=loop=3:size=32767[out]&quot; -map &quot;[out]&quot; -an loop.mp4

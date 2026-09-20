@@ -46,6 +46,10 @@ Result: usable on first seed — sunset, cliffs, waves, flowers, birds. ~1 min w
 | Prompt | `static camera, gentle waves rolling onto the shore, grass and wildflowers swaying in a soft breeze, birds drifting slowly across the sky, clouds moving slowly, subtle motion, minimal movement` |
 | Negative | `camera movement, zoom, morphing, flicker, distortion, text, watermark` |
 
+**Result (2026-09-20)**: success on first run. Birds drift across the sky, waves roll, clouds creep, foreground flowers stay put. Painting itself unchanged frame 1 → 81.
+
+**Measured**: **24 min** wall time for 81 frames at 576×1280 (4 steps ≈ 6 min each, plus ~2.5 min model load). The M4 Max is ~3× slower than the earlier guess on [[local-open-source-4k-video-pipeline]]. Speed levers: 832×480 (≈2.5× fewer pixels), 49 frames, or the Wan 2.2 5B model.
+
 ## Step 3 — loop + music (ffmpeg)
 
 Ping-pong hides the seam; repeat to ~28 s.

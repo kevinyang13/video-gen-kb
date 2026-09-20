@@ -80,3 +80,7 @@
 **Created**: `wiki/living-painting-loop.md`. **Updated**: `wiki/index.md`.
 
 **Findings**: Wan 2.2 T2V at 1 frame + Lightning LoRA makes a good painterly still in ~1 min on M4 Max. I2V requires the separate I2V checkpoint pair (High in Model, Low in Refiner). Downloaded `hne_i2v_i8x` (13.7 GB, ~27 min); `lne_i2v_i8x` in progress. Draw Things has no I2V button — mode is implied by model + canvas image.
+
+## 2026-09-20 — First I2V clip measured
+
+Wan 2.2 I2V 14B 8-bit pair, Lightning 4-step, 576×1280 × 81 frames: 24 min on M4 Max. Result matches the TikTok reference. Updated `living-painting-loop`, `local-open-source-4k-video-pipeline` (time budget), `draw-things-setup` (open items).

@@ -188,7 +188,8 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <h2>Realistic time budget (needs verification on this machine)</h2>
 <ul>
 <li>M1 Max, Wan 2.2 Q4 GGUF, ComfyUI, 20 steps: 82 min / 2 s clip (measured, lilting.ch).</li>
-<li>M4 Max, Draw Things, 4-step LoRA: expect single-digit minutes per 5 s 720p clip — extrapolated from the M5 iPad 480p result and 5× fewer steps, <strong>not measured</strong>. First job: time one clip and record it here.</li>
+<li><strong>M4 Max, Draw Things, Wan 2.2 I2V 14B 8-bit pair + Lightning 4-step, 576×1280 × 81 frames: 24 min (measured 2026-09-20)</strong> — ~6 min per step, ~2.5 min model load. Roughly 720p-equivalent pixel count, so budget ~25 min per 5 s 720p clip.</li>
+<li>M4 Max, Wan 2.2 T2V 14B q8 + Lightning, 576×1280 × 1 frame (a still): ~1 min (measured 2026-09-20).</li>
 <li>Upscale + RIFE: roughly real-time to 5× real-time per clip on Metal, depending on model.</li>
 </ul>
 <h2>Not installed yet on this Mac</h2>

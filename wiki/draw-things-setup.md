@@ -75,9 +75,9 @@ Output is saved via the export/share button as MP4; feed it to [[video-upscaling
 
 ## Open questions
 
-- Exact in-app names and sizes of the Wan 2.2 expert pair once downloaded
+- Wan 2.2 I2V 8-bit S pair: `wan_v2.2_a14b_hne_i2v_i8x.ckpt` + `wan_v2.2_a14b_lne_i2v_i8x.ckpt`, 13.7 GB each, ~27 min download each
 - Whether LightX2V LoRA import works as a plain LoRA or needs the Community listing
-- Measured seconds per 81-frame 720p clip on M4 Max
+- ~~Measured seconds per 81-frame 720p clip on M4 Max~~ → 24 min at 576×1280, see [[living-painting-loop]]
 
 ## Related pages
 - [[local-open-source-4k-video-pipeline]]
