@@ -134,7 +134,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <li>Version History → click <strong>Cleared canvas</strong> (canvas must be empty, otherwise Draw Things runs inpainting for 24 min).</li>
 <li>Settings → Basic → Model → search <code>FLUX</code> → <strong>FLUX.2 [klein] 9B (8-bit S)</strong>. Accept "Try recommended settings" (steps 4, CFG 1, shift 3, DDIM Trailing).</li>
 <li>LoRA → Disabled. Strength 100%.</li>
-<li>All → Image Size → width <strong>1024</strong>, height <strong>1792</strong> (sliders; presets often don't register).</li>
+<li>All → Image Size → width <strong>1024</strong>, height <strong>1792</strong>. Height slider: drag thumb from ~153 px to ~205 px (→1600), then to ~233 px (→1792). Presets (9:16 / Small / Normal) register only sometimes; check the label.</li>
 <li>Prompt: long natural-language scene description ending with <code>Makoto Shinkai and Studio Ghibli background art style, ultra detailed, rich painterly brushwork, soft volumetric light, vibrant saturated colors, masterpiece.</code> Describe foreground / middle / sky explicitly.</li>
 <li>Generate. Repeat with new seeds until the composition is right (~1 min each).</li>
 <li>Export: toolbar <strong>4th icon</strong> (folder with down-arrow) → Save → lands in <code>~/Documents/&lt;prompt&gt;_&lt;seed&gt;.png</code>. Move to <code>raw/clips/&lt;name&gt;_1024x1792.png</code>.</li>
@@ -145,7 +145,7 @@ ffmpeg -i NAME_1024x1792.png -vf &quot;crop=1008:1792:8:0,scale=576:1024:flags=l
 </code></pre>
 <h2>3. Animate (Draw Things)</h2>
 <ol>
-<li>Version History → <strong>Cleared canvas</strong>. All → Image Size → 9:16 + <strong>Normal</strong> = 576×1024 (or sliders).</li>
+<li>Version History → <strong>Cleared canvas</strong>. All → Image Size → 576×1024: try 9:16 + Small/Normal first; if it lands on 1:1 or 1024×1792, set the sliders (width click at ~117 px, height click at ~162 px, then nudge-drag each).</li>
 <li>Click <strong>Drag or paste an image</strong> on the canvas → file picker → pick <code>NAME_576x1024.png</code>. It must fill the canvas.</li>
 <li>Model → search <code>Wan</code> → <strong>Wan 2.2 High Noise Expert I2V A14B (8-bit S)</strong>. Accept recommended settings.</li>
 <li><strong>Verify, in All settings, every one of these</strong> (recommended settings reset them):
@@ -155,7 +155,7 @@ ffmpeg -i NAME_1024x1792.png -vf &quot;crop=1008:1792:8:0,scale=576:1024:flags=l
    - Number of Frames <strong>81</strong>
    - Text Guidance <strong>1.0</strong> (label click = +0.1)
    - Shift 5, Sampler UniPC Trailing
-   - <strong>Refiner Model = Wan 2.2 Low Noise Expert I2V A14B (8-bit S)</strong> — recommended settings pick the <em>6-bit</em> one, which is not downloaded, and the refiner is then silently skipped → washed-out noise. Check the suffix.
+   - <strong>Refiner Model = Wan 2.2 Low Noise Expert I2V A14B (8-bit S)</strong> — recommended settings pick the <em>6-bit</em> one <strong>every single time</strong> (confirmed on 3 of 3 model switches); it is not downloaded and the refiner is then silently skipped → washed-out noise. Open the refiner dropdown and pick the Local entry ending in <code>(8-bit S)</code>.
    - Refiner Start 10%
    - LoRA → Wan 2.2 A14B Lightning High-Noise, 100%</li>
 <li>Prompt (motion only, never describe the subject):

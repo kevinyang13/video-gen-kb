@@ -30,7 +30,7 @@ Iterate on the still. Commit to I2V once.
 1. Version History → click **Cleared canvas** (canvas must be empty, otherwise Draw Things runs inpainting for 24 min).
 2. Settings → Basic → Model → search `FLUX` → **FLUX.2 [klein] 9B (8-bit S)**. Accept "Try recommended settings" (steps 4, CFG 1, shift 3, DDIM Trailing).
 3. LoRA → Disabled. Strength 100%.
-4. All → Image Size → width **1024**, height **1792** (sliders; presets often don't register).
+4. All → Image Size → width **1024**, height **1792**. Height slider: drag thumb from ~153 px to ~205 px (→1600), then to ~233 px (→1792). Presets (9:16 / Small / Normal) register only sometimes; check the label.
 5. Prompt: long natural-language scene description ending with `Makoto Shinkai and Studio Ghibli background art style, ultra detailed, rich painterly brushwork, soft volumetric light, vibrant saturated colors, masterpiece.` Describe foreground / middle / sky explicitly.
 6. Generate. Repeat with new seeds until the composition is right (~1 min each).
 7. Export: toolbar **4th icon** (folder with down-arrow) → Save → lands in `~/Documents/<prompt>_<seed>.png`. Move to `raw/clips/<name>_1024x1792.png`.
@@ -44,7 +44,7 @@ ffmpeg -i NAME_1024x1792.png -vf "crop=1008:1792:8:0,scale=576:1024:flags=lanczo
 
 ## 3. Animate (Draw Things)
 
-1. Version History → **Cleared canvas**. All → Image Size → 9:16 + **Normal** = 576×1024 (or sliders).
+1. Version History → **Cleared canvas**. All → Image Size → 576×1024: try 9:16 + Small/Normal first; if it lands on 1:1 or 1024×1792, set the sliders (width click at ~117 px, height click at ~162 px, then nudge-drag each).
 2. Click **Drag or paste an image** on the canvas → file picker → pick `NAME_576x1024.png`. It must fill the canvas.
 3. Model → search `Wan` → **Wan 2.2 High Noise Expert I2V A14B (8-bit S)**. Accept recommended settings.
 4. **Verify, in All settings, every one of these** (recommended settings reset them):
@@ -54,7 +54,7 @@ ffmpeg -i NAME_1024x1792.png -vf "crop=1008:1792:8:0,scale=576:1024:flags=lanczo
    - Number of Frames **81**
    - Text Guidance **1.0** (label click = +0.1)
    - Shift 5, Sampler UniPC Trailing
-   - **Refiner Model = Wan 2.2 Low Noise Expert I2V A14B (8-bit S)** — recommended settings pick the *6-bit* one, which is not downloaded, and the refiner is then silently skipped → washed-out noise. Check the suffix.
+   - **Refiner Model = Wan 2.2 Low Noise Expert I2V A14B (8-bit S)** — recommended settings pick the *6-bit* one **every single time** (confirmed on 3 of 3 model switches); it is not downloaded and the refiner is then silently skipped → washed-out noise. Open the refiner dropdown and pick the Local entry ending in `(8-bit S)`.
    - Refiner Start 10%
    - LoRA → Wan 2.2 A14B Lightning High-Noise, 100%
 5. Prompt (motion only, never describe the subject):
