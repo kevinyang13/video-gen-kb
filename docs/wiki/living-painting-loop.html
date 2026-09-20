@@ -191,12 +191,18 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </table></div>
 <p><strong>Result (2026-09-20)</strong>: success on first run. Birds drift across the sky, waves roll, clouds creep, foreground flowers stay put. Painting itself unchanged frame 1 → 81.</p>
 <p><strong>Measured</strong>: <strong>24 min</strong> wall time for 81 frames at 576×1280 (4 steps ≈ 6 min each, plus ~2.5 min model load). The M4 Max is ~3× slower than the earlier guess on <a href="local-open-source-4k-video-pipeline.html">local open source 4k video pipeline</a>. Speed levers: 832×480 (≈2.5× fewer pixels), 49 frames, or the Wan 2.2 5B model.</p>
-<h2>Step 3 — loop + music (ffmpeg)</h2>
-<p>Ping-pong hides the seam; repeat to ~28 s.</p>
-<pre><code class="language-bash">ffmpeg -i clip.mp4 -filter_complex &quot;[0:v]reverse[r];[0:v][r]concat=n=2:v=1[pp];[pp]loop=loop=3:size=32767[out]&quot; -map &quot;[out]&quot; -an loop.mp4
-ffmpeg -i loop.mp4 -i music.mp3 -c:v copy -c:a aac -shortest final.mp4
+<h2>Step 3 — export + loop (done 2026-09-20)</h2>
+<p><strong>Export from Draw Things</strong>: toolbar icon 4 (folder with down-arrow, right of the share icon) → Save. Writes a <strong>ProRes <code>.mov</code></strong> to <code>~/Documents</code>, named after the <em>first</em> prompt in the project plus a seed. The share icon (↑) only offers AirDrop/Mail/Notes/Photos — no file save. Exported clip: 576×1280, 16 fps, 81 frames, 5.06 s, 57 MB.</p>
+<p><strong>Loop</strong> — crop to 9:16, ping-pong (forward + reverse) so the seam is invisible, repeat ×3 → 30 s:</p>
+<pre><code class="language-bash">ffmpeg -i coast.mov -filter_complex \
+  &quot;[0:v]crop=576:1024:0:128,setsar=1[c];[c]split[a][b];[b]reverse[r];[a][r]concat=n=2:v=1[pp];[pp]loop=loop=2:size=32767,setpts=N/FRAME_RATE/TB[out]&quot; \
+  -map &quot;[out]&quot; -r 16 -c:v libx264 -pix_fmt yuv420p -crf 18 -an coast_loop.mp4
 </code></pre>
-<p>Crop 576×1280 → 576×1024 (9:16): add <code>crop=576:1024</code> to the filter chain. Upscale to 1080×1920 with Real-ESRGAN if posting; 4K unnecessary for TikTok.</p>
+<p>Result: 486 frames, 30.4 s, 12.8 MB. Birds reversing direction on the ping-pong is visible if you look; a hard-cut loop (<code>loop=loop=5</code> on <code>[c]</code> without reverse) avoids that at the cost of a visible jump.</p>
+<p><strong>Music</strong> (when a track is chosen):</p>
+<pre><code class="language-bash">ffmpeg -i coast_loop.mp4 -i music.mp3 -c:v copy -c:a aac -b:a 192k -shortest coast_final.mp4
+</code></pre>
+<p><strong>Upscale</strong> to 1080×1920 for posting: Real-ESRGAN ncnn, or quick <code>-vf scale=1080:1920:flags=lanczos</code>. 4K is unnecessary for TikTok.</p>
 <h2>Draw Things UI notes (learned driving it via accessibility)</h2>
 <ul>
 <li><strong>No I2V button.</strong> I2V = I2V model selected + image on Canvas + Frames &gt; 1. With a T2V model the Strength tab reads "Text to Video / Video to Video"; with an I2V model it reads "Image to Video / Video to Video".</li>

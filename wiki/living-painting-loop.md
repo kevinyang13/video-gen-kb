@@ -50,16 +50,27 @@ Result: usable on first seed — sunset, cliffs, waves, flowers, birds. ~1 min w
 
 **Measured**: **24 min** wall time for 81 frames at 576×1280 (4 steps ≈ 6 min each, plus ~2.5 min model load). The M4 Max is ~3× slower than the earlier guess on [[local-open-source-4k-video-pipeline]]. Speed levers: 832×480 (≈2.5× fewer pixels), 49 frames, or the Wan 2.2 5B model.
 
-## Step 3 — loop + music (ffmpeg)
+## Step 3 — export + loop (done 2026-09-20)
 
-Ping-pong hides the seam; repeat to ~28 s.
+**Export from Draw Things**: toolbar icon 4 (folder with down-arrow, right of the share icon) → Save. Writes a **ProRes `.mov`** to `~/Documents`, named after the *first* prompt in the project plus a seed. The share icon (↑) only offers AirDrop/Mail/Notes/Photos — no file save. Exported clip: 576×1280, 16 fps, 81 frames, 5.06 s, 57 MB.
+
+**Loop** — crop to 9:16, ping-pong (forward + reverse) so the seam is invisible, repeat ×3 → 30 s:
 
 ```bash
-ffmpeg -i clip.mp4 -filter_complex "[0:v]reverse[r];[0:v][r]concat=n=2:v=1[pp];[pp]loop=loop=3:size=32767[out]" -map "[out]" -an loop.mp4
-ffmpeg -i loop.mp4 -i music.mp3 -c:v copy -c:a aac -shortest final.mp4
+ffmpeg -i coast.mov -filter_complex \
+  "[0:v]crop=576:1024:0:128,setsar=1[c];[c]split[a][b];[b]reverse[r];[a][r]concat=n=2:v=1[pp];[pp]loop=loop=2:size=32767,setpts=N/FRAME_RATE/TB[out]" \
+  -map "[out]" -r 16 -c:v libx264 -pix_fmt yuv420p -crf 18 -an coast_loop.mp4
 ```
 
-Crop 576×1280 → 576×1024 (9:16): add `crop=576:1024` to the filter chain. Upscale to 1080×1920 with Real-ESRGAN if posting; 4K unnecessary for TikTok.
+Result: 486 frames, 30.4 s, 12.8 MB. Birds reversing direction on the ping-pong is visible if you look; a hard-cut loop (`loop=loop=5` on `[c]` without reverse) avoids that at the cost of a visible jump.
+
+**Music** (when a track is chosen):
+
+```bash
+ffmpeg -i coast_loop.mp4 -i music.mp3 -c:v copy -c:a aac -b:a 192k -shortest coast_final.mp4
+```
+
+**Upscale** to 1080×1920 for posting: Real-ESRGAN ncnn, or quick `-vf scale=1080:1920:flags=lanczos`. 4K is unnecessary for TikTok.
 
 ## Draw Things UI notes (learned driving it via accessibility)
 
