@@ -96,3 +96,7 @@ Ping-pong rejected (reverses wave and bird motion). Replaced with forward-only l
 ## 2026-09-20 — FLUX.2 klein still
 
 Quality gap vs reference diagnosed (video-model still, no supersampling, I2V softening). Downloaded FLUX.2 [klein] 9B (8-bit S) + Qwen3-8B encoder (~17.8 GB). 1024×1792 still in ~1 min, reference-grade. Downscaled 2× for I2V; second I2V run in progress. Updated `living-painting-loop`.
+
+## 2026-09-20 — Refiner mismatch gotcha
+
+Second I2V run produced washed-out noise: recommended settings had selected the 6-bit Low Noise refiner (not downloaded) instead of the local 8-bit S. Documented in `draw-things-setup`. Re-running with correct refiner.

@@ -73,6 +73,10 @@ Output is saved via the export/share button as MP4; feed it to [[video-upscaling
 - **Hunyuan Video** — 720p cinematic, 14 camera-move presets, frames 1+4n up to 129.
 - **SkyReels** — Hunyuan derivative for humans/faces, 544p. Set **T2V = 100%** in Settings for it to run (source: Draw Things wiki). Worth an A/B against Wan 2.2 on family portraits.
 
+## Gotcha: refiner variant mismatch (2026-09-20)
+
+"Try recommended settings" on a Wan 2.2 I2V card fills the Refiner slot with the **6-bit SVDQuant** Low Noise expert regardless of what is downloaded. If you only have the 8-bit S variant, the refiner is silently skipped and the output is washed-out, noisy garbage (high-noise expert alone). After any model switch, open All → Refiner Model and confirm the suffix matches a local checkpoint. Cost of missing it: one wasted 15-minute render.
+
 ## Open questions
 
 - Wan 2.2 I2V 8-bit S pair: `wan_v2.2_a14b_hne_i2v_i8x.ckpt` + `wan_v2.2_a14b_lne_i2v_i8x.ckpt`, 13.7 GB each, ~27 min download each
