@@ -77,10 +77,15 @@ Other tracks: Pixabay → press play on a track page → `document.querySelector
 |---|---|---|---|---|
 | 2026-09-20 | Coastal wildflowers (v2) | 20104302 | 1180755429 | `coast_v2_*` |
 | 2026-09-20 | Torrey Pines, San Diego | 1190544862 | 284526412 | `torrey_*` |
+| 2026-09-20 | Golden Gate, San Francisco (first native-576×1024 run) | — | 601904108 | `goldengate_*` |
 
 ## 5. File in the wiki
 
 Append to `wiki/log.md`, note anything new on [[living-painting-loop]], `python3 scripts/build_site.py`, commit, push. Clips stay out of git (`raw/clips/` is ignored).
+
+## When the Mac is locked
+
+macOS blocks all Accessibility input while the screen is locked, so nothing in Draw Things can be clicked or typed — only screenshots work. A render already running continues fine; the Save dialog will wait. The automation watches `ioreg -n Root -d1 -a | grep -A1 CGSSessionScreenIsLocked` and resumes on unlock. Long-term fix: Draw Things HTTP API server (Settings → API Server) so generation and saving need no screen.
 
 ## Failure signatures
 

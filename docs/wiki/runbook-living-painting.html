@@ -192,10 +192,19 @@ scripts/finish_clip.sh raw/clips/NAME.mov raw/clips/calm_ambient_dreamscape.mp3
 <td>284526412</td>
 <td><code>torrey_*</code></td>
 </tr>
+<tr>
+<td>2026-09-20</td>
+<td>Golden Gate, San Francisco (first native-576×1024 run)</td>
+<td>—</td>
+<td>601904108</td>
+<td><code>goldengate_*</code></td>
+</tr>
 </tbody>
 </table></div>
 <h2>5. File in the wiki</h2>
 <p>Append to <code>wiki/log.md</code>, note anything new on <a href="living-painting-loop.html">living painting loop</a>, <code>python3 scripts/build_site.py</code>, commit, push. Clips stay out of git (<code>raw/clips/</code> is ignored).</p>
+<h2>When the Mac is locked</h2>
+<p>macOS blocks all Accessibility input while the screen is locked, so nothing in Draw Things can be clicked or typed — only screenshots work. A render already running continues fine; the Save dialog will wait. The automation watches <code>ioreg -n Root -d1 -a | grep -A1 CGSSessionScreenIsLocked</code> and resumes on unlock. Long-term fix: Draw Things HTTP API server (Settings → API Server) so generation and saving need no screen.</p>
 <h2>Failure signatures</h2>
 <div class="tw"><table>
 <thead>

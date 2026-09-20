@@ -151,6 +151,8 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <p><strong>Created</strong>: <code>wiki/runbook-living-painting.md</code> (checklist distilled from the day's two runs, with failure-signature table), <code>scripts/finish_clip.sh</code> (loop + music in one command). <strong>Updated</strong>: <code>wiki/index.md</code>, <code>CLAUDE.md</code> (Producing a video section).</p>
 <h2>2026-09-20 — Torrey Pines video (second run of the runbook)</h2>
 <p>New Draw Things project, same settings. Still (FLUX.2 klein, seed 1190544862) → I2V (seed 284526412, ~15 min) → <code>finish_clip.sh</code> → <code>raw/clips/torrey_final.mp4</code>. No wasted renders; refiner trap caught by the checklist. Runbook updated: save exports straight into <code>raw/clips/</code>, ffprobe before looping; added a "Done so far" table.</p>
+<h2>2026-09-20 — Golden Gate (native 576×1024 test) + lock-screen finding</h2>
+<p>Still generated directly at 576×1024 with FLUX.2 klein: quality indistinguishable from the supersampled path in the finished video. Runbook now uses this as the default (one human click per video). Mac was locked for ~2.5 h with the Save dialog open; render survived, saved on unlock → <code>raw/clips/goldengate_final.mp4</code>. Documented lock behaviour in the runbook.</p>
   
 </div>
 <footer>video-gen-kb · built 2026-09-20 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>

@@ -116,3 +116,7 @@ Pixabay CC0 ambient track muxed with fades → `raw/clips/coast_v2_final.mp4`. L
 ## 2026-09-20 — Torrey Pines video (second run of the runbook)
 
 New Draw Things project, same settings. Still (FLUX.2 klein, seed 1190544862) → I2V (seed 284526412, ~15 min) → `finish_clip.sh` → `raw/clips/torrey_final.mp4`. No wasted renders; refiner trap caught by the checklist. Runbook updated: save exports straight into `raw/clips/`, ffprobe before looping; added a "Done so far" table.
+
+## 2026-09-20 — Golden Gate (native 576×1024 test) + lock-screen finding
+
+Still generated directly at 576×1024 with FLUX.2 klein: quality indistinguishable from the supersampled path in the finished video. Runbook now uses this as the default (one human click per video). Mac was locked for ~2.5 h with the Save dialog open; render survived, saved on unlock → `raw/clips/goldengate_final.mp4`. Documented lock behaviour in the runbook.
