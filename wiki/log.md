@@ -108,3 +108,7 @@ FLUX.2 klein still → Wan 2.2 I2V (correct 8-bit refiner, 15.5 min) → forward
 ## 2026-09-20 — Music added, deliverable complete
 
 Pixabay CC0 ambient track muxed with fades → `raw/clips/coast_v2_final.mp4`. Living-painting recipe complete end to end. Updated `living-painting-loop`.
+
+## 2026-09-20 — Runbook + finish script
+
+**Created**: `wiki/runbook-living-painting.md` (checklist distilled from the day's two runs, with failure-signature table), `scripts/finish_clip.sh` (loop + music in one command). **Updated**: `wiki/index.md`, `CLAUDE.md` (Producing a video section).

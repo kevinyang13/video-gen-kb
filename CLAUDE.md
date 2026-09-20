@@ -16,7 +16,12 @@ wiki/log.md   -- append-only record of all operations
 docs/         -- generated static site (do not edit by hand)
 scripts/build_site.py -- renders wiki/ -> docs/
 serve.sh      -- rebuild + serve docs/ on http://localhost:8788
+scripts/finish_clip.sh -- I2V export (.mov) -> looped 1080x1920 mp4 (+ music)
+raw/clips/    -- generated stills/clips/music (git-ignored)
 ```
+
+## Producing a video
+Follow `wiki/runbook-living-painting.md` step by step. After each session, record timings and any new gotcha on the relevant recipe page and in `wiki/log.md`.
 
 ## Site
 `docs/` is a static site rendered from `wiki/`. After any wiki change, run
