@@ -92,3 +92,7 @@ Exported ProRes from Draw Things (toolbar export icon → `~/Documents`), croppe
 ## 2026-09-20 — Loop method corrected
 
 Ping-pong rejected (reverses wave and bird motion). Replaced with forward-only loop using an 8-frame tail→head crossfade. Updated `living-painting-loop`.
+
+## 2026-09-20 — FLUX.2 klein still
+
+Quality gap vs reference diagnosed (video-model still, no supersampling, I2V softening). Downloaded FLUX.2 [klein] 9B (8-bit S) + Qwen3-8B encoder (~17.8 GB). 1024×1792 still in ~1 min, reference-grade. Downscaled 2× for I2V; second I2V run in progress. Updated `living-painting-loop`.

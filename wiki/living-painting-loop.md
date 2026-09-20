@@ -32,6 +32,29 @@ No Flux/SDXL on this Mac, so the still came from **Wan 2.2 T2V at 1 frame** — 
 
 Result: usable on first seed — sunset, cliffs, waves, flowers, birds. ~1 min wall time (est. shown 1:07).
 
+### Step 1b — better still with FLUX.2 klein 9B (2026-09-20)
+
+The Wan-T2V still was visibly flatter than the TikTok reference: a distilled 4-step *video* model at native 576×1280 has no texture headroom. Fix = dedicated image model + supersampling.
+
+| Setting | Value |
+|---|---|
+| Model | **FLUX.2 [klein] 9B (8-bit S)** — community list in Draw Things; `flux_2_klein_9b_i8x.ckpt` 9.2 GB + `qwen_3_8b_q8p.ckpt` 8.4 GB text encoder + `flux_2_vae_f16` |
+| Steps / CFG / Shift | 4 / 1.0 / 3 (klein is a 4-step distill; "Try recommended settings" sets these) |
+| Sampler | DDIM Trailing |
+| Size | **1024×1792** (Normal → 9:16 would not click; set via sliders) |
+| Canvas | must be **empty** — with an image present Draw Things silently switches to "Image to Image + Inpainting" and the estimate jumps to 24 min |
+| Prompt | long natural-language: `A breathtaking anime background painting of a coastal hillside at golden hour. Foreground: dense wildflowers in white, pink, yellow and blue with tall swaying grass, every petal crisply painted. Middle ground: lush green cliffs dropping to a turquoise bay with rolling white surf on a sandy cove. Sky: enormous towering cumulus clouds lit orange and pink by the setting sun, a few tiny birds in silhouette. Makoto Shinkai and Studio Ghibli background art style, ultra detailed, rich painterly brushwork, soft volumetric light, vibrant saturated colors, masterpiece.` |
+
+~1 min. Result is reference-grade: towering cumulus with depth, crisp petals, layered surf.
+
+**Downscale for I2V** (supersampling is where the crispness comes from):
+
+```bash
+ffmpeg -i coast_flux_1024x1792.png -vf "crop=1008:1792:8:0,scale=576:1024:flags=lanczos" coast_flux_576x1024.png
+```
+
+Load it via the "Drag or paste an image" button (opens a file picker — needs a human click; clipboard paste is blocked for the automation tools). Draw Things' "Normal" size at 9:16 is exactly 576×1024, so the image fills the canvas.
+
 ## Step 2 — animate (I2V)
 
 | Setting | Value |
