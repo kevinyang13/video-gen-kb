@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Video Generation Landscape (2026) — video-gen-kb</title>
+<style>
+:root{--bg:#0B0D12;--panel:#141822;--panel-2:#1B2130;--stroke:#2A3245;--text:#E6E9F0;
+--muted:#8B94A7;--accent:#F5B84B;--accent-2:#4BC9F5;--on-accent:#12131A;
+--rule:rgba(139,148,167,.22);--code:#F5B84B}
+@media(prefers-color-scheme:light){:root:not([data-theme=dark]){--bg:#F4F1EA;--panel:#fff;
+--panel-2:#FAF8F3;--stroke:#D9D3C6;--text:#16181F;--muted:#5D6473;--accent:#B8781A;
+--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}}
+:root[data-theme=light]{--bg:#F4F1EA;--panel:#fff;--panel-2:#FAF8F3;--stroke:#D9D3C6;
+--text:#16181F;--muted:#5D6473;--accent:#B8781A;--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);
+line-height:1.65;padding:0 1rem 4rem}
+.shell{max-width:840px;margin:0 auto}
+a{color:var(--accent);text-decoration:none;font-weight:600}
+a:hover{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--accent-2);outline-offset:3px;border-radius:4px}
+.bar{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;padding:1.1rem 0;margin-bottom:1.5rem;
+border-bottom:1px solid var(--stroke)}
+.crumb{font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.spacer{flex:1}
+.pill{border:1px solid var(--stroke);background:var(--panel);border-radius:999px;padding:.28rem .8rem;
+font-size:.75rem;font-weight:700;color:var(--text);cursor:pointer;font-family:inherit}
+.pill:hover{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+h1{font-size:clamp(1.7rem,5vw,2.5rem);margin:.2rem 0 1rem;line-height:1.1;letter-spacing:-.015em;text-wrap:balance}
+h2{font-size:1.25rem;margin:2.2rem 0 .7rem;padding-bottom:.35rem;border-bottom:1px solid var(--rule);text-wrap:balance}
+h3{font-size:1.02rem;margin:1.5rem 0 .5rem;color:var(--accent)}
+p{margin:.7rem 0}
+ul,ol{margin:.7rem 0 .7rem 1.3rem}
+li{margin:.28rem 0}
+li::marker{color:var(--accent)}
+em{color:var(--muted)}
+hr{border:none;border-top:1px solid var(--stroke);margin:2rem 0}
+blockquote{border-left:3px solid var(--accent);background:var(--panel);border-radius:0 10px 10px 0;
+padding:.8rem 1.1rem;margin:1.1rem 0;color:var(--muted);font-size:.92rem}
+code{background:var(--panel);border:1px solid var(--stroke);border-radius:5px;padding:.1rem .35rem;
+font-size:.85em;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--code)}
+pre{background:var(--panel);border:1px solid var(--stroke);border-radius:12px;padding:1rem;overflow-x:auto;margin:1.1rem 0}
+pre code{background:none;border:none;padding:0;color:var(--text);font-size:.83rem;line-height:1.55}
+.tw{overflow-x:auto;border:1px solid var(--stroke);border-radius:12px;background:var(--panel);margin:1.1rem 0}
+table{width:100%;border-collapse:collapse;font-size:.85rem;min-width:min(100%,460px)}
+th{background:var(--panel-2);color:var(--accent);text-align:left;padding:.55rem .8rem;font-size:.68rem;
+letter-spacing:.09em;text-transform:uppercase;white-space:nowrap;border-bottom:1px solid var(--stroke)}
+td{padding:.5rem .8rem;border-bottom:1px solid var(--rule);color:var(--muted);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td strong{color:var(--text)}
+.meta{display:flex;flex-wrap:wrap;gap:.4rem .9rem;font-size:.78rem;color:var(--muted);margin:-.4rem 0 1.2rem}
+.meta b{color:var(--text);font-weight:600}
+.missing{color:var(--muted);border-bottom:1px dashed var(--muted);cursor:help}
+.related{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--stroke)}
+.related h2{border:none;margin:0 0 .7rem;font-size:.95rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:0}
+.chips li{margin:0}
+.chips a,.chips .missing{display:inline-block;border:1px solid var(--stroke);background:var(--panel);
+border-radius:999px;padding:.28rem .8rem;font-size:.8rem}
+.chips a:hover{background:var(--accent);color:var(--on-accent);text-decoration:none;border-color:var(--accent)}
+footer{max-width:840px;margin:2.5rem auto 0;padding-top:1.2rem;border-top:1px solid var(--stroke);
+font-size:.75rem;color:var(--muted);text-align:center}
+/* landing */
+.hero{padding:2.4rem 0 1.6rem}
+.kicker{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2)}
+.hero h1{font-size:clamp(2rem,6vw,3.2rem);margin:.35rem 0 .5rem}
+.hero p{color:var(--muted);font-size:1.05rem;max-width:56ch}
+.hw{display:inline-flex;gap:.5rem;align-items:center;margin-top:1rem;border:1px solid var(--stroke);
+background:var(--panel);border-radius:999px;padding:.3rem .9rem;font-size:.78rem;color:var(--muted)}
+.hw .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.sec{margin-top:2.2rem}
+.sec h2{border:none;padding:0;margin:0 0 .8rem;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.9rem}
+.card{display:block;border:1px solid var(--stroke);background:var(--panel);border-radius:14px;padding:1rem 1.1rem;
+color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+.card b{display:block;color:var(--accent);font-size:1rem;margin-bottom:.3rem}
+.card span{font-size:.85rem;color:var(--muted);line-height:1.5}
+.stubs{font-size:.82rem;color:var(--muted);margin-top:.6rem}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="bar">
+    <span class="crumb"><a href="../">video-gen-kb</a> / <a href="index.html">Wiki</a></span>
+    <span class="spacer"></span>
+    <button class="pill" onclick="tt()">◐ Theme</button>
+  </nav>
+  <h1>Video Generation Landscape (2026)</h1><p class="lede">One-page map of the AI video space as of 2026-09-19 — models (open and closed), the harnesses that run them, the apps and websites that sell access, launch dates, and a rough popularity read. Use it to place any new name you hear.</p><div class="meta"><span><b>Updated</b> 2026-09-19</span><span><b>Sources</b> 2026-09-19-local-4k-video-research.md. Entries marked <em>needs verification</em> come from general knowledge, not a file in <code>raw/</code>.</span></div>
+<hr />
+<h2>How to read this page</h2>
+<p>Four layers. A <strong>model</strong> is weights. A <strong>harness</strong> loads weights and runs them. An <strong>app</strong> wraps a harness in a GUI. A <strong>website/platform</strong> rents closed or open models by the clip. Most confusion ("OpenArt vs Seedance") comes from comparing across layers.</p>
+<p>Popularity is a qualitative read: ★★★ = dominant in its layer, ★★ = widely used, ★ = niche. Dates are first public release of the named version.</p>
+<h2>Layer 1 — Models, open weights</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Maker</th>
+<th>Launched</th>
+<th>Params</th>
+<th>Native output</th>
+<th>Audio</th>
+<th>License</th>
+<th>Mac</th>
+<th>Popularity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Wan 2.2</strong> (I2V-A14B, T2V-A14B, TI2V-5B)</td>
+<td>Alibaba</td>
+<td>2025-07 <em>(needs verification)</em></td>
+<td>14B MoE / 5B</td>
+<td>720p, 16–24 fps, ~5 s</td>
+<td>no</td>
+<td>Apache 2.0</td>
+<td>Draw Things, mlx-video, GGUF</td>
+<td>★★★ open-source default</td>
+</tr>
+<tr>
+<td>Wan 2.1 (1.3B, 14B)</td>
+<td>Alibaba</td>
+<td>2025-02 <em>(needs verification)</em></td>
+<td>1.3B / 14B</td>
+<td>480p / 720p, 81 f</td>
+<td>no</td>
+<td>Apache 2.0</td>
+<td>Draw Things, mlx-video</td>
+<td>★★ still common, CausVid LoRA</td>
+</tr>
+<tr>
+<td>Wan 2.7</td>
+<td>Alibaba</td>
+<td>2026 <em>(needs verification)</em></td>
+<td>undisclosed</td>
+<td>unconfirmed</td>
+<td>unconfirmed</td>
+<td>"open-weight line" per one source</td>
+<td>unknown</td>
+<td>★ new; specs unconfirmed</td>
+</tr>
+<tr>
+<td><strong>LTX-2.5</strong></td>
+<td>Lightricks</td>
+<td>2026-08-11</td>
+<td>22B</td>
+<td>up to 4K HDR via 2-stage, auto duration, multi-shot</td>
+<td>yes, native</td>
+<td>free &lt; $10M ARR</td>
+<td>ltx-2-mlx</td>
+<td>★★ rising fast</td>
+</tr>
+<tr>
+<td><strong>LTX-2.3</strong> (dev, distilled, distilled-1.1)</td>
+<td>Lightricks</td>
+<td>2026-03-05</td>
+<td>22B</td>
+<td>480×704 default → 1080p; 4K via ×2 latent upscaler</td>
+<td>yes, native</td>
+<td>LTX-2 community</td>
+<td>Draw Things, ltx-2-mlx</td>
+<td>★★</td>
+</tr>
+<tr>
+<td>LTX-2</td>
+<td>Lightricks</td>
+<td>2026-01 <em>(needs verification)</em></td>
+<td>19B</td>
+<td>1080p→4K via upscaler</td>
+<td>yes</td>
+<td>LTX-2 community</td>
+<td>ltx-2-mlx lineage</td>
+<td>★ superseded</td>
+</tr>
+<tr>
+<td>LTX-Video 0.9.x</td>
+<td>Lightricks</td>
+<td>2024-11 <em>(needs verification)</em></td>
+<td>2B</td>
+<td>768×512, real-time class</td>
+<td>no</td>
+<td>Apache 2.0</td>
+<td>MPS</td>
+<td>★ superseded</td>
+</tr>
+<tr>
+<td><strong>HunyuanVideo 1.5</strong></td>
+<td>Tencent</td>
+<td>2025-11 <em>(needs verification)</em></td>
+<td>8.3B DiT</td>
+<td>720p T2V/I2V</td>
+<td>no</td>
+<td>Tencent community</td>
+<td>GGUF only</td>
+<td>★★</td>
+</tr>
+<tr>
+<td>HunyuanVideo (1.0)</td>
+<td>Tencent</td>
+<td>2024-12 <em>(needs verification)</em></td>
+<td>13B</td>
+<td>720p, up to 129 f, 14 camera presets</td>
+<td>no</td>
+<td>Tencent community</td>
+<td>Draw Things</td>
+<td>★★</td>
+</tr>
+<tr>
+<td>SkyReels (V1/V2)</td>
+<td>Skywork</td>
+<td>2025-02 <em>(needs verification)</em></td>
+<td>13B (Hunyuan-derived)</td>
+<td>544p, human/face focus</td>
+<td>no</td>
+<td>open</td>
+<td>Draw Things (T2V=100%)</td>
+<td>★</td>
+</tr>
+<tr>
+<td>CogVideoX 1.5</td>
+<td>Zhipu / THUDM</td>
+<td>2024-11 <em>(needs verification)</em></td>
+<td>5B</td>
+<td>768×1360, 10 s</td>
+<td>no</td>
+<td>Apache 2.0 / custom</td>
+<td>diffusers MPS</td>
+<td>★ superseded</td>
+</tr>
+<tr>
+<td>Mochi 1</td>
+<td>Genmo</td>
+<td>2024-10 <em>(needs verification)</em></td>
+<td>10B</td>
+<td>480p</td>
+<td>no</td>
+<td>Apache 2.0</td>
+<td>heavy</td>
+<td>★ superseded</td>
+</tr>
+<tr>
+<td>MAGI-1</td>
+<td>Sand AI</td>
+<td>2025-04 <em>(needs verification)</em></td>
+<td>24B / 4.5B autoregressive</td>
+<td>720p, chunked</td>
+<td>no</td>
+<td>Apache 2.0</td>
+<td>none</td>
+<td>★</td>
+</tr>
+<tr>
+<td>Stable Video Diffusion</td>
+<td>Stability AI</td>
+<td>2023-11 <em>(needs verification)</em></td>
+<td>1.5B</td>
+<td>576×1024, 25 f, I2V only</td>
+<td>no</td>
+<td>non-commercial</td>
+<td>Draw Things</td>
+<td>★ obsolete</td>
+</tr>
+<tr>
+<td><strong>SeedVR2</strong> (upscaler)</td>
+<td>ByteDance</td>
+<td>2025-06 <em>(needs verification)</em></td>
+<td>3B / 7B</td>
+<td>×2–×4 temporal restore</td>
+<td>—</td>
+<td>Apache 2.0</td>
+<td>ComfyUI MPS</td>
+<td>★★ best open upscaler</td>
+</tr>
+<tr>
+<td>FlashVSR (upscaler)</td>
+<td>community</td>
+<td>2025 <em>(needs verification)</em></td>
+<td>—</td>
+<td>fast temporal SR</td>
+<td>—</td>
+<td>open</td>
+<td>unverified</td>
+<td>★</td>
+</tr>
+<tr>
+<td>Real-ESRGAN (upscaler)</td>
+<td>Tencent ARC</td>
+<td>2021 <em>(needs verification)</em></td>
+<td>small</td>
+<td>per-frame ×2–×4</td>
+<td>—</td>
+<td>BSD</td>
+<td>ncnn Metal</td>
+<td>★★★ ubiquitous</td>
+</tr>
+<tr>
+<td>RIFE (interpolation)</td>
+<td>hzwer</td>
+<td>2020 <em>(needs verification)</em></td>
+<td>small</td>
+<td>frame interpolation</td>
+<td>—</td>
+<td>MIT</td>
+<td>ncnn Metal</td>
+<td>★★★ ubiquitous</td>
+</tr>
+</tbody>
+</table></div>
+<h2>Layer 1 — Models, closed / API only</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Maker</th>
+<th>Launched</th>
+<th>Native output</th>
+<th>Audio</th>
+<th>Where to use</th>
+<th>Mac local</th>
+<th>Popularity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Seedance 2.5</strong></td>
+<td>ByteDance</td>
+<td>2026</td>
+<td>up to 4K, 30 s single, ~3 min extended, 50 refs</td>
+<td>yes</td>
+<td>Dreamina, CapCut, fal, OpenArt</td>
+<td>no</td>
+<td>★★★ leaderboard top</td>
+</tr>
+<tr>
+<td>Seedance 2.0</td>
+<td>ByteDance</td>
+<td>2026-02</td>
+<td>2K → 4K upgrade, 9 img + 3 vid + 3 audio refs</td>
+<td>yes</td>
+<td>Dreamina, CapCut (2026-03), fal (2026-04), OpenArt</td>
+<td>no</td>
+<td>★★★</td>
+</tr>
+<tr>
+<td>Veo 3.x</td>
+<td>Google DeepMind</td>
+<td>2025-05 (Veo 3) <em>(needs verification)</em></td>
+<td>1080p–4K, native audio</td>
+<td>yes</td>
+<td>Gemini app, Flow, Vertex AI</td>
+<td>no</td>
+<td>★★★</td>
+</tr>
+<tr>
+<td>Sora 2</td>
+<td>OpenAI</td>
+<td>2025-09 <em>(needs verification)</em></td>
+<td>1080p, audio, social app</td>
+<td>yes</td>
+<td>Sora app, ChatGPT</td>
+<td>no</td>
+<td>★★★ consumer</td>
+</tr>
+<tr>
+<td>Kling 2.x / 3</td>
+<td>Kuaishou</td>
+<td>2025–2026 <em>(needs verification)</em></td>
+<td>1080p, 10 s+, strong I2V motion</td>
+<td>partial</td>
+<td>klingai.com, fal, OpenArt</td>
+<td>no</td>
+<td>★★★</td>
+</tr>
+<tr>
+<td>Runway Gen-4 / 4.5</td>
+<td>Runway</td>
+<td>2025-03 <em>(needs verification)</em></td>
+<td>1080p, references, Aleph editing</td>
+<td>via separate tool</td>
+<td>runwayml.com</td>
+<td>no</td>
+<td>★★ pro/film</td>
+</tr>
+<tr>
+<td>Luma Ray 3</td>
+<td>Luma AI</td>
+<td>2025-09 <em>(needs verification)</em></td>
+<td>1080p HDR, 4K upscale</td>
+<td>no</td>
+<td>Dream Machine</td>
+<td>no</td>
+<td>★★</td>
+</tr>
+<tr>
+<td>Hailuo 02 / MiniMax</td>
+<td>MiniMax</td>
+<td>2025-06 <em>(needs verification)</em></td>
+<td>1080p, physics</td>
+<td>no</td>
+<td>hailuoai.video, fal</td>
+<td>no</td>
+<td>★★</td>
+</tr>
+<tr>
+<td>Pika 2.x</td>
+<td>Pika</td>
+<td>2025 <em>(needs verification)</em></td>
+<td>1080p, effects</td>
+<td>no</td>
+<td>pika.art</td>
+<td>no</td>
+<td>★ consumer</td>
+</tr>
+<tr>
+<td>Wan 2.5 / 2.6</td>
+<td>Alibaba</td>
+<td>2025-09 / 2026 <em>(needs verification)</em></td>
+<td>1080p, audio</td>
+<td>yes</td>
+<td>Alibaba Cloud, fal</td>
+<td>no — API only</td>
+<td>★★</td>
+</tr>
+<tr>
+<td>Vidu Q2</td>
+<td>Shengshu</td>
+<td>2025 <em>(needs verification)</em></td>
+<td>1080p, reference-to-video</td>
+<td>no</td>
+<td>vidu.com</td>
+<td>no</td>
+<td>★</td>
+</tr>
+<tr>
+<td>Midjourney Video</td>
+<td>Midjourney</td>
+<td>2025-06 <em>(needs verification)</em></td>
+<td>480p→1080p I2V of MJ images</td>
+<td>no</td>
+<td>midjourney.com</td>
+<td>no</td>
+<td>★★</td>
+</tr>
+</tbody>
+</table></div>
+<h2>Layer 2 — Harnesses (inference engines)</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Harness</th>
+<th>Type</th>
+<th>Backend</th>
+<th>Runs on Mac</th>
+<th>Best for</th>
+<th>Popularity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ComfyUI</strong></td>
+<td>node graph</td>
+<td>PyTorch CUDA / MPS</td>
+<td>yes, slow + fragile on MPS; FP8 dead</td>
+<td>every model, every workflow, upscalers (SeedVR2 node)</td>
+<td>★★★ standard</td>
+</tr>
+<tr>
+<td><strong>Draw Things engine</strong></td>
+<td>app-native</td>
+<td>Metal + Metal FlashAttention v2.5</td>
+<td>yes, native</td>
+<td>Wan, LTX, Hunyuan, SkyReels, LoRAs</td>
+<td>★★ Mac default</td>
+</tr>
+<tr>
+<td><strong>MLX</strong> ports: mlx-video, ltx-2-mlx, ltx-video-swift-mlx</td>
+<td>CLI / lib</td>
+<td>Apple MLX</td>
+<td>yes, native</td>
+<td>scripting, LTX-2.5, batch</td>
+<td>★ growing</td>
+</tr>
+<tr>
+<td>diffusers</td>
+<td>Python lib</td>
+<td>PyTorch</td>
+<td>MPS partial</td>
+<td>research, custom pipelines</td>
+<td>★★★ dev</td>
+</tr>
+<tr>
+<td>WanGP / Wan2GP</td>
+<td>low-VRAM wrapper</td>
+<td>PyTorch CUDA</td>
+<td>no <em>(needs verification)</em></td>
+<td>Wan + Hunyuan on small GPUs</td>
+<td>★★</td>
+</tr>
+<tr>
+<td>SwarmUI</td>
+<td>GUI over ComfyUI</td>
+<td>PyTorch</td>
+<td>limited</td>
+<td>one-click Wan/LTX workflows</td>
+<td>★</td>
+</tr>
+<tr>
+<td>LightX2V</td>
+<td>inference framework + distill LoRAs</td>
+<td>CUDA</td>
+<td>no; LoRAs usable anywhere</td>
+<td>4-step Wan</td>
+<td>★★</td>
+</tr>
+<tr>
+<td>GGUF (city96 / bullerwins quants)</td>
+<td>format, not engine</td>
+<td>ComfyUI-GGUF node</td>
+<td>yes</td>
+<td>fitting 14B models in less memory</td>
+<td>★★</td>
+</tr>
+<tr>
+<td>TensorRT / NVIDIA RTX pipeline</td>
+<td>accel</td>
+<td>CUDA</td>
+<td>no</td>
+<td>LTX-2 4K on RTX</td>
+<td>★</td>
+</tr>
+</tbody>
+</table></div>
+<h2>Layer 3 — Local apps</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>App</th>
+<th>Platform</th>
+<th>Engine</th>
+<th>Models</th>
+<th>Cost</th>
+<th>Popularity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Draw Things</strong></td>
+<td>macOS / iOS / iPadOS</td>
+<td>own Metal engine</td>
+<td>Wan 2.1/2.2, LTX-2.3, Hunyuan, SkyReels, SVD + image models</td>
+<td>free (App Store), optional cloud compute</td>
+<td>★★ Mac default</td>
+</tr>
+<tr>
+<td>ltx-video-mac</td>
+<td>macOS</td>
+<td>MLX</td>
+<td>LTX-2 / 2.3 / 2.5, MiniMax H3</td>
+<td>free, MIT</td>
+<td>★</td>
+</tr>
+<tr>
+<td>REAL Video Enhancer</td>
+<td>macOS / Win / Linux</td>
+<td>ncnn</td>
+<td>RIFE + Real-ESRGAN</td>
+<td>free</td>
+<td>★</td>
+</tr>
+<tr>
+<td>Topaz Video AI</td>
+<td>macOS / Win</td>
+<td>proprietary (Metal on Mac)</td>
+<td>own upscale/interp models</td>
+<td>paid</td>
+<td>★★★ pro upscaling</td>
+</tr>
+<tr>
+<td>ComfyUI Desktop</td>
+<td>macOS / Win</td>
+<td>ComfyUI</td>
+<td>anything</td>
+<td>free</td>
+<td>★★</td>
+</tr>
+<tr>
+<td>Pinokio</td>
+<td>macOS / Win / Linux</td>
+<td>script launcher</td>
+<td>one-click installs of open tools</td>
+<td>free</td>
+<td>★</td>
+</tr>
+<tr>
+<td>Final Cut / DaVinci Resolve</td>
+<td>macOS</td>
+<td>NLE</td>
+<td>assembly, color, encode — not generation</td>
+<td>paid / free tier</td>
+<td>★★★ editing</td>
+</tr>
+</tbody>
+</table></div>
+<h2>Layer 4 — Websites / platforms (rent by the clip)</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Site</th>
+<th>Model</th>
+<th>What it is</th>
+<th>Models offered</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>fal.ai</strong></td>
+<td>API + playground, per-second billing</td>
+<td>Seedance 2.0, Kling, Wan 2.5/2.6, LTX, Veo, Hunyuan, many open models</td>
+<td>cheapest way to try a closed model once</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>OpenArt</strong></td>
+<td>subscription creative suite</td>
+<td>Seedance 2.0/2.5 (Teams/Enterprise first), Kling, Veo, Wan, Runway…</td>
+<td>aggregator; "OpenArt vs Seedance" is platform vs model</td>
+<td></td>
+</tr>
+<tr>
+<td>Dreamina / CapCut</td>
+<td>ByteDance's own front end</td>
+<td>Seedance 2.0, 2.5</td>
+<td>first-party home of Seedance</td>
+<td></td>
+</tr>
+<tr>
+<td>Replicate</td>
+<td>API marketplace</td>
+<td>Wan, LTX, Hunyuan, SeedVR2, upscalers</td>
+<td>open models as APIs</td>
+<td></td>
+</tr>
+<tr>
+<td>Runway</td>
+<td>first-party</td>
+<td>Gen-4 / 4.5, Aleph</td>
+<td>film/pro tooling</td>
+<td></td>
+</tr>
+<tr>
+<td>Google Flow / Gemini</td>
+<td>first-party</td>
+<td>Veo 3.x</td>
+<td>Google account</td>
+<td></td>
+</tr>
+<tr>
+<td>Sora app</td>
+<td>first-party</td>
+<td>Sora 2</td>
+<td>social feed</td>
+<td></td>
+</tr>
+<tr>
+<td>Kling AI</td>
+<td>first-party</td>
+<td>Kling 2.x / 3</td>
+<td>credit packs</td>
+<td></td>
+</tr>
+<tr>
+<td>Luma Dream Machine</td>
+<td>first-party</td>
+<td>Ray 3</td>
+<td>HDR</td>
+<td></td>
+</tr>
+<tr>
+<td>Hailuo</td>
+<td>first-party</td>
+<td>Hailuo 02</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Civitai</td>
+<td>community hub</td>
+<td>LoRAs, workflows for Wan/LTX/Hunyuan</td>
+<td>source for speed LoRAs</td>
+<td></td>
+</tr>
+<tr>
+<td>Hugging Face</td>
+<td>weights host</td>
+<td>every open model above</td>
+<td>canonical download location</td>
+<td></td>
+</tr>
+<tr>
+<td>Artificial Analysis Video Arena</td>
+<td>leaderboard</td>
+<td>all</td>
+<td>popularity / quality ranking source</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<h2>Where this project sits</h2>
+<p>Local, open, Mac: <strong>Layer 1 open</strong> (Wan 2.2, LTX-2.3 distilled 1.1) × <strong>Layer 2</strong> (Draw Things engine, optionally MLX) × <strong>Layer 3</strong> (Draw Things, REAL Video Enhancer, ffmpeg). Closed models are a quality ceiling and a per-clip fallback via fal.ai for hero shots. See <a href="local-open-source-4k-video-pipeline.html">local open source 4k video pipeline</a>.</p>
+
+  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="image-to-video-models.html">image to video models</a></li><li><a href="video-upscaling.html">video upscaling</a></li><li><a href="apple-silicon-inference.html">apple silicon inference</a></li><li><a href="draw-things-setup.html">draw things setup</a></li><li><a href="local-open-source-4k-video-pipeline.html">local open source 4k video pipeline</a></li></ul></div>
+</div>
+<footer>video-gen-kb · built 2026-09-19 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<script>function tt(){var r=document.documentElement,
+d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
+matchMedia('(prefers-color-scheme: dark)').matches);
+r.setAttribute('data-theme',d?'light':'dark');}</script>
+</body>
+</html>

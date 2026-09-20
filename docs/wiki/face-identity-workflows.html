@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Face Identity Workflows — Your Face in a Generated Scene — video-gen-kb</title>
+<style>
+:root{--bg:#0B0D12;--panel:#141822;--panel-2:#1B2130;--stroke:#2A3245;--text:#E6E9F0;
+--muted:#8B94A7;--accent:#F5B84B;--accent-2:#4BC9F5;--on-accent:#12131A;
+--rule:rgba(139,148,167,.22);--code:#F5B84B}
+@media(prefers-color-scheme:light){:root:not([data-theme=dark]){--bg:#F4F1EA;--panel:#fff;
+--panel-2:#FAF8F3;--stroke:#D9D3C6;--text:#16181F;--muted:#5D6473;--accent:#B8781A;
+--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}}
+:root[data-theme=light]{--bg:#F4F1EA;--panel:#fff;--panel-2:#FAF8F3;--stroke:#D9D3C6;
+--text:#16181F;--muted:#5D6473;--accent:#B8781A;--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);
+line-height:1.65;padding:0 1rem 4rem}
+.shell{max-width:840px;margin:0 auto}
+a{color:var(--accent);text-decoration:none;font-weight:600}
+a:hover{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--accent-2);outline-offset:3px;border-radius:4px}
+.bar{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;padding:1.1rem 0;margin-bottom:1.5rem;
+border-bottom:1px solid var(--stroke)}
+.crumb{font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.spacer{flex:1}
+.pill{border:1px solid var(--stroke);background:var(--panel);border-radius:999px;padding:.28rem .8rem;
+font-size:.75rem;font-weight:700;color:var(--text);cursor:pointer;font-family:inherit}
+.pill:hover{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+h1{font-size:clamp(1.7rem,5vw,2.5rem);margin:.2rem 0 1rem;line-height:1.1;letter-spacing:-.015em;text-wrap:balance}
+h2{font-size:1.25rem;margin:2.2rem 0 .7rem;padding-bottom:.35rem;border-bottom:1px solid var(--rule);text-wrap:balance}
+h3{font-size:1.02rem;margin:1.5rem 0 .5rem;color:var(--accent)}
+p{margin:.7rem 0}
+ul,ol{margin:.7rem 0 .7rem 1.3rem}
+li{margin:.28rem 0}
+li::marker{color:var(--accent)}
+em{color:var(--muted)}
+hr{border:none;border-top:1px solid var(--stroke);margin:2rem 0}
+blockquote{border-left:3px solid var(--accent);background:var(--panel);border-radius:0 10px 10px 0;
+padding:.8rem 1.1rem;margin:1.1rem 0;color:var(--muted);font-size:.92rem}
+code{background:var(--panel);border:1px solid var(--stroke);border-radius:5px;padding:.1rem .35rem;
+font-size:.85em;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--code)}
+pre{background:var(--panel);border:1px solid var(--stroke);border-radius:12px;padding:1rem;overflow-x:auto;margin:1.1rem 0}
+pre code{background:none;border:none;padding:0;color:var(--text);font-size:.83rem;line-height:1.55}
+.tw{overflow-x:auto;border:1px solid var(--stroke);border-radius:12px;background:var(--panel);margin:1.1rem 0}
+table{width:100%;border-collapse:collapse;font-size:.85rem;min-width:min(100%,460px)}
+th{background:var(--panel-2);color:var(--accent);text-align:left;padding:.55rem .8rem;font-size:.68rem;
+letter-spacing:.09em;text-transform:uppercase;white-space:nowrap;border-bottom:1px solid var(--stroke)}
+td{padding:.5rem .8rem;border-bottom:1px solid var(--rule);color:var(--muted);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td strong{color:var(--text)}
+.meta{display:flex;flex-wrap:wrap;gap:.4rem .9rem;font-size:.78rem;color:var(--muted);margin:-.4rem 0 1.2rem}
+.meta b{color:var(--text);font-weight:600}
+.missing{color:var(--muted);border-bottom:1px dashed var(--muted);cursor:help}
+.related{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--stroke)}
+.related h2{border:none;margin:0 0 .7rem;font-size:.95rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:0}
+.chips li{margin:0}
+.chips a,.chips .missing{display:inline-block;border:1px solid var(--stroke);background:var(--panel);
+border-radius:999px;padding:.28rem .8rem;font-size:.8rem}
+.chips a:hover{background:var(--accent);color:var(--on-accent);text-decoration:none;border-color:var(--accent)}
+footer{max-width:840px;margin:2.5rem auto 0;padding-top:1.2rem;border-top:1px solid var(--stroke);
+font-size:.75rem;color:var(--muted);text-align:center}
+/* landing */
+.hero{padding:2.4rem 0 1.6rem}
+.kicker{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2)}
+.hero h1{font-size:clamp(2rem,6vw,3.2rem);margin:.35rem 0 .5rem}
+.hero p{color:var(--muted);font-size:1.05rem;max-width:56ch}
+.hw{display:inline-flex;gap:.5rem;align-items:center;margin-top:1rem;border:1px solid var(--stroke);
+background:var(--panel);border-radius:999px;padding:.3rem .9rem;font-size:.78rem;color:var(--muted)}
+.hw .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.sec{margin-top:2.2rem}
+.sec h2{border:none;padding:0;margin:0 0 .8rem;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.9rem}
+.card{display:block;border:1px solid var(--stroke);background:var(--panel);border-radius:14px;padding:1rem 1.1rem;
+color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+.card b{display:block;color:var(--accent);font-size:1rem;margin-bottom:.3rem}
+.card span{font-size:.85rem;color:var(--muted);line-height:1.5}
+.stubs{font-size:.82rem;color:var(--muted);margin-top:.6rem}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="bar">
+    <span class="crumb"><a href="../">video-gen-kb</a> / <a href="index.html">Wiki</a></span>
+    <span class="spacer"></span>
+    <button class="pill" onclick="tt()">◐ Theme</button>
+  </nav>
+  <h1>Face Identity Workflows — Your Face in a Generated Scene</h1><p class="lede">Four ways to generate a video from a text prompt while keeping a specific real face, ranked for the Mac Studio + Draw Things setup. Wan 2.2 I2V alone cannot do this; it anchors to a whole image, not a face.</p><div class="meta"><span><b>Updated</b> 2026-09-19</span><span><b>Sources</b> 2026-09-19-local-4k-video-research.md for model facts; workflow details are general knowledge and <em>need verification</em> in the app.</span></div>
+<hr />
+<h2>Why plain I2V fails here</h2>
+<p>I2V locks the entire first frame. To put a face into a <em>new</em> scene you need either a first frame that already contains the face, a model that takes a separate identity reference, or a post-process swap.</p>
+<h2>A. Two-stage: still with face → I2V (recommended, all in Draw Things)</h2>
+<p><strong>Stage 1 — make the first frame</strong>
+- Model: an image model (Flux.1 dev or SDXL) in Draw Things.
+- Face control: <strong>IP-Adapter FaceID</strong> or <strong>PuLID</strong> style adapter — Draw Things exposes these under Controls for image models; confirm exact name in-app <em>(needs verification)</em>.
+- Reference: one sharp, frontal, evenly lit photo of the face. Strength 0.7–0.9.
+- Canvas 1280×720. Prompt describes <strong>scene, lighting, wardrobe, camera</strong> — not the face; the adapter supplies the face.
+- Iterate seeds until identity reads correctly. Export PNG.</p>
+<p><strong>Stage 2 — animate</strong>
+- Follow <a href="wan22-i2v-locked-image-settings.html">wan22 i2v locked image settings</a> exactly: Wan 2.2 I2V, Strength 100%, motion-only prompt, 81 frames.</p>
+<p>Pros: no new installs, deterministic. Cons: face can soften over long clips; keep motion subtle, keep clips ≤ 5 s.</p>
+<h2>B. Reference-to-video models (identity as a separate input)</h2>
+<p>Models that take a subject reference image plus a text prompt and hold identity across the shot:</p>
+<ul>
+<li><strong>Wan 2.1 VACE</strong> — open weights, unified edit/reference framework; ComfyUI workflows are common. Draw Things support: check Manage for "VACE" <em>(needs verification)</em>.</li>
+<li><strong>Phantom</strong> (Wan-based subject-to-video) — open weights; ComfyUI <em>(needs verification)</em>.</li>
+<li>Closed: <strong>Seedance 2.0</strong> (up to 9 image refs), <strong>Kling Elements</strong>, <strong>Veo Ingredients</strong> — strongest results, cloud only, per-clip cost via fal.ai / OpenArt. See <a href="video-generation-landscape.html">video generation landscape</a>.</li>
+</ul>
+<p>Pros: real T2V freedom with identity. Cons: open options need ComfyUI-on-MPS (slow) or cloud.</p>
+<h2>C. Post-process face swap</h2>
+<p>Generate any T2V clip (Wan 2.2 T2V, any prompt), then swap the face per frame.</p>
+<ul>
+<li><strong>FaceFusion</strong> — open source, runs on Apple Silicon via CoreML/ONNX providers <em>(needs verification of current Mac build)</em>. Input: clip + one face photo. Output: swapped clip. Has face enhancer pass built in.</li>
+<li>Older equivalents: roop, ReActor (ComfyUI node).</li>
+</ul>
+<p>Pros: most reliable identity, works on any clip. Cons: "pasted" look on profile angles and occlusion; run before <a href="video-upscaling.html">video upscaling</a> so the upscaler smooths the seam.</p>
+<h2>D. Train a face LoRA for Wan 2.2</h2>
+<ul>
+<li>15–30 varied photos, captioned with a trigger word.</li>
+<li>Train on cloud (fal.ai Wan 2.2 LoRA trainer, Replicate) — roughly 1–2 h <em>(needs verification)</em>; local Mac training not practical.</li>
+<li>Import the LoRA in Draw Things (Manage → Import → LoRA), use trigger word in any T2V or I2V prompt.</li>
+</ul>
+<p>Pros: best fidelity and full freedom, reusable forever. Cons: most effort, cloud cost, tuning.</p>
+<h2>Decision</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Need</th>
+<th>Pick</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Try tonight, no installs</td>
+<td><strong>A</strong></td>
+</tr>
+<tr>
+<td>A drifts on faces</td>
+<td><strong>A + C</strong> (swap after)</td>
+</tr>
+<tr>
+<td>Many clips of the same person over months</td>
+<td><strong>D</strong></td>
+</tr>
+<tr>
+<td>Best possible single clip, budget OK</td>
+<td>Seedance 2.0 via fal.ai (<strong>B</strong>, closed)</td>
+</tr>
+</tbody>
+</table></div>
+<h2>Ethics note</h2>
+<p>Own face or explicit consent only. Same tools swap anyone's face; keep it to yourself and family who agree.</p>
+
+  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="wan22-i2v-locked-image-settings.html">wan22 i2v locked image settings</a></li><li><a href="draw-things-setup.html">draw things setup</a></li><li><a href="image-to-video-models.html">image to video models</a></li><li><a href="video-generation-landscape.html">video generation landscape</a></li><li><a href="video-upscaling.html">video upscaling</a></li></ul></div>
+</div>
+<footer>video-gen-kb · built 2026-09-19 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<script>function tt(){var r=document.documentElement,
+d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
+matchMedia('(prefers-color-scheme: dark)').matches);
+r.setAttribute('data-theme',d?'light':'dark');}</script>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wan 2.2 I2V — Animate a Photo Without Changing It — video-gen-kb</title>
+<style>
+:root{--bg:#0B0D12;--panel:#141822;--panel-2:#1B2130;--stroke:#2A3245;--text:#E6E9F0;
+--muted:#8B94A7;--accent:#F5B84B;--accent-2:#4BC9F5;--on-accent:#12131A;
+--rule:rgba(139,148,167,.22);--code:#F5B84B}
+@media(prefers-color-scheme:light){:root:not([data-theme=dark]){--bg:#F4F1EA;--panel:#fff;
+--panel-2:#FAF8F3;--stroke:#D9D3C6;--text:#16181F;--muted:#5D6473;--accent:#B8781A;
+--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}}
+:root[data-theme=light]{--bg:#F4F1EA;--panel:#fff;--panel-2:#FAF8F3;--stroke:#D9D3C6;
+--text:#16181F;--muted:#5D6473;--accent:#B8781A;--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);
+line-height:1.65;padding:0 1rem 4rem}
+.shell{max-width:840px;margin:0 auto}
+a{color:var(--accent);text-decoration:none;font-weight:600}
+a:hover{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--accent-2);outline-offset:3px;border-radius:4px}
+.bar{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;padding:1.1rem 0;margin-bottom:1.5rem;
+border-bottom:1px solid var(--stroke)}
+.crumb{font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.spacer{flex:1}
+.pill{border:1px solid var(--stroke);background:var(--panel);border-radius:999px;padding:.28rem .8rem;
+font-size:.75rem;font-weight:700;color:var(--text);cursor:pointer;font-family:inherit}
+.pill:hover{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+h1{font-size:clamp(1.7rem,5vw,2.5rem);margin:.2rem 0 1rem;line-height:1.1;letter-spacing:-.015em;text-wrap:balance}
+h2{font-size:1.25rem;margin:2.2rem 0 .7rem;padding-bottom:.35rem;border-bottom:1px solid var(--rule);text-wrap:balance}
+h3{font-size:1.02rem;margin:1.5rem 0 .5rem;color:var(--accent)}
+p{margin:.7rem 0}
+ul,ol{margin:.7rem 0 .7rem 1.3rem}
+li{margin:.28rem 0}
+li::marker{color:var(--accent)}
+em{color:var(--muted)}
+hr{border:none;border-top:1px solid var(--stroke);margin:2rem 0}
+blockquote{border-left:3px solid var(--accent);background:var(--panel);border-radius:0 10px 10px 0;
+padding:.8rem 1.1rem;margin:1.1rem 0;color:var(--muted);font-size:.92rem}
+code{background:var(--panel);border:1px solid var(--stroke);border-radius:5px;padding:.1rem .35rem;
+font-size:.85em;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--code)}
+pre{background:var(--panel);border:1px solid var(--stroke);border-radius:12px;padding:1rem;overflow-x:auto;margin:1.1rem 0}
+pre code{background:none;border:none;padding:0;color:var(--text);font-size:.83rem;line-height:1.55}
+.tw{overflow-x:auto;border:1px solid var(--stroke);border-radius:12px;background:var(--panel);margin:1.1rem 0}
+table{width:100%;border-collapse:collapse;font-size:.85rem;min-width:min(100%,460px)}
+th{background:var(--panel-2);color:var(--accent);text-align:left;padding:.55rem .8rem;font-size:.68rem;
+letter-spacing:.09em;text-transform:uppercase;white-space:nowrap;border-bottom:1px solid var(--stroke)}
+td{padding:.5rem .8rem;border-bottom:1px solid var(--rule);color:var(--muted);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td strong{color:var(--text)}
+.meta{display:flex;flex-wrap:wrap;gap:.4rem .9rem;font-size:.78rem;color:var(--muted);margin:-.4rem 0 1.2rem}
+.meta b{color:var(--text);font-weight:600}
+.missing{color:var(--muted);border-bottom:1px dashed var(--muted);cursor:help}
+.related{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--stroke)}
+.related h2{border:none;margin:0 0 .7rem;font-size:.95rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:0}
+.chips li{margin:0}
+.chips a,.chips .missing{display:inline-block;border:1px solid var(--stroke);background:var(--panel);
+border-radius:999px;padding:.28rem .8rem;font-size:.8rem}
+.chips a:hover{background:var(--accent);color:var(--on-accent);text-decoration:none;border-color:var(--accent)}
+footer{max-width:840px;margin:2.5rem auto 0;padding-top:1.2rem;border-top:1px solid var(--stroke);
+font-size:.75rem;color:var(--muted);text-align:center}
+/* landing */
+.hero{padding:2.4rem 0 1.6rem}
+.kicker{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2)}
+.hero h1{font-size:clamp(2rem,6vw,3.2rem);margin:.35rem 0 .5rem}
+.hero p{color:var(--muted);font-size:1.05rem;max-width:56ch}
+.hw{display:inline-flex;gap:.5rem;align-items:center;margin-top:1rem;border:1px solid var(--stroke);
+background:var(--panel);border-radius:999px;padding:.3rem .9rem;font-size:.78rem;color:var(--muted)}
+.hw .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.sec{margin-top:2.2rem}
+.sec h2{border:none;padding:0;margin:0 0 .8rem;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.9rem}
+.card{display:block;border:1px solid var(--stroke);background:var(--panel);border-radius:14px;padding:1rem 1.1rem;
+color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+.card b{display:block;color:var(--accent);font-size:1rem;margin-bottom:.3rem}
+.card span{font-size:.85rem;color:var(--muted);line-height:1.5}
+.stubs{font-size:.82rem;color:var(--muted);margin-top:.6rem}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="bar">
+    <span class="crumb"><a href="../">video-gen-kb</a> / <a href="index.html">Wiki</a></span>
+    <span class="spacer"></span>
+    <button class="pill" onclick="tt()">◐ Theme</button>
+  </nav>
+  <h1>Wan 2.2 I2V — Animate a Photo Without Changing It</h1><p class="lede">Draw Things settings that keep the source photo as the literal first frame and let the prompt drive only motion. The "my photo, but moving" recipe.</p><div class="meta"><span><b>Updated</b> 2026-09-19</span><span><b>Sources</b> 2026-09-19-local-4k-video-research.md (Draw Things wiki, LightX2V settings article). Timings on M4 Max still unmeasured.</span></div>
+<hr />
+<h2>Principle</h2>
+<p>Wan 2.2 <strong>I2V</strong> conditions every generated frame on the input image; <strong>T2V</strong> (and Draw Things' T2V/I2V slider at 100% T2V) treats the image as a loose reference. Draw Things has no "keep image" toggle — the lock comes from three things: the I2V model, Strength 100%, and a prompt that never describes the subject.</p>
+<h2>Settings</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Model</td>
+<td><strong>Wan 2.2 I2V 14B</strong> — High Noise Expert + Low Noise Expert pair (6-bit SVDQuant)</td>
+<td>Only the I2V checkpoint anchors to the image. TI2V-5B works but drifts more.</td>
+</tr>
+<tr>
+<td>Canvas</td>
+<td>Match photo aspect, e.g. 1280×720 or 960×544 for tests</td>
+<td>Photo must cover 100% of canvas; uncovered pixels get inpainted with invented content.</td>
+</tr>
+<tr>
+<td>Image</td>
+<td>Drag photo onto <strong>Canvas</strong> (not Moodboard)</td>
+<td>Moodboard is style reference, not first-frame conditioning.</td>
+</tr>
+<tr>
+<td>Strength</td>
+<td><strong>100%</strong></td>
+<td>Below 100% the first frame is partially repainted.</td>
+</tr>
+<tr>
+<td>Frames</td>
+<td>25 to test, then <strong>81</strong> (5 s @ 16 fps)</td>
+<td>Drift compounds with length; shorter = more faithful.</td>
+</tr>
+<tr>
+<td>LoRA</td>
+<td>LightX2V Wan 2.2 I2V distill, weight 1.0 (try 1.5 if motion is dead)</td>
+<td>4 steps instead of 20–30. Mandatory on Mac.</td>
+</tr>
+<tr>
+<td>Steps</td>
+<td><strong>4</strong> with LoRA (2 high + 2 low); 20 without</td>
+<td></td>
+</tr>
+<tr>
+<td>Guidance (CFG)</td>
+<td><strong>1</strong> with LoRA; 3.5–5 without</td>
+<td>Distilled LoRAs break above ~1.5.</td>
+</tr>
+<tr>
+<td>Shift</td>
+<td><strong>5</strong></td>
+<td>Community default for LightX2V.</td>
+</tr>
+<tr>
+<td>Seed</td>
+<td>fixed integer</td>
+<td>Same seed + prompt = reproducible; change only the prompt when iterating.</td>
+</tr>
+<tr>
+<td>TeaCache / Tiled Decode</td>
+<td>on</td>
+<td>Memory safety on first runs.</td>
+</tr>
+</tbody>
+</table></div>
+<h2>Prompting</h2>
+<p>Describe <strong>camera and motion only</strong>. Never describe the subject, clothing, or setting — the model may re-imagine what it is told about.</p>
+<p>Good:
+- <code>slow push in, camera dolly forward, subject still, gentle wind in hair</code>
+- <code>static camera, subject turns head slightly and smiles</code>
+- <code>slow pan left, leaves moving softly, subtle motion, minimal movement</code></p>
+<p>Bad:
+- <code>a woman in a red dress on a beach</code> — invites re-generation of the woman</p>
+<p>Negative prompt: <code>morphing, deformed face, extra fingers, flicker, text, watermark</code></p>
+<h2>If the result drifts from the photo</h2>
+<ol>
+<li>Add <code>subtle motion, minimal movement</code> — less motion, less drift.</li>
+<li>Cut Frames to 49.</li>
+<li>Confirm the model name in Manage contains <strong>I2V</strong>; the T2V-A14B pair accepts an image but does not anchor to it.</li>
+<li>Check the T2V/I2V slider if the model shows one — push it toward I2V.</li>
+<li>Lower LoRA weight to 0.8; distill LoRAs can add motion at the expense of fidelity.</li>
+</ol>
+<h2>Next step after a good clip</h2>
+<p>Export MP4 → <a href="video-upscaling.html">video upscaling</a> → <span class="missing" title="page not written yet">frame interpolation</span> → <span class="missing" title="page not written yet">ffmpeg pipeline</span>. Record the wall time on <a href="local-open-source-4k-video-pipeline.html">local open source 4k video pipeline</a>.</p>
+
+  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="draw-things-setup.html">draw things setup</a></li><li><a href="face-identity-workflows.html">face identity workflows</a></li><li><a href="image-to-video-models.html">image to video models</a></li><li><a href="local-open-source-4k-video-pipeline.html">local open source 4k video pipeline</a></li></ul></div>
+</div>
+<footer>video-gen-kb · built 2026-09-19 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<script>function tt(){var r=document.documentElement,
+d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
+matchMedia('(prefers-color-scheme: dark)').matches);
+r.setAttribute('data-theme',d?'light':'dark');}</script>
+</body>
+</html>

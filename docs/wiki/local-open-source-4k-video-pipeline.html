@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Local Open-Source 4K Video from Photos (Apple Silicon) — video-gen-kb</title>
+<style>
+:root{--bg:#0B0D12;--panel:#141822;--panel-2:#1B2130;--stroke:#2A3245;--text:#E6E9F0;
+--muted:#8B94A7;--accent:#F5B84B;--accent-2:#4BC9F5;--on-accent:#12131A;
+--rule:rgba(139,148,167,.22);--code:#F5B84B}
+@media(prefers-color-scheme:light){:root:not([data-theme=dark]){--bg:#F4F1EA;--panel:#fff;
+--panel-2:#FAF8F3;--stroke:#D9D3C6;--text:#16181F;--muted:#5D6473;--accent:#B8781A;
+--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}}
+:root[data-theme=light]{--bg:#F4F1EA;--panel:#fff;--panel-2:#FAF8F3;--stroke:#D9D3C6;
+--text:#16181F;--muted:#5D6473;--accent:#B8781A;--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);
+line-height:1.65;padding:0 1rem 4rem}
+.shell{max-width:840px;margin:0 auto}
+a{color:var(--accent);text-decoration:none;font-weight:600}
+a:hover{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--accent-2);outline-offset:3px;border-radius:4px}
+.bar{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;padding:1.1rem 0;margin-bottom:1.5rem;
+border-bottom:1px solid var(--stroke)}
+.crumb{font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.spacer{flex:1}
+.pill{border:1px solid var(--stroke);background:var(--panel);border-radius:999px;padding:.28rem .8rem;
+font-size:.75rem;font-weight:700;color:var(--text);cursor:pointer;font-family:inherit}
+.pill:hover{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+h1{font-size:clamp(1.7rem,5vw,2.5rem);margin:.2rem 0 1rem;line-height:1.1;letter-spacing:-.015em;text-wrap:balance}
+h2{font-size:1.25rem;margin:2.2rem 0 .7rem;padding-bottom:.35rem;border-bottom:1px solid var(--rule);text-wrap:balance}
+h3{font-size:1.02rem;margin:1.5rem 0 .5rem;color:var(--accent)}
+p{margin:.7rem 0}
+ul,ol{margin:.7rem 0 .7rem 1.3rem}
+li{margin:.28rem 0}
+li::marker{color:var(--accent)}
+em{color:var(--muted)}
+hr{border:none;border-top:1px solid var(--stroke);margin:2rem 0}
+blockquote{border-left:3px solid var(--accent);background:var(--panel);border-radius:0 10px 10px 0;
+padding:.8rem 1.1rem;margin:1.1rem 0;color:var(--muted);font-size:.92rem}
+code{background:var(--panel);border:1px solid var(--stroke);border-radius:5px;padding:.1rem .35rem;
+font-size:.85em;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--code)}
+pre{background:var(--panel);border:1px solid var(--stroke);border-radius:12px;padding:1rem;overflow-x:auto;margin:1.1rem 0}
+pre code{background:none;border:none;padding:0;color:var(--text);font-size:.83rem;line-height:1.55}
+.tw{overflow-x:auto;border:1px solid var(--stroke);border-radius:12px;background:var(--panel);margin:1.1rem 0}
+table{width:100%;border-collapse:collapse;font-size:.85rem;min-width:min(100%,460px)}
+th{background:var(--panel-2);color:var(--accent);text-align:left;padding:.55rem .8rem;font-size:.68rem;
+letter-spacing:.09em;text-transform:uppercase;white-space:nowrap;border-bottom:1px solid var(--stroke)}
+td{padding:.5rem .8rem;border-bottom:1px solid var(--rule);color:var(--muted);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td strong{color:var(--text)}
+.meta{display:flex;flex-wrap:wrap;gap:.4rem .9rem;font-size:.78rem;color:var(--muted);margin:-.4rem 0 1.2rem}
+.meta b{color:var(--text);font-weight:600}
+.missing{color:var(--muted);border-bottom:1px dashed var(--muted);cursor:help}
+.related{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--stroke)}
+.related h2{border:none;margin:0 0 .7rem;font-size:.95rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:0}
+.chips li{margin:0}
+.chips a,.chips .missing{display:inline-block;border:1px solid var(--stroke);background:var(--panel);
+border-radius:999px;padding:.28rem .8rem;font-size:.8rem}
+.chips a:hover{background:var(--accent);color:var(--on-accent);text-decoration:none;border-color:var(--accent)}
+footer{max-width:840px;margin:2.5rem auto 0;padding-top:1.2rem;border-top:1px solid var(--stroke);
+font-size:.75rem;color:var(--muted);text-align:center}
+/* landing */
+.hero{padding:2.4rem 0 1.6rem}
+.kicker{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2)}
+.hero h1{font-size:clamp(2rem,6vw,3.2rem);margin:.35rem 0 .5rem}
+.hero p{color:var(--muted);font-size:1.05rem;max-width:56ch}
+.hw{display:inline-flex;gap:.5rem;align-items:center;margin-top:1rem;border:1px solid var(--stroke);
+background:var(--panel);border-radius:999px;padding:.3rem .9rem;font-size:.78rem;color:var(--muted)}
+.hw .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.sec{margin-top:2.2rem}
+.sec h2{border:none;padding:0;margin:0 0 .8rem;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.9rem}
+.card{display:block;border:1px solid var(--stroke);background:var(--panel);border-radius:14px;padding:1rem 1.1rem;
+color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+.card b{display:block;color:var(--accent);font-size:1rem;margin-bottom:.3rem}
+.card span{font-size:.85rem;color:var(--muted);line-height:1.5}
+.stubs{font-size:.82rem;color:var(--muted);margin-top:.6rem}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="bar">
+    <span class="crumb"><a href="../">video-gen-kb</a> / <a href="index.html">Wiki</a></span>
+    <span class="spacer"></span>
+    <button class="pill" onclick="tt()">◐ Theme</button>
+  </nav>
+  <h1>Local Open-Source 4K Video from Photos (Apple Silicon)</h1><p class="lede">How to turn photos into 4K video entirely on the Mac Studio (M4 Max, 48 GB) with open-weight models — which models run, what fails, realistic speeds, and the recommended pipeline: generate at 720p–1080p, then upscale + interpolate to 4K.</p><div class="meta"><span><b>Updated</b> 2026-09-19</span><span><b>Sources</b> 2026-09-19-local-4k-video-research.md</span></div>
+<hr />
+<h2>The one-line answer</h2>
+<p>No open model generates <em>good</em> 4K directly on a Mac in reasonable time. The working recipe as of 2026-09-19 is:</p>
+<p><strong>photo → I2V model at 720p/1080p (5s clip) → SeedVR2 or Real-ESRGAN upscale to 3840×2160 → RIFE to 60fps → ffmpeg stitch</strong></p>
+<p>See <a href="image-to-video-models.html">image to video models</a>, <a href="video-upscaling.html">video upscaling</a>, <span class="missing" title="page not written yet">frame interpolation</span>, <span class="missing" title="page not written yet">ffmpeg pipeline</span>.</p>
+<h2>Hardware reality: M4 Max, 48 GB, no CUDA</h2>
+<p>Nearly every guide assumes NVIDIA. Three things break on Apple Silicon:</p>
+<ol>
+<li><strong>FP8 checkpoints do not run.</strong> Metal has no <code>Float8_e4m3fn</code>; official FP8 releases of Wan 2.2 and LTX-2 fail with <code>RuntimeError: Undefined type Float8_e4m3fn</code> (source: 2026-09-19-local-4k-video-research.md, lilting.ch). Use GGUF, MLX-quantized, or Draw Things' own quantized weights instead.</li>
+<li><strong>ComfyUI on MPS is slow and fragile.</strong> Wan 2.2 GGUF Q4 on an M1 Max took 82 min for a 2-second 480p clip; LTX-2's official two-stage pipeline produced NaNs in VAE decode (source: lilting.ch). M4 Max is faster than M1 Max but not 10×.</li>
+<li><strong>Unified memory is the upside.</strong> 48 GB means int8 LTX-2.3 (~21 GB) and Wan 2.2 14B 6-bit (~20 GB) fit without offloading (sources: dgrauet/ltx-2-mlx README, Draw Things wiki).</li>
+</ol>
+<h2>Runtime options, ranked for this Mac</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Runtime</th>
+<th>Models</th>
+<th>Why / why not</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Draw Things</strong> (Mac App Store, free)</td>
+<td>Wan 2.1/2.2, LTX-2.3, Hunyuan, SkyReels</td>
+<td>Native Metal + FlashAttention, quantized weights built in, CausVid/LightX2V 4-step LoRAs, TeaCache, tiled decode. Least friction. Start here.</td>
+</tr>
+<tr>
+<td><strong>mlx-video</strong> (Blaizzy)</td>
+<td>LTX-2, Wan 2.1, Wan 2.2 (TI2V-5B, I2V-14B)</td>
+<td>Pure MLX, CLI, scriptable — good for batch pipelines. <code>python -m mlx_video.wan_2.generate --image photo.png --num-frames 81</code>. No published Mac benchmarks.</td>
+</tr>
+<tr>
+<td><strong>ltx-2-mlx</strong> (dgrauet)</td>
+<td>LTX-2.3, LTX-2.5</td>
+<td>Pure MLX. int8 ≈ 21 GB fits 48 GB comfortably. <code>--image</code> for I2V, frames must be 8k+1 (97 = 4 s @ 24 fps). Up to 1080p with tiling. MIT.</td>
+</tr>
+<tr>
+<td>ComfyUI + GGUF</td>
+<td>anything</td>
+<td>Most workflows, worst Mac experience. Use only when a node exists nowhere else (e.g. SeedVR2 upscaler, which does have MPS support).</td>
+</tr>
+</tbody>
+</table></div>
+<h2>Model choice for photos → motion</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Params</th>
+<th>License</th>
+<th>Mac verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Wan 2.2 I2V-A14B</strong></td>
+<td>14B MoE (high/low noise pair)</td>
+<td>Apache 2.0</td>
+<td>Best motion quality of the open set; needs LightX2V 4-step LoRA to be tolerable on Mac. Draw Things 6-bit ≈ 20 GB at 1024×576×81f.</td>
+</tr>
+<tr>
+<td><strong>Wan 2.2 TI2V-5B</strong></td>
+<td>5B</td>
+<td>Apache 2.0</td>
+<td>Native 720p@24fps, smallest — fastest realistic Mac option. Lower fidelity than 14B.</td>
+</tr>
+<tr>
+<td><strong>LTX-2.5</strong></td>
+<td>22B</td>
+<td>Open weights, free &lt; $10M ARR</td>
+<td>Released 2026-08-11. Native 4K HDR <em>on NVIDIA</em>; distilled variant is few-step. MLX port exists (ltx-2-mlx). Unverified how 4K behaves on MPS — treat as experiment, not plan.</td>
+</tr>
+<tr>
+<td><strong>LTX-2.3 distilled 1.1</strong></td>
+<td>22B</td>
+<td>same</td>
+<td>8-step distill, audio+video. 46 GB bf16 → must run quantized (Draw Things, ltx-2-mlx int8). 4K = 1080p + bundled ×2 latent upscaler. Best LTX pick on Mac; unmeasured.</td>
+</tr>
+<tr>
+<td>HunyuanVideo 1.5</td>
+<td>8.3B</td>
+<td>Tencent community license</td>
+<td>~14 GB FP8 on NVIDIA; FP8 dead on Mac, so needs GGUF. Not the first pick here.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Details per model: <a href="image-to-video-models.html">image to video models</a>.</p>
+<h2>Recommended pipeline (v1)</h2>
+<ol>
+<li><strong>Prep photos</strong>: export from Photos at full resolution as PNG/JPEG into <code>raw/photos/</code>. Crop to 16:9 first — I2V models inpaint if the image does not fill the canvas (source: Draw Things wiki).</li>
+<li><strong>Generate clips</strong> in Draw Things: Wan 2.2 I2V 14B, LightX2V LoRA, 4 steps, 1280×720, 81 frames (5 s @ 16 fps) or 121 frames @ 24 fps. Short camera-move prompts ("slow push in", "gentle pan left"). Test at 25 frames before full renders.</li>
+<li><strong>Upscale</strong> each clip 3× to 3840×2160 with SeedVR2 (ComfyUI, MPS) or Real-ESRGAN ncnn (fast, per-frame, may flicker). See <a href="video-upscaling.html">video upscaling</a>.</li>
+<li><strong>Interpolate</strong> to 48/60 fps with RIFE (REAL Video Enhancer on macOS, or <code>rife-ncnn-vulkan</code>). See <span class="missing" title="page not written yet">frame interpolation</span>.</li>
+<li><strong>Assemble</strong>: <code>ffmpeg</code> concat with <code>xfade</code> crossfades, add music, encode HEVC 4K (<code>-c:v hevc_videotoolbox</code> uses the M4 media engine). See <span class="missing" title="page not written yet">ffmpeg pipeline</span>.</li>
+</ol>
+<h2>Realistic time budget (needs verification on this machine)</h2>
+<ul>
+<li>M1 Max, Wan 2.2 Q4 GGUF, ComfyUI, 20 steps: 82 min / 2 s clip (measured, lilting.ch).</li>
+<li>M4 Max, Draw Things, 4-step LoRA: expect single-digit minutes per 5 s 720p clip — extrapolated from the M5 iPad 480p result and 5× fewer steps, <strong>not measured</strong>. First job: time one clip and record it here.</li>
+<li>Upscale + RIFE: roughly real-time to 5× real-time per clip on Metal, depending on model.</li>
+</ul>
+<h2>Not installed yet on this Mac</h2>
+<p><code>ffmpeg</code>, ComfyUI, Draw Things. Python 3 exists (anaconda). Install order: <code>brew install ffmpeg</code>, Draw Things from App Store, then <code>uv</code> + mlx-video if scripting is wanted.</p>
+<h2>Open questions</h2>
+<ul>
+<li>Actual M4 Max timings for Wan 2.2 14B + LightX2V in Draw Things</li>
+<li>Does ltx-2-mlx int8 run LTX-2.5 I2V at 1080p on 48 GB, and how long?</li>
+<li>SeedVR2 on MPS: memory at 4K output, need for tiling?</li>
+<li>Face fidelity: which model keeps family faces closest to the photo?</li>
+</ul>
+
+  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="photo-to-4k-video-approaches.html">photo to 4k video approaches</a></li><li><a href="image-to-video-models.html">image to video models</a></li><li><a href="video-upscaling.html">video upscaling</a></li><li><span class="missing" title="page not written yet">frame interpolation</span></li><li><span class="missing" title="page not written yet">ffmpeg pipeline</span></li><li><a href="apple-silicon-inference.html">apple silicon inference</a></li></ul></div>
+</div>
+<footer>video-gen-kb · built 2026-09-19 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<script>function tt(){var r=document.documentElement,
+d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
+matchMedia('(prefers-color-scheme: dark)').matches);
+r.setAttribute('data-theme',d?'light':'dark');}</script>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Draw Things Setup for Video Models — video-gen-kb</title>
+<style>
+:root{--bg:#0B0D12;--panel:#141822;--panel-2:#1B2130;--stroke:#2A3245;--text:#E6E9F0;
+--muted:#8B94A7;--accent:#F5B84B;--accent-2:#4BC9F5;--on-accent:#12131A;
+--rule:rgba(139,148,167,.22);--code:#F5B84B}
+@media(prefers-color-scheme:light){:root:not([data-theme=dark]){--bg:#F4F1EA;--panel:#fff;
+--panel-2:#FAF8F3;--stroke:#D9D3C6;--text:#16181F;--muted:#5D6473;--accent:#B8781A;
+--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}}
+:root[data-theme=light]{--bg:#F4F1EA;--panel:#fff;--panel-2:#FAF8F3;--stroke:#D9D3C6;
+--text:#16181F;--muted:#5D6473;--accent:#B8781A;--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);
+line-height:1.65;padding:0 1rem 4rem}
+.shell{max-width:840px;margin:0 auto}
+a{color:var(--accent);text-decoration:none;font-weight:600}
+a:hover{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--accent-2);outline-offset:3px;border-radius:4px}
+.bar{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;padding:1.1rem 0;margin-bottom:1.5rem;
+border-bottom:1px solid var(--stroke)}
+.crumb{font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.spacer{flex:1}
+.pill{border:1px solid var(--stroke);background:var(--panel);border-radius:999px;padding:.28rem .8rem;
+font-size:.75rem;font-weight:700;color:var(--text);cursor:pointer;font-family:inherit}
+.pill:hover{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+h1{font-size:clamp(1.7rem,5vw,2.5rem);margin:.2rem 0 1rem;line-height:1.1;letter-spacing:-.015em;text-wrap:balance}
+h2{font-size:1.25rem;margin:2.2rem 0 .7rem;padding-bottom:.35rem;border-bottom:1px solid var(--rule);text-wrap:balance}
+h3{font-size:1.02rem;margin:1.5rem 0 .5rem;color:var(--accent)}
+p{margin:.7rem 0}
+ul,ol{margin:.7rem 0 .7rem 1.3rem}
+li{margin:.28rem 0}
+li::marker{color:var(--accent)}
+em{color:var(--muted)}
+hr{border:none;border-top:1px solid var(--stroke);margin:2rem 0}
+blockquote{border-left:3px solid var(--accent);background:var(--panel);border-radius:0 10px 10px 0;
+padding:.8rem 1.1rem;margin:1.1rem 0;color:var(--muted);font-size:.92rem}
+code{background:var(--panel);border:1px solid var(--stroke);border-radius:5px;padding:.1rem .35rem;
+font-size:.85em;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--code)}
+pre{background:var(--panel);border:1px solid var(--stroke);border-radius:12px;padding:1rem;overflow-x:auto;margin:1.1rem 0}
+pre code{background:none;border:none;padding:0;color:var(--text);font-size:.83rem;line-height:1.55}
+.tw{overflow-x:auto;border:1px solid var(--stroke);border-radius:12px;background:var(--panel);margin:1.1rem 0}
+table{width:100%;border-collapse:collapse;font-size:.85rem;min-width:min(100%,460px)}
+th{background:var(--panel-2);color:var(--accent);text-align:left;padding:.55rem .8rem;font-size:.68rem;
+letter-spacing:.09em;text-transform:uppercase;white-space:nowrap;border-bottom:1px solid var(--stroke)}
+td{padding:.5rem .8rem;border-bottom:1px solid var(--rule);color:var(--muted);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td strong{color:var(--text)}
+.meta{display:flex;flex-wrap:wrap;gap:.4rem .9rem;font-size:.78rem;color:var(--muted);margin:-.4rem 0 1.2rem}
+.meta b{color:var(--text);font-weight:600}
+.missing{color:var(--muted);border-bottom:1px dashed var(--muted);cursor:help}
+.related{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--stroke)}
+.related h2{border:none;margin:0 0 .7rem;font-size:.95rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:0}
+.chips li{margin:0}
+.chips a,.chips .missing{display:inline-block;border:1px solid var(--stroke);background:var(--panel);
+border-radius:999px;padding:.28rem .8rem;font-size:.8rem}
+.chips a:hover{background:var(--accent);color:var(--on-accent);text-decoration:none;border-color:var(--accent)}
+footer{max-width:840px;margin:2.5rem auto 0;padding-top:1.2rem;border-top:1px solid var(--stroke);
+font-size:.75rem;color:var(--muted);text-align:center}
+/* landing */
+.hero{padding:2.4rem 0 1.6rem}
+.kicker{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2)}
+.hero h1{font-size:clamp(2rem,6vw,3.2rem);margin:.35rem 0 .5rem}
+.hero p{color:var(--muted);font-size:1.05rem;max-width:56ch}
+.hw{display:inline-flex;gap:.5rem;align-items:center;margin-top:1rem;border:1px solid var(--stroke);
+background:var(--panel);border-radius:999px;padding:.3rem .9rem;font-size:.78rem;color:var(--muted)}
+.hw .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.sec{margin-top:2.2rem}
+.sec h2{border:none;padding:0;margin:0 0 .8rem;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.9rem}
+.card{display:block;border:1px solid var(--stroke);background:var(--panel);border-radius:14px;padding:1rem 1.1rem;
+color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+.card b{display:block;color:var(--accent);font-size:1rem;margin-bottom:.3rem}
+.card span{font-size:.85rem;color:var(--muted);line-height:1.5}
+.stubs{font-size:.82rem;color:var(--muted);margin-top:.6rem}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="bar">
+    <span class="crumb"><a href="../">video-gen-kb</a> / <a href="index.html">Wiki</a></span>
+    <span class="spacer"></span>
+    <button class="pill" onclick="tt()">◐ Theme</button>
+  </nav>
+  <h1>Draw Things Setup for Video Models</h1><p class="lede">How to get Wan 2.1/2.2, LTX-2.3, Hunyuan Video, and SkyReels into Draw Things on the Mac Studio and run image-to-video, including the starting settings that make Wan 2.2 tolerable on Apple Silicon.</p><div class="meta"><span><b>Updated</b> 2026-09-19</span><span><b>Sources</b> 2026-09-19-local-4k-video-research.md</span></div>
+<hr />
+<h2>Before anything: disk</h2>
+<p>The Data volume was at <strong>21 GB free of 926 GB</strong> on 2026-09-19. Video model budget:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Model (Draw Things quantized)</th>
+<th>Approx download</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Wan 2.2 14B I2V, high + low noise experts (6-bit SVDQuant)</td>
+<td>~18–20 GB + umT5 text encoder ~5 GB</td>
+</tr>
+<tr>
+<td>Wan 2.2 5B TI2V</td>
+<td>~6–8 GB</td>
+</tr>
+<tr>
+<td>Wan 2.1 14B (6-bit)</td>
+<td>~10 GB + encoder</td>
+</tr>
+<tr>
+<td>LTX-2.3 (quantized)</td>
+<td>~12–20 GB + Gemma encoder</td>
+</tr>
+<tr>
+<td>Hunyuan Video</td>
+<td>~13 GB + encoders</td>
+</tr>
+<tr>
+<td>SkyReels</td>
+<td>~13 GB (Hunyuan-based)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Free at least 100 GB first. Sizes are estimates from NVIDIA-side file sizes; Draw Things' own quantizations vary. Mark as needing verification once downloaded.</p>
+<h2>Where models live</h2>
+<p><code>~/Library/Containers/com.liuliu.draw-things/Data/Documents/Models</code> (source: docs.drawthings.ai). Existing content is 4.7 GB of SD 2.1-era files — <code>sd_v2.1_768_v_f16.ckpt</code>, <code>open_clip_vit_h14_f16.ckpt</code>, <code>vae_ft_mse_840000_f16.ckpt</code>, <code>moondream1_q6p.ckpt</code>, <code>siglip_384_q8p.ckpt</code>, one Ghibli LoRA. Safe to delete from inside the app (Manage → trash icon) if space is tight.</p>
+<h2>Downloading models (in-app — no manual Hugging Face needed)</h2>
+<ol>
+<li>Open Draw Things → <strong>Settings</strong> tab in left sidebar.</li>
+<li><strong>Model</strong> dropdown → <strong>Manage</strong>.</li>
+<li>Browse <strong>Official</strong> (and <strong>Community</strong>) sections. Video models appear by name (source: Draw Things wiki):
+   - <code>Wan 2.1 1.3B [T2V/I2V]</code> and <code>(8-bit)</code> — tiny, test the pipeline with this first
+   - <code>Wan 2.1 14B [T2V/I2V]</code> and <code>(6-bit, SVDQuant)</code>
+   - <code>Wan 2.1 [Fun Inpainting]</code>
+   - Wan 2.2 <strong>High Noise Expert</strong> and <strong>Low Noise Expert</strong>, 14B and 5B, SVDQuant variants — for 14B I2V you need <strong>both</strong> experts
+   - <code>LTX-2.3</code>
+   - <code>Hunyuan Video</code> (up to 129 frames)
+   - <code>SkyReels</code>
+   - <code>Stable Video Diffusion</code> (I2V only, 25 frames)</li>
+<li>Click the <strong>cloud icon</strong> next to each. The app pulls the model plus required text encoder / VAE automatically.</li>
+</ol>
+<p>Manual import (LoRAs from Hugging Face or Civitai): Manage → <strong>Import Model</strong> → <strong>Select from Files</strong>, choose category <strong>LoRA</strong> vs <strong>Model</strong>. <code>Enter URL…</code> exists but is less reliable — download the file to <code>~/Downloads</code> and import from there (source: Install a Model or LoRA wiki page).</p>
+<h2>Speed LoRAs — mandatory on Mac</h2>
+<p>Without a distill LoRA, Wan 2.2 14B runs ~20–30 steps; on M1 Max that was 82 min per 2 s (ComfyUI). With a 4-step LoRA the same job is ~5–7× shorter.</p>
+<ul>
+<li><strong>LightX2V Wan 2.2 distill LoRAs</strong> — <code>huggingface.co/lightx2v/Wan2.2-Distill-Loras</code>. Download the I2V LoRA(s), import as LoRA. Standard config: 2 steps high-noise + 2 steps low-noise (4 total).</li>
+<li><strong>CausVid</strong> — Wan 2.1 equivalent, 4–12 steps. Also listed in-app under LoRAs.</li>
+<li>Community rule of thumb (source: civitai lightx2v article): with a distill LoRA set <strong>guidance (CFG) = 1</strong>, <strong>shift = 5</strong>; the Wan 2.1 lightx2v LoRA at ~1.5 strength also works on Wan 2.2; use low-noise-compatible LoRAs, not high-noise-only ones.</li>
+</ul>
+<h2>Image-to-video, step by step (Wan 2.2 14B)</h2>
+<ol>
+<li><strong>Canvas</strong>: set size to 1280×720 (or 960×544 for tests). Drop the photo onto the Canvas and make sure it <strong>fills the whole canvas</strong> — uncovered area gets inpainted with hallucinated content (source: Draw Things wiki).</li>
+<li><strong>Model</strong>: Wan 2.2 14B I2V. In Draw Things the high/low expert pair is selected as the model with the second expert in the refiner/expert slot — check the model card text in Manage for the exact pairing UI.</li>
+<li><strong>LoRA</strong>: add LightX2V I2V distill LoRA, weight ~1.0 (try 1.5 if motion is dead).</li>
+<li><strong>Steps</strong> 4, <strong>Guidance</strong> 1, <strong>Shift</strong> 5, <strong>Frames</strong> 25 for a test, then 81 (5 s @ 16 fps) or 121 (5 s @ 24 fps).</li>
+<li><strong>Prompt</strong>: short, camera-centric — "slow push in, subject still, soft natural light". Negative prompt: "blurry, distorted face, extra limbs, text".</li>
+<li>Enable <strong>TeaCache</strong> and <strong>Tiled Decode</strong> in Settings if memory pressure shows (source: Draw Things wiki).</li>
+<li>Generate. Time the first full render and record it on <a href="local-open-source-4k-video-pipeline.html">local open source 4k video pipeline</a>.</li>
+</ol>
+<p>Output is saved via the export/share button as MP4; feed it to <a href="video-upscaling.html">video upscaling</a>.</p>
+<h2>Per-model notes</h2>
+<ul>
+<li><strong>Wan 2.1 1.3B</strong> — 480p, seconds per frame. Use only to validate the workflow.</li>
+<li><strong>Wan 2.1 14B</strong> — 720p, up to 81 frames. Still competitive; single model, simpler than 2.2's pair.</li>
+<li><strong>Wan 2.2 5B TI2V</strong> — single model, native 720p@24fps. The speed pick if 14B is too slow.</li>
+<li><strong>LTX-2.3</strong> — audio + video. Prefer the <strong>22B distilled 1.1</strong> listing if offered: 8 steps instead of 30–50. Draw Things ships its own quantization, so the FP8-on-Metal problem does not apply. Default resolution 480×704 up to 1080p; width/height divisible by 32; frames must be 8k+1. For 4K, look for the LTX spatial upscaler ×2 stage in-app; otherwise use <a href="video-upscaling.html">video upscaling</a>.</li>
+<li><strong>Hunyuan Video</strong> — 720p cinematic, 14 camera-move presets, frames 1+4n up to 129.</li>
+<li><strong>SkyReels</strong> — Hunyuan derivative for humans/faces, 544p. Set <strong>T2V = 100%</strong> in Settings for it to run (source: Draw Things wiki). Worth an A/B against Wan 2.2 on family portraits.</li>
+</ul>
+<h2>Open questions</h2>
+<ul>
+<li>Exact in-app names and sizes of the Wan 2.2 expert pair once downloaded</li>
+<li>Whether LightX2V LoRA import works as a plain LoRA or needs the Community listing</li>
+<li>Measured seconds per 81-frame 720p clip on M4 Max</li>
+</ul>
+
+  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="local-open-source-4k-video-pipeline.html">local open source 4k video pipeline</a></li><li><a href="image-to-video-models.html">image to video models</a></li><li><a href="apple-silicon-inference.html">apple silicon inference</a></li><li><a href="video-upscaling.html">video upscaling</a></li></ul></div>
+</div>
+<footer>video-gen-kb · built 2026-09-19 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<script>function tt(){var r=document.documentElement,
+d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
+matchMedia('(prefers-color-scheme: dark)').matches);
+r.setAttribute('data-theme',d?'light':'dark');}</script>
+</body>
+</html>
