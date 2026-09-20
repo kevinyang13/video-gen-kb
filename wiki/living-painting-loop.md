@@ -54,15 +54,21 @@ Result: usable on first seed — sunset, cliffs, waves, flowers, birds. ~1 min w
 
 **Export from Draw Things**: toolbar icon 4 (folder with down-arrow, right of the share icon) → Save. Writes a **ProRes `.mov`** to `~/Documents`, named after the *first* prompt in the project plus a seed. The share icon (↑) only offers AirDrop/Mail/Notes/Photos — no file save. Exported clip: 576×1280, 16 fps, 81 frames, 5.06 s, 57 MB.
 
-**Loop** — crop to 9:16, ping-pong (forward + reverse) so the seam is invisible, repeat ×3 → 30 s:
+**Loop** — forward only. Ping-pong was tried first and rejected: reversing makes waves recede and birds fly backwards. Instead, crossfade the last 8 frames into the first 8 so the cut is invisible and physics stays forward:
 
 ```bash
 ffmpeg -i coast.mov -filter_complex \
-  "[0:v]crop=576:1024:0:128,setsar=1[c];[c]split[a][b];[b]reverse[r];[a][r]concat=n=2:v=1[pp];[pp]loop=loop=2:size=32767,setpts=N/FRAME_RATE/TB[out]" \
+  "[0:v]crop=576:1024:0:128,setsar=1,fps=16[c];[c]split=3[c1][c2][c3];
+   [c1]trim=start_frame=8:end_frame=73,setpts=PTS-STARTPTS[body];
+   [c2]trim=start_frame=73:end_frame=81,setpts=PTS-STARTPTS[tail];
+   [c3]trim=start_frame=0:end_frame=8,setpts=PTS-STARTPTS[head];
+   [tail][head]xfade=transition=fade:duration=0.5:offset=0[seam];
+   [body][seam]concat=n=2:v=1[unit];
+   [unit]loop=loop=5:size=32767,setpts=N/FRAME_RATE/TB[out]" \
   -map "[out]" -r 16 -c:v libx264 -pix_fmt yuv420p -crf 18 -an coast_loop.mp4
 ```
 
-Result: 486 frames, 30.4 s, 12.8 MB. Birds reversing direction on the ping-pong is visible if you look; a hard-cut loop (`loop=loop=5` on `[c]` without reverse) avoids that at the cost of a visible jump.
+One unit = frames 8–72 + (73–80 faded into 0–7) = 73 frames; ×6 = 438 frames, 27.4 s. Moving objects (birds) can ghost during the 0.5 s fade; shorten to 4 frames or prompt "birds exit the frame" on the next generation if it shows.
 
 **Music** (when a track is chosen):
 

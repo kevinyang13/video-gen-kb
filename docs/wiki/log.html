@@ -137,6 +137,8 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <p>Wan 2.2 I2V 14B 8-bit pair, Lightning 4-step, 576×1280 × 81 frames: 24 min on M4 Max. Result matches the TikTok reference. Updated <code>living-painting-loop</code>, <code>local-open-source-4k-video-pipeline</code> (time budget), <code>draw-things-setup</code> (open items).</p>
 <h2>2026-09-20 — Living-painting loop delivered</h2>
 <p>Exported ProRes from Draw Things (toolbar export icon → <code>~/Documents</code>), cropped 9:16, ping-pong looped ×3 with ffmpeg 9.0.2 → <code>raw/clips/coast_loop.mp4</code> (30 s). Pipeline validated end to end. Updated <code>living-painting-loop</code>.</p>
+<h2>2026-09-20 — Loop method corrected</h2>
+<p>Ping-pong rejected (reverses wave and bird motion). Replaced with forward-only loop using an 8-frame tail→head crossfade. Updated <code>living-painting-loop</code>.</p>
   
 </div>
 <footer>video-gen-kb · built 2026-09-20 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>

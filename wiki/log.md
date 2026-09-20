@@ -88,3 +88,7 @@ Wan 2.2 I2V 14B 8-bit pair, Lightning 4-step, 576×1280 × 81 frames: 24 min on 
 ## 2026-09-20 — Living-painting loop delivered
 
 Exported ProRes from Draw Things (toolbar export icon → `~/Documents`), cropped 9:16, ping-pong looped ×3 with ffmpeg 9.0.2 → `raw/clips/coast_loop.mp4` (30 s). Pipeline validated end to end. Updated `living-painting-loop`.
+
+## 2026-09-20 — Loop method corrected
+
+Ping-pong rejected (reverses wave and bird motion). Replaced with forward-only loop using an 8-frame tail→head crossfade. Updated `living-painting-loop`.
