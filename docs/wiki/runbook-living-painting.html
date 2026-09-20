@@ -161,7 +161,7 @@ ffmpeg -i NAME_1024x1792.png -vf &quot;crop=1008:1792:8:0,scale=576:1024:flags=l
 <li>Prompt (motion only, never describe the subject):
    <code>static camera, gentle ocean waves rolling onto the shore, grass and wildflowers swaying in a soft breeze, birds drifting slowly across the sky, clouds moving slowly, subtle motion, minimal movement</code></li>
 <li>Generate. The overlay must list the Refiner line. ~15 min. Preview at step 2 already shows whether it is working.</li>
-<li>Export: same toolbar icon → Save → <code>~/Documents/&lt;prompt&gt;_&lt;seed&gt;.mov</code> (ProRes, 576×1024, 16 fps, 81 f). Move to <code>raw/clips/NAME.mov</code>.</li>
+<li>Export: same toolbar icon → in the Save dialog navigate to <code>~/dev/video-gen-kb/raw/clips/</code> and save as <code>NAME.mov</code> directly (ProRes, 576×1024, 16 fps, 81 f). Verify with <code>ffprobe</code> that it is 576×1024 × 81 frames before looping — on 2026-09-20 a stale <code>~/Documents</code> file was picked up by mistake.</li>
 </ol>
 <h2>4. Loop + music (terminal)</h2>
 <pre><code class="language-bash">cd ~/dev/video-gen-kb
@@ -169,6 +169,34 @@ scripts/finish_clip.sh raw/clips/NAME.mov raw/clips/calm_ambient_dreamscape.mp3
 </code></pre>
 <p>Produces <code>NAME_loop.mp4</code> (1080×1920, 27.4 s, silent) and <code>NAME_final.mp4</code> (with music, fades). Forward-only loop with an 8-frame crossfade at the seam — never ping-pong (reverses waves and birds).</p>
 <p>Other tracks: Pixabay → press play on a track page → <code>document.querySelector('audio').currentSrc</code> gives the CDN mp3 URL (the Download button wants a login).</p>
+<h2>Done so far</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Scene</th>
+<th>Still seed</th>
+<th>I2V seed</th>
+<th>Files</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2026-09-20</td>
+<td>Coastal wildflowers (v2)</td>
+<td>20104302</td>
+<td>1180755429</td>
+<td><code>coast_v2_*</code></td>
+</tr>
+<tr>
+<td>2026-09-20</td>
+<td>Torrey Pines, San Diego</td>
+<td>1190544862</td>
+<td>284526412</td>
+<td><code>torrey_*</code></td>
+</tr>
+</tbody>
+</table></div>
 <h2>5. File in the wiki</h2>
 <p>Append to <code>wiki/log.md</code>, note anything new on <a href="living-painting-loop.html">living painting loop</a>, <code>python3 scripts/build_site.py</code>, commit, push. Clips stay out of git (<code>raw/clips/</code> is ignored).</p>
 <h2>Failure signatures</h2>

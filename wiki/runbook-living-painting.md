@@ -60,7 +60,7 @@ ffmpeg -i NAME_1024x1792.png -vf "crop=1008:1792:8:0,scale=576:1024:flags=lanczo
 5. Prompt (motion only, never describe the subject):
    `static camera, gentle ocean waves rolling onto the shore, grass and wildflowers swaying in a soft breeze, birds drifting slowly across the sky, clouds moving slowly, subtle motion, minimal movement`
 6. Generate. The overlay must list the Refiner line. ~15 min. Preview at step 2 already shows whether it is working.
-7. Export: same toolbar icon → Save → `~/Documents/<prompt>_<seed>.mov` (ProRes, 576×1024, 16 fps, 81 f). Move to `raw/clips/NAME.mov`.
+7. Export: same toolbar icon → in the Save dialog navigate to `~/dev/video-gen-kb/raw/clips/` and save as `NAME.mov` directly (ProRes, 576×1024, 16 fps, 81 f). Verify with `ffprobe` that it is 576×1024 × 81 frames before looping — on 2026-09-20 a stale `~/Documents` file was picked up by mistake.
 
 ## 4. Loop + music (terminal)
 
@@ -72,6 +72,13 @@ scripts/finish_clip.sh raw/clips/NAME.mov raw/clips/calm_ambient_dreamscape.mp3
 Produces `NAME_loop.mp4` (1080×1920, 27.4 s, silent) and `NAME_final.mp4` (with music, fades). Forward-only loop with an 8-frame crossfade at the seam — never ping-pong (reverses waves and birds).
 
 Other tracks: Pixabay → press play on a track page → `document.querySelector('audio').currentSrc` gives the CDN mp3 URL (the Download button wants a login).
+
+## Done so far
+
+| Date | Scene | Still seed | I2V seed | Files |
+|---|---|---|---|---|
+| 2026-09-20 | Coastal wildflowers (v2) | 20104302 | 1180755429 | `coast_v2_*` |
+| 2026-09-20 | Torrey Pines, San Diego | 1190544862 | 284526412 | `torrey_*` |
 
 ## 5. File in the wiki
 
