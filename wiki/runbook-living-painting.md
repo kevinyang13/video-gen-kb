@@ -17,7 +17,7 @@
 | I2V | **~15 min** at 576×1024 × 81 f | Draw Things, Wan 2.2 I2V |
 | Loop + music | seconds | `scripts/finish_clip.sh` |
 
-Iterate on the still. Commit to I2V once. Human clicks needed per video: **one** (Save the .mov).
+Iterate on the still. Commit to I2V once. Human clicks needed per video: **zero** (as of the Rainier run — the Save sheet's Save button is automation-pressable; keep the default filename and rename on disk).
 
 ## 0. One-time prerequisites (already done on this Mac)
 
@@ -56,7 +56,7 @@ The generated still is already on the canvas and already fills 576×1024. No exp
 3. Prompt (motion only, never describe the subject):
    `static camera, gentle ocean waves rolling onto the shore, grass and wildflowers swaying in a soft breeze, birds drifting slowly across the sky, clouds moving slowly, subtle motion, minimal movement`
 4. Generate. The overlay must list the Refiner line. ~15 min. Preview at step 2 already shows whether it is working.
-5. Export: 4th toolbar icon → Save → navigate to `~/dev/video-gen-kb/raw/clips/` and save as `NAME.mov`. `ffprobe` it: expect 576×1024, 81 frames.
+5. Export: 4th toolbar icon → wait ~8 s for the sheet → press **Save** (the sheet remembers the last folder, `raw/clips/`; the filename field rejects automation typing, so accept the prompt-derived default) → `mv raw/clips/static_camera*.mov raw/clips/NAME.mov`. `ffprobe` it: expect 576×1024, 81 frames.
 
 ## 3. (removed — downscale/reload no longer needed)
 
@@ -78,6 +78,7 @@ Other tracks: Pixabay → press play on a track page → `document.querySelector
 | 2026-09-20 | Coastal wildflowers (v2) | 20104302 | 1180755429 | `coast_v2_*` |
 | 2026-09-20 | Torrey Pines, San Diego | 1190544862 | 284526412 | `torrey_*` |
 | 2026-09-20 | Golden Gate, San Francisco (first native-576×1024 run) | — | 601904108 | `goldengate_*` |
+| 2026-09-20 | Mt. Rainier from Paradise (first zero-click run) | — | — | `rainier_*` |
 
 ## 5. File in the wiki
 

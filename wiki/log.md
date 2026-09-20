@@ -120,3 +120,7 @@ New Draw Things project, same settings. Still (FLUX.2 klein, seed 1190544862) �
 ## 2026-09-20 — Golden Gate (native 576×1024 test) + lock-screen finding
 
 Still generated directly at 576×1024 with FLUX.2 klein: quality indistinguishable from the supersampled path in the finished video. Runbook now uses this as the default (one human click per video). Mac was locked for ~2.5 h with the Save dialog open; render survived, saved on unlock → `raw/clips/goldengate_final.mp4`. Documented lock behaviour in the runbook.
+
+## 2026-09-20 — Mt. Rainier, zero-click run
+
+New project → FLUX still at 576×1024 → Wan I2V from canvas → export sheet Save button pressed by automation → `finish_clip.sh` → `raw/clips/rainier_final.mp4`. No human input at any step. Runbook updated (export step, done-so-far table).
