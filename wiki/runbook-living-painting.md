@@ -12,12 +12,12 @@
 
 | Stage | Time | Tool |
 |---|---|---|
-| Still | ~1 min per seed | Draw Things, FLUX.2 klein 9B |
+| Still | ~40 s per seed | Draw Things, FLUX.2 klein 9B at 576×1024 |
 | Downscale | seconds | ffmpeg |
 | I2V | **~15 min** at 576×1024 × 81 f | Draw Things, Wan 2.2 I2V |
 | Loop + music | seconds | `scripts/finish_clip.sh` |
 
-Iterate on the still. Commit to I2V once.
+Iterate on the still. Commit to I2V once. Human clicks needed per video: **one** (Save the .mov).
 
 ## 0. One-time prerequisites (already done on this Mac)
 
@@ -25,42 +25,40 @@ Iterate on the still. Commit to I2V once.
 - `brew install ffmpeg` (9.0.2 present).
 - Project `Untitled-35903` in Draw Things holds the working settings; create a new project per video if you want a clean history (Projects → + button top-left).
 
-## 1. Still (Draw Things)
+## 1. Still (Draw Things) — generate at the video size
 
-1. Version History → click **Cleared canvas** (canvas must be empty, otherwise Draw Things runs inpainting for 24 min).
+Tested 2026-09-20 (Golden Gate): FLUX.2 klein at native **576×1024** is visually as good as 1024×1792 + lanczos downscale for this use, and it removes two file dialogs. Use the 1024×1792 path only if a scene needs extra micro-detail.
+
+1. Projects → **+** (new project) — canvas is empty.
 2. Settings → Basic → Model → search `FLUX` → **FLUX.2 [klein] 9B (8-bit S)**. Accept "Try recommended settings" (steps 4, CFG 1, shift 3, DDIM Trailing).
-3. LoRA → Disabled. Strength 100%.
-4. All → Image Size → width **1024**, height **1792**. Height slider: drag thumb from ~153 px to ~205 px (→1600), then to ~233 px (→1792). Presets (9:16 / Small / Normal) register only sometimes; check the label.
+3. LoRA → Disabled. Strength tab shows Text to Image, 100%.
+4. All → Image Size → **576×1024**: click **9:16** then **Small**; if it lands elsewhere, width slider click at ~117 px (→576), height at ~162 px (→1024), nudge-drag each.
 5. Prompt: long natural-language scene description ending with `Makoto Shinkai and Studio Ghibli background art style, ultra detailed, rich painterly brushwork, soft volumetric light, vibrant saturated colors, masterpiece.` Describe foreground / middle / sky explicitly.
-6. Generate. Repeat with new seeds until the composition is right (~1 min each).
-7. Export: toolbar **4th icon** (folder with down-arrow) → Save → lands in `~/Documents/<prompt>_<seed>.png`. Move to `raw/clips/<name>_1024x1792.png`.
+6. Generate (~40 s). Repeat with new seeds until the composition is right. Note the seed.
 
-## 2. Downscale (terminal)
+*(Optional hi-res asset: export via the 4th toolbar icon → Save into `raw/clips/NAME_576x1024.png`. Not needed for the video.)*
 
-```bash
-cd ~/dev/video-gen-kb/raw/clips
-ffmpeg -i NAME_1024x1792.png -vf "crop=1008:1792:8:0,scale=576:1024:flags=lanczos" NAME_576x1024.png
-```
+## 2. Animate (I2V) — straight from the canvas
 
-## 3. Animate (Draw Things)
+The generated still is already on the canvas and already fills 576×1024. No export, no reload.
 
-1. Version History → **Cleared canvas**. All → Image Size → 576×1024: try 9:16 + Small/Normal first; if it lands on 1:1 or 1024×1792, set the sliders (width click at ~117 px, height click at ~162 px, then nudge-drag each).
-2. Click **Drag or paste an image** on the canvas → file picker → pick `NAME_576x1024.png`. It must fill the canvas.
-3. Model → search `Wan` → **Wan 2.2 High Noise Expert I2V A14B (8-bit S)**. Accept recommended settings.
-4. **Verify, in All settings, every one of these** (recommended settings reset them):
+1. Model → search `Wan` → **Wan 2.2 High Noise Expert I2V A14B (8-bit S)** (Local list). Pick **Not this time** on the Change Model Type dialog (recommended settings would reset the size to 832×448 and trigger inpainting).
+2. **Verify, in All settings** (the model switch resets some of these):
+   - Image Size **576×1024** — it drops to 384×704; click **Normal** under 9:16.
    - Strength tab shows **Image to Video**, 100%
-   - Image Size **576×1024**
-   - Steps **4** (click slider near left, then label-click to step up; label click = +1)
-   - Number of Frames **81**
-   - Text Guidance **1.0** (label click = +0.1)
-   - Shift 5, Sampler UniPC Trailing
-   - **Refiner Model = Wan 2.2 Low Noise Expert I2V A14B (8-bit S)** — recommended settings pick the *6-bit* one **every single time** (confirmed on 3 of 3 model switches); it is not downloaded and the refiner is then silently skipped → washed-out noise. Open the refiner dropdown and pick the Local entry ending in `(8-bit S)`.
-   - Refiner Start 10%
-   - LoRA → Wan 2.2 A14B Lightning High-Noise, 100%
-5. Prompt (motion only, never describe the subject):
+   - Steps **4** (survives), Text Guidance **1.0** (survives)
+   - Number of Frames **81** (resets to 14: click slider at ~188 px → 77, label-click ×1 → 81)
+   - Shift **5** (resets to 3: click slider at ~150 px, nudge-drag → 4.95 is fine)
+   - Sampler: DDIM Trailing works; UniPC Trailing is the Wan default but the menu does not take automation clicks — leave it
+   - **Refiner Model = Wan 2.2 Low Noise Expert I2V A14B (8-bit S)** — resets to Disabled on this path (to the not-downloaded 6-bit variant on the recommended path). Pick the Local entry ending `(8-bit S)`.
+   - **Refiner Start 10%** (defaults to 85% when set fresh: click slider at ~91 px)
+   - LoRA → Wan 2.2 A14B Lightning High-Noise, 100% (resets to Disabled)
+3. Prompt (motion only, never describe the subject):
    `static camera, gentle ocean waves rolling onto the shore, grass and wildflowers swaying in a soft breeze, birds drifting slowly across the sky, clouds moving slowly, subtle motion, minimal movement`
-6. Generate. The overlay must list the Refiner line. ~15 min. Preview at step 2 already shows whether it is working.
-7. Export: same toolbar icon → in the Save dialog navigate to `~/dev/video-gen-kb/raw/clips/` and save as `NAME.mov` directly (ProRes, 576×1024, 16 fps, 81 f). Verify with `ffprobe` that it is 576×1024 × 81 frames before looping — on 2026-09-20 a stale `~/Documents` file was picked up by mistake.
+4. Generate. The overlay must list the Refiner line. ~15 min. Preview at step 2 already shows whether it is working.
+5. Export: 4th toolbar icon → Save → navigate to `~/dev/video-gen-kb/raw/clips/` and save as `NAME.mov`. `ffprobe` it: expect 576×1024, 81 frames.
+
+## 3. (removed — downscale/reload no longer needed)
 
 ## 4. Loop + music (terminal)
 

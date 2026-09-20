@@ -102,8 +102,8 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <tbody>
 <tr>
 <td>Still</td>
-<td>~1 min per seed</td>
-<td>Draw Things, FLUX.2 klein 9B</td>
+<td>~40 s per seed</td>
+<td>Draw Things, FLUX.2 klein 9B at 576×1024</td>
 </tr>
 <tr>
 <td>Downscale</td>
@@ -122,47 +122,44 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </tr>
 </tbody>
 </table></div>
-<p>Iterate on the still. Commit to I2V once.</p>
+<p>Iterate on the still. Commit to I2V once. Human clicks needed per video: <strong>one</strong> (Save the .mov).</p>
 <h2>0. One-time prerequisites (already done on this Mac)</h2>
 <ul>
 <li>Draw Things (App Store) with these local checkpoints: FLUX.2 [klein] 9B (8-bit S) + Qwen3-8B encoder, Wan 2.2 High Noise Expert <strong>I2V</strong> A14B (8-bit S), Wan 2.2 Low Noise Expert <strong>I2V</strong> A14B (8-bit S), Wan 2.2 A14B Lightning High-Noise LoRA.</li>
 <li><code>brew install ffmpeg</code> (9.0.2 present).</li>
 <li>Project <code>Untitled-35903</code> in Draw Things holds the working settings; create a new project per video if you want a clean history (Projects → + button top-left).</li>
 </ul>
-<h2>1. Still (Draw Things)</h2>
+<h2>1. Still (Draw Things) — generate at the video size</h2>
+<p>Tested 2026-09-20 (Golden Gate): FLUX.2 klein at native <strong>576×1024</strong> is visually as good as 1024×1792 + lanczos downscale for this use, and it removes two file dialogs. Use the 1024×1792 path only if a scene needs extra micro-detail.</p>
 <ol>
-<li>Version History → click <strong>Cleared canvas</strong> (canvas must be empty, otherwise Draw Things runs inpainting for 24 min).</li>
+<li>Projects → <strong>+</strong> (new project) — canvas is empty.</li>
 <li>Settings → Basic → Model → search <code>FLUX</code> → <strong>FLUX.2 [klein] 9B (8-bit S)</strong>. Accept "Try recommended settings" (steps 4, CFG 1, shift 3, DDIM Trailing).</li>
-<li>LoRA → Disabled. Strength 100%.</li>
-<li>All → Image Size → width <strong>1024</strong>, height <strong>1792</strong>. Height slider: drag thumb from ~153 px to ~205 px (→1600), then to ~233 px (→1792). Presets (9:16 / Small / Normal) register only sometimes; check the label.</li>
+<li>LoRA → Disabled. Strength tab shows Text to Image, 100%.</li>
+<li>All → Image Size → <strong>576×1024</strong>: click <strong>9:16</strong> then <strong>Small</strong>; if it lands elsewhere, width slider click at ~117 px (→576), height at ~162 px (→1024), nudge-drag each.</li>
 <li>Prompt: long natural-language scene description ending with <code>Makoto Shinkai and Studio Ghibli background art style, ultra detailed, rich painterly brushwork, soft volumetric light, vibrant saturated colors, masterpiece.</code> Describe foreground / middle / sky explicitly.</li>
-<li>Generate. Repeat with new seeds until the composition is right (~1 min each).</li>
-<li>Export: toolbar <strong>4th icon</strong> (folder with down-arrow) → Save → lands in <code>~/Documents/&lt;prompt&gt;_&lt;seed&gt;.png</code>. Move to <code>raw/clips/&lt;name&gt;_1024x1792.png</code>.</li>
+<li>Generate (~40 s). Repeat with new seeds until the composition is right. Note the seed.</li>
 </ol>
-<h2>2. Downscale (terminal)</h2>
-<pre><code class="language-bash">cd ~/dev/video-gen-kb/raw/clips
-ffmpeg -i NAME_1024x1792.png -vf &quot;crop=1008:1792:8:0,scale=576:1024:flags=lanczos&quot; NAME_576x1024.png
-</code></pre>
-<h2>3. Animate (Draw Things)</h2>
+<p><em>(Optional hi-res asset: export via the 4th toolbar icon → Save into <code>raw/clips/NAME_576x1024.png</code>. Not needed for the video.)</em></p>
+<h2>2. Animate (I2V) — straight from the canvas</h2>
+<p>The generated still is already on the canvas and already fills 576×1024. No export, no reload.</p>
 <ol>
-<li>Version History → <strong>Cleared canvas</strong>. All → Image Size → 576×1024: try 9:16 + Small/Normal first; if it lands on 1:1 or 1024×1792, set the sliders (width click at ~117 px, height click at ~162 px, then nudge-drag each).</li>
-<li>Click <strong>Drag or paste an image</strong> on the canvas → file picker → pick <code>NAME_576x1024.png</code>. It must fill the canvas.</li>
-<li>Model → search <code>Wan</code> → <strong>Wan 2.2 High Noise Expert I2V A14B (8-bit S)</strong>. Accept recommended settings.</li>
-<li><strong>Verify, in All settings, every one of these</strong> (recommended settings reset them):
+<li>Model → search <code>Wan</code> → <strong>Wan 2.2 High Noise Expert I2V A14B (8-bit S)</strong> (Local list). Pick <strong>Not this time</strong> on the Change Model Type dialog (recommended settings would reset the size to 832×448 and trigger inpainting).</li>
+<li><strong>Verify, in All settings</strong> (the model switch resets some of these):
+   - Image Size <strong>576×1024</strong> — it drops to 384×704; click <strong>Normal</strong> under 9:16.
    - Strength tab shows <strong>Image to Video</strong>, 100%
-   - Image Size <strong>576×1024</strong>
-   - Steps <strong>4</strong> (click slider near left, then label-click to step up; label click = +1)
-   - Number of Frames <strong>81</strong>
-   - Text Guidance <strong>1.0</strong> (label click = +0.1)
-   - Shift 5, Sampler UniPC Trailing
-   - <strong>Refiner Model = Wan 2.2 Low Noise Expert I2V A14B (8-bit S)</strong> — recommended settings pick the <em>6-bit</em> one <strong>every single time</strong> (confirmed on 3 of 3 model switches); it is not downloaded and the refiner is then silently skipped → washed-out noise. Open the refiner dropdown and pick the Local entry ending in <code>(8-bit S)</code>.
-   - Refiner Start 10%
-   - LoRA → Wan 2.2 A14B Lightning High-Noise, 100%</li>
+   - Steps <strong>4</strong> (survives), Text Guidance <strong>1.0</strong> (survives)
+   - Number of Frames <strong>81</strong> (resets to 14: click slider at ~188 px → 77, label-click ×1 → 81)
+   - Shift <strong>5</strong> (resets to 3: click slider at ~150 px, nudge-drag → 4.95 is fine)
+   - Sampler: DDIM Trailing works; UniPC Trailing is the Wan default but the menu does not take automation clicks — leave it
+   - <strong>Refiner Model = Wan 2.2 Low Noise Expert I2V A14B (8-bit S)</strong> — resets to Disabled on this path (to the not-downloaded 6-bit variant on the recommended path). Pick the Local entry ending <code>(8-bit S)</code>.
+   - <strong>Refiner Start 10%</strong> (defaults to 85% when set fresh: click slider at ~91 px)
+   - LoRA → Wan 2.2 A14B Lightning High-Noise, 100% (resets to Disabled)</li>
 <li>Prompt (motion only, never describe the subject):
    <code>static camera, gentle ocean waves rolling onto the shore, grass and wildflowers swaying in a soft breeze, birds drifting slowly across the sky, clouds moving slowly, subtle motion, minimal movement</code></li>
 <li>Generate. The overlay must list the Refiner line. ~15 min. Preview at step 2 already shows whether it is working.</li>
-<li>Export: same toolbar icon → in the Save dialog navigate to <code>~/dev/video-gen-kb/raw/clips/</code> and save as <code>NAME.mov</code> directly (ProRes, 576×1024, 16 fps, 81 f). Verify with <code>ffprobe</code> that it is 576×1024 × 81 frames before looping — on 2026-09-20 a stale <code>~/Documents</code> file was picked up by mistake.</li>
+<li>Export: 4th toolbar icon → Save → navigate to <code>~/dev/video-gen-kb/raw/clips/</code> and save as <code>NAME.mov</code>. <code>ffprobe</code> it: expect 576×1024, 81 frames.</li>
 </ol>
+<h2>3. (removed — downscale/reload no longer needed)</h2>
 <h2>4. Loop + music (terminal)</h2>
 <pre><code class="language-bash">cd ~/dev/video-gen-kb
 scripts/finish_clip.sh raw/clips/NAME.mov raw/clips/calm_ambient_dreamscape.mp3
