@@ -100,3 +100,7 @@ Quality gap vs reference diagnosed (video-model still, no supersampling, I2V sof
 ## 2026-09-20 — Refiner mismatch gotcha
 
 Second I2V run produced washed-out noise: recommended settings had selected the 6-bit Low Noise refiner (not downloaded) instead of the local 8-bit S. Documented in `draw-things-setup`. Re-running with correct refiner.
+
+## 2026-09-20 — v2 loop delivered
+
+FLUX.2 klein still → Wan 2.2 I2V (correct 8-bit refiner, 15.5 min) → forward-loop + lanczos 1080×1920 → `raw/clips/coast_v2_loop.mp4`. Reference-quality achieved. Updated `living-painting-loop`.

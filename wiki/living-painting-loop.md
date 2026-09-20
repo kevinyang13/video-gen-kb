@@ -93,6 +93,8 @@ ffmpeg -i coast.mov -filter_complex \
 
 One unit = frames 8–72 + (73–80 faded into 0–7) = 73 frames; ×6 = 438 frames, 27.4 s. Moving objects (birds) can ghost during the 0.5 s fade; shorten to 4 frames or prompt "birds exit the frame" on the next generation if it shows.
 
+**v2 (2026-09-20, FLUX still)**: `coast_v2.mov` came out at 576×1024 already, so no crop; same forward-loop filter with `scale=1080:1920:flags=lanczos` appended → `coast_v2_loop.mp4`, 27.4 s, 32 MB. I2V took ~15.5 min at 576×1024 (vs 24 min at 576×1280). Detail held through I2V — the FLUX still is what closed the gap with the reference.
+
 **Music** (when a track is chosen):
 
 ```bash
