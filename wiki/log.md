@@ -104,3 +104,7 @@ Second I2V run produced washed-out noise: recommended settings had selected the 
 ## 2026-09-20 — v2 loop delivered
 
 FLUX.2 klein still → Wan 2.2 I2V (correct 8-bit refiner, 15.5 min) → forward-loop + lanczos 1080×1920 → `raw/clips/coast_v2_loop.mp4`. Reference-quality achieved. Updated `living-painting-loop`.
+
+## 2026-09-20 — Music added, deliverable complete
+
+Pixabay CC0 ambient track muxed with fades → `raw/clips/coast_v2_final.mp4`. Living-painting recipe complete end to end. Updated `living-painting-loop`.

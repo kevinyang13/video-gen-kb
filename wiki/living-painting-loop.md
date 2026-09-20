@@ -95,11 +95,15 @@ One unit = frames 8–72 + (73–80 faded into 0–7) = 73 frames; ×6 = 438 fra
 
 **v2 (2026-09-20, FLUX still)**: `coast_v2.mov` came out at 576×1024 already, so no crop; same forward-loop filter with `scale=1080:1920:flags=lanczos` appended → `coast_v2_loop.mp4`, 27.4 s, 32 MB. I2V took ~15.5 min at 576×1024 (vs 24 min at 576×1280). Detail held through I2V — the FLUX still is what closed the gap with the reference.
 
-**Music** (when a track is chosen):
+**Music** (done 2026-09-20): "Calm Ambient Dreamscape" by morgan-ambient, Pixabay Content License (free, no attribution), `cdn.pixabay.com/audio/2026/05/05/audio_bedae80d67.mp3`, 3:42. Pixabay's Download button wants a login; the CDN mp3 URL is exposed once you press play on the track page (`document.querySelector('audio').currentSrc`). Trim to video length, 1 s fade in, 2 s fade out:
 
 ```bash
-ffmpeg -i coast_loop.mp4 -i music.mp3 -c:v copy -c:a aac -b:a 192k -shortest coast_final.mp4
+ffmpeg -i coast_v2_loop.mp4 -i calm_ambient_dreamscape.mp3 -filter_complex \
+  "[1:a]atrim=0:27.375,afade=t=in:st=0:d=1,afade=t=out:st=25.375:d=2,volume=0.9[a]" \
+  -map 0:v -map "[a]" -c:v copy -c:a aac -b:a 192k -shortest coast_v2_final.mp4
 ```
+
+Deliverable: `raw/clips/coast_v2_final.mp4` — 1080×1920, 27.4 s, 34 MB.
 
 **Upscale** to 1080×1920 for posting: Real-ESRGAN ncnn, or quick `-vf scale=1080:1920:flags=lanczos`. 4K is unnecessary for TikTok.
 

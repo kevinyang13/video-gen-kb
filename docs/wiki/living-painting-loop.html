@@ -247,9 +247,12 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </code></pre>
 <p>One unit = frames 8–72 + (73–80 faded into 0–7) = 73 frames; ×6 = 438 frames, 27.4 s. Moving objects (birds) can ghost during the 0.5 s fade; shorten to 4 frames or prompt "birds exit the frame" on the next generation if it shows.</p>
 <p><strong>v2 (2026-09-20, FLUX still)</strong>: <code>coast_v2.mov</code> came out at 576×1024 already, so no crop; same forward-loop filter with <code>scale=1080:1920:flags=lanczos</code> appended → <code>coast_v2_loop.mp4</code>, 27.4 s, 32 MB. I2V took ~15.5 min at 576×1024 (vs 24 min at 576×1280). Detail held through I2V — the FLUX still is what closed the gap with the reference.</p>
-<p><strong>Music</strong> (when a track is chosen):</p>
-<pre><code class="language-bash">ffmpeg -i coast_loop.mp4 -i music.mp3 -c:v copy -c:a aac -b:a 192k -shortest coast_final.mp4
+<p><strong>Music</strong> (done 2026-09-20): "Calm Ambient Dreamscape" by morgan-ambient, Pixabay Content License (free, no attribution), <code>cdn.pixabay.com/audio/2026/05/05/audio_bedae80d67.mp3</code>, 3:42. Pixabay's Download button wants a login; the CDN mp3 URL is exposed once you press play on the track page (<code>document.querySelector('audio').currentSrc</code>). Trim to video length, 1 s fade in, 2 s fade out:</p>
+<pre><code class="language-bash">ffmpeg -i coast_v2_loop.mp4 -i calm_ambient_dreamscape.mp3 -filter_complex \
+  &quot;[1:a]atrim=0:27.375,afade=t=in:st=0:d=1,afade=t=out:st=25.375:d=2,volume=0.9[a]&quot; \
+  -map 0:v -map &quot;[a]&quot; -c:v copy -c:a aac -b:a 192k -shortest coast_v2_final.mp4
 </code></pre>
+<p>Deliverable: <code>raw/clips/coast_v2_final.mp4</code> — 1080×1920, 27.4 s, 34 MB.</p>
 <p><strong>Upscale</strong> to 1080×1920 for posting: Real-ESRGAN ncnn, or quick <code>-vf scale=1080:1920:flags=lanczos</code>. 4K is unnecessary for TikTok.</p>
 <h2>Draw Things UI notes (learned driving it via accessibility)</h2>
 <ul>
