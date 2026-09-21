@@ -199,8 +199,8 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <tbody>
 <tr>
 <td>Model / Refiner</td>
-<td>High Noise I2V (8-bit S) / Low Noise I2V (8-bit S) @ <strong>50%</strong></td>
-<td>mandatory pair; see the refiner trap in <a href="runbook-living-painting.html">runbook living painting</a>. <strong>10% (Draw Things' recommended) ghosts on large fast subjects</strong> — use 50% for anything bigger than ambient motion</td>
+<td>High Noise I2V (8-bit S) / Low Noise I2V (8-bit S) @ <strong>10%</strong></td>
+<td>mandatory pair; see the refiner trap in <a href="runbook-living-painting.html">runbook living painting</a>. Keep 10% with the Lightning LoRA — <strong>50% produced noise</strong> (v2, 2026-09-21): the distilled LoRA is trained for the 10% split; the low-noise expert needs ~3 of the 4 steps to clean up</td>
 </tr>
 <tr>
 <td>LoRA</td>
@@ -590,7 +590,12 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <tr>
 <td style="text-align: right;">E6 follow-up</td>
 <td>2026-09-21</td>
-<td><strong>Ghosting</strong> (translucent double dragon head/wing/rider) from ~frame 55 of scene 1A, once the dragon fills the frame. Present in the Wan output, not the upscale. Diagnosis: <strong>Refiner Start 10%</strong> gives the High-Noise expert (motion/layout) ~0.4 of 4 steps — fine for calm landscapes, fails on a large fast subject. Wan 2.2's documented split is 50/50. Fix to test: Refiner Start <strong>50%</strong>, LoRA 0.8, gentler motion prompt.</td>
+<td><strong>Ghosting</strong> (translucent double dragon head/wing/rider) from ~frame 55 of scene 1A, once the dragon fills the frame. Present in the Wan output, not the upscale. Diagnosis: <strong>Refiner Start 10%</strong> gives the High-Noise expert (motion/layout) ~0.4 of 4 steps — fine for calm landscapes, fails on a large fast subject. Wan 2.2's documented split is 50/50. Fix to test: Refiner Start 50%, LoRA 0.8, gentler motion prompt.</td>
+</tr>
+<tr>
+<td style="text-align: right;">E6 v2</td>
+<td>2026-09-21</td>
+<td>Refiner 50% + LoRA 80% + gentle prompt → <strong>washed-out noisy silhouette</strong>. Wrong lever: the Lightning LoRA is trained for the 10% split, and at 50% the low-noise expert gets only 2 steps. <strong>Refiner stays at 10%.</strong> v3 plan: 10%, LoRA 100%, motion prompt with no camera move and no "across the frame" — the ghosting in v1 most likely came from asking a full-frame subject to translate a long distance in 5 s.</td>
 </tr>
 <tr>
 <td style="text-align: right;">E8 (part)</td>

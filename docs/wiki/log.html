@@ -180,6 +180,8 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <p>Double-exposure on the dragon from frame ~55. In the Wan output, not the upscale. Hypothesis: Refiner Start 10% → High-Noise expert underused on large motion. Plan and runbook updated; re-render pending (Draw Things not running, screen locked).</p>
 <h2>2026-09-21 — False alarm: "lost" render was still running</h2>
 <p><code>pgrep -x "Draw Things"</code> reports the app absent even while it renders; v2 finished normally through a lock. Keep-awake kept as insurance; runbook corrected to say locks are safe.</p>
+<h2>2026-09-21 — Scene 1A v2 failed (refiner 50%)</h2>
+<p>Output was noise. Refiner Start 50% is incompatible with the 4-step Lightning LoRA (trained for 10%). Reverting to 10%; v3 attacks ghosting via the motion prompt instead. Plan + runbook corrected.</p>
   
 </div>
 <footer>video-gen-kb · built 2026-09-21 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>

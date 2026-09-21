@@ -168,3 +168,7 @@ Double-exposure on the dragon from frame ~55. In the Wan output, not the upscale
 ## 2026-09-21 — False alarm: "lost" render was still running
 
 `pgrep -x "Draw Things"` reports the app absent even while it renders; v2 finished normally through a lock. Keep-awake kept as insurance; runbook corrected to say locks are safe.
+
+## 2026-09-21 — Scene 1A v2 failed (refiner 50%)
+
+Output was noise. Refiner Start 50% is incompatible with the 4-step Lightning LoRA (trained for 10%). Reverting to 10%; v3 attacks ghosting via the motion prompt instead. Plan + runbook corrected.
