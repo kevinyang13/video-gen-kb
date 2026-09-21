@@ -260,6 +260,8 @@ def build_landing(slugs, today):
 
 
 def build():
+    import subprocess, sys
+    subprocess.run([sys.executable, str(ROOT / 'scripts' / 'build_projects.py')], check=True)
     if OUT.exists():
         shutil.rmtree(OUT)
     OUT.mkdir(parents=True)

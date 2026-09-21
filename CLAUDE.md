@@ -18,10 +18,12 @@ scripts/build_site.py -- renders wiki/ -> docs/
 serve.sh      -- rebuild + serve docs/ on http://localhost:8788
 scripts/finish_clip.sh -- I2V export (.mov) -> looped 1080x1920 mp4 (+ music)
 raw/clips/    -- generated stills/clips/music (git-ignored)
+projects.json -- registry of every video project (models, settings, prompts, seeds, music, files)
+scripts/build_projects.py -- projects.json -> wiki/projects.md (run by build_site.py)
 ```
 
 ## Producing a video
-Follow `wiki/runbook-living-painting.md` step by step. After each session, record timings and any new gotcha on the relevant recipe page and in `wiki/log.md`.
+Follow `wiki/runbook-living-painting.md` step by step. When a project starts, add its record to `projects.json` (prompts, seeds, any non-default settings, files, notes) and keep it updated as it renders; `wiki/projects.md` is generated from it. After each session, record timings and any new gotcha on the relevant recipe page and in `wiki/log.md`.
 
 ## Site
 `docs/` is a static site rendered from `wiki/`. After any wiki change, run

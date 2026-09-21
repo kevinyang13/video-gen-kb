@@ -22,6 +22,10 @@
 - [[draw-things-setup]] — downloading Wan 2.1/2.2, LTX-2.3, Hunyuan, SkyReels inside Draw Things; LightX2V 4-step settings; I2V step-by-step; disk budget
 - [[apple-silicon-inference]] — FP8 trap, MPS slowness, Draw Things and MLX runtimes, 48 GB memory planning
 
+## Projects
+
+- [[projects]] — registry of every video: models, settings, prompts, seeds, music, files; generated from `projects.json`
+
 ## Recipes
 
 - [[runbook-living-painting]] — **start here next time**: click-by-click checklist, settings to verify after every model switch, failure signatures, `scripts/finish_clip.sh`
