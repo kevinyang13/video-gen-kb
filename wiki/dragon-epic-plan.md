@@ -91,6 +91,7 @@ Details and Mac notes: [[video-upscaling]].
 - music bed + 3–5 SFX (wing beats, roar, wind, hooves) from Pixabay; `-shortest`
 - 2 s title card at the end (FLUX still at 1280×720, upscaled the same way)
 - encode **HEVC 10-bit, `hevc_videotoolbox`, ~40 Mbps** for YouTube 4K; keep a ProRes master
+- **HDR**: the generators emit 8-bit SDR, so true HDR is not possible. The script gets an `--hdr` flag that produces an **HLG BT.2020** variant via inverse tone-mapping (`zscale` + `tonemap`) for A/B on an HDR TV; if it looks better, upload that, otherwise the SDR master. Default = SDR.
 
 `scripts/assemble_film.sh` — to write when the first 3 clips exist.
 
@@ -186,7 +187,7 @@ Rendering is unattended; the Mac must stay unlocked (see the lock note in [[runb
 2. Hero look: armor / cloak / modern? Era?
 3. Dragon: color and vibe (menacing then loyal? always noble?).
 4. Music: orchestral epic, or ambient like the loops?
-5. Deliverable: YouTube 16:9 at 4K UHD — confirmed. HDR too, or SDR is fine?
+5. Deliverable: YouTube 16:9 at 4K UHD, SDR master + optional HLG variant — confirmed 2026-09-21.
 
 ## Related pages
 - [[face-identity-workflows]]
