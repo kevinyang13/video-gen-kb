@@ -124,7 +124,7 @@ No dragon LoRA exists for these models. Strategy:
 
 ## 5b. Scene 1 — locked (2026-09-21)
 
-**Reference**: `raw/dragon/ref_scene1_flyby.webp` (mood only — haze, backlit sea, scale; our dragon is its own design).
+**Reference**: `raw/dragon/ref_scene1_flyby.webp` — reference for the **dragon** (reddish-brown, confirmed). Environment is ours: **setting sun**, not the ref's grey haze.
 
 **Action**: a rider on a dragon high above open sea; a second dragon further back; the camera pushes in on the rider as the dragon flies past.
 
@@ -140,11 +140,13 @@ Cut 1A → 1B on the wing downbeat. Optional 1C (2 s): tight on the face, eyes n
 **Dragon description lock (draft — edit)**: *massive dark reddish-brown dragon, matte ridged scales, long tapered neck, bat-like wing membranes with visible bone struts and torn trailing edges, a row of curved horns sweeping back from the skull, amber eyes, wingspan four times its body length.*
 
 **Still prompt 1A (FLUX.2 klein, 1280×720)**:
-`Cinematic film still, anamorphic 35mm, high above an open ocean at hazy golden hour, backlit. A [dragon lock] flies left to right across the frame, wings spread wide, a small armored rider seated at the base of its neck. Far behind it a second dragon, smaller and soft in the sea haze. Bright sun glare on the water below, thin clouds, volumetric light, photorealistic, highly detailed, shallow depth of field on the distant dragon.`
+`Cinematic film still, anamorphic 35mm, high above an open ocean at sunset, the sun low on the horizon and half-sunk, sky in orange, magenta and deep violet, backlit. A [dragon lock] flies left to right across the frame, wings spread wide, a small armored rider seated at the base of its neck. Far behind it a second dragon, smaller and soft in the sea haze. A long path of sun glitter on the water below, thin streaked clouds lit from beneath, volumetric warm light, photorealistic, highly detailed, shallow depth of field on the distant dragon.`
 
-**Still prompt 1B**: `Cinematic film still, anamorphic 50mm, three-quarter view from behind and beside a rider on the neck of a [dragon lock], sea and haze far below, a second dragon distant in the background. The rider wears [hero look], cloak streaming, hands on the dragon's neck ridge, looking back over his shoulder toward the camera. Backlit hazy golden hour, rim light on the rider, photorealistic, highly detailed.` + face control (E1/E2).
+**Still prompt 1B**: `Cinematic film still, anamorphic 50mm, three-quarter view from behind and beside a rider on the neck of a [dragon lock], sea and haze far below, a second dragon distant in the background. The rider wears dark weathered leather armor with a deep-red cloak streaming behind him, hands on the dragon's neck ridge, looking back over his shoulder toward the camera. Sunset backlight, orange rim light on the rider's shoulder and hair, violet sky, photorealistic, highly detailed.` + face control (E1/E2).
 
-**Sea/haze palette** is the same family as the coastal loops — reuse those learnings for the motion prompt (waves, haze drift).
+**Hero look (fixed 2026-09-21)**: dark weathered leather armor, deep-red cloak, no helmet (face must be visible). Same words in every hero prompt.
+
+**Sea/sunset palette** is the same family as the coastal loops — reuse those learnings for the motion prompt (waves, haze drift).
 
 ## 6. Shot list (v0 — edit freely)
 
@@ -209,8 +211,8 @@ Rendering is unattended; the Mac must stay unlocked (see the lock note in [[runb
 ## 10. Open questions for Kevin
 
 1. Photos: can you drop 15–30 face photos into `raw/face/`?
-2. Hero look: armor / cloak / modern? Era?
-3. Dragon: color and vibe (menacing then loyal? always noble?).
+2. Hero look: ~~armor / cloak / modern?~~ → weathered leather + red cloak, no helmet (settled 2026-09-21).
+3. Dragon: ~~color~~ reddish-brown (settled 2026-09-21). Vibe still open: menacing-then-loyal, or noble throughout?
 4. Music: orchestral epic, or ambient like the loops?
 5. Deliverable: YouTube 16:9 at 4K UHD, SDR master + optional HLG variant — confirmed 2026-09-21.
 

@@ -333,7 +333,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <li>If it still drifts: train a small dragon LoRA on 20 generated stills of the locked design (same PEFT path as the face).</li>
 </ol>
 <h2>5b. Scene 1 — locked (2026-09-21)</h2>
-<p><strong>Reference</strong>: <code>raw/dragon/ref_scene1_flyby.webp</code> (mood only — haze, backlit sea, scale; our dragon is its own design).</p>
+<p><strong>Reference</strong>: <code>raw/dragon/ref_scene1_flyby.webp</code> — reference for the <strong>dragon</strong> (reddish-brown, confirmed). Environment is ours: <strong>setting sun</strong>, not the ref's grey haze.</p>
 <p><strong>Action</strong>: a rider on a dragon high above open sea; a second dragon further back; the camera pushes in on the rider as the dragon flies past.</p>
 <p>A 5 s push from "rider is 40 px tall" to "face fills the frame" is a 10× scale change — Wan will warp it. Split into two shots that cut together as one move:</p>
 <div class="tw"><table>
@@ -363,9 +363,10 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <p>Cut 1A → 1B on the wing downbeat. Optional 1C (2 s): tight on the face, eyes narrowing, if E3 shows the face holds.</p>
 <p><strong>Dragon description lock (draft — edit)</strong>: <em>massive dark reddish-brown dragon, matte ridged scales, long tapered neck, bat-like wing membranes with visible bone struts and torn trailing edges, a row of curved horns sweeping back from the skull, amber eyes, wingspan four times its body length.</em></p>
 <p><strong>Still prompt 1A (FLUX.2 klein, 1280×720)</strong>:
-<code>Cinematic film still, anamorphic 35mm, high above an open ocean at hazy golden hour, backlit. A [dragon lock] flies left to right across the frame, wings spread wide, a small armored rider seated at the base of its neck. Far behind it a second dragon, smaller and soft in the sea haze. Bright sun glare on the water below, thin clouds, volumetric light, photorealistic, highly detailed, shallow depth of field on the distant dragon.</code></p>
-<p><strong>Still prompt 1B</strong>: <code>Cinematic film still, anamorphic 50mm, three-quarter view from behind and beside a rider on the neck of a [dragon lock], sea and haze far below, a second dragon distant in the background. The rider wears [hero look], cloak streaming, hands on the dragon's neck ridge, looking back over his shoulder toward the camera. Backlit hazy golden hour, rim light on the rider, photorealistic, highly detailed.</code> + face control (E1/E2).</p>
-<p><strong>Sea/haze palette</strong> is the same family as the coastal loops — reuse those learnings for the motion prompt (waves, haze drift).</p>
+<code>Cinematic film still, anamorphic 35mm, high above an open ocean at sunset, the sun low on the horizon and half-sunk, sky in orange, magenta and deep violet, backlit. A [dragon lock] flies left to right across the frame, wings spread wide, a small armored rider seated at the base of its neck. Far behind it a second dragon, smaller and soft in the sea haze. A long path of sun glitter on the water below, thin streaked clouds lit from beneath, volumetric warm light, photorealistic, highly detailed, shallow depth of field on the distant dragon.</code></p>
+<p><strong>Still prompt 1B</strong>: <code>Cinematic film still, anamorphic 50mm, three-quarter view from behind and beside a rider on the neck of a [dragon lock], sea and haze far below, a second dragon distant in the background. The rider wears dark weathered leather armor with a deep-red cloak streaming behind him, hands on the dragon's neck ridge, looking back over his shoulder toward the camera. Sunset backlight, orange rim light on the rider's shoulder and hair, violet sky, photorealistic, highly detailed.</code> + face control (E1/E2).</p>
+<p><strong>Hero look (fixed 2026-09-21)</strong>: dark weathered leather armor, deep-red cloak, no helmet (face must be visible). Same words in every hero prompt.</p>
+<p><strong>Sea/sunset palette</strong> is the same family as the coastal loops — reuse those learnings for the motion prompt (waves, haze drift).</p>
 <h2>6. Shot list (v0 — edit freely)</h2>
 <div class="tw"><table>
 <thead>
@@ -628,8 +629,8 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <h2>10. Open questions for Kevin</h2>
 <ol>
 <li>Photos: can you drop 15–30 face photos into <code>raw/face/</code>?</li>
-<li>Hero look: armor / cloak / modern? Era?</li>
-<li>Dragon: color and vibe (menacing then loyal? always noble?).</li>
+<li>Hero look: ~~armor / cloak / modern?~~ → weathered leather + red cloak, no helmet (settled 2026-09-21).</li>
+<li>Dragon: ~~color~~ reddish-brown (settled 2026-09-21). Vibe still open: menacing-then-loyal, or noble throughout?</li>
 <li>Music: orchestral epic, or ambient like the loops?</li>
 <li>Deliverable: YouTube 16:9 at 4K UHD, SDR master + optional HLG variant — confirmed 2026-09-21.</li>
 </ol>
