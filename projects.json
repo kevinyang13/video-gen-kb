@@ -226,21 +226,21 @@
       "dt_project": "(not created yet)",
       "status": "planning",
       "still": {
-        "size": "1024x576",
+        "size": "1280x720",
         "prompt": "per shot — see wiki/dragon-epic-plan.md §6"
       },
       "i2v": {
-        "size": "1024x576",
+        "size": "1280x720 (measure time in E6)",
         "prompt": "per shot — one camera move + one subject action"
       },
       "post": {
         "script": "scripts/assemble_film.sh (to write)",
         "loop": "none — 12 clips xfade-concatenated",
-        "upscale": "lanczos 1920x1080, optional 2.39:1 bars",
+        "upscale": "AI 3x to 3840x2160 (SeedVR2 / Real-ESRGAN — decide in E8), HEVC 10-bit hevc_videotoolbox",
         "music": "TBD — orchestral epic + SFX"
       },
       "files": [],
-      "notes": "Plan page: wiki/dragon-epic-plan.md. Experiments E1–E7 must pass before rendering the shot list. Needs face photos in raw/face/."
+      "notes": "Plan page: wiki/dragon-epic-plan.md. Experiments E1–E7 must pass before rendering the shot list. Needs face photos in raw/face/. Delivery is 4K UHD."
     }
   ],
   "playlist": {

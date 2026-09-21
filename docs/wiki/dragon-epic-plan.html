@@ -91,7 +91,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
     <span class="spacer"></span>
     <button class="pill" onclick="tt()">◐ Theme</button>
   </nav>
-  <h1>Dragon Epic — Project Plan</h1><p class="lede">Plan for a 1-minute hyper-realistic short with a dragon and a hero whose face is Kevin's, built on the Mac Studio with Draw Things + ffmpeg. Covers the pipeline, the Draw Things configuration for every stage, the face-identity strategy, dragon consistency, the shot list, the time budget, and the experiments to run before committing render hours. Living document — update as experiments land.</p><div class="meta"><span><b>Updated</b> 2026-09-21</span><span><b>Sources</b> 2026-09-19-local-4k-video-research.md; <a href="face-identity-workflows.html">face identity workflows</a>; <a href="runbook-living-painting.html">runbook living painting</a>; hands-on measurements 2026-09-20/21. Items marked <em>verify</em> have not been tested in Draw Things yet.</span></div>
+  <h1>Dragon Epic — Project Plan</h1><p class="lede">Plan for a 1-minute hyper-realistic short with a dragon and a hero whose face is Kevin's, built on the Mac Studio with Draw Things + ffmpeg. Covers the pipeline, the Draw Things configuration for every stage, the face-identity strategy, dragon consistency, the shot list, the time budget, and the experiments to run before committing render hours. Living document — update as experiments land.</p><div class="meta"><span><b>Updated</b> 2026-09-21 (4K delivery added)</span><span><b>Sources</b> 2026-09-19-local-4k-video-research.md; <a href="face-identity-workflows.html">face identity workflows</a>; <a href="runbook-living-painting.html">runbook living painting</a>; hands-on measurements 2026-09-20/21. Items marked <em>verify</em> have not been tested in Draw Things yet.</span></div>
 <hr />
 <h2>1. What we are making</h2>
 <div class="tw"><table>
@@ -111,8 +111,8 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <td>Photoreal cinematic, not anime. Anamorphic film feel, volumetric light, real skin.</td>
 </tr>
 <tr>
-<td>Aspect</td>
-<td><strong>16:9 (1024×576)</strong> — this is a film, not a TikTok. Wan handles 1024×576 at the same cost as 576×1024. Post-upscale to 1920×1080.</td>
+<td>Aspect / delivery</td>
+<td><strong>16:9, delivered at 3840×2160 (4K UHD)</strong>. No open model generates good 4K directly on this Mac (see <a href="image-to-video-models.html">image to video models</a>), so: generate at <strong>1280×720</strong>, AI-upscale 3× to 3840×2160. Stills are made at 1280×720 too so the I2V source matches.</td>
 </tr>
 <tr>
 <td>Story</td>
@@ -137,7 +137,10 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
                           (optional) FaceFusion pass on face-visible shots
                                             │
                                             ▼
-                    ffmpeg: xfade concat ×12 → 1920×1080 → music + SFX → title
+                          AI upscale 1280×720 → 3840×2160 (§3e)
+                                            │
+                                            ▼
+                    ffmpeg: xfade concat ×12 → music + SFX → title → 4K HEVC
 </code></pre>
 <p>Every stage exists already except the face control and the concat script. Nothing here needs ComfyUI.</p>
 <h2>3. Draw Things configuration per stage</h2>
@@ -163,8 +166,8 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </tr>
 <tr>
 <td>Size</td>
-<td><strong>1024×576</strong> (Small 16:9)</td>
-<td>16:9 for film. Generate at 1024×576, not larger — I2V runs at this size anyway</td>
+<td><strong>1280×720</strong> (16:9)</td>
+<td>matches the I2V size below; FLUX klein is comfortable at 0.9 MP</td>
 </tr>
 <tr>
 <td>Prompt style</td>
@@ -206,8 +209,8 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </tr>
 <tr>
 <td>Size</td>
-<td>1024×576, 81 frames @ 16 fps</td>
-<td></td>
+<td><strong>1280×720</strong>, 81 frames @ 16 fps</td>
+<td>1.56× the pixels of 576×1024 → expect <strong>~25 min per clip</strong> (<em>measure in E6</em>). 1920×1080 native would be ~3.5× → 55 min/clip and 48 GB is tight; not worth it when the upscaler does the rest</td>
 </tr>
 <tr>
 <td>Motion prompt</td>
@@ -224,12 +227,53 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <p>Camera moves that Wan 2.2 does well at 4 steps: slow dolly/push, slow pan, orbit ≤ 30°, handheld drift. Avoid: whip pans, fast tracking, anything that reveals new geometry.</p>
 <h3>3c. Face pass — FaceFusion (post, optional per shot)</h3>
 <p>For shots where the hero's face is larger than ~120 px tall, run FaceFusion on the 5 s clip with one reference photo of Kevin, face-enhancer on. It re-locks identity that I2V softened. Runs on Apple Silicon via CoreML <em>(verify install: <code>pip install facefusion</code> or the standalone app)</em>. Do it <strong>before</strong> upscaling.</p>
-<h3>3d. Assembly — ffmpeg</h3>
+<h3>3d. Upscale to 4K — the step that makes "4K" true</h3>
+<p>1280×720 → 3840×2160 is exactly <strong>3×</strong>. Lanczos would just be a blurry 4K container; a learned upscaler adds the detail. Candidates, in order to test (<em>E8</em>):</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Upscaler</th>
+<th>Type</th>
+<th>Mac path</th>
+<th>Expected</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SeedVR2</strong></td>
+<td>temporal video restorer</td>
+<td>ComfyUI node with MPS support (the one ComfyUI use in this project)</td>
+<td>best quality, no flicker; memory at 4K unknown → may need tiling</td>
+</tr>
+<tr>
+<td><strong>Real-ESRGAN x4plus / RealESRGAN_x4plus_anime</strong> via ncnn</td>
+<td>per-frame</td>
+<td><code>realesrgan-ncnn-vulkan</code> binary or <strong>REAL Video Enhancer</strong> app</td>
+<td>fast, sharp, can shimmer on motion; run at 4× then downscale to 3840</td>
+</tr>
+<tr>
+<td><strong>Draw Things built-in Upscaler</strong> (Settings → Upscaler: Real-ESRGAN / UltraSharp)</td>
+<td>per-frame, in-app</td>
+<td>applies to generated <em>images</em>; whether it upscales all 81 video frames on export is <em>unverified</em></td>
+<td>zero setup if it works</td>
+</tr>
+<tr>
+<td>Topaz Video AI</td>
+<td>commercial</td>
+<td>Metal-native</td>
+<td>reference quality; paid — fallback only</td>
+</tr>
+</tbody>
+</table></div>
+<p>Order of operations: <strong>FaceFusion → upscale → assemble</strong>. Never upscale before the face pass (3× the pixels to swap) and never assemble first (upscaling the crossfades is wasted work).</p>
+<p>Details and Mac notes: <a href="video-upscaling.html">video upscaling</a>.</p>
+<h3>3e. Assembly — ffmpeg</h3>
 <ul>
-<li><code>xfade</code> crossfades (0.5 s) or hard cuts between the 12 clips; no loops</li>
-<li>lanczos to 1920×1080; optional 2.39:1 letterbox bars for the film look</li>
+<li><code>xfade</code> crossfades (0.5 s) or hard cuts between the 12 upscaled clips; no loops</li>
+<li>optional 2.39:1 letterbox bars (3840×1608 picture inside 3840×2160)</li>
 <li>music bed + 3–5 SFX (wing beats, roar, wind, hooves) from Pixabay; <code>-shortest</code></li>
-<li>2 s title card at the end (ffmpeg <code>drawtext</code> or a FLUX still)</li>
+<li>2 s title card at the end (FLUX still at 1280×720, upscaled the same way)</li>
+<li>encode <strong>HEVC 10-bit, <code>hevc_videotoolbox</code>, ~40 Mbps</strong> for YouTube 4K; keep a ProRes master</li>
 </ul>
 <p><code>scripts/assemble_film.sh</code> — to write when the first 3 clips exist.</p>
 <h2>4. Face identity — the hard part</h2>
@@ -473,6 +517,13 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <td>finishes in &lt; 3 h</td>
 <td><em>verify</em></td>
 </tr>
+<tr>
+<td style="text-align: right;">E8</td>
+<td>Which upscaler gets 1280×720 → 4K looking real?</td>
+<td>run the E6 clip through SeedVR2, Real-ESRGAN ncnn, and Draw Things' upscaler; compare a still frame at 100%</td>
+<td>skin and scales gain detail, no flicker across 10 frames</td>
+<td>1 h</td>
+</tr>
 </tbody>
 </table></div>
 <p>E1–E2 decide the face strategy. E5–E6 decide whether the dragon look is achievable. Do all seven before rendering the shot list.</p>
@@ -490,12 +541,16 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <td>60 × 40 s ≈ <strong>40 min</strong></td>
 </tr>
 <tr>
-<td>I2V, 12 clips × 16 min</td>
-<td><strong>3.2 h</strong> unattended</td>
+<td>I2V, 12 clips × ~25 min at 1280×720</td>
+<td><strong>5 h</strong> unattended</td>
 </tr>
 <tr>
 <td>Re-renders (assume 4 shots need a second pass)</td>
-<td>+1.1 h</td>
+<td>+1.7 h</td>
+</tr>
+<tr>
+<td>4K upscale, 12 clips (SeedVR2 on MPS, est. 3–8 min each)</td>
+<td>~1 h</td>
 </tr>
 <tr>
 <td>FaceFusion, 4 shots</td>
@@ -506,12 +561,12 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <td>30 min</td>
 </tr>
 <tr>
-<td>Experiments E1–E7</td>
-<td>~2.5 h</td>
+<td>Experiments E1–E8</td>
+<td>~3.5 h</td>
 </tr>
 <tr>
 <td><strong>Total</strong></td>
-<td><strong>≈ 8 h machine time</strong>, spread over 2–3 sessions</td>
+<td><strong>≈ 12 h machine time</strong>, spread over 3–4 sessions</td>
 </tr>
 </tbody>
 </table></div>
@@ -522,7 +577,9 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <li><strong>Dragon changes between shots</strong> — mitigated by description lock + silhouette staging; LoRA as last resort.</li>
 <li><strong>Two-subject shot (9)</strong> — highest failure odds; have a fallback framing (dragon head only, hero's hand in frame).</li>
 <li><strong>Photoreal humans at 4 steps</strong> — hands and eyes. Keep hands out of frame or holding reins; no waving.</li>
-<li><strong>Hardware time</strong> — 8 h is fine; 20 h is not. Cap re-renders at one per shot, then accept or cut the shot.</li>
+<li><strong>Hardware time</strong> — 12 h is fine; 25 h is not. Cap re-renders at one per shot, then accept or cut the shot.</li>
+<li><strong>4K upscale memory</strong> — SeedVR2 at 3840×2160 may exceed 48 GB unified; fall back to tiled mode or Real-ESRGAN. Test on one clip (E8) before the batch.</li>
+<li><strong>1280×720 I2V unmeasured</strong> — if E6 shows &gt; 35 min/clip, drop to 1024×576 and upscale 3.75× instead; the upscaler cost is the same.</li>
 </ul>
 <h2>10. Open questions for Kevin</h2>
 <ol>
@@ -530,7 +587,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <li>Hero look: armor / cloak / modern? Era?</li>
 <li>Dragon: color and vibe (menacing then loyal? always noble?).</li>
 <li>Music: orchestral epic, or ambient like the loops?</li>
-<li>Deliverable: YouTube 16:9 landscape confirmed?</li>
+<li>Deliverable: YouTube 16:9 at 4K UHD — confirmed. HDR too, or SDR is fine?</li>
 </ol>
 
   <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="face-identity-workflows.html">face identity workflows</a></li><li><a href="runbook-living-painting.html">runbook living painting</a></li><li><a href="projects.html">projects</a></li><li><a href="wan22-i2v-locked-image-settings.html">wan22 i2v locked image settings</a></li><li><a href="video-upscaling.html">video upscaling</a></li></ul></div>

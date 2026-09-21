@@ -4,7 +4,7 @@
 
 **Sources**: 2026-09-19-local-4k-video-research.md; [[face-identity-workflows]]; [[runbook-living-painting]]; hands-on measurements 2026-09-20/21. Items marked *verify* have not been tested in Draw Things yet.
 
-**Last updated**: 2026-09-21
+**Last updated**: 2026-09-21 (4K delivery added)
 
 ---
 
@@ -14,7 +14,7 @@
 |---|---|
 | Length | 60 s = **12 shots × 5 s** (81 frames @ 16 fps each). Longer single shots cost more and drift more; 5 s is the sweet spot on this hardware. |
 | Look | Photoreal cinematic, not anime. Anamorphic film feel, volumetric light, real skin. |
-| Aspect | **16:9 (1024×576)** — this is a film, not a TikTok. Wan handles 1024×576 at the same cost as 576×1024. Post-upscale to 1920×1080. |
+| Aspect / delivery | **16:9, delivered at 3840×2160 (4K UHD)**. No open model generates good 4K directly on this Mac (see [[image-to-video-models]]), so: generate at **1280×720**, AI-upscale 3× to 3840×2160. Stills are made at 1280×720 too so the I2V source matches. |
 | Story | Three acts, four shots each: **Arrival** (hero rides into a burned valley) → **Encounter** (the dragon reveals itself, standoff) → **Bond** (hero and dragon fly together over the coast at dawn). No dialogue; music + SFX. |
 | Hero | Kevin's face. One consistent character across ~8 of the 12 shots. |
 | Dragon | One consistent design across ~7 shots. |
@@ -30,7 +30,10 @@ character sheet (hero, dragon)  ──►  per-shot still (FLUX.2 klein + face c
                           (optional) FaceFusion pass on face-visible shots
                                             │
                                             ▼
-                    ffmpeg: xfade concat ×12 → 1920×1080 → music + SFX → title
+                          AI upscale 1280×720 → 3840×2160 (§3e)
+                                            │
+                                            ▼
+                    ffmpeg: xfade concat ×12 → music + SFX → title → 4K HEVC
 ```
 
 Every stage exists already except the face control and the concat script. Nothing here needs ComfyUI.
@@ -43,7 +46,7 @@ Every stage exists already except the face control and the concat script. Nothin
 |---|---|---|
 | Model | FLUX.2 [klein] 9B (8-bit S) | proven on the farm photo test (2026-09-20) — photoreal kids, guide, pomegranate tree were convincing |
 | Steps / CFG / Shift | 4 / 1.0 / 3 | klein defaults |
-| Size | **1024×576** (Small 16:9) | 16:9 for film. Generate at 1024×576, not larger — I2V runs at this size anyway |
+| Size | **1280×720** (16:9) | matches the I2V size below; FLUX klein is comfortable at 0.9 MP |
 | Prompt style | camera + lens + light first, subject second | `Cinematic still, anamorphic 35mm, shallow depth of field, volumetric dawn light, …` No anime suffix |
 | Negative | n/a at CFG 1 | fix the still, not the negative |
 | Control | face adapter for hero shots (see §4) | *verify which adapters Draw Things lists for FLUX.2 klein* |
@@ -56,7 +59,7 @@ Same as the living-painting runbook with three changes for photoreal:
 |---|---|---|
 | Model / Refiner | High Noise I2V (8-bit S) / Low Noise I2V (8-bit S) @ 10% | mandatory pair; see the refiner trap in [[runbook-living-painting]] |
 | LoRA | Lightning High-Noise 100%, 4 steps, CFG 1 | 16 min per clip. Try **8 steps** on one hero close-up to see if skin/face hold better (~30 min) — *experiment E3* |
-| Size | 1024×576, 81 frames @ 16 fps | |
+| Size | **1280×720**, 81 frames @ 16 fps | 1.56× the pixels of 576×1024 → expect **~25 min per clip** (*measure in E6*). 1920×1080 native would be ~3.5× → 55 min/clip and 48 GB is tight; not worth it when the upscaler does the rest |
 | Motion prompt | one camera move + one subject action, nothing else | `slow dolly in, the rider turns his head toward the ridge, cloak moving in the wind, embers drifting` — people may move here, but **one** action per shot, and never "walking toward camera" |
 | Shift | 5 | |
 
@@ -66,12 +69,28 @@ Camera moves that Wan 2.2 does well at 4 steps: slow dolly/push, slow pan, orbit
 
 For shots where the hero's face is larger than ~120 px tall, run FaceFusion on the 5 s clip with one reference photo of Kevin, face-enhancer on. It re-locks identity that I2V softened. Runs on Apple Silicon via CoreML *(verify install: `pip install facefusion` or the standalone app)*. Do it **before** upscaling.
 
-### 3d. Assembly — ffmpeg
+### 3d. Upscale to 4K — the step that makes "4K" true
 
-- `xfade` crossfades (0.5 s) or hard cuts between the 12 clips; no loops
-- lanczos to 1920×1080; optional 2.39:1 letterbox bars for the film look
+1280×720 → 3840×2160 is exactly **3×**. Lanczos would just be a blurry 4K container; a learned upscaler adds the detail. Candidates, in order to test (*E8*):
+
+| Upscaler | Type | Mac path | Expected |
+|---|---|---|---|
+| **SeedVR2** | temporal video restorer | ComfyUI node with MPS support (the one ComfyUI use in this project) | best quality, no flicker; memory at 4K unknown → may need tiling |
+| **Real-ESRGAN x4plus / RealESRGAN_x4plus_anime** via ncnn | per-frame | `realesrgan-ncnn-vulkan` binary or **REAL Video Enhancer** app | fast, sharp, can shimmer on motion; run at 4× then downscale to 3840 |
+| **Draw Things built-in Upscaler** (Settings → Upscaler: Real-ESRGAN / UltraSharp) | per-frame, in-app | applies to generated *images*; whether it upscales all 81 video frames on export is *unverified* | zero setup if it works |
+| Topaz Video AI | commercial | Metal-native | reference quality; paid — fallback only |
+
+Order of operations: **FaceFusion → upscale → assemble**. Never upscale before the face pass (3× the pixels to swap) and never assemble first (upscaling the crossfades is wasted work).
+
+Details and Mac notes: [[video-upscaling]].
+
+### 3e. Assembly — ffmpeg
+
+- `xfade` crossfades (0.5 s) or hard cuts between the 12 upscaled clips; no loops
+- optional 2.39:1 letterbox bars (3840×1608 picture inside 3840×2160)
 - music bed + 3–5 SFX (wing beats, roar, wind, hooves) from Pixabay; `-shortest`
-- 2 s title card at the end (ffmpeg `drawtext` or a FLUX still)
+- 2 s title card at the end (FLUX still at 1280×720, upscaled the same way)
+- encode **HEVC 10-bit, `hevc_videotoolbox`, ~40 Mbps** for YouTube 4K; keep a ProRes master
 
 `scripts/assemble_film.sh` — to write when the first 3 clips exist.
 
@@ -132,6 +151,7 @@ No dragon LoRA exists for these models. Strategy:
 | E5 | Dragon design sheet + description lock | 2 dragon stills from the locked paragraph, different scenes | same dragon | 10 min |
 | E6 | Photoreal I2V motion at 1024×576 | shot 1 (no faces) | no warping, camera move reads | 16 min |
 | E7 | PEFT tab: can Draw Things train a FLUX LoRA locally? | check tab, start a 20-image run | finishes in < 3 h | *verify* |
+| E8 | Which upscaler gets 1280×720 → 4K looking real? | run the E6 clip through SeedVR2, Real-ESRGAN ncnn, and Draw Things' upscaler; compare a still frame at 100% | skin and scales gain detail, no flicker across 10 frames | 1 h |
 
 E1–E2 decide the face strategy. E5–E6 decide whether the dragon look is achievable. Do all seven before rendering the shot list.
 
@@ -140,12 +160,13 @@ E1–E2 decide the face strategy. E5–E6 decide whether the dragon look is achi
 | Item | Estimate |
 |---|---|
 | Stills, all shots incl. iteration (~5 seeds each) | 60 × 40 s ≈ **40 min** |
-| I2V, 12 clips × 16 min | **3.2 h** unattended |
-| Re-renders (assume 4 shots need a second pass) | +1.1 h |
+| I2V, 12 clips × ~25 min at 1280×720 | **5 h** unattended |
+| Re-renders (assume 4 shots need a second pass) | +1.7 h |
+| 4K upscale, 12 clips (SeedVR2 on MPS, est. 3–8 min each) | ~1 h |
 | FaceFusion, 4 shots | 10 min |
 | Assembly, music, titles | 30 min |
-| Experiments E1–E7 | ~2.5 h |
-| **Total** | **≈ 8 h machine time**, spread over 2–3 sessions |
+| Experiments E1–E8 | ~3.5 h |
+| **Total** | **≈ 12 h machine time**, spread over 3–4 sessions |
 
 Rendering is unattended; the Mac must stay unlocked (see the lock note in [[runbook-living-painting]]).
 
@@ -155,7 +176,9 @@ Rendering is unattended; the Mac must stay unlocked (see the lock note in [[runb
 - **Dragon changes between shots** — mitigated by description lock + silhouette staging; LoRA as last resort.
 - **Two-subject shot (9)** — highest failure odds; have a fallback framing (dragon head only, hero's hand in frame).
 - **Photoreal humans at 4 steps** — hands and eyes. Keep hands out of frame or holding reins; no waving.
-- **Hardware time** — 8 h is fine; 20 h is not. Cap re-renders at one per shot, then accept or cut the shot.
+- **Hardware time** — 12 h is fine; 25 h is not. Cap re-renders at one per shot, then accept or cut the shot.
+- **4K upscale memory** — SeedVR2 at 3840×2160 may exceed 48 GB unified; fall back to tiled mode or Real-ESRGAN. Test on one clip (E8) before the batch.
+- **1280×720 I2V unmeasured** — if E6 shows > 35 min/clip, drop to 1024×576 and upscale 3.75× instead; the upscaler cost is the same.
 
 ## 10. Open questions for Kevin
 
@@ -163,7 +186,7 @@ Rendering is unattended; the Mac must stay unlocked (see the lock note in [[runb
 2. Hero look: armor / cloak / modern? Era?
 3. Dragon: color and vibe (menacing then loyal? always noble?).
 4. Music: orchestral epic, or ambient like the loops?
-5. Deliverable: YouTube 16:9 landscape confirmed?
+5. Deliverable: YouTube 16:9 at 4K UHD — confirmed. HDR too, or SDR is fine?
 
 ## Related pages
 - [[face-identity-workflows]]

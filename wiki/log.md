@@ -152,3 +152,7 @@ Symptoms: mid-denoise noise output + 5–9-frame clips. Causes: refiner set to L
 ## 2026-09-21 — Dragon Epic plan
 
 New project planned, not started: `wiki/dragon-epic-plan.md` (pipeline, per-stage Draw Things settings, face strategy ranked, dragon consistency, 12-shot list, 7 gating experiments, ~8 h budget, open questions). Registry entry added as `planning`.
+
+## 2026-09-21 — Dragon Epic: 4K delivery
+
+Plan updated: generate stills + I2V at 1280×720, AI-upscale 3× to 3840×2160 (SeedVR2 first, Real-ESRGAN ncnn fallback, Draw Things upscaler to verify), FaceFusion before upscale, HEVC 10-bit via videotoolbox. New experiment E8 (upscaler bake-off); budget ~12 h.
