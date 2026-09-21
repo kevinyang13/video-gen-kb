@@ -190,13 +190,14 @@
       "title": "FLL BOT Builders — Coastal Roots Farm, wide view",
       "date": "2026-09-20",
       "dt_project": "Untitled-91574",
-      "status": "done",
+      "status": "v2 rendering",
       "still": {
-        "prompt": "A breathtaking anime background painting, wide view from a low hill looking down over Coastal Roots Farm in Encinitas at golden hour. Foreground: rows of orchard trees on raised earth berms with shallow swales between them, alleys of elderberry and pomegranate trees where a flock of chickens pecks inside a white portable net fence, a small red barn-style chicken coop on wheels. Middle ground: long rows of squash and vegetables under white trellis netting, a shed painted with a bright sunflower mural, a corrugated-metal welcome-sign shelter, wooden fences, a winding dirt path where a small group of five children in matching black t-shirts walks with a farm guide, tiny distant figures. Background: tall coastal eucalyptus and a weeping willow, distant hills. Sky: enormous towering cumulus clouds lit orange and pink by the setting sun, a few tiny birds in silhouette. {style_suffix}"
+        "prompt": "A breathtaking anime background painting, wide view from a low hill looking down over Coastal Roots Farm in Encinitas at golden hour. Foreground: rows of orchard trees on raised earth berms with shallow swales between them, alleys of elderberry and pomegranate trees where a flock of chickens pecks inside a white portable net fence, a small red barn-style chicken coop on wheels. Middle ground: long rows of squash and vegetables under white trellis netting, a shed painted with a bright sunflower mural, a corrugated-metal welcome-sign shelter, wooden fences. On the dirt path, exactly six people standing still in a tight group: one adult farm guide in a sun hat and five small children in matching black t-shirts, all facing the crops and listening, tiny distant figures, faces not visible. Background: tall coastal eucalyptus and a weeping willow, distant hills. Sky: enormous towering cumulus clouds lit orange and pink by the setting sun, a few tiny birds in silhouette. {style_suffix}"
       },
       "i2v": {
-        "prompt": "static camera, chickens pecking and wandering slowly inside the net fence, the group of children walking slowly along the dirt path, tree leaves and vegetable rows swaying in a gentle breeze, birds drifting slowly across the sky, clouds moving slowly, subtle motion, minimal movement",
-        "time_min": 16
+        "prompt": "static camera, the six people stand completely still in place, tree branches and leaves swaying in a steady wind, willow fronds swinging, vegetable rows and netting rippling in the breeze, chickens pecking slowly at the ground, birds drifting across the sky, clouds moving slowly, subtle motion",
+        "time_min": 16,
+        "negative": "people walking, running, jumping, teleporting, morphing, duplicating people, extra people, disappearing people, camera movement, zoom, flicker, distortion"
       },
       "files": [
         "fll_farm.mov",
@@ -207,7 +208,7 @@
         "fll/crop_rows.webp (reference only)",
         "fll/logo.webp"
       ],
-      "notes": "Kids must be distant, no faces, no close-ups (Kevin's rule). Real photos used only as reference for farm features; a photoreal attempt and a real-photo I2V attempt were both abandoned. Farm details from FLL-kb: berms/swales, elderberry+pomegranate alleys with rotating chickens, sunflower mural shed, trellis netting."
+      "notes": "Kids must be distant, no faces, no close-ups (Kevin's rule). Real photos used only as reference for farm features; a photoreal attempt and a real-photo I2V attempt were both abandoned. Farm details from FLL-kb: berms/swales, elderberry+pomegranate alleys with rotating chickens, sunflower mural shed, trellis netting. v1 (6 kids + adult, 'walking' prompt) had figures teleporting and merging; v2 regenerated with exactly 5+1 standing still and a wind-only motion prompt."
     }
   ]
 }

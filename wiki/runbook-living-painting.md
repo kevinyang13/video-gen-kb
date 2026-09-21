@@ -89,6 +89,15 @@ Append to `wiki/log.md`, note anything new on [[living-painting-loop]], `python3
 
 macOS blocks all Accessibility input while the screen is locked, so nothing in Draw Things can be clicked or typed — only screenshots work. A render already running continues fine; the Save dialog will wait. The automation watches `ioreg -n Root -d1 -a | grep -A1 CGSSessionScreenIsLocked` and resumes on unlock. Long-term fix: Draw Things HTTP API server (Settings → API Server) so generation and saving need no screen.
 
+## People in the scene
+
+Wan 2.2 I2V at 4 steps handles landscapes well and small human figures badly: if the prompt says they walk, they teleport, merge, or duplicate between frames. Rules learned on the FLL farm project (2026-09-20):
+
+1. In the **still** prompt, state the exact count (`exactly six people: one adult and five children`) and pose them **standing still** in a tight group, facing away. Count heads before I2V; regenerate if the count is off.
+2. In the **I2V** prompt, give people zero motion (`the six people stand completely still in place`) and spend the motion budget on wind: `tree branches and leaves swaying in a steady wind, willow fronds swinging, netting rippling`, plus chickens/birds/clouds.
+3. A negative prompt does little at CFG 1.0 (distilled LoRA disables guidance). Fix the still, not the negative.
+4. Keep figures tiny and distant; no faces, no close-ups.
+
 ## Failure signatures
 
 | Symptom | Cause | Fix |
@@ -97,6 +106,7 @@ macOS blocks all Accessibility input while the screen is locked, so nothing in D
 | Washed-out, noisy, pastel video | refiner variant not downloaded | set refiner to the **8-bit S** Low Noise expert |
 | No "Image to Video" tab | a T2V model is selected | pick the **I2V** High Noise expert |
 | Birds fly backwards in the loop | ping-pong loop | use `finish_clip.sh` (forward + crossfade) |
+| People teleport / merge / multiply | "walking" in the I2V prompt, or wrong head count in the still | see *People in the scene* above |
 | Still looks flat / plasticky | Wan T2V used for the still | FLUX.2 klein at 1024×1792, downscale |
 | Slider label won't take the value | AX click moves thumb without commit | drag the thumb a few px, or use label clicks |
 

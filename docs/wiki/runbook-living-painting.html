@@ -219,6 +219,14 @@ scripts/finish_clip.sh raw/clips/NAME.mov raw/clips/calm_ambient_dreamscape.mp3
 <p>Append to <code>wiki/log.md</code>, note anything new on <a href="living-painting-loop.html">living painting loop</a>, <code>python3 scripts/build_site.py</code>, commit, push. Clips stay out of git (<code>raw/clips/</code> is ignored).</p>
 <h2>When the Mac is locked</h2>
 <p>macOS blocks all Accessibility input while the screen is locked, so nothing in Draw Things can be clicked or typed — only screenshots work. A render already running continues fine; the Save dialog will wait. The automation watches <code>ioreg -n Root -d1 -a | grep -A1 CGSSessionScreenIsLocked</code> and resumes on unlock. Long-term fix: Draw Things HTTP API server (Settings → API Server) so generation and saving need no screen.</p>
+<h2>People in the scene</h2>
+<p>Wan 2.2 I2V at 4 steps handles landscapes well and small human figures badly: if the prompt says they walk, they teleport, merge, or duplicate between frames. Rules learned on the FLL farm project (2026-09-20):</p>
+<ol>
+<li>In the <strong>still</strong> prompt, state the exact count (<code>exactly six people: one adult and five children</code>) and pose them <strong>standing still</strong> in a tight group, facing away. Count heads before I2V; regenerate if the count is off.</li>
+<li>In the <strong>I2V</strong> prompt, give people zero motion (<code>the six people stand completely still in place</code>) and spend the motion budget on wind: <code>tree branches and leaves swaying in a steady wind, willow fronds swinging, netting rippling</code>, plus chickens/birds/clouds.</li>
+<li>A negative prompt does little at CFG 1.0 (distilled LoRA disables guidance). Fix the still, not the negative.</li>
+<li>Keep figures tiny and distant; no faces, no close-ups.</li>
+</ol>
 <h2>Failure signatures</h2>
 <div class="tw"><table>
 <thead>
@@ -248,6 +256,11 @@ scripts/finish_clip.sh raw/clips/NAME.mov raw/clips/calm_ambient_dreamscape.mp3
 <td>Birds fly backwards in the loop</td>
 <td>ping-pong loop</td>
 <td>use <code>finish_clip.sh</code> (forward + crossfade)</td>
+</tr>
+<tr>
+<td>People teleport / merge / multiply</td>
+<td>"walking" in the I2V prompt, or wrong head count in the still</td>
+<td>see <em>People in the scene</em> above</td>
 </tr>
 <tr>
 <td>Still looks flat / plasticky</td>
