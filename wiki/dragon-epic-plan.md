@@ -183,6 +183,13 @@ Cut 1A → 1B on the wing downbeat. Optional 1C (2 s): tight on the face, eyes n
 
 E1–E2 decide the face strategy. E5–E6 decide whether the dragon look is achievable. Do all seven before rendering the shot list.
 
+## 7b. Experiment results
+
+| # | Date | Result |
+|--:|---|---|
+| E6 | 2026-09-21 | Scene 1A still at 1280×768 (FLUX klein, first seed) matched the brief. I2V at 1280×768 × 81 f: **~43 min** with the upscaler test sharing the GPU for ~10 min; estimate **~35 min clean**. Twice the 576×1024 cost. |
+| E8 (part) | 2026-09-21 | **Real-ESRGAN ncnn (x4plus)** runs on Metal only with `-t 256` (auto tile size segfaults). Quality on the Golden Gate frame: clean edges, no ringing, real detail gain. Speed while sharing GPU: ~40 s/frame at 576×1024 — needs the GPU to itself; measure clean. Script: `scripts/upscale_4k.sh`. SeedVR2 and Draw Things upscaler still untested. |
+
 ## 8. Budget
 
 | Item | Estimate |
