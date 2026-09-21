@@ -165,7 +165,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 scripts/finish_clip.sh raw/clips/NAME.mov raw/clips/calm_ambient_dreamscape.mp3
 </code></pre>
 <p>Produces <code>NAME_loop.mp4</code> (1080×1920, 27.4 s, silent) and <code>NAME_final.mp4</code> (with music, fades). Forward-only loop with an 8-frame crossfade at the seam — never ping-pong (reverses waves and birds).</p>
-<p>Other tracks: Pixabay → press play on a track page → <code>document.querySelector('audio').currentSrc</code> gives the CDN mp3 URL (the Download button wants a login).</p>
+<p>Other tracks: Pixabay → press play on a track page → <code>document.querySelector('audio').currentSrc</code> gives the CDN mp3 URL (the Download button wants a login). Library so far in <code>raw/clips/</code>: <code>calm_ambient_dreamscape.mp3</code> (landscapes), <code>neon_synthwave_drive.mp3</code> (night/city). Match genre to scene — the calm track on the cyberpunk clip was wrong.</p>
 <h2>Done so far</h2>
 <div class="tw"><table>
 <thead>

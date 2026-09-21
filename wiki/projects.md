@@ -17,7 +17,7 @@
 | 3 | [Torrey Pines, San Diego](#torrey) | 2026-09-20 | done | FLUX.2 [klein] 9B 1024x1792 | Wan 2.2 High Noise 15 min | Calm Ambient Dreamscape | `torrey_final.mp4` |
 | 4 | [Golden Gate, San Francisco](#goldengate) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Calm Ambient Dreamscape | `goldengate_final.mp4` |
 | 5 | [Mt. Rainier from Paradise](#rainier) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 15.5 min | Calm Ambient Dreamscape | `rainier_final.mp4` |
-| 6 | [Cyberpunk city, rain, neon](#cyberpunk) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Calm Ambient Dreamscape | `cyberpunk_final.mp4` |
+| 6 | [Cyberpunk city, rain, neon](#cyberpunk) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Neon Synthwave Drive | `cyberpunk_final.mp4` |
 | 7 | [FLL BOT Builders — Coastal Roots Farm, wide view](#fll_farm) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Calm Ambient Dreamscape | `fll_farm_final.mp4` |
 
 ## Defaults (apply unless a record overrides)
@@ -304,7 +304,7 @@ Prompt: `static camera, wildflowers and meadow grass swaying in a soft breeze, t
 
 - **Date**: 2026-09-20 · **Status**: done · **Draw Things project**: `Untitled-76300`
 - **Files** (`raw/clips/`): `cyberpunk.mov`, `cyberpunk_loop.mp4`, `cyberpunk_final.mp4`
-- **Notes**: Night scene works with the same style suffix.
+- **Notes**: Night scene works with the same style suffix. Music swapped from the calm-ambient default to synthwave on 2026-09-20.
 
 **Still**
 
@@ -345,7 +345,7 @@ Prompt: `static camera, rain falling steadily, neon signs flickering and glowing
 | Script | scripts/finish_clip.sh |
 | Loop | forward, 8-frame tail->head crossfade, x6 = 27.4 s |
 | Upscale | lanczos 1080x1920 |
-| Music | Calm Ambient Dreamscape (mismatch — replace with lo-fi/synthwave) |
+| Music | Neon Synthwave Drive — alex-morgan, Pixabay (cdn.pixabay.com/audio/2026/06/04/audio_ae113c6d69.mp3), 2:48; 1 s fade in / 2 s fade out, vol 0.9 |
 
 ## FLL BOT Builders — Coastal Roots Farm, wide view {#fll_farm}
 

@@ -132,3 +132,7 @@ Fifth video, zero-click. Night/neon scene works with the same style suffix; the 
 ## 2026-09-20 — Projects registry + FLL farm video
 
 Added `projects.json` + `scripts/build_projects.py` → `wiki/projects.md` (summary table + per-project models/settings/prompts/seeds/music/files). FLL BOT Builders farm video delivered: wide anime view of Coastal Roots Farm with the team as distant figures, no faces — after a photoreal attempt and a real-photo I2V attempt were both stopped at Kevin's request. `raw/clips/fll_farm_final.mp4`.
+
+## 2026-09-20 — Cyberpunk music swap
+
+Replaced calm-ambient with "Neon Synthwave Drive" (Pixabay). Registry + runbook music note updated.
