@@ -107,6 +107,7 @@ Wan 2.2 I2V at 4 steps handles landscapes well and small human figures badly: if
 | No "Image to Video" tab | a T2V model is selected | pick the **I2V** High Noise expert |
 | Birds fly backwards in the loop | ping-pong loop | use `finish_clip.sh` (forward + crossfade) |
 | Settings silently changed after clicking Version History | loading a history entry restores that entry's frames / CFG / refiner / prompt | re-run the verify-list before Generate |
+| Translucent double image (ghosting) on a big moving subject | Refiner Start 10% starves the High-Noise expert of steps | Refiner Start 50% (2 high + 2 low), LoRA 0.8, gentler motion |
 | People teleport / merge / multiply | "walking" in the I2V prompt, or wrong head count in the still | see *People in the scene* above |
 | Still looks flat / plasticky | Wan T2V used for the still | FLUX.2 klein at 1024×1792, downscale |
 | Slider label won't take the value | AX click moves thumb without commit | drag the thumb a few px, or use label clicks |

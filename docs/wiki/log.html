@@ -176,6 +176,8 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <p>Plan updated: generate stills + I2V at 1280×720, AI-upscale 3× to 3840×2160 (SeedVR2 first, Real-ESRGAN ncnn fallback, Draw Things upscaler to verify), FaceFusion before upscale, HEVC 10-bit via videotoolbox. New experiment E8 (upscaler bake-off); budget ~12 h.</p>
 <h2>2026-09-21 — Dragon Epic: first 4K clip</h2>
 <p>Scene 1A end to end: FLUX.2 klein still at 1280×768 (first seed) → Wan 2.2 I2V 81 f (~43 min, GPU shared) → Real-ESRGAN ncnn 4× (5.6 min) → 3840×2160 HEVC 10-bit. Real-ESRGAN needs <code>-t 128</code>, <code>-j 1:1:1</code>, and cwd = its own directory. <code>scripts/upscale_4k.sh</code> added. Plan §7b + registry updated.</p>
+<h2>2026-09-21 — Scene 1A ghosting diagnosed</h2>
+<p>Double-exposure on the dragon from frame ~55. In the Wan output, not the upscale. Hypothesis: Refiner Start 10% → High-Noise expert underused on large motion. Plan and runbook updated; re-render pending (Draw Things not running, screen locked).</p>
   
 </div>
 <footer>video-gen-kb · built 2026-09-21 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>

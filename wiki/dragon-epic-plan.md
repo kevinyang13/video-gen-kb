@@ -57,7 +57,7 @@ Same as the living-painting runbook with three changes for photoreal:
 
 | Setting | Value | Why |
 |---|---|---|
-| Model / Refiner | High Noise I2V (8-bit S) / Low Noise I2V (8-bit S) @ 10% | mandatory pair; see the refiner trap in [[runbook-living-painting]] |
+| Model / Refiner | High Noise I2V (8-bit S) / Low Noise I2V (8-bit S) @ **50%** | mandatory pair; see the refiner trap in [[runbook-living-painting]]. **10% (Draw Things' recommended) ghosts on large fast subjects** — use 50% for anything bigger than ambient motion |
 | LoRA | Lightning High-Noise 100%, 4 steps, CFG 1 | 16 min per clip. Try **8 steps** on one hero close-up to see if skin/face hold better (~30 min) — *experiment E3* |
 | Size | **1280×720**, 81 frames @ 16 fps | 1.56× the pixels of 576×1024 → expect **~25 min per clip** (*measure in E6*). 1920×1080 native would be ~3.5× → 55 min/clip and 48 GB is tight; not worth it when the upscaler does the rest |
 | Motion prompt | one camera move + one subject action, nothing else | `slow dolly in, the rider turns his head toward the ridge, cloak moving in the wind, embers drifting` — people may move here, but **one** action per shot, and never "walking toward camera" |
@@ -188,6 +188,7 @@ E1–E2 decide the face strategy. E5–E6 decide whether the dragon look is achi
 | # | Date | Result |
 |--:|---|---|
 | E6 | 2026-09-21 | Scene 1A still at 1280×768 (FLUX klein, first seed) matched the brief. I2V at 1280×768 × 81 f: **~43 min** with the upscaler test sharing the GPU for ~10 min; estimate **~35 min clean**. Twice the 576×1024 cost. |
+| E6 follow-up | 2026-09-21 | **Ghosting** (translucent double dragon head/wing/rider) from ~frame 55 of scene 1A, once the dragon fills the frame. Present in the Wan output, not the upscale. Diagnosis: **Refiner Start 10%** gives the High-Noise expert (motion/layout) ~0.4 of 4 steps — fine for calm landscapes, fails on a large fast subject. Wan 2.2's documented split is 50/50. Fix to test: Refiner Start **50%**, LoRA 0.8, gentler motion prompt. |
 | E8 (part) | 2026-09-21 | **Real-ESRGAN ncnn (x4plus)** works on Metal with `-t 128 -j 1:1:1`, run from its own directory (models path is cwd-relative); auto/256 tile segfaults. **81 frames at 1280×768 → 4K in 5.6 min** on a free GPU. 1:1 comparison vs lanczos: scale ridges and spine edges resolve, no ringing. Script: `scripts/upscale_4k.sh` → HEVC 10-bit 40 Mbps. **Good enough to ship**; SeedVR2 only if flicker shows up on motion. First 4K clip: `raw/clips/dragon/scene1a_4k.mp4`. |
 
 ## 8. Budget

@@ -199,8 +199,8 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <tbody>
 <tr>
 <td>Model / Refiner</td>
-<td>High Noise I2V (8-bit S) / Low Noise I2V (8-bit S) @ 10%</td>
-<td>mandatory pair; see the refiner trap in <a href="runbook-living-painting.html">runbook living painting</a></td>
+<td>High Noise I2V (8-bit S) / Low Noise I2V (8-bit S) @ <strong>50%</strong></td>
+<td>mandatory pair; see the refiner trap in <a href="runbook-living-painting.html">runbook living painting</a>. <strong>10% (Draw Things' recommended) ghosts on large fast subjects</strong> — use 50% for anything bigger than ambient motion</td>
 </tr>
 <tr>
 <td>LoRA</td>
@@ -586,6 +586,11 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <td style="text-align: right;">E6</td>
 <td>2026-09-21</td>
 <td>Scene 1A still at 1280×768 (FLUX klein, first seed) matched the brief. I2V at 1280×768 × 81 f: <strong>~43 min</strong> with the upscaler test sharing the GPU for ~10 min; estimate <strong>~35 min clean</strong>. Twice the 576×1024 cost.</td>
+</tr>
+<tr>
+<td style="text-align: right;">E6 follow-up</td>
+<td>2026-09-21</td>
+<td><strong>Ghosting</strong> (translucent double dragon head/wing/rider) from ~frame 55 of scene 1A, once the dragon fills the frame. Present in the Wan output, not the upscale. Diagnosis: <strong>Refiner Start 10%</strong> gives the High-Noise expert (motion/layout) ~0.4 of 4 steps — fine for calm landscapes, fails on a large fast subject. Wan 2.2's documented split is 50/50. Fix to test: Refiner Start <strong>50%</strong>, LoRA 0.8, gentler motion prompt.</td>
 </tr>
 <tr>
 <td style="text-align: right;">E8 (part)</td>

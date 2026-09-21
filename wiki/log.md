@@ -160,3 +160,7 @@ Plan updated: generate stills + I2V at 1280×720, AI-upscale 3× to 3840×2160 (
 ## 2026-09-21 — Dragon Epic: first 4K clip
 
 Scene 1A end to end: FLUX.2 klein still at 1280×768 (first seed) → Wan 2.2 I2V 81 f (~43 min, GPU shared) → Real-ESRGAN ncnn 4× (5.6 min) → 3840×2160 HEVC 10-bit. Real-ESRGAN needs `-t 128`, `-j 1:1:1`, and cwd = its own directory. `scripts/upscale_4k.sh` added. Plan §7b + registry updated.
+
+## 2026-09-21 — Scene 1A ghosting diagnosed
+
+Double-exposure on the dragon from frame ~55. In the Wan output, not the upscale. Hypothesis: Refiner Start 10% → High-Noise expert underused on large motion. Plan and runbook updated; re-render pending (Draw Things not running, screen locked).
