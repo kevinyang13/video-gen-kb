@@ -165,6 +165,6 @@ Scene 1A end to end: FLUX.2 klein still at 1280×768 (first seed) → Wan 2.2 I2
 
 Double-exposure on the dragon from frame ~55. In the Wan output, not the upscale. Hypothesis: Refiner Start 10% → High-Noise expert underused on large motion. Plan and runbook updated; re-render pending (Draw Things not running, screen locked).
 
-## 2026-09-21 — Renders lost to idle sleep
+## 2026-09-21 — False alarm: "lost" render was still running
 
-Scene 1A v2 (refiner 50%, LoRA 80%) died ~30 min in: screen locked → `pmset sleep 1` → Draw Things quit, no crash report. Second occurrence today. Keep-awake now held by the session; runbook lock note corrected.
+`pgrep -x "Draw Things"` reports the app absent even while it renders; v2 finished normally through a lock. Keep-awake kept as insurance; runbook corrected to say locks are safe.

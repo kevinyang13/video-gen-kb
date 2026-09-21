@@ -87,7 +87,7 @@ Append to `wiki/log.md`, note anything new on [[living-painting-loop]], `python3
 
 ## When the Mac is locked
 
-macOS blocks all Accessibility input while the screen is locked, so nothing in Draw Things can be clicked or typed — only screenshots work. **A render survives a lock only if the Mac does not idle-sleep.** This Mac has `pmset sleep 1`; twice on 2026-09-21 a lock → idle sleep killed Draw Things mid-render (no crash report — the app just exits when it loses the GPU) and the 40-minute render was lost. Before any long render: the session holds a keep-awake (`request_keep_awake until: session_idle`), or run `caffeinate -dims` in a terminal, or set Energy → Prevent automatic sleeping. Locking the screen is then fine. The automation watches `ioreg -n Root -d1 -a | grep -A1 CGSSessionScreenIsLocked` and resumes on unlock. Long-term fix: Draw Things HTTP API server (Settings → API Server) so generation and saving need no screen.
+macOS blocks all Accessibility input while the screen is locked, so nothing in Draw Things can be clicked or typed — only screenshots work. A render already running survives a lock (confirmed 2026-09-21: a 42-min render finished through a lock). Caveat: `pmset sleep 1` means an idle Mac *could* sleep; the session holds a keep-awake as insurance. Note for automation: `pgrep -x "Draw Things"` returns nothing even when the app is running — use `pgrep -f "Draw Things"` or just screenshot. The automation watches `ioreg -n Root -d1 -a | grep -A1 CGSSessionScreenIsLocked` and resumes on unlock. Long-term fix: Draw Things HTTP API server (Settings → API Server) so generation and saving need no screen.
 
 ## People in the scene
 
