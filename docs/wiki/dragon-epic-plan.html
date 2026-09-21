@@ -332,6 +332,40 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <li><strong>Stage the shots</strong> so the dragon is far, backlit, or partially framed in most of them — silhouette is consistent for free; only 2 shots need the full close design.</li>
 <li>If it still drifts: train a small dragon LoRA on 20 generated stills of the locked design (same PEFT path as the face).</li>
 </ol>
+<h2>5b. Scene 1 — locked (2026-09-21)</h2>
+<p><strong>Reference</strong>: <code>raw/dragon/ref_scene1_flyby.webp</code> (mood only — haze, backlit sea, scale; our dragon is its own design).</p>
+<p><strong>Action</strong>: a rider on a dragon high above open sea; a second dragon further back; the camera pushes in on the rider as the dragon flies past.</p>
+<p>A 5 s push from "rider is 40 px tall" to "face fills the frame" is a 10× scale change — Wan will warp it. Split into two shots that cut together as one move:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Shot</th>
+<th>Frame</th>
+<th>Camera (Wan prompt)</th>
+<th>Face</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1A</strong></td>
+<td>Wide, dragon enters frame left, crosses; second dragon small in the haze behind; sea far below</td>
+<td><code>slow push in, the dragon glides across frame from left to right, wings beating slowly, the distant dragon drifts behind, sea haze, camera slowly tightening</code></td>
+<td>rider tiny, no face</td>
+</tr>
+<tr>
+<td><strong>1B</strong></td>
+<td>Medium, three-quarter from behind-side, rider's upper body + dragon's neck, sea and second dragon beyond</td>
+<td><code>slow push in toward the rider, wind pulling at cloak and hair, the rider turns to look back over his shoulder, dragon neck rising and falling with wing beats</code></td>
+<td><strong>yes</strong> — ends on the face; FaceFusion pass</td>
+</tr>
+</tbody>
+</table></div>
+<p>Cut 1A → 1B on the wing downbeat. Optional 1C (2 s): tight on the face, eyes narrowing, if E3 shows the face holds.</p>
+<p><strong>Dragon description lock (draft — edit)</strong>: <em>massive dark reddish-brown dragon, matte ridged scales, long tapered neck, bat-like wing membranes with visible bone struts and torn trailing edges, a row of curved horns sweeping back from the skull, amber eyes, wingspan four times its body length.</em></p>
+<p><strong>Still prompt 1A (FLUX.2 klein, 1280×720)</strong>:
+<code>Cinematic film still, anamorphic 35mm, high above an open ocean at hazy golden hour, backlit. A [dragon lock] flies left to right across the frame, wings spread wide, a small armored rider seated at the base of its neck. Far behind it a second dragon, smaller and soft in the sea haze. Bright sun glare on the water below, thin clouds, volumetric light, photorealistic, highly detailed, shallow depth of field on the distant dragon.</code></p>
+<p><strong>Still prompt 1B</strong>: <code>Cinematic film still, anamorphic 50mm, three-quarter view from behind and beside a rider on the neck of a [dragon lock], sea and haze far below, a second dragon distant in the background. The rider wears [hero look], cloak streaming, hands on the dragon's neck ridge, looking back over his shoulder toward the camera. Backlit hazy golden hour, rim light on the rider, photorealistic, highly detailed.</code> + face control (E1/E2).</p>
+<p><strong>Sea/haze palette</strong> is the same family as the coastal loops — reuse those learnings for the motion prompt (waves, haze drift).</p>
 <h2>6. Shot list (v0 — edit freely)</h2>
 <div class="tw"><table>
 <thead>
@@ -347,13 +381,22 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">1</td>
-<td>Arrival</td>
-<td>Wide: rider crosses a burned valley at dawn, smoke columns</td>
-<td style="text-align: center;">far</td>
-<td style="text-align: center;">—</td>
+<td style="text-align: right;">1A</td>
+<td>Open</td>
+<td>Wide: dragon + rider fly by high over open sea, second dragon in haze</td>
+<td style="text-align: center;">tiny</td>
+<td style="text-align: center;"><strong>full</strong></td>
 <td>slow push</td>
-<td>establishes scale</td>
+<td><strong>locked — see §5b</strong></td>
+</tr>
+<tr>
+<td style="text-align: right;">1B</td>
+<td>Open</td>
+<td>Medium: rider on the dragon's neck, turns to camera</td>
+<td style="text-align: center;"><strong>yes</strong></td>
+<td style="text-align: center;">partial</td>
+<td>slow push</td>
+<td><strong>locked — see §5b</strong>; FaceFusion</td>
 </tr>
 <tr>
 <td style="text-align: right;">2</td>

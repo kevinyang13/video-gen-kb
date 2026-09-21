@@ -122,11 +122,36 @@ No dragon LoRA exists for these models. Strategy:
 4. **Stage the shots** so the dragon is far, backlit, or partially framed in most of them — silhouette is consistent for free; only 2 shots need the full close design.
 5. If it still drifts: train a small dragon LoRA on 20 generated stills of the locked design (same PEFT path as the face).
 
+## 5b. Scene 1 — locked (2026-09-21)
+
+**Reference**: `raw/dragon/ref_scene1_flyby.webp` (mood only — haze, backlit sea, scale; our dragon is its own design).
+
+**Action**: a rider on a dragon high above open sea; a second dragon further back; the camera pushes in on the rider as the dragon flies past.
+
+A 5 s push from "rider is 40 px tall" to "face fills the frame" is a 10× scale change — Wan will warp it. Split into two shots that cut together as one move:
+
+| Shot | Frame | Camera (Wan prompt) | Face |
+|---|---|---|---|
+| **1A** | Wide, dragon enters frame left, crosses; second dragon small in the haze behind; sea far below | `slow push in, the dragon glides across frame from left to right, wings beating slowly, the distant dragon drifts behind, sea haze, camera slowly tightening` | rider tiny, no face |
+| **1B** | Medium, three-quarter from behind-side, rider's upper body + dragon's neck, sea and second dragon beyond | `slow push in toward the rider, wind pulling at cloak and hair, the rider turns to look back over his shoulder, dragon neck rising and falling with wing beats` | **yes** — ends on the face; FaceFusion pass |
+
+Cut 1A → 1B on the wing downbeat. Optional 1C (2 s): tight on the face, eyes narrowing, if E3 shows the face holds.
+
+**Dragon description lock (draft — edit)**: *massive dark reddish-brown dragon, matte ridged scales, long tapered neck, bat-like wing membranes with visible bone struts and torn trailing edges, a row of curved horns sweeping back from the skull, amber eyes, wingspan four times its body length.*
+
+**Still prompt 1A (FLUX.2 klein, 1280×720)**:
+`Cinematic film still, anamorphic 35mm, high above an open ocean at hazy golden hour, backlit. A [dragon lock] flies left to right across the frame, wings spread wide, a small armored rider seated at the base of its neck. Far behind it a second dragon, smaller and soft in the sea haze. Bright sun glare on the water below, thin clouds, volumetric light, photorealistic, highly detailed, shallow depth of field on the distant dragon.`
+
+**Still prompt 1B**: `Cinematic film still, anamorphic 50mm, three-quarter view from behind and beside a rider on the neck of a [dragon lock], sea and haze far below, a second dragon distant in the background. The rider wears [hero look], cloak streaming, hands on the dragon's neck ridge, looking back over his shoulder toward the camera. Backlit hazy golden hour, rim light on the rider, photorealistic, highly detailed.` + face control (E1/E2).
+
+**Sea/haze palette** is the same family as the coastal loops — reuse those learnings for the motion prompt (waves, haze drift).
+
 ## 6. Shot list (v0 — edit freely)
 
 | # | Act | Shot | Hero face? | Dragon? | Camera | Notes |
 |--:|---|---|:-:|:-:|---|---|
-| 1 | Arrival | Wide: rider crosses a burned valley at dawn, smoke columns | far | — | slow push | establishes scale |
+| 1A | Open | Wide: dragon + rider fly by high over open sea, second dragon in haze | tiny | **full** | slow push | **locked — see §5b** |
+| 1B | Open | Medium: rider on the dragon's neck, turns to camera | **yes** | partial | slow push | **locked — see §5b**; FaceFusion |
 | 2 | Arrival | Medium: hero on horseback, cloak, looks up | **yes** | — | slow dolly in | first identity shot |
 | 3 | Arrival | Insert: hoof through ash, embers | — | — | static, low | cheap, no faces |
 | 4 | Arrival | Wide: ruined village, giant claw marks on a wall | — | trace | slow pan | dragon implied |
