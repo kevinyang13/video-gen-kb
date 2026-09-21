@@ -1,71 +1,212 @@
 {
   "_schema": "one entry per Draw Things project; still = text-to-image step, i2v = image-to-video step; settings omitted means 'same as defaults' below",
   "defaults": {
-    "still": {"model": "FLUX.2 [klein] 9B (8-bit S)", "steps": 4, "cfg": 1.0, "shift": 3.0, "sampler": "DDIM Trailing", "size": "576x1024", "lora": null, "refiner": null},
-    "i2v": {"model": "Wan 2.2 High Noise Expert I2V A14B (8-bit S)", "refiner": "Wan 2.2 Low Noise Expert I2V A14B (8-bit S) @ 10%", "lora": "Wan 2.2 A14B Lightning High-Noise T2V v2.0 @ 100%", "steps": 4, "cfg": 1.0, "shift": 4.95, "sampler": "DDIM Trailing", "size": "576x1024", "frames": 81, "fps": 16, "strength": "100%"},
-    "post": {"script": "scripts/finish_clip.sh", "loop": "forward, 8-frame tail->head crossfade, x6 = 27.4 s", "upscale": "lanczos 1080x1920", "music": "Calm Ambient Dreamscape — morgan-ambient, Pixabay, 1 s fade in / 2 s fade out, vol 0.9"},
+    "still": {
+      "model": "FLUX.2 [klein] 9B (8-bit S)",
+      "steps": 4,
+      "cfg": 1.0,
+      "shift": 3.0,
+      "sampler": "DDIM Trailing",
+      "size": "576x1024",
+      "lora": null,
+      "refiner": null
+    },
+    "i2v": {
+      "model": "Wan 2.2 High Noise Expert I2V A14B (8-bit S)",
+      "refiner": "Wan 2.2 Low Noise Expert I2V A14B (8-bit S) @ 10%",
+      "lora": "Wan 2.2 A14B Lightning High-Noise T2V v2.0 @ 100%",
+      "steps": 4,
+      "cfg": 1.0,
+      "shift": 4.95,
+      "sampler": "DDIM Trailing",
+      "size": "576x1024",
+      "frames": 81,
+      "fps": 16,
+      "strength": "100%"
+    },
+    "post": {
+      "script": "scripts/finish_clip.sh",
+      "loop": "forward, 8-frame tail->head crossfade, x6 = 27.4 s",
+      "upscale": "lanczos 1080x1920",
+      "music": "Calm Ambient Dreamscape — morgan-ambient, Pixabay, 1 s fade in / 2 s fade out, vol 0.9"
+    },
     "style_suffix": "Makoto Shinkai and Studio Ghibli background art style, ultra detailed, rich painterly brushwork, soft volumetric light, vibrant saturated colors, masterpiece."
   },
   "projects": [
     {
-      "id": "coast", "title": "Coastal wildflowers (v1)", "date": "2026-09-20", "dt_project": "Untitled-35903", "status": "superseded by coast_v2",
-      "still": {"model": "Wan 2.2 High Noise Expert T2V A14B (q8) @ 1 frame", "lora": "Lightning High-Noise 100%", "steps": 4, "cfg": 1.0, "shift": 5, "sampler": "UniPC Trailing", "size": "576x1280",
-        "prompt": "anime painting of a coastal hillside at golden hour, wildflowers in the foreground, tall grass, ocean waves below a cliff, towering orange and pink cumulus clouds, warm sunset light, birds in the sky, Makoto Shinkai style, highly detailed, soft painterly light"},
-      "i2v": {"size": "576x1280", "sampler": "UniPC Trailing", "shift": 5, "time_min": 24,
-        "prompt": "static camera, gentle ocean waves rolling onto the shore, grass and wildflowers swaying in a soft breeze, birds drifting slowly across the sky, clouds moving slowly, subtle motion, minimal movement"},
-      "post": {"loop": "ping-pong x3 (rejected: reverses motion), then forward crossfade", "music": null},
-      "files": ["coast.mov", "coast_loop.mp4"],
+      "id": "coast",
+      "title": "Coastal wildflowers (v1)",
+      "date": "2026-09-20",
+      "dt_project": "Untitled-35903",
+      "status": "superseded by coast_v2",
+      "still": {
+        "model": "Wan 2.2 High Noise Expert T2V A14B (q8) @ 1 frame",
+        "lora": "Lightning High-Noise 100%",
+        "steps": 4,
+        "cfg": 1.0,
+        "shift": 5,
+        "sampler": "UniPC Trailing",
+        "size": "576x1280",
+        "prompt": "anime painting of a coastal hillside at golden hour, wildflowers in the foreground, tall grass, ocean waves below a cliff, towering orange and pink cumulus clouds, warm sunset light, birds in the sky, Makoto Shinkai style, highly detailed, soft painterly light"
+      },
+      "i2v": {
+        "size": "576x1280",
+        "sampler": "UniPC Trailing",
+        "shift": 5,
+        "time_min": 24,
+        "prompt": "static camera, gentle ocean waves rolling onto the shore, grass and wildflowers swaying in a soft breeze, birds drifting slowly across the sky, clouds moving slowly, subtle motion, minimal movement"
+      },
+      "post": {
+        "loop": "ping-pong x3 (rejected: reverses motion), then forward crossfade",
+        "music": null
+      },
+      "files": [
+        "coast.mov",
+        "coast_loop.mp4"
+      ],
       "notes": "First end-to-end run. Still too soft — Wan-T2V at native res. Led to FLUX for stills."
     },
     {
-      "id": "coast_v2", "title": "Coastal wildflowers (v2)", "date": "2026-09-20", "dt_project": "Untitled-35903", "status": "done",
-      "still": {"size": "1024x1792 then lanczos crop/downscale to 576x1024", "seed": 20104302,
-        "prompt": "A breathtaking anime background painting of a coastal hillside at golden hour. Foreground: dense wildflowers in white, pink, yellow and blue with tall swaying grass, every petal crisply painted. Middle ground: lush green cliffs dropping to a turquoise bay with rolling white surf on a sandy cove. Sky: enormous towering cumulus clouds lit orange and pink by the setting sun, a few tiny birds in silhouette. {style_suffix}"},
-      "i2v": {"seed": 1180755429, "sampler": "UniPC Trailing", "shift": 5, "time_min": 15.5,
-        "prompt": "static camera, gentle ocean waves rolling onto the shore, grass and wildflowers swaying in a soft breeze, birds drifting slowly across the sky, clouds moving slowly, subtle motion, minimal movement"},
-      "files": ["coast_flux_1024x1792.png", "coast_flux_576x1024.png", "coast_v2.mov", "coast_v2_loop.mp4", "coast_v2_final.mp4"],
+      "id": "coast_v2",
+      "title": "Coastal wildflowers (v2)",
+      "date": "2026-09-20",
+      "dt_project": "Untitled-35903",
+      "status": "done",
+      "still": {
+        "size": "1024x1792 then lanczos crop/downscale to 576x1024",
+        "seed": 20104302,
+        "prompt": "A breathtaking anime background painting of a coastal hillside at golden hour. Foreground: dense wildflowers in white, pink, yellow and blue with tall swaying grass, every petal crisply painted. Middle ground: lush green cliffs dropping to a turquoise bay with rolling white surf on a sandy cove. Sky: enormous towering cumulus clouds lit orange and pink by the setting sun, a few tiny birds in silhouette. {style_suffix}"
+      },
+      "i2v": {
+        "seed": 1180755429,
+        "sampler": "UniPC Trailing",
+        "shift": 5,
+        "time_min": 15.5,
+        "prompt": "static camera, gentle ocean waves rolling onto the shore, grass and wildflowers swaying in a soft breeze, birds drifting slowly across the sky, clouds moving slowly, subtle motion, minimal movement"
+      },
+      "files": [
+        "coast_flux_1024x1792.png",
+        "coast_flux_576x1024.png",
+        "coast_v2.mov",
+        "coast_v2_loop.mp4",
+        "coast_v2_final.mp4"
+      ],
       "notes": "First run with wrong refiner (6-bit, not downloaded) produced washed-out noise; re-run with 8-bit S."
     },
     {
-      "id": "torrey", "title": "Torrey Pines, San Diego", "date": "2026-09-20", "dt_project": "Untitled-91451", "status": "done",
-      "still": {"size": "1024x1792 then downscale to 576x1024", "seed": 1190544862,
-        "prompt": "A breathtaking anime background painting of Torrey Pines State Reserve in San Diego at golden hour. Foreground: a windswept Torrey pine tree with twisted branches and long needles, golden coastal sage and yellow wildflowers on a sandy bluff. Middle ground: dramatic eroded golden sandstone cliffs with deep gullies dropping to a wide sandy beach and the Pacific Ocean, small white surf lines. Sky: enormous towering cumulus clouds lit orange and pink by the setting sun over the ocean, a few tiny seagulls in silhouette. {style_suffix}"},
-      "i2v": {"seed": 284526412, "sampler": "UniPC Trailing", "shift": 5, "time_min": 15,
-        "prompt": "static camera, gentle ocean waves rolling onto the beach below the cliffs, pine needles and coastal grass swaying in a soft breeze, seagulls drifting slowly across the sky, clouds moving slowly, subtle motion, minimal movement"},
-      "files": ["torrey_flux_1024x1792.png", "torrey_flux_576x1024.png", "torrey.mov", "torrey_loop.mp4", "torrey_final.mp4"],
+      "id": "torrey",
+      "title": "Torrey Pines, San Diego",
+      "date": "2026-09-20",
+      "dt_project": "Untitled-91451",
+      "status": "done",
+      "still": {
+        "size": "1024x1792 then downscale to 576x1024",
+        "seed": 1190544862,
+        "prompt": "A breathtaking anime background painting of Torrey Pines State Reserve in San Diego at golden hour. Foreground: a windswept Torrey pine tree with twisted branches and long needles, golden coastal sage and yellow wildflowers on a sandy bluff. Middle ground: dramatic eroded golden sandstone cliffs with deep gullies dropping to a wide sandy beach and the Pacific Ocean, small white surf lines. Sky: enormous towering cumulus clouds lit orange and pink by the setting sun over the ocean, a few tiny seagulls in silhouette. {style_suffix}"
+      },
+      "i2v": {
+        "seed": 284526412,
+        "sampler": "UniPC Trailing",
+        "shift": 5,
+        "time_min": 15,
+        "prompt": "static camera, gentle ocean waves rolling onto the beach below the cliffs, pine needles and coastal grass swaying in a soft breeze, seagulls drifting slowly across the sky, clouds moving slowly, subtle motion, minimal movement"
+      },
+      "files": [
+        "torrey_flux_1024x1792.png",
+        "torrey_flux_576x1024.png",
+        "torrey.mov",
+        "torrey_loop.mp4",
+        "torrey_final.mp4"
+      ],
       "notes": "Second run of the runbook; refiner trap caught by checklist."
     },
     {
-      "id": "goldengate", "title": "Golden Gate, San Francisco", "date": "2026-09-20", "dt_project": "Untitled-82025", "status": "done",
-      "still": {"size": "576x1024 (first native-res run, no downscale)",
-        "prompt": "A breathtaking anime background painting of the Golden Gate Bridge in San Francisco at golden hour, viewed from the Marin Headlands. Foreground: golden coastal grass and orange California poppies on a rocky bluff, a windswept cypress tree. Middle ground: the International Orange suspension bridge spanning the bay, its towers rising out of a low bank of fog, small sailboats on the water. Background: the San Francisco skyline glowing in warm light, Alcatraz in the distance. Sky: enormous towering cumulus clouds lit orange and pink by the setting sun, a few tiny seagulls in silhouette. {style_suffix}"},
-      "i2v": {"seed": 601904108, "time_min": 16,
-        "prompt": "static camera, fog slowly drifting under the bridge, gentle waves on the bay, sailboats gliding slowly, grass and poppies swaying in a soft breeze, seagulls drifting slowly across the sky, clouds moving slowly, subtle motion, minimal movement"},
-      "files": ["goldengate.mov", "goldengate_loop.mp4", "goldengate_final.mp4"],
+      "id": "goldengate",
+      "title": "Golden Gate, San Francisco",
+      "date": "2026-09-20",
+      "dt_project": "Untitled-82025",
+      "status": "done",
+      "still": {
+        "size": "576x1024 (first native-res run, no downscale)",
+        "prompt": "A breathtaking anime background painting of the Golden Gate Bridge in San Francisco at golden hour, viewed from the Marin Headlands. Foreground: golden coastal grass and orange California poppies on a rocky bluff, a windswept cypress tree. Middle ground: the International Orange suspension bridge spanning the bay, its towers rising out of a low bank of fog, small sailboats on the water. Background: the San Francisco skyline glowing in warm light, Alcatraz in the distance. Sky: enormous towering cumulus clouds lit orange and pink by the setting sun, a few tiny seagulls in silhouette. {style_suffix}"
+      },
+      "i2v": {
+        "seed": 601904108,
+        "time_min": 16,
+        "prompt": "static camera, fog slowly drifting under the bridge, gentle waves on the bay, sailboats gliding slowly, grass and poppies swaying in a soft breeze, seagulls drifting slowly across the sky, clouds moving slowly, subtle motion, minimal movement"
+      },
+      "files": [
+        "goldengate.mov",
+        "goldengate_loop.mp4",
+        "goldengate_final.mp4"
+      ],
       "notes": "Proved native 576x1024 still is good enough; runbook switched to it. Mac was locked 2.5 h with Save sheet open — render survived."
     },
     {
-      "id": "rainier", "title": "Mt. Rainier from Paradise", "date": "2026-09-20", "dt_project": "Untitled-70762", "status": "done",
-      "still": {"prompt": "A breathtaking anime background painting of Mount Rainier from the Paradise meadows near Seattle at golden hour. Foreground: subalpine meadow dense with purple lupine, magenta paintbrush and white avalanche lilies, a few dark pointed fir trees. Middle ground: rolling green slopes and a small glacial stream catching the light. Background: the massive glaciated volcano filling the sky, its snow and ice lit pink and orange by the setting sun. Sky: enormous towering cumulus clouds lit orange and pink, a few tiny birds in silhouette. {style_suffix}"},
-      "i2v": {"time_min": 15.5,
-        "prompt": "static camera, wildflowers and meadow grass swaying in a soft breeze, the stream flowing gently, birds drifting slowly across the sky, clouds moving slowly over the mountain, subtle motion, minimal movement"},
-      "files": ["rainier.mov", "rainier_loop.mp4", "rainier_final.mp4"],
+      "id": "rainier",
+      "title": "Mt. Rainier from Paradise",
+      "date": "2026-09-20",
+      "dt_project": "Untitled-70762",
+      "status": "done",
+      "still": {
+        "prompt": "A breathtaking anime background painting of Mount Rainier from the Paradise meadows near Seattle at golden hour. Foreground: subalpine meadow dense with purple lupine, magenta paintbrush and white avalanche lilies, a few dark pointed fir trees. Middle ground: rolling green slopes and a small glacial stream catching the light. Background: the massive glaciated volcano filling the sky, its snow and ice lit pink and orange by the setting sun. Sky: enormous towering cumulus clouds lit orange and pink, a few tiny birds in silhouette. {style_suffix}"
+      },
+      "i2v": {
+        "time_min": 15.5,
+        "prompt": "static camera, wildflowers and meadow grass swaying in a soft breeze, the stream flowing gently, birds drifting slowly across the sky, clouds moving slowly over the mountain, subtle motion, minimal movement"
+      },
+      "files": [
+        "rainier.mov",
+        "rainier_loop.mp4",
+        "rainier_final.mp4"
+      ],
       "notes": "First zero-click run — export Save button pressed by automation."
     },
     {
-      "id": "cyberpunk", "title": "Cyberpunk city, rain, neon", "date": "2026-09-20", "dt_project": "Untitled-76300", "status": "done",
-      "still": {"prompt": "A breathtaking anime background painting of a rain-soaked cyberpunk city street at night. Foreground: wet asphalt reflecting neon, a noodle stall with steam rising, stacked crates, a puddle mirroring the signs. Middle ground: narrow street canyon lined with holographic billboards in magenta, cyan and orange, tangled cables, kanji and katakana neon signs, a few silhouetted pedestrians with umbrellas. Background: towering megastructures fading into purple haze, flying vehicles with red tail lights, a giant glowing advertisement screen. {style_suffix}"},
-      "i2v": {"time_min": 16,
-        "prompt": "static camera, rain falling steadily, neon signs flickering and glowing, steam rising from the noodle stall, puddle reflections rippling, pedestrians walking slowly with umbrellas, flying vehicles drifting across the sky, subtle motion, minimal movement"},
-      "post": {"music": "Calm Ambient Dreamscape (mismatch — replace with lo-fi/synthwave)"},
-      "files": ["cyberpunk.mov", "cyberpunk_loop.mp4", "cyberpunk_final.mp4"],
+      "id": "cyberpunk",
+      "title": "Cyberpunk city, rain, neon",
+      "date": "2026-09-20",
+      "dt_project": "Untitled-76300",
+      "status": "done",
+      "still": {
+        "prompt": "A breathtaking anime background painting of a rain-soaked cyberpunk city street at night. Foreground: wet asphalt reflecting neon, a noodle stall with steam rising, stacked crates, a puddle mirroring the signs. Middle ground: narrow street canyon lined with holographic billboards in magenta, cyan and orange, tangled cables, kanji and katakana neon signs, a few silhouetted pedestrians with umbrellas. Background: towering megastructures fading into purple haze, flying vehicles with red tail lights, a giant glowing advertisement screen. {style_suffix}"
+      },
+      "i2v": {
+        "time_min": 16,
+        "prompt": "static camera, rain falling steadily, neon signs flickering and glowing, steam rising from the noodle stall, puddle reflections rippling, pedestrians walking slowly with umbrellas, flying vehicles drifting across the sky, subtle motion, minimal movement"
+      },
+      "post": {
+        "music": "Calm Ambient Dreamscape (mismatch — replace with lo-fi/synthwave)"
+      },
+      "files": [
+        "cyberpunk.mov",
+        "cyberpunk_loop.mp4",
+        "cyberpunk_final.mp4"
+      ],
       "notes": "Night scene works with the same style suffix."
     },
     {
-      "id": "fll_farm", "title": "FLL BOT Builders — Coastal Roots Farm, wide view", "date": "2026-09-20", "dt_project": "Untitled-91574", "status": "rendering",
-      "still": {"prompt": "A breathtaking anime background painting, wide view from a low hill looking down over Coastal Roots Farm in Encinitas at golden hour. Foreground: rows of orchard trees on raised earth berms with shallow swales between them, alleys of elderberry and pomegranate trees where a flock of chickens pecks inside a white portable net fence, a small red barn-style chicken coop on wheels. Middle ground: long rows of squash and vegetables under white trellis netting, a shed painted with a bright sunflower mural, a corrugated-metal welcome-sign shelter, wooden fences, a winding dirt path where a small group of five children in matching black t-shirts walks with a farm guide, tiny distant figures. Background: tall coastal eucalyptus and a weeping willow, distant hills. Sky: enormous towering cumulus clouds lit orange and pink by the setting sun, a few tiny birds in silhouette. {style_suffix}"},
-      "i2v": {"prompt": "static camera, chickens pecking and wandering slowly inside the net fence, the group of children walking slowly along the dirt path, tree leaves and vegetable rows swaying in a gentle breeze, birds drifting slowly across the sky, clouds moving slowly, subtle motion, minimal movement"},
-      "files": ["fll/team_entrance.webp (reference only)", "fll/chickens.webp (reference only)", "fll/crop_rows.webp (reference only)", "fll/logo.webp"],
+      "id": "fll_farm",
+      "title": "FLL BOT Builders — Coastal Roots Farm, wide view",
+      "date": "2026-09-20",
+      "dt_project": "Untitled-91574",
+      "status": "done",
+      "still": {
+        "prompt": "A breathtaking anime background painting, wide view from a low hill looking down over Coastal Roots Farm in Encinitas at golden hour. Foreground: rows of orchard trees on raised earth berms with shallow swales between them, alleys of elderberry and pomegranate trees where a flock of chickens pecks inside a white portable net fence, a small red barn-style chicken coop on wheels. Middle ground: long rows of squash and vegetables under white trellis netting, a shed painted with a bright sunflower mural, a corrugated-metal welcome-sign shelter, wooden fences, a winding dirt path where a small group of five children in matching black t-shirts walks with a farm guide, tiny distant figures. Background: tall coastal eucalyptus and a weeping willow, distant hills. Sky: enormous towering cumulus clouds lit orange and pink by the setting sun, a few tiny birds in silhouette. {style_suffix}"
+      },
+      "i2v": {
+        "prompt": "static camera, chickens pecking and wandering slowly inside the net fence, the group of children walking slowly along the dirt path, tree leaves and vegetable rows swaying in a gentle breeze, birds drifting slowly across the sky, clouds moving slowly, subtle motion, minimal movement",
+        "time_min": 16
+      },
+      "files": [
+        "fll_farm.mov",
+        "fll_farm_loop.mp4",
+        "fll_farm_final.mp4",
+        "fll/team_entrance.webp (reference only)",
+        "fll/chickens.webp (reference only)",
+        "fll/crop_rows.webp (reference only)",
+        "fll/logo.webp"
+      ],
       "notes": "Kids must be distant, no faces, no close-ups (Kevin's rule). Real photos used only as reference for farm features; a photoreal attempt and a real-photo I2V attempt were both abandoned. Farm details from FLL-kb: berms/swales, elderberry+pomegranate alleys with rotating chickens, sunflower mural shed, trellis netting."
     }
   ]

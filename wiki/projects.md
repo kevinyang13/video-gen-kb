@@ -18,7 +18,7 @@
 | 4 | [Golden Gate, San Francisco](#goldengate) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Calm Ambient Dreamscape | `goldengate_final.mp4` |
 | 5 | [Mt. Rainier from Paradise](#rainier) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 15.5 min | Calm Ambient Dreamscape | `rainier_final.mp4` |
 | 6 | [Cyberpunk city, rain, neon](#cyberpunk) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Calm Ambient Dreamscape | `cyberpunk_final.mp4` |
-| 7 | [FLL BOT Builders — Coastal Roots Farm, wide view](#fll_farm) | 2026-09-20 | rendering | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` |
+| 7 | [FLL BOT Builders — Coastal Roots Farm, wide view](#fll_farm) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Calm Ambient Dreamscape | `fll_farm_final.mp4` |
 
 ## Defaults (apply unless a record overrides)
 
@@ -349,8 +349,8 @@ Prompt: `static camera, rain falling steadily, neon signs flickering and glowing
 
 ## FLL BOT Builders — Coastal Roots Farm, wide view {#fll_farm}
 
-- **Date**: 2026-09-20 · **Status**: rendering · **Draw Things project**: `Untitled-91574`
-- **Files** (`raw/clips/`): `fll/team_entrance.webp (reference only)`, `fll/chickens.webp (reference only)`, `fll/crop_rows.webp (reference only)`, `fll/logo.webp`
+- **Date**: 2026-09-20 · **Status**: done · **Draw Things project**: `Untitled-91574`
+- **Files** (`raw/clips/`): `fll_farm.mov`, `fll_farm_loop.mp4`, `fll_farm_final.mp4`, `fll/team_entrance.webp (reference only)`, `fll/chickens.webp (reference only)`, `fll/crop_rows.webp (reference only)`, `fll/logo.webp`
 - **Notes**: Kids must be distant, no faces, no close-ups (Kevin's rule). Real photos used only as reference for farm features; a photoreal attempt and a real-photo I2V attempt were both abandoned. Farm details from FLL-kb: berms/swales, elderberry+pomegranate alleys with rotating chickens, sunflower mural shed, trellis netting.
 
 **Still**
@@ -381,6 +381,7 @@ Prompt: `A breathtaking anime background painting, wide view from a low hill loo
 | Shift | 4.95 |
 | Sampler | DDIM Trailing |
 | Strength | 100% |
+| I2V time (min) | 16 |
 
 Prompt: `static camera, chickens pecking and wandering slowly inside the net fence, the group of children walking slowly along the dirt path, tree leaves and vegetable rows swaying in a gentle breeze, birds drifting slowly across the sky, clouds moving slowly, subtle motion, minimal movement`
 
