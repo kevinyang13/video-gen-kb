@@ -1,6 +1,6 @@
 # Dragon Epic — Project Plan
 
-**Summary**: Plan for a 1-minute hyper-realistic short with a dragon and a hero whose face is Kevin's, built on the Mac Studio with Draw Things + ffmpeg. Covers the pipeline, the Draw Things configuration for every stage, the face-identity strategy, dragon consistency, the shot list, the time budget, and the experiments to run before committing render hours. Living document — update as experiments land.
+**Summary**: Plan for a 1-minute hyper-realistic short with a dragon and a hero carrying a real family member's face, built on the Mac Studio with Draw Things + ffmpeg. Covers the pipeline, the Draw Things configuration for every stage, the face-identity strategy, dragon consistency, the shot list, the time budget, and the experiments to run before committing render hours. Living document — update as experiments land.
 
 **Sources**: 2026-09-19-local-4k-video-research.md; [[face-identity-workflows]]; [[runbook-living-painting]]; hands-on measurements 2026-09-20/21. Items marked *verify* have not been tested in Draw Things yet.
 
@@ -16,7 +16,7 @@
 | Look | Photoreal cinematic, not anime. Anamorphic film feel, volumetric light, real skin. |
 | Aspect / delivery | **16:9, delivered at 3840×2160 (4K UHD)**. No open model generates good 4K directly on this Mac (see [[image-to-video-models]]), so: generate at **1280×720**, AI-upscale 3× to 3840×2160. Stills are made at 1280×720 too so the I2V source matches. |
 | Story | Three acts, four shots each: **Arrival** (hero rides into a burned valley) → **Encounter** (the dragon reveals itself, standoff) → **Bond** (hero and dragon fly together over the coast at dawn). No dialogue; music + SFX. |
-| Hero | Kevin's face. One consistent character across ~8 of the 12 shots. |
+| Hero | A family member's face (photo supplied by Kevin 2026-09-21, with her consent assumed as Kevin's household). One consistent character across ~8 of the 12 shots. |
 | Dragon | One consistent design across ~7 shots. |
 
 ## 2. Pipeline
@@ -108,9 +108,9 @@ Ranked for this project. Start at the top; fall through only if it fails the tes
 
 **Recommended stack:** 2 (or 1 if 2 is unavailable) for the still **+ 3 on the 3–4 close-up shots**. That is two independent locks on identity, both free.
 
-**Photos needed from Kevin:** 15–30 sharp, varied (angles, expressions, lighting), no sunglasses, no other faces, ≥ 1024 px. Put in `raw/face/` (git-ignored). Even method 1 needs one clean frontal shot.
+**Face reference on disk** (`raw/face/`, git-ignored): `hero_face_head.jpg` (560×700 head crop) and `hero_face_tight.jpg` (1024 px tight face), cropped from `source_beach_selfie.jpg`. One frontal, evenly lit photo — enough for PuLID / IP-Adapter / FaceFusion. A LoRA (method 2, E7) wants 15–30 more with varied angles and expressions.
 
-**Consent/ethics:** own face only. Same as [[face-identity-workflows]].
+**Consent/ethics:** own face or a consenting family member only; the hero photo is from Kevin's own family album. Same as [[face-identity-workflows]].
 
 ## 5. Dragon consistency
 
@@ -133,7 +133,7 @@ A 5 s push from "rider is 40 px tall" to "face fills the frame" is a 10× scale 
 | Shot | Frame | Camera (Wan prompt) | Face |
 |---|---|---|---|
 | **1A** | Wide, dragon enters frame left, crosses; second dragon small in the haze behind; sea far below | `slow push in, the dragon glides across frame from left to right, wings beating slowly, the distant dragon drifts behind, sea haze, camera slowly tightening` | rider tiny, no face |
-| **1B** | Medium, three-quarter from behind-side, rider's upper body + dragon's neck, sea and second dragon beyond | `slow push in toward the rider, wind pulling at cloak and hair, the rider turns to look back over his shoulder, dragon neck rising and falling with wing beats` | **yes** — ends on the face; FaceFusion pass |
+| **1B** | Medium, three-quarter from behind-side, rider's upper body + dragon's neck, sea and second dragon beyond | `slow push in toward the rider, wind pulling at cloak and long dark hair, the rider turns to look back over her shoulder, dragon neck rising and falling with wing beats` | **yes** — ends on the face; FaceFusion pass |
 
 Cut 1A → 1B on the wing downbeat. Optional 1C (2 s): tight on the face, eyes narrowing, if E3 shows the face holds.
 
@@ -142,9 +142,9 @@ Cut 1A → 1B on the wing downbeat. Optional 1C (2 s): tight on the face, eyes n
 **Still prompt 1A (FLUX.2 klein, 1280×720)**:
 `Cinematic film still, anamorphic 35mm, high above an open ocean at sunset, the sun low on the horizon and half-sunk, sky in orange, magenta and deep violet, backlit. A [dragon lock] flies left to right across the frame, wings spread wide, a small armored rider seated at the base of its neck. Far behind it a second dragon, smaller and soft in the sea haze. A long path of sun glitter on the water below, thin streaked clouds lit from beneath, volumetric warm light, photorealistic, highly detailed, shallow depth of field on the distant dragon.`
 
-**Still prompt 1B**: `Cinematic film still, anamorphic 50mm, three-quarter view from behind and beside a rider on the neck of a [dragon lock], sea and haze far below, a second dragon distant in the background. The rider wears dark weathered leather armor with a deep-red cloak streaming behind him, hands on the dragon's neck ridge, looking back over his shoulder toward the camera. Sunset backlight, orange rim light on the rider's shoulder and hair, violet sky, photorealistic, highly detailed.` + face control (E1/E2).
+**Still prompt 1B**: `Cinematic film still, anamorphic 50mm, three-quarter view from behind and beside a rider on the neck of a [dragon lock], sea and haze far below, a second dragon distant in the background. The rider wears dark weathered leather armor with a deep-red cloak streaming behind her, hands on the dragon's neck ridge, looking back over her shoulder toward the camera. Sunset backlight, orange rim light on the rider's shoulder and hair, violet sky, photorealistic, highly detailed.` + face control (E1/E2).
 
-**Hero look (fixed 2026-09-21)**: dark weathered leather armor, deep-red cloak, no helmet (face must be visible). Same words in every hero prompt.
+**Hero look (fixed 2026-09-21)**: young woman, long dark hair, dark weathered leather armor, deep-red cloak, no helmet (face must be visible). Same words in every hero prompt; the face itself comes from the adapter/LoRA, never from the prompt.
 
 **Sea/sunset palette** is the same family as the coastal loops — reuse those learnings for the motion prompt (waves, haze drift).
 
@@ -210,7 +210,7 @@ Rendering is unattended; the Mac must stay unlocked (see the lock note in [[runb
 
 ## 10. Open questions for Kevin
 
-1. Photos: can you drop 15–30 face photos into `raw/face/`?
+1. Photos: ~~can you drop 15–30 face photos?~~ → one frontal reference supplied 2026-09-21; more only if E7 (LoRA) goes ahead.
 2. Hero look: ~~armor / cloak / modern?~~ → weathered leather + red cloak, no helmet (settled 2026-09-21).
 3. Dragon: ~~color~~ reddish-brown (settled 2026-09-21). Vibe still open: menacing-then-loyal, or noble throughout?
 4. Music: orchestral epic, or ambient like the loops?

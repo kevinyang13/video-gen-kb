@@ -91,7 +91,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
     <span class="spacer"></span>
     <button class="pill" onclick="tt()">◐ Theme</button>
   </nav>
-  <h1>Dragon Epic — Project Plan</h1><p class="lede">Plan for a 1-minute hyper-realistic short with a dragon and a hero whose face is Kevin's, built on the Mac Studio with Draw Things + ffmpeg. Covers the pipeline, the Draw Things configuration for every stage, the face-identity strategy, dragon consistency, the shot list, the time budget, and the experiments to run before committing render hours. Living document — update as experiments land.</p><div class="meta"><span><b>Updated</b> 2026-09-21 (4K delivery added)</span><span><b>Sources</b> 2026-09-19-local-4k-video-research.md; <a href="face-identity-workflows.html">face identity workflows</a>; <a href="runbook-living-painting.html">runbook living painting</a>; hands-on measurements 2026-09-20/21. Items marked <em>verify</em> have not been tested in Draw Things yet.</span></div>
+  <h1>Dragon Epic — Project Plan</h1><p class="lede">Plan for a 1-minute hyper-realistic short with a dragon and a hero carrying a real family member's face, built on the Mac Studio with Draw Things + ffmpeg. Covers the pipeline, the Draw Things configuration for every stage, the face-identity strategy, dragon consistency, the shot list, the time budget, and the experiments to run before committing render hours. Living document — update as experiments land.</p><div class="meta"><span><b>Updated</b> 2026-09-21 (4K delivery added)</span><span><b>Sources</b> 2026-09-19-local-4k-video-research.md; <a href="face-identity-workflows.html">face identity workflows</a>; <a href="runbook-living-painting.html">runbook living painting</a>; hands-on measurements 2026-09-20/21. Items marked <em>verify</em> have not been tested in Draw Things yet.</span></div>
 <hr />
 <h2>1. What we are making</h2>
 <div class="tw"><table>
@@ -120,7 +120,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </tr>
 <tr>
 <td>Hero</td>
-<td>Kevin's face. One consistent character across ~8 of the 12 shots.</td>
+<td>A family member's face (photo supplied by Kevin 2026-09-21, with her consent assumed as Kevin's household). One consistent character across ~8 of the 12 shots.</td>
 </tr>
 <tr>
 <td>Dragon</td>
@@ -321,8 +321,8 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </tbody>
 </table></div>
 <p><strong>Recommended stack:</strong> 2 (or 1 if 2 is unavailable) for the still <strong>+ 3 on the 3–4 close-up shots</strong>. That is two independent locks on identity, both free.</p>
-<p><strong>Photos needed from Kevin:</strong> 15–30 sharp, varied (angles, expressions, lighting), no sunglasses, no other faces, ≥ 1024 px. Put in <code>raw/face/</code> (git-ignored). Even method 1 needs one clean frontal shot.</p>
-<p><strong>Consent/ethics:</strong> own face only. Same as <a href="face-identity-workflows.html">face identity workflows</a>.</p>
+<p><strong>Face reference on disk</strong> (<code>raw/face/</code>, git-ignored): <code>hero_face_head.jpg</code> (560×700 head crop) and <code>hero_face_tight.jpg</code> (1024 px tight face), cropped from <code>source_beach_selfie.jpg</code>. One frontal, evenly lit photo — enough for PuLID / IP-Adapter / FaceFusion. A LoRA (method 2, E7) wants 15–30 more with varied angles and expressions.</p>
+<p><strong>Consent/ethics:</strong> own face or a consenting family member only; the hero photo is from Kevin's own family album. Same as <a href="face-identity-workflows.html">face identity workflows</a>.</p>
 <h2>5. Dragon consistency</h2>
 <p>No dragon LoRA exists for these models. Strategy:</p>
 <ol>
@@ -355,7 +355,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <tr>
 <td><strong>1B</strong></td>
 <td>Medium, three-quarter from behind-side, rider's upper body + dragon's neck, sea and second dragon beyond</td>
-<td><code>slow push in toward the rider, wind pulling at cloak and hair, the rider turns to look back over his shoulder, dragon neck rising and falling with wing beats</code></td>
+<td><code>slow push in toward the rider, wind pulling at cloak and long dark hair, the rider turns to look back over her shoulder, dragon neck rising and falling with wing beats</code></td>
 <td><strong>yes</strong> — ends on the face; FaceFusion pass</td>
 </tr>
 </tbody>
@@ -364,8 +364,8 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <p><strong>Dragon description lock (draft — edit)</strong>: <em>massive dark reddish-brown dragon, matte ridged scales, long tapered neck, bat-like wing membranes with visible bone struts and torn trailing edges, a row of curved horns sweeping back from the skull, amber eyes, wingspan four times its body length.</em></p>
 <p><strong>Still prompt 1A (FLUX.2 klein, 1280×720)</strong>:
 <code>Cinematic film still, anamorphic 35mm, high above an open ocean at sunset, the sun low on the horizon and half-sunk, sky in orange, magenta and deep violet, backlit. A [dragon lock] flies left to right across the frame, wings spread wide, a small armored rider seated at the base of its neck. Far behind it a second dragon, smaller and soft in the sea haze. A long path of sun glitter on the water below, thin streaked clouds lit from beneath, volumetric warm light, photorealistic, highly detailed, shallow depth of field on the distant dragon.</code></p>
-<p><strong>Still prompt 1B</strong>: <code>Cinematic film still, anamorphic 50mm, three-quarter view from behind and beside a rider on the neck of a [dragon lock], sea and haze far below, a second dragon distant in the background. The rider wears dark weathered leather armor with a deep-red cloak streaming behind him, hands on the dragon's neck ridge, looking back over his shoulder toward the camera. Sunset backlight, orange rim light on the rider's shoulder and hair, violet sky, photorealistic, highly detailed.</code> + face control (E1/E2).</p>
-<p><strong>Hero look (fixed 2026-09-21)</strong>: dark weathered leather armor, deep-red cloak, no helmet (face must be visible). Same words in every hero prompt.</p>
+<p><strong>Still prompt 1B</strong>: <code>Cinematic film still, anamorphic 50mm, three-quarter view from behind and beside a rider on the neck of a [dragon lock], sea and haze far below, a second dragon distant in the background. The rider wears dark weathered leather armor with a deep-red cloak streaming behind her, hands on the dragon's neck ridge, looking back over her shoulder toward the camera. Sunset backlight, orange rim light on the rider's shoulder and hair, violet sky, photorealistic, highly detailed.</code> + face control (E1/E2).</p>
+<p><strong>Hero look (fixed 2026-09-21)</strong>: young woman, long dark hair, dark weathered leather armor, deep-red cloak, no helmet (face must be visible). Same words in every hero prompt; the face itself comes from the adapter/LoRA, never from the prompt.</p>
 <p><strong>Sea/sunset palette</strong> is the same family as the coastal loops — reuse those learnings for the motion prompt (waves, haze drift).</p>
 <h2>6. Shot list (v0 — edit freely)</h2>
 <div class="tw"><table>
@@ -628,7 +628,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </ul>
 <h2>10. Open questions for Kevin</h2>
 <ol>
-<li>Photos: can you drop 15–30 face photos into <code>raw/face/</code>?</li>
+<li>Photos: ~~can you drop 15–30 face photos?~~ → one frontal reference supplied 2026-09-21; more only if E7 (LoRA) goes ahead.</li>
 <li>Hero look: ~~armor / cloak / modern?~~ → weathered leather + red cloak, no helmet (settled 2026-09-21).</li>
 <li>Dragon: ~~color~~ reddish-brown (settled 2026-09-21). Vibe still open: menacing-then-loyal, or noble throughout?</li>
 <li>Music: orchestral epic, or ambient like the loops?</li>
