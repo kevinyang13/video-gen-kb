@@ -642,7 +642,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </tr>
 </tbody>
 </table></div>
-<p>Rendering is unattended; the Mac must stay unlocked (see the lock note in <a href="runbook-living-painting.html">runbook living painting</a>).</p>
+<p>Rendering is unattended, but the Mac must not <strong>idle-sleep</strong>: two 1280×768 renders were lost on 2026-09-21 when a screen lock let the Mac sleep and Draw Things quit. The session now holds a keep-awake; <code>caffeinate -dims</code> is the manual equivalent. Locking is fine once that is in place.</p>
 <h2>9. Risks</h2>
 <ul>
 <li><strong>Face drift over 5 s</strong> — mitigated by FaceFusion; if still bad, shorten face shots to 49 frames (3 s).</li>

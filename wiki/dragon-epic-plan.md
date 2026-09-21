@@ -204,7 +204,7 @@ E1–E2 decide the face strategy. E5–E6 decide whether the dragon look is achi
 | Experiments E1–E8 | ~3.5 h |
 | **Total** | **≈ 12 h machine time**, spread over 3–4 sessions |
 
-Rendering is unattended; the Mac must stay unlocked (see the lock note in [[runbook-living-painting]]).
+Rendering is unattended, but the Mac must not **idle-sleep**: two 1280×768 renders were lost on 2026-09-21 when a screen lock let the Mac sleep and Draw Things quit. The session now holds a keep-awake; `caffeinate -dims` is the manual equivalent. Locking is fine once that is in place.
 
 ## 9. Risks
 
