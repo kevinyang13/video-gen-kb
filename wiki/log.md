@@ -140,3 +140,7 @@ Replaced calm-ambient with "Neon Synthwave Drive" (Pixabay). Registry + runbook 
 ## 2026-09-20 — YouTube embeds on the projects page
 
 Playlist "AI-Vids" (PLJx49Sf61wKQ, 6 videos) mapped to registry entries by title via oEmbed. `projects.json` gained `playlist` + per-project `youtube` id; generator emits a playlist iframe under the summary and a 9:16 player on each record. Plain iframes work on GitHub Pages. Note: the uploaded fll farm video is v1.
+
+## 2026-09-20 — FLL farm v2
+
+Regenerated still with exactly 5 children + 1 adult standing still; I2V prompt gave people zero motion and put the motion budget on wind/chickens/clouds. Frame check: figures hold position across all 81 frames. `raw/clips/fll_farm_v2_final.mp4`. Registry updated; YouTube upload still shows v1.
