@@ -156,3 +156,7 @@ New project planned, not started: `wiki/dragon-epic-plan.md` (pipeline, per-stag
 ## 2026-09-21 — Dragon Epic: 4K delivery
 
 Plan updated: generate stills + I2V at 1280×720, AI-upscale 3× to 3840×2160 (SeedVR2 first, Real-ESRGAN ncnn fallback, Draw Things upscaler to verify), FaceFusion before upscale, HEVC 10-bit via videotoolbox. New experiment E8 (upscaler bake-off); budget ~12 h.
+
+## 2026-09-21 — Dragon Epic: first 4K clip
+
+Scene 1A end to end: FLUX.2 klein still at 1280×768 (first seed) → Wan 2.2 I2V 81 f (~43 min, GPU shared) → Real-ESRGAN ncnn 4× (5.6 min) → 3840×2160 HEVC 10-bit. Real-ESRGAN needs `-t 128`, `-j 1:1:1`, and cwd = its own directory. `scripts/upscale_4k.sh` added. Plan §7b + registry updated.

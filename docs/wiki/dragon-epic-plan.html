@@ -572,6 +572,28 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </tbody>
 </table></div>
 <p>E1–E2 decide the face strategy. E5–E6 decide whether the dragon look is achievable. Do all seven before rendering the shot list.</p>
+<h2>7b. Experiment results</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th style="text-align: right;">#</th>
+<th>Date</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">E6</td>
+<td>2026-09-21</td>
+<td>Scene 1A still at 1280×768 (FLUX klein, first seed) matched the brief. I2V at 1280×768 × 81 f: <strong>~43 min</strong> with the upscaler test sharing the GPU for ~10 min; estimate <strong>~35 min clean</strong>. Twice the 576×1024 cost.</td>
+</tr>
+<tr>
+<td style="text-align: right;">E8 (part)</td>
+<td>2026-09-21</td>
+<td><strong>Real-ESRGAN ncnn (x4plus)</strong> works on Metal with <code>-t 128 -j 1:1:1</code>, run from its own directory (models path is cwd-relative); auto/256 tile segfaults. <strong>81 frames at 1280×768 → 4K in 5.6 min</strong> on a free GPU. 1:1 comparison vs lanczos: scale ridges and spine edges resolve, no ringing. Script: <code>scripts/upscale_4k.sh</code> → HEVC 10-bit 40 Mbps. <strong>Good enough to ship</strong>; SeedVR2 only if flicker shows up on motion. First 4K clip: <code>raw/clips/dragon/scene1a_4k.mp4</code>.</td>
+</tr>
+</tbody>
+</table></div>
 <h2>8. Budget</h2>
 <div class="tw"><table>
 <thead>

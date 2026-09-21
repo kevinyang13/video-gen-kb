@@ -188,7 +188,7 @@ E1–E2 decide the face strategy. E5–E6 decide whether the dragon look is achi
 | # | Date | Result |
 |--:|---|---|
 | E6 | 2026-09-21 | Scene 1A still at 1280×768 (FLUX klein, first seed) matched the brief. I2V at 1280×768 × 81 f: **~43 min** with the upscaler test sharing the GPU for ~10 min; estimate **~35 min clean**. Twice the 576×1024 cost. |
-| E8 (part) | 2026-09-21 | **Real-ESRGAN ncnn (x4plus)** runs on Metal only with `-t 256` (auto tile size segfaults). Quality on the Golden Gate frame: clean edges, no ringing, real detail gain. Speed while sharing GPU: ~40 s/frame at 576×1024 — needs the GPU to itself; measure clean. Script: `scripts/upscale_4k.sh`. SeedVR2 and Draw Things upscaler still untested. |
+| E8 (part) | 2026-09-21 | **Real-ESRGAN ncnn (x4plus)** works on Metal with `-t 128 -j 1:1:1`, run from its own directory (models path is cwd-relative); auto/256 tile segfaults. **81 frames at 1280×768 → 4K in 5.6 min** on a free GPU. 1:1 comparison vs lanczos: scale ridges and spine edges resolve, no ringing. Script: `scripts/upscale_4k.sh` → HEVC 10-bit 40 Mbps. **Good enough to ship**; SeedVR2 only if flicker shows up on motion. First 4K clip: `raw/clips/dragon/scene1a_4k.mp4`. |
 
 ## 8. Budget
 

@@ -19,7 +19,7 @@
 | 5 | [Mt. Rainier from Paradise](#rainier) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 15.5 min | Calm Ambient Dreamscape | `rainier_final.mp4` | [▶ watch](https://youtu.be/JJB154LbBi0) |
 | 6 | [Cyberpunk city, rain, neon](#cyberpunk) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Neon Synthwave Drive | `cyberpunk_final.mp4` | [▶ watch](https://youtu.be/GrNTNQCqKnk) |
 | 7 | [FLL BOT Builders — Coastal Roots Farm, wide view](#fll_farm) | 2026-09-20 | done (v2) | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Calm Ambient Dreamscape | `fll_farm_v2_final.mp4` | [▶ watch](https://youtu.be/-Mf2UThasCg) |
-| 8 | [Dragon Epic — 1-minute photoreal short with Kevin's face](#dragon_epic) | 2026-09-21 | planning | FLUX.2 [klein] 9B 1280x720 | Wan 2.2 High Noise ? min | TBD | `—` | — |
+| 8 | [Dragon Epic — 1-minute photoreal short with Kevin's face](#dragon_epic) | 2026-09-21 | in progress — scene 1A done | FLUX.2 [klein] 9B 1280x768 | Wan 2.2 High Noise 43 min | TBD | `—` | — |
 
 ## YouTube playlist — [AI-Vids](https://www.youtube.com/playlist?list=PLJx49Sf61wKQ)
 
@@ -426,8 +426,8 @@ Prompt: `static camera, the six people stand completely still in place, tree bra
 
 ## Dragon Epic — 1-minute photoreal short with Kevin's face {#dragon_epic}
 
-- **Date**: 2026-09-21 · **Status**: planning · **Draw Things project**: `(not created yet)`
-- **Files** (`raw/clips/`): 
+- **Date**: 2026-09-21 · **Status**: in progress — scene 1A done · **Draw Things project**: `Untitled-35325`
+- **Files** (`raw/clips/`): `dragon/scene1a.mov`, `dragon/scene1a_4k.mp4`, `dragon/scene1a_4k_preview720.mp4`
 - **Notes**: Plan page: wiki/dragon-epic-plan.md. Experiments E1–E7 must pass before rendering the shot list. Needs face photos in raw/face/. Delivery is 4K UHD.
 
 **Still**
@@ -435,7 +435,7 @@ Prompt: `static camera, the six people stand completely still in place, tree bra
 | Setting | Value |
 |---|---|
 | Model | FLUX.2 [klein] 9B (8-bit S) |
-| Size | 1280x720 |
+| Size | 1280x768 (grid is 64px; 720 not reachable) |
 | Steps | 4 |
 | CFG | 1.0 |
 | Shift | 3.0 |
@@ -450,7 +450,7 @@ Prompt: `per shot — see wiki/dragon-epic-plan.md §6`
 | Model | Wan 2.2 High Noise Expert I2V A14B (8-bit S) |
 | Refiner | Wan 2.2 Low Noise Expert I2V A14B (8-bit S) @ 10% |
 | LoRA | Wan 2.2 A14B Lightning High-Noise T2V v2.0 @ 100% |
-| Size | 1280x720 (measure time in E6) |
+| Size | 1280x768 |
 | Frames | 81 |
 | FPS | 16 |
 | Steps | 4 |
@@ -458,6 +458,7 @@ Prompt: `per shot — see wiki/dragon-epic-plan.md §6`
 | Shift | 4.95 |
 | Sampler | DDIM Trailing |
 | Strength | 100% |
+| I2V time (min) | 43 |
 
 Prompt: `per shot — one camera move + one subject action`
 
@@ -467,7 +468,7 @@ Prompt: `per shot — one camera move + one subject action`
 |---|---|
 | Script | scripts/assemble_film.sh (to write) |
 | Loop | none — 12 clips xfade-concatenated |
-| Upscale | AI 3x to 3840x2160 (SeedVR2 / Real-ESRGAN — decide in E8), HEVC 10-bit hevc_videotoolbox |
+| Upscale | scripts/upscale_4k.sh — Real-ESRGAN x4plus ncnn, tile 128, → 3840x2160 HEVC 10-bit 40 Mbps (5.6 min/clip) |
 | Music | TBD — orchestral epic + SFX |
 
 ## Related pages
