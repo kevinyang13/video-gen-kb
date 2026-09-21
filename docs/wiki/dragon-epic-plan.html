@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dragon Epic — Project Plan — video-gen-kb</title>
+<style>
+:root{--bg:#0B0D12;--panel:#141822;--panel-2:#1B2130;--stroke:#2A3245;--text:#E6E9F0;
+--muted:#8B94A7;--accent:#F5B84B;--accent-2:#4BC9F5;--on-accent:#12131A;
+--rule:rgba(139,148,167,.22);--code:#F5B84B}
+@media(prefers-color-scheme:light){:root:not([data-theme=dark]){--bg:#F4F1EA;--panel:#fff;
+--panel-2:#FAF8F3;--stroke:#D9D3C6;--text:#16181F;--muted:#5D6473;--accent:#B8781A;
+--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}}
+:root[data-theme=light]{--bg:#F4F1EA;--panel:#fff;--panel-2:#FAF8F3;--stroke:#D9D3C6;
+--text:#16181F;--muted:#5D6473;--accent:#B8781A;--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);
+line-height:1.65;padding:0 1rem 4rem}
+.shell{max-width:840px;margin:0 auto}
+a{color:var(--accent);text-decoration:none;font-weight:600}
+a:hover{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--accent-2);outline-offset:3px;border-radius:4px}
+.bar{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;padding:1.1rem 0;margin-bottom:1.5rem;
+border-bottom:1px solid var(--stroke)}
+.crumb{font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.spacer{flex:1}
+.pill{border:1px solid var(--stroke);background:var(--panel);border-radius:999px;padding:.28rem .8rem;
+font-size:.75rem;font-weight:700;color:var(--text);cursor:pointer;font-family:inherit}
+.pill:hover{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+h1{font-size:clamp(1.7rem,5vw,2.5rem);margin:.2rem 0 1rem;line-height:1.1;letter-spacing:-.015em;text-wrap:balance}
+h2{font-size:1.25rem;margin:2.2rem 0 .7rem;padding-bottom:.35rem;border-bottom:1px solid var(--rule);text-wrap:balance}
+h3{font-size:1.02rem;margin:1.5rem 0 .5rem;color:var(--accent)}
+p{margin:.7rem 0}
+ul,ol{margin:.7rem 0 .7rem 1.3rem}
+li{margin:.28rem 0}
+li::marker{color:var(--accent)}
+em{color:var(--muted)}
+hr{border:none;border-top:1px solid var(--stroke);margin:2rem 0}
+blockquote{border-left:3px solid var(--accent);background:var(--panel);border-radius:0 10px 10px 0;
+padding:.8rem 1.1rem;margin:1.1rem 0;color:var(--muted);font-size:.92rem}
+code{background:var(--panel);border:1px solid var(--stroke);border-radius:5px;padding:.1rem .35rem;
+font-size:.85em;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--code)}
+pre{background:var(--panel);border:1px solid var(--stroke);border-radius:12px;padding:1rem;overflow-x:auto;margin:1.1rem 0}
+pre code{background:none;border:none;padding:0;color:var(--text);font-size:.83rem;line-height:1.55}
+.tw{overflow-x:auto;border:1px solid var(--stroke);border-radius:12px;background:var(--panel);margin:1.1rem 0}
+table{width:100%;border-collapse:collapse;font-size:.85rem;min-width:min(100%,460px)}
+th{background:var(--panel-2);color:var(--accent);text-align:left;padding:.55rem .8rem;font-size:.68rem;
+letter-spacing:.09em;text-transform:uppercase;white-space:nowrap;border-bottom:1px solid var(--stroke)}
+td{padding:.5rem .8rem;border-bottom:1px solid var(--rule);color:var(--muted);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td strong{color:var(--text)}
+.meta{display:flex;flex-wrap:wrap;gap:.4rem .9rem;font-size:.78rem;color:var(--muted);margin:-.4rem 0 1.2rem}
+.meta b{color:var(--text);font-weight:600}
+.missing{color:var(--muted);border-bottom:1px dashed var(--muted);cursor:help}
+.related{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--stroke)}
+.related h2{border:none;margin:0 0 .7rem;font-size:.95rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:0}
+.chips li{margin:0}
+.chips a,.chips .missing{display:inline-block;border:1px solid var(--stroke);background:var(--panel);
+border-radius:999px;padding:.28rem .8rem;font-size:.8rem}
+.chips a:hover{background:var(--accent);color:var(--on-accent);text-decoration:none;border-color:var(--accent)}
+footer{max-width:840px;margin:2.5rem auto 0;padding-top:1.2rem;border-top:1px solid var(--stroke);
+font-size:.75rem;color:var(--muted);text-align:center}
+/* landing */
+.hero{padding:2.4rem 0 1.6rem}
+.kicker{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2)}
+.hero h1{font-size:clamp(2rem,6vw,3.2rem);margin:.35rem 0 .5rem}
+.hero p{color:var(--muted);font-size:1.05rem;max-width:56ch}
+.hw{display:inline-flex;gap:.5rem;align-items:center;margin-top:1rem;border:1px solid var(--stroke);
+background:var(--panel);border-radius:999px;padding:.3rem .9rem;font-size:.78rem;color:var(--muted)}
+.hw .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.sec{margin-top:2.2rem}
+.sec h2{border:none;padding:0;margin:0 0 .8rem;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.9rem}
+.card{display:block;border:1px solid var(--stroke);background:var(--panel);border-radius:14px;padding:1rem 1.1rem;
+color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+.card b{display:block;color:var(--accent);font-size:1rem;margin-bottom:.3rem}
+.card span{font-size:.85rem;color:var(--muted);line-height:1.5}
+.stubs{font-size:.82rem;color:var(--muted);margin-top:.6rem}
+.yt{position:relative;width:100%;aspect-ratio:16/9;border:1px solid var(--stroke);border-radius:12px;overflow:hidden;background:#000;margin:1rem 0}
+.yt.yt-v{aspect-ratio:9/16;max-width:360px}
+.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="bar">
+    <span class="crumb"><a href="../">video-gen-kb</a> / <a href="index.html">Wiki</a></span>
+    <span class="spacer"></span>
+    <button class="pill" onclick="tt()">◐ Theme</button>
+  </nav>
+  <h1>Dragon Epic — Project Plan</h1><p class="lede">Plan for a 1-minute hyper-realistic short with a dragon and a hero whose face is Kevin's, built on the Mac Studio with Draw Things + ffmpeg. Covers the pipeline, the Draw Things configuration for every stage, the face-identity strategy, dragon consistency, the shot list, the time budget, and the experiments to run before committing render hours. Living document — update as experiments land.</p><div class="meta"><span><b>Updated</b> 2026-09-21</span><span><b>Sources</b> 2026-09-19-local-4k-video-research.md; <a href="face-identity-workflows.html">face identity workflows</a>; <a href="runbook-living-painting.html">runbook living painting</a>; hands-on measurements 2026-09-20/21. Items marked <em>verify</em> have not been tested in Draw Things yet.</span></div>
+<hr />
+<h2>1. What we are making</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Length</td>
+<td>60 s = <strong>12 shots × 5 s</strong> (81 frames @ 16 fps each). Longer single shots cost more and drift more; 5 s is the sweet spot on this hardware.</td>
+</tr>
+<tr>
+<td>Look</td>
+<td>Photoreal cinematic, not anime. Anamorphic film feel, volumetric light, real skin.</td>
+</tr>
+<tr>
+<td>Aspect</td>
+<td><strong>16:9 (1024×576)</strong> — this is a film, not a TikTok. Wan handles 1024×576 at the same cost as 576×1024. Post-upscale to 1920×1080.</td>
+</tr>
+<tr>
+<td>Story</td>
+<td>Three acts, four shots each: <strong>Arrival</strong> (hero rides into a burned valley) → <strong>Encounter</strong> (the dragon reveals itself, standoff) → <strong>Bond</strong> (hero and dragon fly together over the coast at dawn). No dialogue; music + SFX.</td>
+</tr>
+<tr>
+<td>Hero</td>
+<td>Kevin's face. One consistent character across ~8 of the 12 shots.</td>
+</tr>
+<tr>
+<td>Dragon</td>
+<td>One consistent design across ~7 shots.</td>
+</tr>
+</tbody>
+</table></div>
+<h2>2. Pipeline</h2>
+<pre><code>character sheet (hero, dragon)  ──►  per-shot still (FLUX.2 klein + face control)
+                                            │
+                                            ▼
+                               Wan 2.2 I2V 5 s clip (photoreal motion prompt)
+                                            │
+                          (optional) FaceFusion pass on face-visible shots
+                                            │
+                                            ▼
+                    ffmpeg: xfade concat ×12 → 1920×1080 → music + SFX → title
+</code></pre>
+<p>Every stage exists already except the face control and the concat script. Nothing here needs ComfyUI.</p>
+<h2>3. Draw Things configuration per stage</h2>
+<h3>3a. Stills — FLUX.2 [klein] 9B (8-bit S), photoreal</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Model</td>
+<td>FLUX.2 [klein] 9B (8-bit S)</td>
+<td>proven on the farm photo test (2026-09-20) — photoreal kids, guide, pomegranate tree were convincing</td>
+</tr>
+<tr>
+<td>Steps / CFG / Shift</td>
+<td>4 / 1.0 / 3</td>
+<td>klein defaults</td>
+</tr>
+<tr>
+<td>Size</td>
+<td><strong>1024×576</strong> (Small 16:9)</td>
+<td>16:9 for film. Generate at 1024×576, not larger — I2V runs at this size anyway</td>
+</tr>
+<tr>
+<td>Prompt style</td>
+<td>camera + lens + light first, subject second</td>
+<td><code>Cinematic still, anamorphic 35mm, shallow depth of field, volumetric dawn light, …</code> No anime suffix</td>
+</tr>
+<tr>
+<td>Negative</td>
+<td>n/a at CFG 1</td>
+<td>fix the still, not the negative</td>
+</tr>
+<tr>
+<td>Control</td>
+<td>face adapter for hero shots (see §4)</td>
+<td><em>verify which adapters Draw Things lists for FLUX.2 klein</em></td>
+</tr>
+</tbody>
+</table></div>
+<h3>3b. Motion — Wan 2.2 I2V A14B (8-bit S) pair</h3>
+<p>Same as the living-painting runbook with three changes for photoreal:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Model / Refiner</td>
+<td>High Noise I2V (8-bit S) / Low Noise I2V (8-bit S) @ 10%</td>
+<td>mandatory pair; see the refiner trap in <a href="runbook-living-painting.html">runbook living painting</a></td>
+</tr>
+<tr>
+<td>LoRA</td>
+<td>Lightning High-Noise 100%, 4 steps, CFG 1</td>
+<td>16 min per clip. Try <strong>8 steps</strong> on one hero close-up to see if skin/face hold better (~30 min) — <em>experiment E3</em></td>
+</tr>
+<tr>
+<td>Size</td>
+<td>1024×576, 81 frames @ 16 fps</td>
+<td></td>
+</tr>
+<tr>
+<td>Motion prompt</td>
+<td>one camera move + one subject action, nothing else</td>
+<td><code>slow dolly in, the rider turns his head toward the ridge, cloak moving in the wind, embers drifting</code> — people may move here, but <strong>one</strong> action per shot, and never "walking toward camera"</td>
+</tr>
+<tr>
+<td>Shift</td>
+<td>5</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p>Camera moves that Wan 2.2 does well at 4 steps: slow dolly/push, slow pan, orbit ≤ 30°, handheld drift. Avoid: whip pans, fast tracking, anything that reveals new geometry.</p>
+<h3>3c. Face pass — FaceFusion (post, optional per shot)</h3>
+<p>For shots where the hero's face is larger than ~120 px tall, run FaceFusion on the 5 s clip with one reference photo of Kevin, face-enhancer on. It re-locks identity that I2V softened. Runs on Apple Silicon via CoreML <em>(verify install: <code>pip install facefusion</code> or the standalone app)</em>. Do it <strong>before</strong> upscaling.</p>
+<h3>3d. Assembly — ffmpeg</h3>
+<ul>
+<li><code>xfade</code> crossfades (0.5 s) or hard cuts between the 12 clips; no loops</li>
+<li>lanczos to 1920×1080; optional 2.39:1 letterbox bars for the film look</li>
+<li>music bed + 3–5 SFX (wing beats, roar, wind, hooves) from Pixabay; <code>-shortest</code></li>
+<li>2 s title card at the end (ffmpeg <code>drawtext</code> or a FLUX still)</li>
+</ul>
+<p><code>scripts/assemble_film.sh</code> — to write when the first 3 clips exist.</p>
+<h2>4. Face identity — the hard part</h2>
+<p>Ranked for this project. Start at the top; fall through only if it fails the test in §7.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th style="text-align: right;">#</th>
+<th>Method</th>
+<th>How</th>
+<th>Cost</th>
+<th>Expected identity hold</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td><strong>Face adapter in Draw Things at the still stage</strong></td>
+<td>Control → IP-Adapter FaceID / PuLID / Flux Kontext-style reference <em>(verify names for FLUX.2 klein; Draw Things ships PuLID for FLUX.1 dev — klein support unknown)</em> + 1 frontal photo, strength 0.7–0.9</td>
+<td>free, in-app</td>
+<td>good on the still; I2V softens it over 5 s</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td><strong>Face LoRA for FLUX</strong></td>
+<td>15–30 photos → train. Draw Things has a <strong>PEFT</strong> tab (local LoRA training) <em>(verify it supports FLUX.2 klein and how long on M4 Max)</em>; fallback fal.ai trainer ~$5–10</td>
+<td>1–3 h once</td>
+<td>best on stills, reusable across all shots and future projects</td>
+</tr>
+<tr>
+<td style="text-align: right;">3</td>
+<td><strong>FaceFusion post-swap</strong> (§3c)</td>
+<td>swap after I2V</td>
+<td>free, ~1 min/clip</td>
+<td>re-locks identity; can look pasted on profile angles</td>
+</tr>
+<tr>
+<td style="text-align: right;">4</td>
+<td><strong>Face LoRA for Wan 2.2</strong></td>
+<td>cloud trainer only</td>
+<td>~$10–20, hours</td>
+<td>identity survives motion; most work</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Recommended stack:</strong> 2 (or 1 if 2 is unavailable) for the still <strong>+ 3 on the 3–4 close-up shots</strong>. That is two independent locks on identity, both free.</p>
+<p><strong>Photos needed from Kevin:</strong> 15–30 sharp, varied (angles, expressions, lighting), no sunglasses, no other faces, ≥ 1024 px. Put in <code>raw/face/</code> (git-ignored). Even method 1 needs one clean frontal shot.</p>
+<p><strong>Consent/ethics:</strong> own face only. Same as <a href="face-identity-workflows.html">face identity workflows</a>.</p>
+<h2>5. Dragon consistency</h2>
+<p>No dragon LoRA exists for these models. Strategy:</p>
+<ol>
+<li><strong>Design sheet first.</strong> One FLUX still, 3 views on one canvas: <code>character design sheet, same dragon from front, side and three-quarter view, …</code>. Iterate until it is <em>the</em> dragon. Save as <code>raw/dragon/design.png</code>.</li>
+<li><strong>Lock the description.</strong> Write a 40-word dragon paragraph (color, horn shape, wing membrane, scale texture, eye color, size relative to a horse) and paste it verbatim into every dragon shot prompt. Text consistency is 70% of the battle.</li>
+<li><strong>Reference control</strong> if available: IP-Adapter (non-face) with the design sheet at ~0.5 strength on every dragon still <em>(verify)</em>.</li>
+<li><strong>Stage the shots</strong> so the dragon is far, backlit, or partially framed in most of them — silhouette is consistent for free; only 2 shots need the full close design.</li>
+<li>If it still drifts: train a small dragon LoRA on 20 generated stills of the locked design (same PEFT path as the face).</li>
+</ol>
+<h2>6. Shot list (v0 — edit freely)</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th style="text-align: right;">#</th>
+<th>Act</th>
+<th>Shot</th>
+<th style="text-align: center;">Hero face?</th>
+<th style="text-align: center;">Dragon?</th>
+<th>Camera</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td>Arrival</td>
+<td>Wide: rider crosses a burned valley at dawn, smoke columns</td>
+<td style="text-align: center;">far</td>
+<td style="text-align: center;">—</td>
+<td>slow push</td>
+<td>establishes scale</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td>Arrival</td>
+<td>Medium: hero on horseback, cloak, looks up</td>
+<td style="text-align: center;"><strong>yes</strong></td>
+<td style="text-align: center;">—</td>
+<td>slow dolly in</td>
+<td>first identity shot</td>
+</tr>
+<tr>
+<td style="text-align: right;">3</td>
+<td>Arrival</td>
+<td>Insert: hoof through ash, embers</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td>static, low</td>
+<td>cheap, no faces</td>
+</tr>
+<tr>
+<td style="text-align: right;">4</td>
+<td>Arrival</td>
+<td>Wide: ruined village, giant claw marks on a wall</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">trace</td>
+<td>slow pan</td>
+<td>dragon implied</td>
+</tr>
+<tr>
+<td style="text-align: right;">5</td>
+<td>Encounter</td>
+<td>Wide: cliff, a shadow passes over the hero</td>
+<td style="text-align: center;">small</td>
+<td style="text-align: center;">silhouette</td>
+<td>static</td>
+<td>wing shadow</td>
+</tr>
+<tr>
+<td style="text-align: right;">6</td>
+<td>Encounter</td>
+<td>Dragon lands, dust, framed by rocks</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><strong>full</strong></td>
+<td>slow pull back</td>
+<td>design-sheet shot 1</td>
+</tr>
+<tr>
+<td style="text-align: right;">7</td>
+<td>Encounter</td>
+<td>Close: hero's face, wind, ash on cheek</td>
+<td style="text-align: center;"><strong>yes</strong></td>
+<td style="text-align: center;">—</td>
+<td>static, shallow DoF</td>
+<td>hero close-up; FaceFusion pass</td>
+</tr>
+<tr>
+<td style="text-align: right;">8</td>
+<td>Encounter</td>
+<td>Close: dragon's eye opens, pupil contracts</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><strong>full</strong></td>
+<td>slow push</td>
+<td>design-sheet shot 2</td>
+</tr>
+<tr>
+<td style="text-align: right;">9</td>
+<td>Bond</td>
+<td>Medium: hero reaches out, dragon lowers its head</td>
+<td style="text-align: center;"><strong>yes</strong></td>
+<td style="text-align: center;">yes</td>
+<td>slow orbit</td>
+<td>hardest shot — two subjects</td>
+</tr>
+<tr>
+<td style="text-align: right;">10</td>
+<td>Bond</td>
+<td>Wide: takeoff, wings blast the dust</td>
+<td style="text-align: center;">small</td>
+<td style="text-align: center;">yes</td>
+<td>crane up</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align: right;">11</td>
+<td>Bond</td>
+<td>Aerial: flying over the coast, dawn</td>
+<td style="text-align: center;">small</td>
+<td style="text-align: center;">yes</td>
+<td>tracking</td>
+<td>reuse coastal palette from earlier projects</td>
+</tr>
+<tr>
+<td style="text-align: right;">12</td>
+<td>Bond</td>
+<td>Hero on dragon's back, looks at camera, smiles</td>
+<td style="text-align: center;"><strong>yes</strong></td>
+<td style="text-align: center;">partial</td>
+<td>static</td>
+<td>final identity shot; FaceFusion pass</td>
+</tr>
+</tbody>
+</table></div>
+<p>4 face shots, 7 dragon shots. Shots 3, 4, 5 are cheap; render them first to build the assembly early.</p>
+<h2>7. Experiments before committing (in order)</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th style="text-align: right;">#</th>
+<th>Question</th>
+<th>Test</th>
+<th>Pass criterion</th>
+<th>Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">E1</td>
+<td>What face controls does Draw Things offer for FLUX.2 klein?</td>
+<td>open Control dropdown with klein selected; also check with FLUX.1 dev if klein has none</td>
+<td>a face/reference adapter exists</td>
+<td>5 min</td>
+</tr>
+<tr>
+<td style="text-align: right;">E2</td>
+<td>Does the adapter hold Kevin's identity on a cinematic still?</td>
+<td>shot 7 prompt + adapter, 4 seeds</td>
+<td>3 of 4 recognisably Kevin</td>
+<td>10 min</td>
+</tr>
+<tr>
+<td style="text-align: right;">E3</td>
+<td>Does identity survive I2V? 4 vs 8 steps</td>
+<td>shot 7 still → I2V at 4 steps and at 8 steps</td>
+<td>face at frame 81 still reads as Kevin</td>
+<td>16 + 30 min</td>
+</tr>
+<tr>
+<td style="text-align: right;">E4</td>
+<td>FaceFusion on Apple Silicon</td>
+<td>install, run on E3 output</td>
+<td>runs; result better than E3</td>
+<td>30 min</td>
+</tr>
+<tr>
+<td style="text-align: right;">E5</td>
+<td>Dragon design sheet + description lock</td>
+<td>2 dragon stills from the locked paragraph, different scenes</td>
+<td>same dragon</td>
+<td>10 min</td>
+</tr>
+<tr>
+<td style="text-align: right;">E6</td>
+<td>Photoreal I2V motion at 1024×576</td>
+<td>shot 1 (no faces)</td>
+<td>no warping, camera move reads</td>
+<td>16 min</td>
+</tr>
+<tr>
+<td style="text-align: right;">E7</td>
+<td>PEFT tab: can Draw Things train a FLUX LoRA locally?</td>
+<td>check tab, start a 20-image run</td>
+<td>finishes in &lt; 3 h</td>
+<td><em>verify</em></td>
+</tr>
+</tbody>
+</table></div>
+<p>E1–E2 decide the face strategy. E5–E6 decide whether the dragon look is achievable. Do all seven before rendering the shot list.</p>
+<h2>8. Budget</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Estimate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Stills, all shots incl. iteration (~5 seeds each)</td>
+<td>60 × 40 s ≈ <strong>40 min</strong></td>
+</tr>
+<tr>
+<td>I2V, 12 clips × 16 min</td>
+<td><strong>3.2 h</strong> unattended</td>
+</tr>
+<tr>
+<td>Re-renders (assume 4 shots need a second pass)</td>
+<td>+1.1 h</td>
+</tr>
+<tr>
+<td>FaceFusion, 4 shots</td>
+<td>10 min</td>
+</tr>
+<tr>
+<td>Assembly, music, titles</td>
+<td>30 min</td>
+</tr>
+<tr>
+<td>Experiments E1–E7</td>
+<td>~2.5 h</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>≈ 8 h machine time</strong>, spread over 2–3 sessions</td>
+</tr>
+</tbody>
+</table></div>
+<p>Rendering is unattended; the Mac must stay unlocked (see the lock note in <a href="runbook-living-painting.html">runbook living painting</a>).</p>
+<h2>9. Risks</h2>
+<ul>
+<li><strong>Face drift over 5 s</strong> — mitigated by FaceFusion; if still bad, shorten face shots to 49 frames (3 s).</li>
+<li><strong>Dragon changes between shots</strong> — mitigated by description lock + silhouette staging; LoRA as last resort.</li>
+<li><strong>Two-subject shot (9)</strong> — highest failure odds; have a fallback framing (dragon head only, hero's hand in frame).</li>
+<li><strong>Photoreal humans at 4 steps</strong> — hands and eyes. Keep hands out of frame or holding reins; no waving.</li>
+<li><strong>Hardware time</strong> — 8 h is fine; 20 h is not. Cap re-renders at one per shot, then accept or cut the shot.</li>
+</ul>
+<h2>10. Open questions for Kevin</h2>
+<ol>
+<li>Photos: can you drop 15–30 face photos into <code>raw/face/</code>?</li>
+<li>Hero look: armor / cloak / modern? Era?</li>
+<li>Dragon: color and vibe (menacing then loyal? always noble?).</li>
+<li>Music: orchestral epic, or ambient like the loops?</li>
+<li>Deliverable: YouTube 16:9 landscape confirmed?</li>
+</ol>
+
+  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="face-identity-workflows.html">face identity workflows</a></li><li><a href="runbook-living-painting.html">runbook living painting</a></li><li><a href="projects.html">projects</a></li><li><a href="wan22-i2v-locked-image-settings.html">wan22 i2v locked image settings</a></li><li><a href="video-upscaling.html">video upscaling</a></li></ul></div>
+</div>
+<footer>video-gen-kb · built 2026-09-21 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<script>function tt(){var r=document.documentElement,
+d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
+matchMedia('(prefers-color-scheme: dark)').matches);
+r.setAttribute('data-theme',d?'light':'dark');}</script>
+</body>
+</html>

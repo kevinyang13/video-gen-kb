@@ -148,3 +148,7 @@ Regenerated still with exactly 5 children + 1 adult standing still; I2V prompt g
 ## 2026-09-21 — Kevin's own I2V attempt (project vid-916) debugged
 
 Symptoms: mid-denoise noise output + 5–9-frame clips. Causes: refiner set to Low Noise **T2V** (not downloaded → skipped), Frames 9, CFG 2.1, "drone camera, people walking" prompt. Fixed via automation; also found that clicking a Version History entry restores that entry's settings. Runbook updated.
+
+## 2026-09-21 — Dragon Epic plan
+
+New project planned, not started: `wiki/dragon-epic-plan.md` (pipeline, per-stage Draw Things settings, face strategy ranked, dragon consistency, 12-shot list, 7 gating experiments, ~8 h budget, open questions). Registry entry added as `planning`.

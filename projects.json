@@ -218,6 +218,29 @@
       "notes": "Kids must be distant, no faces, no close-ups (Kevin's rule). Real photos used only as reference for farm features; a photoreal attempt and a real-photo I2V attempt were both abandoned. Farm details from FLL-kb: berms/swales, elderberry+pomegranate alleys with rotating chickens, sunflower mural shed, trellis netting. v1 (6 kids + adult, 'walking' prompt) had figures teleporting and merging; v2 regenerated with exactly 5+1 standing still and a wind-only motion prompt.",
       "youtube": "-Mf2UThasCg",
       "youtube_v1": "v9-dvUiv4-0"
+    },
+    {
+      "id": "dragon_epic",
+      "title": "Dragon Epic — 1-minute photoreal short with Kevin's face",
+      "date": "2026-09-21",
+      "dt_project": "(not created yet)",
+      "status": "planning",
+      "still": {
+        "size": "1024x576",
+        "prompt": "per shot — see wiki/dragon-epic-plan.md §6"
+      },
+      "i2v": {
+        "size": "1024x576",
+        "prompt": "per shot — one camera move + one subject action"
+      },
+      "post": {
+        "script": "scripts/assemble_film.sh (to write)",
+        "loop": "none — 12 clips xfade-concatenated",
+        "upscale": "lanczos 1920x1080, optional 2.39:1 bars",
+        "music": "TBD — orchestral epic + SFX"
+      },
+      "files": [],
+      "notes": "Plan page: wiki/dragon-epic-plan.md. Experiments E1–E7 must pass before rendering the shot list. Needs face photos in raw/face/."
     }
   ],
   "playlist": {

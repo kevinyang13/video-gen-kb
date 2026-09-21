@@ -26,6 +26,10 @@
 
 - [[projects]] — registry of every video: models, settings, prompts, seeds, music, files; generated from `projects.json`
 
+## Plans
+
+- [[dragon-epic-plan]] — 1-minute photoreal dragon short with a personal face: pipeline, Draw Things config per stage, face-identity and dragon-consistency strategy, 12-shot list, experiments, budget
+
 ## Recipes
 
 - [[runbook-living-painting]] — **start here next time**: click-by-click checklist, settings to verify after every model switch, failure signatures, `scripts/finish_clip.sh`

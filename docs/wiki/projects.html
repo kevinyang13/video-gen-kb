@@ -186,6 +186,17 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <td><code>fll_farm_v2_final.mp4</code></td>
 <td><a href="https://youtu.be/-Mf2UThasCg">▶ watch</a></td>
 </tr>
+<tr>
+<td style="text-align: right;">8</td>
+<td><a href="#dragon_epic">Dragon Epic — 1-minute photoreal short with Kevin's face</a></td>
+<td>2026-09-21</td>
+<td>planning</td>
+<td>FLUX.2 [klein] 9B 1024x576</td>
+<td>Wan 2.2 High Noise ? min</td>
+<td>TBD</td>
+<td><code>—</code></td>
+<td>—</td>
+</tr>
 </tbody>
 </table></div>
 <h2>YouTube playlist — <a href="https://www.youtube.com/playlist?list=PLJx49Sf61wKQ">AI-Vids</a></h2>
@@ -1272,6 +1283,131 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <tr>
 <td>Music</td>
 <td>Calm Ambient Dreamscape — morgan-ambient, Pixabay, 1 s fade in / 2 s fade out, vol 0.9</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="dragon_epic">Dragon Epic — 1-minute photoreal short with Kevin's face</h2>
+<ul>
+<li><strong>Date</strong>: 2026-09-21 · <strong>Status</strong>: planning · <strong>Draw Things project</strong>: <code>(not created yet)</code></li>
+<li><strong>Files</strong> (<code>raw/clips/</code>): </li>
+<li><strong>Notes</strong>: Plan page: wiki/dragon-epic-plan.md. Experiments E1–E7 must pass before rendering the shot list. Needs face photos in raw/face/.</li>
+</ul>
+<p><strong>Still</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Model</td>
+<td>FLUX.2 [klein] 9B (8-bit S)</td>
+</tr>
+<tr>
+<td>Size</td>
+<td>1024x576</td>
+</tr>
+<tr>
+<td>Steps</td>
+<td>4</td>
+</tr>
+<tr>
+<td>CFG</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Shift</td>
+<td>3.0</td>
+</tr>
+<tr>
+<td>Sampler</td>
+<td>DDIM Trailing</td>
+</tr>
+</tbody>
+</table></div>
+<p>Prompt: <code>per shot — see wiki/dragon-epic-plan.md §6</code></p>
+<p><strong>I2V</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Model</td>
+<td>Wan 2.2 High Noise Expert I2V A14B (8-bit S)</td>
+</tr>
+<tr>
+<td>Refiner</td>
+<td>Wan 2.2 Low Noise Expert I2V A14B (8-bit S) @ 10%</td>
+</tr>
+<tr>
+<td>LoRA</td>
+<td>Wan 2.2 A14B Lightning High-Noise T2V v2.0 @ 100%</td>
+</tr>
+<tr>
+<td>Size</td>
+<td>1024x576</td>
+</tr>
+<tr>
+<td>Frames</td>
+<td>81</td>
+</tr>
+<tr>
+<td>FPS</td>
+<td>16</td>
+</tr>
+<tr>
+<td>Steps</td>
+<td>4</td>
+</tr>
+<tr>
+<td>CFG</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Shift</td>
+<td>4.95</td>
+</tr>
+<tr>
+<td>Sampler</td>
+<td>DDIM Trailing</td>
+</tr>
+<tr>
+<td>Strength</td>
+<td>100%</td>
+</tr>
+</tbody>
+</table></div>
+<p>Prompt: <code>per shot — one camera move + one subject action</code></p>
+<p><strong>Post</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Script</td>
+<td>scripts/assemble_film.sh (to write)</td>
+</tr>
+<tr>
+<td>Loop</td>
+<td>none — 12 clips xfade-concatenated</td>
+</tr>
+<tr>
+<td>Upscale</td>
+<td>lanczos 1920x1080, optional 2.39:1 bars</td>
+</tr>
+<tr>
+<td>Music</td>
+<td>TBD — orchestral epic + SFX</td>
 </tr>
 </tbody>
 </table></div>
