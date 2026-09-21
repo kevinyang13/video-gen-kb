@@ -144,3 +144,7 @@ Playlist "AI-Vids" (PLJx49Sf61wKQ, 6 videos) mapped to registry entries by title
 ## 2026-09-20 — FLL farm v2
 
 Regenerated still with exactly 5 children + 1 adult standing still; I2V prompt gave people zero motion and put the motion budget on wind/chickens/clouds. Frame check: figures hold position across all 81 frames. `raw/clips/fll_farm_v2_final.mp4`. Registry updated; YouTube upload still shows v1.
+
+## 2026-09-21 — Kevin's own I2V attempt (project vid-916) debugged
+
+Symptoms: mid-denoise noise output + 5–9-frame clips. Causes: refiner set to Low Noise **T2V** (not downloaded → skipped), Frames 9, CFG 2.1, "drone camera, people walking" prompt. Fixed via automation; also found that clicking a Version History entry restores that entry's settings. Runbook updated.
