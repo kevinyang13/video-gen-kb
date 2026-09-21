@@ -91,7 +91,8 @@
         "coast_v2_loop.mp4",
         "coast_v2_final.mp4"
       ],
-      "notes": "First run with wrong refiner (6-bit, not downloaded) produced washed-out noise; re-run with 8-bit S."
+      "notes": "First run with wrong refiner (6-bit, not downloaded) produced washed-out noise; re-run with 8-bit S.",
+      "youtube": "W8fy4bhGOEU"
     },
     {
       "id": "torrey",
@@ -118,7 +119,8 @@
         "torrey_loop.mp4",
         "torrey_final.mp4"
       ],
-      "notes": "Second run of the runbook; refiner trap caught by checklist."
+      "notes": "Second run of the runbook; refiner trap caught by checklist.",
+      "youtube": "nRU-Upd2E3o"
     },
     {
       "id": "goldengate",
@@ -140,7 +142,8 @@
         "goldengate_loop.mp4",
         "goldengate_final.mp4"
       ],
-      "notes": "Proved native 576x1024 still is good enough; runbook switched to it. Mac was locked 2.5 h with Save sheet open — render survived."
+      "notes": "Proved native 576x1024 still is good enough; runbook switched to it. Mac was locked 2.5 h with Save sheet open — render survived.",
+      "youtube": "h8ic1_9Q9mI"
     },
     {
       "id": "rainier",
@@ -160,7 +163,8 @@
         "rainier_loop.mp4",
         "rainier_final.mp4"
       ],
-      "notes": "First zero-click run — export Save button pressed by automation."
+      "notes": "First zero-click run — export Save button pressed by automation.",
+      "youtube": "JJB154LbBi0"
     },
     {
       "id": "cyberpunk",
@@ -183,7 +187,8 @@
         "cyberpunk_loop.mp4",
         "cyberpunk_final.mp4"
       ],
-      "notes": "Night scene works with the same style suffix. Music swapped from the calm-ambient default to synthwave on 2026-09-20."
+      "notes": "Night scene works with the same style suffix. Music swapped from the calm-ambient default to synthwave on 2026-09-20.",
+      "youtube": "GrNTNQCqKnk"
     },
     {
       "id": "fll_farm",
@@ -208,7 +213,14 @@
         "fll/crop_rows.webp (reference only)",
         "fll/logo.webp"
       ],
-      "notes": "Kids must be distant, no faces, no close-ups (Kevin's rule). Real photos used only as reference for farm features; a photoreal attempt and a real-photo I2V attempt were both abandoned. Farm details from FLL-kb: berms/swales, elderberry+pomegranate alleys with rotating chickens, sunflower mural shed, trellis netting. v1 (6 kids + adult, 'walking' prompt) had figures teleporting and merging; v2 regenerated with exactly 5+1 standing still and a wind-only motion prompt."
+      "notes": "Kids must be distant, no faces, no close-ups (Kevin's rule). Real photos used only as reference for farm features; a photoreal attempt and a real-photo I2V attempt were both abandoned. Farm details from FLL-kb: berms/swales, elderberry+pomegranate alleys with rotating chickens, sunflower mural shed, trellis netting. v1 (6 kids + adult, 'walking' prompt) had figures teleporting and merging; v2 regenerated with exactly 5+1 standing still and a wind-only motion prompt.",
+      "youtube": "v9-dvUiv4-0",
+      "youtube_note": "uploaded video is v1 (figures teleport); replace with v2 when done"
     }
-  ]
+  ],
+  "playlist": {
+    "title": "AI-Vids",
+    "url": "https://www.youtube.com/playlist?list=PLJx49Sf61wKQ",
+    "id": "PLJx49Sf61wKQ"
+  }
 }

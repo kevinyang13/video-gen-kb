@@ -10,15 +10,20 @@
 
 ## Summary
 
-| # | Project | Date | Status | Still | I2V | Music | Final file |
-|--:|---|---|---|---|---|---|---|
-| 1 | [Coastal wildflowers (v1)](#coast) | 2026-09-20 | superseded by coast_v2 | Wan 2.2 High Noise Expert T2V A14B 576x1280 | Wan 2.2 High Noise 24 min | — | `—` |
-| 2 | [Coastal wildflowers (v2)](#coast_v2) | 2026-09-20 | done | FLUX.2 [klein] 9B 1024x1792 | Wan 2.2 High Noise 15.5 min | Calm Ambient Dreamscape | `coast_v2_final.mp4` |
-| 3 | [Torrey Pines, San Diego](#torrey) | 2026-09-20 | done | FLUX.2 [klein] 9B 1024x1792 | Wan 2.2 High Noise 15 min | Calm Ambient Dreamscape | `torrey_final.mp4` |
-| 4 | [Golden Gate, San Francisco](#goldengate) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Calm Ambient Dreamscape | `goldengate_final.mp4` |
-| 5 | [Mt. Rainier from Paradise](#rainier) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 15.5 min | Calm Ambient Dreamscape | `rainier_final.mp4` |
-| 6 | [Cyberpunk city, rain, neon](#cyberpunk) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Neon Synthwave Drive | `cyberpunk_final.mp4` |
-| 7 | [FLL BOT Builders — Coastal Roots Farm, wide view](#fll_farm) | 2026-09-20 | v2 rendering | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Calm Ambient Dreamscape | `fll_farm_final.mp4` |
+| # | Project | Date | Status | Still | I2V | Music | Final file | YouTube |
+|--:|---|---|---|---|---|---|---|---|
+| 1 | [Coastal wildflowers (v1)](#coast) | 2026-09-20 | superseded by coast_v2 | Wan 2.2 High Noise Expert T2V A14B 576x1280 | Wan 2.2 High Noise 24 min | — | `—` | — |
+| 2 | [Coastal wildflowers (v2)](#coast_v2) | 2026-09-20 | done | FLUX.2 [klein] 9B 1024x1792 | Wan 2.2 High Noise 15.5 min | Calm Ambient Dreamscape | `coast_v2_final.mp4` | [▶ watch](https://youtu.be/W8fy4bhGOEU) |
+| 3 | [Torrey Pines, San Diego](#torrey) | 2026-09-20 | done | FLUX.2 [klein] 9B 1024x1792 | Wan 2.2 High Noise 15 min | Calm Ambient Dreamscape | `torrey_final.mp4` | [▶ watch](https://youtu.be/nRU-Upd2E3o) |
+| 4 | [Golden Gate, San Francisco](#goldengate) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Calm Ambient Dreamscape | `goldengate_final.mp4` | [▶ watch](https://youtu.be/h8ic1_9Q9mI) |
+| 5 | [Mt. Rainier from Paradise](#rainier) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 15.5 min | Calm Ambient Dreamscape | `rainier_final.mp4` | [▶ watch](https://youtu.be/JJB154LbBi0) |
+| 6 | [Cyberpunk city, rain, neon](#cyberpunk) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Neon Synthwave Drive | `cyberpunk_final.mp4` | [▶ watch](https://youtu.be/GrNTNQCqKnk) |
+| 7 | [FLL BOT Builders — Coastal Roots Farm, wide view](#fll_farm) | 2026-09-20 | v2 rendering | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Calm Ambient Dreamscape | `fll_farm_final.mp4` | [▶ watch](https://youtu.be/v9-dvUiv4-0) |
+
+## YouTube playlist — [AI-Vids](https://www.youtube.com/playlist?list=PLJx49Sf61wKQ)
+
+<div class="yt"><iframe src="https://www.youtube.com/embed/videoseries?list=PLJx49Sf61wKQ" title="AI-Vids" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+
 
 ## Defaults (apply unless a record overrides)
 
@@ -113,6 +118,10 @@ Prompt: `static camera, gentle ocean waves rolling onto the shore, grass and wil
 - **Files** (`raw/clips/`): `coast_flux_1024x1792.png`, `coast_flux_576x1024.png`, `coast_v2.mov`, `coast_v2_loop.mp4`, `coast_v2_final.mp4`
 - **Notes**: First run with wrong refiner (6-bit, not downloaded) produced washed-out noise; re-run with 8-bit S.
 
+- **YouTube**: [youtu.be/W8fy4bhGOEU](https://youtu.be/W8fy4bhGOEU)
+
+<div class="yt yt-v"><iframe src="https://www.youtube.com/embed/W8fy4bhGOEU" title="Coastal wildflowers (v2)" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+
 **Still**
 
 | Setting | Value |
@@ -161,6 +170,10 @@ Prompt: `static camera, gentle ocean waves rolling onto the shore, grass and wil
 - **Date**: 2026-09-20 · **Status**: done · **Draw Things project**: `Untitled-91451`
 - **Files** (`raw/clips/`): `torrey_flux_1024x1792.png`, `torrey_flux_576x1024.png`, `torrey.mov`, `torrey_loop.mp4`, `torrey_final.mp4`
 - **Notes**: Second run of the runbook; refiner trap caught by checklist.
+
+- **YouTube**: [youtu.be/nRU-Upd2E3o](https://youtu.be/nRU-Upd2E3o)
+
+<div class="yt yt-v"><iframe src="https://www.youtube.com/embed/nRU-Upd2E3o" title="Torrey Pines, San Diego" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
 **Still**
 
@@ -211,6 +224,10 @@ Prompt: `static camera, gentle ocean waves rolling onto the beach below the clif
 - **Files** (`raw/clips/`): `goldengate.mov`, `goldengate_loop.mp4`, `goldengate_final.mp4`
 - **Notes**: Proved native 576x1024 still is good enough; runbook switched to it. Mac was locked 2.5 h with Save sheet open — render survived.
 
+- **YouTube**: [youtu.be/h8ic1_9Q9mI](https://youtu.be/h8ic1_9Q9mI)
+
+<div class="yt yt-v"><iframe src="https://www.youtube.com/embed/h8ic1_9Q9mI" title="Golden Gate, San Francisco" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+
 **Still**
 
 | Setting | Value |
@@ -259,6 +276,10 @@ Prompt: `static camera, fog slowly drifting under the bridge, gentle waves on th
 - **Files** (`raw/clips/`): `rainier.mov`, `rainier_loop.mp4`, `rainier_final.mp4`
 - **Notes**: First zero-click run — export Save button pressed by automation.
 
+- **YouTube**: [youtu.be/JJB154LbBi0](https://youtu.be/JJB154LbBi0)
+
+<div class="yt yt-v"><iframe src="https://www.youtube.com/embed/JJB154LbBi0" title="Mt. Rainier from Paradise" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+
 **Still**
 
 | Setting | Value |
@@ -306,6 +327,10 @@ Prompt: `static camera, wildflowers and meadow grass swaying in a soft breeze, t
 - **Files** (`raw/clips/`): `cyberpunk.mov`, `cyberpunk_loop.mp4`, `cyberpunk_final.mp4`
 - **Notes**: Night scene works with the same style suffix. Music swapped from the calm-ambient default to synthwave on 2026-09-20.
 
+- **YouTube**: [youtu.be/GrNTNQCqKnk](https://youtu.be/GrNTNQCqKnk)
+
+<div class="yt yt-v"><iframe src="https://www.youtube.com/embed/GrNTNQCqKnk" title="Cyberpunk city, rain, neon" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+
 **Still**
 
 | Setting | Value |
@@ -352,6 +377,10 @@ Prompt: `static camera, rain falling steadily, neon signs flickering and glowing
 - **Date**: 2026-09-20 · **Status**: v2 rendering · **Draw Things project**: `Untitled-91574`
 - **Files** (`raw/clips/`): `fll_farm.mov`, `fll_farm_loop.mp4`, `fll_farm_final.mp4`, `fll/team_entrance.webp (reference only)`, `fll/chickens.webp (reference only)`, `fll/crop_rows.webp (reference only)`, `fll/logo.webp`
 - **Notes**: Kids must be distant, no faces, no close-ups (Kevin's rule). Real photos used only as reference for farm features; a photoreal attempt and a real-photo I2V attempt were both abandoned. Farm details from FLL-kb: berms/swales, elderberry+pomegranate alleys with rotating chickens, sunflower mural shed, trellis netting. v1 (6 kids + adult, 'walking' prompt) had figures teleporting and merging; v2 regenerated with exactly 5+1 standing still and a wind-only motion prompt.
+
+- **YouTube**: [youtu.be/v9-dvUiv4-0](https://youtu.be/v9-dvUiv4-0) *(uploaded video is v1 (figures teleport); replace with v2 when done)*
+
+<div class="yt yt-v"><iframe src="https://www.youtube.com/embed/v9-dvUiv4-0" title="FLL BOT Builders — Coastal Roots Farm, wide view" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
 **Still**
 

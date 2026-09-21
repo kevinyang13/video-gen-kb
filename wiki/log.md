@@ -136,3 +136,7 @@ Added `projects.json` + `scripts/build_projects.py` → `wiki/projects.md` (summ
 ## 2026-09-20 — Cyberpunk music swap
 
 Replaced calm-ambient with "Neon Synthwave Drive" (Pixabay). Registry + runbook music note updated.
+
+## 2026-09-20 — YouTube embeds on the projects page
+
+Playlist "AI-Vids" (PLJx49Sf61wKQ, 6 videos) mapped to registry entries by title via oEmbed. `projects.json` gained `playlist` + per-project `youtube` id; generator emits a playlist iframe under the summary and a 9:16 player on each record. Plain iframes work on GitHub Pages. Note: the uploaded fll farm video is v1.

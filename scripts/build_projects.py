@@ -58,15 +58,21 @@ def main():
         "",
         "## Summary",
         "",
-        "| # | Project | Date | Status | Still | I2V | Music | Final file |",
-        "|--:|---|---|---|---|---|---|---|",
+        "| # | Project | Date | Status | Still | I2V | Music | Final file | YouTube |",
+        "|--:|---|---|---|---|---|---|---|---|",
     ]
     for i, p in enumerate(projects, 1):
         s = merged(defs["still"], p.get("still"))
         v = merged(defs["i2v"], p.get("i2v"))
         m = merged(defs["post"], p.get("post")).get("music") or "—"
         final = next((f for f in p.get("files", []) if f.endswith("_final.mp4")), "—")
-        out.append(f"| {i} | [{p['title']}](#{p['id']}) | {p['date']} | {p['status']} | {s['model'].split(' (')[0]} {s['size'].split(' ')[0]} | {v['model'].split(' Expert')[0]} {v.get('time_min', '?')} min | {m.split(' —')[0].split(' (')[0]} | `{final}` |")
+        yt = f"[▶ watch](https://youtu.be/{p['youtube']})" if p.get("youtube") else "—"
+        out.append(f"| {i} | [{p['title']}](#{p['id']}) | {p['date']} | {p['status']} | {s['model'].split(' (')[0]} {s['size'].split(' ')[0]} | {v['model'].split(' Expert')[0]} {v.get('time_min', '?')} min | {m.split(' —')[0].split(' (')[0]} | `{final}` | {yt} |")
+
+    pl = data.get("playlist")
+    if pl:
+        out += ["", f"## YouTube playlist — [{pl['title']}]({pl['url']})", "",
+                f'<div class="yt"><iframe src="https://www.youtube.com/embed/videoseries?list={pl["id"]}" title="{pl["title"]}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>', ""]
 
     out += ["", "## Defaults (apply unless a record overrides)", "",
             block("Still", defs["still"], None, suffix), "",
@@ -78,7 +84,12 @@ def main():
         out += [f"## {p['title']} {{#{p['id']}}}", "",
                 f"- **Date**: {p['date']} · **Status**: {p['status']} · **Draw Things project**: `{p['dt_project']}`",
                 f"- **Files** (`raw/clips/`): " + ", ".join(f"`{f}`" for f in p.get("files", [])),
-                f"- **Notes**: {p.get('notes', '')}", "",
+                f"- **Notes**: {p.get('notes', '')}", ""]
+        if p.get("youtube"):
+            note = f" *({p['youtube_note']})*" if p.get("youtube_note") else ""
+            out += [f"- **YouTube**: [youtu.be/{p['youtube']}](https://youtu.be/{p['youtube']}){note}", "",
+                    f'<div class="yt yt-v"><iframe src="https://www.youtube.com/embed/{p["youtube"]}" title="{p["title"]}" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>', ""]
+        out += [
                 block("Still", defs["still"], p.get("still"), suffix), "",
                 block("I2V", defs["i2v"], p.get("i2v"), suffix), "",
                 block("Post", defs["post"], p.get("post"), suffix), ""]
