@@ -56,7 +56,7 @@ The generated still is already on the canvas and already fills 576×1024. No exp
 3. Prompt (motion only, never describe the subject):
    `static camera, gentle ocean waves rolling onto the shore, grass and wildflowers swaying in a soft breeze, birds drifting slowly across the sky, clouds moving slowly, subtle motion, minimal movement`
 4. Generate. The overlay must list the Refiner line. ~15 min. Preview at step 2 already shows whether it is working.
-5. Export: 4th toolbar icon → wait ~8 s for the sheet → press **Save** (the sheet remembers the last folder, `raw/clips/`; the filename field rejects automation typing, so accept the prompt-derived default) → `mv raw/clips/static_camera*.mov raw/clips/NAME.mov`. `ffprobe` it: expect 576×1024, 81 frames.
+5. Export: 4th toolbar icon (if the click reports "raw input on AXGroup" it missed — retry at x≈503; a real hit says "AXPress on AXButton") → wait ~8 s for the sheet → press **Save** (the sheet remembers the last folder, `raw/clips/`; the filename field rejects automation typing, so accept the prompt-derived default) → `mv raw/clips/static_camera*.mov raw/clips/NAME.mov`. `ffprobe` it: expect 576×1024, 81 frames.
 
 ## 3. (removed — downscale/reload no longer needed)
 
@@ -79,6 +79,7 @@ Other tracks: Pixabay → press play on a track page → `document.querySelector
 | 2026-09-20 | Torrey Pines, San Diego | 1190544862 | 284526412 | `torrey_*` |
 | 2026-09-20 | Golden Gate, San Francisco (first native-576×1024 run) | — | 601904108 | `goldengate_*` |
 | 2026-09-20 | Mt. Rainier from Paradise (first zero-click run) | — | — | `rainier_*` |
+| 2026-09-20 | Cyberpunk city, rain, neon (night scene) | — | — | `cyberpunk_*` |
 
 ## 5. File in the wiki
 

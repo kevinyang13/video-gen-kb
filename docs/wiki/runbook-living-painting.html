@@ -157,7 +157,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <li>Prompt (motion only, never describe the subject):
    <code>static camera, gentle ocean waves rolling onto the shore, grass and wildflowers swaying in a soft breeze, birds drifting slowly across the sky, clouds moving slowly, subtle motion, minimal movement</code></li>
 <li>Generate. The overlay must list the Refiner line. ~15 min. Preview at step 2 already shows whether it is working.</li>
-<li>Export: 4th toolbar icon → wait ~8 s for the sheet → press <strong>Save</strong> (the sheet remembers the last folder, <code>raw/clips/</code>; the filename field rejects automation typing, so accept the prompt-derived default) → <code>mv raw/clips/static_camera*.mov raw/clips/NAME.mov</code>. <code>ffprobe</code> it: expect 576×1024, 81 frames.</li>
+<li>Export: 4th toolbar icon (if the click reports "raw input on AXGroup" it missed — retry at x≈503; a real hit says "AXPress on AXButton") → wait ~8 s for the sheet → press <strong>Save</strong> (the sheet remembers the last folder, <code>raw/clips/</code>; the filename field rejects automation typing, so accept the prompt-derived default) → <code>mv raw/clips/static_camera*.mov raw/clips/NAME.mov</code>. <code>ffprobe</code> it: expect 576×1024, 81 frames.</li>
 </ol>
 <h2>3. (removed — downscale/reload no longer needed)</h2>
 <h2>4. Loop + music (terminal)</h2>
@@ -205,6 +205,13 @@ scripts/finish_clip.sh raw/clips/NAME.mov raw/clips/calm_ambient_dreamscape.mp3
 <td>—</td>
 <td>—</td>
 <td><code>rainier_*</code></td>
+</tr>
+<tr>
+<td>2026-09-20</td>
+<td>Cyberpunk city, rain, neon (night scene)</td>
+<td>—</td>
+<td>—</td>
+<td><code>cyberpunk_*</code></td>
 </tr>
 </tbody>
 </table></div>

@@ -124,3 +124,7 @@ Still generated directly at 576×1024 with FLUX.2 klein: quality indistinguishab
 ## 2026-09-20 — Mt. Rainier, zero-click run
 
 New project → FLUX still at 576×1024 → Wan I2V from canvas → export sheet Save button pressed by automation → `finish_clip.sh` → `raw/clips/rainier_final.mp4`. No human input at any step. Runbook updated (export step, done-so-far table).
+
+## 2026-09-20 — Cyberpunk city
+
+Fifth video, zero-click. Night/neon scene works with the same style suffix; the Wan motion prompt handled rain + steam + flickering neon. Music mismatch noted (calm ambient on a cyberpunk scene) — next time pick a genre-matched Pixabay track. `raw/clips/cyberpunk_final.mp4`.
