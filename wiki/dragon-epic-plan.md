@@ -63,7 +63,7 @@ Same as the living-painting runbook with three changes for photoreal:
 | Motion prompt | one camera move + one subject action, nothing else | `slow dolly in, the rider turns his head toward the ridge, cloak moving in the wind, embers drifting` — people may move here, but **one** action per shot, and never "walking toward camera" |
 | Shift | 5 | |
 
-Camera moves that Wan 2.2 does well at 4 steps: slow dolly/push, slow pan, orbit ≤ 30°, handheld drift. Avoid: whip pans, fast tracking, anything that reveals new geometry.
+Camera moves that Wan 2.2 does well at 4 steps on **small/mid subjects**: slow dolly/push, slow pan, orbit ≤ 30°, handheld drift. On a **full-frame subject** (dragon filling the shot): no camera move and no subject translation — articulation only (wings, tail, head, cloth); scene 1A v1 ghosted when asked to glide across the frame under a push-in. Get the push-in from a 1.0→1.15 post zoom in ffmpeg or from the cut to the next shot. Avoid always: whip pans, fast tracking, anything that reveals new geometry.
 
 ### 3c. Face pass — FaceFusion (post, optional per shot)
 
@@ -189,7 +189,8 @@ E1–E2 decide the face strategy. E5–E6 decide whether the dragon look is achi
 |--:|---|---|
 | E6 | 2026-09-21 | Scene 1A still at 1280×768 (FLUX klein, first seed) matched the brief. I2V at 1280×768 × 81 f: **~43 min** with the upscaler test sharing the GPU for ~10 min; estimate **~35 min clean**. Twice the 576×1024 cost. |
 | E6 follow-up | 2026-09-21 | **Ghosting** (translucent double dragon head/wing/rider) from ~frame 55 of scene 1A, once the dragon fills the frame. Present in the Wan output, not the upscale. Diagnosis: **Refiner Start 10%** gives the High-Noise expert (motion/layout) ~0.4 of 4 steps — fine for calm landscapes, fails on a large fast subject. Wan 2.2's documented split is 50/50. Fix to test: Refiner Start 50%, LoRA 0.8, gentler motion prompt. |
-| E6 v2 | 2026-09-21 | Refiner 50% + LoRA 80% + gentle prompt → **washed-out noisy silhouette**. Wrong lever: the Lightning LoRA is trained for the 10% split, and at 50% the low-noise expert gets only 2 steps. **Refiner stays at 10%.** v3 plan: 10%, LoRA 100%, motion prompt with no camera move and no "across the frame" — the ghosting in v1 most likely came from asking a full-frame subject to translate a long distance in 5 s. |
+| E6 v2 | 2026-09-21 | Refiner 50% + LoRA 80% + gentle prompt → **washed-out noisy silhouette**. Wrong lever: the Lightning LoRA is trained for the 10% split, and at 50% the low-noise expert gets only 2 steps. **Refiner stays at 10%.** v3 plan: 10%, LoRA 100%, motion prompt with no camera move and no "across the frame". |
+| E6 v3 | 2026-09-21 | **Clean.** Refiner 10%, LoRA 100%, UniPC, shift 5, prompt: `the dragon hangs in the air with slow deep wing beats, its body and head steady in the frame, the rider sitting still, the distant dragon slowly beating its wings…`. 47 min render. No ghosting; wing beat, tail curl, subtle drift. **Rule: on Wan 2.2 at 4 steps, a full-frame subject may articulate (wings, tail, head) but must not translate across the frame; leave the push-in to the edit (cut 1A→1B) or to a post zoom.** 4K: `dragon/scene1a_v3_4k.mp4`. |
 | E8 (part) | 2026-09-21 | **Real-ESRGAN ncnn (x4plus)** works on Metal with `-t 128 -j 1:1:1`, run from its own directory (models path is cwd-relative); auto/256 tile segfaults. **81 frames at 1280×768 → 4K in 5.6 min** on a free GPU. 1:1 comparison vs lanczos: scale ridges and spine edges resolve, no ringing. Script: `scripts/upscale_4k.sh` → HEVC 10-bit 40 Mbps. **Good enough to ship**; SeedVR2 only if flicker shows up on motion. First 4K clip: `raw/clips/dragon/scene1a_4k.mp4`. |
 
 ## 8. Budget

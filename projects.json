@@ -233,8 +233,10 @@
       "i2v": {
         "size": "1280x768",
         "prompt": "per shot — one camera move + one subject action",
-        "time_min": 43,
-        "scene1a_prompt": "slow push in, the dragon glides across the frame from left to right with slow powerful wing beats, the rider holding steady on its neck, the distant dragon drifting slowly behind in the haze, sun glitter shimmering on the sea, thin clouds drifting, camera slowly tightening, cinematic, photorealistic"
+        "time_min": 47,
+        "scene1a_prompt": "the dragon hangs in the air with slow deep wing beats, its body and head steady in the frame, the rider sitting still, the distant dragon slowly beating its wings in the haze, sun glitter shimmering on the sea, clouds drifting very slowly, subtle motion, cinematic, photorealistic",
+        "sampler": "UniPC Trailing",
+        "shift": 5.0
       },
       "post": {
         "script": "scripts/assemble_film.sh (to write)",
@@ -243,11 +245,12 @@
         "music": "TBD — orchestral epic + SFX"
       },
       "files": [
-        "dragon/scene1a.mov",
-        "dragon/scene1a_4k.mp4",
-        "dragon/scene1a_4k_preview720.mp4"
+        "dragon/scene1a_v3.mov",
+        "dragon/scene1a_v3_4k.mp4",
+        "dragon/scene1a.mov (v1, ghosting)",
+        "dragon/scene1a_4k.mp4 (v1)"
       ],
-      "notes": "Plan page: wiki/dragon-epic-plan.md. Experiments E1–E7 must pass before rendering the shot list. Needs face photos in raw/face/. Delivery is 4K UHD."
+      "notes": "Plan page: wiki/dragon-epic-plan.md. Experiments E1–E7 must pass before rendering the shot list. Needs face photos in raw/face/. Delivery is 4K UHD. Scene 1A: v1 ghosted (push-in + translation), v2 noise (refiner 50%), v3 clean (10%, articulation-only prompt)."
     },
     {
       "id": "film3min",

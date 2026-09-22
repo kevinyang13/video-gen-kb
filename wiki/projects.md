@@ -19,7 +19,7 @@
 | 5 | [Mt. Rainier from Paradise](#rainier) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 15.5 min | Calm Ambient Dreamscape | `rainier_final.mp4` | [▶ watch](https://youtu.be/JJB154LbBi0) |
 | 6 | [Cyberpunk city, rain, neon](#cyberpunk) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Neon Synthwave Drive | `cyberpunk_final.mp4` | [▶ watch](https://youtu.be/GrNTNQCqKnk) |
 | 7 | [FLL BOT Builders — Coastal Roots Farm, wide view](#fll_farm) | 2026-09-20 | done (v2) | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Calm Ambient Dreamscape | `fll_farm_v2_final.mp4` | [▶ watch](https://youtu.be/-Mf2UThasCg) |
-| 8 | [Dragon Epic — 1-minute photoreal short with Kevin's face](#dragon_epic) | 2026-09-21 | in progress — scene 1A done | FLUX.2 [klein] 9B 1280x768 | Wan 2.2 High Noise 43 min | TBD | `—` | — |
+| 8 | [Dragon Epic — 1-minute photoreal short with Kevin's face](#dragon_epic) | 2026-09-21 | in progress — scene 1A done | FLUX.2 [klein] 9B 1280x768 | Wan 2.2 High Noise 47 min | TBD | `—` | — |
 | 9 | [Three-minute film — recurring characters (subject TBD)](#film3min) | 2026-09-21 | planning | FLUX.2 [klein] 9B 1024x576 | Wan 2.2 High Noise 15 min | TBD | `—` | — |
 
 ## YouTube playlist — [AI-Vids](https://www.youtube.com/playlist?list=PLJx49Sf61wKQ)
@@ -428,8 +428,8 @@ Prompt: `static camera, the six people stand completely still in place, tree bra
 ## Dragon Epic — 1-minute photoreal short with Kevin's face {#dragon_epic}
 
 - **Date**: 2026-09-21 · **Status**: in progress — scene 1A done · **Draw Things project**: `Untitled-35325`
-- **Files** (`raw/clips/`): `dragon/scene1a.mov`, `dragon/scene1a_4k.mp4`, `dragon/scene1a_4k_preview720.mp4`
-- **Notes**: Plan page: wiki/dragon-epic-plan.md. Experiments E1–E7 must pass before rendering the shot list. Needs face photos in raw/face/. Delivery is 4K UHD.
+- **Files** (`raw/clips/`): `dragon/scene1a_v3.mov`, `dragon/scene1a_v3_4k.mp4`, `dragon/scene1a.mov (v1, ghosting)`, `dragon/scene1a_4k.mp4 (v1)`
+- **Notes**: Plan page: wiki/dragon-epic-plan.md. Experiments E1–E7 must pass before rendering the shot list. Needs face photos in raw/face/. Delivery is 4K UHD. Scene 1A: v1 ghosted (push-in + translation), v2 noise (refiner 50%), v3 clean (10%, articulation-only prompt).
 
 **Still**
 
@@ -456,10 +456,10 @@ Prompt: `per shot — see wiki/dragon-epic-plan.md §6`
 | FPS | 16 |
 | Steps | 4 |
 | CFG | 1.0 |
-| Shift | 4.95 |
-| Sampler | DDIM Trailing |
+| Shift | 5.0 |
+| Sampler | UniPC Trailing |
 | Strength | 100% |
-| I2V time (min) | 43 |
+| I2V time (min) | 47 |
 
 Prompt: `per shot — one camera move + one subject action`
 

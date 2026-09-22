@@ -184,3 +184,7 @@ Filed the Q&A on *why* consistency tools work: `wiki/identity-conditioning.md` (
 ## 2026-09-21 — 3D infographic for the landscape page
 
 Built an isometric "four-layer stack" infographic of `video-generation-landscape` (models → harnesses → local apps → platforms, gold outlines = this project's path). Source is CSS-3D HTML in `scripts/infographics/video-generation-landscape.html`, rendered by `scripts/render_infographic.sh` (headless Chrome, 2×) to `wiki/assets/video-generation-landscape-3d.webp` (~390 KB). Not a generative-model image — content mirrors the page's tables. **Changed**: `build_site.py` now copies `wiki/assets/` → `docs/wiki/assets/` and styles `img`; page embeds the image above "How to read this page"; `CLAUDE.md` folder list.
+
+## 2026-09-21 — Scene 1A v3 clean at 4K
+
+Ghosting fixed by the prompt, not the refiner: full-frame subject articulates but does not translate. Rule added to plan §3b. `raw/clips/dragon/scene1a_v3_4k.mp4`.

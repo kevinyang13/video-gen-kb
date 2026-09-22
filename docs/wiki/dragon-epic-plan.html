@@ -225,7 +225,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </tr>
 </tbody>
 </table></div>
-<p>Camera moves that Wan 2.2 does well at 4 steps: slow dolly/push, slow pan, orbit ≤ 30°, handheld drift. Avoid: whip pans, fast tracking, anything that reveals new geometry.</p>
+<p>Camera moves that Wan 2.2 does well at 4 steps on <strong>small/mid subjects</strong>: slow dolly/push, slow pan, orbit ≤ 30°, handheld drift. On a <strong>full-frame subject</strong> (dragon filling the shot): no camera move and no subject translation — articulation only (wings, tail, head, cloth); scene 1A v1 ghosted when asked to glide across the frame under a push-in. Get the push-in from a 1.0→1.15 post zoom in ffmpeg or from the cut to the next shot. Avoid always: whip pans, fast tracking, anything that reveals new geometry.</p>
 <h3>3c. Face pass — FaceFusion (post, optional per shot)</h3>
 <p>For shots where the hero's face is larger than ~120 px tall, run FaceFusion on the 5 s clip with one reference photo of Kevin, face-enhancer on. It re-locks identity that I2V softened. Runs on Apple Silicon via CoreML <em>(verify install: <code>pip install facefusion</code> or the standalone app)</em>. Do it <strong>before</strong> upscaling.</p>
 <h3>3d. Upscale to 4K — the step that makes "4K" true</h3>
@@ -596,7 +596,12 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <tr>
 <td style="text-align: right;">E6 v2</td>
 <td>2026-09-21</td>
-<td>Refiner 50% + LoRA 80% + gentle prompt → <strong>washed-out noisy silhouette</strong>. Wrong lever: the Lightning LoRA is trained for the 10% split, and at 50% the low-noise expert gets only 2 steps. <strong>Refiner stays at 10%.</strong> v3 plan: 10%, LoRA 100%, motion prompt with no camera move and no "across the frame" — the ghosting in v1 most likely came from asking a full-frame subject to translate a long distance in 5 s.</td>
+<td>Refiner 50% + LoRA 80% + gentle prompt → <strong>washed-out noisy silhouette</strong>. Wrong lever: the Lightning LoRA is trained for the 10% split, and at 50% the low-noise expert gets only 2 steps. <strong>Refiner stays at 10%.</strong> v3 plan: 10%, LoRA 100%, motion prompt with no camera move and no "across the frame".</td>
+</tr>
+<tr>
+<td style="text-align: right;">E6 v3</td>
+<td>2026-09-21</td>
+<td><strong>Clean.</strong> Refiner 10%, LoRA 100%, UniPC, shift 5, prompt: <code>the dragon hangs in the air with slow deep wing beats, its body and head steady in the frame, the rider sitting still, the distant dragon slowly beating its wings…</code>. 47 min render. No ghosting; wing beat, tail curl, subtle drift. <strong>Rule: on Wan 2.2 at 4 steps, a full-frame subject may articulate (wings, tail, head) but must not translate across the frame; leave the push-in to the edit (cut 1A→1B) or to a post zoom.</strong> 4K: <code>dragon/scene1a_v3_4k.mp4</code>.</td>
 </tr>
 <tr>
 <td style="text-align: right;">E8 (part)</td>
