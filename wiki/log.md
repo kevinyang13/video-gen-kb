@@ -240,3 +240,7 @@ Kevin asked for a rename path that doesn't need desktop takeover. Found: project
 ## 2026-09-22 — Lost City overnight batch: shot 7 done, s8–s12 queued
 
 Shot 7 rear-view anatomy failures solved by switching to the side-profile framing that worked on shot 1 (rules in plan §7b). LTX frame slider maxes at 249 (10 s) — rendered in ~20 min, same as 97 f, so 10 s is now the default clip length. New `dt_project.sh clone` copies a closed project's DB (history + Moodboard refs) so new scenes need no drag; the app must be restarted after cloning or it treats the copy as empty. s8 (gallop) still keeper on seed 1, LTX running; s9 jump, s10 drink, s11 dismount, s12 mount queued.
+
+## 2026-09-22 — Lost City batch: s8, s9, s10 done; s11 blocked
+
+s8 gallop and s10 drinking finished at 4K with music; s9 jump trimmed to its clean 4.6 s. Two crashes traced to `ImageHistoryManager.pushHistory` when saving a video into a **cloned** project — fresh projects fixed it. New rules in the plan: slow in-place actions hold the creature design for a full 10 s clip, fast locomotion drifts after ~4–5 s; never upscale while LTX renders; the screen lock blocks all automation (disable auto-lock for unattended batches). s11 dismount blocked: klein renders two creatures for any "rider beside the mount" phrasing, negations don't help.

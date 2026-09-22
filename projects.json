@@ -283,8 +283,8 @@
       "id": "lost_city",
       "title": "Lost City — hyper-real rider on a raptor-dragon entering jungle ruins",
       "date": "2026-09-21",
-      "dt_project": "lostcity-s1, s2 (shot 2), s3, s7, s8–s12 (cloned from s7 via dt_project.sh clone)",
-      "status": "in progress — overnight batch: s7 done (10 s); s8 running; s9–s12 queued",
+      "dt_project": "lostcity-s1, s2, s3, s7 (named); s8, s9 (cloned — clone crashes on video save); s10 and s11 in fresh Untitled projects",
+      "status": "in progress — clips at 4K+music: s2, s3, s7, s8, s10; s9 trimmed (4.6 s, drift after); s11 stills rejected (klein duplicates the creature); s12 not started",
       "still": {
         "model": "FLUX.2 [klein] 9B (8-bit S)",
         "size": "1280x768",
@@ -334,7 +334,7 @@
           "steps": 8,
           "cfg": 1.0,
           "time_min": 20,
-          "note": "249 is the Draw Things frame-slider max for LTX (~10 s). 20 s in one pass is not possible in DT."
+          "note": "249 f is the slider max at 1024×576 (~10 s, ~20 min). 257 f (8k+1) also works. Slow actions (walk, drink, weight shift) hold the creature design for the full clip; fast actions (gallop, jump) drift toward a horse after ~4–5 s — trim or keep those shots short."
         }
       },
       "post": {
@@ -361,7 +361,10 @@
         "lostcity/s7_still_v1.png (side profile, anatomy OK)",
         "lostcity/s7_ltx_v1.mov (LTX 1024x576x249 @25fps)",
         "lostcity/s7_ltx_v1_4k_music.mp4",
-        "lostcity/s8_still_v1.png (gallop)"
+        "lostcity/s8_still_v1.png (gallop)",
+        "lostcity/s8_ltx_v1.mov + s8_ltx_v1_4k_music.mp4 (gallop, 10 s)",
+        "lostcity/s9_still_v1.png, s9_ltx_v1.mov (jump; drifts after ~4.6 s), s9_ltx_v1_trim.mov (clean 116 f)",
+        "lostcity/s10_still_v1.png, s10_ltx_v1.mov, s10_ltx_v1_4k_music.mp4 (drinking, 10.3 s, holds design)"
       ],
       "notes": "Plan: wiki/lost-city-plan.md. Reference is an OpenArt render (closed model, unknown); we re-generate our own frame. 8 shots × 5 s first. Experiments L0–L6 gate rendering; L1 = first LTX-2.3 test on this Mac."
     }
