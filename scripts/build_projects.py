@@ -96,6 +96,25 @@ def main():
                 block("Still", defs["still"], p.get("still"), suffix), "",
                 block("I2V", defs["i2v"], p.get("i2v"), suffix), "",
                 block("Post", defs["post"], p.get("post"), suffix), ""]
+        if p.get("scenes"):
+            sc = p["scenes"]
+            out += ["### Scene prompts", ""]
+            if "locks" in sc:
+                L = sc["locks"]
+                out += ["**Locks** (paste verbatim into every prompt):", ""]
+                for k in ("style_head", "creature", "rider", "style_tail"):
+                    if L.get(k): out += [f"- *{k.replace('_', ' ')}* — {L[k]}"]
+                if L.get("rules"): out += ["", f"**Rules**: {L['rules']}", ""]
+            for key in [k for k in sc if k != "locks"]:
+                v = sc[key]
+                out += ["", f"#### {key} — {v.get('title', '')}", ""]
+                if v.get("engine"): out += [f"- **Engine**: {v['engine']}"]
+                if v.get("files"): out += [f"- **Files** (`raw/clips/lostcity/`): {v['files']}"]
+                if v.get("note"): out += [f"- **Note**: {v['note']}"]
+                if v.get("still"): out += ["", "*Still prompt*", "", f"> {v['still']}"]
+                for label, k in (("Video prompt", "video"), ("Video prompt (Wan)", "video_wan"), ("Video prompt (LTX)", "video_ltx")):
+                    if v.get(k): out += ["", f"*{label}*", "", f"> {v[k]}"]
+                out += [""]
 
     out += ["## Related pages", "- [[runbook-living-painting]]", "- [[living-painting-loop]]", "- [[draw-things-setup]]", ""]
     OUT.write_text("\n".join(out), encoding="utf-8")

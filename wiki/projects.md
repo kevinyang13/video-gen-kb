@@ -540,7 +540,7 @@ Prompt: `per shot — one camera move + one subject action`
 | Shift | 3 |
 | Sampler | DDIM Trailing |
 
-Prompt: `see wiki/lost-city-plan.md §5 — camera/lens/light → planes far-to-near → creature lock → hero lock; muted colours, low contrast, film grain`
+Prompt: `per scene — see the scenes table (locks + still/video prompt for every shot)`
 
 **I2V**
 
@@ -559,7 +559,7 @@ Prompt: `see wiki/lost-city-plan.md §5 — camera/lens/light → planes far-to-
 | Strength | 100% |
 | I2V time (min) | 49 |
 
-Prompt: `tracking shot alongside the walking rider, rider kept centred; heavy four-legged gait; waterfall, mist through god rays, distant birds`
+Prompt: `per scene — see the scenes table`
 
 **Post**
 
@@ -569,6 +569,149 @@ Prompt: `tracking shot alongside the walking rider, rider kept centred; heavy fo
 | Loop | none — xfade concat |
 | Upscale | scripts/upscale_4k.sh — Real-ESRGAN x4plus → 3840x2160 HEVC 10-bit |
 | Music | Mystical orchestral theme with ancient flute — DesiFreeMusic, Pixabay (cdn.pixabay.com/audio/2025/07/12/audio_fb278af2ae.mp3), 4:00, steady −15 dB from 0 s, dips at 80 s and 200 s |
+
+### Scene prompts
+
+**Locks** (paste verbatim into every prompt):
+
+- *style head* — Cinematic film still, anamorphic 35mm, eye-level side view, muted colours, low contrast, subtle film grain.
+- *creature* — a large quadrupedal raptor-like reptile mount, no wings, slate-grey ridged hide, long neck with a bony horn crest, small amber eyes, leather saddle with reins and a brown satchel, walking on two heavy hind legs and two smaller forelegs
+- *rider* — a lone rider, grey-green hooded cloak, brown leather jerkin, tan trousers, tall boots
+- *style tail* — Layered atmospheric perspective, photorealistic, highly detailed, natural overcast light with warm sun breaks.
+
+**Rules**: Never write 'dragon' (grows wings) or 'two-legged' (breaks legs). Quadruped wording only. Side/three-quarter framing — rear-view low angles fail. Moodboard refs must be crops, never a full wide frame.
+
+
+#### s1 — Side view, rider + creature walk toward the city (reference frame)
+
+- **Engine**: LTX-2.3 1024x576 x97
+- **Files** (`raw/clips/lostcity/`): s1_still_v1.png, s1_ltx_v1.mov, s1_ltx_v1_4k_audio.mp4
+
+*Still prompt*
+
+> see wiki/lost-city-plan.md §5 — camera/lens/light → planes far-to-near → creature lock → hero lock; muted colours, low contrast, film grain
+
+*Video prompt*
+
+> The creature walks slowly from left to right with a heavy four-legged gait, its head bobbing and tail swaying, while the camera tracks alongside at the same pace so the rider stays centred in frame. The rider sways gently in the saddle, the cloak lifting in a light breeze. Behind them the waterfall pours steadily and thin mist drifts through the shafts of light; two birds glide across the distant spires. Heavy footsteps on damp earth, the far roar of the waterfall, faint jungle birdsong, no music.
+
+
+#### s2 — Extreme wide from a ledge, tiny rider on the path
+
+- **Engine**: both — Wan 2.2 1280x768 x81 and LTX 1024x576 x97
+- **Files** (`raw/clips/lostcity/`): s2_still_v1.png, s2_wan_v1_4k.mp4, s2_ltx_v1_4k_audio.mp4
+
+*Still prompt*
+
+> Cinematic film still, anamorphic 35mm, extreme wide establishing shot from a high mossy ledge, muted colours, low contrast, subtle film grain. Below and beyond, a lost city of tall eroded sandstone spires and ziggurat towers swallowed by jungle stretches to the horizon through layered morning haze, a stone arch bridge and a white waterfall between the towers, soft volumetric god rays breaking through thin cloud. A narrow dirt path winds down from the ledge toward the city; on it, very small in the frame, a lone hooded rider on a large wingless quadrupedal raptor-like dragon walks toward the city, seen from behind. Ferns and a broken stone column in the foreground on the ledge, palms and mossy blocks in the middle distance, birds tiny in the sky. Layered atmospheric perspective, photorealistic, highly detailed, natural overcast light with warm sun breaks.
+
+*Video prompt (Wan)*
+
+> very slow push in, the camera drifting gently forward toward the city, mist drifting slowly through the god rays, the waterfall flowing steadily, thin clouds moving very slowly, ferns and palm fronds swaying in a light breeze, tiny birds gliding across the distant sky, the small rider and creature walking slowly along the path away from the camera, subtle motion, smooth, cinematic, photorealistic
+
+*Video prompt (LTX)*
+
+> The camera pushes in very slowly and steadily toward the distant city, the mossy columns in the foreground drifting past the edges of the frame. The small rider and creature walk slowly down the dirt path away from the camera toward the city. Mist drifts through the shafts of light, the waterfall pours steadily under the stone arch, ferns and palm fronds sway in a light breeze, and tiny birds glide across the sky above the spires. Wind through jungle leaves, the distant hush of the waterfall, faint birdsong, no music. Photorealistic, cinematic, smooth motion.
+
+
+#### s3 — Low angle, creature's feet on wet flagstones
+
+- **Engine**: LTX 1024x576 x97
+- **Files** (`raw/clips/lostcity/`): s3_still_v1.png, s3_ltx_v2_4k_music.mp4
+- **Note**: v1 asked for one step forward — it walked out of frame and hallucinated a second rider. Close-ups need hold-position wording.
+
+*Still prompt*
+
+> Cinematic film still, anamorphic 35mm, very low camera angle at ground level on a wet jungle path, muted colours, low contrast, subtle film grain. Filling the frame, the heavy clawed feet and thick scaled legs of a large saddled raptor-like reptile mount, a wingless two-legged theropod with slate-grey ridged hide, planted on wet mossy flagstones, water pooled between the stones, ferns and tall grass in the near foreground, the rider's boot in a stirrup and a hanging brown satchel visible above. Behind, out of focus, mossy carved blocks and the haze of a lost city with soft god rays. Shallow depth of field, layered atmospheric perspective, photorealistic, highly detailed, natural overcast light with warm sun breaks.
+
+*Video prompt*
+
+> Fixed camera, low on the wet stone path. The creature stands still in place and does not walk; it only shifts its weight from one foot to the other, the claws flexing on the wet flagstones, small ripples spreading in the pooled water, the thick scaled legs tensing, the tail swaying slowly. The rider's boot rocks gently in the stirrup and the satchel sways. Ferns and grass in the foreground move in a light breeze, mist drifts through the god rays behind. The path behind stays empty. Water dripping, leather creaking, wind in the leaves, faint birdsong, no music. Photorealistic, cinematic, subtle smooth motion.
+
+
+#### s7 — Canyon, side profile walking through the spires
+
+- **Engine**: LTX 1024x576 x249 (10 s)
+- **Files** (`raw/clips/lostcity/`): s7_still_v1.png, s7_ltx_v1_4k_music.mp4
+- **Note**: Six rear-view attempts failed on anatomy before switching to this side framing.
+
+*Still prompt*
+
+> Cinematic film still, anamorphic 35mm, eye-level side view, muted colours, low contrast, subtle film grain. Inside a narrow canyon between colossal eroded sandstone spires and ziggurat towers of a lost city, soft volumetric god rays pouring down through morning haze, dust drifting in the light, vines and moss hanging from the carved stone walls. In the centre, walking left to right along a dirt path, a large quadrupedal raptor-like reptile mount, no wings, slate-grey ridged hide, long neck with a bony horn crest, small amber eyes, leather saddle with reins and a brown satchel, walking on two heavy hind legs and two smaller forelegs. On its back a lone rider seen from the side, grey-green hooded cloak, brown leather jerkin, tan trousers, tall boots, hands on the reins, looking up at the towers. Ferns and broken carved blocks in the foreground, tiny birds high in the sky. Layered atmospheric perspective, photorealistic, highly detailed, natural overcast light with warm sun breaks.
+
+*Video prompt*
+
+> The camera holds a steady low side view as the creature walks slowly from left to right through the canyon with a heavy four-legged gait, its head bobbing gently and tail swaying, staying in the centre of the frame while the carved stone walls drift past behind it. The rider sways in the saddle, cloak lifting in a light breeze, looking up at the towers. Dust and pollen drift through the shafts of light, mist rolls slowly along the ground, ferns sway, tiny birds cross the sky. Heavy footsteps on packed earth, leather creaking, wind in the vines, faint jungle birdsong, no music.
+
+
+#### s8 — Running — full gallop across a clearing
+
+- **Engine**: LTX 1024x576 x249
+- **Files** (`raw/clips/lostcity/`): s8_still_v1.png, s8_ltx_v1_4k_music.mp4
+
+*Still prompt*
+
+> Cinematic film still, anamorphic 35mm, eye-level side view, muted colours, low contrast, subtle film grain. An open jungle clearing beside the lost city, eroded sandstone spires and ziggurat towers soft in the haze behind, god rays through thin cloud. In the centre, galloping left to right at full stride in side profile, a large quadrupedal raptor-like reptile mount, no wings, slate-grey ridged hide, long neck with a bony horn crest, small amber eyes, leather saddle with reins and a brown satchel, all four legs in a running gallop with the heavy hind legs driving and the smaller forelegs reaching forward, dust kicked up behind it, on two heavy hind legs and two smaller forelegs. On its back a lone rider leaning low over the neck holding the reins, grey-green hooded cloak streaming straight back, brown leather jerkin, tan trousers, tall boots. Ferns and tall grass in the foreground, tiny birds high in the sky. Motion, energy, Layered atmospheric perspective, photorealistic, highly detailed, natural overcast light with warm sun breaks.
+
+*Video prompt*
+
+> The creature gallops at full speed from left to right across the clearing with a powerful four-legged running gait, hind legs driving and forelegs reaching, dust bursting up behind each stride, while the camera tracks alongside at the same speed keeping the creature and rider centred in the frame as the ruins and jungle rush past behind. The rider stays low over the neck, cloak whipping straight back. Grass and ferns blur past in the foreground, birds scatter from the trees. Pounding heavy footfalls, rushing wind, leather creaking, distant birds, no music.
+
+
+#### s9 — Jumping — leap over a fallen pillar
+
+- **Engine**: LTX 1024x576 x249
+- **Files** (`raw/clips/lostcity/`): s9_still_v1.png, s9_ltx_v1.mov, s9_ltx_v1_trim.mov
+- **Note**: Creature morphs toward a horse after ~frame 115 (4.6 s) — trimmed there.
+
+*Still prompt*
+
+> Cinematic film still, anamorphic 35mm, eye-level side view, muted colours, low contrast, subtle film grain. A jungle path beside the lost city, spires and ziggurat towers in the haze behind, god rays through morning mist. In the centre, caught mid-leap in side profile over a fallen mossy stone pillar lying across the path, a large quadrupedal raptor-like reptile mount, no wings, slate-grey ridged hide, long neck with a bony horn crest, small amber eyes, leather saddle with reins and a brown satchel, walking on two heavy hind legs and two smaller forelegs, its heavy hind legs extended behind from the push-off and its smaller forelegs tucked up, body arched in the air above the pillar. On its back a lone rider crouched low in the saddle gripping the reins, grey-green hooded cloak flaring, brown leather jerkin, tan trousers, tall boots. Ferns and broken carved blocks in the foreground, tiny birds high in the sky. Motion, Layered atmospheric perspective, photorealistic, highly detailed, natural overcast light with warm sun breaks.
+
+*Video prompt*
+
+> The creature completes its leap over the fallen stone pillar, forelegs reaching down and hind legs swinging under it, lands on the far side with a puff of dust and runs on a few strides before slowing to a walk, while the camera tracks alongside at the same pace keeping the creature and rider centred in frame. The rider absorbs the landing, rising and settling in the saddle, cloak snapping. Dust bursts at the landing, ferns shake, birds scatter. A heavy thudding landing, pounding footfalls, leather creaking, distant birdsong, no music.
+
+
+#### s10 — Drinking at a jungle pool
+
+- **Engine**: LTX 1024x576 x257 (10.3 s)
+- **Files** (`raw/clips/lostcity/`): s10_still_v1.png, s10_ltx_v1_4k_music.mp4
+- **Note**: Best of the batch — design holds the full clip.
+
+*Still prompt*
+
+> Cinematic film still, anamorphic 35mm, eye-level side view, muted colours, low contrast, subtle film grain. A still jungle pool below a small waterfall at the edge of the lost city, mossy carved blocks and ferns around the water, eroded sandstone spires in the haze behind, god rays through the canopy. At the water's edge in side profile, a large quadrupedal raptor-like reptile mount, no wings, slate-grey ridged hide, long neck with a bony horn crest, small amber eyes, leather saddle with reins and a brown satchel, walking on two heavy hind legs and two smaller forelegs with its neck lowered and its muzzle touching the water, ripples spreading across the surface, its reflection in the pool. On its back a lone rider, grey-green hooded cloak, brown leather jerkin, tan trousers, tall boots, sitting relaxed in the saddle looking around. Layered atmospheric perspective, photorealistic, highly detailed, natural overcast light with warm sun breaks.
+
+*Video prompt*
+
+> Fixed camera on the pool. The creature stands in place at the water's edge and drinks, lowering its muzzle to the surface and lifting its head slowly with water dripping from its jaw, then lowering it again, its throat working as it swallows, tail swaying gently. The rider sits relaxed in the saddle and turns his head to look around at the ruins. Ripples spread across the pool and settle, the waterfall pours steadily behind, mist drifts, ferns move in a light breeze. Water lapping and dripping, the hush of the waterfall, leather creaking, faint birdsong, no music.
+
+
+#### s11 — Dismount (blocked)
+
+- **Engine**: not rendered
+
+*Still prompt*
+
+> Three variants tried, all rendered two creatures; see plan §7b. Latest: 'Solo portrait of one animal: a single large quadrupedal raptor-like reptile mount standing still in full side profile ... A man stands on the ground in front of its shoulder with his back to the camera, reaching up to the saddle strap ... No other animals, no second creature, empty path behind.'
+
+*Video prompt*
+
+> planned: The rider swings the leg over and steps down to the ground beside the creature, landing on both feet and patting its flank; the creature stands still, head turning to look at the rider.
+
+
+#### s12 — Mount up (not started)
+
+- **Engine**: not rendered
+
+*Still prompt*
+
+> planned: rider standing beside the creature with one boot in the stirrup and both hands on the saddle, about to swing up.
+
+*Video prompt*
+
+> planned: The rider pushes up from the stirrup, swings the leg over and settles into the saddle, gathering the reins; the creature shifts its weight and raises its head.
 
 ## Related pages
 - [[runbook-living-painting]]
