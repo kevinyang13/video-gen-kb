@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scripts Reference — video-gen-kb</title>
+<style>
+:root{--bg:#0B0D12;--panel:#141822;--panel-2:#1B2130;--stroke:#2A3245;--text:#E6E9F0;
+--muted:#8B94A7;--accent:#F5B84B;--accent-2:#4BC9F5;--on-accent:#12131A;
+--rule:rgba(139,148,167,.22);--code:#F5B84B}
+@media(prefers-color-scheme:light){:root:not([data-theme=dark]){--bg:#F4F1EA;--panel:#fff;
+--panel-2:#FAF8F3;--stroke:#D9D3C6;--text:#16181F;--muted:#5D6473;--accent:#B8781A;
+--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}}
+:root[data-theme=light]{--bg:#F4F1EA;--panel:#fff;--panel-2:#FAF8F3;--stroke:#D9D3C6;
+--text:#16181F;--muted:#5D6473;--accent:#B8781A;--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);
+line-height:1.65;padding:0 1rem 4rem}
+.shell{max-width:840px;margin:0 auto}
+a{color:var(--accent);text-decoration:none;font-weight:600}
+a:hover{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--accent-2);outline-offset:3px;border-radius:4px}
+.bar{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;padding:1.1rem 0;margin-bottom:1.5rem;
+border-bottom:1px solid var(--stroke)}
+.crumb{font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.spacer{flex:1}
+.pill{border:1px solid var(--stroke);background:var(--panel);border-radius:999px;padding:.28rem .8rem;
+font-size:.75rem;font-weight:700;color:var(--text);cursor:pointer;font-family:inherit}
+.pill:hover{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+h1{font-size:clamp(1.7rem,5vw,2.5rem);margin:.2rem 0 1rem;line-height:1.1;letter-spacing:-.015em;text-wrap:balance}
+h2{font-size:1.25rem;margin:2.2rem 0 .7rem;padding-bottom:.35rem;border-bottom:1px solid var(--rule);text-wrap:balance}
+h3{font-size:1.02rem;margin:1.5rem 0 .5rem;color:var(--accent)}
+p{margin:.7rem 0}
+ul,ol{margin:.7rem 0 .7rem 1.3rem}
+li{margin:.28rem 0}
+li::marker{color:var(--accent)}
+em{color:var(--muted)}
+hr{border:none;border-top:1px solid var(--stroke);margin:2rem 0}
+blockquote{border-left:3px solid var(--accent);background:var(--panel);border-radius:0 10px 10px 0;
+padding:.8rem 1.1rem;margin:1.1rem 0;color:var(--muted);font-size:.92rem}
+code{background:var(--panel);border:1px solid var(--stroke);border-radius:5px;padding:.1rem .35rem;
+font-size:.85em;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--code)}
+img{max-width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--stroke);margin:1.1rem 0}
+pre{background:var(--panel);border:1px solid var(--stroke);border-radius:12px;padding:1rem;overflow-x:auto;margin:1.1rem 0}
+pre code{background:none;border:none;padding:0;color:var(--text);font-size:.83rem;line-height:1.55}
+.tw{overflow-x:auto;border:1px solid var(--stroke);border-radius:12px;background:var(--panel);margin:1.1rem 0}
+table{width:100%;border-collapse:collapse;font-size:.85rem;min-width:min(100%,460px)}
+th{background:var(--panel-2);color:var(--accent);text-align:left;padding:.55rem .8rem;font-size:.68rem;
+letter-spacing:.09em;text-transform:uppercase;white-space:nowrap;border-bottom:1px solid var(--stroke)}
+td{padding:.5rem .8rem;border-bottom:1px solid var(--rule);color:var(--muted);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td strong{color:var(--text)}
+.meta{display:flex;flex-wrap:wrap;gap:.4rem .9rem;font-size:.78rem;color:var(--muted);margin:-.4rem 0 1.2rem}
+.meta b{color:var(--text);font-weight:600}
+.missing{color:var(--muted);border-bottom:1px dashed var(--muted);cursor:help}
+.related{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--stroke)}
+.related h2{border:none;margin:0 0 .7rem;font-size:.95rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:0}
+.chips li{margin:0}
+.chips a,.chips .missing{display:inline-block;border:1px solid var(--stroke);background:var(--panel);
+border-radius:999px;padding:.28rem .8rem;font-size:.8rem}
+.chips a:hover{background:var(--accent);color:var(--on-accent);text-decoration:none;border-color:var(--accent)}
+footer{max-width:840px;margin:2.5rem auto 0;padding-top:1.2rem;border-top:1px solid var(--stroke);
+font-size:.75rem;color:var(--muted);text-align:center}
+/* landing */
+.hero{padding:2.4rem 0 1.6rem}
+.kicker{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2)}
+.hero h1{font-size:clamp(2rem,6vw,3.2rem);margin:.35rem 0 .5rem}
+.hero p{color:var(--muted);font-size:1.05rem;max-width:56ch}
+.hw{display:inline-flex;gap:.5rem;align-items:center;margin-top:1rem;border:1px solid var(--stroke);
+background:var(--panel);border-radius:999px;padding:.3rem .9rem;font-size:.78rem;color:var(--muted)}
+.hw .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.sec{margin-top:2.2rem}
+.sec h2{border:none;padding:0;margin:0 0 .8rem;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.9rem}
+.card{display:block;border:1px solid var(--stroke);background:var(--panel);border-radius:14px;padding:1rem 1.1rem;
+color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+.card b{display:block;color:var(--accent);font-size:1rem;margin-bottom:.3rem}
+.card span{font-size:.85rem;color:var(--muted);line-height:1.5}
+.stubs{font-size:.82rem;color:var(--muted);margin-top:.6rem}
+.yt{position:relative;width:100%;aspect-ratio:16/9;border:1px solid var(--stroke);border-radius:12px;overflow:hidden;background:#000;margin:1rem 0}
+.yt.yt-v{aspect-ratio:9/16;max-width:360px}
+.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="bar">
+    <span class="crumb"><a href="../">video-gen-kb</a> / <a href="index.html">Wiki</a></span>
+    <span class="spacer"></span>
+    <button class="pill" onclick="tt()">◐ Theme</button>
+  </nav>
+  <h1>Scripts Reference</h1><p class="lede">What each script in <code>scripts/</code> does, which tools and APIs it calls, and the exact processing steps — so the post-production side of the pipeline (Draw Things export → looped/upscaled/assembled deliverable) is reproducible without re-reading the code. Covers <code>finish_clip.sh</code>, <code>upscale_4k.sh</code>, <code>assemble_film.sh</code>, plus the site/registry builders.</p><div class="meta"><span><b>Updated</b> 2026-09-21</span><span><b>Sources</b> the scripts themselves (<code>scripts/*.sh</code>, <code>scripts/*.py</code>); hands-on timings in <a href="log.html">log</a> 2026-09-20/21; Real-ESRGAN ncnn README (<code>tools/realesrgan/README_macos.md</code>).</span></div>
+<hr />
+<h2>The toolchain (all local, all free)</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Version here</th>
+<th>Role</th>
+<th>Why this one</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ffmpeg / ffprobe</strong></td>
+<td>9.0 (Homebrew)</td>
+<td>every decode, filter, encode, probe</td>
+<td>one binary does frames-out, loops, crossfades, scaling, muxing; <code>hevc_videotoolbox</code> uses the Mac's hardware encoder</td>
+</tr>
+<tr>
+<td><strong>Real-ESRGAN ncnn-vulkan</strong></td>
+<td><code>tools/realesrgan/realesrgan-ncnn-vulkan</code> (xinntao 0.2 build)</td>
+<td>AI 4× upscaler, per frame</td>
+<td>runs on Metal via Vulkan/MoltenVK, no Python, no PyTorch; ~4 s per 1280×768 frame</td>
+</tr>
+<tr>
+<td><strong>Python 3</strong></td>
+<td>system</td>
+<td><code>build_site.py</code>, <code>build_projects.py</code>, small arithmetic inside the shell scripts</td>
+<td><code>markdown</code> package for the site</td>
+</tr>
+<tr>
+<td><strong>Draw Things</strong></td>
+<td>App Store</td>
+<td>produces the input <code>.mov</code> (ProRes, 16 or 25 fps)</td>
+<td>see <a href="runbook-living-painting.html">runbook living painting</a> — not a script, but every script starts from its export</td>
+</tr>
+</tbody>
+</table></div>
+<p>No cloud APIs anywhere. The only network call in the whole workflow is <code>curl</code> for a Pixabay music file when a project needs music.</p>
+<p>Draw Things exports are <strong>ProRes 422 <code>.mov</code></strong> (video) — 8-bit 4:2:2, 16 fps for Wan 2.2 or 25 fps for LTX-2.3, plus a PCM audio track for LTX. Every script probes the input first; sizes to expect: 576×1024 / 576×1280 (loops), 1280×768 (Dragon Epic, Lost City), 1024×576 (LTX tests).</p>
+<hr />
+<h2><code>scripts/finish_clip.sh</code> — 5 s I2V export → 27 s looping 9:16 post</h2>
+<pre><code>scripts/finish_clip.sh raw/clips/NAME.mov [music.mp3] [outname]
+</code></pre>
+<p><strong>Purpose</strong>: turn one 81-frame Wan 2.2 clip into a TikTok/Shorts-ready 1080×1920 loop with music (the living-painting projects: coast, Torrey Pines, Golden Gate, Rainier, cyberpunk, FLL farm).</p>
+<p><strong>Steps</strong></p>
+<ol>
+<li><code>ffprobe</code> the height. If it is 1280 (Draw Things sometimes exports 576×1280), centre-crop to 576×1024 with <code>crop=576:1024:0:128</code>.</li>
+<li>Conform to 16 fps, <code>setsar=1</code>, then <strong>split the stream three ways</strong> (<code>split=3</code>) so ffmpeg can read the same frames as body, tail and head without re-decoding:
+   - <code>body</code> = frames 8 … 72 (<code>trim=start_frame=8:end_frame=73</code>)
+   - <code>tail</code> = frames 73 … 80 (last 8)
+   - <code>head</code> = frames 0 … 7 (first 8)</li>
+<li><strong>Seamless loop seam</strong>: <code>[tail][head]xfade=transition=fade:duration=0.5:offset=0</code> dissolves the last 8 frames into the first 8. Then <code>concat</code> body + seam → one 73-frame unit whose last frame flows into its first. This is a <em>forward-only</em> loop — no ping-pong, so waves never run backwards (the reason ping-pong was rejected on 2026-09-20).</li>
+<li><code>loop=loop=5:size=32767</code> repeats the unit 6× (≈27.4 s), <code>setpts=N/FRAME_RATE/TB</code> rebuilds timestamps, <code>scale=1080:1920:flags=lanczos</code> upsizes 1.875×.</li>
+<li>Encode <code>libx264 -crf 18 yuv420p</code>, no audio → <code>NAME_loop.mp4</code>.</li>
+<li>If a music file was given: <code>atrim</code> to the loop length, <code>afade in 1 s</code>, <code>afade out 2 s</code> (start computed in Python from the probed duration), <code>volume=0.9</code>, mux with <code>-c:v copy -c:a aac 192k -shortest</code> → <code>NAME_final.mp4</code>.</li>
+</ol>
+<p><strong>Knobs at the top of the script</strong>: <code>LOOPS=5</code> (units − 1), <code>FADE_FRAMES=8</code> (seam length; 0.5 s at 16 fps). Music comes from Pixabay CC0 via the CDN URL grabbed from the page's <code>&lt;audio&gt;</code> element (see <a href="projects.html">projects</a> records for the URLs).</p>
+<p><strong>Gotchas</strong>: expects exactly 81 frames — a 25-frame test export produces a 1-second "loop". Portrait only; for 16:9 use <code>assemble_film.sh</code> instead.</p>
+<hr />
+<h2><code>scripts/upscale_4k.sh</code> — any clip → 3840×2160 HEVC 10-bit</h2>
+<pre><code>scripts/upscale_4k.sh raw/clips/NAME.mov [outname] [model]
+</code></pre>
+<p><strong>Purpose</strong>: the step that makes "4K" true. Wan/LTX generate 576p–768p; this adds detail with a learned upscaler instead of a blurry resize. Used for Dragon Epic scene 1A and every Lost City clip.</p>
+<p><strong>Steps</strong></p>
+<ol>
+<li><code>ffprobe</code> the frame rate (<code>r_frame_rate</code>, e.g. <code>16/1</code> or <code>25/1</code>) so the output keeps the source cadence.</li>
+<li>Resolve absolute paths — Real-ESRGAN resolves its <code>models/</code> folder relative to <strong>cwd</strong>, so the script <code>cd</code>s into <code>tools/realesrgan</code> and needs absolute in/out paths.</li>
+<li><strong>Frames out</strong>: <code>ffmpeg -i IN SRC/%04d.png</code> — one PNG per frame (8-bit; the 16-bit variant crashed the ncnn build).</li>
+<li><strong>Upscale the whole directory in one process</strong> (model loads once):
+   <code>./realesrgan-ncnn-vulkan -i SRC -o DST -n MODEL -f png -s 4 -t 128 -j 1:1:1</code>
+   - <code>-s 4</code>: 4× (1280×768 → 5120×3072; 1024×576 → 4096×2304)
+   - <code>-t 128</code>: tile size — <strong>auto/256 segfaults on Metal</strong>; 128 is the largest stable value
+   - <code>-j 1:1:1</code>: load/proc/save threads; more than one GPU thread also crashed
+   - models present: <code>realesrgan-x4plus</code> (default, photoreal), <code>realesrgan-x4plus-anime</code>, <code>realesr-animevideov3-x2/x3/x4</code> (faster, flat shading — good for the anime loops)</li>
+<li><strong>Encode</strong>: <code>ffmpeg -framerate FPS -i DST/%04d.png -vf "scale=3840:2160:force_original_aspect_ratio=increase:flags=lanczos,crop=3840:2160"</code> — scale so the shorter side fits, then centre-crop to exactly UHD (1280×768 is 5:3, so ~4% is cropped top/bottom). Codec <code>hevc_videotoolbox -profile:v main10 -pix_fmt p010le -b:v 40M -tag:v hvc1</code> = hardware HEVC, 10-bit, 40 Mbps, Apple/YouTube-friendly tag. <strong><code>-an</code>: audio is dropped</strong> — for LTX clips mux it back:
+   <code>ffmpeg -i NAME_4k.mp4 -i NAME.mov -map 0:v -map 1:a -c:v copy -c:a aac -b:a 192k -shortest NAME_4k_audio.mp4</code></li>
+<li>Deletes the source PNGs, keeps <code>NAME_4k_frames/</code> (the 4× PNGs) for re-encodes without re-upscaling, prints an <code>ffprobe</code> line of the result.</li>
+</ol>
+<p><strong>Timing (M4 Max)</strong>: 81 frames @ 1280×768 → 5.6–6.3 min; 97 frames @ 1024×576 → ~7 min. Frames folder ≈ 1–1.5 GB per clip — delete when the clip is final.</p>
+<p><strong>Alternatives considered</strong> (<a href="video-upscaling.html">video upscaling</a>): SeedVR2 (temporal, better but needs ComfyUI + MPS memory at 4K unverified), Draw Things' built-in upscaler (images only), Topaz (paid). Real-ESRGAN per-frame can shimmer on fine texture; so far no shimmer on foliage (Lost City L5).</p>
+<hr />
+<h2><code>scripts/assemble_film.sh</code> — N clips → one 4K film with crossfades</h2>
+<pre><code>scripts/assemble_film.sh OUT.mp4 clip1.mp4 clip2.mp4 [...]
+XFADE=0.5 FPS=25 MUSIC=bed.mp3 LETTERBOX=1  scripts/assemble_film.sh ...
+</code></pre>
+<p><strong>Purpose</strong>: the edit. Written 2026-09-21 for Lost City (s2 → s1); the same script is planned for Dragon Epic's 12 shots.</p>
+<p><strong>Steps</strong></p>
+<ol>
+<li>For each clip: <code>ffprobe</code> duration and whether it has an audio stream.</li>
+<li>Per-clip video filter: scale-and-crop to 3840×2160 (same expression as <code>upscale_4k.sh</code>, so mixed sizes are safe), <code>fps=FPS</code> to conform 16- and 25-fps clips, <code>format=yuv420p10le</code>, <code>setsar=1</code>; optional <code>drawbox</code> bars for 2.39:1.</li>
+<li>Per-clip audio: real track → <code>aformat</code> 48 kHz stereo + <code>apad</code>; no track → <code>anullsrc</code> silence of the same duration. A uniform audio graph is required or <code>acrossfade</code> fails.</li>
+<li><strong>Crossfade chain</strong>: for clip <em>i</em>, <code>xfade=transition=fade:duration=XFADE:offset=</code> (running total of durations minus one XFADE per join) and <code>acrossfade=d=XFADE</code>. With <code>XFADE=0</code> it uses <code>concat</code> (hard cuts).</li>
+<li>Optional music: <code>volume=0.6</code> then <code>amix</code> under the clip audio.</li>
+<li>Encode: same HEVC 10-bit 40 Mbps + AAC 192k, <code>-movflags +faststart</code>.</li>
+</ol>
+<p><strong>Limits</strong>: xfade offsets are computed in Python from probed durations, so clips must have accurate container durations (Draw Things ProRes exports do). Title cards and SFX are not in yet — add them as extra "clips" (a 2 s still rendered with <code>ffmpeg -loop 1</code>).</p>
+<hr />
+<h2>Site and registry scripts</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Script</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>scripts/build_projects.py</code></td>
+<td><code>projects.json</code> → <code>wiki/projects.md</code>. Fills each record from <code>defaults</code>, writes the summary table (with ▶ YouTube links) and one section per project, embeds the playlist and per-project YouTube iframes; orientation (16:9 vs 9:16) is inferred from the I2V size. Run by <code>build_site.py</code>.</td>
+</tr>
+<tr>
+<td><code>scripts/build_site.py</code></td>
+<td><code>wiki/*.md</code> → <code>docs/</code> static site with the <code>markdown</code> package: rewrites <code>&lt;span class="missing" title="page not written yet"&gt;wiki links&lt;/span&gt;</code> to <code>.html</code>, copies <code>wiki/assets/</code>, generates the landing page cards from <code>wiki/index.md</code>. Run after any wiki edit; <code>./serve.sh</code> builds and serves on :8788.</td>
+</tr>
+<tr>
+<td><code>scripts/render_infographic.sh NAME</code></td>
+<td>headless Chrome screenshot of <code>scripts/infographics/NAME.html</code> at 2× → <code>cwebp</code> → <code>wiki/assets/NAME-3d.webp</code>.</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>End-to-end, per project type</h2>
+<pre><code>living painting (9:16)   DT export .mov ─► finish_clip.sh (+music) ─► NAME_final.mp4 ─► YouTube
+cinematic shot (16:9)    DT export .mov ─► upscale_4k.sh ─► NAME_4k.mp4 (+ audio remux for LTX)
+film                     N × NAME_4k.mp4 ─► assemble_film.sh (XFADE, MUSIC) ─► film.mp4 ─► YouTube
+</code></pre>
+<p>Every run should end with an <code>ffprobe</code> check (size, frame count, fps, audio) and a line in <a href="log.html">log</a> with the timing.</p>
+
+  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="runbook-living-painting.html">runbook living painting</a> — the Draw Things side, click by click</li><li><a href="video-upscaling.html">video upscaling</a> — why Real-ESRGAN, what else exists</li><li><a href="lost-city-plan.html">lost city plan</a> · <a href="dragon-epic-plan.html">dragon epic plan</a> — where these scripts are used</li><li><a href="projects.html">projects</a> — per-project files and settings</li></ul></div>
+</div>
+<footer>video-gen-kb · built 2026-09-21 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<script>function tt(){var r=document.documentElement,
+d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
+matchMedia('(prefers-color-scheme: dark)').matches);
+r.setAttribute('data-theme',d?'light':'dark');}</script>
+</body>
+</html>

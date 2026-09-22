@@ -224,3 +224,7 @@ Same shot-2 still through both engines. Wan (768p, 49 min): subtle stable push, 
 ## 2026-09-21 — Wan vs LTX comparison filed
 
 Kevin's questions (why LTX faster; which has better quality; T2V vs I2V) answered and filed as a section in `image-to-video-models.md` (latent-token math, fidelity vs motion, both runs were I2V). LTX shot 2 upscaled to 4K with audio re-muxed (`s2_ltx_v1_4k_audio.mp4`; `upscale_4k.sh` strips audio — mux back from the .mov).
+
+## 2026-09-21 — Scripts reference page; assemble_film.sh
+
+Kevin asked for a page explaining the key scripts. **Created** `wiki/scripts-reference.md`: toolchain table (ffmpeg 9, Real-ESRGAN ncnn-vulkan, python), then per script — purpose, invocation, numbered steps with the actual filter chains, the Metal-specific flags (`-t 128 -j 1:1:1`, cwd), timings, gotchas (audio dropped by the upscaler → remux command), plus the site/registry builders and an end-to-end map per project type. **Added** `scripts/assemble_film.sh` (xfade/acrossfade chain, silence padding for mute clips, optional music and 2.39:1 bars, HEVC 10-bit). Index + CLAUDE.md updated.
