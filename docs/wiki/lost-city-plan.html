@@ -236,7 +236,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 - Camera vocabulary Wan 2.2 obeys: <em>pushes in / pulls back / tilts up / tracking shot / fixed lens / handheld</em>. Speed word every time (<em>slowly</em>). Avoid whip pans and anything that reveals geometry not in the still.
 - Full-frame creature shot (head fills frame): articulation only, no camera move (Dragon Epic rule).</p>
 <h3>3c. Motion B — LTX-2.3 22B distilled 1.1 — the candidate (installed, <strong>untested</strong> on this Mac)</h3>
-<p>Why try it here: native <strong>25 fps</strong>, joint <strong>audio</strong> (footsteps, waterfall, birds), stronger camera-move following, longer clips possible. Risk: memory (22B) and speed on 48 GB.</p>
+<p>Why try it here: native <strong>25 fps</strong>, joint <strong>audio</strong> (footsteps, waterfall, birds), real locomotion. Risk: memory (22B DiT + Gemma text encoder) — on 48 GB it pages; ~25 min per 4 s clip at 576p (L1). <strong>Camera staging is loose at CFG 1</strong>: it picks its own blocking; write the <em>action</em> you want and accept the camera it gives, or cut to Wan for locked-camera shots.</p>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -258,13 +258,13 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </tr>
 <tr>
 <td>Size</td>
-<td><strong>1280×736</strong> (both ÷32; 1280×720 not legal) — or 1024×576 for the first test</td>
-<td>LTX constraint</td>
+<td><strong>1024×576</strong> is what fits in 48 GB (~25 min). 1280×768 (÷32, legal) runs the two-stage hi-res path and stalls in swap on stage 2 — needs a clean memory session, untested to completion</td>
+<td>measured 2026-09-21</td>
 </tr>
 <tr>
 <td>Frames</td>
-<td><strong>121</strong> (8k+1) @ 25 fps = 4.84 s; 97 f = 3.9 s for the first test</td>
-<td>LTX constraint</td>
+<td><strong>97</strong> (3.9 s) proven; 121 (4.84 s) only with 1280×768 → swap. Try 121 @ 1024×576 next</td>
+<td>LTX constraint + measured</td>
 </tr>
 <tr>
 <td>Strength (I2V)</td>
@@ -402,7 +402,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <td><strong>LTX-2.3 distilled 1.1 on the M4 Max</strong>: loads? time? quality? audio?</td>
 <td>same still → LTX at 1024×576, 97 f, 8 steps, CFG 1, motion prompt 1 (LTX); then 1280×736 × 121 f</td>
 <td>≤ 60 min/clip, no blobs, walk cycle plausible</td>
-<td>1–2 h</td>
+<td>1–2 h — <strong>done, see 7b</strong></td>
 </tr>
 <tr>
 <td>L2</td>
@@ -453,9 +453,19 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </thead>
 <tbody>
 <tr>
-<td>—</td>
-<td>—</td>
-<td>none yet</td>
+<td>L1 (result)</td>
+<td>2026-09-21</td>
+<td><strong>Works; slow; strong motion.</strong> 1024×576 × 97 f @ 25 fps, 8 steps, CFG 1, TCD Trailing, SSS 30%, shift 5, single stage (DT auto-disables hi-res fix at this size). <strong>~25 min wall clock</strong> (compute timer said 3 min — the rest is swap). Output: ProRes .mov <strong>with a PCM audio track</strong> (mean −33 dB, quiet ambience). Motion: the creature turns ¾ and <strong>walks away into the city with a real four-legged gait</strong>, rider stays seated, birds cross, god rays hold; no ghosting, anatomy intact. It ignored "left to right" + "camera tracks alongside" and chose its own blocking (walk into the scene, camera static) — LTX follows the <em>action</em>, not the <em>staging</em>, at CFG 1. First frame = centre crop of the 1280×768 still (canvas larger than the generation area). Files: <code>raw/clips/lostcity/s1_ltx_v1.mov</code>, <code>_preview.mp4</code>, <code>_strip.png</code>. <strong>Verdict</strong>: LTX-2.3 is usable for shots that need real locomotion (Wan can't at 4 steps) but costs ~25 min at 576p and needs a memory-light session (quit other apps); Wan 2.2 stays the default for ambient/static-subject shots at 768p.</td>
+</tr>
+<tr>
+<td>L1 (interim)</td>
+<td>2026-09-21</td>
+<td>LTX-2.3 22B distilled 1.1 <strong>loads and runs</strong> in Draw Things on the M4 Max, but is <strong>memory-bound</strong>. <em>Try recommended settings</em> gives steps 8, CFG 1.0, TCD Trailing, Strategic Stochastic Sampling 30%, shift 5, frames 121, and turns on <strong>High Resolution Fix</strong> = the official LTX two-stage pipeline (1st pass at half size 640×384, 2nd pass at full size, strength 70%). At 1280×768 × 121 f: stage 1 (8 steps @ 640×384) took ~3 min — fast — but stage 2 at 1280×768 stalled (swap 27–48 GB, step counter frozen for minutes) → stopped. At 1024×576 × 97 f DT auto-disables hi-res fix (single stage); the compute timer reads ~1 min per 10+ min wall clock — paging the 22B DiT + Gemma text encoder in and out of swap. Overlay says "Text to Image Generation" but the canvas still <strong>is</strong> used as first frame (preview shows creature + rider); the Strength tab reads <em>Text to Video 100%</em> for LTX I2V. Canvas larger than the generation area → centre crop, not scale.</td>
+</tr>
+<tr>
+<td>L0</td>
+<td>2026-09-21</td>
+<td><strong>Pass on seed 1.</strong> klein + 3 cropped refs (creature+rider, spires, foreground) at 33% each, still prompt 1 verbatim. God rays, spire skyline, bridge + waterfall, saddled wingless creature, hooded rider from behind, muted palette — all present; composition is ours (not a copy). ~2 min render with 3 refs. Export via the toolbar Save sheet worked fully from automation. <code>raw/clips/lostcity/s1_still_v1.png</code>.</td>
 </tr>
 </tbody>
 </table></div>

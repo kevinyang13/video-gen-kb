@@ -283,8 +283,8 @@
       "id": "lost_city",
       "title": "Lost City — hyper-real rider on a raptor-dragon entering jungle ruins",
       "date": "2026-09-21",
-      "dt_project": null,
-      "status": "planning",
+      "dt_project": "lostcity-s1",
+      "status": "in progress — L0 pass, L1 done (LTX works, 25 min @ 576p)",
       "still": {
         "model": "FLUX.2 [klein] 9B (8-bit S)",
         "size": "1280x768",
@@ -306,7 +306,21 @@
         "sampler": "UniPC Trailing",
         "lora": "Wan 2.2 A14B Lightning High-Noise 100%",
         "prompt": "tracking shot alongside the walking rider, rider kept centred; heavy four-legged gait; waterfall, mist through god rays, distant birds",
-        "time_min": 45
+        "time_min": 45,
+        "ltx_test": {
+          "model": "LTX-2.3 22B [distilled] 1.1",
+          "size": "1024x576",
+          "frames": 97,
+          "fps": 25,
+          "steps": 8,
+          "cfg": 1.0,
+          "sampler": "TCD Trailing",
+          "sss": "30%",
+          "shift": 5.0,
+          "hires_fix": "auto-off at 576p (on at 768p: 1st pass 640x384, 2nd pass 70% — stalls in swap)",
+          "time_min": 25,
+          "prompt": "The creature walks slowly from left to right with a heavy four-legged gait, its head bobbing and tail swaying, while the camera tracks alongside at the same pace so the rider stays centred in frame. The rider sways gently in the saddle, the cloak lifting in a light breeze. Behind them the waterfall pours steadily and thin mist drifts through the shafts of light; two birds glide across the distant spires. Heavy footsteps on damp earth, the far roar of the waterfall, faint jungle birdsong, no music. Photorealistic, cinematic, smooth motion."
+        }
       },
       "post": {
         "upscale": "scripts/upscale_4k.sh — Real-ESRGAN x4plus → 3840x2160 HEVC 10-bit",
@@ -314,7 +328,10 @@
         "music": "TBD — ambient orchestral / ethereal choir (or LTX ambience)"
       },
       "files": [
-        "lostcity/ref_openart_rider_ruins.webp (reference, raw/)"
+        "lostcity/ref_openart_rider_ruins.webp (reference, raw/)",
+        "lostcity/crop_creature_rider.png, crop_spires.png, crop_foreground.png (Moodboard refs, raw/)",
+        "lostcity/s1_still_v1.png (shot 1 still, klein)",
+        "lostcity/s1_ltx_v1.mov (LTX-2.3 test, 1024x576x97 @25fps + audio)"
       ],
       "notes": "Plan: wiki/lost-city-plan.md. Reference is an OpenArt render (closed model, unknown); we re-generate our own frame. 8 shots × 5 s first. Experiments L0–L6 gate rendering; L1 = first LTX-2.3 test on this Mac."
     }

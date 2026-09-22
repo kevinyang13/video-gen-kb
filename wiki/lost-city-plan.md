@@ -72,14 +72,14 @@ Time: ~1 min per still with 3 refs (measured 2026-09-21 on Dragon Epic 1B v2).
 
 ### 3c. Motion B — LTX-2.3 22B distilled 1.1 — the candidate (installed, **untested** on this Mac)
 
-Why try it here: native **25 fps**, joint **audio** (footsteps, waterfall, birds), stronger camera-move following, longer clips possible. Risk: memory (22B) and speed on 48 GB.
+Why try it here: native **25 fps**, joint **audio** (footsteps, waterfall, birds), real locomotion. Risk: memory (22B DiT + Gemma text encoder) — on 48 GB it pages; ~25 min per 4 s clip at 576p (L1). **Camera staging is loose at CFG 1**: it picks its own blocking; write the *action* you want and accept the camera it gives, or cut to Wan for locked-camera shots.
 
 | Setting | Value (start here) | Source |
 |---|---|---|
 | Model | LTX-2.3 22B [distilled] 1.1 — Local list, Draw Things quant | DT model list 2026-09-21 |
 | Steps / CFG | **8 / 1.0** (distilled; dev variant wants 20–25 / CFG 3–7) | LTX docs; DT wiki numbers (20–25, CFG 6–7) are for the *dev* model |
-| Size | **1280×736** (both ÷32; 1280×720 not legal) — or 1024×576 for the first test | LTX constraint |
-| Frames | **121** (8k+1) @ 25 fps = 4.84 s; 97 f = 3.9 s for the first test | LTX constraint |
+| Size | **1024×576** is what fits in 48 GB (~25 min). 1280×768 (÷32, legal) runs the two-stage hi-res path and stalls in swap on stage 2 — needs a clean memory session, untested to completion | measured 2026-09-21 |
+| Frames | **97** (3.9 s) proven; 121 (4.84 s) only with 1280×768 → swap. Try 121 @ 1024×576 next | LTX constraint + measured |
 | Strength (I2V) | 100% first frame; LTX reference uses 0.7 image conditioning in stage 1 — if DT exposes it, try 0.7–1.0 | LTX I2V guide |
 | Prompt | one chronological paragraph, 4–8 sentences, < 200 words: motion → camera → **audio** ("heavy footsteps on wet stone, distant waterfall roar, birdsong") | LTX prompt guide |
 | Upscaler | LTX ships ×2 / ×1.5 latent spatial upscalers (DT: *High Resolution Fix*) — try 1280→2560 in-app, then Real-ESRGAN to 3840; else skip and use §3d | DT wiki |
@@ -139,7 +139,7 @@ Cheap shots first: 2, 3, 5, 7 have no hero face and simple motion — render the
 | # | Question | Test | Pass | Cost |
 |---|---|---|---|---|
 | L0 | Does klein reproduce the reference **look** (palette, god rays, layering) without copying it? | still prompt 1, Moodboard = 3 crops of the reference (spires, creature, foreground); 3 seeds | 2 of 3 read as film stills, not renders | 5 min |
-| L1 | **LTX-2.3 distilled 1.1 on the M4 Max**: loads? time? quality? audio? | same still → LTX at 1024×576, 97 f, 8 steps, CFG 1, motion prompt 1 (LTX); then 1280×736 × 121 f | ≤ 60 min/clip, no blobs, walk cycle plausible | 1–2 h |
+| L1 | **LTX-2.3 distilled 1.1 on the M4 Max**: loads? time? quality? audio? | same still → LTX at 1024×576, 97 f, 8 steps, CFG 1, motion prompt 1 (LTX); then 1280×736 × 121 f | ≤ 60 min/clip, no blobs, walk cycle plausible | 1–2 h — **done, see 7b** |
 | L2 | Walking creature without ghosting on Wan 2.2 (tracking-shot phrasing) | still 1 → Wan, §3b prompt | legs cycle, rider stays centred, no double edges | 45 min |
 | L3 | Creature consistency via cropped sheet across two shots (1 → 5) | shot 5 still with the head crop in Moodboard | same crest/eye/hide | 5 min |
 | L4 | Hero consistency from behind (1 → 4) | shot 4 still with the rider crop | same cloak/jerkin/hair | 5 min |
@@ -152,7 +152,9 @@ L1 decides the engine for the whole project; run L2 anyway as the fallback.
 
 | Exp | Date | Result |
 |---|---|---|
-| — | — | none yet |
+| L1 (result) | 2026-09-21 | **Works; slow; strong motion.** 1024×576 × 97 f @ 25 fps, 8 steps, CFG 1, TCD Trailing, SSS 30%, shift 5, single stage (DT auto-disables hi-res fix at this size). **~25 min wall clock** (compute timer said 3 min — the rest is swap). Output: ProRes .mov **with a PCM audio track** (mean −33 dB, quiet ambience). Motion: the creature turns ¾ and **walks away into the city with a real four-legged gait**, rider stays seated, birds cross, god rays hold; no ghosting, anatomy intact. It ignored "left to right" + "camera tracks alongside" and chose its own blocking (walk into the scene, camera static) — LTX follows the *action*, not the *staging*, at CFG 1. First frame = centre crop of the 1280×768 still (canvas larger than the generation area). Files: `raw/clips/lostcity/s1_ltx_v1.mov`, `_preview.mp4`, `_strip.png`. **Verdict**: LTX-2.3 is usable for shots that need real locomotion (Wan can't at 4 steps) but costs ~25 min at 576p and needs a memory-light session (quit other apps); Wan 2.2 stays the default for ambient/static-subject shots at 768p. |
+| L1 (interim) | 2026-09-21 | LTX-2.3 22B distilled 1.1 **loads and runs** in Draw Things on the M4 Max, but is **memory-bound**. *Try recommended settings* gives steps 8, CFG 1.0, TCD Trailing, Strategic Stochastic Sampling 30%, shift 5, frames 121, and turns on **High Resolution Fix** = the official LTX two-stage pipeline (1st pass at half size 640×384, 2nd pass at full size, strength 70%). At 1280×768 × 121 f: stage 1 (8 steps @ 640×384) took ~3 min — fast — but stage 2 at 1280×768 stalled (swap 27–48 GB, step counter frozen for minutes) → stopped. At 1024×576 × 97 f DT auto-disables hi-res fix (single stage); the compute timer reads ~1 min per 10+ min wall clock — paging the 22B DiT + Gemma text encoder in and out of swap. Overlay says "Text to Image Generation" but the canvas still **is** used as first frame (preview shows creature + rider); the Strength tab reads *Text to Video 100%* for LTX I2V. Canvas larger than the generation area → centre crop, not scale. |
+| L0 | 2026-09-21 | **Pass on seed 1.** klein + 3 cropped refs (creature+rider, spires, foreground) at 33% each, still prompt 1 verbatim. God rays, spire skyline, bridge + waterfall, saddled wingless creature, hooded rider from behind, muted palette — all present; composition is ours (not a copy). ~2 min render with 3 refs. Export via the toolbar Save sheet worked fully from automation. `raw/clips/lostcity/s1_still_v1.png`. |
 
 ## 8. Budget (Wan path; LTX unknown until L1)
 
