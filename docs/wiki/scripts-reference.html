@@ -191,6 +191,11 @@ XFADE=0.5 FPS=25 MUSIC=bed.mp3 LETTERBOX=1  scripts/assemble_film.sh ...
 </ol>
 <p><strong>Limits</strong>: xfade offsets are computed in Python from probed durations, so clips must have accurate container durations (Draw Things ProRes exports do). Title cards and SFX are not in yet — add them as extra "clips" (a 2 s still rendered with <code>ffmpeg -loop 1</code>).</p>
 <hr />
+<h2><code>scripts/dt_project.sh</code> — Draw Things projects from the shell</h2>
+<pre><code>scripts/dt_project.sh list | newest | rename OLD NEW | rename-newest NEW | delete NAME
+</code></pre>
+<p>A Draw Things project is one SQLite file: <code>~/Library/Containers/com.liuliu.draw-things/Data/Documents/NAME.sqlite3</code> (plus <code>-shm</code>/<code>-wal</code> while open). The project name <strong>is</strong> the filename, so <code>mv</code> renames it and the Projects list updates live — verified 2026-09-21 (<code>Untitled-66452</code> → <code>junk-66452</code> appeared without a restart). Rules: never touch the currently open project (its WAL is live) — switch to another project first; <code>delete</code> moves the three files to <code>~/.Trash</code>. This replaces the in-app Rename dialog, which background automation cannot see.</p>
+<p>New-project flow: <strong>+</strong> in Projects (creates and opens <code>Untitled-NNNNN</code>) → click any other project → <code>scripts/dt_project.sh rename-newest lostcity-s3</code> → click the renamed row.</p>
 <h2>Site and registry scripts</h2>
 <div class="tw"><table>
 <thead>

@@ -100,6 +100,16 @@ XFADE=0.5 FPS=25 MUSIC=bed.mp3 LETTERBOX=1  scripts/assemble_film.sh ...
 
 ---
 
+## `scripts/dt_project.sh` — Draw Things projects from the shell
+
+```
+scripts/dt_project.sh list | newest | rename OLD NEW | rename-newest NEW | delete NAME
+```
+
+A Draw Things project is one SQLite file: `~/Library/Containers/com.liuliu.draw-things/Data/Documents/NAME.sqlite3` (plus `-shm`/`-wal` while open). The project name **is** the filename, so `mv` renames it and the Projects list updates live — verified 2026-09-21 (`Untitled-66452` → `junk-66452` appeared without a restart). Rules: never touch the currently open project (its WAL is live) — switch to another project first; `delete` moves the three files to `~/.Trash`. This replaces the in-app Rename dialog, which background automation cannot see.
+
+New-project flow: **+** in Projects (creates and opens `Untitled-NNNNN`) → click any other project → `scripts/dt_project.sh rename-newest lostcity-s3` → click the renamed row.
+
 ## Site and registry scripts
 
 | Script | What it does |

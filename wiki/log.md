@@ -228,3 +228,7 @@ Kevin's questions (why LTX faster; which has better quality; T2V vs I2V) answere
 ## 2026-09-21 — Scripts reference page; assemble_film.sh
 
 Kevin asked for a page explaining the key scripts. **Created** `wiki/scripts-reference.md`: toolchain table (ffmpeg 9, Real-ESRGAN ncnn-vulkan, python), then per script — purpose, invocation, numbered steps with the actual filter chains, the Metal-specific flags (`-t 128 -j 1:1:1`, cwd), timings, gotchas (audio dropped by the upscaler → remux command), plus the site/registry builders and an end-to-end map per project type. **Added** `scripts/assemble_film.sh` (xfade/acrossfade chain, silence padding for mute clips, optional music and 2.39:1 bars, HEVC 10-bit). Index + CLAUDE.md updated.
+
+## 2026-09-21 — Draw Things project rename without screen control
+
+Kevin asked for a rename path that doesn't need desktop takeover. Found: projects are `NAME.sqlite3` files in the app container; renaming the files renames the project and the list refreshes live (tested on a junk project). Added `scripts/dt_project.sh` (list/newest/rename/rename-newest/delete), documented in `scripts-reference.md`, CLAUDE.md and memory; the in-app Rename dialog is now a fallback only.
