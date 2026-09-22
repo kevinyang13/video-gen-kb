@@ -272,7 +272,8 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <ul>
 <li><code>xfade</code> crossfades (0.5 s) or hard cuts between the 12 upscaled clips; no loops</li>
 <li>optional 2.39:1 letterbox bars (3840×1608 picture inside 3840×2160)</li>
-<li>music bed + 3–5 SFX (wing beats, roar, wind, hooves) from Pixabay; <code>-shortest</code></li>
+<li>music bed: <strong>The Dragon's Breath</strong> (ONECinematicStudio, Pixabay CC0, 2:40, <code>raw/clips/music/dragons_breath.mp3</code>) — loudness ramps from −33 dB RMS (0–5 s) to −11 dB (150 s), so cue the film so its climax lands on 135–155 s; per-clip previews take the peak section from 135 s. Plus 3–5 SFX (wing beats, roar, wind, hooves) from Pixabay; <code>-shortest</code></li>
+<li>single-clip preview with music: <code>ffmpeg -i clip_4k.mp4 -ss 135 -i music.mp3 -filter_complex "[1:a]atrim=0:DUR,afade=t=in:st=0:d=0.3,afade=t=out:st=DUR-1:d=1,volume=0.9[a]" -map 0:v -map "[a]" -c:v copy -c:a aac -b:a 192k -shortest out.mp4</code></li>
 <li>2 s title card at the end (FLUX still at 1280×720, upscaled the same way)</li>
 <li>encode <strong>HEVC 10-bit, <code>hevc_videotoolbox</code>, ~40 Mbps</strong> for YouTube 4K; keep a ProRes master</li>
 <li><strong>HDR</strong>: the generators emit 8-bit SDR, so true HDR is not possible. The script gets an <code>--hdr</code> flag that produces an <strong>HLG BT.2020</strong> variant via inverse tone-mapping (<code>zscale</code> + <code>tonemap</code>) for A/B on an HDR TV; if it looks better, upload that, otherwise the SDR master. Default = SDR.</li>
@@ -669,7 +670,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <li>Photos: ~~can you drop 15–30 face photos?~~ → one frontal reference supplied 2026-09-21; more only if E7 (LoRA) goes ahead.</li>
 <li>Hero look: ~~armor / cloak / modern?~~ → weathered leather + red cloak, no helmet (settled 2026-09-21).</li>
 <li>Dragon: ~~color~~ reddish-brown (settled 2026-09-21). Vibe still open: menacing-then-loyal, or noble throughout?</li>
-<li>Music: orchestral epic, or ambient like the loops?</li>
+<li>Music: ~~orchestral epic, or ambient?~~ → orchestral epic, "The Dragon's Breath" (settled 2026-09-21).</li>
 <li>Deliverable: YouTube 16:9 at 4K UHD, SDR master + optional HLG variant — confirmed 2026-09-21.</li>
 </ol>
 

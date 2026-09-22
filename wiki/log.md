@@ -188,3 +188,7 @@ Built an isometric "four-layer stack" infographic of `video-generation-landscape
 ## 2026-09-21 — Scene 1A v3 clean at 4K
 
 Ghosting fixed by the prompt, not the refiner: full-frame subject articulates but does not translate. Rule added to plan §3b. `raw/clips/dragon/scene1a_v3_4k.mp4`.
+
+## 2026-09-21 — Dragon Epic music chosen
+
+"The Dragon's Breath" (ONECinematicStudio, Pixabay CC0) picked as the film's music bed; RMS profile shows the track peaks at 135–155 s, so scene 1A's preview uses that section. Muxed `raw/clips/dragon/scene1a_v3_4k_music.mp4`. Plan §3e + open question 4 + `projects.json` updated.

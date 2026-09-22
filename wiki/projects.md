@@ -19,7 +19,7 @@
 | 5 | [Mt. Rainier from Paradise](#rainier) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 15.5 min | Calm Ambient Dreamscape | `rainier_final.mp4` | [▶ watch](https://youtu.be/JJB154LbBi0) |
 | 6 | [Cyberpunk city, rain, neon](#cyberpunk) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Neon Synthwave Drive | `cyberpunk_final.mp4` | [▶ watch](https://youtu.be/GrNTNQCqKnk) |
 | 7 | [FLL BOT Builders — Coastal Roots Farm, wide view](#fll_farm) | 2026-09-20 | done (v2) | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Calm Ambient Dreamscape | `fll_farm_v2_final.mp4` | [▶ watch](https://youtu.be/-Mf2UThasCg) |
-| 8 | [Dragon Epic — 1-minute photoreal short with Kevin's face](#dragon_epic) | 2026-09-21 | in progress — scene 1A done | FLUX.2 [klein] 9B 1280x768 | Wan 2.2 High Noise 47 min | TBD | `—` | — |
+| 8 | [Dragon Epic — 1-minute photoreal short with Kevin's face](#dragon_epic) | 2026-09-21 | in progress — scene 1A done | FLUX.2 [klein] 9B 1280x768 | Wan 2.2 High Noise 47 min | The Dragon's Breath | `—` | — |
 | 9 | [Three-minute film — recurring characters (subject TBD)](#film3min) | 2026-09-21 | planning | FLUX.2 [klein] 9B 1024x576 | Wan 2.2 High Noise 15 min | TBD | `—` | — |
 
 ## YouTube playlist — [AI-Vids](https://www.youtube.com/playlist?list=PLJx49Sf61wKQ)
@@ -428,7 +428,7 @@ Prompt: `static camera, the six people stand completely still in place, tree bra
 ## Dragon Epic — 1-minute photoreal short with Kevin's face {#dragon_epic}
 
 - **Date**: 2026-09-21 · **Status**: in progress — scene 1A done · **Draw Things project**: `Untitled-35325`
-- **Files** (`raw/clips/`): `dragon/scene1a_v3.mov`, `dragon/scene1a_v3_4k.mp4`, `dragon/scene1a.mov (v1, ghosting)`, `dragon/scene1a_4k.mp4 (v1)`
+- **Files** (`raw/clips/`): `dragon/scene1a_v3.mov`, `dragon/scene1a_v3_4k.mp4`, `dragon/scene1a_v3_4k_music.mp4 (with music)`, `music/dragons_breath.mp3`, `dragon/scene1a.mov (v1, ghosting)`, `dragon/scene1a_4k.mp4 (v1)`
 - **Notes**: Plan page: wiki/dragon-epic-plan.md. Experiments E1–E7 must pass before rendering the shot list. Needs face photos in raw/face/. Delivery is 4K UHD. Scene 1A: v1 ghosted (push-in + translation), v2 noise (refiner 50%), v3 clean (10%, articulation-only prompt).
 
 **Still**
@@ -470,7 +470,7 @@ Prompt: `per shot — one camera move + one subject action`
 | Script | scripts/assemble_film.sh (to write) |
 | Loop | none — 12 clips xfade-concatenated |
 | Upscale | scripts/upscale_4k.sh — Real-ESRGAN x4plus ncnn, tile 128, → 3840x2160 HEVC 10-bit 40 Mbps (5.6 min/clip) |
-| Music | TBD — orchestral epic + SFX |
+| Music | The Dragon's Breath — ONECinematicStudio, Pixabay (cdn.pixabay.com/audio/2026/05/04/audio_505690c98b.mp3), 2:40; scene 1A preview uses peak section from 135 s, 0.3 s fade in / 1 s fade out, vol 0.9. Final film: full track + SFX (TBD) |
 
 ## Three-minute film — recurring characters (subject TBD) {#film3min}
 

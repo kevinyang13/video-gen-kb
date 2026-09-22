@@ -88,7 +88,8 @@ Details and Mac notes: [[video-upscaling]].
 
 - `xfade` crossfades (0.5 s) or hard cuts between the 12 upscaled clips; no loops
 - optional 2.39:1 letterbox bars (3840×1608 picture inside 3840×2160)
-- music bed + 3–5 SFX (wing beats, roar, wind, hooves) from Pixabay; `-shortest`
+- music bed: **The Dragon's Breath** (ONECinematicStudio, Pixabay CC0, 2:40, `raw/clips/music/dragons_breath.mp3`) — loudness ramps from −33 dB RMS (0–5 s) to −11 dB (150 s), so cue the film so its climax lands on 135–155 s; per-clip previews take the peak section from 135 s. Plus 3–5 SFX (wing beats, roar, wind, hooves) from Pixabay; `-shortest`
+- single-clip preview with music: `ffmpeg -i clip_4k.mp4 -ss 135 -i music.mp3 -filter_complex "[1:a]atrim=0:DUR,afade=t=in:st=0:d=0.3,afade=t=out:st=DUR-1:d=1,volume=0.9[a]" -map 0:v -map "[a]" -c:v copy -c:a aac -b:a 192k -shortest out.mp4`
 - 2 s title card at the end (FLUX still at 1280×720, upscaled the same way)
 - encode **HEVC 10-bit, `hevc_videotoolbox`, ~40 Mbps** for YouTube 4K; keep a ProRes master
 - **HDR**: the generators emit 8-bit SDR, so true HDR is not possible. The script gets an `--hdr` flag that produces an **HLG BT.2020** variant via inverse tone-mapping (`zscale` + `tonemap`) for A/B on an HDR TV; if it looks better, upload that, otherwise the SDR master. Default = SDR.
@@ -223,7 +224,7 @@ Rendering is unattended and survives a screen lock; the session holds a keep-awa
 1. Photos: ~~can you drop 15–30 face photos?~~ → one frontal reference supplied 2026-09-21; more only if E7 (LoRA) goes ahead.
 2. Hero look: ~~armor / cloak / modern?~~ → weathered leather + red cloak, no helmet (settled 2026-09-21).
 3. Dragon: ~~color~~ reddish-brown (settled 2026-09-21). Vibe still open: menacing-then-loyal, or noble throughout?
-4. Music: orchestral epic, or ambient like the loops?
+4. Music: ~~orchestral epic, or ambient?~~ → orchestral epic, "The Dragon's Breath" (settled 2026-09-21).
 5. Deliverable: YouTube 16:9 at 4K UHD, SDR master + optional HLG variant — confirmed 2026-09-21.
 
 ## Related pages
