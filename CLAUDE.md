@@ -18,6 +18,8 @@ scripts/build_site.py -- renders wiki/ -> docs/
 serve.sh      -- rebuild + serve docs/ on http://localhost:8788
 scripts/finish_clip.sh -- I2V export (.mov) -> looped 1080x1920 mp4 (+ music)
 raw/clips/    -- generated stills/clips/music (git-ignored)
+wiki/assets/  -- images embedded in wiki pages (reference as assets/<file>; copied to docs/wiki/assets/)
+scripts/infographics/*.html -- CSS-3D infographic sources; scripts/render_infographic.sh <name> -> wiki/assets/<name>-3d.webp
 projects.json -- registry of every video project (models, settings, prompts, seeds, music, files)
 scripts/build_projects.py -- projects.json -> wiki/projects.md (run by build_site.py)
 ```

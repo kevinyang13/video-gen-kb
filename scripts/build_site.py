@@ -2,6 +2,7 @@
 """Render wiki/*.md into docs/ as a static site.
 
 - docs/wiki/<slug>.html   one page per wiki markdown file
+- docs/wiki/assets/       copy of wiki/assets/ (images referenced as assets/<file>)
 - docs/index.html         landing page generated from wiki/index.md
 
 The wiki lives at the repo root (CLAUDE.md requires it); docs/ is what gets
@@ -62,6 +63,7 @@ blockquote{border-left:3px solid var(--accent);background:var(--panel);border-ra
 padding:.8rem 1.1rem;margin:1.1rem 0;color:var(--muted);font-size:.92rem}
 code{background:var(--panel);border:1px solid var(--stroke);border-radius:5px;padding:.1rem .35rem;
 font-size:.85em;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--code)}
+img{max-width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--stroke);margin:1.1rem 0}
 pre{background:var(--panel);border:1px solid var(--stroke);border-radius:12px;padding:1rem;overflow-x:auto;margin:1.1rem 0}
 pre code{background:none;border:none;padding:0;color:var(--text);font-size:.83rem;line-height:1.55}
 .tw{overflow-x:auto;border:1px solid var(--stroke);border-radius:12px;background:var(--panel);margin:1.1rem 0}
@@ -268,6 +270,8 @@ def build():
     if OUT.exists():
         shutil.rmtree(OUT)
     OUT.mkdir(parents=True)
+    if (WIKI / "assets").is_dir():
+        shutil.copytree(WIKI / "assets", OUT / "assets")
     (DOCS / ".nojekyll").touch()
     today = date.today().isoformat()
 

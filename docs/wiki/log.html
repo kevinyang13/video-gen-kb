@@ -41,6 +41,7 @@ blockquote{border-left:3px solid var(--accent);background:var(--panel);border-ra
 padding:.8rem 1.1rem;margin:1.1rem 0;color:var(--muted);font-size:.92rem}
 code{background:var(--panel);border:1px solid var(--stroke);border-radius:5px;padding:.1rem .35rem;
 font-size:.85em;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--code)}
+img{max-width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--stroke);margin:1.1rem 0}
 pre{background:var(--panel);border:1px solid var(--stroke);border-radius:12px;padding:1rem;overflow-x:auto;margin:1.1rem 0}
 pre code{background:none;border:none;padding:0;color:var(--text);font-size:.83rem;line-height:1.55}
 .tw{overflow-x:auto;border:1px solid var(--stroke);border-radius:12px;background:var(--panel);margin:1.1rem 0}
@@ -186,6 +187,8 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <p>Web research on keeping one character consistent across shots (as of 2026-09-21). Key findings: FLUX.2 klein takes reference images via the Draw Things Moodboard (official face-swap demo); Qwen Image Edit 2509 does Picture 1/2/3 multi-reference in DT; local klein LoRA training crashes on Apple Silicon (draw-things-community #114, open), cloud training ~$1 / &lt; 1 h; Wan 2.1 VACE subject reference is in DT, Wan 2.2 Animate is CUDA-only, Wan 2.5/2.6/2.7 have no weights; LTX-2.5 has native multi-shot + multi-subject LoRA but unproven on Mac. <strong>Created</strong>: <code>wiki/character-consistency.md</code> (methods ranked, decision table), <code>wiki/three-minute-film-plan.md</code> (36–40 clips, consistency stack, X1–X7 experiments, ~23 h budget, open questions). <strong>Updated</strong>: <code>index.md</code>, <code>face-identity-workflows.md</code>, <code>dragon-epic-plan.md</code> (links), <code>projects.json</code> (film3min, planning).</p>
 <h2>2026-09-21 — Identity conditioning concept page</h2>
 <p>Filed the Q&amp;A on <em>why</em> consistency tools work: <code>wiki/identity-conditioning.md</code> (five conditioning channels — text, in-context reference tokens, ID adapters, LoRA, first-frame latent — and our stack mapped onto them). Linked from <code>character-consistency</code>, <code>index</code>.</p>
+<h2>2026-09-21 — 3D infographic for the landscape page</h2>
+<p>Built an isometric "four-layer stack" infographic of <code>video-generation-landscape</code> (models → harnesses → local apps → platforms, gold outlines = this project's path). Source is CSS-3D HTML in <code>scripts/infographics/video-generation-landscape.html</code>, rendered by <code>scripts/render_infographic.sh</code> (headless Chrome, 2×) to <code>wiki/assets/video-generation-landscape-3d.webp</code> (~390 KB). Not a generative-model image — content mirrors the page's tables. <strong>Changed</strong>: <code>build_site.py</code> now copies <code>wiki/assets/</code> → <code>docs/wiki/assets/</code> and styles <code>img</code>; page embeds the image above "How to read this page"; <code>CLAUDE.md</code> folder list.</p>
   
 </div>
 <footer>video-gen-kb · built 2026-09-21 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>

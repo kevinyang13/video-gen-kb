@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Video Generation Landscape — 3D infographic</title>
+<style>
+  :root{
+    --bg:#0B0D12; --text:#E6E9F0; --muted:#8B94A7; --stroke:#2A3245;
+    --gold:#F5B84B; --cyan:#4BC9F5; --violet:#A78BFA; --rose:#F472B6; --green:#4ADE80;
+    --W:1600px; --H:1100px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:var(--W);height:var(--H);overflow:hidden;background:var(--bg);color:var(--text);
+    font-family:-apple-system,system-ui,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+  body{position:relative;
+    background:
+      radial-gradient(900px 600px at 78% 62%, rgba(75,201,245,.10), transparent 60%),
+      radial-gradient(800px 500px at 25% 25%, rgba(245,184,75,.10), transparent 60%),
+      var(--bg)}
+  body::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+                     linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+    background-size:40px 40px}
+
+  /* ---------- header ---------- */
+  .head{position:absolute;left:56px;top:44px;width:520px;z-index:5}
+  .kicker{font-size:13px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+  h1{font-size:44px;line-height:1.05;letter-spacing:-.02em;margin:10px 0 14px}
+  .sub{font-size:16px;line-height:1.5;color:var(--muted);max-width:480px}
+  .sub b{color:var(--text)}
+
+  /* ---------- legend ---------- */
+  .legend{position:absolute;left:56px;bottom:44px;z-index:5;display:flex;flex-direction:column;gap:9px;font-size:13px;color:var(--muted)}
+  .legend .row{display:flex;align-items:center;gap:10px}
+  .sw{width:26px;height:16px;border-radius:4px;border:1px solid rgba(255,255,255,.25)}
+  .sw.here{background:transparent;border:2px solid var(--gold);box-shadow:0 0 0 2px rgba(245,184,75,.25)}
+  .stars{color:var(--gold);letter-spacing:.05em}
+  .foot{position:absolute;right:56px;bottom:44px;z-index:5;font-size:12px;color:var(--muted);text-align:right;line-height:1.6}
+
+  /* ---------- isometric scene ---------- */
+  .scene{position:absolute;left:0;top:0;width:var(--W);height:var(--H);transform-style:preserve-3d;perspective:none}
+  .stack{position:absolute;left:720px;top:640px;width:760px;height:400px;transform-style:preserve-3d;
+    transform-origin:50% 50%;transform:scale(.8) translateZ(-480px) rotateX(57deg) rotateZ(-33deg)}
+  .layer{position:absolute;left:0;top:0;width:760px;height:400px;transform-style:preserve-3d;
+    border-radius:14px}
+  .plate{position:absolute;inset:0;border-radius:14px;transform-style:preserve-3d;
+    background:linear-gradient(135deg,var(--c1),var(--c2));
+    border:1px solid rgba(255,255,255,.18);
+    box-shadow:0 0 0 1px rgba(0,0,0,.35) inset}
+  /* thickness: bottom copy + two visible side faces */
+  .plate::before{content:"";position:absolute;inset:0;border-radius:14px;background:var(--c3);
+    transform:translateZ(-22px)}
+  .side-f{position:absolute;left:0;top:100%;width:100%;height:22px;background:var(--c3);
+    transform-origin:top;transform:rotateX(-90deg);filter:brightness(.72)}
+  .side-r{position:absolute;left:100%;top:0;width:22px;height:100%;background:var(--c3);
+    transform-origin:left;transform:rotateY(90deg);filter:brightness(.55)}
+  .shadow{position:absolute;inset:0;border-radius:14px;background:rgba(0,0,0,.55);filter:blur(28px);
+    transform:translateZ(-60px) translate(30px,30px)}
+
+  /* label that stands up off the plate */
+  .tag{position:absolute;left:-18px;top:-18px;padding:6px 12px;border-radius:8px;font-size:12px;font-weight:800;
+    letter-spacing:.12em;text-transform:uppercase;color:#12131A;background:var(--lc);
+    box-shadow:0 6px 18px rgba(0,0,0,.45);transform:translateZ(6px)}
+  .title{position:absolute;left:22px;top:22px;font-size:22px;font-weight:800;letter-spacing:-.01em;color:#fff;
+    text-shadow:0 2px 8px rgba(0,0,0,.4)}
+  .title small{display:block;font-size:12px;font-weight:600;color:rgba(255,255,255,.75);letter-spacing:.02em;margin-top:2px}
+
+  .tiles{position:absolute;left:22px;right:22px;top:100px;bottom:20px;display:grid;
+    grid-template-columns:repeat(4,1fr);grid-auto-rows:min-content;gap:10px;align-content:start;transform-style:preserve-3d}
+  .tiles.cols5{grid-template-columns:repeat(5,1fr)}
+  .t{position:relative;background:rgba(11,13,18,.72);border:1px solid rgba(255,255,255,.14);border-radius:9px;
+    padding:9px 28px 9px 10px;font-size:14px;font-weight:700;color:#fff;line-height:1.2;transform:translateZ(10px);
+    box-shadow:0 8px 16px rgba(0,0,0,.35);backdrop-filter:blur(2px)}
+  .t small{display:block;font-size:11px;font-weight:600;color:var(--muted);margin-top:3px;letter-spacing:.01em}
+  .t .st{position:absolute;right:7px;top:7px;font-size:10px;color:var(--gold);letter-spacing:.04em}
+  .t.here{border:2px solid var(--gold);box-shadow:0 0 0 3px rgba(245,184,75,.22),0 10px 22px rgba(0,0,0,.45);transform:translateZ(14px)}
+  .t.here::after{content:"";position:absolute;inset:-2px;border-radius:9px;box-shadow:0 0 22px rgba(245,184,75,.45);pointer-events:none}
+  .split{position:absolute;left:22px;right:22px;top:100px;bottom:20px;display:grid;grid-template-columns:1fr 1fr;gap:18px;transform-style:preserve-3d}
+  .half{position:relative;transform-style:preserve-3d}
+  .half h4{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:8px;
+    transform:translateZ(6px)}
+  .half .tiles{position:static;grid-template-columns:repeat(2,1fr);gap:8px}
+  .half.closed .t{background:rgba(30,12,30,.72)}
+
+  /* layer colors + z positions (bottom → top) */
+  .l1{--c1:#1E2A48;--c2:#0E1730;--c3:#0A1020;--lc:var(--cyan);transform:translateZ(0)}
+  .l2{--c1:#2A1E4E;--c2:#160E30;--c3:#0E0920;--lc:var(--violet);transform:translateZ(340px)}
+  .l3{--c1:#123A2E;--c2:#0A2019;--c3:#061510;--lc:var(--green);transform:translateZ(680px)}
+  .l4{--c1:#4A1E3A;--c2:#2A0E20;--c3:#1A0814;--lc:var(--rose);transform:translateZ(1020px)}
+
+  /* connector arrows between layers (drawn flat on scene) */
+  .arrows{position:absolute;left:0;top:0;width:var(--W);height:var(--H);pointer-events:none;z-index:4}
+  .cap{position:absolute;font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+
+  .key{position:absolute;left:56px;top:400px;width:520px;z-index:5;display:flex;flex-direction:column;gap:14px}
+  .key .k{display:flex;gap:14px;align-items:flex-start}
+  .key .dot{width:14px;height:14px;border-radius:4px;margin-top:5px;flex:none;box-shadow:0 0 12px var(--kc);background:var(--kc)}
+  .key b{display:block;font-size:16px;color:var(--text)}
+  .key span{font-size:13.5px;color:var(--muted);line-height:1.45}
+  .key .n{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--kc)}
+  .callout{margin-top:26px;padding:14px 16px;border:1px solid rgba(245,184,75,.45);border-radius:12px;background:rgba(245,184,75,.06);
+    font-size:13.5px;color:var(--muted);line-height:1.5}
+  .callout b{color:var(--gold);display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:4px}
+  .callout em{color:var(--text);font-style:normal;font-weight:700}
+</style>
+</head>
+<body>
+
+<div class="head">
+  <div class="kicker">video-gen-kb · landscape · 2026-09</div>
+  <h1>The AI video stack, in four layers</h1>
+  <p class="sub"><b>Models</b> are weights. A <b>harness</b> runs them. An <b>app</b> wraps a harness in a GUI. A <b>platform</b> rents closed or open models by the clip. Most confusion (“OpenArt vs Seedance”) is comparing across layers.</p>
+</div>
+
+<div class="key">
+  <div class="k" style="--kc:var(--rose)"><div class="dot"></div><div><div class="n">Layer 4 · top</div><b>Websites / platforms</b><span>Rent clips of closed models (Seedance, Veo, Sora, Kling) or open ones via API. Cheapest way to try a model once.</span></div></div>
+  <div class="k" style="--kc:var(--green)"><div class="dot"></div><div><div class="n">Layer 3</div><b>Local apps</b><span>GUI around a harness. Draw Things is the Mac default; Topaz for paid upscaling; ffmpeg glues it all.</span></div></div>
+  <div class="k" style="--kc:var(--violet)"><div class="dot"></div><div><div class="n">Layer 2</div><b>Harnesses</b><span>Load weights and run them. ComfyUI is the standard; Draw Things engine and MLX are Metal-native.</span></div></div>
+  <div class="k" style="--kc:var(--cyan)"><div class="dot"></div><div><div class="n">Layer 1 · foundation</div><b>Models</b><span>Open weights (Wan, LTX, Hunyuan) run on a Mac. Closed models (Seedance, Veo, Sora, Kling) are the quality ceiling — API only.</span></div></div>
+  <div class="callout"><b>Where this project sits</b><em>Wan 2.2 · LTX-2.3 → Draw Things engine / MLX → Draw Things + REAL Video Enhancer + ffmpeg.</em> Local, open, Apple Silicon. Closed models are a per-clip fallback via fal.ai for hero shots.</div>
+</div>
+
+<div class="scene">
+  <div class="stack">
+
+    <!-- LAYER 1: MODELS -->
+    <div class="layer l1">
+      <div class="shadow"></div>
+      <div class="plate">
+        <div class="side-f"></div><div class="side-r"></div>
+        <div class="tag">Layer 1</div>
+        <div class="title">Models<small>weights — open on the left, closed / API-only on the right</small></div>
+        <div class="split">
+          <div class="half">
+            <h4>Open weights · runs on Mac</h4>
+            <div class="tiles">
+              <div class="t here">Wan 2.2<small>Alibaba · 14B MoE · 720p</small><span class="st">★★★</span></div>
+              <div class="t here">LTX-2.3<small>Lightricks · 22B · audio · 4K</small><span class="st">★★</span></div>
+              <div class="t">LTX-2.5<small>Lightricks · 22B · 4K HDR</small><span class="st">★★</span></div>
+              <div class="t">HunyuanVideo 1.5<small>Tencent · 8.3B · 720p</small><span class="st">★★</span></div>
+              <div class="t">SeedVR2<small>ByteDance · upscaler</small><span class="st">★★</span></div>
+              <div class="t">Real-ESRGAN · RIFE<small>upscale · interpolate</small><span class="st">★★★</span></div>
+            </div>
+          </div>
+          <div class="half closed">
+            <h4>Closed · API only</h4>
+            <div class="tiles">
+              <div class="t">Seedance 2.5<small>ByteDance · 4K · leaderboard top</small><span class="st">★★★</span></div>
+              <div class="t">Veo 3.x<small>Google DeepMind · 4K · audio</small><span class="st">★★★</span></div>
+              <div class="t">Sora 2<small>OpenAI · 1080p · social</small><span class="st">★★★</span></div>
+              <div class="t">Kling 2.x / 3<small>Kuaishou · strong I2V motion</small><span class="st">★★★</span></div>
+              <div class="t">Runway Gen-4.5<small>pro / film · Aleph</small><span class="st">★★</span></div>
+              <div class="t">Luma Ray 3 · Hailuo 02<small>1080p HDR · physics</small><span class="st">★★</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LAYER 2: HARNESSES -->
+    <div class="layer l2">
+      <div class="shadow"></div>
+      <div class="plate">
+        <div class="side-f"></div><div class="side-r"></div>
+        <div class="tag">Layer 2</div>
+        <div class="title">Harnesses<small>inference engines that load weights and run them</small></div>
+        <div class="tiles">
+          <div class="t">ComfyUI<small>node graph · CUDA / MPS</small><span class="st">★★★</span></div>
+          <div class="t here">Draw Things engine<small>Metal + FlashAttention</small><span class="st">★★</span></div>
+          <div class="t here">MLX ports<small>mlx-video · ltx-2-mlx</small><span class="st">★</span></div>
+          <div class="t">diffusers<small>PyTorch · MPS partial</small><span class="st">★★★</span></div>
+          <div class="t">WanGP<small>low-VRAM wrapper</small><span class="st">★★</span></div>
+          <div class="t">LightX2V<small>4-step distill LoRAs</small><span class="st">★★</span></div>
+          <div class="t">GGUF quants<small>format · city96</small><span class="st">★★</span></div>
+          <div class="t">SwarmUI · TensorRT<small>GUI · RTX accel</small><span class="st">★</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LAYER 3: LOCAL APPS -->
+    <div class="layer l3">
+      <div class="shadow"></div>
+      <div class="plate">
+        <div class="side-f"></div><div class="side-r"></div>
+        <div class="tag">Layer 3</div>
+        <div class="title">Local apps<small>a GUI around a harness — runs on your Mac</small></div>
+        <div class="tiles">
+          <div class="t here">Draw Things<small>macOS · iOS · free</small><span class="st">★★</span></div>
+          <div class="t here">REAL Video Enhancer<small>RIFE + Real-ESRGAN</small><span class="st">★</span></div>
+          <div class="t">Topaz Video AI<small>paid · pro upscaling</small><span class="st">★★★</span></div>
+          <div class="t">ComfyUI Desktop<small>free · anything</small><span class="st">★★</span></div>
+          <div class="t">ltx-video-mac<small>MLX · LTX-2.5</small><span class="st">★</span></div>
+          <div class="t">Pinokio<small>one-click installer</small><span class="st">★</span></div>
+          <div class="t here">ffmpeg<small>assemble · loop · encode</small><span class="st">★★★</span></div>
+          <div class="t">Final Cut · Resolve<small>NLE · color · export</small><span class="st">★★★</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LAYER 4: PLATFORMS -->
+    <div class="layer l4">
+      <div class="shadow"></div>
+      <div class="plate">
+        <div class="side-f"></div><div class="side-r"></div>
+        <div class="tag">Layer 4</div>
+        <div class="title">Websites / platforms<small>rent closed or open models by the clip</small></div>
+        <div class="tiles cols5">
+          <div class="t here">fal.ai<small>API · per-second · hero-shot fallback</small></div>
+          <div class="t">OpenArt<small>aggregator suite</small></div>
+          <div class="t">Dreamina · CapCut<small>home of Seedance</small></div>
+          <div class="t">Replicate<small>open models as APIs</small></div>
+          <div class="t">Runway<small>Gen-4 / 4.5</small></div>
+          <div class="t">Flow · Gemini<small>Veo 3.x</small></div>
+          <div class="t">Sora app<small>Sora 2</small></div>
+          <div class="t">Kling AI<small>credit packs</small></div>
+          <div class="t">Luma · Hailuo<small>Ray 3 · Hailuo 02</small></div>
+          <div class="t">Civitai · HF<small>LoRAs · weights</small></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="legend">
+  <div class="row"><span class="stars">★★★</span><span>dominant in its layer &nbsp;·&nbsp; <span class="stars">★★</span> widely used &nbsp;·&nbsp; <span class="stars">★</span> niche</span></div>
+</div>
+<div class="foot">Popularity is a qualitative read, as of 2026-09-19.<br>Source: wiki/video-generation-landscape.md · rendered from HTML, not a generative model.</div>
+
+</body>
+</html>

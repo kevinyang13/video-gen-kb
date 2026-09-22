@@ -41,6 +41,7 @@ blockquote{border-left:3px solid var(--accent);background:var(--panel);border-ra
 padding:.8rem 1.1rem;margin:1.1rem 0;color:var(--muted);font-size:.92rem}
 code{background:var(--panel);border:1px solid var(--stroke);border-radius:5px;padding:.1rem .35rem;
 font-size:.85em;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--code)}
+img{max-width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--stroke);margin:1.1rem 0}
 pre{background:var(--panel);border:1px solid var(--stroke);border-radius:12px;padding:1rem;overflow-x:auto;margin:1.1rem 0}
 pre code{background:none;border:none;padding:0;color:var(--text);font-size:.83rem;line-height:1.55}
 .tw{overflow-x:auto;border:1px solid var(--stroke);border-radius:12px;background:var(--panel);margin:1.1rem 0}
@@ -91,8 +92,10 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
     <span class="spacer"></span>
     <button class="pill" onclick="tt()">◐ Theme</button>
   </nav>
-  <h1>Video Generation Landscape (2026)</h1><p class="lede">One-page map of the AI video space as of 2026-09-19 — models (open and closed), the harnesses that run them, the apps and websites that sell access, launch dates, and a rough popularity read. Use it to place any new name you hear.</p><div class="meta"><span><b>Updated</b> 2026-09-19</span><span><b>Sources</b> 2026-09-19-local-4k-video-research.md. Entries marked <em>needs verification</em> come from general knowledge, not a file in <code>raw/</code>.</span></div>
+  <h1>Video Generation Landscape (2026)</h1><p class="lede">One-page map of the AI video space as of 2026-09-19 — models (open and closed), the harnesses that run them, the apps and websites that sell access, launch dates, and a rough popularity read. Use it to place any new name you hear.</p><div class="meta"><span><b>Updated</b> 2026-09-21</span><span><b>Sources</b> 2026-09-19-local-4k-video-research.md. Entries marked <em>needs verification</em> come from general knowledge, not a file in <code>raw/</code>.</span></div>
 <hr />
+<p><a href="assets/video-generation-landscape-3d.webp"><img alt="Isometric 3D infographic: the AI video stack as four stacked layers — Layer 1 models (open on the left, closed on the right), Layer 2 harnesses, Layer 3 local apps, Layer 4 websites/platforms; gold outlines mark this project's path (Wan 2.2 / LTX-2.3 → Draw Things engine / MLX → Draw Things + REAL Video Enhancer + ffmpeg, fal.ai fallback)" src="assets/video-generation-landscape-3d.webp" /></a></p>
+<p><em>Infographic rendered from <code>scripts/infographics/video-generation-landscape.html</code> (CSS 3D, headless Chrome). Content mirrors the tables below; ★ ratings and "this project" highlights are the same qualitative reads. Click for full size.</em></p>
 <h2>How to read this page</h2>
 <p>Four layers. A <strong>model</strong> is weights. A <strong>harness</strong> loads weights and runs them. An <strong>app</strong> wraps a harness in a GUI. A <strong>website/platform</strong> rents closed or open models by the clip. Most confusion ("OpenArt vs Seedance") comes from comparing across layers.</p>
 <p>Popularity is a qualitative read: ★★★ = dominant in its layer, ★★ = widely used, ★ = niche. Dates are first public release of the named version.</p>

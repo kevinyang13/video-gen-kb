@@ -4,9 +4,13 @@
 
 **Sources**: 2026-09-19-local-4k-video-research.md. Entries marked *needs verification* come from general knowledge, not a file in `raw/`.
 
-**Last updated**: 2026-09-19
+**Last updated**: 2026-09-21
 
 ---
+
+[![Isometric 3D infographic: the AI video stack as four stacked layers — Layer 1 models (open on the left, closed on the right), Layer 2 harnesses, Layer 3 local apps, Layer 4 websites/platforms; gold outlines mark this project's path (Wan 2.2 / LTX-2.3 → Draw Things engine / MLX → Draw Things + REAL Video Enhancer + ffmpeg, fal.ai fallback)](assets/video-generation-landscape-3d.webp)](assets/video-generation-landscape-3d.webp)
+
+*Infographic rendered from `scripts/infographics/video-generation-landscape.html` (CSS 3D, headless Chrome). Content mirrors the tables below; ★ ratings and "this project" highlights are the same qualitative reads. Click for full size.*
 
 ## How to read this page
 
