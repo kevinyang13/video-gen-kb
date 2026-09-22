@@ -323,7 +323,8 @@
           "time_min": 25,
           "prompt": "The creature walks slowly from left to right with a heavy four-legged gait, its head bobbing and tail swaying, while the camera tracks alongside at the same pace so the rider stays centred in frame. The rider sways gently in the saddle, the cloak lifting in a light breeze. Behind them the waterfall pours steadily and thin mist drifts through the shafts of light; two birds glide across the distant spires. Heavy footsteps on damp earth, the far roar of the waterfall, faint jungle birdsong, no music. Photorealistic, cinematic, smooth motion."
         },
-        "shot2_prompt": "very slow push in, the camera drifting gently forward toward the city, mist drifting slowly through the god rays, the waterfall flowing steadily, thin clouds moving very slowly, ferns and palm fronds swaying in a light breeze, tiny birds gliding across the distant sky, the small rider and creature walking slowly along the path away from the camera, subtle motion, smooth, cinematic, photorealistic"
+        "shot2_prompt": "very slow push in, the camera drifting gently forward toward the city, mist drifting slowly through the god rays, the waterfall flowing steadily, thin clouds moving very slowly, ferns and palm fronds swaying in a light breeze, tiny birds gliding across the distant sky, the small rider and creature walking slowly along the path away from the camera, subtle motion, smooth, cinematic, photorealistic",
+        "shot2_ltx_prompt": "The camera pushes in very slowly and steadily toward the distant city, the mossy columns in the foreground drifting past the edges of the frame. The small rider and creature walk slowly down the dirt path away from the camera toward the city. Mist drifts through the shafts of light, the waterfall pours steadily under the stone arch, ferns and palm fronds sway in a light breeze, and tiny birds glide across the sky above the spires. Wind through jungle leaves, the distant hush of the waterfall, faint birdsong, no music. Photorealistic, cinematic, smooth motion."
       },
       "post": {
         "upscale": "scripts/upscale_4k.sh — Real-ESRGAN x4plus → 3840x2160 HEVC 10-bit",
@@ -338,7 +339,8 @@
         "lostcity/s2_still_v1.png (shot 2 still, klein, refs: our s1 skyline + spires crop, seed 1)",
         "lostcity/s7_still_v1.png (shot 7 still, v2 wording without the word dragon)",
         "lostcity/s2_wan_v1.mov (shot 2 I2V, Wan 2.2, 1280x768x81)",
-        "lostcity/s2_wan_v1_4k.mp4 (3840x2160 HEVC 10-bit)"
+        "lostcity/s2_wan_v1_4k.mp4 (3840x2160 HEVC 10-bit)",
+        "lostcity/s2_ltx_v1.mov (shot 2 via LTX-2.3, 1024x576x97 @25fps + audio)"
       ],
       "notes": "Plan: wiki/lost-city-plan.md. Reference is an OpenArt render (closed model, unknown); we re-generate our own frame. 8 shots × 5 s first. Experiments L0–L6 gate rendering; L1 = first LTX-2.3 test on this Mac."
     }

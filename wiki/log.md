@@ -216,3 +216,7 @@ Draw Things project `lostcity-s1` (renamed at creation — new rule: never leave
 ## 2026-09-21 — Lost City shot 2 clip at 4K
 
 First finished Lost City clip: shot 2 still → Wan 2.2 I2V (49 min at 1280×768 × 81 f, refiner 11%, Lightning 100%, DDIM Trailing, shift 5) → Real-ESRGAN 4K (6:19). Slow push-in + tiny walking rider, no artefacts; L5 (foliage shimmer) passes. Gotcha: the export Save sheet's filename field refused typing this time (AXGroup, not AXTextField) — saved under the stale default name and renamed on disk; always `find -mmin` the export folder after Save. Files in `raw/clips/lostcity/`.
+
+## 2026-09-21 — Shot 2 A/B: Wan 2.2 vs LTX-2.3
+
+Same shot-2 still through both engines. Wan (768p, 49 min): subtle stable push, rider walks. LTX (576p, ~20 min, audio): real push-in with foreground parallax (invents palm fronds/column passing the lens), obeyed the camera prompt this time — an action-first paragraph with an explicit "camera pushes in … columns drifting past the edges" phrasing. Both clean. Recorded in plan §7b. Draw Things gotcha: clicking the export icon on a video saves straight to the last folder with the prompt-derived name (no sheet if the folder is remembered) — a second click makes a duplicate.
