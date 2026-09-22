@@ -209,6 +209,17 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <td><code>—</code></td>
 <td>—</td>
 </tr>
+<tr>
+<td style="text-align: right;">10</td>
+<td><a href="#lost_city">Lost City — hyper-real rider on a raptor-dragon entering jungle ruins</a></td>
+<td>2026-09-21</td>
+<td>planning</td>
+<td>FLUX.2 [klein] 9B 1280x768</td>
+<td>Wan 2.2 High Noise I2V (8-bit S) + Low Noise refiner 10% (proven) — or LTX-2.3 22B distilled 1.1 (experiment L1: 8 steps, CFG 1, 1280x736, 121 f @ 25 fps, audio) 45 min</td>
+<td>TBD</td>
+<td><code>—</code></td>
+<td>—</td>
+</tr>
 </tbody>
 </table></div>
 <h2>YouTube playlist — <a href="https://www.youtube.com/playlist?list=PLJx49Sf61wKQ">AI-Vids</a></h2>
@@ -1556,6 +1567,135 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <tr>
 <td>Music</td>
 <td>TBD</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="lost_city">Lost City — hyper-real rider on a raptor-dragon entering jungle ruins</h2>
+<ul>
+<li><strong>Date</strong>: 2026-09-21 · <strong>Status</strong>: planning · <strong>Draw Things project</strong>: <code>None</code></li>
+<li><strong>Files</strong> (<code>raw/clips/</code>): <code>lostcity/ref_openart_rider_ruins.webp (reference, raw/)</code></li>
+<li><strong>Notes</strong>: Plan: wiki/lost-city-plan.md. Reference is an OpenArt render (closed model, unknown); we re-generate our own frame. 8 shots × 5 s first. Experiments L0–L6 gate rendering; L1 = first LTX-2.3 test on this Mac.</li>
+</ul>
+<p><strong>Still</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Model</td>
+<td>FLUX.2 [klein] 9B (8-bit S)</td>
+</tr>
+<tr>
+<td>Size</td>
+<td>1280x768</td>
+</tr>
+<tr>
+<td>Steps</td>
+<td>4</td>
+</tr>
+<tr>
+<td>CFG</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Shift</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Sampler</td>
+<td>DDIM Trailing</td>
+</tr>
+</tbody>
+</table></div>
+<p>Prompt: <code>see wiki/lost-city-plan.md §5 — camera/lens/light → planes far-to-near → creature lock → hero lock; muted colours, low contrast, film grain</code></p>
+<p><strong>I2V</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Model</td>
+<td>Wan 2.2 High Noise I2V (8-bit S) + Low Noise refiner 10% (proven) — or LTX-2.3 22B distilled 1.1 (experiment L1: 8 steps, CFG 1, 1280x736, 121 f @ 25 fps, audio)</td>
+</tr>
+<tr>
+<td>Refiner</td>
+<td>Wan 2.2 Low Noise Expert I2V A14B (8-bit S) @ 10%</td>
+</tr>
+<tr>
+<td>LoRA</td>
+<td>Wan 2.2 A14B Lightning High-Noise 100%</td>
+</tr>
+<tr>
+<td>Size</td>
+<td>1280x768</td>
+</tr>
+<tr>
+<td>Frames</td>
+<td>81</td>
+</tr>
+<tr>
+<td>FPS</td>
+<td>16</td>
+</tr>
+<tr>
+<td>Steps</td>
+<td>4</td>
+</tr>
+<tr>
+<td>CFG</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Shift</td>
+<td>5.0</td>
+</tr>
+<tr>
+<td>Sampler</td>
+<td>UniPC Trailing</td>
+</tr>
+<tr>
+<td>Strength</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>I2V time (min)</td>
+<td>45</td>
+</tr>
+</tbody>
+</table></div>
+<p>Prompt: <code>tracking shot alongside the walking rider, rider kept centred; heavy four-legged gait; waterfall, mist through god rays, distant birds</code></p>
+<p><strong>Post</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Script</td>
+<td>scripts/finish_clip.sh</td>
+</tr>
+<tr>
+<td>Loop</td>
+<td>none — xfade concat</td>
+</tr>
+<tr>
+<td>Upscale</td>
+<td>scripts/upscale_4k.sh — Real-ESRGAN x4plus → 3840x2160 HEVC 10-bit</td>
+</tr>
+<tr>
+<td>Music</td>
+<td>TBD — ambient orchestral / ethereal choir (or LTX ambience)</td>
 </tr>
 </tbody>
 </table></div>

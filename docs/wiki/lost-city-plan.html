@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lost City — Project Plan (hyper-real sci-fantasy rider) — video-gen-kb</title>
+<style>
+:root{--bg:#0B0D12;--panel:#141822;--panel-2:#1B2130;--stroke:#2A3245;--text:#E6E9F0;
+--muted:#8B94A7;--accent:#F5B84B;--accent-2:#4BC9F5;--on-accent:#12131A;
+--rule:rgba(139,148,167,.22);--code:#F5B84B}
+@media(prefers-color-scheme:light){:root:not([data-theme=dark]){--bg:#F4F1EA;--panel:#fff;
+--panel-2:#FAF8F3;--stroke:#D9D3C6;--text:#16181F;--muted:#5D6473;--accent:#B8781A;
+--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}}
+:root[data-theme=light]{--bg:#F4F1EA;--panel:#fff;--panel-2:#FAF8F3;--stroke:#D9D3C6;
+--text:#16181F;--muted:#5D6473;--accent:#B8781A;--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);
+line-height:1.65;padding:0 1rem 4rem}
+.shell{max-width:840px;margin:0 auto}
+a{color:var(--accent);text-decoration:none;font-weight:600}
+a:hover{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--accent-2);outline-offset:3px;border-radius:4px}
+.bar{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;padding:1.1rem 0;margin-bottom:1.5rem;
+border-bottom:1px solid var(--stroke)}
+.crumb{font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.spacer{flex:1}
+.pill{border:1px solid var(--stroke);background:var(--panel);border-radius:999px;padding:.28rem .8rem;
+font-size:.75rem;font-weight:700;color:var(--text);cursor:pointer;font-family:inherit}
+.pill:hover{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+h1{font-size:clamp(1.7rem,5vw,2.5rem);margin:.2rem 0 1rem;line-height:1.1;letter-spacing:-.015em;text-wrap:balance}
+h2{font-size:1.25rem;margin:2.2rem 0 .7rem;padding-bottom:.35rem;border-bottom:1px solid var(--rule);text-wrap:balance}
+h3{font-size:1.02rem;margin:1.5rem 0 .5rem;color:var(--accent)}
+p{margin:.7rem 0}
+ul,ol{margin:.7rem 0 .7rem 1.3rem}
+li{margin:.28rem 0}
+li::marker{color:var(--accent)}
+em{color:var(--muted)}
+hr{border:none;border-top:1px solid var(--stroke);margin:2rem 0}
+blockquote{border-left:3px solid var(--accent);background:var(--panel);border-radius:0 10px 10px 0;
+padding:.8rem 1.1rem;margin:1.1rem 0;color:var(--muted);font-size:.92rem}
+code{background:var(--panel);border:1px solid var(--stroke);border-radius:5px;padding:.1rem .35rem;
+font-size:.85em;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--code)}
+img{max-width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--stroke);margin:1.1rem 0}
+pre{background:var(--panel);border:1px solid var(--stroke);border-radius:12px;padding:1rem;overflow-x:auto;margin:1.1rem 0}
+pre code{background:none;border:none;padding:0;color:var(--text);font-size:.83rem;line-height:1.55}
+.tw{overflow-x:auto;border:1px solid var(--stroke);border-radius:12px;background:var(--panel);margin:1.1rem 0}
+table{width:100%;border-collapse:collapse;font-size:.85rem;min-width:min(100%,460px)}
+th{background:var(--panel-2);color:var(--accent);text-align:left;padding:.55rem .8rem;font-size:.68rem;
+letter-spacing:.09em;text-transform:uppercase;white-space:nowrap;border-bottom:1px solid var(--stroke)}
+td{padding:.5rem .8rem;border-bottom:1px solid var(--rule);color:var(--muted);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td strong{color:var(--text)}
+.meta{display:flex;flex-wrap:wrap;gap:.4rem .9rem;font-size:.78rem;color:var(--muted);margin:-.4rem 0 1.2rem}
+.meta b{color:var(--text);font-weight:600}
+.missing{color:var(--muted);border-bottom:1px dashed var(--muted);cursor:help}
+.related{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--stroke)}
+.related h2{border:none;margin:0 0 .7rem;font-size:.95rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:0}
+.chips li{margin:0}
+.chips a,.chips .missing{display:inline-block;border:1px solid var(--stroke);background:var(--panel);
+border-radius:999px;padding:.28rem .8rem;font-size:.8rem}
+.chips a:hover{background:var(--accent);color:var(--on-accent);text-decoration:none;border-color:var(--accent)}
+footer{max-width:840px;margin:2.5rem auto 0;padding-top:1.2rem;border-top:1px solid var(--stroke);
+font-size:.75rem;color:var(--muted);text-align:center}
+/* landing */
+.hero{padding:2.4rem 0 1.6rem}
+.kicker{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2)}
+.hero h1{font-size:clamp(2rem,6vw,3.2rem);margin:.35rem 0 .5rem}
+.hero p{color:var(--muted);font-size:1.05rem;max-width:56ch}
+.hw{display:inline-flex;gap:.5rem;align-items:center;margin-top:1rem;border:1px solid var(--stroke);
+background:var(--panel);border-radius:999px;padding:.3rem .9rem;font-size:.78rem;color:var(--muted)}
+.hw .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.sec{margin-top:2.2rem}
+.sec h2{border:none;padding:0;margin:0 0 .8rem;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.9rem}
+.card{display:block;border:1px solid var(--stroke);background:var(--panel);border-radius:14px;padding:1rem 1.1rem;
+color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+.card b{display:block;color:var(--accent);font-size:1rem;margin-bottom:.3rem}
+.card span{font-size:.85rem;color:var(--muted);line-height:1.5}
+.stubs{font-size:.82rem;color:var(--muted);margin-top:.6rem}
+.yt{position:relative;width:100%;aspect-ratio:16/9;border:1px solid var(--stroke);border-radius:12px;overflow:hidden;background:#000;margin:1rem 0}
+.yt.yt-v{aspect-ratio:9/16;max-width:360px}
+.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="bar">
+    <span class="crumb"><a href="../">video-gen-kb</a> / <a href="index.html">Wiki</a></span>
+    <span class="spacer"></span>
+    <button class="pill" onclick="tt()">◐ Theme</button>
+  </nav>
+  <h1>Lost City — Project Plan (hyper-real sci-fantasy rider)</h1><p class="lede">Plan for a hyper-realistic short in the style of the OpenArt reference (<code>raw/lostcity/ref_openart_rider_ruins.webp</code>): a hooded rider on a saddled raptor-dragon walks into an overgrown city of stone spires, god rays, waterfall. Covers what makes the reference look real, the local pipeline, Draw Things settings per stage (FLUX.2 klein stills; Wan 2.2 vs <strong>LTX-2.3</strong> for motion), creature/hero/environment consistency, shot list, experiments, budget. Living document.</p><div class="meta"><span><b>Updated</b> 2026-09-21</span><span><b>Sources</b> <code>raw/lostcity/ref_openart_rider_ruins.webp</code> (reference, OpenArt watermark — generator unknown, probably a closed model such as Kling/Veo/Seedance; <em>unverified</em>); Wan 2.2 prompting guides (<a href="https://www.mimicpc.com/learn/how-to-craft-wan22-ai-video-prompts">MimicPC</a>, <a href="https://www.instasd.com/post/wan2-2-whats-new-and-how-to-write-killer-prompts">InstaSD</a>, <a href="https://whatlab.ai/guides/wan2-2-prompting-guide">WhatLab</a>); LTX docs (<a href="https://docs.ltx.io/open-source-model/usage-guides/image-to-video">I2V guide</a>, <a href="https://wiki.drawthings.ai/wiki/LTX-2">Draw Things LTX-2 wiki</a>, <a href="https://huggingface.co/Lightricks/LTX-2.3">HF LTX-2.3</a>); hands-on results from <a href="dragon-epic-plan.html">dragon epic plan</a> §7b (2026-09-21). All as of 2026-09-21.</span></div>
+<hr />
+<h2>1. What the reference does — and what we copy</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Element in the reference</th>
+<th>Why it reads as real</th>
+<th>How we get it locally</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Rider seen <strong>from behind</strong>, hood + grey-green cloak, satchel, boots in stirrups</td>
+<td>no face to judge → no uncanny valley; wardrobe is period-plausible</td>
+<td>hero always ¾-back or profile; face optional (one hero-turn shot at most) — see §4</td>
+</tr>
+<tr>
+<td>Creature = <strong>quadruped raptor-dragon</strong>, no wings, saddle, reins, saddlebag, horn crest</td>
+<td>grounded animal anatomy, tack that obeys gravity; scale ≈ horse+</td>
+<td>creature design sheet in the Moodboard (§4); "no wings" in every prompt</td>
+</tr>
+<tr>
+<td><strong>God rays</strong> through haze, cool overcast + warm sun, muted greens, soft shadows</td>
+<td>atmospheric perspective: 4–5 depth planes, each hazier</td>
+<td>prompt words: <em>volumetric god rays, layered haze, atmospheric perspective, natural overcast with sun breaks, muted desaturated greens</em></td>
+</tr>
+<tr>
+<td>Layered set: foreground fern/grass → creature → mossy blocks → waterfall/bridge → spire skyline</td>
+<td>parallax gives motion something to reveal</td>
+<td>describe the planes in order in the still prompt</td>
+</tr>
+<tr>
+<td>Waterfall, birds, dust in the light</td>
+<td>secondary motion sells the frame in video</td>
+<td>motion prompt: waterfall + birds + drifting dust, always</td>
+</tr>
+<tr>
+<td>Anamorphic 2.0:1 frame, 35–50 mm, slight film grain, no HDR glow</td>
+<td>cinema camera, not a phone</td>
+<td><code>anamorphic 35mm, subtle film grain</code>; export 2.39:1 letterbox optional</td>
+</tr>
+<tr>
+<td>Camera: slow <strong>side tracking</strong> with the walking rider</td>
+<td>subject stays centred → no ghosting from translation</td>
+<td>"tracking shot, camera moves with the rider, keeping them centred" (§3b/3c)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Colour: <strong>do not</strong> saturate. Reference is low-contrast, sand/olive/slate palette; the sky is near-white. Add <code>muted colours, low contrast, natural</code> to every still prompt.</p>
+<h2>2. Pipeline</h2>
+<pre><code>design sheets (creature, hero, city)  ──►  per-shot still (FLUX.2 klein + Moodboard refs, 1280×768)
+                                                 │
+                                                 ▼
+                       5 s clip — Wan 2.2 I2V (proven) **or** LTX-2.3 distilled (untested, 25 fps + audio)
+                                                 │
+                                                 ▼
+                          Real-ESRGAN ×4 → 3840×2160 HEVC 10-bit (scripts/upscale_4k.sh)
+                                                 │
+                                                 ▼
+                       ffmpeg: xfade concat → music/ambience → letterbox → title → 4K master
+</code></pre>
+<p>Same skeleton as <a href="dragon-epic-plan.html">dragon epic plan</a> §2. New: the LTX-2.3 branch (experiment L1 decides) and no face pass by default.</p>
+<h2>3. Draw Things configuration per stage</h2>
+<h3>3a. Stills — FLUX.2 [klein] 9B (8-bit S)</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Model</td>
+<td>FLUX.2 [klein] 9B (8-bit S)</td>
+<td><em>Try recommended settings</em> → steps 4, CFG 1, shift 3, DDIM Trailing. New projects inherit the last model (Wan) — re-pick klein every time</td>
+</tr>
+<tr>
+<td>Size</td>
+<td><strong>1280×768</strong></td>
+<td>1280×720 not reachable (64-px grid). Same size as the I2V so no rescale</td>
+</tr>
+<tr>
+<td>LoRA</td>
+<td>Disabled</td>
+<td>auto-clears when switching from Wan</td>
+</tr>
+<tr>
+<td>Control Inputs → <strong>Moodboard</strong></td>
+<td>1–3 reference images, equal weight</td>
+<td>klein's reference channel; <strong>no</strong> ControlNet/IP-Adapter/PuLID is compatible with klein (Dragon Epic E1). Learned 2026-09-21: an uncropped scene reference at equal weight <strong>imposes its composition</strong> — crop references to the element you want copied (creature head/neck, cloak, a spire cluster), never a full wide frame</td>
+</tr>
+<tr>
+<td>Prompt order</td>
+<td>camera + lens + light → planes far to near → creature → rider → palette</td>
+<td>see §5 prompt</td>
+</tr>
+<tr>
+<td>Negative</td>
+<td>n/a at CFG 1</td>
+<td>fix the prompt, not the negative</td>
+</tr>
+</tbody>
+</table></div>
+<p>Time: ~1 min per still with 3 refs (measured 2026-09-21 on Dragon Epic 1B v2).</p>
+<h3>3b. Motion A — Wan 2.2 I2V A14B (8-bit S) pair — the proven path</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Model / Refiner</td>
+<td>High Noise I2V (8-bit S) / Low Noise I2V (8-bit S) @ <strong>10%</strong> (never 50% with Lightning)</td>
+</tr>
+<tr>
+<td>LoRA</td>
+<td>Wan 2.2 A14B Lightning High-Noise 100%</td>
+</tr>
+<tr>
+<td>Steps / CFG / Shift / Sampler</td>
+<td>4 / 1.0 / 5 / UniPC Trailing</td>
+</tr>
+<tr>
+<td>Size / frames</td>
+<td>1280×768, 81 f @ 16 fps (5.06 s)</td>
+</tr>
+<tr>
+<td>Time</td>
+<td><strong>~45 min per clip</strong> at this size (measured)</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Motion prompt rules</strong> (from guides + our ghosting fix):
+- I2V formula = <em>subject motion + camera motion</em>, nothing about appearance (the image already has it). 80–120 words max; one camera move, one subject action, secondary ambience.
+- <strong>Walking creature</strong>: the rider must not slide across the frame at 4 steps. Phrase it as a <strong>tracking shot</strong> so the subject stays put and the <em>background</em> moves: <code>tracking shot, the camera moves alongside the rider at walking pace, keeping the rider and creature centred in frame; the creature walks with a slow heavy four-legged gait, head bobbing gently, tail swaying; the rider sways with the saddle, cloak moving in a light breeze; the waterfall flows, mist drifts through the god rays, two birds cross the sky far away; smooth motion, cinematic, photorealistic</code>. Test = <strong>L2</strong>.
+- Camera vocabulary Wan 2.2 obeys: <em>pushes in / pulls back / tilts up / tracking shot / fixed lens / handheld</em>. Speed word every time (<em>slowly</em>). Avoid whip pans and anything that reveals geometry not in the still.
+- Full-frame creature shot (head fills frame): articulation only, no camera move (Dragon Epic rule).</p>
+<h3>3c. Motion B — LTX-2.3 22B distilled 1.1 — the candidate (installed, <strong>untested</strong> on this Mac)</h3>
+<p>Why try it here: native <strong>25 fps</strong>, joint <strong>audio</strong> (footsteps, waterfall, birds), stronger camera-move following, longer clips possible. Risk: memory (22B) and speed on 48 GB.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value (start here)</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Model</td>
+<td>LTX-2.3 22B [distilled] 1.1 — Local list, Draw Things quant</td>
+<td>DT model list 2026-09-21</td>
+</tr>
+<tr>
+<td>Steps / CFG</td>
+<td><strong>8 / 1.0</strong> (distilled; dev variant wants 20–25 / CFG 3–7)</td>
+<td>LTX docs; DT wiki numbers (20–25, CFG 6–7) are for the <em>dev</em> model</td>
+</tr>
+<tr>
+<td>Size</td>
+<td><strong>1280×736</strong> (both ÷32; 1280×720 not legal) — or 1024×576 for the first test</td>
+<td>LTX constraint</td>
+</tr>
+<tr>
+<td>Frames</td>
+<td><strong>121</strong> (8k+1) @ 25 fps = 4.84 s; 97 f = 3.9 s for the first test</td>
+<td>LTX constraint</td>
+</tr>
+<tr>
+<td>Strength (I2V)</td>
+<td>100% first frame; LTX reference uses 0.7 image conditioning in stage 1 — if DT exposes it, try 0.7–1.0</td>
+<td>LTX I2V guide</td>
+</tr>
+<tr>
+<td>Prompt</td>
+<td>one chronological paragraph, 4–8 sentences, &lt; 200 words: motion → camera → <strong>audio</strong> ("heavy footsteps on wet stone, distant waterfall roar, birdsong")</td>
+<td>LTX prompt guide</td>
+</tr>
+<tr>
+<td>Upscaler</td>
+<td>LTX ships ×2 / ×1.5 latent spatial upscalers (DT: <em>High Resolution Fix</em>) — try 1280→2560 in-app, then Real-ESRGAN to 3840; else skip and use §3d</td>
+<td>DT wiki</td>
+</tr>
+<tr>
+<td>Refiner / LoRA</td>
+<td>none</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p>Experiment <strong>L1</strong> measures: does it load, seconds per step, memory pressure, motion quality vs Wan on the same still. If LTX wins, <code>upscale_4k.sh</code> already reads fps from the file; <code>finish/assemble</code> must keep the audio track (<code>-map 1:a</code>).</p>
+<h3>3d. Upscale to 4K</h3>
+<p><code>scripts/upscale_4k.sh clip.mov</code> — Real-ESRGAN x4plus ncnn, tile 128, → 3840×2160 HEVC 10-bit 40 Mbps, ~6 min per 81-frame clip (121 frames → ~9 min). Before upscaling, check the clip has no shimmer on the fern foreground; if it does, try <code>realesr-general-x4v3</code> (denoise) <em>(verify model present in tools/realesrgan/models)</em>.</p>
+<h3>3e. Assembly</h3>
+<p><code>scripts/assemble_film.sh</code> (to write, shared with Dragon Epic): xfade 0.5 s, optional 2.39:1 letterbox (3840×1608 in 3840×2160), music + ambience, title, HEVC 10-bit. Music genre here: <strong>ambient orchestral / ethereal choir</strong>, quieter than Dragon Epic; pick from Pixabay when shot 1 exists.</p>
+<h2>4. Consistency — creature, hero, city</h2>
+<p>Same toolkit as <a href="character-consistency.html">character consistency</a>; three locks.</p>
+<p><strong>Creature lock (text, verbatim in every prompt)</strong>: <em>a large quadrupedal raptor-like dragon, no wings, slate-grey ridged hide, long neck with a bony horn crest, small amber eyes, leather saddle with reins and a brown satchel, walking on two heavy hind legs and two smaller forelegs</em>.
+<strong>Creature sheet (Moodboard)</strong>: first-shot still, <strong>cropped to head+neck</strong> and a second crop of saddle+flank. Never the full frame.</p>
+<p><strong>Hero lock</strong>: <em>a lone rider seen from behind, dark cropped hair, grey-green hooded cloak thrown back, brown leather jerkin, tan trousers, tall boots, hands on the reins</em>. No face by default. If a face shot is added later → Dragon Epic face path (Moodboard ×2 face crops; FaceFusion post).
+<strong>Hero sheet</strong>: crop of the rider from the first still.</p>
+<p><strong>City lock</strong>: <em>a lost city of tall eroded sandstone spires and ziggurat towers swallowed by jungle, a stone arch bridge and a waterfall between them, soft god rays through morning haze</em>. Plus one crop of a spire cluster in the Moodboard for the wide shots.</p>
+<p>Moodboard cap: <strong>3 images</strong> per still (klein guides say 3–5, &gt;7 muddies; at 1280×768 three refs cost ~1 min).</p>
+<h2>5. Scene 1 — locked to the reference</h2>
+<p>Shot 1 = the reference frame, re-generated by us (we do not animate the OpenArt image itself — different creature, and it is someone else's render).</p>
+<p><strong>Still prompt 1</strong>:
+<code>Cinematic film still, anamorphic 35mm, eye-level side view, muted colours, low contrast, subtle film grain. A lost city of tall eroded sandstone spires and ziggurat towers swallowed by jungle rises in the distance through morning haze, a stone arch bridge and a white waterfall between them, soft volumetric god rays breaking through thin cloud. Mossy stone blocks and palms in the middle distance, ferns and tall grass in the foreground. In the centre, [creature lock] walks left to right on a dirt path. On its back [hero lock]. Layered atmospheric perspective, photorealistic, highly detailed, natural overcast light with warm sun breaks.</code></p>
+<p><strong>Motion prompt 1 (Wan)</strong>: see §3b tracking-shot prompt.
+<strong>Motion prompt 1 (LTX)</strong>: <code>The creature walks slowly from left to right with a heavy four-legged gait, its head bobbing and tail swaying, while the camera tracks alongside at the same pace so the rider stays centred. The rider sways gently in the saddle, the cloak lifting in a light breeze. Behind them the waterfall pours steadily and thin mist drifts through the shafts of light; two birds glide across the distant spires. Heavy footsteps on damp earth, the far roar of the waterfall, faint jungle birdsong, no music.</code></p>
+<h2>6. Shot list (v0 — 8 × 5 s = 40 s; extend to 12 if it works)</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Shot</th>
+<th>Camera</th>
+<th>Subject motion</th>
+<th>Consistency need</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Reference frame</strong>: side, rider + creature walk toward the city</td>
+<td>slow side tracking</td>
+<td>walk, cloak, waterfall, birds</td>
+<td>creature + hero + city</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Extreme wide from a ledge: city skyline, tiny rider on the path</td>
+<td>very slow push in</td>
+<td>mist drift, birds, waterfall</td>
+<td>city</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Low angle, creature's feet and forelegs on wet stone, ferns</td>
+<td>fixed lens</td>
+<td>feet plant, dust puffs, grass sway</td>
+<td>creature (legs)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>¾-back medium on the rider's shoulders, spires beyond</td>
+<td>slow push in</td>
+<td>rider's head turns slightly, cloak, hair</td>
+<td>hero</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Creature head in profile, amber eye, horn crest, haze behind</td>
+<td>fixed lens</td>
+<td>slow blink, nostril flare, head turn ≤ 10° — <strong>articulation only</strong></td>
+<td>creature (head)</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Through the stone arch: rider crosses the bridge, waterfall to the side</td>
+<td>tracking from behind</td>
+<td>walk, spray, mist</td>
+<td>city + creature</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Reverse wide: rider entering the spire canyon, god rays overhead</td>
+<td>slow tilt up</td>
+<td>dust in the light, birds</td>
+<td>city</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Ending: rider dismounted, silhouette before the tallest tower, hood up</td>
+<td>slow pull back</td>
+<td>cloak, mist</td>
+<td>hero (silhouette)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Cheap shots first: 2, 3, 5, 7 have no hero face and simple motion — render them to test the look before the tracking shots.</p>
+<h2>7. Experiments (in order)</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Question</th>
+<th>Test</th>
+<th>Pass</th>
+<th>Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L0</td>
+<td>Does klein reproduce the reference <strong>look</strong> (palette, god rays, layering) without copying it?</td>
+<td>still prompt 1, Moodboard = 3 crops of the reference (spires, creature, foreground); 3 seeds</td>
+<td>2 of 3 read as film stills, not renders</td>
+<td>5 min</td>
+</tr>
+<tr>
+<td>L1</td>
+<td><strong>LTX-2.3 distilled 1.1 on the M4 Max</strong>: loads? time? quality? audio?</td>
+<td>same still → LTX at 1024×576, 97 f, 8 steps, CFG 1, motion prompt 1 (LTX); then 1280×736 × 121 f</td>
+<td>≤ 60 min/clip, no blobs, walk cycle plausible</td>
+<td>1–2 h</td>
+</tr>
+<tr>
+<td>L2</td>
+<td>Walking creature without ghosting on Wan 2.2 (tracking-shot phrasing)</td>
+<td>still 1 → Wan, §3b prompt</td>
+<td>legs cycle, rider stays centred, no double edges</td>
+<td>45 min</td>
+</tr>
+<tr>
+<td>L3</td>
+<td>Creature consistency via cropped sheet across two shots (1 → 5)</td>
+<td>shot 5 still with the head crop in Moodboard</td>
+<td>same crest/eye/hide</td>
+<td>5 min</td>
+</tr>
+<tr>
+<td>L4</td>
+<td>Hero consistency from behind (1 → 4)</td>
+<td>shot 4 still with the rider crop</td>
+<td>same cloak/jerkin/hair</td>
+<td>5 min</td>
+</tr>
+<tr>
+<td>L5</td>
+<td>Real-ESRGAN on fern foreground: shimmer?</td>
+<td>upscale L2 result, check 3 s loop</td>
+<td>no crawling texture</td>
+<td>10 min</td>
+</tr>
+<tr>
+<td>L6</td>
+<td>Music/ambience pick</td>
+<td>Pixabay "ambient orchestral ruins"</td>
+<td>Kevin approves</td>
+<td>10 min</td>
+</tr>
+</tbody>
+</table></div>
+<p>L1 decides the engine for the whole project; run L2 anyway as the fallback.</p>
+<h2>7b. Results</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Exp</th>
+<th>Date</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>—</td>
+<td>—</td>
+<td>none yet</td>
+</tr>
+</tbody>
+</table></div>
+<h2>8. Budget (Wan path; LTX unknown until L1)</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Design sheets + L0</td>
+<td>30 min</td>
+</tr>
+<tr>
+<td>L1</td>
+<td>1–2 h</td>
+</tr>
+<tr>
+<td>8 stills × ~3 seeds</td>
+<td>30 min</td>
+</tr>
+<tr>
+<td>8 clips × 45 min</td>
+<td>6 h (unattended)</td>
+</tr>
+<tr>
+<td>8 upscales × 6 min</td>
+<td>50 min</td>
+</tr>
+<tr>
+<td>Assembly + music</td>
+<td>45 min</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>~10 h</strong>, ~2.5 h attended</td>
+</tr>
+</tbody>
+</table></div>
+<h2>9. Risks</h2>
+<ul>
+<li><strong>Walk cycles</strong>: 4-step Lightning Wan struggles with limb cycles (Dragon 1A ghosting). Tracking phrasing (L2) or LTX (L1) mitigate; fallback = creature standing, only head/tail/cloak moving, camera does the travel.</li>
+<li><strong>LTX-2.3 memory</strong>: 22B quant + Gemma text encoder on 48 GB may swap; start at 1024×576 × 97 f.</li>
+<li><strong>Reference drift</strong>: klein may copy the OpenArt frame too closely (composition, creature). Crops only; different palette words if needed. We are not distributing their image.</li>
+<li><strong>Shimmer</strong> on high-frequency foliage after Real-ESRGAN → L5; alternative SeedVR2 (see <a href="video-upscaling.html">video upscaling</a>).</li>
+<li><strong>Saturation creep</strong>: Wan tends to warm/saturate; keep "muted colours" in the still and grade in ffmpeg if needed (<code>eq=saturation=0.9</code>).</li>
+</ul>
+<h2>10. Open questions for Kevin</h2>
+<ol>
+<li>Length: 40 s (8 shots) first, or straight to 60 s?</li>
+<li>Story beat at the end — dismount and look up (shot 8), or ride on into the city?</li>
+<li>Hero face ever shown? (If yes → face refs like Dragon Epic.)</li>
+<li>Sound: LTX-generated ambience if L1 works, or music only?</li>
+</ol>
+
+  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="dragon-epic-plan.html">dragon epic plan</a> — sibling project; motion rules and 4K path reused here</li><li><a href="character-consistency.html">character consistency</a> · <a href="identity-conditioning.html">identity conditioning</a></li><li><a href="image-to-video-models.html">image to video models</a> — LTX-2.3 facts · <a href="draw-things-setup.html">draw things setup</a></li><li><a href="video-upscaling.html">video upscaling</a> · <a href="runbook-living-painting.html">runbook living painting</a> · <a href="projects.html">projects</a></li></ul></div>
+</div>
+<footer>video-gen-kb · built 2026-09-21 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<script>function tt(){var r=document.documentElement,
+d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
+matchMedia('(prefers-color-scheme: dark)').matches);
+r.setAttribute('data-theme',d?'light':'dark');}</script>
+</body>
+</html>

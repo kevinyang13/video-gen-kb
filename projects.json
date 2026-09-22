@@ -278,6 +278,45 @@
       },
       "files": [],
       "notes": "Plan: wiki/three-minute-film-plan.md. Consistency stack: wiki/character-consistency.md. Waiting on story/style/characters from Kevin; experiments X1–X7 before rendering."
+    },
+    {
+      "id": "lost_city",
+      "title": "Lost City — hyper-real rider on a raptor-dragon entering jungle ruins",
+      "date": "2026-09-21",
+      "dt_project": null,
+      "status": "planning",
+      "still": {
+        "model": "FLUX.2 [klein] 9B (8-bit S)",
+        "size": "1280x768",
+        "steps": 4,
+        "cfg": 1.0,
+        "shift": 3,
+        "sampler": "DDIM Trailing",
+        "control": "Moodboard: up to 3 cropped refs (creature head/neck, rider, spire cluster) — never a full wide frame",
+        "prompt": "see wiki/lost-city-plan.md §5 — camera/lens/light → planes far-to-near → creature lock → hero lock; muted colours, low contrast, film grain"
+      },
+      "i2v": {
+        "model": "Wan 2.2 High Noise I2V (8-bit S) + Low Noise refiner 10% (proven) — or LTX-2.3 22B distilled 1.1 (experiment L1: 8 steps, CFG 1, 1280x736, 121 f @ 25 fps, audio)",
+        "size": "1280x768",
+        "frames": 81,
+        "fps": 16,
+        "steps": 4,
+        "cfg": 1.0,
+        "shift": 5.0,
+        "sampler": "UniPC Trailing",
+        "lora": "Wan 2.2 A14B Lightning High-Noise 100%",
+        "prompt": "tracking shot alongside the walking rider, rider kept centred; heavy four-legged gait; waterfall, mist through god rays, distant birds",
+        "time_min": 45
+      },
+      "post": {
+        "upscale": "scripts/upscale_4k.sh — Real-ESRGAN x4plus → 3840x2160 HEVC 10-bit",
+        "loop": "none — xfade concat",
+        "music": "TBD — ambient orchestral / ethereal choir (or LTX ambience)"
+      },
+      "files": [
+        "lostcity/ref_openart_rider_ruins.webp (reference, raw/)"
+      ],
+      "notes": "Plan: wiki/lost-city-plan.md. Reference is an OpenArt render (closed model, unknown); we re-generate our own frame. 8 shots × 5 s first. Experiments L0–L6 gate rendering; L1 = first LTX-2.3 test on this Mac."
     }
   ],
   "playlist": {

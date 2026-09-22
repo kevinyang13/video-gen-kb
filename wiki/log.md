@@ -196,3 +196,11 @@ Ghosting fixed by the prompt, not the refiner: full-frame subject articulates bu
 ## 2026-09-21 — Dragon Epic scene 1A on YouTube
 
 Added `Xzu-c5yX8uo` to the dragon_epic record. `build_projects.py` now picks the embed orientation from the I2V size (landscape `yt`, portrait `yt yt-v`) instead of hard-coding 9:16. Title corrected to "family hero face".
+
+## 2026-09-21 — Lost City project plan
+
+New project from an OpenArt reference (rider on a wingless raptor-dragon walking into overgrown spire ruins, god rays, waterfall). Research: Wan 2.2 prompt guides (subject+scene+movement; I2V = motion + camera only; 80–120 words; name the camera move and speed every time), LTX docs (I2V: describe what happens, not the image; 4–8 sentence paragraph; dialogue in quotes; defaults 768×512 × 97 f @ 24 fps, CFG 1 dual-CFG; sizes ÷32, frames 8k+1), Draw Things LTX-2 wiki (25 fps in DT; 20–25 steps / CFG 6–7 are dev-model numbers; ×2 / ×1.5 latent upscalers via High Resolution Fix). **Created** `wiki/lost-city-plan.md` — reference breakdown → local recipe, §3 Draw Things settings for klein stills (Moodboard crops only — full frames impose composition, learned on Dragon 1B v2), Wan 2.2 tracking-shot phrasing for a walking creature, first LTX-2.3 22B distilled 1.1 config (8 steps, CFG 1, 1280×736 × 121 f), creature/hero/city text locks, 8-shot list, L0–L6 experiments, ~10 h budget. **Updated**: `index.md`, `projects.json` (lost_city, planning), `.gitignore` (raw/lostcity/). Reference saved to `raw/lostcity/`.
+
+## 2026-09-21 — Dragon Epic scene 1B stills v1/v2
+
+E1 done (no klein-compatible face adapter → Moodboard). 1B v1: 1 face ref, medium shot, likeness partial, dragon anatomy wrong. v2: 3 refs (face head, face tight, 1A frame as dragon ref) — dragon now matches 1A and likeness improved, but the wide 1A frame pulled the composition wide. Fix for v3: dragon ref cropped to head/neck (`raw/dragon/ref_scene1a_dragon_head.png`). Both stills in DT project `Untitled-39715` Version History. Paused pending Kevin's pick.

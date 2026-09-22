@@ -600,6 +600,11 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <td>Refiner 50% + LoRA 80% + gentle prompt → <strong>washed-out noisy silhouette</strong>. Wrong lever: the Lightning LoRA is trained for the 10% split, and at 50% the low-noise expert gets only 2 steps. <strong>Refiner stays at 10%.</strong> v3 plan: 10%, LoRA 100%, motion prompt with no camera move and no "across the frame".</td>
 </tr>
 <tr>
+<td style="text-align: right;">E1</td>
+<td>2026-09-21</td>
+<td><strong>No adapter for klein.</strong> Control dropdown, <em>Comp.</em> tab with FLUX.2 klein selected = empty (Official and Community both). <em>All</em> tab has PuLID 0.9.1 (FLUX.1 dev only), FLEX.1 Redux SigLIP2 (FLUX.1), IP-Adapter Plus Face (SD1.5/SDXL), IP-Adapter FaceID (Kwai Kolors) — none load on klein. Face path for klein = <strong>Control Inputs → Moodboard</strong> (klein's native reference-image input; loaded <code>raw/face/hero_face_head.jpg</code> at weight 100%). Draw Things gotchas: dragging a file onto the <em>canvas</em> instead of the Moodboard area loads it as the base image and auto-captions it into the prompt ("1girl, aqua eyes…") — restart the project if that happens; new projects inherit the last-used model (Wan), so re-pick FLUX.2 klein and re-set 1280×768 each time.</td>
+</tr>
+<tr>
 <td style="text-align: right;">E6 v3</td>
 <td>2026-09-21</td>
 <td><strong>Clean.</strong> Refiner 10%, LoRA 100%, UniPC, shift 5, prompt: <code>the dragon hangs in the air with slow deep wing beats, its body and head steady in the frame, the rider sitting still, the distant dragon slowly beating its wings…</code>. 47 min render. No ghosting; wing beat, tail curl, subtle drift. <strong>Rule: on Wan 2.2 at 4 steps, a full-frame subject may articulate (wings, tail, head) but must not translate across the frame; leave the push-in to the edit (cut 1A→1B) or to a post zoom.</strong> 4K: <code>dragon/scene1a_v3_4k.mp4</code>.</td>

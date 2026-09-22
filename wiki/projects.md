@@ -21,6 +21,7 @@
 | 7 | [FLL BOT Builders — Coastal Roots Farm, wide view](#fll_farm) | 2026-09-20 | done (v2) | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Calm Ambient Dreamscape | `fll_farm_v2_final.mp4` | [▶ watch](https://youtu.be/-Mf2UThasCg) |
 | 8 | [Dragon Epic — 1-minute photoreal short, family hero face](#dragon_epic) | 2026-09-21 | in progress — scene 1A posted | FLUX.2 [klein] 9B 1280x768 | Wan 2.2 High Noise 47 min | The Dragon's Breath | `—` | [▶ watch](https://youtu.be/Xzu-c5yX8uo) |
 | 9 | [Three-minute film — recurring characters (subject TBD)](#film3min) | 2026-09-21 | planning | FLUX.2 [klein] 9B 1024x576 | Wan 2.2 High Noise 15 min | TBD | `—` | — |
+| 10 | [Lost City — hyper-real rider on a raptor-dragon entering jungle ruins](#lost_city) | 2026-09-21 | planning | FLUX.2 [klein] 9B 1280x768 | Wan 2.2 High Noise I2V (8-bit S) + Low Noise refiner 10% (proven) — or LTX-2.3 22B distilled 1.1 (experiment L1: 8 steps, CFG 1, 1280x736, 121 f @ 25 fps, audio) 45 min | TBD | `—` | — |
 
 ## YouTube playlist — [AI-Vids](https://www.youtube.com/playlist?list=PLJx49Sf61wKQ)
 
@@ -521,6 +522,53 @@ Prompt: `per shot — one camera move + one subject action`
 | Script | scripts/finish_clip.sh |
 | Upscale | Real-ESRGAN ncnn 4x -> 3840x2160 (scripts/upscale_4k.sh) |
 | Music | TBD |
+
+## Lost City — hyper-real rider on a raptor-dragon entering jungle ruins {#lost_city}
+
+- **Date**: 2026-09-21 · **Status**: planning · **Draw Things project**: `None`
+- **Files** (`raw/clips/`): `lostcity/ref_openart_rider_ruins.webp (reference, raw/)`
+- **Notes**: Plan: wiki/lost-city-plan.md. Reference is an OpenArt render (closed model, unknown); we re-generate our own frame. 8 shots × 5 s first. Experiments L0–L6 gate rendering; L1 = first LTX-2.3 test on this Mac.
+
+**Still**
+
+| Setting | Value |
+|---|---|
+| Model | FLUX.2 [klein] 9B (8-bit S) |
+| Size | 1280x768 |
+| Steps | 4 |
+| CFG | 1.0 |
+| Shift | 3 |
+| Sampler | DDIM Trailing |
+
+Prompt: `see wiki/lost-city-plan.md §5 — camera/lens/light → planes far-to-near → creature lock → hero lock; muted colours, low contrast, film grain`
+
+**I2V**
+
+| Setting | Value |
+|---|---|
+| Model | Wan 2.2 High Noise I2V (8-bit S) + Low Noise refiner 10% (proven) — or LTX-2.3 22B distilled 1.1 (experiment L1: 8 steps, CFG 1, 1280x736, 121 f @ 25 fps, audio) |
+| Refiner | Wan 2.2 Low Noise Expert I2V A14B (8-bit S) @ 10% |
+| LoRA | Wan 2.2 A14B Lightning High-Noise 100% |
+| Size | 1280x768 |
+| Frames | 81 |
+| FPS | 16 |
+| Steps | 4 |
+| CFG | 1.0 |
+| Shift | 5.0 |
+| Sampler | UniPC Trailing |
+| Strength | 100% |
+| I2V time (min) | 45 |
+
+Prompt: `tracking shot alongside the walking rider, rider kept centred; heavy four-legged gait; waterfall, mist through god rays, distant birds`
+
+**Post**
+
+| Setting | Value |
+|---|---|
+| Script | scripts/finish_clip.sh |
+| Loop | none — xfade concat |
+| Upscale | scripts/upscale_4k.sh — Real-ESRGAN x4plus → 3840x2160 HEVC 10-bit |
+| Music | TBD — ambient orchestral / ethereal choir (or LTX ambience) |
 
 ## Related pages
 - [[runbook-living-painting]]
