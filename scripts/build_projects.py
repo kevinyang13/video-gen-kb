@@ -87,8 +87,11 @@ def main():
                 f"- **Notes**: {p.get('notes', '')}", ""]
         if p.get("youtube"):
             note = f" *({p['youtube_note']})*" if p.get("youtube_note") else ""
+            size = (p.get("i2v") or {}).get("size") or defs["i2v"].get("size", "576x1024")
+            w, h = (int(x) for x in size.lower().split("x"))
+            cls = "yt" if w > h else "yt yt-v"
             out += [f"- **YouTube**: [youtu.be/{p['youtube']}](https://youtu.be/{p['youtube']}){note}", "",
-                    f'<div class="yt yt-v"><iframe src="https://www.youtube.com/embed/{p["youtube"]}" title="{p["title"]}" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>', ""]
+                    f'<div class="{cls}"><iframe src="https://www.youtube.com/embed/{p["youtube"]}" title="{p["title"]}" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>', ""]
         out += [
                 block("Still", defs["still"], p.get("still"), suffix), "",
                 block("I2V", defs["i2v"], p.get("i2v"), suffix), "",
