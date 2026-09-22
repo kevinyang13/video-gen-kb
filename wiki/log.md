@@ -220,3 +220,7 @@ First finished Lost City clip: shot 2 still → Wan 2.2 I2V (49 min at 1280×768
 ## 2026-09-21 — Shot 2 A/B: Wan 2.2 vs LTX-2.3
 
 Same shot-2 still through both engines. Wan (768p, 49 min): subtle stable push, rider walks. LTX (576p, ~20 min, audio): real push-in with foreground parallax (invents palm fronds/column passing the lens), obeyed the camera prompt this time — an action-first paragraph with an explicit "camera pushes in … columns drifting past the edges" phrasing. Both clean. Recorded in plan §7b. Draw Things gotcha: clicking the export icon on a video saves straight to the last folder with the prompt-derived name (no sheet if the folder is remembered) — a second click makes a duplicate.
+
+## 2026-09-21 — Wan vs LTX comparison filed
+
+Kevin's questions (why LTX faster; which has better quality; T2V vs I2V) answered and filed as a section in `image-to-video-models.md` (latent-token math, fidelity vs motion, both runs were I2V). LTX shot 2 upscaled to 4K with audio re-muxed (`s2_ltx_v1_4k_audio.mp4`; `upscale_4k.sh` strips audio — mux back from the .mov).

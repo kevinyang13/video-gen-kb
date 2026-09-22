@@ -92,7 +92,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
     <span class="spacer"></span>
     <button class="pill" onclick="tt()">◐ Theme</button>
   </nav>
-  <h1>Image-to-Video Models (Open Weights)</h1><p class="lede">Catalog of open-weight image-to-video models as of 2026-09-19, with size, license, native output, and how each runs on Apple Silicon.</p><div class="meta"><span><b>Updated</b> 2026-09-19</span><span><b>Sources</b> 2026-09-19-local-4k-video-research.md</span></div>
+  <h1>Image-to-Video Models (Open Weights)</h1><p class="lede">Catalog of open-weight image-to-video models as of 2026-09-19, with size, license, native output, and how each runs on Apple Silicon.</p><div class="meta"><span><b>Updated</b> 2026-09-21</span><span><b>Sources</b> 2026-09-19-local-4k-video-research.md</span></div>
 <hr />
 <p>All capability and size claims are <strong>as of 2026-09-19</strong>; this space moves monthly.</p>
 <h2>Wan 2.2 (Alibaba / Wan-AI)</h2>
@@ -135,6 +135,61 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <li><strong>MAGI-1</strong>: autoregressive, listed in 2026 roundups; no Mac data. Needs verification.</li>
 <li><strong>Wan 2.5 / 2.6</strong>: API-only from Alibaba as of last check; no open weights found. Needs verification.</li>
 </ul>
+<h2>Wan 2.2 vs LTX-2.3 on the M4 Max — measured (as of 2026-09-21)</h2>
+<p>Same still (Lost City shot 2, FLUX.2 klein 1280×768) animated with both. Source: <a href="lost-city-plan.html">lost city plan</a> §7b.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th></th>
+<th>Wan 2.2 I2V A14B pair (8-bit S) + Lightning</th>
+<th>LTX-2.3 22B distilled 1.1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Run</td>
+<td>1280×768 × 81 f @ 16 fps, 4 steps, refiner 10%</td>
+<td>1024×576 × 97 f @ 25 fps, 8 steps, CFG 1</td>
+</tr>
+<tr>
+<td>Wall clock</td>
+<td><strong>49 min</strong> (real compute, fits in 48 GB)</td>
+<td><strong>~20–25 min</strong> (≈3 min compute + swap: 22B DiT + Gemma encoder exceed 48 GB)</td>
+</tr>
+<tr>
+<td>Why the speed gap</td>
+<td>VAE 8×8 spatial / 4× temporal → ~320 k latent tokens per clip</td>
+<td>VAE 32×32 / 8× temporal → ~7.5 k tokens; ~10× fewer through the transformer. Plus 0.72× the pixels in this run</td>
+</tr>
+<tr>
+<td>First-frame fidelity</td>
+<td>exact; textures locked</td>
+<td>re-synthesised through the coarse latent — softer, invents foreground geometry (palm fronds, columns)</td>
+</tr>
+<tr>
+<td>Motion</td>
+<td>subtle, stable; no locomotion at 4 steps (ghosting)</td>
+<td>real walk cycles, camera moves with parallax; obeys explicit camera phrasing</td>
+</tr>
+<tr>
+<td>Audio</td>
+<td>none</td>
+<td>native ambience track (PCM in the .mov)</td>
+</tr>
+<tr>
+<td>Resolution ceiling here</td>
+<td>1280×768 fine</td>
+<td>1024×576; 1280×768 runs the 2-stage hi-res path and stalls in swap</td>
+</tr>
+<tr>
+<td>Use for</td>
+<td>hero / face / creature close-ups, living-painting loops</td>
+<td>wide establishing shots with camera moves, walking shots</td>
+</tr>
+</tbody>
+</table></div>
+<p>Both were <strong>image-to-video</strong> — Draw Things labels the Strength tab "Text to Video" for LTX and "Image to Video" for Wan, but the mode comes from the canvas: image present → I2V. Neither takes Moodboard references, which is why every shot starts as a klein still (composition/palette/character lock) before animation. Pure T2V exists in both (Wan needs the separate T2V checkpoints) but gives no consistency control.</p>
+<p>Short version: Wan = better <em>image</em> quality per frame; LTX = better <em>video</em> (motion, audio, speed). A fair 1280×768 LTX test in a clean-memory session is still open.</p>
 <h2>Choosing for family photos</h2>
 <p>Faces are the hard case. Priority: identity preservation &gt; motion &gt; resolution. Wan 2.2 14B with low motion prompts and 4-step LoRA is the baseline; compare SkyReels on portraits. Resolution comes from <a href="video-upscaling.html">video upscaling</a>, not the generator.</p>
 

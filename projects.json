@@ -340,7 +340,8 @@
         "lostcity/s7_still_v1.png (shot 7 still, v2 wording without the word dragon)",
         "lostcity/s2_wan_v1.mov (shot 2 I2V, Wan 2.2, 1280x768x81)",
         "lostcity/s2_wan_v1_4k.mp4 (3840x2160 HEVC 10-bit)",
-        "lostcity/s2_ltx_v1.mov (shot 2 via LTX-2.3, 1024x576x97 @25fps + audio)"
+        "lostcity/s2_ltx_v1.mov (shot 2 via LTX-2.3, 1024x576x97 @25fps + audio)",
+        "lostcity/s2_ltx_v1_4k_audio.mp4 (LTX shot 2 at 3840x2160 + audio)"
       ],
       "notes": "Plan: wiki/lost-city-plan.md. Reference is an OpenArt render (closed model, unknown); we re-generate our own frame. 8 shots × 5 s first. Experiments L0–L6 gate rendering; L1 = first LTX-2.3 test on this Mac."
     }

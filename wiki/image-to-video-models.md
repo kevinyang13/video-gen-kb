@@ -4,7 +4,7 @@
 
 **Sources**: 2026-09-19-local-4k-video-research.md
 
-**Last updated**: 2026-09-19
+**Last updated**: 2026-09-21
 
 ---
 
@@ -49,6 +49,25 @@ All capability and size claims are **as of 2026-09-19**; this space moves monthl
 - **Stable Video Diffusion**: I2V only, 25 frames. Obsolete but tiny.
 - **MAGI-1**: autoregressive, listed in 2026 roundups; no Mac data. Needs verification.
 - **Wan 2.5 / 2.6**: API-only from Alibaba as of last check; no open weights found. Needs verification.
+
+## Wan 2.2 vs LTX-2.3 on the M4 Max — measured (as of 2026-09-21)
+
+Same still (Lost City shot 2, FLUX.2 klein 1280×768) animated with both. Source: [[lost-city-plan]] §7b.
+
+| | Wan 2.2 I2V A14B pair (8-bit S) + Lightning | LTX-2.3 22B distilled 1.1 |
+|---|---|---|
+| Run | 1280×768 × 81 f @ 16 fps, 4 steps, refiner 10% | 1024×576 × 97 f @ 25 fps, 8 steps, CFG 1 |
+| Wall clock | **49 min** (real compute, fits in 48 GB) | **~20–25 min** (≈3 min compute + swap: 22B DiT + Gemma encoder exceed 48 GB) |
+| Why the speed gap | VAE 8×8 spatial / 4× temporal → ~320 k latent tokens per clip | VAE 32×32 / 8× temporal → ~7.5 k tokens; ~10× fewer through the transformer. Plus 0.72× the pixels in this run |
+| First-frame fidelity | exact; textures locked | re-synthesised through the coarse latent — softer, invents foreground geometry (palm fronds, columns) |
+| Motion | subtle, stable; no locomotion at 4 steps (ghosting) | real walk cycles, camera moves with parallax; obeys explicit camera phrasing |
+| Audio | none | native ambience track (PCM in the .mov) |
+| Resolution ceiling here | 1280×768 fine | 1024×576; 1280×768 runs the 2-stage hi-res path and stalls in swap |
+| Use for | hero / face / creature close-ups, living-painting loops | wide establishing shots with camera moves, walking shots |
+
+Both were **image-to-video** — Draw Things labels the Strength tab "Text to Video" for LTX and "Image to Video" for Wan, but the mode comes from the canvas: image present → I2V. Neither takes Moodboard references, which is why every shot starts as a klein still (composition/palette/character lock) before animation. Pure T2V exists in both (Wan needs the separate T2V checkpoints) but gives no consistency control.
+
+Short version: Wan = better *image* quality per frame; LTX = better *video* (motion, audio, speed). A fair 1280×768 LTX test in a clean-memory session is still open.
 
 ## Choosing for family photos
 
