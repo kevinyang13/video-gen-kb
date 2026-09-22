@@ -339,7 +339,7 @@
         "lostcity/s1_still_v1.png (shot 1 still, klein)",
         "lostcity/s1_ltx_v1.mov (LTX-2.3 test, 1024x576x97 @25fps + audio)",
         "lostcity/s2_still_v1.png (shot 2 still, klein, refs: our s1 skyline + spires crop, seed 1)",
-        "lostcity/s7_still_v1.png (shot 7 still, v2 wording without the word dragon)",
+        "lostcity/s7_still_v2.png (shot 7 still, wingless; s7_still_v1_winged.png = rejected v1)",
         "lostcity/s2_wan_v1.mov (shot 2 I2V, Wan 2.2, 1280x768x81)",
         "lostcity/s2_wan_v1_4k.mp4 (3840x2160 HEVC 10-bit)",
         "lostcity/s2_ltx_v1.mov (shot 2 via LTX-2.3, 1024x576x97 @25fps + audio)",
