@@ -232,3 +232,7 @@ Kevin asked for a page explaining the key scripts. **Created** `wiki/scripts-ref
 ## 2026-09-21 — Draw Things project rename without screen control
 
 Kevin asked for a rename path that doesn't need desktop takeover. Found: projects are `NAME.sqlite3` files in the app container; renaming the files renames the project and the list refreshes live (tested on a junk project). Added `scripts/dt_project.sh` (list/newest/rename/rename-newest/delete), documented in `scripts-reference.md`, CLAUDE.md and memory; the in-app Rename dialog is now a fallback only.
+
+## 2026-09-21 — Lost City shot 3 (LTX) and the close-up rule
+
+`lostcity-s3` (renamed on disk with `dt_project.sh` — no screen control; gotcha: the stale list row re-creates an Untitled if clicked, so refresh the panel and click the new name). Still first-seed keeper. LTX v1 with "one slow step" walked the creature out of frame and hallucinated a second rider — close-ups must use hold-position prompts; v2 clean. Music bed chosen (L6): "Mystical orchestral theme with ancient flute", mixed under LTX ambience. Files in `raw/clips/lostcity/`.

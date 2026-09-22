@@ -437,7 +437,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <td>Music/ambience pick</td>
 <td>Pixabay "ambient orchestral ruins"</td>
 <td>Kevin approves</td>
-<td>10 min</td>
+<td>10 min — <strong>picked</strong>: "Mystical orchestral theme with ancient flute" (DesiFreeMusic, 4:00), <code>raw/clips/music/mystical_flute.mp3</code></td>
 </tr>
 </tbody>
 </table></div>
@@ -461,6 +461,16 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <td>L1 (interim)</td>
 <td>2026-09-21</td>
 <td>LTX-2.3 22B distilled 1.1 <strong>loads and runs</strong> in Draw Things on the M4 Max, but is <strong>memory-bound</strong>. <em>Try recommended settings</em> gives steps 8, CFG 1.0, TCD Trailing, Strategic Stochastic Sampling 30%, shift 5, frames 121, and turns on <strong>High Resolution Fix</strong> = the official LTX two-stage pipeline (1st pass at half size 640×384, 2nd pass at full size, strength 70%). At 1280×768 × 121 f: stage 1 (8 steps @ 640×384) took ~3 min — fast — but stage 2 at 1280×768 stalled (swap 27–48 GB, step counter frozen for minutes) → stopped. At 1024×576 × 97 f DT auto-disables hi-res fix (single stage); the compute timer reads ~1 min per 10+ min wall clock — paging the 22B DiT + Gemma text encoder in and out of swap. Overlay says "Text to Image Generation" but the canvas still <strong>is</strong> used as first frame (preview shows creature + rider); the Strength tab reads <em>Text to Video 100%</em> for LTX I2V. Canvas larger than the generation area → centre crop, not scale.</td>
+</tr>
+<tr>
+<td>Shot 3 v2 (LTX)</td>
+<td>2026-09-21</td>
+<td>Hold-position prompt ("stands still… only shifts its weight… the path behind stays empty"): creature stays in frame, weight shift + claw flex + tail sway, ripples, no phantom figures; slight forward drift in the last second. ~20 min. 4K + LTX ambience mixed with the flute bed at 0.5 (<code>s3_ltx_v2_4k_music.mp4</code>). Music mix recipe: <code>[fx]</code> LTX track at 1.0, <code>[m]</code> bed atrim/afade 0.5 in 1 out at 0.5, <code>amix</code> then <code>volume=1.6</code> to recover amix's level drop.</td>
+</tr>
+<tr>
+<td>Shot 3 v1 (LTX)</td>
+<td>2026-09-21</td>
+<td>Still: first seed keeper (claws on wet flagstones, boot + satchel, arch in haze; ref = crop of <em>our</em> s1 creature body). LTX 1024×576 × 97 f with "take one slow step forward": it produced a full walk cycle, the creature left the frame by 2 s, and it <strong>hallucinated a second rider on horseback</strong> on the path behind (visible from frame ~30). Real gait, unusable shot. Rule: on a <strong>close-up</strong>, never ask LTX for locomotion — hold position ("stands still… only shifts its weight") and say the background stays empty; save walking for wides. v2 rerun with that prompt.</td>
 </tr>
 <tr>
 <td>Shot 2 via LTX</td>
