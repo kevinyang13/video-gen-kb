@@ -212,3 +212,7 @@ Draw Things project `lostcity-s1` (renamed at creation — new rule: never leave
 ## 2026-09-21 — Lost City stills for shots 2 and 7
 
 `lostcity-s2` project: shot 2 (extreme wide, tiny rider) and shot 7 (canyon reverse) both first-seed keepers with two Moodboard refs (our shot-1 skyline crop + the reference spires crop). Shot 7 v1 grew bat wings from "raptor-like dragon, no wings" — klein at CFG 1 obeys the noun, not the negation; rewritten creature lock without the word "dragon" fixed it (plan §4). Draw Things quit and relaunched between drags and lost the unsaved prompt (settings survived) — re-check the prompt after any restart. Finder→Moodboard drag cannot be automated (synthetic drags don't register); the import icon loads to the canvas, not the Moodboard. Files: `raw/clips/lostcity/s2_still_v1.png`, `s7_still_v1.png`.
+
+## 2026-09-21 — Lost City shot 2 clip at 4K
+
+First finished Lost City clip: shot 2 still → Wan 2.2 I2V (49 min at 1280×768 × 81 f, refiner 11%, Lightning 100%, DDIM Trailing, shift 5) → Real-ESRGAN 4K (6:19). Slow push-in + tiny walking rider, no artefacts; L5 (foliage shimmer) passes. Gotcha: the export Save sheet's filename field refused typing this time (AXGroup, not AXTextField) — saved under the stale default name and renamed on disk; always `find -mmin` the export folder after Save. Files in `raw/clips/lostcity/`.
