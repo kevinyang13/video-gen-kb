@@ -428,7 +428,7 @@ Prompt: `static camera, the six people stand completely still in place, tree bra
 
 ## Dragon Epic — 1-minute photoreal short, family hero face {#dragon_epic}
 
-- **Date**: 2026-09-21 · **Status**: in progress — scene 1A posted · **Draw Things project**: `Untitled-35325`
+- **Date**: 2026-09-21 · **Status**: in progress — scene 1A posted · **Draw Things project**: `dragon-1a (scene 1A I2V), dragon-1b (scene 1B stills, Kevin, 5 refs), dragon-1b-tests (1B v1/v2)`
 - **Files** (`raw/clips/`): `dragon/scene1a_v3.mov`, `dragon/scene1a_v3_4k.mp4`, `dragon/scene1a_v3_4k_music.mp4 (with music)`, `music/dragons_breath.mp3`, `dragon/scene1a.mov (v1, ghosting)`, `dragon/scene1a_4k.mp4 (v1)`
 - **Notes**: Plan page: wiki/dragon-epic-plan.md. Experiments E1–E7 must pass before rendering the shot list. Needs face photos in raw/face/. Delivery is 4K UHD. Scene 1A: v1 ghosted (push-in + translation), v2 noise (refiner 50%), v3 clean (10%, articulation-only prompt).
 
