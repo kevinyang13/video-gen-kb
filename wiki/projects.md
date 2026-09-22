@@ -21,7 +21,7 @@
 | 7 | [FLL BOT Builders — Coastal Roots Farm, wide view](#fll_farm) | 2026-09-20 | done (v2) | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Calm Ambient Dreamscape | `fll_farm_v2_final.mp4` | [▶ watch](https://youtu.be/-Mf2UThasCg) |
 | 8 | [Dragon Epic — 1-minute photoreal short, family hero face](#dragon_epic) | 2026-09-21 | in progress — scene 1A posted | FLUX.2 [klein] 9B 1280x768 | Wan 2.2 High Noise 47 min | The Dragon's Breath | `—` | [▶ watch](https://youtu.be/Xzu-c5yX8uo) |
 | 9 | [Three-minute film — recurring characters (subject TBD)](#film3min) | 2026-09-21 | planning | FLUX.2 [klein] 9B 1024x576 | Wan 2.2 High Noise 15 min | TBD | `—` | — |
-| 10 | [Lost City — hyper-real rider on a raptor-dragon entering jungle ruins](#lost_city) | 2026-09-21 | in progress — L0 pass, L1 done (LTX works, 25 min @ 576p) | FLUX.2 [klein] 9B 1280x768 | Wan 2.2 High Noise I2V (8-bit S) + Low Noise refiner 10% (proven) — or LTX-2.3 22B distilled 1.1 (experiment L1: 8 steps, CFG 1, 1280x736, 121 f @ 25 fps, audio) 45 min | TBD | `—` | — |
+| 10 | [Lost City — hyper-real rider on a raptor-dragon entering jungle ruins](#lost_city) | 2026-09-21 | in progress — stills s1, s2, s7 done; next s3/s5 (need creature crop refs), then I2V | FLUX.2 [klein] 9B 1280x768 | Wan 2.2 High Noise I2V (8-bit S) + Low Noise refiner 10% (proven) — or LTX-2.3 22B distilled 1.1 (experiment L1: 8 steps, CFG 1, 1280x736, 121 f @ 25 fps, audio) 45 min | TBD | `—` | — |
 
 ## YouTube playlist — [AI-Vids](https://www.youtube.com/playlist?list=PLJx49Sf61wKQ)
 
@@ -525,8 +525,8 @@ Prompt: `per shot — one camera move + one subject action`
 
 ## Lost City — hyper-real rider on a raptor-dragon entering jungle ruins {#lost_city}
 
-- **Date**: 2026-09-21 · **Status**: in progress — L0 pass, L1 done (LTX works, 25 min @ 576p) · **Draw Things project**: `lostcity-s1`
-- **Files** (`raw/clips/`): `lostcity/ref_openart_rider_ruins.webp (reference, raw/)`, `lostcity/crop_creature_rider.png, crop_spires.png, crop_foreground.png (Moodboard refs, raw/)`, `lostcity/s1_still_v1.png (shot 1 still, klein)`, `lostcity/s1_ltx_v1.mov (LTX-2.3 test, 1024x576x97 @25fps + audio)`
+- **Date**: 2026-09-21 · **Status**: in progress — stills s1, s2, s7 done; next s3/s5 (need creature crop refs), then I2V · **Draw Things project**: `lostcity-s1 (shot 1 still + LTX test), lostcity-s2 (shots 2 & 7 stills)`
+- **Files** (`raw/clips/`): `lostcity/ref_openart_rider_ruins.webp (reference, raw/)`, `lostcity/crop_creature_rider.png, crop_spires.png, crop_foreground.png (Moodboard refs, raw/)`, `lostcity/s1_still_v1.png (shot 1 still, klein)`, `lostcity/s1_ltx_v1.mov (LTX-2.3 test, 1024x576x97 @25fps + audio)`, `lostcity/s2_still_v1.png (shot 2 still, klein, refs: our s1 skyline + spires crop, seed 1)`, `lostcity/s7_still_v1.png (shot 7 still, v2 wording without the word dragon)`
 - **Notes**: Plan: wiki/lost-city-plan.md. Reference is an OpenArt render (closed model, unknown); we re-generate our own frame. 8 shots × 5 s first. Experiments L0–L6 gate rendering; L1 = first LTX-2.3 test on this Mac.
 
 **Still**

@@ -99,7 +99,7 @@ Experiment **L1** measures: does it load, seconds per step, memory pressure, mot
 
 Same toolkit as [[character-consistency]]; three locks.
 
-**Creature lock (text, verbatim in every prompt)**: *a large quadrupedal raptor-like dragon, no wings, slate-grey ridged hide, long neck with a bony horn crest, small amber eyes, leather saddle with reins and a brown satchel, walking on two heavy hind legs and two smaller forelegs*.
+**Creature lock (text, verbatim in every prompt)**: *a large saddled raptor-like reptile mount, a wingless two-legged theropod with a long neck,* — **never the word "dragon"**: shot 7 v1 (2026-09-21) grew bat wings from "raptor-like dragon, no wings" when no creature crop was in the Moodboard; klein at CFG 1 weighs the noun over the negation. Old wording for reference: *a large quadrupedal raptor-like dragon, no wings, slate-grey ridged hide, long neck with a bony horn crest, small amber eyes, leather saddle with reins and a brown satchel, walking on two heavy hind legs and two smaller forelegs*.
 **Creature sheet (Moodboard)**: first-shot still, **cropped to head+neck** and a second crop of saddle+flank. Never the full frame.
 
 **Hero lock**: *a lone rider seen from behind, dark cropped hair, grey-green hooded cloak thrown back, brown leather jerkin, tan trousers, tall boots, hands on the reins*. No face by default. If a face shot is added later → Dragon Epic face path (Moodboard ×2 face crops; FaceFusion post).

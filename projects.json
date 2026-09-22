@@ -283,8 +283,8 @@
       "id": "lost_city",
       "title": "Lost City — hyper-real rider on a raptor-dragon entering jungle ruins",
       "date": "2026-09-21",
-      "dt_project": "lostcity-s1",
-      "status": "in progress — L0 pass, L1 done (LTX works, 25 min @ 576p)",
+      "dt_project": "lostcity-s1 (shot 1 still + LTX test), lostcity-s2 (shots 2 & 7 stills)",
+      "status": "in progress — stills s1, s2, s7 done; next s3/s5 (need creature crop refs), then I2V",
       "still": {
         "model": "FLUX.2 [klein] 9B (8-bit S)",
         "size": "1280x768",
@@ -293,7 +293,9 @@
         "shift": 3,
         "sampler": "DDIM Trailing",
         "control": "Moodboard: up to 3 cropped refs (creature head/neck, rider, spire cluster) — never a full wide frame",
-        "prompt": "see wiki/lost-city-plan.md §5 — camera/lens/light → planes far-to-near → creature lock → hero lock; muted colours, low contrast, film grain"
+        "prompt": "see wiki/lost-city-plan.md §5 — camera/lens/light → planes far-to-near → creature lock → hero lock; muted colours, low contrast, film grain",
+        "shot2_prompt": "Cinematic film still, anamorphic 35mm, extreme wide establishing shot from a high mossy ledge, muted colours, low contrast, subtle film grain. Below and beyond, a lost city of tall eroded sandstone spires and ziggurat towers swallowed by jungle stretches to the horizon through layered morning haze, a stone arch bridge and a white waterfall between the towers, soft volumetric god rays breaking through thin cloud. A narrow dirt path winds down from the ledge toward the city; on it, very small in the frame, a lone hooded rider on a large wingless quadrupedal raptor-like dragon walks toward the city, seen from behind. Ferns and a broken stone column in the foreground on the ledge, palms and mossy blocks in the middle distance, birds tiny in the sky. Layered atmospheric perspective, photorealistic, highly detailed, natural overcast light with warm sun breaks.",
+        "shot7_prompt": "Cinematic film still, anamorphic 35mm, wide shot looking up from low on a jungle path into a narrow canyon between colossal eroded sandstone spires and ziggurat towers of a lost city, muted colours, low contrast, subtle film grain. Soft volumetric god rays pour down between the towers through morning haze, dust and pollen drifting in the light, vines and moss hanging from the carved stone. On the path, small in the lower frame, a lone hooded rider sits on a large saddled raptor-like reptile mount, a wingless two-legged theropod with a long neck, bony horn crest and slate-grey ridged hide, walking away from the camera into the canyon, seen from behind. Ferns and broken carved blocks in the foreground, tiny birds high in the sky. Layered atmospheric perspective, photorealistic, highly detailed, natural overcast light with warm sun breaks."
       },
       "i2v": {
         "model": "Wan 2.2 High Noise I2V (8-bit S) + Low Noise refiner 10% (proven) — or LTX-2.3 22B distilled 1.1 (experiment L1: 8 steps, CFG 1, 1280x736, 121 f @ 25 fps, audio)",
@@ -331,7 +333,9 @@
         "lostcity/ref_openart_rider_ruins.webp (reference, raw/)",
         "lostcity/crop_creature_rider.png, crop_spires.png, crop_foreground.png (Moodboard refs, raw/)",
         "lostcity/s1_still_v1.png (shot 1 still, klein)",
-        "lostcity/s1_ltx_v1.mov (LTX-2.3 test, 1024x576x97 @25fps + audio)"
+        "lostcity/s1_ltx_v1.mov (LTX-2.3 test, 1024x576x97 @25fps + audio)",
+        "lostcity/s2_still_v1.png (shot 2 still, klein, refs: our s1 skyline + spires crop, seed 1)",
+        "lostcity/s7_still_v1.png (shot 7 still, v2 wording without the word dragon)"
       ],
       "notes": "Plan: wiki/lost-city-plan.md. Reference is an OpenArt render (closed model, unknown); we re-generate our own frame. 8 shots × 5 s first. Experiments L0–L6 gate rendering; L1 = first LTX-2.3 test on this Mac."
     }
