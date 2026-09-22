@@ -283,8 +283,8 @@
       "id": "lost_city",
       "title": "Lost City — hyper-real rider on a raptor-dragon entering jungle ruins",
       "date": "2026-09-21",
-      "dt_project": "lostcity-s1, lostcity-s2 (shots 2 & 7), lostcity-s3",
-      "status": "in progress — clips: 1 (LTX), 2 (Wan+LTX), 3 (LTX v2); stills 7; next 4/5/6/8",
+      "dt_project": "lostcity-s1, s2 (shot 2), s3, s7, s8–s12 (cloned from s7 via dt_project.sh clone)",
+      "status": "in progress — overnight batch: s7 done (10 s); s8 running; s9–s12 queued",
       "still": {
         "model": "FLUX.2 [klein] 9B (8-bit S)",
         "size": "1280x768",
@@ -326,7 +326,16 @@
         },
         "shot2_prompt": "very slow push in, the camera drifting gently forward toward the city, mist drifting slowly through the god rays, the waterfall flowing steadily, thin clouds moving very slowly, ferns and palm fronds swaying in a light breeze, tiny birds gliding across the distant sky, the small rider and creature walking slowly along the path away from the camera, subtle motion, smooth, cinematic, photorealistic",
         "shot2_ltx_prompt": "The camera pushes in very slowly and steadily toward the distant city, the mossy columns in the foreground drifting past the edges of the frame. The small rider and creature walk slowly down the dirt path away from the camera toward the city. Mist drifts through the shafts of light, the waterfall pours steadily under the stone arch, ferns and palm fronds sway in a light breeze, and tiny birds glide across the sky above the spires. Wind through jungle leaves, the distant hush of the waterfall, faint birdsong, no music. Photorealistic, cinematic, smooth motion.",
-        "shot3_ltx_prompt": "Fixed camera, low on the wet stone path. The creature stands still in place and does not walk; it only shifts its weight from one foot to the other, the claws flexing on the wet flagstones, small ripples spreading in the pooled water, the thick scaled legs tensing, the tail swaying slowly. The rider's boot rocks gently in the stirrup and the satchel sways. Ferns and grass in the foreground move in a light breeze, mist drifts through the god rays behind. The path behind stays empty. Water dripping, leather creaking, wind in the leaves, faint birdsong, no music. Photorealistic, cinematic, subtle smooth motion."
+        "shot3_ltx_prompt": "Fixed camera, low on the wet stone path. The creature stands still in place and does not walk; it only shifts its weight from one foot to the other, the claws flexing on the wet flagstones, small ripples spreading in the pooled water, the thick scaled legs tensing, the tail swaying slowly. The rider's boot rocks gently in the stirrup and the satchel sways. Ferns and grass in the foreground move in a light breeze, mist drifts through the god rays behind. The path behind stays empty. Water dripping, leather creaking, wind in the leaves, faint birdsong, no music. Photorealistic, cinematic, subtle smooth motion.",
+        "ltx_10s": {
+          "frames": 249,
+          "fps": 25,
+          "size": "1024x576",
+          "steps": 8,
+          "cfg": 1.0,
+          "time_min": 20,
+          "note": "249 is the Draw Things frame-slider max for LTX (~10 s). 20 s in one pass is not possible in DT."
+        }
       },
       "post": {
         "upscale": "scripts/upscale_4k.sh — Real-ESRGAN x4plus → 3840x2160 HEVC 10-bit",
@@ -348,7 +357,11 @@
         "music/mystical_flute.mp3",
         "lostcity/s3_ltx_v2.mov (shot 3 LTX v2, hold-position prompt)",
         "lostcity/s3_ltx_v2_4k_music.mp4 (4K + ambience + music bed)",
-        "lostcity/s3_ltx_v1_walkout.mov (v1, rejected: walk-out + phantom rider)"
+        "lostcity/s3_ltx_v1_walkout.mov (v1, rejected: walk-out + phantom rider)",
+        "lostcity/s7_still_v1.png (side profile, anatomy OK)",
+        "lostcity/s7_ltx_v1.mov (LTX 1024x576x249 @25fps)",
+        "lostcity/s7_ltx_v1_4k_music.mp4",
+        "lostcity/s8_still_v1.png (gallop)"
       ],
       "notes": "Plan: wiki/lost-city-plan.md. Reference is an OpenArt render (closed model, unknown); we re-generate our own frame. 8 shots × 5 s first. Experiments L0–L6 gate rendering; L1 = first LTX-2.3 test on this Mac."
     }

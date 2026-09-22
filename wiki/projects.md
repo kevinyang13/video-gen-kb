@@ -4,7 +4,7 @@
 
 **Sources**: projects.json; per-project notes from the session logs.
 
-**Last updated**: 2026-09-21
+**Last updated**: 2026-09-22
 
 ---
 
@@ -21,7 +21,7 @@
 | 7 | [FLL BOT Builders — Coastal Roots Farm, wide view](#fll_farm) | 2026-09-20 | done (v2) | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Calm Ambient Dreamscape | `fll_farm_v2_final.mp4` | [▶ watch](https://youtu.be/-Mf2UThasCg) |
 | 8 | [Dragon Epic — 1-minute photoreal short, family hero face](#dragon_epic) | 2026-09-21 | in progress — scene 1A posted | FLUX.2 [klein] 9B 1280x768 | Wan 2.2 High Noise 47 min | The Dragon's Breath | `—` | [▶ watch](https://youtu.be/Xzu-c5yX8uo) |
 | 9 | [Three-minute film — recurring characters (subject TBD)](#film3min) | 2026-09-21 | planning | FLUX.2 [klein] 9B 1024x576 | Wan 2.2 High Noise 15 min | TBD | `—` | — |
-| 10 | [Lost City — hyper-real rider on a raptor-dragon entering jungle ruins](#lost_city) | 2026-09-21 | in progress — clips: 1 (LTX), 2 (Wan+LTX), 3 (LTX v2); stills 7; next 4/5/6/8 | FLUX.2 [klein] 9B 1280x768 | Wan 2.2 High Noise I2V (8-bit S) + Low Noise refiner 10% (proven) — or LTX-2.3 22B distilled 1.1 (experiment L1: 8 steps, CFG 1, 1280x736, 121 f @ 25 fps, audio) 49 min | Mystical orchestral theme with ancient flute | `—` | — |
+| 10 | [Lost City — hyper-real rider on a raptor-dragon entering jungle ruins](#lost_city) | 2026-09-21 | in progress — overnight batch: s7 done (10 s); s8 running; s9–s12 queued | FLUX.2 [klein] 9B 1280x768 | Wan 2.2 High Noise I2V (8-bit S) + Low Noise refiner 10% (proven) — or LTX-2.3 22B distilled 1.1 (experiment L1: 8 steps, CFG 1, 1280x736, 121 f @ 25 fps, audio) 49 min | Mystical orchestral theme with ancient flute | `—` | — |
 
 ## YouTube playlist — [AI-Vids](https://www.youtube.com/playlist?list=PLJx49Sf61wKQ)
 
@@ -525,8 +525,8 @@ Prompt: `per shot — one camera move + one subject action`
 
 ## Lost City — hyper-real rider on a raptor-dragon entering jungle ruins {#lost_city}
 
-- **Date**: 2026-09-21 · **Status**: in progress — clips: 1 (LTX), 2 (Wan+LTX), 3 (LTX v2); stills 7; next 4/5/6/8 · **Draw Things project**: `lostcity-s1, lostcity-s2 (shots 2 & 7), lostcity-s3`
-- **Files** (`raw/clips/`): `lostcity/ref_openart_rider_ruins.webp (reference, raw/)`, `lostcity/crop_creature_rider.png, crop_spires.png, crop_foreground.png (Moodboard refs, raw/)`, `lostcity/s1_still_v1.png (shot 1 still, klein)`, `lostcity/s1_ltx_v1.mov (LTX-2.3 test, 1024x576x97 @25fps + audio)`, `lostcity/s2_still_v1.png (shot 2 still, klein, refs: our s1 skyline + spires crop, seed 1)`, `lostcity/s7_still_v1.png (shot 7 still, v2 wording without the word dragon)`, `lostcity/s2_wan_v1.mov (shot 2 I2V, Wan 2.2, 1280x768x81)`, `lostcity/s2_wan_v1_4k.mp4 (3840x2160 HEVC 10-bit)`, `lostcity/s2_ltx_v1.mov (shot 2 via LTX-2.3, 1024x576x97 @25fps + audio)`, `lostcity/s2_ltx_v1_4k_audio.mp4 (LTX shot 2 at 3840x2160 + audio)`, `lostcity/s3_still_v1.png (shot 3 still, ref = crop of our s1 creature body)`, `music/mystical_flute.mp3`, `lostcity/s3_ltx_v2.mov (shot 3 LTX v2, hold-position prompt)`, `lostcity/s3_ltx_v2_4k_music.mp4 (4K + ambience + music bed)`, `lostcity/s3_ltx_v1_walkout.mov (v1, rejected: walk-out + phantom rider)`
+- **Date**: 2026-09-21 · **Status**: in progress — overnight batch: s7 done (10 s); s8 running; s9–s12 queued · **Draw Things project**: `lostcity-s1, s2 (shot 2), s3, s7, s8–s12 (cloned from s7 via dt_project.sh clone)`
+- **Files** (`raw/clips/`): `lostcity/ref_openart_rider_ruins.webp (reference, raw/)`, `lostcity/crop_creature_rider.png, crop_spires.png, crop_foreground.png (Moodboard refs, raw/)`, `lostcity/s1_still_v1.png (shot 1 still, klein)`, `lostcity/s1_ltx_v1.mov (LTX-2.3 test, 1024x576x97 @25fps + audio)`, `lostcity/s2_still_v1.png (shot 2 still, klein, refs: our s1 skyline + spires crop, seed 1)`, `lostcity/s7_still_v2.png (shot 7 still, wingless; s7_still_v1_winged.png = rejected v1)`, `lostcity/s2_wan_v1.mov (shot 2 I2V, Wan 2.2, 1280x768x81)`, `lostcity/s2_wan_v1_4k.mp4 (3840x2160 HEVC 10-bit)`, `lostcity/s2_ltx_v1.mov (shot 2 via LTX-2.3, 1024x576x97 @25fps + audio)`, `lostcity/s2_ltx_v1_4k_audio.mp4 (LTX shot 2 at 3840x2160 + audio)`, `lostcity/s3_still_v1.png (shot 3 still, ref = crop of our s1 creature body)`, `music/mystical_flute.mp3`, `lostcity/s3_ltx_v2.mov (shot 3 LTX v2, hold-position prompt)`, `lostcity/s3_ltx_v2_4k_music.mp4 (4K + ambience + music bed)`, `lostcity/s3_ltx_v1_walkout.mov (v1, rejected: walk-out + phantom rider)`, `lostcity/s7_still_v1.png (side profile, anatomy OK)`, `lostcity/s7_ltx_v1.mov (LTX 1024x576x249 @25fps)`, `lostcity/s7_ltx_v1_4k_music.mp4`, `lostcity/s8_still_v1.png (gallop)`
 - **Notes**: Plan: wiki/lost-city-plan.md. Reference is an OpenArt render (closed model, unknown); we re-generate our own frame. 8 shots × 5 s first. Experiments L0–L6 gate rendering; L1 = first LTX-2.3 test on this Mac.
 
 **Still**

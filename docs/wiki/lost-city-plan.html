@@ -263,8 +263,8 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </tr>
 <tr>
 <td>Frames</td>
-<td><strong>97</strong> (3.9 s) proven; 121 (4.84 s) only with 1280×768 → swap. Try 121 @ 1024×576 next</td>
-<td>LTX constraint + measured</td>
+<td><strong>249 = the DT slider max</strong> (10 s @ 25 fps) works at 1024×576 in ~20 min — same wall time as 97 f, so always use 249. Longer single shots are impossible in DT; chain on the last frame</td>
+<td>measured 2026-09-22</td>
 </tr>
 <tr>
 <td>Strength (I2V)</td>
@@ -463,6 +463,11 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <td>LTX-2.3 22B distilled 1.1 <strong>loads and runs</strong> in Draw Things on the M4 Max, but is <strong>memory-bound</strong>. <em>Try recommended settings</em> gives steps 8, CFG 1.0, TCD Trailing, Strategic Stochastic Sampling 30%, shift 5, frames 121, and turns on <strong>High Resolution Fix</strong> = the official LTX two-stage pipeline (1st pass at half size 640×384, 2nd pass at full size, strength 70%). At 1280×768 × 121 f: stage 1 (8 steps @ 640×384) took ~3 min — fast — but stage 2 at 1280×768 stalled (swap 27–48 GB, step counter frozen for minutes) → stopped. At 1024×576 × 97 f DT auto-disables hi-res fix (single stage); the compute timer reads ~1 min per 10+ min wall clock — paging the 22B DiT + Gemma text encoder in and out of swap. Overlay says "Text to Image Generation" but the canvas still <strong>is</strong> used as first frame (preview shows creature + rider); the Strength tab reads <em>Text to Video 100%</em> for LTX I2V. Canvas larger than the generation area → centre crop, not scale.</td>
 </tr>
 <tr>
+<td>Shot 7</td>
+<td>2026-09-22</td>
+<td>Six failed rear-view attempts (wings, three legs, mismatched legs) → the fix was the <strong>camera</strong>, not the prompt: the side-profile framing and verbatim creature wording from shot 1 gave correct anatomy first try. Rules: (1) never say "two-legged" — the creature is a quadruped in every ref; (2) don't put a four-legged animal dead-behind at low angle; klein cannot resolve the legs. Then LTX at the slider max <strong>249 f = 10 s</strong> (1024×576, 8 steps, ~20 min): tracking side view holds the creature centred through the canyon, anatomy stable for the full 10 s. <code>s7_ltx_v1_4k_music.mp4</code>.</td>
+</tr>
+<tr>
 <td>Shot 3 v2 (LTX)</td>
 <td>2026-09-21</td>
 <td>Hold-position prompt ("stands still… only shifts its weight… the path behind stays empty"): creature stays in frame, weight shift + claw flex + tail sway, ripples, no phantom figures; slight forward drift in the last second. ~20 min. 4K + LTX ambience mixed with the flute bed at 0.5 (<code>s3_ltx_v2_4k_music.mp4</code>). Music mix recipe: <code>[fx]</code> LTX track at 1.0, <code>[m]</code> bed atrim/afade 0.5 in 1 out at 0.5, <code>amix</code> then <code>volume=1.6</code> to recover amix's level drop.</td>
@@ -546,7 +551,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 
   <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="dragon-epic-plan.html">dragon epic plan</a> — sibling project; motion rules and 4K path reused here</li><li><a href="character-consistency.html">character consistency</a> · <a href="identity-conditioning.html">identity conditioning</a></li><li><a href="image-to-video-models.html">image to video models</a> — LTX-2.3 facts · <a href="draw-things-setup.html">draw things setup</a></li><li><a href="video-upscaling.html">video upscaling</a> · <a href="runbook-living-painting.html">runbook living painting</a> · <a href="projects.html">projects</a></li></ul></div>
 </div>
-<footer>video-gen-kb · built 2026-09-21 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<footer>video-gen-kb · built 2026-09-22 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
 <script>function tt(){var r=document.documentElement,
 d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
 matchMedia('(prefers-color-scheme: dark)').matches);

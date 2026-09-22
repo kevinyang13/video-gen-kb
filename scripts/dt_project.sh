@@ -8,6 +8,7 @@
 #   scripts/dt_project.sh newest               # most recently modified project (the one just created)
 #   scripts/dt_project.sh rename-newest NEW    # rename the newest Untitled-* -> NEW
 #   scripts/dt_project.sh delete NAME          # moves the files to ~/.Trash
+#   scripts/dt_project.sh clone SRC NEW        # copy SRC (closed!) -> NEW; keeps history + Moodboard refs
 set -euo pipefail
 D="$HOME/Library/Containers/com.liuliu.draw-things/Data/Documents"
 cmd="${1:-list}"
@@ -31,5 +32,12 @@ case "$cmd" in
     case "$old" in Untitled-*) "$0" rename "$old" "$new" ;; *) echo "newest project is '$old', not Untitled-* — refusing" >&2; exit 1 ;; esac ;;
   delete)
     n="${2:?name}"; for f in $(files "$n"); do mv "$f" ~/.Trash/; done; echo "trashed $n" ;;
-  *) echo "usage: $0 list|newest|rename OLD NEW|rename-newest NEW|delete NAME" >&2; exit 1 ;;
+  clone)
+    src="${2:?source}"; new="${3:?new name}"
+    [ -e "$D/$src.sqlite3" ] || { echo "no project '$src'" >&2; exit 1; }
+    [ -e "$D/$new.sqlite3" ] && { echo "'$new' already exists" >&2; exit 1; }
+    sqlite3 "$D/$src.sqlite3" "PRAGMA wal_checkpoint(TRUNCATE);" >/dev/null 2>&1 || true
+    cp "$D/$src.sqlite3" "$D/$new.sqlite3"
+    echo "cloned $src -> $new" ;;
+  *) echo "usage: $0 list|newest|rename OLD NEW|rename-newest NEW|delete NAME|clone SRC NEW" >&2; exit 1 ;;
 esac

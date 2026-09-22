@@ -236,3 +236,7 @@ Kevin asked for a rename path that doesn't need desktop takeover. Found: project
 ## 2026-09-21 — Lost City shot 3 (LTX) and the close-up rule
 
 `lostcity-s3` (renamed on disk with `dt_project.sh` — no screen control; gotcha: the stale list row re-creates an Untitled if clicked, so refresh the panel and click the new name). Still first-seed keeper. LTX v1 with "one slow step" walked the creature out of frame and hallucinated a second rider — close-ups must use hold-position prompts; v2 clean. Music bed chosen (L6): "Mystical orchestral theme with ancient flute", mixed under LTX ambience. Files in `raw/clips/lostcity/`.
+
+## 2026-09-22 — Lost City overnight batch: shot 7 done, s8–s12 queued
+
+Shot 7 rear-view anatomy failures solved by switching to the side-profile framing that worked on shot 1 (rules in plan §7b). LTX frame slider maxes at 249 (10 s) — rendered in ~20 min, same as 97 f, so 10 s is now the default clip length. New `dt_project.sh clone` copies a closed project's DB (history + Moodboard refs) so new scenes need no drag; the app must be restarted after cloning or it treats the copy as empty. s8 (gallop) still keeper on seed 1, LTX running; s9 jump, s10 drink, s11 dismount, s12 mount queued.
