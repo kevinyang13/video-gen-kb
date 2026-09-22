@@ -182,6 +182,10 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <p><code>pgrep -x "Draw Things"</code> reports the app absent even while it renders; v2 finished normally through a lock. Keep-awake kept as insurance; runbook corrected to say locks are safe.</p>
 <h2>2026-09-21 — Scene 1A v2 failed (refiner 50%)</h2>
 <p>Output was noise. Refiner Start 50% is incompatible with the 4-step Lightning LoRA (trained for 10%). Reverting to 10%; v3 attacks ghosting via the motion prompt instead. Plan + runbook corrected.</p>
+<h2>2026-09-21 — Character consistency research + 3-minute film plan</h2>
+<p>Web research on keeping one character consistent across shots (as of 2026-09-21). Key findings: FLUX.2 klein takes reference images via the Draw Things Moodboard (official face-swap demo); Qwen Image Edit 2509 does Picture 1/2/3 multi-reference in DT; local klein LoRA training crashes on Apple Silicon (draw-things-community #114, open), cloud training ~$1 / &lt; 1 h; Wan 2.1 VACE subject reference is in DT, Wan 2.2 Animate is CUDA-only, Wan 2.5/2.6/2.7 have no weights; LTX-2.5 has native multi-shot + multi-subject LoRA but unproven on Mac. <strong>Created</strong>: <code>wiki/character-consistency.md</code> (methods ranked, decision table), <code>wiki/three-minute-film-plan.md</code> (36–40 clips, consistency stack, X1–X7 experiments, ~23 h budget, open questions). <strong>Updated</strong>: <code>index.md</code>, <code>face-identity-workflows.md</code>, <code>dragon-epic-plan.md</code> (links), <code>projects.json</code> (film3min, planning).</p>
+<h2>2026-09-21 — Identity conditioning concept page</h2>
+<p>Filed the Q&amp;A on <em>why</em> consistency tools work: <code>wiki/identity-conditioning.md</code> (five conditioning channels — text, in-context reference tokens, ID adapters, LoRA, first-frame latent — and our stack mapped onto them). Linked from <code>character-consistency</code>, <code>index</code>.</p>
   
 </div>
 <footer>video-gen-kb · built 2026-09-21 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>

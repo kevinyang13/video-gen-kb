@@ -172,3 +172,11 @@ Double-exposure on the dragon from frame ~55. In the Wan output, not the upscale
 ## 2026-09-21 — Scene 1A v2 failed (refiner 50%)
 
 Output was noise. Refiner Start 50% is incompatible with the 4-step Lightning LoRA (trained for 10%). Reverting to 10%; v3 attacks ghosting via the motion prompt instead. Plan + runbook corrected.
+
+## 2026-09-21 — Character consistency research + 3-minute film plan
+
+Web research on keeping one character consistent across shots (as of 2026-09-21). Key findings: FLUX.2 klein takes reference images via the Draw Things Moodboard (official face-swap demo); Qwen Image Edit 2509 does Picture 1/2/3 multi-reference in DT; local klein LoRA training crashes on Apple Silicon (draw-things-community #114, open), cloud training ~$1 / < 1 h; Wan 2.1 VACE subject reference is in DT, Wan 2.2 Animate is CUDA-only, Wan 2.5/2.6/2.7 have no weights; LTX-2.5 has native multi-shot + multi-subject LoRA but unproven on Mac. **Created**: `wiki/character-consistency.md` (methods ranked, decision table), `wiki/three-minute-film-plan.md` (36–40 clips, consistency stack, X1–X7 experiments, ~23 h budget, open questions). **Updated**: `index.md`, `face-identity-workflows.md`, `dragon-epic-plan.md` (links), `projects.json` (film3min, planning).
+
+## 2026-09-21 — Identity conditioning concept page
+
+Filed the Q&A on *why* consistency tools work: `wiki/identity-conditioning.md` (five conditioning channels — text, in-context reference tokens, ID adapters, LoRA, first-frame latent — and our stack mapped onto them). Linked from `character-consistency`, `index`.

@@ -67,6 +67,7 @@ Pros: best fidelity and full freedom, reusable forever. Cons: most effort, cloud
 Own face or explicit consent only. Same tools swap anyone's face; keep it to yourself and family who agree.
 
 ## Related pages
+- [[character-consistency]] — the general (non-face) version of this page
 - [[wan22-i2v-locked-image-settings]]
 - [[draw-things-setup]]
 - [[image-to-video-models]]

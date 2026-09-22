@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Identity Conditioning — Why a Character Can Stay the Same — video-gen-kb</title>
+<style>
+:root{--bg:#0B0D12;--panel:#141822;--panel-2:#1B2130;--stroke:#2A3245;--text:#E6E9F0;
+--muted:#8B94A7;--accent:#F5B84B;--accent-2:#4BC9F5;--on-accent:#12131A;
+--rule:rgba(139,148,167,.22);--code:#F5B84B}
+@media(prefers-color-scheme:light){:root:not([data-theme=dark]){--bg:#F4F1EA;--panel:#fff;
+--panel-2:#FAF8F3;--stroke:#D9D3C6;--text:#16181F;--muted:#5D6473;--accent:#B8781A;
+--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}}
+:root[data-theme=light]{--bg:#F4F1EA;--panel:#fff;--panel-2:#FAF8F3;--stroke:#D9D3C6;
+--text:#16181F;--muted:#5D6473;--accent:#B8781A;--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);
+line-height:1.65;padding:0 1rem 4rem}
+.shell{max-width:840px;margin:0 auto}
+a{color:var(--accent);text-decoration:none;font-weight:600}
+a:hover{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--accent-2);outline-offset:3px;border-radius:4px}
+.bar{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;padding:1.1rem 0;margin-bottom:1.5rem;
+border-bottom:1px solid var(--stroke)}
+.crumb{font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.spacer{flex:1}
+.pill{border:1px solid var(--stroke);background:var(--panel);border-radius:999px;padding:.28rem .8rem;
+font-size:.75rem;font-weight:700;color:var(--text);cursor:pointer;font-family:inherit}
+.pill:hover{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+h1{font-size:clamp(1.7rem,5vw,2.5rem);margin:.2rem 0 1rem;line-height:1.1;letter-spacing:-.015em;text-wrap:balance}
+h2{font-size:1.25rem;margin:2.2rem 0 .7rem;padding-bottom:.35rem;border-bottom:1px solid var(--rule);text-wrap:balance}
+h3{font-size:1.02rem;margin:1.5rem 0 .5rem;color:var(--accent)}
+p{margin:.7rem 0}
+ul,ol{margin:.7rem 0 .7rem 1.3rem}
+li{margin:.28rem 0}
+li::marker{color:var(--accent)}
+em{color:var(--muted)}
+hr{border:none;border-top:1px solid var(--stroke);margin:2rem 0}
+blockquote{border-left:3px solid var(--accent);background:var(--panel);border-radius:0 10px 10px 0;
+padding:.8rem 1.1rem;margin:1.1rem 0;color:var(--muted);font-size:.92rem}
+code{background:var(--panel);border:1px solid var(--stroke);border-radius:5px;padding:.1rem .35rem;
+font-size:.85em;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--code)}
+pre{background:var(--panel);border:1px solid var(--stroke);border-radius:12px;padding:1rem;overflow-x:auto;margin:1.1rem 0}
+pre code{background:none;border:none;padding:0;color:var(--text);font-size:.83rem;line-height:1.55}
+.tw{overflow-x:auto;border:1px solid var(--stroke);border-radius:12px;background:var(--panel);margin:1.1rem 0}
+table{width:100%;border-collapse:collapse;font-size:.85rem;min-width:min(100%,460px)}
+th{background:var(--panel-2);color:var(--accent);text-align:left;padding:.55rem .8rem;font-size:.68rem;
+letter-spacing:.09em;text-transform:uppercase;white-space:nowrap;border-bottom:1px solid var(--stroke)}
+td{padding:.5rem .8rem;border-bottom:1px solid var(--rule);color:var(--muted);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td strong{color:var(--text)}
+.meta{display:flex;flex-wrap:wrap;gap:.4rem .9rem;font-size:.78rem;color:var(--muted);margin:-.4rem 0 1.2rem}
+.meta b{color:var(--text);font-weight:600}
+.missing{color:var(--muted);border-bottom:1px dashed var(--muted);cursor:help}
+.related{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--stroke)}
+.related h2{border:none;margin:0 0 .7rem;font-size:.95rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:0}
+.chips li{margin:0}
+.chips a,.chips .missing{display:inline-block;border:1px solid var(--stroke);background:var(--panel);
+border-radius:999px;padding:.28rem .8rem;font-size:.8rem}
+.chips a:hover{background:var(--accent);color:var(--on-accent);text-decoration:none;border-color:var(--accent)}
+footer{max-width:840px;margin:2.5rem auto 0;padding-top:1.2rem;border-top:1px solid var(--stroke);
+font-size:.75rem;color:var(--muted);text-align:center}
+/* landing */
+.hero{padding:2.4rem 0 1.6rem}
+.kicker{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2)}
+.hero h1{font-size:clamp(2rem,6vw,3.2rem);margin:.35rem 0 .5rem}
+.hero p{color:var(--muted);font-size:1.05rem;max-width:56ch}
+.hw{display:inline-flex;gap:.5rem;align-items:center;margin-top:1rem;border:1px solid var(--stroke);
+background:var(--panel);border-radius:999px;padding:.3rem .9rem;font-size:.78rem;color:var(--muted)}
+.hw .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.sec{margin-top:2.2rem}
+.sec h2{border:none;padding:0;margin:0 0 .8rem;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.9rem}
+.card{display:block;border:1px solid var(--stroke);background:var(--panel);border-radius:14px;padding:1rem 1.1rem;
+color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+.card b{display:block;color:var(--accent);font-size:1rem;margin-bottom:.3rem}
+.card span{font-size:.85rem;color:var(--muted);line-height:1.5}
+.stubs{font-size:.82rem;color:var(--muted);margin-top:.6rem}
+.yt{position:relative;width:100%;aspect-ratio:16/9;border:1px solid var(--stroke);border-radius:12px;overflow:hidden;background:#000;margin:1rem 0}
+.yt.yt-v{aspect-ratio:9/16;max-width:360px}
+.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="bar">
+    <span class="crumb"><a href="../">video-gen-kb</a> / <a href="index.html">Wiki</a></span>
+    <span class="spacer"></span>
+    <button class="pill" onclick="tt()">◐ Theme</button>
+  </nav>
+  <h1>Identity Conditioning — Why a Character Can Stay the Same</h1><p class="lede">The mechanism behind every "consistent character" tool. A diffusion model samples each image or clip fresh from noise and remembers nothing; a character persists only if identity is injected as a <em>condition</em> the network attends to. Five mechanisms, weak to strong: text embeddings, reference-image tokens in context, identity-embedding adapters, LoRA weights, and first-frame latent conditioning inside a video clip.</p><div class="meta"><span><b>Updated</b> 2026-09-21</span><span><b>Sources</b> General knowledge of diffusion-transformer architectures (FLUX.2, Qwen-Image-Edit, Wan 2.x, VACE, IP-Adapter/PuLID, LoRA); product behaviour cross-checked against the links in <a href="character-consistency.html">character consistency</a>. Architectural details of closed models (Kling, Veo, Seedance) are inferred and <em>need verification</em>.</span></div>
+<hr />
+<h2>The core concept: conditioning</h2>
+<p>A latent diffusion model starts from Gaussian noise and denoises toward whatever its conditioning inputs point at. There is no hidden state between generations — seed, prompt and conditioning are the <em>entire</em> input. So "same character across scenes" is not a memory problem; it is a question of <strong>which channel carries the identity into each generation, and how much information that channel can hold</strong>.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Channel</th>
+<th>Carries</th>
+<th>Capacity</th>
+<th>Used by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Text embeddings</td>
+<td>a description</td>
+<td>low — a region of faces, not one face</td>
+<td>every model</td>
+</tr>
+<tr>
+<td>2. Reference-image tokens (in-context)</td>
+<td>actual latent pixels of the character</td>
+<td>high — copies detail</td>
+<td>FLUX.2 klein, Qwen Image Edit, Flux Kontext, VACE, Wan Animate, Kling Elements, Veo Ingredients</td>
+</tr>
+<tr>
+<td>3. Identity-embedding adapter</td>
+<td>one compressed face vector</td>
+<td>medium, faces only</td>
+<td>IP-Adapter FaceID, PuLID, InstantID</td>
+</tr>
+<tr>
+<td>4. LoRA weights</td>
+<td>the <em>concept</em> of the character</td>
+<td>highest — generalises to unseen angles</td>
+<td>any model with a trained LoRA</td>
+</tr>
+<tr>
+<td>5. First-frame latent (I2V)</td>
+<td>one whole frame</td>
+<td>high at frame 1, decays with motion</td>
+<td>Wan 2.2 I2V, every I2V model</td>
+</tr>
+</tbody>
+</table></div>
+<h2>1. Text conditioning</h2>
+<p>Prompt → text encoder (T5 / Qwen3 / Gemma) → sequence of embeddings → attended to by every transformer block. Words select a <em>distribution</em>: "young woman, long dark hair, red cloak" is satisfied by millions of faces. Same words with a new seed give a new person. Text locks wardrobe, silhouette, palette — the things that are categorical — and cannot lock a face. This is why the character bible in <a href="character-consistency.html">character consistency</a> helps a lot and is never enough.</p>
+<h2>2. Reference-image conditioning (in-context editing)</h2>
+<p>The mechanism behind the Moodboard in Draw Things and most 2025–26 consistency features.</p>
+<ol>
+<li>Reference image → VAE encoder → latent → split into patch tokens, same as the target image.</li>
+<li>Reference tokens are <strong>concatenated into the transformer's token sequence</strong> beside the noisy target tokens. Positional IDs are offset (a separate "picture 2" coordinate range) so the model can tell reference from canvas.</li>
+<li>In joint self-attention, target tokens attend to reference tokens and copy features from them — colour, texture, geometry of the face — rather than reconstructing them from a description.</li>
+<li>The model was fine-tuned on (reference, instruction, edited target) triples, so it learned the rule "preserve the identity in the reference, change what the instruction says".</li>
+</ol>
+<p>Multi-reference = more token blocks with more positional offsets. Costs: sequence length grows and attention is quadratic in it; past ~5 references the model blurs which tokens to copy from (the "muddied fusion" failure in the guides).</p>
+<p>Video models do the same thing along time: <strong>VACE</strong> and <strong>Wan 2.2 Animate</strong> append the reference image(s) as extra latent <em>frames</em> (plus a mask saying "these frames are given, do not denoise"); temporal attention then carries the identity into the generated frames. Closed models with "elements" / "ingredients" / "cameo" features almost certainly work this way at larger scale <em>(needs verification)</em>.</p>
+<p>Limits: the model copies what it can see. A single frontal reference gives weak profiles; extreme lighting changes break the copy because the reference tokens encode lit pixels, not an albedo.</p>
+<h2>3. Identity-embedding adapters (IP-Adapter, PuLID, InstantID)</h2>
+<p>Older, face-specific approach for SD1.5 / SDXL / FLUX.1.</p>
+<ul>
+<li>A face recogniser (ArcFace) or CLIP image encoder turns the face into one or a few embedding vectors.</li>
+<li>Small adapter layers add an extra cross-attention path into the U-Net or DiT that reads these vectors.</li>
+<li>PuLID trains the adapter with an ID-loss so the output face scores as the same identity to a recogniser.</li>
+</ul>
+<p>Compact and cheap, but one vector cannot hold a costume, a dragon, or a hairstyle. Draw Things ships these for FLUX.1 dev; klein support unknown (<a href="dragon-epic-plan.html">dragon epic plan</a> E1).</p>
+<h2>4. LoRA — identity in the weights</h2>
+<p>Fine-tuning that adds low-rank matrices to the attention (and sometimes MLP) projections: <code>W' = W + A·B</code>, with A·B of rank 8–32, trained on 15–40 images of the character captioned with a trigger token. After training, the trigger token in any prompt steers the model into the character — from angles, lighting and outfits it never saw, because it learned the <em>concept</em>, not pixel copies.</p>
+<ul>
+<li>Strongest and most flexible channel; combinable with 2 for belt-and-braces.</li>
+<li>Cost: a training run (cloud ~$1 / &lt; 1 h for FLUX.2 klein; local Draw Things training currently crashes on Apple Silicon — see <a href="character-consistency.html">character consistency</a> §3).</li>
+<li>Separate LoRAs per model: a klein LoRA does nothing for Wan; a Wan I2V LoRA teaches the <em>video</em> model to hold the face through motion.</li>
+<li>Failure modes: overfitting (character appears in every image regardless of prompt; only the training poses work) — pick an earlier checkpoint.</li>
+</ul>
+<h2>5. First-frame conditioning — why identity survives inside one clip</h2>
+<p>Wan 2.2 I2V (and every I2V model):</p>
+<ul>
+<li>The still → VAE → latent; it <strong>replaces the first latent frame</strong> of the video tensor, with an extra mask channel telling the model "frame 0 is given".</li>
+<li>Temporal self-attention lets later frames attend to frame 0's tokens, so its pixels propagate forward.</li>
+<li>Identity is perfect at frame 1 and decays as motion reveals pixels that were not in the still (the back of the head on a turn, an open mouth). The model must <em>invent</em> those from text + priors, and priors drift toward an average face.</li>
+</ul>
+<p>Practical consequences (all observed on this Mac): keep faces still or on a slow push, ≤ 5 s per clip, one action; chain long moves by using the last frame of clip N as the still for clip N+1 so pixels keep carrying (<a href="wan22-i2v-locked-image-settings.html">wan22 i2v locked image settings</a>, <a href="three-minute-film-plan.html">three minute film plan</a> §3).</p>
+<h2>Our stack, in these terms</h2>
+<pre><code>character bible ── (1) text ──┐
+character sheet ── (2) reference tokens (klein Moodboard) ──┤──► per-shot still
+                                                            │
+                                (5) first-frame latent ──► Wan 2.2 I2V clip
+optional upgrade: (4) klein LoRA, then Wan I2V LoRA
+</code></pre>
+<p>All open-weight consistency tooling of 2025–26 is (2) or (4); the closed products are (2) at scale. (3) is legacy and face-only.</p>
+
+  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="character-consistency.html">character consistency</a> — which tools implement each mechanism and what runs here</li><li><a href="face-identity-workflows.html">face identity workflows</a></li><li><a href="three-minute-film-plan.html">three minute film plan</a></li><li><a href="wan22-i2v-locked-image-settings.html">wan22 i2v locked image settings</a></li><li><a href="image-to-video-models.html">image to video models</a></li></ul></div>
+</div>
+<footer>video-gen-kb · built 2026-09-21 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<script>function tt(){var r=document.documentElement,
+d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
+matchMedia('(prefers-color-scheme: dark)').matches);
+r.setAttribute('data-theme',d?'light':'dark');}</script>
+</body>
+</html>

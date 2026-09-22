@@ -197,6 +197,17 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <td><code>—</code></td>
 <td>—</td>
 </tr>
+<tr>
+<td style="text-align: right;">9</td>
+<td><a href="#film3min">Three-minute film — recurring characters (subject TBD)</a></td>
+<td>2026-09-21</td>
+<td>planning</td>
+<td>FLUX.2 [klein] 9B 1024x576</td>
+<td>Wan 2.2 High Noise 15 min</td>
+<td>TBD</td>
+<td><code>—</code></td>
+<td>—</td>
+</tr>
 </tbody>
 </table></div>
 <h2>YouTube playlist — <a href="https://www.youtube.com/playlist?list=PLJx49Sf61wKQ">AI-Vids</a></h2>
@@ -1412,6 +1423,131 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <tr>
 <td>Music</td>
 <td>TBD — orchestral epic + SFX</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="film3min">Three-minute film — recurring characters (subject TBD)</h2>
+<ul>
+<li><strong>Date</strong>: 2026-09-21 · <strong>Status</strong>: planning · <strong>Draw Things project</strong>: <code>None</code></li>
+<li><strong>Files</strong> (<code>raw/clips/</code>): </li>
+<li><strong>Notes</strong>: Plan: wiki/three-minute-film-plan.md. Consistency stack: wiki/character-consistency.md. Waiting on story/style/characters from Kevin; experiments X1–X7 before rendering.</li>
+</ul>
+<p><strong>Still</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Model</td>
+<td>FLUX.2 [klein] 9B (8-bit S)</td>
+</tr>
+<tr>
+<td>Size</td>
+<td>1024x576</td>
+</tr>
+<tr>
+<td>Steps</td>
+<td>4</td>
+</tr>
+<tr>
+<td>CFG</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Shift</td>
+<td>3.0</td>
+</tr>
+<tr>
+<td>Sampler</td>
+<td>DDIM Trailing</td>
+</tr>
+</tbody>
+</table></div>
+<p>Prompt: <code>per shot — [camera/light lock] [scene] [character lock verbatim] [action]; see wiki/three-minute-film-plan.md</code></p>
+<p><strong>I2V</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Model</td>
+<td>Wan 2.2 High Noise Expert I2V A14B (8-bit S)</td>
+</tr>
+<tr>
+<td>Refiner</td>
+<td>Wan 2.2 Low Noise Expert I2V A14B (8-bit S) @ 10%</td>
+</tr>
+<tr>
+<td>LoRA</td>
+<td>Wan 2.2 A14B Lightning High-Noise T2V v2.0 @ 100%</td>
+</tr>
+<tr>
+<td>Size</td>
+<td>1024x576</td>
+</tr>
+<tr>
+<td>Frames</td>
+<td>81</td>
+</tr>
+<tr>
+<td>FPS</td>
+<td>16</td>
+</tr>
+<tr>
+<td>Steps</td>
+<td>4</td>
+</tr>
+<tr>
+<td>CFG</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Shift</td>
+<td>4.95</td>
+</tr>
+<tr>
+<td>Sampler</td>
+<td>DDIM Trailing</td>
+</tr>
+<tr>
+<td>Strength</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>I2V time (min)</td>
+<td>15</td>
+</tr>
+</tbody>
+</table></div>
+<p>Prompt: <code>per shot — one camera move + one subject action</code></p>
+<p><strong>Post</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Script</td>
+<td>scripts/finish_clip.sh</td>
+</tr>
+<tr>
+<td>Upscale</td>
+<td>Real-ESRGAN ncnn 4x -&gt; 3840x2160 (scripts/upscale_4k.sh)</td>
+</tr>
+<tr>
+<td>Music</td>
+<td>TBD</td>
 </tr>
 </tbody>
 </table></div>

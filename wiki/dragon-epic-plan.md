@@ -226,6 +226,7 @@ Rendering is unattended and survives a screen lock; the session holds a keep-awa
 5. Deliverable: YouTube 16:9 at 4K UHD, SDR master + optional HLG variant — confirmed 2026-09-21.
 
 ## Related pages
+- [[character-consistency]]
 - [[face-identity-workflows]]
 - [[runbook-living-painting]]
 - [[projects]]

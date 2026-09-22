@@ -20,6 +20,7 @@
 | 6 | [Cyberpunk city, rain, neon](#cyberpunk) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Neon Synthwave Drive | `cyberpunk_final.mp4` | [▶ watch](https://youtu.be/GrNTNQCqKnk) |
 | 7 | [FLL BOT Builders — Coastal Roots Farm, wide view](#fll_farm) | 2026-09-20 | done (v2) | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Calm Ambient Dreamscape | `fll_farm_v2_final.mp4` | [▶ watch](https://youtu.be/-Mf2UThasCg) |
 | 8 | [Dragon Epic — 1-minute photoreal short with Kevin's face](#dragon_epic) | 2026-09-21 | in progress — scene 1A done | FLUX.2 [klein] 9B 1280x768 | Wan 2.2 High Noise 43 min | TBD | `—` | — |
+| 9 | [Three-minute film — recurring characters (subject TBD)](#film3min) | 2026-09-21 | planning | FLUX.2 [klein] 9B 1024x576 | Wan 2.2 High Noise 15 min | TBD | `—` | — |
 
 ## YouTube playlist — [AI-Vids](https://www.youtube.com/playlist?list=PLJx49Sf61wKQ)
 
@@ -470,6 +471,52 @@ Prompt: `per shot — one camera move + one subject action`
 | Loop | none — 12 clips xfade-concatenated |
 | Upscale | scripts/upscale_4k.sh — Real-ESRGAN x4plus ncnn, tile 128, → 3840x2160 HEVC 10-bit 40 Mbps (5.6 min/clip) |
 | Music | TBD — orchestral epic + SFX |
+
+## Three-minute film — recurring characters (subject TBD) {#film3min}
+
+- **Date**: 2026-09-21 · **Status**: planning · **Draw Things project**: `None`
+- **Files** (`raw/clips/`): 
+- **Notes**: Plan: wiki/three-minute-film-plan.md. Consistency stack: wiki/character-consistency.md. Waiting on story/style/characters from Kevin; experiments X1–X7 before rendering.
+
+**Still**
+
+| Setting | Value |
+|---|---|
+| Model | FLUX.2 [klein] 9B (8-bit S) |
+| Size | 1024x576 |
+| Steps | 4 |
+| CFG | 1.0 |
+| Shift | 3.0 |
+| Sampler | DDIM Trailing |
+
+Prompt: `per shot — [camera/light lock] [scene] [character lock verbatim] [action]; see wiki/three-minute-film-plan.md`
+
+**I2V**
+
+| Setting | Value |
+|---|---|
+| Model | Wan 2.2 High Noise Expert I2V A14B (8-bit S) |
+| Refiner | Wan 2.2 Low Noise Expert I2V A14B (8-bit S) @ 10% |
+| LoRA | Wan 2.2 A14B Lightning High-Noise T2V v2.0 @ 100% |
+| Size | 1024x576 |
+| Frames | 81 |
+| FPS | 16 |
+| Steps | 4 |
+| CFG | 1.0 |
+| Shift | 4.95 |
+| Sampler | DDIM Trailing |
+| Strength | 100% |
+| I2V time (min) | 15 |
+
+Prompt: `per shot — one camera move + one subject action`
+
+**Post**
+
+| Setting | Value |
+|---|---|
+| Script | scripts/finish_clip.sh |
+| Upscale | Real-ESRGAN ncnn 4x -> 3840x2160 (scripts/upscale_4k.sh) |
+| Music | TBD |
 
 ## Related pages
 - [[runbook-living-painting]]

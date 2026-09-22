@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Character Consistency Across Scenes — video-gen-kb</title>
+<style>
+:root{--bg:#0B0D12;--panel:#141822;--panel-2:#1B2130;--stroke:#2A3245;--text:#E6E9F0;
+--muted:#8B94A7;--accent:#F5B84B;--accent-2:#4BC9F5;--on-accent:#12131A;
+--rule:rgba(139,148,167,.22);--code:#F5B84B}
+@media(prefers-color-scheme:light){:root:not([data-theme=dark]){--bg:#F4F1EA;--panel:#fff;
+--panel-2:#FAF8F3;--stroke:#D9D3C6;--text:#16181F;--muted:#5D6473;--accent:#B8781A;
+--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}}
+:root[data-theme=light]{--bg:#F4F1EA;--panel:#fff;--panel-2:#FAF8F3;--stroke:#D9D3C6;
+--text:#16181F;--muted:#5D6473;--accent:#B8781A;--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);
+line-height:1.65;padding:0 1rem 4rem}
+.shell{max-width:840px;margin:0 auto}
+a{color:var(--accent);text-decoration:none;font-weight:600}
+a:hover{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--accent-2);outline-offset:3px;border-radius:4px}
+.bar{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;padding:1.1rem 0;margin-bottom:1.5rem;
+border-bottom:1px solid var(--stroke)}
+.crumb{font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.spacer{flex:1}
+.pill{border:1px solid var(--stroke);background:var(--panel);border-radius:999px;padding:.28rem .8rem;
+font-size:.75rem;font-weight:700;color:var(--text);cursor:pointer;font-family:inherit}
+.pill:hover{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+h1{font-size:clamp(1.7rem,5vw,2.5rem);margin:.2rem 0 1rem;line-height:1.1;letter-spacing:-.015em;text-wrap:balance}
+h2{font-size:1.25rem;margin:2.2rem 0 .7rem;padding-bottom:.35rem;border-bottom:1px solid var(--rule);text-wrap:balance}
+h3{font-size:1.02rem;margin:1.5rem 0 .5rem;color:var(--accent)}
+p{margin:.7rem 0}
+ul,ol{margin:.7rem 0 .7rem 1.3rem}
+li{margin:.28rem 0}
+li::marker{color:var(--accent)}
+em{color:var(--muted)}
+hr{border:none;border-top:1px solid var(--stroke);margin:2rem 0}
+blockquote{border-left:3px solid var(--accent);background:var(--panel);border-radius:0 10px 10px 0;
+padding:.8rem 1.1rem;margin:1.1rem 0;color:var(--muted);font-size:.92rem}
+code{background:var(--panel);border:1px solid var(--stroke);border-radius:5px;padding:.1rem .35rem;
+font-size:.85em;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--code)}
+pre{background:var(--panel);border:1px solid var(--stroke);border-radius:12px;padding:1rem;overflow-x:auto;margin:1.1rem 0}
+pre code{background:none;border:none;padding:0;color:var(--text);font-size:.83rem;line-height:1.55}
+.tw{overflow-x:auto;border:1px solid var(--stroke);border-radius:12px;background:var(--panel);margin:1.1rem 0}
+table{width:100%;border-collapse:collapse;font-size:.85rem;min-width:min(100%,460px)}
+th{background:var(--panel-2);color:var(--accent);text-align:left;padding:.55rem .8rem;font-size:.68rem;
+letter-spacing:.09em;text-transform:uppercase;white-space:nowrap;border-bottom:1px solid var(--stroke)}
+td{padding:.5rem .8rem;border-bottom:1px solid var(--rule);color:var(--muted);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td strong{color:var(--text)}
+.meta{display:flex;flex-wrap:wrap;gap:.4rem .9rem;font-size:.78rem;color:var(--muted);margin:-.4rem 0 1.2rem}
+.meta b{color:var(--text);font-weight:600}
+.missing{color:var(--muted);border-bottom:1px dashed var(--muted);cursor:help}
+.related{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--stroke)}
+.related h2{border:none;margin:0 0 .7rem;font-size:.95rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:0}
+.chips li{margin:0}
+.chips a,.chips .missing{display:inline-block;border:1px solid var(--stroke);background:var(--panel);
+border-radius:999px;padding:.28rem .8rem;font-size:.8rem}
+.chips a:hover{background:var(--accent);color:var(--on-accent);text-decoration:none;border-color:var(--accent)}
+footer{max-width:840px;margin:2.5rem auto 0;padding-top:1.2rem;border-top:1px solid var(--stroke);
+font-size:.75rem;color:var(--muted);text-align:center}
+/* landing */
+.hero{padding:2.4rem 0 1.6rem}
+.kicker{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2)}
+.hero h1{font-size:clamp(2rem,6vw,3.2rem);margin:.35rem 0 .5rem}
+.hero p{color:var(--muted);font-size:1.05rem;max-width:56ch}
+.hw{display:inline-flex;gap:.5rem;align-items:center;margin-top:1rem;border:1px solid var(--stroke);
+background:var(--panel);border-radius:999px;padding:.3rem .9rem;font-size:.78rem;color:var(--muted)}
+.hw .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.sec{margin-top:2.2rem}
+.sec h2{border:none;padding:0;margin:0 0 .8rem;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.9rem}
+.card{display:block;border:1px solid var(--stroke);background:var(--panel);border-radius:14px;padding:1rem 1.1rem;
+color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+.card b{display:block;color:var(--accent);font-size:1rem;margin-bottom:.3rem}
+.card span{font-size:.85rem;color:var(--muted);line-height:1.5}
+.stubs{font-size:.82rem;color:var(--muted);margin-top:.6rem}
+.yt{position:relative;width:100%;aspect-ratio:16/9;border:1px solid var(--stroke);border-radius:12px;overflow:hidden;background:#000;margin:1rem 0}
+.yt.yt-v{aspect-ratio:9/16;max-width:360px}
+.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="bar">
+    <span class="crumb"><a href="../">video-gen-kb</a> / <a href="index.html">Wiki</a></span>
+    <span class="spacer"></span>
+    <button class="pill" onclick="tt()">◐ Theme</button>
+  </nav>
+  <h1>Character Consistency Across Scenes</h1><p class="lede">How to keep one character looking like the same person/creature across many shots in a generated video, ranked for the Mac Studio + Draw Things pipeline. The winning local recipe (as of 2026-09-21) is <em>reference-conditioned stills</em> — FLUX.2 klein with the character sheet in the Moodboard — feeding the existing Wan 2.2 I2V step, with a text "character lock" in every prompt and a cloud-trained LoRA as the upgrade path.</p><div class="meta"><span><b>Updated</b> 2026-09-21</span><span><b>Sources</b> Web research 2026-09-21 (links inline); <a href="face-identity-workflows.html">face identity workflows</a> (face-specific subset); <a href="dragon-epic-plan.html">dragon epic plan</a> §5 (first field notes). Everything marked <em>verify</em> has not been tested in Draw Things on this machine.</span></div>
+<hr />
+<h2>The problem in one line</h2>
+<p>Every clip is a fresh sample. Nothing carries over between shots unless you put it there — via <strong>text</strong>, <strong>pixels</strong> (a reference image in the first frame), <strong>weights</strong> (a LoRA), or a <strong>model that accepts a separate identity input</strong>. Real projects stack two or three of these. Mechanism per channel: <a href="identity-conditioning.html">identity conditioning</a>.</p>
+<h2>Layers, cheapest first</h2>
+<h3>1. Text lock — the character bible (free, always on)</h3>
+<p>Write a 40–80 word paragraph per character: age, build, hair, eyes, skin, one signature feature, wardrobe (colour + material + one detail), props. Paste it <strong>verbatim</strong> into every still prompt; never paraphrase. Guides across the board call this the baseline and say to fix the reference structure before rewriting prompts when drift appears (source: <a href="https://magichour.ai/blog/how-to-keep-characters-consistent-in-ai-video">magichour</a>, <a href="https://www.aimagicx.com/blog/long-form-ai-video-character-consistency-guide-2026">aimagicx</a>). Field note from the dragon project: text consistency is ~70% of the battle for non-human subjects (<a href="dragon-epic-plan.html">dragon epic plan</a> §5).</p>
+<p>Also lock what surrounds the character: lighting family, lens, time of day, colour palette. Characters "drift" most when the light changes.</p>
+<h3>2. Reference-conditioned stills (recommended core; zero installs)</h3>
+<p>Generate each shot's <strong>first frame</strong> with the character sheet as a reference, then animate with the proven <a href="wan22-i2v-locked-image-settings.html">wan22 i2v locked image settings</a> step. Identity lives in the still; I2V only has to hold it for 5 s.</p>
+<p>Two in-app options, both already downloadable in Draw Things:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Model</th>
+<th>How in Draw Things</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>FLUX.2 [klein] 9B</strong> (already installed, used for all stills)</td>
+<td>Base image or empty canvas + reference image(s) in <strong>Control → Moodboard</strong>; prompt refers to "the person in picture 2"; Strength 0.6–0.7 when editing an existing base, steps 4–8</td>
+<td>Draw Things demonstrates face swap this way (source: <a href="https://x.com/drawthingsapp/status/2014756085438283811">Draw Things on X</a>, <a href="https://note.com/sane_weasel8589/n/ne8649e756cbe">note.com guide</a>). FLUX.2 accepts multiple references; community guides say 3–5 refs is the sweet spot, &gt;7 muddies, keep lighting uniform and angle variance &lt; 90° (source: <a href="https://selfielabstudio.com/blog/flux-2-multi-ref-character-consistency-guide-20260329">selfielab</a> — written for FLUX.2 dev/pro CLI; <em>verify the same holds for klein 9B 8-bit in DT</em>)</td>
+</tr>
+<tr>
+<td><strong>Qwen Image Edit 2509</strong></td>
+<td>Base on canvas = Picture 1, refs on the moodboard = Picture 2, 3…; prompt like "the girl in Picture 2 is sitting on the sofa in Picture 1"</td>
+<td>Draw Things added multi-image referencing for 2509 in Oct 2025; ControlNet (pose/depth) goes in Picture 1 (source: <a href="https://wiki.drawthings.ai/wiki/Qwen_Image_Edit">DT wiki</a>). ~20 GB download; <em>verify</em> quality vs klein</td>
+</tr>
+</tbody>
+</table></div>
+<p>Workflow: make a <strong>character sheet</strong> first (front, three-quarter, profile, full body on a plain background — one FLUX still or 3–4 separate ones), then every shot still = scene prompt + character lock + sheet in the Moodboard. Iterate seeds; keep the one where the identity reads. Save sheets under <code>raw/characters/&lt;name&gt;/</code>.</p>
+<p>Weakness: I2V softens identity over 5 s, most on faces (see <a href="face-identity-workflows.html">face identity workflows</a>). Keep face shots ≤ 5 s, one action, camera mostly still.</p>
+<h3>3. Character LoRA (weights; the upgrade when 2 drifts or the cast is large)</h3>
+<p><strong>For the still model (FLUX.2 klein):</strong>
+- Local training in Draw Things (PEFT tab) supports SDXL, Flux.1 dev, Kolors, SD3 — klein was added later but <strong>crashes at step 0 on Apple Silicon</strong> (MPS SwiGLU backward assertion, issue open since Aug 2026; source: <a href="https://github.com/drawthingsai/draw-things-community/issues/114">draw-things-community #114</a>, <a href="https://wiki.drawthings.ai/wiki/LoRA_Training">DT wiki</a>). Re-check after each DT update.
+- Cloud: ostris/ai-toolkit trains a klein LoRA in &lt; 60 min on a 4090, ~$0.50 on RunPod; 15–40 images, non-word trigger token, caption content not style, pick a checkpoint around steps 750–1500 by eye. The official guide targets <strong>klein-base-4B</strong>; 9B "receives minimal discussion" (source: <a href="https://huggingface.co/blog/black-forest-labs/flux-2-klein-lora">HF blog</a>). A 4B LoRA does not load into the 9B model — either train on 9B base or switch stills to klein 4B for that character. <em>verify</em> DT imports the resulting <code>.safetensors</code> as a klein LoRA.
+- Dataset for a fictional character: 20–30 stills generated from the locked sheet (method 2), curated for identity, varied angle/expression/light.</p>
+<p><strong>For the video model (Wan 2.2 I2V):</strong> cloud trainers (RunComfy / ai-toolkit) train an I2V character LoRA in 30–60 min on a modern GPU; pays off past ~20 clips of the same character and is the fix for face drift <em>during</em> the clip rather than in the still (source: <a href="https://www.runcomfy.com/trainer/ai-toolkit/wan-2-2-i2v-character-consistency-lora">RunComfy</a>, <a href="https://wan27.org/blog/wan-2-2-lora-training-guide">wan27.org guide</a>). Note T2V and I2V LoRAs are trained separately. Loads in DT as a plain LoRA alongside Lightning (<em>verify</em> stacking two LoRAs on the 8-bit S pair).</p>
+<h3>4. Reference-to-video models (identity as a separate input to the video model)</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Identity input</th>
+<th>Runs here? (as of 2026-09-21)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Wan 2.1 VACE</strong> in Draw Things</td>
+<td>subject reference image(s) on white background in the Moodboard, plus T2V prompt; also first/last-frame control</td>
+<td><strong>Yes, in-app</strong> since DT 1.20250616.0, Wan 2.1 T2V base + CausVid/self-forcing LoRA (source: <a href="https://x.com/drawthingsapp/status/1935515572911140882">Draw Things on X</a>). Wan 2.1 quality &lt; Wan 2.2; <em>verify</em> whether DT's VACE also runs on the 2.2 experts</td>
+</tr>
+<tr>
+<td><strong>Wan 2.2 Animate-14B</strong> (Animate-2 weights released 2026-08-07)</td>
+<td>character image + driving video → replaces the performer, copies motion/expression, relights</td>
+<td>Open weights, but CUDA/ComfyUI only; no Mac port found. Cloud via Replicate/fal (source: <a href="https://huggingface.co/Wan-AI/Wan2.2-Animate-2-14B">HF</a>, <a href="https://replicate.com/wan-video/wan-2.2-animate-replace">Replicate</a>)</td>
+</tr>
+<tr>
+<td><strong>LTX-2.5</strong> (22B, open)</td>
+<td>native multi-shot in one pass (holds identity/voice across cuts, up to ~5 min claimed) + Multi-Subject Reference LoRA (≤ 5 refs) + reference-sheet IC-LoRA</td>
+<td>Mac via <code>ltx-2-mlx</code> int8 ≈ 21 GB, unproven for these LoRAs (source: <a href="https://ltx.io/model/capabilities/multi-shot-video-generation">ltx.io</a>, <a href="https://ltx.io/blog/how-to-use-ic-lora-in-ltx-2">LTX blog</a>, <a href="https://huggingface.co/Lightricks/LTX-2.5">HF</a>). Experiment track, see <a href="image-to-video-models.html">image to video models</a></td>
+</tr>
+<tr>
+<td>Wan 2.6 / 2.7 reference-to-video, multi-shot</td>
+<td>up to several refs, 15 s clips</td>
+<td><strong>API only</strong> — no weights published for 2.5/2.6/2.7 (source: <a href="https://www.runpod.io/articles/guides/wan-2-7-runpod">Runpod</a>)</td>
+</tr>
+<tr>
+<td>Kling Elements, Veo Ingredients, Seedance refs, Sora cameo</td>
+<td>1–9 reference images</td>
+<td>closed, per-clip cost; strongest results. See <a href="video-generation-landscape.html">video generation landscape</a></td>
+</tr>
+</tbody>
+</table></div>
+<h3>5. Post-process (faces only)</h3>
+<p>FaceFusion swap after I2V, before upscale — re-locks a <em>real</em> face; useless for creatures or stylised characters. Details in <a href="face-identity-workflows.html">face identity workflows</a> C.</p>
+<h3>6. Continuity tricks that cost nothing</h3>
+<ul>
+<li><strong>Shot staging</strong>: most shots do not need the full face. Over-shoulder, silhouette, wide, hands/props read as "the same character" for free; spend the reference budget on 25–30% of shots.</li>
+<li><strong>Wardrobe as identity</strong>: a distinctive jacket/cloak/hat survives I2V far better than a face. Give every character one.</li>
+<li><strong>Chained shots</strong>: for a continuous move longer than 5 s, use the last frame of clip N as the first frame of clip N+1 (I2V from that frame). Identity carries because pixels carry.</li>
+<li><strong>Same seed does nothing</strong> across different prompts — do not rely on it.</li>
+<li><strong>Fewer, longer-held faces</strong>: face at frame 81 drifts most when the head turns; keep head motion small, camera static or slow push.</li>
+</ul>
+<h2>Decision table</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>Stack</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fictional character, ~30 shots, local only</td>
+<td><strong>1 + 2 (klein Moodboard) + 6</strong>; if 5 test shots drift → add 3 (cloud klein LoRA, ~$1)</td>
+</tr>
+<tr>
+<td>Real person's face</td>
+<td>1 + 2 + FaceFusion on close-ups; LoRA if many projects</td>
+</tr>
+<tr>
+<td>Many characters in one frame</td>
+<td>2 with Qwen Image Edit 2509 (Picture 1/2/3 addressing) <em>verify</em>; or LTX-2.5 multi-subject LoRA</td>
+</tr>
+<tr>
+<td>Need the character to <em>perform</em> (dialogue, dance)</td>
+<td>Wan 2.2 Animate on cloud, or closed models</td>
+</tr>
+<tr>
+<td>Money OK, best quality</td>
+<td>Kling Elements / Veo Ingredients / Seedance for hero shots, local for the rest</td>
+</tr>
+</tbody>
+</table></div>
+
+  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="identity-conditioning.html">identity conditioning</a></li><li><a href="three-minute-film-plan.html">three minute film plan</a></li><li><a href="face-identity-workflows.html">face identity workflows</a></li><li><a href="dragon-epic-plan.html">dragon epic plan</a></li><li><a href="wan22-i2v-locked-image-settings.html">wan22 i2v locked image settings</a></li><li><a href="image-to-video-models.html">image to video models</a></li><li><a href="video-generation-landscape.html">video generation landscape</a></li><li><a href="draw-things-setup.html">draw things setup</a></li></ul></div>
+</div>
+<footer>video-gen-kb · built 2026-09-21 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<script>function tt(){var r=document.documentElement,
+d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
+matchMedia('(prefers-color-scheme: dark)').matches);
+r.setAttribute('data-theme',d?'light':'dark');}</script>
+</body>
+</html>

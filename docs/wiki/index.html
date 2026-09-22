@@ -91,7 +91,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
     <span class="spacer"></span>
     <button class="pill" onclick="tt()">◐ Theme</button>
   </nav>
-  <h1>Index</h1><p class="lede">Table of contents for the video generation knowledge base.</p><div class="meta"><span><b>Updated</b> 2026-09-19</span><span><b>Sources</b> n/a</span></div>
+  <h1>Index</h1><p class="lede">Table of contents for the video generation knowledge base.</p><div class="meta"><span><b>Updated</b> 2026-09-21</span><span><b>Sources</b> n/a</span></div>
 <hr />
 <h2>Overviews</h2>
 <ul>
@@ -117,15 +117,20 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <h2>Plans</h2>
 <ul>
 <li><a href="dragon-epic-plan.html">dragon epic plan</a> — 1-minute photoreal dragon short with a personal face: pipeline, Draw Things config per stage, face-identity and dragon-consistency strategy, 12-shot list, experiments, budget</li>
+<li><a href="three-minute-film-plan.html">three minute film plan</a> — 3-minute narrative film (36–40 × 5 s clips) with recurring characters: structure, consistency stack, per-shot workflow, 7 gating experiments, ~23 h budget, open questions</li>
 </ul>
 <h2>Recipes</h2>
 <ul>
 <li><a href="runbook-living-painting.html">runbook living painting</a> — <strong>start here next time</strong>: click-by-click checklist, settings to verify after every model switch, failure signatures, <code>scripts/finish_clip.sh</code></li>
 <li><a href="living-painting-loop.html">living painting loop</a> — TikTok-style animated painting: Wan 2.2 T2V still → I2V ambient motion → ffmpeg ping-pong loop; exact Draw Things settings and UI gotchas</li>
 <li><a href="wan22-i2v-locked-image-settings.html">wan22 i2v locked image settings</a> — Draw Things settings to animate a photo while keeping it as the literal first frame; motion-only prompting</li>
+<li><a href="character-consistency.html">character consistency</a> — keeping one character the same across many shots: text lock, Moodboard-referenced stills (FLUX.2 klein / Qwen Image Edit), LoRAs (local training broken on Apple Silicon, cloud ~$1), reference-to-video models, staging tricks; decision table</li>
 <li><a href="face-identity-workflows.html">face identity workflows</a> — four ways to put a specific face into a prompt-generated video: two-stage still→I2V, reference-to-video models, FaceFusion swap, face LoRA</li>
 </ul>
 <h2>Concepts</h2>
+<ul>
+<li><a href="identity-conditioning.html">identity conditioning</a> — why a character can stay the same: text embeddings vs reference-image tokens vs adapters vs LoRA weights vs first-frame latent; the mechanism behind every consistency tool</li>
+</ul>
 <p><em>(stubs referenced but not yet written: frame-interpolation, depth-parallax, ffmpeg-pipeline)</em></p>
 <h2>Log</h2>
 <ul>
