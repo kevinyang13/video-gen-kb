@@ -459,8 +459,8 @@
           "note": "v1 failed: LTX applied the collapse to the creature — its head sheared off and fell like a spire. Two causes, both fixed here. (1) Scale: the creature was a sixth of the frame, so its head was ~30 px in the 32x32 LTX latent and got re-synthesised as debris; it now fills the left third close to camera. (2) Prompt order and verbs: the falling verbs came before the subject and bled onto it. Subject first with positive rigidity words (solid, still, intact, head held level and attached, only the ribs move), then one sentence that pins the destruction to the horizon ('all of the destruction is far away on the horizon and nowhere near them'). Pace so the last tower falls by ~8 s and the final second is an empty dust skyline — the film's last frame. Fallback if v2 still bleeds: render the collapse as a plate with no creature in it and cut the foreground as its own shot."
         }
       },
-      "youtube": "9YlHr5mehaA",
-      "youtube_note": "scenes 1–10 compilation"
+      "youtube": "68sq_jZqu6c",
+      "youtube_note": "latest cut (replaces 9YlHr5mehaA)"
     }
   ],
   "playlist": {
