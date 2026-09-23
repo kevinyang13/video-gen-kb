@@ -8,7 +8,7 @@
 
 ---
 
-**Project pages**: [[projects-anime|Anime projects]] (7) · [[projects-realistic|Photoreal projects]] (3) · [[projects-3d|3D-animated projects]] (1)
+**Project pages**: [[projects-anime|Anime projects]] (7) · [[projects-realistic|Photoreal projects]] (3) · [[projects-3d|3D-animated projects]] (2)
 
 Each theme page holds the full records — settings, prompts, seeds, files. The tables below link straight to a project's record on its page.
 
@@ -40,15 +40,16 @@ Cinematic photoreal shorts: FLUX.2 klein stills with Moodboard references, motio
 
 → full records for all 3: [[projects-realistic|Photoreal projects]]
 
-## [[projects-3d|3D-animated projects]] (1)
+## [[projects-3d|3D-animated projects]] (2)
 
-Pixar-style 3D-animated shorts. Kyle's Antarctic Rescue.
+Pixar-style 3D-animated shorts. Kyle's Antarctic Rescue, Lindsey: A Small Dream.
 
 | # | Project | Date | Status | Still | I2V | Music | Final file | YouTube |
 |--:|---|---|---|---|---|---|---|---|
 | 1 | [Kyle's Antarctic Rescue — 1-minute 3D-animated vertical short from a 5-panel comic](projects-3d.html#kyle_rescue) | 2026-09-22 | delivered 2026-09-23 01:38 — 60.0 s, 1080x1920 + 2160x3840, rendered unattended overnight (see plan §0) | FLUX.2 [klein] 9B 576x1024 | LTX-2.3 22B [distilled] 1.1 via draw-things-cli ? min | Calm Ambient Dreamscape | `—` | — |
+| 2 | [Lindsey: A Small Dream — 1-minute 3D-animated vertical short from Lindsey's 5-panel art comic](projects-3d.html#lindsey_art) | 2026-09-23 | rendering — unattended run started 2026-09-23 (see wiki/lindsey-art-plan.md) | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
 
-→ full records for all 1: [[projects-3d|3D-animated projects]]
+→ full records for all 2: [[projects-3d|3D-animated projects]]
 
 
 ## YouTube playlist — [AI-Vids](https://www.youtube.com/playlist?list=PLJx49Sf61wKQ)

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Index — video-gen-kb</title>
+<title>Lindsey: A Small Dream — 1-Minute Plan — video-gen-kb</title>
 <style>
 :root{--bg:#0B0D12;--panel:#141822;--panel-2:#1B2130;--stroke:#2A3245;--text:#E6E9F0;
 --muted:#8B94A7;--accent:#F5B84B;--accent-2:#4BC9F5;--on-accent:#12131A;
@@ -92,61 +92,148 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
     <span class="spacer"></span>
     <button class="pill" onclick="tt()">◐ Theme</button>
   </nav>
-  <h1>Index</h1><p class="lede">Table of contents for the video generation knowledge base.</p><div class="meta"><span><b>Updated</b> 2026-09-23</span><span><b>Sources</b> n/a</span></div>
+  <h1>Lindsey: A Small Dream — 1-Minute Plan</h1><p class="lede">A 60-second vertical 3D-animated short made from Lindsey's 5-panel comic. She draws at the kitchen table, practises every day, finds her own style, holds her first art exhibition, and ends hugging her favourite animals at sunrise. It's the second film through the <a href="idea-to-video-blueprint.html">idea to video blueprint</a>, the first run entirely by <code>scripts/film_run.py</code> from a run-spec, unattended after "go".</p><div class="meta"><span><b>Updated</b> 2026-09-23 (plan approved, run started)</span><span><b>Sources</b> <code>raw/lindsey/comic_source.jpg</code> (5-panel comic, 1374×1145, added 2026-09-23); <a href="idea-to-video-blueprint.html">idea to video blueprint</a>; <a href="kyle-antarctic-rescue-plan.html">kyle antarctic rescue plan</a> §0 (method and rules this reuses); <a href="scripts-reference.html">scripts reference</a> (run-spec format).</span></div>
 <hr />
-<h2>Overviews</h2>
+<h2>1. Decisions (Kevin, 2026-09-23 intake)</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Who</td>
+<td>Lindsey, Kevin's daughter. Consent is his, and her face comes from the comic (no photo)</td>
+</tr>
+<tr>
+<td>Look</td>
+<td>3D animated feature film: stylised characters in a physically real world, same as Kyle's film</td>
+</tr>
+<tr>
+<td>Format</td>
+<td>9:16, 60 s, rendered at 576×1024; 2160×3840 master plus 1080×1920 and 720×1280 copies</td>
+</tr>
+<tr>
+<td>Her artworks</td>
+<td><strong>stay flat 2D kid drawings</strong> on paper and canvas inside the 3D world. The finale animals are plush toys, as drawn in panel 5</td>
+</tr>
+<tr>
+<td>On-screen text</td>
+<td>none; pictures and music only</td>
+</tr>
+<tr>
+<td>Music</td>
+<td><strong>"Emotional Children Piano"</strong>, Music_For_Videos (Pixabay, 1:55) → <code>raw/clips/music/emotional_children_piano.mp3</code>. First 60 s: rises from −23 dB to fullest near 50 s (the exhibition), and its section ends at 60 s. 2 s fade out</td>
+</tr>
+<tr>
+<td>Overnight</td>
+<td>Claude judges. A face shot that keeps failing gets restaged from behind or wide. Allowed to quit the app, run caffeinate and edit scripts. Deliver the film plus this report, commit, push and notify</td>
+</tr>
+</tbody>
+</table></div>
+<p>Runners-up for the music: "Inspirational Piano Arpeggios" (Music_For_Videos, 1:14, builds then dips), "Leva – Finder Dreams" (lemonmusicstudio, acoustic folk, bright but no build).</p>
+<h2>2. Storyboard (approved)</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Keep</th>
+<th>From</th>
+<th>First frame</th>
+<th>Motion</th>
+<th>Face</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S1</td>
+<td>6.5 s</td>
+<td>P1 → S2</td>
+<td>sunlit table: her cat-and-cake drawing, cup of pencils, grey tabby asleep</td>
+<td>slow push-in, sunlight flickers, tail flicks</td>
+<td>—</td>
+</tr>
+<tr>
+<td>S2</td>
+<td>8 s</td>
+<td>P1</td>
+<td>Lindsey (teal top) coloring the cat drawing, cat beside her</td>
+<td>colors, looks up and smiles</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>S3</td>
+<td>7 s</td>
+<td>P2 → S4</td>
+<td>looking down at sketches (fish, panda, gecko), her hand in the pink sleeve shading</td>
+<td>hand shades, light drifts</td>
+<td>—</td>
+</tr>
+<tr>
+<td>S4</td>
+<td>8 s</td>
+<td>P2</td>
+<td>Lindsey (pink sweater) sketching a gecko</td>
+<td>draws, pauses, smiles at the page</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>S5</td>
+<td>10 s</td>
+<td>P3</td>
+<td>from behind (lavender hoodie) painting a sea turtle, her drawings on the wall</td>
+<td>brush strokes, push-in to the canvas</td>
+<td>back</td>
+</tr>
+<tr>
+<td>S6</td>
+<td>8 s</td>
+<td>P4 → S7</td>
+<td>gallery wide: framed drawings, visitors walking in</td>
+<td>visitors drift in</td>
+<td>—</td>
+</tr>
+<tr>
+<td>S7</td>
+<td>8 s</td>
+<td>P4</td>
+<td>Lindsey (navy dress, name tag) arms open, crowd from behind</td>
+<td>laughs, arms stay open</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>S8</td>
+<td>9.6 s</td>
+<td>P5</td>
+<td>sunrise by the sea, hugging plush cat, panda, gecko and fish</td>
+<td>rocks gently, camera rises</td>
+<td>✔</td>
+</tr>
+</tbody>
+</table></div>
+<p>65.1 s kept − 7 × 0.75 s crossfades ≈ 60 s. Her outfit changes by panel, which shows time passing; her face and hair are the identity, locked to the master.</p>
+<h2>3. How consistency is held</h2>
+<p>This is the Kyle method (<a href="kyle-antarctic-rescue-plan.html">kyle antarctic rescue plan</a> §0, <a href="headless-cli-pipeline.html">headless cli pipeline</a> §1c):</p>
 <ul>
-<li><a href="photo-to-4k-video-approaches.html">photo to 4k video approaches</a> — four candidate pipelines (Ken Burns, AI image-to-video, depth parallax, hybrid) with trade-offs and open questions</li>
-<li><a href="local-open-source-4k-video-pipeline.html">local open source 4k video pipeline</a> — the recommended all-local recipe on the M4 Max: I2V at 720p/1080p → upscale → interpolate → ffmpeg; runtime and model rankings, time budget, open questions</li>
+<li><strong>Master</strong>: panel 1 face crop → klein edit at strength 1.0 ("re-render as a 3D animated film character, same face, same long dark brown hair with a side part …"). 4 seeds; <strong>seed 3</strong> was picked for its side part and closest face shape. File: <code>raw/clips/lindsey/masters/lindsey_front.png</code>.</li>
+<li><strong>Face shots</strong> S2, S4, S5, S7, S8: diptych with the master on the left and the panel crop on the right.</li>
+<li><strong>Chained shots</strong>: S1 = edit of the approved S2 ("the girl is gone"); S3 = diptych with S4 (same sleeve, sketches, light); S6 = diptych with S7 (same gallery, same framed drawings).</li>
+<li><strong>Art stays art</strong>: every still prompt ends with "her drawings stay flat hand-drawn children's crayon and colored-pencil pictures on paper".</li>
+<li><strong>Motion rules</strong>: face shots "stay in place … face and hair stay exactly the same, hair stays neat"; multi-person shots "camera holds completely still, same framing throughout"; trim before LTX's end-of-clip fade.</li>
 </ul>
-<h2>Models &amp; tools</h2>
-<ul>
-<li>
-<p><a href="video-generation-landscape.html">video generation landscape</a> — the whole map: open and closed models, harnesses, apps, websites, launch dates, popularity; where this project sits</p>
-</li>
-<li>
-<p><a href="image-to-video-models.html">image to video models</a> — Wan 2.2, LTX-2.5/2.3, HunyuanVideo 1.5, SkyReels: size, license, native output, Mac status</p>
-</li>
-<li><a href="video-upscaling.html">video upscaling</a> — SeedVR2, FlashVSR, Real-ESRGAN; temporal vs per-frame; Mac support</li>
-<li><a href="draw-things-setup.html">draw things setup</a> — downloading Wan 2.1/2.2, LTX-2.3, Hunyuan, SkyReels inside Draw Things; LightX2V 4-step settings; I2V step-by-step; disk budget</li>
-<li><a href="apple-silicon-inference.html">apple silicon inference</a> — FP8 trap, MPS slowness, Draw Things and MLX runtimes, 48 GB memory planning</li>
-<li><a href="headless-cli-pipeline.html">headless cli pipeline</a> — running the whole pipeline without a UI: <code>draw-things-cli</code> (klein strength 1.0 = edit mode, diptych as Moodboard substitute, <code>--frames</code> video, config JSON), gRPCServerCLI, and why ComfyUI/MLX can't replace it on a Mac</li>
-</ul>
-<h2>Projects</h2>
-<ul>
-<li><a href="projects.html">projects</a> — index of every video, grouped by theme; generated from <code>projects.json</code></li>
-<li><a href="projects-anime.html">projects anime</a> — Shinkai/Ghibli living-painting loops: coast, Torrey Pines, Golden Gate, Rainier, cyberpunk, FLL farm</li>
-<li><a href="projects-realistic.html">projects realistic</a> — photoreal shorts: Dragon Epic, Lost City, the three-minute film</li>
-<li><a href="projects-3d.html">projects 3d</a> — 3D-animated shorts: Kyle's Antarctic Rescue</li>
-</ul>
-<h2>Plans</h2>
-<ul>
-<li><a href="dragon-epic-plan.html">dragon epic plan</a> — 1-minute photoreal dragon short with a personal face: pipeline, Draw Things config per stage, face-identity and dragon-consistency strategy, 12-shot list, experiments, budget</li>
-<li><a href="lost-city-plan.html">lost city plan</a> — hyper-real sci-fantasy rider entering jungle ruins (OpenArt-style reference): what makes it look real, klein Moodboard stills, Wan 2.2 vs LTX-2.3 motion settings, creature/hero/city locks, 8-shot list, experiments L0–L6</li>
-<li><a href="lindsey-art-plan.html">lindsey art plan</a> — 1-minute vertical 3D-animated short from Lindsey's 5-panel art comic (drawing → practice → style → exhibition → brighter future); first run fully through <code>film_run.py</code></li>
-<li><a href="kyle-antarctic-rescue-plan.html">kyle antarctic rescue plan</a> — <strong>delivered</strong>: 1-minute vertical 3D-animated short from Kyle's 2D comic, rendered unattended overnight with <code>draw-things-cli</code> — klein edit-mode masters, diptych identity lock, LTX-2.3, every pick and rejection</li>
-<li><a href="three-minute-film-plan.html">three minute film plan</a> — 3-minute narrative film (36–40 × 5 s clips) with recurring characters: structure, consistency stack, per-shot workflow, 7 gating experiments, ~23 h budget, open questions</li>
-</ul>
-<h2>Recipes</h2>
-<ul>
-<li><a href="idea-to-video-blueprint.html">idea to video blueprint</a> — <strong>start here for a new film</strong>: idea → intake questionnaire → storyboard approval → unattended CLI run (masters, diptych stills, LTX batch, QC/redo, upscale, music, report); rules, rubric, time budget, failure playbook</li>
-<li><a href="scripts-reference.html">scripts reference</a> — every pipeline script by production phase, the run-spec that drives them, <code>film_run.py</code> (check/stills/pick/clips/qc/finish), options, validation, tests, timings</li>
-<li><a href="runbook-living-painting.html">runbook living painting</a> — <strong>start here next time</strong>: click-by-click checklist, settings to verify after every model switch, failure signatures, <code>scripts/finish_clip.sh</code></li>
-<li><a href="living-painting-loop.html">living painting loop</a> — TikTok-style animated painting: Wan 2.2 T2V still → I2V ambient motion → ffmpeg ping-pong loop; exact Draw Things settings and UI gotchas</li>
-<li><a href="wan22-i2v-locked-image-settings.html">wan22 i2v locked image settings</a> — Draw Things settings to animate a photo while keeping it as the literal first frame; motion-only prompting</li>
-<li><a href="character-consistency.html">character consistency</a> — keeping one character the same across many shots: text lock, Moodboard-referenced stills (FLUX.2 klein / Qwen Image Edit), LoRAs (local training broken on Apple Silicon, cloud ~$1), reference-to-video models, staging tricks; decision table</li>
-<li><a href="face-identity-workflows.html">face identity workflows</a> — four ways to put a specific face into a prompt-generated video: two-stage still→I2V, reference-to-video models, FaceFusion swap, face LoRA</li>
-</ul>
-<h2>Concepts</h2>
-<ul>
-<li><a href="identity-conditioning.html">identity conditioning</a> — why a character can stay the same: text embeddings vs reference-image tokens vs adapters vs LoRA weights vs first-frame latent; the mechanism behind every consistency tool</li>
-</ul>
-<p><em>(stubs referenced but not yet written: frame-interpolation, depth-parallax, ffmpeg-pipeline)</em></p>
-<h2>Log</h2>
-<ul>
-<li><a href="log.html">log</a> — append-only record of all operations</li>
-</ul>
-  
+<h2>4. Run</h2>
+<p>The run-spec is <code>projects.json → lindsey_art["run-spec"]</code>. Commands, in order:</p>
+<pre><code class="language-bash">scripts/preflight.sh --fix
+scripts/film_run.py lindsey_art stills s2 s4 s5 s7 s8   # then pick
+scripts/film_run.py lindsey_art stills s1 s3 s6         # chained from the picks
+scripts/film_run.py lindsey_art clips                   # 8 × ~9.5 min
+scripts/film_run.py lindsey_art qc                      # judge sets take + trim, queues redos
+scripts/film_run.py lindsey_art finish
+</code></pre>
+
+  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="idea-to-video-blueprint.html">idea to video blueprint</a> — the process</li><li><a href="kyle-antarctic-rescue-plan.html">kyle antarctic rescue plan</a> — the first film, same method</li><li><a href="scripts-reference.html">scripts reference</a> — run-spec and <code>film_run.py</code></li><li><a href="projects.html">projects</a> — the <code>lindsey_art</code> record</li></ul></div>
 </div>
 <footer>video-gen-kb · built 2026-09-23 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
 <script>function tt(){var r=document.documentElement,

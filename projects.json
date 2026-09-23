@@ -828,6 +828,174 @@
           }
         ]
       }
+    },
+    {
+      "id": "lindsey_art",
+      "title": "Lindsey: A Small Dream — 1-minute 3D-animated vertical short from Lindsey's 5-panel art comic",
+      "date": "2026-09-23",
+      "theme": "3d",
+      "dt_project": "none — draw-things-cli via scripts/film_run.py",
+      "status": "rendering — unattended run started 2026-09-23 (see wiki/lindsey-art-plan.md)",
+      "source": "raw/lindsey/comic_source.jpg",
+      "music": "Emotional Children Piano — Music_For_Videos, Pixabay (cdn.pixabay.com/download/audio/2023/09/03/audio_2c0ed5a272.mp3), 1:55; first 60 s (build to ~50 s, section ends at 60 s), 2 s fade out",
+      "notes": "Lindsey is Kevin's daughter; consent confirmed 2026-09-23. Face from the comic, no photo.",
+      "run-spec": {
+        "dir": "raw/clips/lindsey",
+        "name": "lindsey_art",
+        "size": [
+          576,
+          1024
+        ],
+        "still": {
+          "model": "flux_2_klein_9b_i8x.ckpt",
+          "steps": 4,
+          "cfg": 1,
+          "config": {
+            "shift": 3.0,
+            "sampler": 16
+          },
+          "seeds": [
+            1,
+            2,
+            3
+          ],
+          "strength": 1.0
+        },
+        "clip": {
+          "model": "ltx_2.3_22b_distilled_1.1_q8p.ckpt",
+          "frames": 249,
+          "steps": 8,
+          "cfg": 1,
+          "config": {
+            "sampler": 19,
+            "shift": 5.0,
+            "stochasticSamplingGamma": 0.3,
+            "fps": 25,
+            "hiresFix": false
+          },
+          "seed": 1,
+          "video_format": "prores422hq"
+        },
+        "masters": {
+          "lindsey": "masters/lindsey_front.png"
+        },
+        "upscale": {
+          "model": "realesrgan-x4plus",
+          "size": [
+            2160,
+            3840
+          ],
+          "fit": "crop",
+          "bitrate": "40M"
+        },
+        "assemble": {
+          "fps": 25,
+          "xfade": 0.75,
+          "clip_audio": false,
+          "bitrate": "40M"
+        },
+        "music": {
+          "file": "raw/clips/music/emotional_children_piano.mp3",
+          "start": 0,
+          "vol": 1.0,
+          "fade_in": 0,
+          "fade_out": 2
+        },
+        "deliver": [
+          {
+            "size": [
+              1080,
+              1920
+            ],
+            "bitrate": "12M"
+          },
+          {
+            "size": [
+              720,
+              1280
+            ],
+            "bitrate": "2.8M"
+          }
+        ],
+        "shots": [
+          {
+            "id": "s1",
+            "still": {
+              "ref": null,
+              "input": "stills/s2.png",
+              "prompt": "stills/s1.txt"
+            },
+            "video_prompt": "stills/s1_v.txt"
+          },
+          {
+            "id": "s2",
+            "still": {
+              "ref": "lindsey",
+              "input": "work/s2_in.png",
+              "prompt": "stills/s2.txt"
+            },
+            "video_prompt": "stills/s2_v.txt",
+            "qc_ref": "lindsey"
+          },
+          {
+            "id": "s3",
+            "still": {
+              "ref": "stills/s4.png",
+              "input": "work/s3_in.png",
+              "prompt": "stills/s3.txt"
+            },
+            "video_prompt": "stills/s3_v.txt"
+          },
+          {
+            "id": "s4",
+            "still": {
+              "ref": "lindsey",
+              "input": "work/s4_in.png",
+              "prompt": "stills/s4.txt"
+            },
+            "video_prompt": "stills/s4_v.txt",
+            "qc_ref": "lindsey"
+          },
+          {
+            "id": "s5",
+            "still": {
+              "ref": "lindsey",
+              "input": "work/s5_in.png",
+              "prompt": "stills/s5.txt"
+            },
+            "video_prompt": "stills/s5_v.txt"
+          },
+          {
+            "id": "s6",
+            "still": {
+              "ref": "stills/s7.png",
+              "input": "work/s6_in.png",
+              "prompt": "stills/s6.txt"
+            },
+            "video_prompt": "stills/s6_v.txt"
+          },
+          {
+            "id": "s7",
+            "still": {
+              "ref": "lindsey",
+              "input": "work/s7_in.png",
+              "prompt": "stills/s7.txt"
+            },
+            "video_prompt": "stills/s7_v.txt",
+            "qc_ref": "lindsey"
+          },
+          {
+            "id": "s8",
+            "still": {
+              "ref": "lindsey",
+              "input": "work/s8_in.png",
+              "prompt": "stills/s8.txt"
+            },
+            "video_prompt": "stills/s8_v.txt",
+            "qc_ref": "lindsey"
+          }
+        ]
+      }
     }
   ],
   "playlist": {
@@ -849,7 +1017,7 @@
     "3d": {
       "slug": "projects-3d",
       "title": "3D-animated projects",
-      "blurb": "Pixar-style 3D-animated shorts. Kyle's Antarctic Rescue."
+      "blurb": "Pixar-style 3D-animated shorts. Kyle's Antarctic Rescue, Lindsey: A Small Dream."
     }
   }
 }

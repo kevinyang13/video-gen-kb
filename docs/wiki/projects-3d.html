@@ -92,7 +92,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
     <span class="spacer"></span>
     <button class="pill" onclick="tt()">◐ Theme</button>
   </nav>
-  <h1>3D-animated projects</h1><p class="lede">Pixar-style 3D-animated shorts. Kyle's Antarctic Rescue. Full record per project: models, settings, prompts, seeds, music and output files. Generated from <code>projects.json</code>.</p><div class="meta"><span><b>Updated</b> 2026-09-23</span><span><b>Sources</b> projects.json; per-project notes from the session logs.</span></div>
+  <h1>3D-animated projects</h1><p class="lede">Pixar-style 3D-animated shorts. Kyle's Antarctic Rescue, Lindsey: A Small Dream. Full record per project: models, settings, prompts, seeds, music and output files. Generated from <code>projects.json</code>.</p><div class="meta"><span><b>Updated</b> 2026-09-23</span><span><b>Sources</b> projects.json; per-project notes from the session logs.</span></div>
 <hr />
 <p>Index of every project: <a href="projects.html">projects</a>. Other themes: <a href="projects-anime.html">projects anime</a> · <a href="projects-realistic.html">projects realistic</a>.</p>
 <h2>Summary</h2>
@@ -118,6 +118,17 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <td>delivered 2026-09-23 01:38 — 60.0 s, 1080x1920 + 2160x3840, rendered unattended overnight (see plan §0)</td>
 <td>FLUX.2 [klein] 9B 576x1024</td>
 <td>LTX-2.3 22B [distilled] 1.1 via draw-things-cli ? min</td>
+<td>Calm Ambient Dreamscape</td>
+<td><code>—</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td><a href="#lindsey_art">Lindsey: A Small Dream — 1-minute 3D-animated vertical short from Lindsey's 5-panel art comic</a></td>
+<td>2026-09-23</td>
+<td>rendering — unattended run started 2026-09-23 (see wiki/lindsey-art-plan.md)</td>
+<td>FLUX.2 [klein] 9B 576x1024</td>
+<td>Wan 2.2 High Noise ? min</td>
 <td>Calm Ambient Dreamscape</td>
 <td><code>—</code></td>
 <td>—</td>
@@ -361,6 +372,129 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <blockquote>
 <p>The camera rises slowly into the glowing sky as the sun climbs.</p>
 </blockquote>
+<h2 id="lindsey_art">Lindsey: A Small Dream — 1-minute 3D-animated vertical short from Lindsey's 5-panel art comic</h2>
+<ul>
+<li><strong>Date</strong>: 2026-09-23 · <strong>Status</strong>: rendering — unattended run started 2026-09-23 (see wiki/lindsey-art-plan.md) · <strong>Draw Things project</strong>: <code>none — draw-things-cli via scripts/film_run.py</code></li>
+<li><strong>Files</strong> (<code>raw/clips/</code>): </li>
+<li><strong>Notes</strong>: Lindsey is Kevin's daughter; consent confirmed 2026-09-23. Face from the comic, no photo.</li>
+</ul>
+<p><strong>Still</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Model</td>
+<td>FLUX.2 [klein] 9B (8-bit S)</td>
+</tr>
+<tr>
+<td>Size</td>
+<td>576x1024</td>
+</tr>
+<tr>
+<td>Steps</td>
+<td>4</td>
+</tr>
+<tr>
+<td>CFG</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Shift</td>
+<td>3.0</td>
+</tr>
+<tr>
+<td>Sampler</td>
+<td>DDIM Trailing</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>I2V</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Model</td>
+<td>Wan 2.2 High Noise Expert I2V A14B (8-bit S)</td>
+</tr>
+<tr>
+<td>Refiner</td>
+<td>Wan 2.2 Low Noise Expert I2V A14B (8-bit S) @ 10%</td>
+</tr>
+<tr>
+<td>LoRA</td>
+<td>Wan 2.2 A14B Lightning High-Noise T2V v2.0 @ 100%</td>
+</tr>
+<tr>
+<td>Size</td>
+<td>576x1024</td>
+</tr>
+<tr>
+<td>Frames</td>
+<td>81</td>
+</tr>
+<tr>
+<td>FPS</td>
+<td>16</td>
+</tr>
+<tr>
+<td>Steps</td>
+<td>4</td>
+</tr>
+<tr>
+<td>CFG</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Shift</td>
+<td>4.95</td>
+</tr>
+<tr>
+<td>Sampler</td>
+<td>DDIM Trailing</td>
+</tr>
+<tr>
+<td>Strength</td>
+<td>100%</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Post</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Script</td>
+<td>scripts/finish_clip.sh</td>
+</tr>
+<tr>
+<td>Loop</td>
+<td>forward, 8-frame tail-&gt;head crossfade, x6 = 27.4 s</td>
+</tr>
+<tr>
+<td>Upscale</td>
+<td>lanczos 1080x1920</td>
+</tr>
+<tr>
+<td>Music</td>
+<td>Calm Ambient Dreamscape — morgan-ambient, Pixabay, 1 s fade in / 2 s fade out, vol 0.9</td>
+</tr>
+</tbody>
+</table></div>
 
   <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="projects.html">projects</a></li><li><a href="runbook-living-painting.html">runbook living painting</a></li><li><a href="draw-things-setup.html">draw things setup</a></li></ul></div>
 </div>

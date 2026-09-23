@@ -1,6 +1,6 @@
 # 3D-animated projects
 
-**Summary**: Pixar-style 3D-animated shorts. Kyle's Antarctic Rescue. Full record per project: models, settings, prompts, seeds, music and output files. Generated from `projects.json`.
+**Summary**: Pixar-style 3D-animated shorts. Kyle's Antarctic Rescue, Lindsey: A Small Dream. Full record per project: models, settings, prompts, seeds, music and output files. Generated from `projects.json`.
 
 **Sources**: projects.json; per-project notes from the session logs.
 
@@ -15,6 +15,7 @@ Index of every project: [[projects]]. Other themes: [[projects-anime]] · [[proj
 | # | Project | Date | Status | Still | I2V | Music | Final file | YouTube |
 |--:|---|---|---|---|---|---|---|---|
 | 1 | [Kyle's Antarctic Rescue — 1-minute 3D-animated vertical short from a 5-panel comic](#kyle_rescue) | 2026-09-22 | delivered 2026-09-23 01:38 — 60.0 s, 1080x1920 + 2160x3840, rendered unattended overnight (see plan §0) | FLUX.2 [klein] 9B 576x1024 | LTX-2.3 22B [distilled] 1.1 via draw-things-cli ? min | Calm Ambient Dreamscape | `—` | — |
+| 2 | [Lindsey: A Small Dream — 1-minute 3D-animated vertical short from Lindsey's 5-panel art comic](#lindsey_art) | 2026-09-23 | rendering — unattended run started 2026-09-23 (see wiki/lindsey-art-plan.md) | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
 
 ## Kyle's Antarctic Rescue — 1-minute 3D-animated vertical short from a 5-panel comic {#kyle_rescue}
 
@@ -182,6 +183,48 @@ Prompt: `per scene — see scenes`
 *Video prompt*
 
 > The camera rises slowly into the glowing sky as the sun climbs.
+
+## Lindsey: A Small Dream — 1-minute 3D-animated vertical short from Lindsey's 5-panel art comic {#lindsey_art}
+
+- **Date**: 2026-09-23 · **Status**: rendering — unattended run started 2026-09-23 (see wiki/lindsey-art-plan.md) · **Draw Things project**: `none — draw-things-cli via scripts/film_run.py`
+- **Files** (`raw/clips/`): 
+- **Notes**: Lindsey is Kevin's daughter; consent confirmed 2026-09-23. Face from the comic, no photo.
+
+**Still**
+
+| Setting | Value |
+|---|---|
+| Model | FLUX.2 [klein] 9B (8-bit S) |
+| Size | 576x1024 |
+| Steps | 4 |
+| CFG | 1.0 |
+| Shift | 3.0 |
+| Sampler | DDIM Trailing |
+
+**I2V**
+
+| Setting | Value |
+|---|---|
+| Model | Wan 2.2 High Noise Expert I2V A14B (8-bit S) |
+| Refiner | Wan 2.2 Low Noise Expert I2V A14B (8-bit S) @ 10% |
+| LoRA | Wan 2.2 A14B Lightning High-Noise T2V v2.0 @ 100% |
+| Size | 576x1024 |
+| Frames | 81 |
+| FPS | 16 |
+| Steps | 4 |
+| CFG | 1.0 |
+| Shift | 4.95 |
+| Sampler | DDIM Trailing |
+| Strength | 100% |
+
+**Post**
+
+| Setting | Value |
+|---|---|
+| Script | scripts/finish_clip.sh |
+| Loop | forward, 8-frame tail->head crossfade, x6 = 27.4 s |
+| Upscale | lanczos 1080x1920 |
+| Music | Calm Ambient Dreamscape — morgan-ambient, Pixabay, 1 s fade in / 2 s fade out, vol 0.9 |
 
 ## Related pages
 - [[projects]]

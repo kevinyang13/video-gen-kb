@@ -110,6 +110,14 @@ def main():
     themes = data["themes"]
     today = date.today().isoformat()
 
+    # a project with no theme (or an unknown one) would otherwise vanish from every
+    # page — put it in the first theme and say so loudly
+    fallback = next(iter(themes))
+    for p in projects:
+        if p.get("theme") not in themes:
+            print(f"  ! {p['id']}: theme {p.get('theme')!r} unknown — filed under {fallback!r}")
+            p["theme"] = fallback
+
     # ---- hub page: every project in one table, grouped by theme, records live elsewhere
     out = [
         "# Projects Registry",

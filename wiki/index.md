@@ -34,6 +34,7 @@
 
 - [[dragon-epic-plan]] — 1-minute photoreal dragon short with a personal face: pipeline, Draw Things config per stage, face-identity and dragon-consistency strategy, 12-shot list, experiments, budget
 - [[lost-city-plan]] — hyper-real sci-fantasy rider entering jungle ruins (OpenArt-style reference): what makes it look real, klein Moodboard stills, Wan 2.2 vs LTX-2.3 motion settings, creature/hero/city locks, 8-shot list, experiments L0–L6
+- [[lindsey-art-plan]] — 1-minute vertical 3D-animated short from Lindsey's 5-panel art comic (drawing → practice → style → exhibition → brighter future); first run fully through `film_run.py`
 - [[kyle-antarctic-rescue-plan]] — **delivered**: 1-minute vertical 3D-animated short from Kyle's 2D comic, rendered unattended overnight with `draw-things-cli` — klein edit-mode masters, diptych identity lock, LTX-2.3, every pick and rejection
 - [[three-minute-film-plan]] — 3-minute narrative film (36–40 × 5 s clips) with recurring characters: structure, consistency stack, per-shot workflow, 7 gating experiments, ~23 h budget, open questions
 
