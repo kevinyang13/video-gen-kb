@@ -5,21 +5,22 @@
 #   XFADE=0.5   crossfade seconds (0 = hard cuts)
 #   FPS=25      output frame rate (inputs are conformed to it)
 #   MUSIC=path  optional music bed mixed under the clips' own audio
-#   LETTERBOX=1 2.39:1 bars (3840x1608 picture inside 3840x2160)
+#   LETTERBOX=1 2.39:1 bars (3840x1608 picture inside 3840x2160; landscape only)
+#   W=3840 H=2160 output size (portrait: W=2160 H=3840)
 # Clips with no audio track get silence so the audio graph stays uniform.
-# Output: 3840x2160 HEVC 10-bit (videotoolbox) ~40 Mbps + AAC 192k.
+# Output: WxH (default 3840x2160) HEVC 10-bit (videotoolbox) ~40 Mbps + AAC 192k.
 set -euo pipefail
 
 OUT="${1:?output .mp4}"; shift
 [ "$#" -ge 2 ] || { echo "need at least 2 clips" >&2; exit 1; }
-XFADE="${XFADE:-0.5}"; FPS="${FPS:-25}"; MUSIC="${MUSIC:-}"; LETTERBOX="${LETTERBOX:-0}"
+XFADE="${XFADE:-0.5}"; FPS="${FPS:-25}"; MUSIC="${MUSIC:-}"; LETTERBOX="${LETTERBOX:-0}"; W="${W:-3840}"; H="${H:-2160}"
 
 inputs=(); filt=""; n=0; offset=0
 for c in "$@"; do
   inputs+=(-i "$c")
   dur=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$c")
   has_a=$(ffprobe -v error -select_streams a -show_entries stream=codec_type -of csv=p=0 "$c" | head -1)
-  vf="scale=3840:2160:force_original_aspect_ratio=increase:flags=lanczos,crop=3840:2160,fps=${FPS},format=yuv420p10le,setsar=1"
+  vf="scale=${W}:${H}:force_original_aspect_ratio=increase:flags=lanczos,crop=${W}:${H},fps=${FPS},format=yuv420p10le,setsar=1"
   [ "$LETTERBOX" = "1" ] && vf="$vf,drawbox=0:0:3840:276:black:fill,drawbox=0:1884:3840:276:black:fill"
   filt+="[$n:v]${vf}[v$n];"
   # apad must be bounded: an unbounded apad buffers silence forever and the graph OOMs at 4K (2026-09-22)

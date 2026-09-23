@@ -3,11 +3,13 @@
 #   scripts/upscale_4k.sh raw/clips/scene1a.mov [outname] [model]
 # model: realesrgan-x4plus (default, photoreal) | realesr-animevideov3-x4 (anime, faster)
 # Output: <outname>_4k.mp4 (HEVC 10-bit via videotoolbox, 16 fps, no audio) + <outname>_4k_frames/ kept for reuse.
+# Env: W=3840 H=2160 output size (portrait: W=2160 H=3840).
 set -euo pipefail
 
 IN="${1:?input .mov/.mp4}"
 OUT="${2:-${IN%.*}}"
 MODEL="${3:-realesrgan-x4plus}"
+W="${W:-3840}"; H="${H:-2160}"
 ESR_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/tools/realesrgan"   # binary resolves models relative to cwd
 FPS=$(ffprobe -v error -select_streams v:0 -show_entries stream=r_frame_rate -of csv=p=0 "$IN" | awk -F/ '{printf "%.4f", $1/$2}')
 
@@ -21,9 +23,9 @@ ffmpeg -v error -i "$IN" "$SRC/%04d.png"
 # 2. 4x upscale, whole directory in one process (model load once)
 ( cd "$ESR_DIR" && ./realesrgan-ncnn-vulkan -i "$SRC" -o "$DST" -n "$MODEL" -f png -s 4 -t 128 -j 1:1:1 >/dev/null )   # -t 128: auto/256 tile segfaults on Metal
 
-# 3. downscale 4x result to exactly 3840x2160 (input aspect may not be 16:9: crop to fit), encode
+# 3. downscale 4x result to exactly WxH (input aspect may differ: crop to fit), encode
 ffmpeg -v error -y -framerate "$FPS" -i "$DST/%04d.png" \
-  -vf "scale=3840:2160:force_original_aspect_ratio=increase:flags=lanczos,crop=3840:2160" \
+  -vf "scale=${W}:${H}:force_original_aspect_ratio=increase:flags=lanczos,crop=${W}:${H}" \
   -c:v hevc_videotoolbox -profile:v main10 -pix_fmt p010le -b:v 40M -tag:v hvc1 -an "${OUT}_4k.mp4"
 
 rm -rf "$SRC"
