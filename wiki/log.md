@@ -244,3 +244,9 @@ Shot 7 rear-view anatomy failures solved by switching to the side-profile framin
 ## 2026-09-22 — Lost City batch: s8, s9, s10 done; s11 blocked
 
 s8 gallop and s10 drinking finished at 4K with music; s9 jump trimmed to its clean 4.6 s. Two crashes traced to `ImageHistoryManager.pushHistory` when saving a video into a **cloned** project — fresh projects fixed it. New rules in the plan: slow in-place actions hold the creature design for a full 10 s clip, fast locomotion drifts after ~4–5 s; never upscale while LTX renders; the screen lock blocks all automation (disable auto-lock for unattended batches). s11 dismount blocked: klein renders two creatures for any "rider beside the mount" phrasing, negations don't help.
+
+## 2026-09-22 — Lost City: escape ending, and every prompt in one place
+
+Kevin added a story turn: the lost city collapses and the rider escapes. Wrote two scenes for it — **s13** (gallop down the avenue while a spire shears and falls, dust wall rolling after them) and **s14** (out on the plain, creature still and breathing while the whole skyline comes down behind). s14 deliberately uses the s10 pattern — slow foreground, violent background — because that is what holds the creature design for a full 10 s clip.
+
+Also consolidated prompts: `projects.json` now has a `scenes` block per project (shared locks + still and video prompt for every shot), and `build_projects.py` renders it as a "Scene prompts" section on the projects page. Previously the prompts were scattered across `still.shot2_prompt`, `i2v.shot3_ltx_prompt` and similar keys, and several were never recorded. Shot list in the plan updated to v2 (10 s clips, shots 9–14 added).

@@ -92,7 +92,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
     <span class="spacer"></span>
     <button class="pill" onclick="tt()">◐ Theme</button>
   </nav>
-  <h1>Lost City — Project Plan (hyper-real sci-fantasy rider)</h1><p class="lede">Plan for a hyper-realistic short in the style of the OpenArt reference (<code>raw/lostcity/ref_openart_rider_ruins.webp</code>): a hooded rider on a saddled raptor-dragon walks into an overgrown city of stone spires, god rays, waterfall. Covers what makes the reference look real, the local pipeline, Draw Things settings per stage (FLUX.2 klein stills; Wan 2.2 vs <strong>LTX-2.3</strong> for motion), creature/hero/environment consistency, shot list, experiments, budget. Living document.</p><div class="meta"><span><b>Updated</b> 2026-09-21</span><span><b>Sources</b> <code>raw/lostcity/ref_openart_rider_ruins.webp</code> (reference, OpenArt watermark — generator unknown, probably a closed model such as Kling/Veo/Seedance; <em>unverified</em>); Wan 2.2 prompting guides (<a href="https://www.mimicpc.com/learn/how-to-craft-wan22-ai-video-prompts">MimicPC</a>, <a href="https://www.instasd.com/post/wan2-2-whats-new-and-how-to-write-killer-prompts">InstaSD</a>, <a href="https://whatlab.ai/guides/wan2-2-prompting-guide">WhatLab</a>); LTX docs (<a href="https://docs.ltx.io/open-source-model/usage-guides/image-to-video">I2V guide</a>, <a href="https://wiki.drawthings.ai/wiki/LTX-2">Draw Things LTX-2 wiki</a>, <a href="https://huggingface.co/Lightricks/LTX-2.3">HF LTX-2.3</a>); hands-on results from <a href="dragon-epic-plan.html">dragon epic plan</a> §7b (2026-09-21). All as of 2026-09-21.</span></div>
+  <h1>Lost City — Project Plan (hyper-real sci-fantasy rider)</h1><p class="lede">Plan for a hyper-realistic short in the style of the OpenArt reference (<code>raw/lostcity/ref_openart_rider_ruins.webp</code>): a hooded rider on a saddled raptor-dragon walks into an overgrown city of stone spires, god rays, waterfall. Covers what makes the reference look real, the local pipeline, Draw Things settings per stage (FLUX.2 klein stills; Wan 2.2 vs <strong>LTX-2.3</strong> for motion), creature/hero/environment consistency, shot list, experiments, budget. Living document.</p><div class="meta"><span><b>Updated</b> 2026-09-22 (escape ending; per-scene prompts moved to <a href="projects.html">projects</a>)</span><span><b>Sources</b> <code>raw/lostcity/ref_openart_rider_ruins.webp</code> (reference, OpenArt watermark — generator unknown, probably a closed model such as Kling/Veo/Seedance; <em>unverified</em>); Wan 2.2 prompting guides (<a href="https://www.mimicpc.com/learn/how-to-craft-wan22-ai-video-prompts">MimicPC</a>, <a href="https://www.instasd.com/post/wan2-2-whats-new-and-how-to-write-killer-prompts">InstaSD</a>, <a href="https://whatlab.ai/guides/wan2-2-prompting-guide">WhatLab</a>); LTX docs (<a href="https://docs.ltx.io/open-source-model/usage-guides/image-to-video">I2V guide</a>, <a href="https://wiki.drawthings.ai/wiki/LTX-2">Draw Things LTX-2 wiki</a>, <a href="https://huggingface.co/Lightricks/LTX-2.3">HF LTX-2.3</a>); hands-on results from <a href="dragon-epic-plan.html">dragon epic plan</a> §7b (2026-09-21). All as of 2026-09-21.</span></div>
 <hr />
 <h2>1. What the reference does — and what we copy</h2>
 <div class="tw"><table>
@@ -307,7 +307,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <code>Cinematic film still, anamorphic 35mm, eye-level side view, muted colours, low contrast, subtle film grain. A lost city of tall eroded sandstone spires and ziggurat towers swallowed by jungle rises in the distance through morning haze, a stone arch bridge and a white waterfall between them, soft volumetric god rays breaking through thin cloud. Mossy stone blocks and palms in the middle distance, ferns and tall grass in the foreground. In the centre, [creature lock] walks left to right on a dirt path. On its back [hero lock]. Layered atmospheric perspective, photorealistic, highly detailed, natural overcast light with warm sun breaks.</code></p>
 <p><strong>Motion prompt 1 (Wan)</strong>: see §3b tracking-shot prompt.
 <strong>Motion prompt 1 (LTX)</strong>: <code>The creature walks slowly from left to right with a heavy four-legged gait, its head bobbing and tail swaying, while the camera tracks alongside at the same pace so the rider stays centred. The rider sways gently in the saddle, the cloak lifting in a light breeze. Behind them the waterfall pours steadily and thin mist drifts through the shafts of light; two birds glide across the distant spires. Heavy footsteps on damp earth, the far roar of the waterfall, faint jungle birdsong, no music.</code></p>
-<h2>6. Shot list (v0 — 8 × 5 s = 40 s; extend to 12 if it works)</h2>
+<h2>6. Shot list (v2 — 10 s clips; 1–3 and 7–10 shot, 13–14 written)</h2>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -375,10 +375,52 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <td>cloak, mist</td>
 <td>hero (silhouette)</td>
 </tr>
+<tr>
+<td>9</td>
+<td><strong>Running</strong> — full gallop across a clearing</td>
+<td>tracking alongside</td>
+<td>gallop, dust, cloak streaming</td>
+<td>creature (drifts after ~5 s)</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>Jumping</strong> — leap over a fallen pillar</td>
+<td>tracking alongside</td>
+<td>leap, landing, dust</td>
+<td>creature (drifts after ~5 s)</td>
+</tr>
+<tr>
+<td>11</td>
+<td><strong>Drinking</strong> — muzzle in a jungle pool below a waterfall</td>
+<td>fixed</td>
+<td>head lowers/lifts, ripples, rider looks around</td>
+<td>creature (stable, full 10 s)</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Dismount / mount up beside the creature</td>
+<td>fixed</td>
+<td>rider steps down / swings up</td>
+<td><strong>blocked</strong> — klein renders two creatures</td>
+</tr>
+<tr>
+<td>13</td>
+<td><strong>Escape</strong> — gallop down the avenue as a spire shears and falls behind</td>
+<td>tracking alongside at speed</td>
+<td>gallop, tumbling blocks, rolling dust wall</td>
+<td>creature large in frame; trim on first soft frame</td>
+</tr>
+<tr>
+<td>14</td>
+<td><strong>Escape</strong> — clear of the city on the plain, skyline collapsing behind</td>
+<td>fixed</td>
+<td>creature still and breathing, rider looks back; all motion in the distance</td>
+<td>creature + city</td>
+</tr>
 </tbody>
 </table></div>
 <p>Cheap shots first: 2, 3, 5, 7 have no hero face and simple motion — render them to test the look before the tracking shots.</p>
-<p>Story turn (added 2026-09-22): the film now ends on an escape — the city comes down while the rider runs for the tree line. Shots 13 and 14 carry it; prompts in <a href="projects.html">projects</a> → Lost City → Scene prompts.</p>
+<p><strong>Story (v2, 2026-09-22)</strong>: arrival and exploration (1–3, 7), life with the creature (9–11), then the city comes down and the rider escapes (13–14). The collapse gives the film an ending that needs no dialogue and no face.</p>
 <h2>7. Experiments (in order)</h2>
 <div class="tw"><table>
 <thead>
