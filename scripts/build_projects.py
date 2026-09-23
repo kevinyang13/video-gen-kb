@@ -102,7 +102,7 @@ def main():
             if "locks" in sc:
                 L = sc["locks"]
                 out += ["**Locks** (paste verbatim into every prompt):", ""]
-                for k in ("style_head", "creature", "rider", "style_tail"):
+                for k in [k for k in L if k != "rules"]:
                     if L.get(k): out += [f"- *{k.replace('_', ' ')}* — {L[k]}"]
                 if L.get("rules"): out += ["", f"**Rules**: {L['rules']}", ""]
             for key in [k for k in sc if k != "locks"]:

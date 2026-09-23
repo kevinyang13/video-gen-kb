@@ -8,6 +8,14 @@
 
 ---
 
+## 2026-09-22 — Plan: Kyle's Antarctic Rescue (1-minute, headless)
+
+**Source**: `raw/kyle/comic_source.webp` — a 5-panel comic Kevin shared (Kyle on an Antarctic expedition; UFO attacks the ice; rescue with a freeze-ray; happy ending with the penguins). Added to `raw/`.
+
+**Created**: `wiki/kyle-antarctic-rescue-plan.md` — how to make a 60 s film from it with `draw-things-cli` only. Key decision: the released CLI has no Moodboard, so Kyle's identity comes from the panels themselves (crop → `delogo` the bubbles → klein img2img at strength 0.45–0.6), plus a verbatim text lock and last-frame chaining. 8 shots (5 from panels, 3 text-only), LTX-2.3 at 249 f with the Lost City config JSON, Real-ESRGAN anime model for the illustrated look, `assemble_film.sh` with 0.75 s crossfades, captions via `drawtext`. Experiments K0–K5, ~4–5 h machine time. Nothing rendered yet.
+
+**Updated**: `projects.json` (new `kyle_rescue` record, status planned, locks + all 8 scene prompts), `wiki/index.md`.
+
 ## 2026-09-22 — First headless render: Lost City shot 14 through `draw-things-cli`
 
 **Source**: hands-on. `brew tap drawthingsai/draw-things && brew install draw-things-cli` (prebuilt binary, 178 MB, version `1.20260430.0`).

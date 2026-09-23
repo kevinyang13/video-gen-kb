@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kyle's Antarctic Rescue — 1-Minute Headless Plan — video-gen-kb</title>
+<style>
+:root{--bg:#0B0D12;--panel:#141822;--panel-2:#1B2130;--stroke:#2A3245;--text:#E6E9F0;
+--muted:#8B94A7;--accent:#F5B84B;--accent-2:#4BC9F5;--on-accent:#12131A;
+--rule:rgba(139,148,167,.22);--code:#F5B84B}
+@media(prefers-color-scheme:light){:root:not([data-theme=dark]){--bg:#F4F1EA;--panel:#fff;
+--panel-2:#FAF8F3;--stroke:#D9D3C6;--text:#16181F;--muted:#5D6473;--accent:#B8781A;
+--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}}
+:root[data-theme=light]{--bg:#F4F1EA;--panel:#fff;--panel-2:#FAF8F3;--stroke:#D9D3C6;
+--text:#16181F;--muted:#5D6473;--accent:#B8781A;--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);
+line-height:1.65;padding:0 1rem 4rem}
+.shell{max-width:840px;margin:0 auto}
+a{color:var(--accent);text-decoration:none;font-weight:600}
+a:hover{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--accent-2);outline-offset:3px;border-radius:4px}
+.bar{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;padding:1.1rem 0;margin-bottom:1.5rem;
+border-bottom:1px solid var(--stroke)}
+.crumb{font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.spacer{flex:1}
+.pill{border:1px solid var(--stroke);background:var(--panel);border-radius:999px;padding:.28rem .8rem;
+font-size:.75rem;font-weight:700;color:var(--text);cursor:pointer;font-family:inherit}
+.pill:hover{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+h1{font-size:clamp(1.7rem,5vw,2.5rem);margin:.2rem 0 1rem;line-height:1.1;letter-spacing:-.015em;text-wrap:balance}
+h2{font-size:1.25rem;margin:2.2rem 0 .7rem;padding-bottom:.35rem;border-bottom:1px solid var(--rule);text-wrap:balance}
+h3{font-size:1.02rem;margin:1.5rem 0 .5rem;color:var(--accent)}
+p{margin:.7rem 0}
+ul,ol{margin:.7rem 0 .7rem 1.3rem}
+li{margin:.28rem 0}
+li::marker{color:var(--accent)}
+em{color:var(--muted)}
+hr{border:none;border-top:1px solid var(--stroke);margin:2rem 0}
+blockquote{border-left:3px solid var(--accent);background:var(--panel);border-radius:0 10px 10px 0;
+padding:.8rem 1.1rem;margin:1.1rem 0;color:var(--muted);font-size:.92rem}
+code{background:var(--panel);border:1px solid var(--stroke);border-radius:5px;padding:.1rem .35rem;
+font-size:.85em;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--code)}
+img{max-width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--stroke);margin:1.1rem 0}
+pre{background:var(--panel);border:1px solid var(--stroke);border-radius:12px;padding:1rem;overflow-x:auto;margin:1.1rem 0}
+pre code{background:none;border:none;padding:0;color:var(--text);font-size:.83rem;line-height:1.55}
+.tw{overflow-x:auto;border:1px solid var(--stroke);border-radius:12px;background:var(--panel);margin:1.1rem 0}
+table{width:100%;border-collapse:collapse;font-size:.85rem;min-width:min(100%,460px)}
+th{background:var(--panel-2);color:var(--accent);text-align:left;padding:.55rem .8rem;font-size:.68rem;
+letter-spacing:.09em;text-transform:uppercase;white-space:nowrap;border-bottom:1px solid var(--stroke)}
+td{padding:.5rem .8rem;border-bottom:1px solid var(--rule);color:var(--muted);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td strong{color:var(--text)}
+.meta{display:flex;flex-wrap:wrap;gap:.4rem .9rem;font-size:.78rem;color:var(--muted);margin:-.4rem 0 1.2rem}
+.meta b{color:var(--text);font-weight:600}
+.missing{color:var(--muted);border-bottom:1px dashed var(--muted);cursor:help}
+.related{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--stroke)}
+.related h2{border:none;margin:0 0 .7rem;font-size:.95rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:0}
+.chips li{margin:0}
+.chips a,.chips .missing{display:inline-block;border:1px solid var(--stroke);background:var(--panel);
+border-radius:999px;padding:.28rem .8rem;font-size:.8rem}
+.chips a:hover{background:var(--accent);color:var(--on-accent);text-decoration:none;border-color:var(--accent)}
+footer{max-width:840px;margin:2.5rem auto 0;padding-top:1.2rem;border-top:1px solid var(--stroke);
+font-size:.75rem;color:var(--muted);text-align:center}
+/* landing */
+.hero{padding:2.4rem 0 1.6rem}
+.kicker{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2)}
+.hero h1{font-size:clamp(2rem,6vw,3.2rem);margin:.35rem 0 .5rem}
+.hero p{color:var(--muted);font-size:1.05rem;max-width:56ch}
+.hw{display:inline-flex;gap:.5rem;align-items:center;margin-top:1rem;border:1px solid var(--stroke);
+background:var(--panel);border-radius:999px;padding:.3rem .9rem;font-size:.78rem;color:var(--muted)}
+.hw .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.sec{margin-top:2.2rem}
+.sec h2{border:none;padding:0;margin:0 0 .8rem;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.9rem}
+.card{display:block;border:1px solid var(--stroke);background:var(--panel);border-radius:14px;padding:1rem 1.1rem;
+color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+.card b{display:block;color:var(--accent);font-size:1rem;margin-bottom:.3rem}
+.card span{font-size:.85rem;color:var(--muted);line-height:1.5}
+.stubs{font-size:.82rem;color:var(--muted);margin-top:.6rem}
+.yt{position:relative;width:100%;aspect-ratio:16/9;border:1px solid var(--stroke);border-radius:12px;overflow:hidden;background:#000;margin:1rem 0}
+.yt.yt-v{aspect-ratio:9/16;max-width:360px}
+.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="bar">
+    <span class="crumb"><a href="../">video-gen-kb</a> / <a href="index.html">Wiki</a></span>
+    <span class="spacer"></span>
+    <button class="pill" onclick="tt()">◐ Theme</button>
+  </nav>
+  <h1>Kyle's Antarctic Rescue — 1-Minute Headless Plan</h1><p class="lede">Plan for a 60-second illustrated short made from a 5-panel comic: Kyle, a boy on an Antarctic expedition, sees a UFO attacking the ice, rescues the animals with a freeze-ray gadget and ends hugging a penguin chick. Rendered <strong>entirely with <code>draw-things-cli</code></strong>: comic panels become cleaned first frames through klein img2img, LTX-2.3 animates each one, and the existing scripts handle the 4K upscale and the final cut. No Draw Things window, no Moodboard.</p><div class="meta"><span><b>Updated</b> 2026-09-22 (plan written, nothing rendered)</span><span><b>Sources</b> <code>raw/kyle/comic_source.webp</code> (the 5-panel comic, 1024×1536, added 2026-09-22); <a href="headless-cli-pipeline.html">headless cli pipeline</a> §1b (CLI flags and timings measured 2026-09-22); <a href="lost-city-plan.html">lost city plan</a> §3c, §7b (LTX production settings and motion rules); <a href="character-consistency.html">character consistency</a>; <a href="scripts-reference.html">scripts reference</a>. Timings below are estimates built from the Lost City measurements, <strong>not yet measured on this project</strong>.</span></div>
+<hr />
+<h2>1. What the source gives us</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Panel</th>
+<th>Story beat</th>
+<th>Kyle in frame?</th>
+<th>Text to remove</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 "A brave boy with a big dream"</td>
+<td>Kyle on the ice, expedition ship behind, thumbs up</td>
+<td>face, frontal close-up</td>
+<td>title box, thought bubble, caption box</td>
+</tr>
+<tr>
+<td>2 "A mysterious UFO appears"</td>
+<td>night, Kyle seen from behind looking up at a saucer firing purple beams at the ice</td>
+<td>back of head only</td>
+<td>title, "Wow! A UFO?!", caption</td>
+</tr>
+<tr>
+<td>3 "Animals in danger"</td>
+<td>penguins, seal, orca, whale; beams lifting ice blocks</td>
+<td>no</td>
+<td>title, "Help!", caption</td>
+</tr>
+<tr>
+<td>4 "Kyle to the rescue!"</td>
+<td>Kyle flying, freeze-ray with a snowflake glow, penguin sidekick</td>
+<td>face, ¾</td>
+<td>title, bubble, 4 starbursts, caption</td>
+</tr>
+<tr>
+<td>5 "A happy ending"</td>
+<td>sunrise, Kyle hugging a chick among penguins, seal, whale, orca, wooden sign</td>
+<td>face, frontal</td>
+<td>title, caption, slogan (sign is part of the scene)</td>
+</tr>
+</tbody>
+</table></div>
+<p>The comic already fixes the character design, the palette and every composition. That is the main asset: instead of generating Kyle from text and hoping he stays the same, <strong>each Kyle shot starts from a panel that already shows him.</strong> Identity comes in as pixels, which is the strongest channel in <a href="identity-conditioning.html">identity conditioning</a>.</p>
+<p>Style: keep the look — hand-painted comic illustration, bold ink lines, vivid saturated colour. Not photoreal. Illustration hides the small face drift that I2V causes over 10 s, and it matches the source.</p>
+<blockquote>
+<p>Kyle looks like a real child. Use a real child's likeness only with the parent's consent, and keep the film private unless they decide otherwise.</p>
+</blockquote>
+<h2>2. Why the CLI changes the plan</h2>
+<p>From <a href="headless-cli-pipeline.html">headless cli pipeline</a> §1b, measured on this Mac:</p>
+<ul>
+<li>the released CLI (<code>1.20260430.0</code>) takes <strong>one</strong> <code>--image</code>. With <code>--strength &lt; 1</code> it is img2img on a still model, and with <code>--frames</code> on LTX it is true image-to-video (frame 0 = the image, pixel for pixel);</li>
+<li><strong>no Moodboard</strong> — multi-reference <code>--image</code> exists only on <code>main</code>;</li>
+<li>LTX 249 frames (10 s) takes <strong>9 min 41 s</strong>, about 2× faster than the app; a klein still takes 27–35 s.</li>
+</ul>
+<p>So consistency can't come from reference images the way it did on Lost City. It comes from three things the CLI <em>can</em> do:</p>
+<ol>
+<li><strong>Panel → img2img.</strong> The cropped panel is the <code>--image</code>, at strength 0.45–0.6. Klein keeps the layout, the face and the parka, repaints the parts under the removed text and adds detail at 1024×576.</li>
+<li><strong>A text lock</strong> pasted verbatim into every prompt (§4).</li>
+<li><strong>Chaining.</strong> For the non-panel shots next to Kyle shots, the last frame of the previous clip becomes the next <code>--image</code> (see <a href="character-consistency.html">character consistency</a> §6).</li>
+</ol>
+<p>Fallback if img2img loses Kyle's face: build the CLI from <code>main</code> (<code>brew install --HEAD</code>, Swift-version friction reported) to get multi-<code>--image</code>, or do only the 3 Kyle stills in the app's Moodboard and everything else from the CLI.</p>
+<h2>3. Pipeline</h2>
+<pre><code>comic_source.webp
+  │ ffmpeg crop per panel → delogo over bubbles/captions → 2× lanczos        (§5 step 1–2)
+  ▼
+panel_N_clean.png ──draw-things-cli klein img2img, strength 0.45–0.6────────┐
+text-only shots  ──draw-things-cli klein txt2img (style lock, no Kyle close-up)┤ 1024×576 still, 3 seeds
+                                                                             ▼
+                    draw-things-cli LTX-2.3 --image still --frames 249 → sN_ltx_v1.mov (ProRes + audio)
+                                                                             ▼
+                    ffmpeg trim → upscale_4k.sh (realesr-animevideov3-x4) → remux audio
+                                                                             ▼
+                    assemble_film.sh XFADE=0.75 MUSIC=… → kyle_rescue_4k.mp4 (+ drawtext captions)
+</code></pre>
+<h2>4. Locks (paste verbatim, never paraphrase)</h2>
+<ul>
+<li><strong>style_head</strong>: <code>Hand-painted comic book illustration, bold clean ink outlines, soft cel shading, vivid saturated colours, bright cheerful children's storybook style.</code></li>
+<li><strong>kyle</strong>: <code>Kyle, a cheerful young East Asian boy with short spiky black hair, dark brown eyes and a wide smile, wearing a bright red and black insulated expedition parka with a round blue Antarctica patch on the left chest, black backpack straps over both shoulders, black gloves.</code></li>
+<li><strong>world</strong>: <code>Antarctica: turquoise icebergs, snowy white mountains, deep blue polar ocean.</code></li>
+<li><strong>video tail</strong> (LTX): <code>Smooth gentle motion, consistent character, hand-painted animated illustration style, no text, no speech bubbles.</code></li>
+<li><strong>rules</strong>: never ask for readable text from the model — titles and captions are added with ffmpeg. Kyle's face shots use hold-position wording (Lost City close-up rule: a "step" walks the subject out of frame). Fast action drifts after ~4–5 s: trim.</li>
+</ul>
+<h2>5. Step-by-step</h2>
+<h3>Step 0 — project record</h3>
+<p>Add <code>kyle_rescue</code> to <code>projects.json</code> (done at plan time, status <code>planned</code>). Every still and clip lands in <code>raw/clips/kyle/</code>.</p>
+<h3>Step 1 — crop the panels</h3>
+<p>Approximate panel boxes in the 1024×1536 source (measure and correct on the first run):</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Panel</th>
+<th>ffmpeg crop (w:h:x:y)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>506:470:6:6</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>500:470:518:6</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>534:514:6:486</code></td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>488:514:530:486</code></td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>1012:520:6:1010</code></td>
+</tr>
+</tbody>
+</table></div>
+<pre><code class="language-bash">mkdir -p raw/clips/kyle
+ffmpeg -i raw/kyle/comic_source.webp -vf &quot;crop=506:470:6:6&quot; raw/clips/kyle/p1_crop.png
+</code></pre>
+<p>These are whole-panel boxes. The CLI center-crops <code>--image</code> to the output aspect, so a near-square panel fed at 1024×576 silently loses its top and bottom strips. Cut the 16:9 window yourself instead (panel 1: <code>crop=506:285:6:100</code> skips the title box and most of the caption), so you choose what goes — title and caption boxes mostly sit in those strips anyway.</p>
+<h3>Step 2 — remove the text</h3>
+<p>Speech bubbles and starbursts sit inside the 16:9 area. Cover each with ffmpeg <code>delogo</code> (it fills the box from the pixels around it), then 2× lanczos so klein gets a 1024-wide input:</p>
+<pre><code class="language-bash">ffmpeg -i raw/clips/kyle/p1_crop.png \
+  -vf &quot;delogo=x=290:y=0:w=210:h=150,scale=1024:-1:flags=lanczos&quot; \
+  raw/clips/kyle/p1_clean.png
+</code></pre>
+<p>The smear left by <code>delogo</code> doesn't matter: klein repaints it in step 3. Box coordinates are per panel — read them off the crop.</p>
+<h3>Step 3 — stills with klein (CLI)</h3>
+<pre><code class="language-bash"># panel shot: img2img from the cleaned panel
+draw-things-cli generate -m flux_2_klein_9b_i8x.ckpt \
+  --prompt-file raw/clips/kyle/s2_still.txt \
+  --image raw/clips/kyle/p1_clean.png --strength 0.5 \
+  --width 1024 --height 576 --steps 4 --cfg 1 --seed 1 \
+  --config-json '{&quot;shift&quot;:3.0,&quot;sampler&quot;:16}' \
+  --offline --disable-preview -o raw/clips/kyle/s2_still_v1.png
+
+# text-only shot: same command without --image/--strength
+</code></pre>
+<p>Loop over <code>--seed 1 2 3</code> and keep the best. Strength guide: 0.4 ≈ panel redrawn cleaner; 0.6 ≈ more painterly detail with the pose kept; &gt; 0.7 Kyle starts turning into a different boy (<em>to verify in K0</em>).</p>
+<h3>Step 4 — motion with LTX-2.3 (CLI)</h3>
+<pre><code class="language-bash">draw-things-cli generate -m ltx_2.3_22b_distilled_1.1_q8p.ckpt \
+  --prompt-file raw/clips/kyle/s2_video.txt \
+  --image raw/clips/kyle/s2_still_v1.png \
+  --width 1024 --height 576 --frames 249 --steps 8 --cfg 1 --seed 1 \
+  --config-json '{&quot;sampler&quot;:19,&quot;shift&quot;:5.0,&quot;stochasticSamplingGamma&quot;:0.3,&quot;fps&quot;:25,&quot;hiresFix&quot;:false}' \
+  --offline --disable-preview --video-format prores422hq \
+  -o raw/clips/kyle/s2_ltx_v1.mov
+</code></pre>
+<p>Always render 249 frames: same cost per clip as a shorter one in practice (Lost City §7b), and the trim happens in the edit. Progress is a TTY spinner — a redirected log stays empty until the process exits.</p>
+<h3>Step 5 — trim, upscale, remux</h3>
+<pre><code class="language-bash">ffmpeg -i raw/clips/kyle/s2_ltx_v1.mov -t 8 -c copy raw/clips/kyle/s2_ltx_v1_t.mov
+scripts/upscale_4k.sh raw/clips/kyle/s2_ltx_v1_t.mov s2 realesr-animevideov3-x4
+ffmpeg -i s2_4k.mp4 -i raw/clips/kyle/s2_ltx_v1_t.mov -map 0:v -map 1:a -c:v copy -c:a aac s2_4k_audio.mp4
+</code></pre>
+<p>Use the <strong>anime</strong> Real-ESRGAN model: it is built for flat-shaded line art and runs faster than x4plus (<a href="scripts-reference.html">scripts reference</a>). <code>upscale_4k.sh</code> drops audio — the remux line restores LTX's ambience. Never upscale while LTX is rendering.</p>
+<h3>Step 6 — assemble</h3>
+<pre><code class="language-bash">XFADE=0.75 MUSIC=raw/clips/music/&lt;track&gt;.mp3 \
+  scripts/assemble_film.sh raw/clips/kyle/kyle_rescue_4k.mp4 s1_4k_audio.mp4 … s8_4k_audio.mp4
+</code></pre>
+<p>Then burn the title and the five story captions with <code>drawtext</code> (one lower-third per beat, 3–4 s each), and the end card "The End ♥".</p>
+<h3>Step 7 — batch it</h3>
+<p>Once the per-shot commands work, write <code>scripts/dt_render.sh &lt;project&gt; &lt;scene&gt;</code> (proposed in <a href="headless-cli-pipeline.html">headless cli pipeline</a> §5): read the locks and the scene's prompts from <code>projects.json</code>, write the prompt files, run step 3 over 3 seeds and step 4 on the chosen still. Stills first (≈ 12 min, pick by eye), then one <code>for</code> loop renders all 8 clips overnight — no screen lock, no app.</p>
+<h2>6. Shot list (60 s)</h2>
+<p>8 clips, 7 crossfades of 0.75 s. Kept lengths add up to ~65 s, ~60 s after the fades.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Keep</th>
+<th>Source</th>
+<th>Still</th>
+<th>Motion (LTX prompt core)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S1</td>
+<td>7 s</td>
+<td>text-only</td>
+<td>Expedition ship "Antarctica Expedition" on a turquoise sea between icebergs, seagulls, wide</td>
+<td>slow push toward the ship, gulls glide, gentle swell, ice creaks; wind, gulls</td>
+</tr>
+<tr>
+<td>S2</td>
+<td>8 s</td>
+<td>panel 1</td>
+<td>Kyle close-up, ship behind, thumbs up (bubble removed)</td>
+<td>Kyle holds his place, smiles wider, thumbs-up bobs once, hair and parka hood stir in the wind; camera still</td>
+</tr>
+<tr>
+<td>S3</td>
+<td>10 s</td>
+<td>panel 2</td>
+<td>night, Kyle from behind, saucer overhead</td>
+<td>foreground still (Kyle only turns his head a little), saucer hovers and pulses, purple beams crackle onto the ice, ice glows and cracks; low hum, electric crackle</td>
+</tr>
+<tr>
+<td>S4</td>
+<td>10 s</td>
+<td>panel 3</td>
+<td>penguins, seal, orca, whale on breaking ice</td>
+<td>slow background violence: ice blocks rise into the beams, floes split, penguins huddle and flap, seal looks up; the s10/s14 Lost City pattern — slow foreground, violent background</td>
+</tr>
+<tr>
+<td>S5</td>
+<td>6 s</td>
+<td>panel 4</td>
+<td>Kyle mid-air aiming the freeze-ray, penguin sidekick</td>
+<td>Kyle glides forward, the gadget fires a bright blue snowflake beam, frost spreads across the frame; trim at the first sign of drift</td>
+</tr>
+<tr>
+<td>S6</td>
+<td>6 s</td>
+<td>last frame of S5 → text-only fallback</td>
+<td>the saucer frozen in blue ice, beams gone</td>
+<td>ice crust cracks, saucer shakes free and zips away up into the stars, light fades</td>
+</tr>
+<tr>
+<td>S7</td>
+<td>10 s</td>
+<td>panel 5</td>
+<td>sunrise, Kyle hugging the chick, animals around, whale breaching</td>
+<td>slow and warm: Kyle hugs and rocks gently, chick nuzzles, penguins bob, whale arcs behind; soft wind, lapping waves, happy penguin calls</td>
+</tr>
+<tr>
+<td>S8</td>
+<td>8 s</td>
+<td>text-only</td>
+<td>Wide sunrise over the ice, the wooden "protect our ocean" sign in the foreground, small figure and penguins far away</td>
+<td>slow pull-back and rise; end card text from ffmpeg over the last 4 s</td>
+</tr>
+</tbody>
+</table></div>
+<p>S2, S5 and S7 are the only face shots; S3 shows Kyle from behind (identity from wardrobe, free).</p>
+<h2>7. Experiments (run before the batch)</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Question</th>
+<th>Test</th>
+<th>Pass</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>K0</td>
+<td>Does img2img keep Kyle?</td>
+<td>panel 1 at strength 0.4 / 0.5 / 0.6, seed 1</td>
+<td>the boy reads as the same kid; bubble area painted over</td>
+</tr>
+<tr>
+<td>K1</td>
+<td>Does LTX keep the illustrated style?</td>
+<td>S2 clip</td>
+<td>no drift to photoreal or 3D over 10 s; if it drifts, add "2D" and "flat colour" to the tail, or try Wan 2.2 via CLI with <code>refinerModel</code></td>
+</tr>
+<tr>
+<td>K2</td>
+<td>Face drift over 10 s</td>
+<td>S2 and S7</td>
+<td>face and parka unchanged at frame 249; else trim to 5–6 s</td>
+</tr>
+<tr>
+<td>K3</td>
+<td>Fast action</td>
+<td>S5</td>
+<td>clean for ≥ 5 s</td>
+</tr>
+<tr>
+<td>K4</td>
+<td>Chaining</td>
+<td>last frame of S5 → S6</td>
+<td>saucer and frost carry over</td>
+</tr>
+<tr>
+<td>K5</td>
+<td>Upscaler</td>
+<td>anime vs x4plus on S2</td>
+<td>pick by eye; anime expected cleaner lines</td>
+</tr>
+</tbody>
+</table></div>
+<h2>8. Budget (estimate)</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Count</th>
+<th>Each</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>klein stills</td>
+<td>8 shots × 3 seeds + K0 sweep</td>
+<td>~30 s</td>
+<td>~15 min</td>
+</tr>
+<tr>
+<td>LTX clips</td>
+<td>8 + ~50% retries</td>
+<td>9 min 41 s</td>
+<td>~2 h</td>
+</tr>
+<tr>
+<td>Upscale (trimmed clips, ~65 s total ≈ 1 625 frames)</td>
+<td>8</td>
+<td>~13 frames/min (81 f ≈ 6 min)</td>
+<td>~2 h</td>
+</tr>
+<tr>
+<td>Assembly + captions</td>
+<td>1</td>
+<td>—</td>
+<td>~10 min</td>
+</tr>
+</tbody>
+</table></div>
+<p>About <strong>4–5 h of machine time</strong>, mostly unattended, plus ~1 h of picking stills and trims.</p>
+<h2>9. Open questions for Kevin</h2>
+<ol>
+<li><strong>Aspect</strong>: 16:9 3840×2160 (YouTube, like Lost City), or 9:16 for phone? The comic panels are near-square, so either works; 9:16 would change every crop.</li>
+<li><strong>Captions</strong>: burn the comic's own caption lines as lower-thirds, or picture and music only?</li>
+<li><strong>Voice</strong>: narration of the captions? No local TTS is set up yet — would need a new tool.</li>
+<li><strong>Music</strong>: which bed from <code>raw/clips/music/</code> — something bright and adventurous rather than the orchestral Lost City theme.</li>
+</ol>
+
+  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="headless-cli-pipeline.html">headless cli pipeline</a> — the CLI, its flags, and the measured timings this plan relies on</li><li><a href="lost-city-plan.html">lost city plan</a> — LTX production settings and motion rules</li><li><a href="character-consistency.html">character consistency</a> · <a href="identity-conditioning.html">identity conditioning</a> — why panel pixels beat text for identity</li><li><a href="face-identity-workflows.html">face identity workflows</a> — if the face drifts</li><li><a href="scripts-reference.html">scripts reference</a> — <code>upscale_4k.sh</code>, <code>assemble_film.sh</code></li><li><a href="projects.html">projects</a> — the <code>kyle_rescue</code> record</li></ul></div>
+</div>
+<footer>video-gen-kb · built 2026-09-22 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<script>function tt(){var r=document.documentElement,
+d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
+matchMedia('(prefers-color-scheme: dark)').matches);
+r.setAttribute('data-theme',d?'light':'dark');}</script>
+</body>
+</html>

@@ -284,7 +284,7 @@
       "title": "Lost City — hyper-real rider on a raptor-dragon entering jungle ruins",
       "date": "2026-09-21",
       "dt_project": "lostcity-s1, s2, s3, s7 (named); s8, s9 (cloned — clone crashes on video save); s10 and s11 in fresh Untitled projects; s14 rendered with draw-things-cli (no project file)",
-      "status": "in progress — clips at 4K+music: s2, s3, s7, s8, s10, s14; s9 trimmed (4.6 s, drift after); s11 stills rejected (klein duplicates the creature); s12 not started; s15 (3-part, 30 s rift sequence) rendering",
+      "status": "in progress — clips at 4K+music: s2, s3, s7, s8, s10, s14; s9 trimmed (4.6 s, drift after); s11 stills rejected (klein duplicates the creature); s12 not started; s15 rift coda done (3 clips assembled to 30 s 4K with music)",
       "still": {
         "model": "FLUX.2 [klein] 9B (8-bit S)",
         "size": "1280x768",
@@ -370,7 +370,9 @@
         "lostcity/s10_still_v1.png, s10_ltx_v1.mov, s10_ltx_v1_4k_music.mp4 (drinking, 10.3 s, holds design)",
         "lostcity/s14_still_v1.png (seed 2; s1/s3 variants kept)",
         "lostcity/s14_ltx_v1.mov (ProRes 422 HQ, 249 f @ 25 fps + PCM audio)",
-        "lostcity/s14_ltx_v1_4k_music.mp4"
+        "lostcity/s14_ltx_v1_4k_music.mp4",
+        "lostcity/s15a|b|c_still_v1.png + _ltx_v1.mov + _4k_audio.mp4",
+        "lostcity/s15_rift_30s_4k.mp4 (the 30 s cut)"
       ],
       "notes": "Plan: wiki/lost-city-plan.md. Reference is an OpenArt render (closed model, unknown); we re-generate our own frame. 8 shots × 5 s first. Experiments L0–L6 gate rendering; L1 = first LTX-2.3 test on this Mac.",
       "scenes": {
@@ -465,26 +467,116 @@
           "title": "The crack — a rift opens in the sky above the ruined city",
           "still": "Cinematic film still, anamorphic 35mm, muted colours, low contrast, subtle film grain. Low wide angle looking up across a ruined city. Broken sandstone spires and shattered ziggurat towers fill the lower third of the frame, rubble and snapped stone, thick dust still hanging in the air, jungle canopy pressing in at the edges. Above them the overcast sky is torn wide open by a long jagged crack that runs across the clouds like a sheet of glass broken from edge to edge, hard-edged and forked, blinding white light pouring through the gap from behind the sky, the torn edges sharp and glowing, the clouds curling and peeling back along them, pale light spilling down onto the ruins in hard shafts. Far away and tiny, a few small dark winged shapes are just slipping out of the crack. Huge sense of scale, deep depth of field, Layered atmospheric perspective, photorealistic, highly detailed, cold pale light spilling from the crack against a dull overcast sky.",
           "video": "Fixed camera, very slow push in on the crack. The tear in the sky splits further open, its glowing edges flaring and shifting, the pale light pulsing brighter over the ruins; clouds peel back and drag in toward the opening, dust lifts from the rubble below and turns in the shafts of light. The small dark winged shapes grow larger as more of them slip out of the tear, one after another. Deep resonant hum from the torn sky, low rumbling air, distant falling stones, wind, no music.",
-          "engine": "LTX 1024x576 x257 (10.3 s) — draw-things-cli",
-          "note": "No creature and no rider in this shot: the ground mount must never share a frame with winged animals or klein grows wings on it. City is already ruined here — this follows s14. Never write 'lightning' — klein renders a literal lightning bolt instead of a rift; say torn sky, broken glass, hard-edged crack."
+          "engine": "LTX 1024x576 x257 (10.28 s) — draw-things-cli — rendered in 9.7 min",
+          "note": "No creature and no rider in this shot: the ground mount must never share a frame with winged animals or klein grows wings on it. City is already ruined here — this follows s14. Never write 'lightning' — klein renders a literal lightning bolt instead of a rift; say torn sky, broken glass, hard-edged crack. Rendered 2026-09-22: crack holds and widens, winged shapes multiply. Artefact: the rising dust reads as puffy cumulus blobs rather than dust — drop the dust clause if re-shot."
         },
         "s15b": {
           "title": "Exodus — the flock pours out of the rift",
           "still": "none — chained: first frame is the last frame of s15a (keeps the rift shape and cloud spiral continuous)",
           "video": "The torn crack holds open above the ruins as a dense stream of large leathery-winged flying reptiles pours out of it, long crested heads and beating wings, spilling downward and fanning apart across the sky; the camera tilts slowly down with them toward the broken spires. Their shadows sweep over the rubble, dust swirls up through the shafts of light, the torn edges of the sky keep flaring. Massed leathery wingbeats, harsh distant shrieks, deep rift hum, wind, no music.",
-          "engine": "LTX 1024x576 x257 (10.3 s) — draw-things-cli, --image = last frame of s15a",
-          "note": "Chaining test: extract the last frame with ffmpeg and hand it to the CLI as --image. Flying animals are the subject here, so wings are wanted — never mention the ground creature."
+          "engine": "LTX 1024x576 x257 (10.28 s) — draw-things-cli, --image = last frame of s15a — rendered in 9.5 min",
+          "note": "Chaining test: extract the last frame with ffmpeg and hand it to the CLI as --image. Flying animals are the subject here, so wings are wanted — never mention the ground creature. Chaining worked: `ffmpeg -sseof -0.08 -i a.mov -update 1 -frames:v 1 first.png` then pass it as --image. Continuous across the cut."
         },
         "s15c": {
           "title": "The circling — the flock wheels above the dead city",
           "still": "Cinematic film still, anamorphic 35mm, muted colours, low contrast, subtle film grain. Very wide high vantage looking down and across the ruined lost city, the broken spires and collapsed ziggurats small in a wide bowl of jungle, dust and haze lying over the rubble. Dozens of large leathery-winged flying reptiles wheel in one slow enormous circle above the ruins, silhouetted at different distances, some near and sharp with crested heads and outstretched wings, others tiny specks far away, their shadows crossing the stone below. Behind and above them the sky is still torn wide open by a long jagged crack like broken glass, white light pouring through the gap, its glow lighting the underside of the flock and the dust. Enormous sense of scale, deep depth of field, Layered atmospheric perspective, photorealistic, highly detailed, cold pale light spilling from the rift against a dull overcast sky.",
           "video": "Fixed wide camera. Dozens of winged reptiles wheel slowly in one great circle above the ruined city, gliding and banking, wings beating now and then, the whole ring turning steadily and unbroken; nearer birds cross the frame and away, their shadows sliding over the rubble. Behind them the torn crack in the sky glows and flares, its edges shifting, clouds peeling back along it, dust drifting over the ruins below. Massed wingbeats, layered distant shrieks, deep rift hum, wind, no music.",
-          "engine": "LTX 1024x576 x257 (10.3 s) — draw-things-cli",
-          "note": "Slow, in-place swarm motion — the stable pattern. Nothing large and detailed in the foreground to drift."
+          "engine": "LTX 1024x576 x257 (10.28 s) — draw-things-cli — rendered in 9.6 min",
+          "note": "Slow, in-place swarm motion — the stable pattern. Nothing large and detailed in the foreground to drift. Best of the three: the ring of animals holds for the full clip and the crack stays put."
         }
       },
       "youtube": "68sq_jZqu6c",
       "youtube_note": "latest cut (replaces 9YlHr5mehaA)"
+    },
+    {
+      "id": "kyle_rescue",
+      "title": "Kyle's Antarctic Rescue — 1-minute illustrated short from a 5-panel comic",
+      "date": "2026-09-22",
+      "dt_project": "none — rendered with draw-things-cli (no project file)",
+      "status": "planned — see wiki/kyle-antarctic-rescue-plan.md; experiments K0–K5 first",
+      "source": "raw/kyle/comic_source.webp",
+      "still": {
+        "model": "FLUX.2 [klein] 9B (8-bit S) via draw-things-cli",
+        "size": "1024x576",
+        "steps": 4,
+        "cfg": 1.0,
+        "shift": 3,
+        "sampler": "DDIM Trailing (16)",
+        "control": "no Moodboard (CLI release); panel shots = img2img from the cleaned panel crop, strength 0.45-0.6",
+        "prompt": "per scene — see scenes"
+      },
+      "i2v": {
+        "model": "LTX-2.3 22B [distilled] 1.1 via draw-things-cli",
+        "size": "1024x576",
+        "frames": 249,
+        "fps": 25,
+        "steps": 8,
+        "cfg": 1.0,
+        "sampler": "TCD Trailing (19)",
+        "sss": "30%",
+        "shift": 5.0,
+        "hires_fix": "off"
+      },
+      "upscale": "scripts/upscale_4k.sh … realesr-animevideov3-x4, audio remuxed from the .mov",
+      "music": "TBD",
+      "scenes": {
+        "locks": {
+          "style_head": "Hand-painted comic book illustration, bold clean ink outlines, soft cel shading, vivid saturated colours, bright cheerful children's storybook style.",
+          "kyle": "Kyle, a cheerful young East Asian boy with short spiky black hair, dark brown eyes and a wide smile, wearing a bright red and black insulated expedition parka with a round blue Antarctica patch on the left chest, black backpack straps over both shoulders, black gloves.",
+          "world": "Antarctica: turquoise icebergs, snowy white mountains, deep blue polar ocean.",
+          "video_tail": "Smooth gentle motion, consistent character, hand-painted animated illustration style, no text, no speech bubbles.",
+          "rules": "No model-rendered text (captions via ffmpeg). Face shots use hold-position wording. Fast action drifts after ~4-5 s: trim."
+        },
+        "s1": {
+          "title": "text-only, keep 7 s",
+          "engine": "LTX-2.3 via draw-things-cli",
+          "still": "An expedition ship with a red and white hull on a turquoise sea between tall icebergs, seagulls overhead, wide shot.",
+          "video": "The camera pushes slowly toward the ship as seagulls glide past and the sea swells gently around the icebergs. Wind, gull calls, creaking ice."
+        },
+        "s2": {
+          "title": "panel 1 (img2img), keep 8 s",
+          "engine": "LTX-2.3 via draw-things-cli",
+          "still": "Close-up of Kyle smiling and giving a thumbs up, the expedition ship and icebergs behind him.",
+          "video": "Kyle stays in place and smiles wider, his thumbs-up bobs once, his hair and parka stir in the wind; the camera holds still. Wind, distant waves."
+        },
+        "s3": {
+          "title": "panel 2 (img2img), keep 10 s",
+          "engine": "LTX-2.3 via draw-things-cli",
+          "still": "Night: Kyle seen from behind looking up at a huge glowing flying saucer firing purple energy beams onto the ice.",
+          "video": "Kyle stays still and turns his head slightly; the saucer hovers and pulses, purple beams crackle down onto the ice, which glows and cracks. Low hum, electric crackle."
+        },
+        "s4": {
+          "title": "panel 3 (img2img), keep 10 s",
+          "engine": "LTX-2.3 via draw-things-cli",
+          "still": "Frightened penguins, a seal pup, an orca and a whale on breaking ice floes, purple beams lifting blocks of ice into the sky.",
+          "video": "Blocks of ice rise slowly into the beams as the floes split apart; the penguins huddle and flap, the seal looks up, the orca surfaces. Cracking ice, splashes, penguin calls."
+        },
+        "s5": {
+          "title": "panel 4 (img2img), keep 6 s",
+          "engine": "LTX-2.3 via draw-things-cli",
+          "still": "Kyle flying through the air aiming a glowing freeze-ray gadget, a small penguin with a backpack beside him.",
+          "video": "Kyle glides forward and the gadget fires a bright blue snowflake beam; frost spreads across the frame. Whoosh, icy zap."
+        },
+        "s6": {
+          "title": "last frame of S5, text-only fallback, keep 6 s",
+          "engine": "LTX-2.3 via draw-things-cli",
+          "still": "The flying saucer frozen inside a crust of blue ice above the icebergs, its beams gone.",
+          "video": "The ice crust cracks, the saucer shakes free and zips up into the stars, its light fading. Cracking, fading hum."
+        },
+        "s7": {
+          "title": "panel 5 (img2img), keep 10 s",
+          "engine": "LTX-2.3 via draw-things-cli",
+          "still": "Sunrise: Kyle kneeling and hugging a fluffy penguin chick, surrounded by happy penguins and a seal, a whale breaching and an orca behind.",
+          "video": "Kyle hugs the chick and rocks gently, the chick nuzzles him, the penguins bob, the whale arcs slowly behind. Soft wind, lapping waves, happy penguin calls."
+        },
+        "s8": {
+          "title": "text-only, keep 8 s",
+          "engine": "LTX-2.3 via draw-things-cli",
+          "still": "Wide sunrise over the ice with a wooden sign in the foreground, a small boy and penguins far away.",
+          "video": "The camera pulls back and rises slowly over the ice as the sun climbs. Gentle wind. (End card text added with ffmpeg.)"
+        }
+      },
+      "notes": "Real child's likeness: parent consent, keep private unless they choose otherwise."
     }
   ],
   "playlist": {

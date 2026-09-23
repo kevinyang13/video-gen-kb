@@ -21,7 +21,8 @@
 | 7 | [FLL BOT Builders — Coastal Roots Farm, wide view](#fll_farm) | 2026-09-20 | done (v2) | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Calm Ambient Dreamscape | `fll_farm_v2_final.mp4` | [▶ watch](https://youtu.be/-Mf2UThasCg) |
 | 8 | [Dragon Epic — 1-minute photoreal short, family hero face](#dragon_epic) | 2026-09-21 | in progress — scene 1A posted | FLUX.2 [klein] 9B 1280x768 | Wan 2.2 High Noise 47 min | The Dragon's Breath | `—` | [▶ watch](https://youtu.be/Xzu-c5yX8uo) |
 | 9 | [Three-minute film — recurring characters (subject TBD)](#film3min) | 2026-09-21 | planning | FLUX.2 [klein] 9B 1024x576 | Wan 2.2 High Noise 15 min | TBD | `—` | — |
-| 10 | [Lost City — hyper-real rider on a raptor-dragon entering jungle ruins](#lost_city) | 2026-09-21 | in progress — clips at 4K+music: s2, s3, s7, s8, s10, s14; s9 trimmed (4.6 s, drift after); s11 stills rejected (klein duplicates the creature); s12 not started; s15 (3-part, 30 s rift sequence) rendering | FLUX.2 [klein] 9B 1280x768 | LTX-2.3 22B [distilled] 1.1 (production engine — see ltx_10s) — Wan 2.2 High Noise I2V (8-bit S) + Low Noise refiner 10% for locked-camera shots at 768p 49 min | Mystical orchestral theme with ancient flute | `—` | [▶ watch](https://youtu.be/68sq_jZqu6c) |
+| 10 | [Lost City — hyper-real rider on a raptor-dragon entering jungle ruins](#lost_city) | 2026-09-21 | in progress — clips at 4K+music: s2, s3, s7, s8, s10, s14; s9 trimmed (4.6 s, drift after); s11 stills rejected (klein duplicates the creature); s12 not started; s15 rift coda done (3 clips assembled to 30 s 4K with music) | FLUX.2 [klein] 9B 1280x768 | LTX-2.3 22B [distilled] 1.1 (production engine — see ltx_10s) — Wan 2.2 High Noise I2V (8-bit S) + Low Noise refiner 10% for locked-camera shots at 768p 49 min | Mystical orchestral theme with ancient flute | `—` | [▶ watch](https://youtu.be/68sq_jZqu6c) |
+| 11 | [Kyle's Antarctic Rescue — 1-minute illustrated short from a 5-panel comic](#kyle_rescue) | 2026-09-22 | planned — see wiki/kyle-antarctic-rescue-plan.md; experiments K0–K5 first | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 via draw-things-cli ? min | Calm Ambient Dreamscape | `—` | — |
 
 ## YouTube playlist — [AI-Vids](https://www.youtube.com/playlist?list=PLJx49Sf61wKQ)
 
@@ -525,8 +526,8 @@ Prompt: `per shot — one camera move + one subject action`
 
 ## Lost City — hyper-real rider on a raptor-dragon entering jungle ruins {#lost_city}
 
-- **Date**: 2026-09-21 · **Status**: in progress — clips at 4K+music: s2, s3, s7, s8, s10, s14; s9 trimmed (4.6 s, drift after); s11 stills rejected (klein duplicates the creature); s12 not started; s15 (3-part, 30 s rift sequence) rendering · **Draw Things project**: `lostcity-s1, s2, s3, s7 (named); s8, s9 (cloned — clone crashes on video save); s10 and s11 in fresh Untitled projects; s14 rendered with draw-things-cli (no project file)`
-- **Files** (`raw/clips/`): `lostcity/ref_openart_rider_ruins.webp (reference, raw/)`, `lostcity/crop_creature_rider.png, crop_spires.png, crop_foreground.png (Moodboard refs, raw/)`, `lostcity/s1_still_v1.png (shot 1 still, klein)`, `lostcity/s1_ltx_v1.mov (LTX-2.3 test, 1024x576x97 @25fps + audio)`, `lostcity/s2_still_v1.png (shot 2 still, klein, refs: our s1 skyline + spires crop, seed 1)`, `lostcity/s7_still_v2.png (shot 7 still, wingless; s7_still_v1_winged.png = rejected v1)`, `lostcity/s2_wan_v1.mov (shot 2 I2V, Wan 2.2, 1280x768x81)`, `lostcity/s2_wan_v1_4k.mp4 (3840x2160 HEVC 10-bit)`, `lostcity/s2_ltx_v1.mov (shot 2 via LTX-2.3, 1024x576x97 @25fps + audio)`, `lostcity/s2_ltx_v1_4k_audio.mp4 (LTX shot 2 at 3840x2160 + audio)`, `lostcity/s3_still_v1.png (shot 3 still, ref = crop of our s1 creature body)`, `music/mystical_flute.mp3`, `lostcity/s3_ltx_v2.mov (shot 3 LTX v2, hold-position prompt)`, `lostcity/s3_ltx_v2_4k_music.mp4 (4K + ambience + music bed)`, `lostcity/s3_ltx_v1_walkout.mov (v1, rejected: walk-out + phantom rider)`, `lostcity/s7_still_v1.png (side profile, anatomy OK)`, `lostcity/s7_ltx_v1.mov (LTX 1024x576x249 @25fps)`, `lostcity/s7_ltx_v1_4k_music.mp4`, `lostcity/s8_still_v1.png (gallop)`, `lostcity/s8_ltx_v1.mov + s8_ltx_v1_4k_music.mp4 (gallop, 10 s)`, `lostcity/s9_still_v1.png, s9_ltx_v1.mov (jump; drifts after ~4.6 s), s9_ltx_v1_trim.mov (clean 116 f)`, `lostcity/s10_still_v1.png, s10_ltx_v1.mov, s10_ltx_v1_4k_music.mp4 (drinking, 10.3 s, holds design)`, `lostcity/s14_still_v1.png (seed 2; s1/s3 variants kept)`, `lostcity/s14_ltx_v1.mov (ProRes 422 HQ, 249 f @ 25 fps + PCM audio)`, `lostcity/s14_ltx_v1_4k_music.mp4`
+- **Date**: 2026-09-21 · **Status**: in progress — clips at 4K+music: s2, s3, s7, s8, s10, s14; s9 trimmed (4.6 s, drift after); s11 stills rejected (klein duplicates the creature); s12 not started; s15 rift coda done (3 clips assembled to 30 s 4K with music) · **Draw Things project**: `lostcity-s1, s2, s3, s7 (named); s8, s9 (cloned — clone crashes on video save); s10 and s11 in fresh Untitled projects; s14 rendered with draw-things-cli (no project file)`
+- **Files** (`raw/clips/`): `lostcity/ref_openart_rider_ruins.webp (reference, raw/)`, `lostcity/crop_creature_rider.png, crop_spires.png, crop_foreground.png (Moodboard refs, raw/)`, `lostcity/s1_still_v1.png (shot 1 still, klein)`, `lostcity/s1_ltx_v1.mov (LTX-2.3 test, 1024x576x97 @25fps + audio)`, `lostcity/s2_still_v1.png (shot 2 still, klein, refs: our s1 skyline + spires crop, seed 1)`, `lostcity/s7_still_v2.png (shot 7 still, wingless; s7_still_v1_winged.png = rejected v1)`, `lostcity/s2_wan_v1.mov (shot 2 I2V, Wan 2.2, 1280x768x81)`, `lostcity/s2_wan_v1_4k.mp4 (3840x2160 HEVC 10-bit)`, `lostcity/s2_ltx_v1.mov (shot 2 via LTX-2.3, 1024x576x97 @25fps + audio)`, `lostcity/s2_ltx_v1_4k_audio.mp4 (LTX shot 2 at 3840x2160 + audio)`, `lostcity/s3_still_v1.png (shot 3 still, ref = crop of our s1 creature body)`, `music/mystical_flute.mp3`, `lostcity/s3_ltx_v2.mov (shot 3 LTX v2, hold-position prompt)`, `lostcity/s3_ltx_v2_4k_music.mp4 (4K + ambience + music bed)`, `lostcity/s3_ltx_v1_walkout.mov (v1, rejected: walk-out + phantom rider)`, `lostcity/s7_still_v1.png (side profile, anatomy OK)`, `lostcity/s7_ltx_v1.mov (LTX 1024x576x249 @25fps)`, `lostcity/s7_ltx_v1_4k_music.mp4`, `lostcity/s8_still_v1.png (gallop)`, `lostcity/s8_ltx_v1.mov + s8_ltx_v1_4k_music.mp4 (gallop, 10 s)`, `lostcity/s9_still_v1.png, s9_ltx_v1.mov (jump; drifts after ~4.6 s), s9_ltx_v1_trim.mov (clean 116 f)`, `lostcity/s10_still_v1.png, s10_ltx_v1.mov, s10_ltx_v1_4k_music.mp4 (drinking, 10.3 s, holds design)`, `lostcity/s14_still_v1.png (seed 2; s1/s3 variants kept)`, `lostcity/s14_ltx_v1.mov (ProRes 422 HQ, 249 f @ 25 fps + PCM audio)`, `lostcity/s14_ltx_v1_4k_music.mp4`, `lostcity/s15a|b|c_still_v1.png + _ltx_v1.mov + _4k_audio.mp4`, `lostcity/s15_rift_30s_4k.mp4 (the 30 s cut)`
 - **Notes**: Plan: wiki/lost-city-plan.md. Reference is an OpenArt render (closed model, unknown); we re-generate our own frame. 8 shots × 5 s first. Experiments L0–L6 gate rendering; L1 = first LTX-2.3 test on this Mac.
 
 - **YouTube**: [youtu.be/68sq_jZqu6c](https://youtu.be/68sq_jZqu6c) *(latest cut (replaces 9YlHr5mehaA))*
@@ -579,9 +580,9 @@ Prompt: `per scene — see the scenes table`
 **Locks** (paste verbatim into every prompt):
 
 - *style head* — Cinematic film still, anamorphic 35mm, eye-level side view, muted colours, low contrast, subtle film grain.
+- *style tail* — Layered atmospheric perspective, photorealistic, highly detailed, natural overcast light with warm sun breaks.
 - *creature* — a large quadrupedal raptor-like reptile mount, no wings, slate-grey ridged hide, long neck with a bony horn crest, small amber eyes, leather saddle with reins and a brown satchel, walking on two heavy hind legs and two smaller forelegs
 - *rider* — a lone rider, grey-green hooded cloak, brown leather jerkin, tan trousers, tall boots
-- *style tail* — Layered atmospheric perspective, photorealistic, highly detailed, natural overcast light with warm sun breaks.
 
 **Rules**: Never write 'dragon' (grows wings) or 'two-legged' (breaks legs). Quadruped wording only. Side/three-quarter framing — rear-view low angles fail. Moodboard refs must be crops, never a full wide frame. Destruction shots: name the subject and its stillness first, then confine the falling verbs to the distance in one clause — LTX bleeds collapse motion onto anything small or mentioned after it (s14 v1: the creature's head fell off like a spire). Keep the subject at least a third of the frame wide in any shot where other things break apart.
 
@@ -748,8 +749,8 @@ Prompt: `per scene — see the scenes table`
 
 #### s15a — The crack — a rift opens in the sky above the ruined city
 
-- **Engine**: LTX 1024x576 x257 (10.3 s) — draw-things-cli
-- **Note**: No creature and no rider in this shot: the ground mount must never share a frame with winged animals or klein grows wings on it. City is already ruined here — this follows s14. Never write 'lightning' — klein renders a literal lightning bolt instead of a rift; say torn sky, broken glass, hard-edged crack.
+- **Engine**: LTX 1024x576 x257 (10.28 s) — draw-things-cli — rendered in 9.7 min
+- **Note**: No creature and no rider in this shot: the ground mount must never share a frame with winged animals or klein grows wings on it. City is already ruined here — this follows s14. Never write 'lightning' — klein renders a literal lightning bolt instead of a rift; say torn sky, broken glass, hard-edged crack. Rendered 2026-09-22: crack holds and widens, winged shapes multiply. Artefact: the rising dust reads as puffy cumulus blobs rather than dust — drop the dust clause if re-shot.
 
 *Still prompt*
 
@@ -762,8 +763,8 @@ Prompt: `per scene — see the scenes table`
 
 #### s15b — Exodus — the flock pours out of the rift
 
-- **Engine**: LTX 1024x576 x257 (10.3 s) — draw-things-cli, --image = last frame of s15a
-- **Note**: Chaining test: extract the last frame with ffmpeg and hand it to the CLI as --image. Flying animals are the subject here, so wings are wanted — never mention the ground creature.
+- **Engine**: LTX 1024x576 x257 (10.28 s) — draw-things-cli, --image = last frame of s15a — rendered in 9.5 min
+- **Note**: Chaining test: extract the last frame with ffmpeg and hand it to the CLI as --image. Flying animals are the subject here, so wings are wanted — never mention the ground creature. Chaining worked: `ffmpeg -sseof -0.08 -i a.mov -update 1 -frames:v 1 first.png` then pass it as --image. Continuous across the cut.
 
 *Still prompt*
 
@@ -776,8 +777,8 @@ Prompt: `per scene — see the scenes table`
 
 #### s15c — The circling — the flock wheels above the dead city
 
-- **Engine**: LTX 1024x576 x257 (10.3 s) — draw-things-cli
-- **Note**: Slow, in-place swarm motion — the stable pattern. Nothing large and detailed in the foreground to drift.
+- **Engine**: LTX 1024x576 x257 (10.28 s) — draw-things-cli — rendered in 9.6 min
+- **Note**: Slow, in-place swarm motion — the stable pattern. Nothing large and detailed in the foreground to drift. Best of the three: the ring of animals holds for the full clip and the crack stays put.
 
 *Still prompt*
 
@@ -786,6 +787,165 @@ Prompt: `per scene — see the scenes table`
 *Video prompt*
 
 > Fixed wide camera. Dozens of winged reptiles wheel slowly in one great circle above the ruined city, gliding and banking, wings beating now and then, the whole ring turning steadily and unbroken; nearer birds cross the frame and away, their shadows sliding over the rubble. Behind them the torn crack in the sky glows and flares, its edges shifting, clouds peeling back along it, dust drifting over the ruins below. Massed wingbeats, layered distant shrieks, deep rift hum, wind, no music.
+
+## Kyle's Antarctic Rescue — 1-minute illustrated short from a 5-panel comic {#kyle_rescue}
+
+- **Date**: 2026-09-22 · **Status**: planned — see wiki/kyle-antarctic-rescue-plan.md; experiments K0–K5 first · **Draw Things project**: `none — rendered with draw-things-cli (no project file)`
+- **Files** (`raw/clips/`): 
+- **Notes**: Real child's likeness: parent consent, keep private unless they choose otherwise.
+
+**Still**
+
+| Setting | Value |
+|---|---|
+| Model | FLUX.2 [klein] 9B (8-bit S) via draw-things-cli |
+| Size | 1024x576 |
+| Steps | 4 |
+| CFG | 1.0 |
+| Shift | 3 |
+| Sampler | DDIM Trailing (16) |
+
+Prompt: `per scene — see scenes`
+
+**I2V**
+
+| Setting | Value |
+|---|---|
+| Model | LTX-2.3 22B [distilled] 1.1 via draw-things-cli |
+| Refiner | Wan 2.2 Low Noise Expert I2V A14B (8-bit S) @ 10% |
+| LoRA | Wan 2.2 A14B Lightning High-Noise T2V v2.0 @ 100% |
+| Size | 1024x576 |
+| Frames | 249 |
+| FPS | 25 |
+| Steps | 8 |
+| CFG | 1.0 |
+| Shift | 5.0 |
+| Sampler | TCD Trailing (19) |
+| Strength | 100% |
+
+**Post**
+
+| Setting | Value |
+|---|---|
+| Script | scripts/finish_clip.sh |
+| Loop | forward, 8-frame tail->head crossfade, x6 = 27.4 s |
+| Upscale | lanczos 1080x1920 |
+| Music | Calm Ambient Dreamscape — morgan-ambient, Pixabay, 1 s fade in / 2 s fade out, vol 0.9 |
+
+### Scene prompts
+
+**Locks** (paste verbatim into every prompt):
+
+- *style head* — Hand-painted comic book illustration, bold clean ink outlines, soft cel shading, vivid saturated colours, bright cheerful children's storybook style.
+- *kyle* — Kyle, a cheerful young East Asian boy with short spiky black hair, dark brown eyes and a wide smile, wearing a bright red and black insulated expedition parka with a round blue Antarctica patch on the left chest, black backpack straps over both shoulders, black gloves.
+- *world* — Antarctica: turquoise icebergs, snowy white mountains, deep blue polar ocean.
+- *video tail* — Smooth gentle motion, consistent character, hand-painted animated illustration style, no text, no speech bubbles.
+
+**Rules**: No model-rendered text (captions via ffmpeg). Face shots use hold-position wording. Fast action drifts after ~4-5 s: trim.
+
+
+#### s1 — text-only, keep 7 s
+
+- **Engine**: LTX-2.3 via draw-things-cli
+
+*Still prompt*
+
+> An expedition ship with a red and white hull on a turquoise sea between tall icebergs, seagulls overhead, wide shot.
+
+*Video prompt*
+
+> The camera pushes slowly toward the ship as seagulls glide past and the sea swells gently around the icebergs. Wind, gull calls, creaking ice.
+
+
+#### s2 — panel 1 (img2img), keep 8 s
+
+- **Engine**: LTX-2.3 via draw-things-cli
+
+*Still prompt*
+
+> Close-up of Kyle smiling and giving a thumbs up, the expedition ship and icebergs behind him.
+
+*Video prompt*
+
+> Kyle stays in place and smiles wider, his thumbs-up bobs once, his hair and parka stir in the wind; the camera holds still. Wind, distant waves.
+
+
+#### s3 — panel 2 (img2img), keep 10 s
+
+- **Engine**: LTX-2.3 via draw-things-cli
+
+*Still prompt*
+
+> Night: Kyle seen from behind looking up at a huge glowing flying saucer firing purple energy beams onto the ice.
+
+*Video prompt*
+
+> Kyle stays still and turns his head slightly; the saucer hovers and pulses, purple beams crackle down onto the ice, which glows and cracks. Low hum, electric crackle.
+
+
+#### s4 — panel 3 (img2img), keep 10 s
+
+- **Engine**: LTX-2.3 via draw-things-cli
+
+*Still prompt*
+
+> Frightened penguins, a seal pup, an orca and a whale on breaking ice floes, purple beams lifting blocks of ice into the sky.
+
+*Video prompt*
+
+> Blocks of ice rise slowly into the beams as the floes split apart; the penguins huddle and flap, the seal looks up, the orca surfaces. Cracking ice, splashes, penguin calls.
+
+
+#### s5 — panel 4 (img2img), keep 6 s
+
+- **Engine**: LTX-2.3 via draw-things-cli
+
+*Still prompt*
+
+> Kyle flying through the air aiming a glowing freeze-ray gadget, a small penguin with a backpack beside him.
+
+*Video prompt*
+
+> Kyle glides forward and the gadget fires a bright blue snowflake beam; frost spreads across the frame. Whoosh, icy zap.
+
+
+#### s6 — last frame of S5, text-only fallback, keep 6 s
+
+- **Engine**: LTX-2.3 via draw-things-cli
+
+*Still prompt*
+
+> The flying saucer frozen inside a crust of blue ice above the icebergs, its beams gone.
+
+*Video prompt*
+
+> The ice crust cracks, the saucer shakes free and zips up into the stars, its light fading. Cracking, fading hum.
+
+
+#### s7 — panel 5 (img2img), keep 10 s
+
+- **Engine**: LTX-2.3 via draw-things-cli
+
+*Still prompt*
+
+> Sunrise: Kyle kneeling and hugging a fluffy penguin chick, surrounded by happy penguins and a seal, a whale breaching and an orca behind.
+
+*Video prompt*
+
+> Kyle hugs the chick and rocks gently, the chick nuzzles him, the penguins bob, the whale arcs slowly behind. Soft wind, lapping waves, happy penguin calls.
+
+
+#### s8 — text-only, keep 8 s
+
+- **Engine**: LTX-2.3 via draw-things-cli
+
+*Still prompt*
+
+> Wide sunrise over the ice with a wooden sign in the foreground, a small boy and penguins far away.
+
+*Video prompt*
+
+> The camera pulls back and rises slowly over the ice as the sun climbs. Gentle wind. (End card text added with ffmpeg.)
 
 ## Related pages
 - [[runbook-living-painting]]
