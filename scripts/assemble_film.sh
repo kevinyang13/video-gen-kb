@@ -22,7 +22,8 @@ for c in "$@"; do
   vf="scale=3840:2160:force_original_aspect_ratio=increase:flags=lanczos,crop=3840:2160,fps=${FPS},format=yuv420p10le,setsar=1"
   [ "$LETTERBOX" = "1" ] && vf="$vf,drawbox=0:0:3840:276:black:fill,drawbox=0:1884:3840:276:black:fill"
   filt+="[$n:v]${vf}[v$n];"
-  if [ -n "$has_a" ]; then filt+="[$n:a]aformat=sample_rates=48000:channel_layouts=stereo,apad[a$n];"
+  # apad must be bounded: an unbounded apad buffers silence forever and the graph OOMs at 4K (2026-09-22)
+  if [ -n "$has_a" ]; then filt+="[$n:a]aformat=sample_rates=48000:channel_layouts=stereo,apad=whole_dur=${dur}[a$n];"
   else filt+="anullsrc=r=48000:cl=stereo,atrim=0:${dur}[a$n];"; fi
   durs[$n]=$dur; n=$((n+1))
 done

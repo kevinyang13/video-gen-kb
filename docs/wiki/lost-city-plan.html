@@ -466,21 +466,21 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <td>creature <strong>must be large</strong> — at a sixth of the frame its head collapsed with the spires (v1)</td>
 </tr>
 <tr>
-<td>15a</td>
+<td>15a ✅</td>
 <td><strong>The crack</strong> — a jagged tear splits the sky over the ruined city</td>
 <td>fixed, very slow push in</td>
 <td>the tear widens, clouds peel back, first winged shapes slip out</td>
 <td>city (ruined); no ground creature in frame</td>
 </tr>
 <tr>
-<td>15b</td>
+<td>15b ✅</td>
 <td><strong>Exodus</strong> — the flock pours out of the tear</td>
 <td>tilt down with them</td>
 <td>dense stream of winged reptiles fanning apart, shadows over rubble</td>
 <td>chained: first frame = last frame of 15a</td>
 </tr>
 <tr>
-<td>15c</td>
+<td>15c ✅</td>
 <td><strong>The circling</strong> — the flock wheels above the dead city</td>
 <td>fixed very wide</td>
 <td>one slow unbroken circle of winged reptiles, crack flaring behind</td>
@@ -564,6 +564,11 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>s15 rift coda</td>
+<td>2026-09-22</td>
+<td><strong>30 s from three chained clips, start to finish with no UI.</strong> 15a crack → 15b exodus (first frame = last frame of 15a, pulled with <code>ffmpeg -sseof</code>) → 15c circling; each 257 f, ~9.6 min LTX + ~11.5 min upscale. Assembled with <code>assemble_film.sh</code> (xfade 0.5, flute bed) → 29.76 s 4K, then +6 dB. Two lessons: klein renders "lightning" literally, so a sky rift needs torn-glass wording; and the rising-dust clause produces puffy cumulus blobs in 15a/15b — drop it on a re-shoot. <code>s15_rift_30s_4k_music.mp4</code>.</td>
+</tr>
 <tr>
 <td>s14 v2 (final shot)</td>
 <td>2026-09-22</td>

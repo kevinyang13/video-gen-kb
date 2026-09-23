@@ -92,7 +92,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
     <span class="spacer"></span>
     <button class="pill" onclick="tt()">◐ Theme</button>
   </nav>
-  <h1>Scripts Reference</h1><p class="lede">What each script in <code>scripts/</code> does, which tools and APIs it calls, and the exact processing steps — so the post-production side of the pipeline (Draw Things export → looped/upscaled/assembled deliverable) is reproducible without re-reading the code. Covers <code>finish_clip.sh</code>, <code>upscale_4k.sh</code>, <code>assemble_film.sh</code>, plus the site/registry builders.</p><div class="meta"><span><b>Updated</b> 2026-09-21</span><span><b>Sources</b> the scripts themselves (<code>scripts/*.sh</code>, <code>scripts/*.py</code>); hands-on timings in <a href="log.html">log</a> 2026-09-20/21; Real-ESRGAN ncnn README (<code>tools/realesrgan/README_macos.md</code>).</span></div>
+  <h1>Scripts Reference</h1><p class="lede">What each script in <code>scripts/</code> does, which tools and APIs it calls, and the exact processing steps — so the post-production side of the pipeline (Draw Things export → looped/upscaled/assembled deliverable) is reproducible without re-reading the code. Covers <code>finish_clip.sh</code>, <code>upscale_4k.sh</code>, <code>assemble_film.sh</code>, plus the site/registry builders.</p><div class="meta"><span><b>Updated</b> 2026-09-22</span><span><b>Sources</b> the scripts themselves (<code>scripts/*.sh</code>, <code>scripts/*.py</code>); hands-on timings in <a href="log.html">log</a> 2026-09-20/21; Real-ESRGAN ncnn README (<code>tools/realesrgan/README_macos.md</code>).</span></div>
 <hr />
 <h2>The toolchain (all local, all free)</h2>
 <div class="tw"><table>
@@ -189,6 +189,8 @@ XFADE=0.5 FPS=25 MUSIC=bed.mp3 LETTERBOX=1  scripts/assemble_film.sh ...
 <li>Optional music: <code>volume=0.6</code> then <code>amix</code> under the clip audio.</li>
 <li>Encode: same HEVC 10-bit 40 Mbps + AAC 192k, <code>-movflags +faststart</code>.</li>
 </ol>
+<p><strong>Gotcha (2026-09-22, fixed)</strong>: the per-clip audio used a bare <code>apad</code>, which pads silence <em>forever</em>. At 576p it went unnoticed; with three 4K 10-bit inputs the graph buffered until ffmpeg died with <code>Cannot allocate memory</code> after 11 minutes of encoding. It is now <code>apad=whole_dur=${dur}</code>. A 30 s 4K assembly takes ~8 min on the M4 Max.</p>
+<p><strong>Level</strong>: <code>amix</code> halves the perceived level, so finish with an audio-only pass — <code>ffmpeg -i film.mp4 -af volume=6dB -c:v copy -c:a aac -b:a 192k out.mp4</code> took s15 from mean −24 dB to −18.1 dB, max −3.4 dB.</p>
 <p><strong>Limits</strong>: xfade offsets are computed in Python from probed durations, so clips must have accurate container durations (Draw Things ProRes exports do). Title cards and SFX are not in yet — add them as extra "clips" (a 2 s still rendered with <code>ffmpeg -loop 1</code>).</p>
 <hr />
 <h2><code>scripts/dt_project.sh</code> — Draw Things projects from the shell</h2>

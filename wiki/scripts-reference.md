@@ -4,7 +4,7 @@
 
 **Sources**: the scripts themselves (`scripts/*.sh`, `scripts/*.py`); hands-on timings in [[log]] 2026-09-20/21; Real-ESRGAN ncnn README (`tools/realesrgan/README_macos.md`).
 
-**Last updated**: 2026-09-21
+**Last updated**: 2026-09-22
 
 ---
 
@@ -95,6 +95,10 @@ XFADE=0.5 FPS=25 MUSIC=bed.mp3 LETTERBOX=1  scripts/assemble_film.sh ...
 4. **Crossfade chain**: for clip *i*, `xfade=transition=fade:duration=XFADE:offset=` (running total of durations minus one XFADE per join) and `acrossfade=d=XFADE`. With `XFADE=0` it uses `concat` (hard cuts).
 5. Optional music: `volume=0.6` then `amix` under the clip audio.
 6. Encode: same HEVC 10-bit 40 Mbps + AAC 192k, `-movflags +faststart`.
+
+**Gotcha (2026-09-22, fixed)**: the per-clip audio used a bare `apad`, which pads silence *forever*. At 576p it went unnoticed; with three 4K 10-bit inputs the graph buffered until ffmpeg died with `Cannot allocate memory` after 11 minutes of encoding. It is now `apad=whole_dur=${dur}`. A 30 s 4K assembly takes ~8 min on the M4 Max.
+
+**Level**: `amix` halves the perceived level, so finish with an audio-only pass — `ffmpeg -i film.mp4 -af volume=6dB -c:v copy -c:a aac -b:a 192k out.mp4` took s15 from mean −24 dB to −18.1 dB, max −3.4 dB.
 
 **Limits**: xfade offsets are computed in Python from probed durations, so clips must have accurate container durations (Draw Things ProRes exports do). Title cards and SFX are not in yet — add them as extra "clips" (a 2 s still rendered with `ffmpeg -loop 1`).
 

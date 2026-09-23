@@ -342,7 +342,7 @@
       },
       "post": {
         "upscale": "scripts/upscale_4k.sh — Real-ESRGAN x4plus → 3840x2160 HEVC 10-bit",
-        "loop": "none — xfade concat",
+        "loop": "none — xfade concat; s15 assembled with scripts/assemble_film.sh (XFADE=0.5, MUSIC=mystical_flute.mp3) then +6 dB",
         "music": "Mystical orchestral theme with ancient flute — DesiFreeMusic, Pixabay (cdn.pixabay.com/audio/2025/07/12/audio_fb278af2ae.mp3), 4:00, steady −15 dB from 0 s, dips at 80 s and 200 s"
       },
       "files": [
@@ -372,7 +372,7 @@
         "lostcity/s14_ltx_v1.mov (ProRes 422 HQ, 249 f @ 25 fps + PCM audio)",
         "lostcity/s14_ltx_v1_4k_music.mp4",
         "lostcity/s15a|b|c_still_v1.png + _ltx_v1.mov + _4k_audio.mp4",
-        "lostcity/s15_rift_30s_4k.mp4 (the 30 s cut)"
+        "lostcity/s15_rift_30s_4k_music.mp4 (the 30 s cut: 15a+15b+15c, xfade 0.5, flute bed, +6 dB)"
       ],
       "notes": "Plan: wiki/lost-city-plan.md. Reference is an OpenArt render (closed model, unknown); we re-generate our own frame. 8 shots × 5 s first. Experiments L0–L6 gate rendering; L1 = first LTX-2.3 test on this Mac.",
       "scenes": {
@@ -497,7 +497,7 @@
       "source": "raw/kyle/comic_source.webp",
       "still": {
         "model": "FLUX.2 [klein] 9B (8-bit S) via draw-things-cli",
-        "size": "1024x576",
+        "size": "576x1024",
         "steps": 4,
         "cfg": 1.0,
         "shift": 3,
@@ -507,7 +507,7 @@
       },
       "i2v": {
         "model": "LTX-2.3 22B [distilled] 1.1 via draw-things-cli",
-        "size": "1024x576",
+        "size": "576x1024",
         "frames": 249,
         "fps": 25,
         "steps": 8,
@@ -517,66 +517,67 @@
         "shift": 5.0,
         "hires_fix": "off"
       },
-      "upscale": "scripts/upscale_4k.sh … realesr-animevideov3-x4, audio remuxed from the .mov",
-      "music": "TBD",
+      "upscale": "W=2160 H=3840 scripts/upscale_4k.sh … realesr-animevideov3-x4 (needs the portrait option, plan step 5a); no audio remux",
+      "music": "TBD — asked Kevin",
       "scenes": {
         "locks": {
           "style_head": "Hand-painted comic book illustration, bold clean ink outlines, soft cel shading, vivid saturated colours, bright cheerful children's storybook style.",
           "kyle": "Kyle, a cheerful young East Asian boy with short spiky black hair, dark brown eyes and a wide smile, wearing a bright red and black insulated expedition parka with a round blue Antarctica patch on the left chest, black backpack straps over both shoulders, black gloves.",
           "world": "Antarctica: turquoise icebergs, snowy white mountains, deep blue polar ocean.",
           "video_tail": "Smooth gentle motion, consistent character, hand-painted animated illustration style, no text, no speech bubbles.",
-          "rules": "No model-rendered text (captions via ffmpeg). Face shots use hold-position wording. Fast action drifts after ~4-5 s: trim."
+          "rules": "No on-screen text at all (film is pictures + music). Face shots use hold-position wording. Fast action drifts after ~4-5 s: trim. Hand the CLI an image already at 9:16 — it center-crops otherwise."
         },
         "s1": {
           "title": "text-only, keep 7 s",
           "engine": "LTX-2.3 via draw-things-cli",
-          "still": "An expedition ship with a red and white hull on a turquoise sea between tall icebergs, seagulls overhead, wide shot.",
-          "video": "The camera pushes slowly toward the ship as seagulls glide past and the sea swells gently around the icebergs. Wind, gull calls, creaking ice."
+          "still": "Tall vertical frame: an expedition ship with a red and white hull small at the bottom on a turquoise sea, a towering iceberg and blue sky above, seagulls overhead.",
+          "video": "The camera tilts slowly down from the gliding seagulls to the ship as the sea swells gently around the icebergs."
         },
         "s2": {
-          "title": "panel 1 (img2img), keep 8 s",
+          "title": "panel 1 (method B pad + img2img), keep 8 s",
           "engine": "LTX-2.3 via draw-things-cli",
           "still": "Close-up of Kyle smiling and giving a thumbs up, the expedition ship and icebergs behind him.",
-          "video": "Kyle stays in place and smiles wider, his thumbs-up bobs once, his hair and parka stir in the wind; the camera holds still. Wind, distant waves."
+          "video": "Kyle stays in place and smiles wider, his thumbs-up bobs once, his hair and parka stir in the wind; the camera holds still."
         },
         "s3": {
-          "title": "panel 2 (img2img), keep 10 s",
+          "title": "panel 2 (method A tight + img2img), keep 10 s",
           "engine": "LTX-2.3 via draw-things-cli",
           "still": "Night: Kyle seen from behind looking up at a huge glowing flying saucer firing purple energy beams onto the ice.",
-          "video": "Kyle stays still and turns his head slightly; the saucer hovers and pulses, purple beams crackle down onto the ice, which glows and cracks. Low hum, electric crackle."
+          "video": "Kyle stays still at the bottom of the frame and turns his head slightly; above him the saucer hovers and pulses, purple beams crackle down onto the ice, which glows and cracks."
         },
         "s4": {
-          "title": "panel 3 (img2img), keep 10 s",
+          "title": "panel 3 (method B pad + img2img), keep 10 s",
           "engine": "LTX-2.3 via draw-things-cli",
           "still": "Frightened penguins, a seal pup, an orca and a whale on breaking ice floes, purple beams lifting blocks of ice into the sky.",
-          "video": "Blocks of ice rise slowly into the beams as the floes split apart; the penguins huddle and flap, the seal looks up, the orca surfaces. Cracking ice, splashes, penguin calls."
+          "video": "Blocks of ice rise slowly into the beams as the floes split apart; the penguins huddle and flap, the seal looks up, the orca surfaces."
         },
         "s5": {
-          "title": "panel 4 (img2img), keep 6 s",
+          "title": "panel 4 (method B pad + img2img), keep 6 s",
           "engine": "LTX-2.3 via draw-things-cli",
           "still": "Kyle flying through the air aiming a glowing freeze-ray gadget, a small penguin with a backpack beside him.",
-          "video": "Kyle glides forward and the gadget fires a bright blue snowflake beam; frost spreads across the frame. Whoosh, icy zap."
+          "video": "Kyle glides forward and the gadget fires a bright blue snowflake beam; frost spreads across the frame."
         },
         "s6": {
           "title": "last frame of S5, text-only fallback, keep 6 s",
           "engine": "LTX-2.3 via draw-things-cli",
           "still": "The flying saucer frozen inside a crust of blue ice above the icebergs, its beams gone.",
-          "video": "The ice crust cracks, the saucer shakes free and zips up into the stars, its light fading. Cracking, fading hum."
+          "video": "The ice crust cracks, the saucer shakes free and zips up into the stars, its light fading."
         },
         "s7": {
-          "title": "panel 5 (img2img), keep 10 s",
+          "title": "panel 5 (method A tight + img2img), keep 10 s",
           "engine": "LTX-2.3 via draw-things-cli",
-          "still": "Sunrise: Kyle kneeling and hugging a fluffy penguin chick, surrounded by happy penguins and a seal, a whale breaching and an orca behind.",
-          "video": "Kyle hugs the chick and rocks gently, the chick nuzzles him, the penguins bob, the whale arcs slowly behind. Soft wind, lapping waves, happy penguin calls."
+          "still": "Sunrise: Kyle kneeling and hugging a fluffy penguin chick, happy penguins at the edges of the frame.",
+          "video": "Kyle hugs the chick and rocks gently, the chick nuzzles him, the penguins bob at the edges, the sun glints behind."
         },
         "s8": {
           "title": "text-only, keep 8 s",
           "engine": "LTX-2.3 via draw-things-cli",
-          "still": "Wide sunrise over the ice with a wooden sign in the foreground, a small boy and penguins far away.",
-          "video": "The camera pulls back and rises slowly over the ice as the sun climbs. Gentle wind. (End card text added with ffmpeg.)"
+          "still": "Tall sunrise frame: sky and sun above, a whale's tail and a line of penguins with a small boy far away on the ice below.",
+          "video": "The camera rises slowly into the glowing sky as the sun climbs."
         }
       },
-      "notes": "Real child's likeness: parent consent, keep private unless they choose otherwise."
+      "notes": "Kyle is Kevin's son; consent confirmed 2026-09-22.",
+      "delivery": "9:16 — master 2160x3840, phone copy 1080x1920; pictures and music only (no captions, narration or SFX)"
     }
   ],
   "playlist": {

@@ -8,6 +8,10 @@
 
 ---
 
+## 2026-09-22 — Kyle plan: Kevin's answers (9:16, music only)
+
+Kevin answered the open questions: **9:16 for phones**, **pictures and music only**, **no narration**, and Kyle is his son (consent settled). Plan updated: stills/clips at 576×1024; each panel gets a 9:16 window by tight crop (panels 2, 5) or pad-and-repaint at higher klein strength (panels 1, 3, 4); LTX audio discarded, no remux, no captions or end card; master 2160×3840 plus a 1080×1920 phone copy. New prerequisite found: `upscale_4k.sh` and `assemble_film.sh` both hardcode 3840×2160 and would crop a portrait clip to a landscape strip — they need a `W`/`H` option (plan step 5a). New experiment K6 (portrait LTX). Music still open. `projects.json` `kyle_rescue` updated.
+
 ## 2026-09-22 — Plan: Kyle's Antarctic Rescue (1-minute, headless)
 
 **Source**: `raw/kyle/comic_source.webp` — a 5-panel comic Kevin shared (Kyle on an Antarctic expedition; UFO attacks the ice; rescue with a freeze-ray; happy ending with the penguins). Added to `raw/`.

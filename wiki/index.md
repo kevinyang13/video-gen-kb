@@ -31,7 +31,7 @@
 
 - [[dragon-epic-plan]] — 1-minute photoreal dragon short with a personal face: pipeline, Draw Things config per stage, face-identity and dragon-consistency strategy, 12-shot list, experiments, budget
 - [[lost-city-plan]] — hyper-real sci-fantasy rider entering jungle ruins (OpenArt-style reference): what makes it look real, klein Moodboard stills, Wan 2.2 vs LTX-2.3 motion settings, creature/hero/city locks, 8-shot list, experiments L0–L6
-- [[kyle-antarctic-rescue-plan]] — 1-minute illustrated short from Kyle's 5-panel comic, fully headless: panel crops → klein img2img stills → LTX-2.3 clips via `draw-things-cli` → 4K → assembly; 8-shot list, experiments K0–K5
+- [[kyle-antarctic-rescue-plan]] — 1-minute vertical (9:16) illustrated short from Kyle's 5-panel comic, music only, fully headless: panel crops → klein img2img stills → LTX-2.3 clips via `draw-things-cli` → 4K → assembly; 8-shot list, experiments K0–K5
 - [[three-minute-film-plan]] — 3-minute narrative film (36–40 × 5 s clips) with recurring characters: structure, consistency stack, per-shot workflow, 7 gating experiments, ~23 h budget, open questions
 
 ## Recipes
