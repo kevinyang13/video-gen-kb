@@ -4,7 +4,7 @@
 
 **Sources**: [[kyle-antarctic-rescue-plan]] §0 (the unattended run, 2026-09-22/23 — every timing below is from it unless marked); [[lost-city-plan]] §3c prompt rules; [[headless-cli-pipeline]] §1b–1c; [[character-consistency]]; [[identity-conditioning]]; [[scripts-reference]].
 
-**Last updated**: 2026-09-23
+**Last updated**: 2026-09-23 (phases 3–9 now run through `scripts/film_run.py` from a `film` spec — see [[scripts-reference]])
 
 ---
 
@@ -24,6 +24,20 @@
 The rule that makes it work: **every decision the machine will face must have a rule written down before go** — which seed wins, what counts as a failed shot, what to do after N failures, what the film does if a shot can't be saved. Anything left open becomes a 2 a.m. stall.
 
 ---
+
+## One command per phase
+
+The intake answers become a **`film` spec** in `projects.json` (size, still/clip models, frames, upscaler and output size, crossfade, music, deliveries, and per shot: still recipe, prompts, take, trim). Every script reads its settings from there through the driver — nothing is hardcoded to Kyle's 9:16 LTX setup. Spec schema and per-script options: [[scripts-reference]].
+
+| Phase | Command |
+|---|---|
+| 3 Preflight | `scripts/preflight.sh --fix` |
+| 2 → spec sanity | `scripts/film_run.py P check` |
+| 4–5 Masters, stills | `film_run.py P stills` → judge → `film_run.py P pick ID SEED` |
+| 7 Clips | `film_run.py P clips` (redo: `clips ID --v 2 --seed 2`) |
+| 8 QC | `film_run.py P qc` → judge sets `take` + `trim` in the spec |
+| 9 Finish | `film_run.py P finish` |
+| any time | `film_run.py P status` |
 
 ## Phase 0 — Intake (human, ~5 min)
 
@@ -71,7 +85,7 @@ Ask these once, all together, and record the answers in the project page's "Deci
 | Draw Things app closed (holds GPU memory, halves CLI speed) | `osascript -e 'tell application "Draw Things" to quit'` |
 | Mac won't sleep | `caffeinate -dis -t 50400 &` (kill it when done) |
 | Models present | klein `flux_2_klein_9b_i8x.ckpt`, LTX `ltx_2.3_22b_distilled_1.1_q8p.ckpt` in the app's `Models/` |
-| Scripts portrait-ready | `W`/`H` env in `upscale_4k.sh`, `assemble_film.sh` |
+| All of the above in one go | `scripts/preflight.sh --fix` (quits the app, starts caffeinate, checks models/disk/power) |
 | Session stays open | the desktop app and this session must keep running; the screen may lock (the CLI needs no screen) |
 
 ## Phase 4 — Masters (model sheets)
@@ -110,7 +124,7 @@ One paragraph per shot, action first, ending with the video tail. Rules from Kyl
 
 ## Phase 7 — Clip batch (unattended)
 
-A loop script, one clip at a time, skipping clips that exist, logging one line per clip — the Kyle version is `raw/clips/kyle/render_clips.sh`:
+`film_run.py P clips` runs this loop from the spec (one clip at a time, skipping clips that exist). What it does per shot, equivalent to Kyle's hand-written `raw/clips/kyle/render_clips.sh`:
 
 ```bash
 for s in $SHOTS; do
@@ -151,7 +165,7 @@ Log every verdict to `work/qc_notes.txt`; it becomes the report.
 
 ## Phase 9 — Finish (unattended)
 
-A spec list of `shot clip start end`, then per shot: trim → upscale → collect; then assemble → music → delivery copies. Kyle's `raw/clips/kyle/finish.sh` is the template.
+`film_run.py P finish` does this from each shot's `take` + `trim` and the spec's upscale / assemble / music / deliver blocks, caching each shot's upscale so a changed trim only redoes that shot. The underlying commands (Kyle's hand-written `raw/clips/kyle/finish.sh` did the same):
 
 ```bash
 ffmpeg -nostdin -i clips/$c.mov -vf "trim=start=$a:end=$b,setpts=PTS-STARTPTS" -an -c:v prores_ks -profile:v 3 final/${s}_t.mov
@@ -239,7 +253,7 @@ wiki/assets/<project>-*.jpg            QC and contact sheets shown in the report
 
 ## Not automated yet
 
-- A single driver (`scripts/film_run.sh <project>`) that reads `projects.json` scenes and runs Phases 5–9 — today the loop scripts are per project (Kyle's are the template).
+- The judge steps (`pick`, setting `take`/`trim`) are decisions, not code — Claude reads the candidate and QC sheets; `film_run.py` stops cleanly at each of them.
 - Programmatic identity scoring (face embeddings) — the judge is Claude reading contact sheets.
 - Narration/TTS and captions.
 - Chaining clips longer than 10 s (last frame → next first frame) — planned in [[character-consistency]] §6, not needed yet.

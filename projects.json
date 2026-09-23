@@ -631,6 +631,202 @@
         "s8": 2,
         "ltx_v1": 1,
         "ltx_v2": 2
+      },
+      "film": {
+        "dir": "raw/clips/kyle",
+        "name": "kyle_rescue",
+        "size": [
+          576,
+          1024
+        ],
+        "still": {
+          "model": "flux_2_klein_9b_i8x.ckpt",
+          "steps": 4,
+          "cfg": 1,
+          "config": {
+            "shift": 3.0,
+            "sampler": 16
+          },
+          "seeds": [
+            1,
+            2,
+            3
+          ],
+          "strength": 1.0
+        },
+        "clip": {
+          "model": "ltx_2.3_22b_distilled_1.1_q8p.ckpt",
+          "frames": 249,
+          "steps": 8,
+          "cfg": 1,
+          "config": {
+            "sampler": 19,
+            "shift": 5.0,
+            "stochasticSamplingGamma": 0.3,
+            "fps": 25,
+            "hiresFix": false
+          },
+          "seed": 1,
+          "video_format": "prores422hq"
+        },
+        "masters": {
+          "kyle": "masters/kyle_front.png"
+        },
+        "upscale": {
+          "model": "realesrgan-x4plus",
+          "size": [
+            2160,
+            3840
+          ],
+          "fit": "crop",
+          "bitrate": "40M"
+        },
+        "assemble": {
+          "fps": 25,
+          "xfade": 0.75,
+          "clip_audio": false,
+          "bitrate": "40M"
+        },
+        "music": {
+          "file": "raw/clips/music/best_adventure_ever.mp3",
+          "start": "tail",
+          "vol": 1.0,
+          "fade_in": 1.5,
+          "fade_out": 0
+        },
+        "deliver": [
+          {
+            "size": [
+              1080,
+              1920
+            ],
+            "bitrate": "12M"
+          },
+          {
+            "size": [
+              720,
+              1280
+            ],
+            "bitrate": "2.8M"
+          }
+        ],
+        "shots": [
+          {
+            "id": "s1",
+            "still": {
+              "ref": null,
+              "input": "stills/s2.png",
+              "prompt": "stills/s1.txt"
+            },
+            "video_prompt": "stills/s1_v.txt",
+            "take": "clips/s1_ltx_v1.mov",
+            "trim": [
+              0,
+              6.5
+            ]
+          },
+          {
+            "id": "s2",
+            "still": {
+              "ref": "kyle",
+              "input": "work/s2_in.png",
+              "prompt": "stills/s2.txt"
+            },
+            "video_prompt": "stills/s2_v.txt",
+            "qc_ref": "kyle",
+            "take": "clips/s2_ltx_v2.mov",
+            "trim": [
+              0,
+              8
+            ]
+          },
+          {
+            "id": "s3",
+            "still": {
+              "ref": "kyle",
+              "input": "work/s3_in.png",
+              "prompt": "stills/s3.txt"
+            },
+            "video_prompt": "stills/s3_v.txt",
+            "take": "clips/s3_ltx_v1.mov",
+            "trim": [
+              0,
+              9.96
+            ]
+          },
+          {
+            "id": "s4",
+            "still": {
+              "ref": "stills/s3.png",
+              "input": "work/s4_in.png",
+              "prompt": "stills/s4.txt"
+            },
+            "video_prompt": "stills/s4_v.txt",
+            "take": "clips/s4_ltx_v2.mov",
+            "trim": [
+              0,
+              9.96
+            ]
+          },
+          {
+            "id": "s5",
+            "still": {
+              "ref": "kyle",
+              "input": "work/s5_in.png",
+              "prompt": "stills/s5.txt"
+            },
+            "video_prompt": "stills/s5_v.txt",
+            "qc_ref": "kyle",
+            "take": "clips/s5_ltx_v1.mov",
+            "trim": [
+              0,
+              6
+            ]
+          },
+          {
+            "id": "s6",
+            "still": {
+              "ref": null,
+              "input": "stills/s3.png",
+              "prompt": "stills/s6.txt"
+            },
+            "video_prompt": "stills/s6_v.txt",
+            "take": "clips/s6_ltx_v1.mov",
+            "trim": [
+              1.6,
+              8.8
+            ]
+          },
+          {
+            "id": "s7",
+            "still": {
+              "ref": "kyle",
+              "input": "work/s7_in.png",
+              "prompt": "stills/s7.txt"
+            },
+            "video_prompt": "stills/s7_v.txt",
+            "qc_ref": "kyle",
+            "take": "clips/s7_ltx_v1.mov",
+            "trim": [
+              0,
+              8
+            ]
+          },
+          {
+            "id": "s8",
+            "still": {
+              "ref": "stills/s7.png",
+              "input": "work/s8_in.png",
+              "prompt": "stills/s8.txt"
+            },
+            "video_prompt": "stills/s8_v.txt",
+            "take": "clips/s8_ltx_v1.mov",
+            "trim": [
+              0,
+              9.6
+            ]
+          }
+        ]
       }
     }
   ],

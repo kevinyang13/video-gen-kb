@@ -40,7 +40,7 @@
 ## Recipes
 
 - [[idea-to-video-blueprint]] — **start here for a new film**: idea → intake questionnaire → storyboard approval → unattended CLI run (masters, diptych stills, LTX batch, QC/redo, upscale, music, report); rules, rubric, time budget, failure playbook
-- [[scripts-reference]] — what `finish_clip.sh`, `upscale_4k.sh`, `assemble_film.sh` and the site builders do: tools (ffmpeg, Real-ESRGAN ncnn), exact filter chains, flags that matter on Metal, timings
+- [[scripts-reference]] — every pipeline script by production phase, the `film` spec that drives them, `film_run.py` (check/stills/pick/clips/qc/finish), options, validation, tests, timings
 - [[runbook-living-painting]] — **start here next time**: click-by-click checklist, settings to verify after every model switch, failure signatures, `scripts/finish_clip.sh`
 - [[living-painting-loop]] — TikTok-style animated painting: Wan 2.2 T2V still → I2V ambient motion → ffmpeg ping-pong loop; exact Draw Things settings and UI gotchas
 - [[wan22-i2v-locked-image-settings]] — Draw Things settings to animate a photo while keeping it as the literal first frame; motion-only prompting

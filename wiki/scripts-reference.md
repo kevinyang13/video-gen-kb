@@ -1,10 +1,10 @@
 # Scripts Reference
 
-**Summary**: What each script in `scripts/` does, which tools and APIs it calls, and the exact processing steps — so the post-production side of the pipeline (Draw Things export → looped/upscaled/assembled deliverable) is reproducible without re-reading the code. Covers `finish_clip.sh`, `upscale_4k.sh`, `assemble_film.sh`, plus the site/registry builders.
+**Summary**: What each script in `scripts/` does, which tools and APIs it calls, and the exact processing steps. Since 2026-09-23 the whole [[idea-to-video-blueprint]] runs on these scripts, driven by a `film` spec in `projects.json` through `film_run.py`: every size, model, frame count, upscaler, crossfade, music and delivery setting comes from the spec, not from the script. Covers the generation scripts (`dt_diptych.sh`, `dt_clip.sh`), QC (`qc_sheet.sh`), post (`upscale_4k.sh`, `assemble_film.sh`, `finish_clip.sh`), `preflight.sh`, the driver, and the site/registry builders.
 
 **Sources**: the scripts themselves (`scripts/*.sh`, `scripts/*.py`); hands-on timings in [[log]] 2026-09-20/21; Real-ESRGAN ncnn README (`tools/realesrgan/README_macos.md`).
 
-**Last updated**: 2026-09-22
+**Last updated**: 2026-09-23 (audit: every script parameterised and validated; new `dt_clip.sh`, `qc_sheet.sh`, `preflight.sh`, `film_run.py`)
 
 ---
 
@@ -20,6 +20,77 @@
 No cloud APIs anywhere. The only network call in the whole workflow is `curl` for a Pixabay music file when a project needs music.
 
 Draw Things exports are **ProRes 422 `.mov`** (video) — 8-bit 4:2:2, 16 fps for Wan 2.2 or 25 fps for LTX-2.3, plus a PCM audio track for LTX. Every script probes the input first; sizes to expect: 576×1024 / 576×1280 (loops), 1280×768 (Dragon Epic, Lost City), 1024×576 (LTX tests).
+
+---
+
+## Scripts by production phase (audit 2026-09-23)
+
+| Phase ([[idea-to-video-blueprint]]) | Script | Decided by the spec | Validates |
+|---|---|---|---|
+| 3 Preflight | `preflight.sh [--fix] [models…]` | models to check | CLI, ffmpeg, Real-ESRGAN, models, AC, disk, app closed, caffeinate, no overlapping jobs |
+| 4–5 Masters, stills | `dt_diptych.sh REF IN PROMPT OUT [seed] [W] [H]` | `film.still` (model, steps, cfg, config, strength, seeds), `film.size` or per-shot `still.size` | W/H ÷64, files exist, REF needs IN |
+| 7 Clips | `dt_clip.sh STILL PROMPT OUT [seed] [W] [H] [FRAMES]` | `film.clip` (+ per-shot `clip` overrides): model family LTX / Wan, frames, steps, cfg, config, video format | W/H ÷64, LTX 8k+1 / Wan 4k+1 frames, LTX > 1024×576 warning, still ≠ render size note, skip if exists |
+| 8 QC | `qc_sheet.sh CLIP OUT [REF] [N] [TILE_H]` | shot `qc_ref` (a master) or the shot's still | frame indices from the clip itself — any length/fps |
+| 9 Upscale | `upscale_4k.sh IN [out] [model]` | `film.upscale` (model, size, fit, bitrate), `assemble.clip_audio` → `KEEP_AUDIO` | model/scale exists, even W/H, frame count out = in |
+| 9 Assemble + music | `assemble_film.sh OUT clip…` | `film.assemble` (fps, xfade, clip_audio, bitrate), `film.music` (file, start / `tail`, vol, fades) | clips/music exist, letterbox landscape-only, music-too-short note, expected vs actual length |
+| 9 Deliver | inside `film_run.py finish` | `film.deliver[]` sizes and bitrates | — |
+| all | **`film_run.py PROJECT check·status·stills·pick·clips·qc·finish`** | the whole `film` block (or a standalone `.json` spec) | spec sanity: sizes, frame rules, paths, refs, trims, planned length |
+| loop posts | `finish_clip.sh IN [music] [out]` | env: W, H, LOOPS, SEAM, FPS, MUSIC_VOL | clip long enough for the seam |
+
+Every script: `set -euo pipefail`, a clear `die` message, `ffmpeg -nostdin` everywhere (ffmpeg inside a `while read` loop eats the loop's input — the Kyle overnight bug), and `DRY_RUN=1` on the two CLI wrappers.
+
+### The `film` spec
+
+Lives in `projects.json → projects[].film` (Kyle's is the reference). Paths are relative to `film.dir`, except `music.file` (repo root). Only `dir`, `size`, `shots` are required; everything else has the defaults used so far (klein 9B still, LTX-2.3 249 f clip, x4plus → 3840×2160, 0.5 s crossfades).
+
+```json
+"film": {
+  "dir": "raw/clips/kyle", "name": "kyle_rescue", "size": [576, 1024],
+  "still":   {"model": "flux_2_klein_9b_i8x.ckpt", "steps": 4, "cfg": 1, "config": {"shift": 3.0, "sampler": 16}, "seeds": [1,2,3], "strength": 1.0},
+  "clip":    {"model": "ltx_2.3_22b_distilled_1.1_q8p.ckpt", "frames": 249, "steps": 8, "cfg": 1,
+              "config": {"sampler": 19, "shift": 5.0, "stochasticSamplingGamma": 0.3, "fps": 25, "hiresFix": false}, "seed": 1},
+  "masters": {"kyle": "masters/kyle_front.png"},
+  "upscale": {"model": "realesrgan-x4plus", "size": [2160, 3840], "fit": "crop", "bitrate": "40M"},
+  "assemble":{"fps": 25, "xfade": 0.75, "clip_audio": false, "bitrate": "40M"},
+  "music":   {"file": "raw/clips/music/best_adventure_ever.mp3", "start": "tail", "vol": 1.0, "fade_in": 1.5},
+  "deliver": [{"size": [1080, 1920], "bitrate": "12M"}, {"size": [720, 1280], "bitrate": "2.8M"}],
+  "shots": [
+    {"id": "s2", "still": {"ref": "kyle", "input": "work/s2_in.png", "prompt": "stills/s2.txt"},
+     "video_prompt": "stills/s2_v.txt", "qc_ref": "kyle", "take": "clips/s2_ltx_v2.mov", "trim": [0, 8]}
+  ]}
+```
+
+Still mode per shot: `ref` + `input` = diptych; `input` only = single edit; neither = text-to-image. `ref` is a master name or a path (an approved shot = reference chaining). A shot can override `still.seeds/size/model…` and `clip.frames/model/seed…` — e.g. one Wan shot in an LTX film.
+
+### `film_run.py` workflow
+
+```bash
+scripts/preflight.sh --fix
+scripts/film_run.py kyle_rescue check          # spec sanity + planned length
+scripts/film_run.py kyle_rescue stills         # 3 seeds per shot → work/<id>_c<seed>.png   (skips shots with a picked still)
+scripts/film_run.py kyle_rescue pick s2 4      # → stills/s2.png  (judge picks)
+scripts/film_run.py kyle_rescue clips          # clips/<id>_v1.mov (skips existing);  --v 2 --seed 2 s2 for a redo
+scripts/film_run.py kyle_rescue qc             # work/<id>_v1_qc.png
+#   judge sets take + trim per shot in the spec
+scripts/film_run.py kyle_rescue finish         # trim → upscale → assemble + music → delivery copies
+scripts/film_run.py kyle_rescue status         # where every shot is
+```
+
+`--dry-run` prints every command; `--force` redoes existing outputs. `finish` caches each shot's upscale against a stamp of *take, trim, model, size, fit*, so changing one trim re-upscales only that shot (a no-change re-run takes < 1 s). A standalone spec file works in place of the project id: `film_run.py path/to/spec.json …`.
+
+**Tested 2026-09-23**: validation paths (bad sizes, 8k+1/4k+1 frames, unknown upscaler, portrait letterbox, missing IN); text / edit / landscape stills; LTX 33 f at 1024×576 (104 s); **Wan 2.2 I2V via the CLI with the low-noise refiner + Lightning LoRA in `CONFIG_JSON`** (9 f at 512² in 57 s — first CLI Wan run); upscale with `realesr-animevideov3` at 2× to 1080p with audio kept, and x4plus padded into 2160×3840; assembly single-clip, music tail + fades, landscape letterbox + clip audio; a 2-shot landscape film end to end through `film_run.py` (text still → chained edit → 2 clips → QC → finish → 720p copy). `assemble_film.sh` defaults reproduce the previous script's mix exactly (same length, −35.9 dB mean, −20.9 dB peak on the same inputs); `finish_clip.sh` reproduces the old 27.375 s coast loop.
+
+### `scripts/dt_clip.sh` — any I2V clip
+
+Model family from the name sets the defaults — **ltx**: 249 f, 8 steps, TCD Trailing (19), shift 5, SSS 0.3, 25 fps, hi-res fix off; **wan**: 81 f, 4 steps, UniPC Trailing (17), shift 5, 16 fps, `refinerModel` = the low-noise expert at `refinerStart` 0.1, Lightning LoRA at 1.0. Env `MODEL STEPS CFG CONFIG_JSON VIDEO_FORMAT NEGATIVE FORCE DRY_RUN` override any of it. W/H default to the still's size. Prints size, frame count and wall time.
+
+### `scripts/qc_sheet.sh` — contact sheet
+
+`qc_sheet.sh CLIP OUT [REF|-] [N=5] [TILE_H=384]` — reference + N frames spread evenly from first to last (indices computed from the clip, so a 33-frame test and a 249-frame shot both work).
+
+### `scripts/preflight.sh`
+
+Blocking failures (exit 1): CLI, ffmpeg, Real-ESRGAN or a model missing, disk < 20 GB. Warnings: battery, disk < 50 GB, Draw Things app open, no caffeinate, another CLI or Real-ESRGAN job running. `--fix` quits the app and starts `caffeinate -dis -t 50400`.
 
 ---
 
@@ -45,13 +116,13 @@ scripts/finish_clip.sh raw/clips/NAME.mov [music.mp3] [outname]
 
 **Knobs at the top of the script**: `LOOPS=5` (units − 1), `FADE_FRAMES=8` (seam length; 0.5 s at 16 fps). Music comes from Pixabay CC0 via the CDN URL grabbed from the page's `<audio>` element (see [[projects]] records for the URLs).
 
-**Gotchas**: expects exactly 81 frames — a 25-frame test export produces a 1-second "loop". Portrait only; for 16:9 use `assemble_film.sh` instead.
+**Since 2026-09-23 generic**: frame count, fps and size come from the input; the seam is `SEAM` seconds (default 0.5 → 8 frames at 16 fps, identical to before); output size `W`/`H` (default 1080×1920, `W=1920 H=1080` for a landscape post); `LOOPS`, `FPS`, `MUSIC_VOL` env. It refuses clips shorter than 3 seams.
 
 ---
 
 ## `scripts/upscale_4k.sh` — any clip → 3840×2160 HEVC 10-bit
 
-**Portrait (2026-09-23)**: `W=2160 H=3840 scripts/upscale_4k.sh …` — output size is now `W`/`H` env (default 3840×2160). Without it a 9:16 clip gets cropped to a landscape strip. Measured on 576×1024 LTX clips with x4plus: ~20 frames/min (6.8–11.1 min per 6–10 s clip).
+**Env (2026-09-23)**: `W`/`H` output size (default 3840×2160; portrait `W=2160 H=3840`), `FIT=crop|pad`, `BITRATE` (40M; 12M for 1080p), `KEEP_AUDIO=1` (copies the input's audio — no `-shortest`, which dropped a frame), `KEEP_FRAMES=0` (delete the PNG folder), `SCALE` (x4plus is always 4×; `realesr-animevideov3` also runs at 2×/3×, or name `-x2`/`-x3` — a 1080p target needs only 2×). Validates the model/scale file and that frames out = frames in; Real-ESRGAN's progress spam goes to a log shown only on failure. `-t 128 -j 1:1:1` are both required on Metal (segfault without). Measured on 576×1024 LTX clips with x4plus: ~20 frames/min.
 
 ```
 scripts/upscale_4k.sh raw/clips/NAME.mov [outname] [model]
@@ -82,7 +153,7 @@ scripts/upscale_4k.sh raw/clips/NAME.mov [outname] [model]
 
 ## `scripts/assemble_film.sh` — N clips → one 4K film with crossfades
 
-**Portrait (2026-09-23)**: same `W`/`H` env (`W=2160 H=3840`); `LETTERBOX` stays landscape-only. For a music-only film, assemble without `MUSIC` (mute clips get silence) and mux a pre-cut bed afterwards — `MUSIC` goes through `amix`, which halves its level.
+**Env (2026-09-23)**: `W`/`H`, `FPS`, `XFADE`, `BITRATE`, `LETTERBOX` (landscape only, bars computed for any width), `CLIP_AUDIO=0` (music-only film), `CLIP_VOL` (0.5), `MUSIC`, `MUSIC_VOL` (0.3), `MUSIC_START` (seconds or `tail` = the last film-length of the track, so the film ends on the song's ending), `MUSIC_FADE_IN/OUT`. The mix is `amix normalize=0` with explicit levels; the 0.5/0.3 defaults equal what the old normalised mix produced, so older projects sound the same. A single clip is allowed. Prints expected vs actual length and the music start.
 
 ```
 scripts/assemble_film.sh OUT.mp4 clip1.mp4 clip2.mp4 [...]
