@@ -4,7 +4,7 @@
 
 **Sources**: `raw/lostcity/ref_openart_rider_ruins.webp` (reference, OpenArt watermark — generator unknown, probably a closed model such as Kling/Veo/Seedance; *unverified*); Wan 2.2 prompting guides ([MimicPC](https://www.mimicpc.com/learn/how-to-craft-wan22-ai-video-prompts), [InstaSD](https://www.instasd.com/post/wan2-2-whats-new-and-how-to-write-killer-prompts), [WhatLab](https://whatlab.ai/guides/wan2-2-prompting-guide)); LTX docs ([I2V guide](https://docs.ltx.io/open-source-model/usage-guides/image-to-video), [Draw Things LTX-2 wiki](https://wiki.drawthings.ai/wiki/LTX-2), [HF LTX-2.3](https://huggingface.co/Lightricks/LTX-2.3)); hands-on results from [[dragon-epic-plan]] §7b (2026-09-21). All as of 2026-09-21.
 
-**Last updated**: 2026-09-22 (escape ending; per-scene prompts moved to [[projects]])
+**Last updated**: 2026-09-22 (LTX production settings in §3c; escape ending; per-scene prompts in [[projects]])
 
 ---
 
@@ -70,22 +70,45 @@ Time: ~1 min per still with 3 refs (measured 2026-09-21 on Dragon Epic 1B v2).
 - Camera vocabulary Wan 2.2 obeys: *pushes in / pulls back / tilts up / tracking shot / fixed lens / handheld*. Speed word every time (*slowly*). Avoid whip pans and anything that reveals geometry not in the still.
 - Full-frame creature shot (head fills frame): articulation only, no camera move (Dragon Epic rule).
 
-### 3c. Motion B — LTX-2.3 22B distilled 1.1 — the candidate (installed, **untested** on this Mac)
+### 3c. Motion B — LTX-2.3 22B [distilled] 1.1 — **the production engine** (validated 2026-09-22)
 
-Why try it here: native **25 fps**, joint **audio** (footsteps, waterfall, birds), real locomotion. Risk: memory (22B DiT + Gemma text encoder) — on 48 GB it pages; ~25 min per 4 s clip at 576p (L1). **Camera staging is loose at CFG 1**: it picks its own blocking; write the *action* you want and accept the camera it gives, or cut to Wan for locked-camera shots.
+Every Lost City clip since shot 2 is LTX: s2, s3, s7, s8, s9, s10. What you get: native **25 fps**, a **PCM audio track** (footsteps, waterfall, birds), and real locomotion Wan cannot do at 4 steps. What you pay: a coarse latent (32×32 spatial, 8× temporal) that re-synthesizes fine detail and invents geometry, 576p instead of 768p, and **loose camera staging at CFG 1** — LTX obeys the *action*, picks its own *blocking*.
 
-| Setting | Value (start here) | Source |
+**Draw Things settings — all measured on the M4 Max 48 GB**
+
+| Setting | Value | Why / gotcha |
 |---|---|---|
-| Model | LTX-2.3 22B [distilled] 1.1 — Local list, Draw Things quant | DT model list 2026-09-21 |
-| Steps / CFG | **8 / 1.0** (distilled; dev variant wants 20–25 / CFG 3–7) | LTX docs; DT wiki numbers (20–25, CFG 6–7) are for the *dev* model |
-| Size | **1024×576** is what fits in 48 GB (~25 min). 1280×768 (÷32, legal) runs the two-stage hi-res path and stalls in swap on stage 2 — needs a clean memory session, untested to completion | measured 2026-09-21 |
-| Frames | **249 = the DT slider max** (10 s @ 25 fps) works at 1024×576 in ~20 min — same wall time as 97 f, so always use 249. Longer single shots are impossible in DT; chain on the last frame | measured 2026-09-22 |
-| Strength (I2V) | 100% first frame; LTX reference uses 0.7 image conditioning in stage 1 — if DT exposes it, try 0.7–1.0 | LTX I2V guide |
-| Prompt | one chronological paragraph, 4–8 sentences, < 200 words: motion → camera → **audio** ("heavy footsteps on wet stone, distant waterfall roar, birdsong") | LTX prompt guide |
-| Upscaler | LTX ships ×2 / ×1.5 latent spatial upscalers (DT: *High Resolution Fix*) — try 1280→2560 in-app, then Real-ESRGAN to 3840; else skip and use §3d | DT wiki |
-| Refiner / LoRA | none | |
+| Model | LTX-2.3 22B [distilled] 1.1 (Local list, DT quant) | UI overlay says "Text to Image Generation" but the canvas image **is** the first frame; the Strength tab reads *Text to Video 100%* |
+| Steps / CFG | **8 / 1.0** | distilled model. The DT wiki's 20–25 steps / CFG 6–7 are for the *dev* variant — wrong here |
+| Sampler | **TCD Trailing** | from *Try recommended settings* |
+| Strategic Stochastic Sampling | **30%** | ditto; leave on |
+| Shift | **5** | |
+| Size | **1024×576** | the only size that fits 48 GB in one stage. Sizes must be ÷32 (1280×768 is legal but see hi-res fix) |
+| Frames | **249** = the slider max ≈ 9.96 s; **257** (8k+1) also accepted | frames must be 8k+1. 249 f costs the same wall clock as 97 f → always max out |
+| High Resolution Fix | **off** (DT auto-disables it at 576p) | at 1280×768 DT turns it on (stage 1 at 640×384, stage 2 at 70% strength) and **stage 2 stalls in swap** — 27–48 GB, step counter frozen |
+| Strength / first frame | **100%** | a canvas larger than the generation area is **centre-cropped, not scaled** — render or crop the still at 1024×576 or expect to lose the edges |
+| LoRA / Refiner | none | |
+| Time | **~20 min per 10 s clip** | the in-app compute timer reads ~3 min — the rest is paging. Quit other apps; **never run Real-ESRGAN while LTX renders** (48 GB can't hold both) |
+| Export | ProRes 422 `.mov`, 25 fps + PCM audio ≈ −33 dB | `upscale_4k.sh` drops audio (`-an`) → remux, then mix the flute bed under it (recipe in §3e) |
 
-Experiment **L1** measures: does it load, seconds per step, memory pressure, motion quality vs Wan on the same still. If LTX wins, `upscale_4k.sh` already reads fps from the file; `finish/assemble` must keep the audio track (`-map 1:a`).
+**Prompt rules (learned the hard way)**
+
+- One chronological paragraph, 4–8 sentences, < 200 words: **motion → camera → audio**. Name the sounds explicitly ("heavy footsteps on wet stone, distant waterfall roar, birdsong, no music") — they end up on the track.
+- **Action, not staging.** "left to right, camera tracks alongside" was ignored on s1; the same wording worked on s2 and s7. Write the action you want, accept the camera you get, or shoot that frame on Wan.
+- **Close-ups: hold position.** Asking a close-up for locomotion (s3 v1) produced a full walk cycle that left the frame by 2 s *and* hallucinated a second rider behind. Use "stands still… only shifts its weight" and say the path behind **stays empty**.
+- **Motion-stability rule**: slow in-place actions (walk, drink, weight shift, breathing) hold the creature design for the full 10 s; fast locomotion (gallop, jump) drifts toward a horse after ~4–5 s → trim on the first soft frame (s9 → 116 f).
+- Wide shots tolerate invented foreground geometry (s2 gained palm fronds sweeping the lens — more cinematic); hero shots do not.
+
+**Per-clip workflow (Draw Things)**
+
+1. **Fresh project** per clip (Projects → + → `dt_project.sh rename-newest lostcity-sN`). Never a `dt_project.sh clone` — saving a *video* into a cloned project asserts in `ImageHistoryManager.pushHistory` and **kills the app, wiping that project's history** (two crashes, 2026-09-22). Clone is fine for stills.
+2. Load the still from disk with the import icon (the Open panel takes a full path via ⇧⌘G). Moodboard drag from Finder cannot be automated.
+3. Pick the LTX model **after** loading the image — a new project inherits the last model, and pressing Stop rolls the settings back to the previous model.
+4. Click **Generate once**. A second click is Stop.
+5. Export, verify the file landed (`find raw/clips -mmin -2`) — the Save sheet needs two presses, the first only commits the filename.
+6. Then, and only then, `scripts/upscale_4k.sh`.
+
+L1 (below) is the experiment that produced these numbers; Wan 2.2 (§3b) stays for locked-camera, static-subject shots at 768p — see [[image-to-video-models]] for the decision rule.
 
 ### 3d. Upscale to 4K
 
@@ -172,14 +195,14 @@ L1 decides the engine for the whole project; run L2 anyway as the fallback.
 | Shot 2 clip | 2026-09-21 | Wan 2.2 I2V on `s2_still_v1.png`, §3b settings (DDIM Trailing, refiner 11%), prompt: *very slow push in … mist … waterfall … ferns swaying … tiny birds … the small rider and creature walking slowly along the path away from the camera*. **49 min** at 1280×768 × 81 f. Clean: push-in reads on the foreground columns, rider walks the path (tiny subject → translation is fine), no ghosting, foliage no shimmer after Real-ESRGAN (L5 pass). 4K: `raw/clips/lostcity/s2_wan_v1_4k.mp4` (6:19 upscale). |
 | L0 | 2026-09-21 | **Pass on seed 1.** klein + 3 cropped refs (creature+rider, spires, foreground) at 33% each, still prompt 1 verbatim. God rays, spire skyline, bridge + waterfall, saddled wingless creature, hooded rider from behind, muted palette — all present; composition is ours (not a copy). ~2 min render with 3 refs. Export via the toolbar Save sheet worked fully from automation. `raw/clips/lostcity/s1_still_v1.png`. |
 
-## 8. Budget (Wan path; LTX unknown until L1)
+## 8. Budget
 
 | Stage | Time |
 |---|---|
 | Design sheets + L0 | 30 min |
 | L1 | 1–2 h |
 | 8 stills × ~3 seeds | 30 min |
-| 8 clips × 45 min | 6 h (unattended) |
+| 8 clips × ~20 min (LTX 10 s) or 45 min (Wan 5 s) | 3–6 h (unattended) |
 | 8 upscales × 6 min | 50 min |
 | Assembly + music | 45 min |
 | **Total** | **~10 h**, ~2.5 h attended |
@@ -187,7 +210,7 @@ L1 decides the engine for the whole project; run L2 anyway as the fallback.
 ## 9. Risks
 
 - **Walk cycles**: 4-step Lightning Wan struggles with limb cycles (Dragon 1A ghosting). Tracking phrasing (L2) or LTX (L1) mitigate; fallback = creature standing, only head/tail/cloak moving, camera does the travel.
-- **LTX-2.3 memory**: 22B quant + Gemma text encoder on 48 GB may swap; start at 1024×576 × 97 f.
+- **LTX-2.3 memory**: confirmed — the 22B quant + Gemma text encoder swap on 48 GB. Stay at 1024×576, single stage, nothing else running (§3c).
 - **Reference drift**: klein may copy the OpenArt frame too closely (composition, creature). Crops only; different palette words if needed. We are not distributing their image.
 - **Shimmer** on high-frequency foliage after Real-ESRGAN → L5; alternative SeedVR2 (see [[video-upscaling]]).
 - **Saturation creep**: Wan tends to warm/saturate; keep "muted colours" in the still and grade in ffmpeg if needed (`eq=saturation=0.9`).

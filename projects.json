@@ -296,7 +296,7 @@
         "prompt": "per scene — see the scenes table (locks + still/video prompt for every shot)"
       },
       "i2v": {
-        "model": "Wan 2.2 High Noise I2V (8-bit S) + Low Noise refiner 10% (proven) — or LTX-2.3 22B distilled 1.1 (experiment L1: 8 steps, CFG 1, 1280x736, 121 f @ 25 fps, audio)",
+        "model": "LTX-2.3 22B [distilled] 1.1 (production engine — see ltx_10s) — Wan 2.2 High Noise I2V (8-bit S) + Low Noise refiner 10% for locked-camera shots at 768p",
         "size": "1280x768",
         "frames": 81,
         "fps": 16,
@@ -328,7 +328,16 @@
           "steps": 8,
           "cfg": 1.0,
           "time_min": 20,
-          "note": "249 f is the slider max at 1024×576 (~10 s, ~20 min). 257 f (8k+1) also works. Slow actions (walk, drink, weight shift) hold the creature design for the full clip; fast actions (gallop, jump) drift toward a horse after ~4–5 s — trim or keep those shots short."
+          "note": "249 f is the slider max at 1024x576 (~9.96 s, ~20 min; frames must be 8k+1, 257 also works) and costs the same wall clock as 97 f. Slow actions (walk, drink, weight shift) hold the creature design for the full clip; fast actions (gallop, jump) drift toward a horse after ~4-5 s - trim or keep short. Fresh project per clip: saving a video into a dt_project.sh clone crashes Draw Things and wipes its history. Never upscale while LTX renders.",
+          "model": "LTX-2.3 22B [distilled] 1.1",
+          "sampler": "TCD Trailing",
+          "sss": "30%",
+          "shift": 5.0,
+          "hires_fix": "off (DT auto-disables at 576p; on at 1280x768 stage 2 stalls in swap)",
+          "lora": null,
+          "refiner": null,
+          "strength": "100% first frame; canvas larger than the generation area is centre-cropped, not scaled",
+          "export": "ProRes 422 .mov, 25 fps + PCM audio ~-33 dB; upscale_4k.sh drops audio -> remux, then amix the flute bed at 0.5 and volume=1.6"
         }
       },
       "post": {
