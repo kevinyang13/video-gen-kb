@@ -8,6 +8,10 @@
 
 ---
 
+**Project pages**: [[projects-anime|Anime projects]] (7) · [[projects-realistic|Photoreal projects]] (3) · [[projects-3d|3D-animated projects]] (1)
+
+Each theme page holds the full records — settings, prompts, seeds, files. The tables below link straight to a project's record on its page.
+
 ## [[projects-anime|Anime projects]] (7)
 
 Shinkai/Ghibli-styled living paintings: a still from FLUX or Wan T2V, ambient motion from Wan 2.2 I2V, looped 9:16 with music. Coastal wildflowers, Torrey Pines, Golden Gate, Mt. Rainier, a cyberpunk street, the FLL farm.
@@ -22,6 +26,8 @@ Shinkai/Ghibli-styled living paintings: a still from FLUX or Wan T2V, ambient mo
 | 6 | [Cyberpunk city, rain, neon](projects-anime.html#cyberpunk) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Neon Synthwave Drive | `cyberpunk_final.mp4` | [▶ watch](https://youtu.be/GrNTNQCqKnk) |
 | 7 | [FLL BOT Builders — Coastal Roots Farm, wide view](projects-anime.html#fll_farm) | 2026-09-20 | done (v2) | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Calm Ambient Dreamscape | `fll_farm_v2_final.mp4` | [▶ watch](https://youtu.be/-Mf2UThasCg) |
 
+→ full records for all 7: [[projects-anime|Anime projects]]
+
 ## [[projects-realistic|Photoreal projects]] (3)
 
 Cinematic photoreal shorts: FLUX.2 klein stills with Moodboard references, motion from LTX-2.3 or Wan 2.2, Real-ESRGAN to 4K, cut with crossfades. Dragon Epic, Lost City, the three-minute film.
@@ -32,6 +38,8 @@ Cinematic photoreal shorts: FLUX.2 klein stills with Moodboard references, motio
 | 2 | [Three-minute film — recurring characters (subject TBD)](projects-realistic.html#film3min) | 2026-09-21 | planning | FLUX.2 [klein] 9B 1024x576 | Wan 2.2 High Noise 15 min | TBD | `—` | — |
 | 3 | [Lost City — hyper-real rider on a raptor-dragon entering jungle ruins](projects-realistic.html#lost_city) | 2026-09-21 | in progress — clips at 4K+music: s2, s3, s7, s8, s10, s14; s9 trimmed (4.6 s, drift after); s11 stills rejected (klein duplicates the creature); s12 not started; s15 rift coda done (3 clips assembled to 30 s 4K with music) | FLUX.2 [klein] 9B 1280x768 | LTX-2.3 22B [distilled] 1.1 (production engine — see ltx_10s) — Wan 2.2 High Noise I2V (8-bit S) + Low Noise refiner 10% for locked-camera shots at 768p 49 min | Mystical orchestral theme with ancient flute | `—` | [▶ watch](https://youtu.be/68sq_jZqu6c) |
 
+→ full records for all 3: [[projects-realistic|Photoreal projects]]
+
 ## [[projects-3d|3D-animated projects]] (1)
 
 Pixar-style 3D-animated shorts. Kyle's Antarctic Rescue.
@@ -39,6 +47,8 @@ Pixar-style 3D-animated shorts. Kyle's Antarctic Rescue.
 | # | Project | Date | Status | Still | I2V | Music | Final file | YouTube |
 |--:|---|---|---|---|---|---|---|---|
 | 1 | [Kyle's Antarctic Rescue — 1-minute 3D-animated vertical short from a 5-panel comic](projects-3d.html#kyle_rescue) | 2026-09-22 | delivered 2026-09-23 01:38 — 60.0 s, 1080x1920 + 2160x3840, rendered unattended overnight (see plan §0) | FLUX.2 [klein] 9B 576x1024 | LTX-2.3 22B [distilled] 1.1 via draw-things-cli ? min | Calm Ambient Dreamscape | `—` | — |
+
+→ full records for all 1: [[projects-3d|3D-animated projects]]
 
 
 ## YouTube playlist — [AI-Vids](https://www.youtube.com/playlist?list=PLJx49Sf61wKQ)

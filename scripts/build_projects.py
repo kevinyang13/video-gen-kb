@@ -122,13 +122,21 @@ def main():
         "",
         "---",
         "",
+        "**Project pages**: " + " · ".join(
+            f"[[{t['slug']}|{t['title']}]] ({sum(1 for p in projects if p.get('theme') == key)})"
+            for key, t in themes.items()
+            if any(p.get("theme") == key for p in projects)),
+        "",
+        "Each theme page holds the full records — settings, prompts, seeds, files. The tables below link straight to a project's record on its page.",
+        "",
     ]
     for key, t in themes.items():
         group = [p for p in projects if p.get("theme") == key]
         if not group:
             continue
         out += [f"## [[{t['slug']}|{t['title']}]] ({len(group)})", "", t["blurb"], ""] + HEAD
-        out += summary_rows(group, defs, link_page=t["slug"]) + [""]
+        out += summary_rows(group, defs, link_page=t["slug"])
+        out += ["", f"→ full records for all {len(group)}: [[{t['slug']}|{t['title']}]]", ""]
 
     pl = data.get("playlist")
     if pl:
