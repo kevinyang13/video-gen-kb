@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Idea-to-Video Blueprint — Minimal-Touch Production — video-gen-kb</title>
+<style>
+:root{--bg:#0B0D12;--panel:#141822;--panel-2:#1B2130;--stroke:#2A3245;--text:#E6E9F0;
+--muted:#8B94A7;--accent:#F5B84B;--accent-2:#4BC9F5;--on-accent:#12131A;
+--rule:rgba(139,148,167,.22);--code:#F5B84B}
+@media(prefers-color-scheme:light){:root:not([data-theme=dark]){--bg:#F4F1EA;--panel:#fff;
+--panel-2:#FAF8F3;--stroke:#D9D3C6;--text:#16181F;--muted:#5D6473;--accent:#B8781A;
+--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}}
+:root[data-theme=light]{--bg:#F4F1EA;--panel:#fff;--panel-2:#FAF8F3;--stroke:#D9D3C6;
+--text:#16181F;--muted:#5D6473;--accent:#B8781A;--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);
+line-height:1.65;padding:0 1rem 4rem}
+.shell{max-width:840px;margin:0 auto}
+a{color:var(--accent);text-decoration:none;font-weight:600}
+a:hover{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--accent-2);outline-offset:3px;border-radius:4px}
+.bar{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;padding:1.1rem 0;margin-bottom:1.5rem;
+border-bottom:1px solid var(--stroke)}
+.crumb{font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.spacer{flex:1}
+.pill{border:1px solid var(--stroke);background:var(--panel);border-radius:999px;padding:.28rem .8rem;
+font-size:.75rem;font-weight:700;color:var(--text);cursor:pointer;font-family:inherit}
+.pill:hover{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+h1{font-size:clamp(1.7rem,5vw,2.5rem);margin:.2rem 0 1rem;line-height:1.1;letter-spacing:-.015em;text-wrap:balance}
+h2{font-size:1.25rem;margin:2.2rem 0 .7rem;padding-bottom:.35rem;border-bottom:1px solid var(--rule);text-wrap:balance}
+h3{font-size:1.02rem;margin:1.5rem 0 .5rem;color:var(--accent)}
+p{margin:.7rem 0}
+ul,ol{margin:.7rem 0 .7rem 1.3rem}
+li{margin:.28rem 0}
+li::marker{color:var(--accent)}
+em{color:var(--muted)}
+hr{border:none;border-top:1px solid var(--stroke);margin:2rem 0}
+blockquote{border-left:3px solid var(--accent);background:var(--panel);border-radius:0 10px 10px 0;
+padding:.8rem 1.1rem;margin:1.1rem 0;color:var(--muted);font-size:.92rem}
+code{background:var(--panel);border:1px solid var(--stroke);border-radius:5px;padding:.1rem .35rem;
+font-size:.85em;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--code)}
+img{max-width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--stroke);margin:1.1rem 0}
+pre{background:var(--panel);border:1px solid var(--stroke);border-radius:12px;padding:1rem;overflow-x:auto;margin:1.1rem 0}
+pre code{background:none;border:none;padding:0;color:var(--text);font-size:.83rem;line-height:1.55}
+.tw{overflow-x:auto;border:1px solid var(--stroke);border-radius:12px;background:var(--panel);margin:1.1rem 0}
+table{width:100%;border-collapse:collapse;font-size:.85rem;min-width:min(100%,460px)}
+th{background:var(--panel-2);color:var(--accent);text-align:left;padding:.55rem .8rem;font-size:.68rem;
+letter-spacing:.09em;text-transform:uppercase;white-space:nowrap;border-bottom:1px solid var(--stroke)}
+td{padding:.5rem .8rem;border-bottom:1px solid var(--rule);color:var(--muted);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td strong{color:var(--text)}
+.meta{display:flex;flex-wrap:wrap;gap:.4rem .9rem;font-size:.78rem;color:var(--muted);margin:-.4rem 0 1.2rem}
+.meta b{color:var(--text);font-weight:600}
+.missing{color:var(--muted);border-bottom:1px dashed var(--muted);cursor:help}
+.related{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--stroke)}
+.related h2{border:none;margin:0 0 .7rem;font-size:.95rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:0}
+.chips li{margin:0}
+.chips a,.chips .missing{display:inline-block;border:1px solid var(--stroke);background:var(--panel);
+border-radius:999px;padding:.28rem .8rem;font-size:.8rem}
+.chips a:hover{background:var(--accent);color:var(--on-accent);text-decoration:none;border-color:var(--accent)}
+footer{max-width:840px;margin:2.5rem auto 0;padding-top:1.2rem;border-top:1px solid var(--stroke);
+font-size:.75rem;color:var(--muted);text-align:center}
+/* landing */
+.hero{padding:2.4rem 0 1.6rem}
+.kicker{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2)}
+.hero h1{font-size:clamp(2rem,6vw,3.2rem);margin:.35rem 0 .5rem}
+.hero p{color:var(--muted);font-size:1.05rem;max-width:56ch}
+.hw{display:inline-flex;gap:.5rem;align-items:center;margin-top:1rem;border:1px solid var(--stroke);
+background:var(--panel);border-radius:999px;padding:.3rem .9rem;font-size:.78rem;color:var(--muted)}
+.hw .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.sec{margin-top:2.2rem}
+.sec h2{border:none;padding:0;margin:0 0 .8rem;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.9rem}
+.card{display:block;border:1px solid var(--stroke);background:var(--panel);border-radius:14px;padding:1rem 1.1rem;
+color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+.card b{display:block;color:var(--accent);font-size:1rem;margin-bottom:.3rem}
+.card span{font-size:.85rem;color:var(--muted);line-height:1.5}
+.stubs{font-size:.82rem;color:var(--muted);margin-top:.6rem}
+.yt{position:relative;width:100%;aspect-ratio:16/9;border:1px solid var(--stroke);border-radius:12px;overflow:hidden;background:#000;margin:1rem 0}
+.yt.yt-v{aspect-ratio:9/16;max-width:360px}
+.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="bar">
+    <span class="crumb"><a href="../">video-gen-kb</a> / <a href="index.html">Wiki</a></span>
+    <span class="spacer"></span>
+    <button class="pill" onclick="tt()">◐ Theme</button>
+  </nav>
+  <h1>Idea-to-Video Blueprint — Minimal-Touch Production</h1><p class="lede">The end-to-end process for turning an idea (a sentence, a comic, a photo) into a finished short film on this Mac, arranged so that <strong>all human input happens up front</strong> — one intake questionnaire and one storyboard approval — and everything after "go" (masters, stills, clips, QC, retries, upscale, edit, music, report, push) runs unattended through <code>draw-things-cli</code>, with Claude as the judge. Proven end to end on <a href="kyle-antarctic-rescue-plan.html">kyle antarctic rescue plan</a> (60 s, 3 h 40 min, zero input after go).</p><div class="meta"><span><b>Updated</b> 2026-09-23</span><span><b>Sources</b> <a href="kyle-antarctic-rescue-plan.html">kyle antarctic rescue plan</a> §0 (the unattended run, 2026-09-22/23 — every timing below is from it unless marked); <a href="lost-city-plan.html">lost city plan</a> §3c prompt rules; <a href="headless-cli-pipeline.html">headless cli pipeline</a> §1b–1c; <a href="character-consistency.html">character consistency</a>; <a href="identity-conditioning.html">identity conditioning</a>; <a href="scripts-reference.html">scripts reference</a>.</span></div>
+<hr />
+<h2>The shape of it</h2>
+<pre><code> HUMAN (≈15 min, before go)                 MACHINE (hours, no human)
+ ┌──────────────────────────┐   ┌──────────────────────────────────────────────────────────────┐
+ │ 0 Intake questionnaire   │   │ 4 Masters → 5 Shot stills → 6 Motion prompts → 7 Clip batch  │
+ │ 1 Story + storyboard  ✔  │ → │      ↑ Claude picks each      8 QC + redo queue ←──┘         │
+ │ 2 Bible (locks, rules)   │ go│ 9 Trim → upscale → assemble → music → delivery copies        │
+ │ 3 Preflight + permissions│   │ 10 Report to wiki, projects.json, log → commit/push → notify │
+ └──────────────────────────┘   └──────────────────────────────────────────────────────────────┘
+        ✔ = the only approval gate                     optional gate: master pick (step 4)
+</code></pre>
+<p>The rule that makes it work: <strong>every decision the machine will face must have a rule written down before go</strong> — which seed wins, what counts as a failed shot, what to do after N failures, what the film does if a shot can't be saved. Anything left open becomes a 2 a.m. stall.</p>
+<hr />
+<h2>Phase 0 — Intake (human, ~5 min)</h2>
+<p>Ask these once, all together, and record the answers in the project page's "Decisions" table and in <code>projects.json</code>. Defaults in <strong>bold</strong> are what Kyle used.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Question</th>
+<th>Options</th>
+<th>Why it matters downstream</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Source</td>
+<td>idea text · comic/storyboard image · photo(s) · reference video frame</td>
+<td>a visual source becomes the layout for every shot (pixels beat text for identity)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Look</td>
+<td>2D illustrated · <strong>3D animated feature film</strong> · photoreal live-action</td>
+<td>sets the style lock; photoreal needs a real face photo (Q6) and tighter QC</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Aspect / delivery</td>
+<td><strong>9:16 phone (576×1024 → 2160×3840 + 1080×1920)</strong> · 16:9 (1024×576 → 3840×2160)</td>
+<td>render size, crops, <code>W</code>/<code>H</code> for the scripts</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Length</td>
+<td>30 s · <strong>60 s</strong> · 3 min</td>
+<td>shot count ≈ length ÷ 7.5 s (see Phase 1)</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Sound</td>
+<td><strong>music only</strong> · music + model audio (LTX ambience) · narration</td>
+<td>narration needs a TTS tool (none installed yet)</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Characters</td>
+<td>names, who they are, <strong>consent</strong> for real people, real face photo yes/no</td>
+<td>a real person needs consent; no photo → face comes from the source drawing</td>
+</tr>
+<tr>
+<td>7</td>
+<td>On-screen text</td>
+<td><strong>none</strong> · captions · title/end card</td>
+<td>text is always added with ffmpeg, never by the model</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Music</td>
+<td>pick now, or "find one" (Claude searches Pixabay, ranks by tags + loudness curve, human picks)</td>
+<td>music must be chosen before go — the edit is cut to it</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Who picks overnight</td>
+<td><strong>Claude judges</strong> (session stays open) · fully scripted (seed 1, fixed trims)</td>
+<td>scripted finishes regardless of quality</td>
+</tr>
+<tr>
+<td>10</td>
+<td>If a hero shot keeps failing</td>
+<td><strong>restage</strong> (from behind/wide) · keep best attempt · drop and stretch neighbours</td>
+<td>the one failure rule that must exist</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Permissions</td>
+<td><strong>quit Draw Things app · caffeinate · edit scripts · build tools</strong></td>
+<td>each is otherwise a stop-and-ask</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Morning deliverable</td>
+<td><strong>film + wiki report, committed, pushed, notification</strong> · same, no push</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<h2>Phase 1 — Story and storyboard (Claude drafts, human approves ✔)</h2>
+<ol>
+<li><strong>Beats.</strong> Reduce the idea to 4–6 story beats (Kyle: arrival → threat → danger → rescue → happy ending).</li>
+<li><strong>Shot count.</strong> 249-frame LTX clips are ~10 s; after trimming the end fade and drift, a shot keeps 6–10 s. With 0.75 s crossfades: <strong>60 s ≈ 8 shots, 30 s ≈ 4–5, 3 min ≈ 24</strong>. Sum of kept lengths − (shots−1)×0.75 = film length.</li>
+<li><strong>One line per shot</strong>: what's in the still, what moves, how long it's kept, and whether it is a <strong>face shot</strong>. Keep face shots to ~⅓ of the film; the rest are from behind, wide, or without the character — identity is free there.</li>
+<li><strong>Stage for the model, not just the story</strong> (rules from <a href="lost-city-plan.html">lost city plan</a> §3c and Kyle §0):
+   - close-ups <strong>hold position</strong> — the character smiles, blinks, rocks; doesn't walk or turn away;
+   - <strong>slow foreground, busy background</strong> — violence goes to the sky, beams, ice, never onto the hero;
+   - fast action (flight, gallop, jump) is clean for ~4–6 s only — plan it short;
+   - <strong>camera mostly still</strong> — a moving camera makes LTX invent picture at the edges, where extra characters appear and existing ones vanish.</li>
+<li><strong>Approval gate ✔</strong> — show the shot table (and, if the source is a comic, which panel feeds which shot). This is the last question to the human.</li>
+</ol>
+<h2>Phase 2 — Bible: locks and rules (Claude)</h2>
+<ul>
+<li><strong>One lock per entity</strong> (character, creature, vehicle, place), 1–2 sentences, pasted verbatim into every prompt that shows it. Name the count: "one boy".</li>
+<li><strong>Style lock</strong> (head of every still prompt) and <strong>video tail</strong> (end of every LTX prompt).</li>
+<li><strong>Word bans</strong> collected so far: "UFO"/"alien" (invites aliens → write "flying saucer, no aliens visible"), "dragon" for a wingless mount (grows wings), "lightning" for a sky rift (renders a bolt), "wind in his hair" on a face shot (hair restyles over 10 s), negations with klein at CFG 1 (it obeys the noun). Add to this list after every project.</li>
+<li>Store everything in <code>projects.json → scenes.locks</code> and per-shot <code>still</code> / <code>video</code> prompts; <code>wiki/projects.md</code> renders it.</li>
+</ul>
+<h2>Phase 3 — Preflight (Claude, 2 min, just before go)</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Command / action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>On AC power, disk &gt; 50 GB free</td>
+<td><code>pmset -g batt</code>, <code>df -h /</code></td>
+</tr>
+<tr>
+<td>Draw Things app closed (holds GPU memory, halves CLI speed)</td>
+<td><code>osascript -e 'tell application "Draw Things" to quit'</code></td>
+</tr>
+<tr>
+<td>Mac won't sleep</td>
+<td><code>caffeinate -dis -t 50400 &amp;</code> (kill it when done)</td>
+</tr>
+<tr>
+<td>Models present</td>
+<td>klein <code>flux_2_klein_9b_i8x.ckpt</code>, LTX <code>ltx_2.3_22b_distilled_1.1_q8p.ckpt</code> in the app's <code>Models/</code></td>
+</tr>
+<tr>
+<td>Scripts portrait-ready</td>
+<td><code>W</code>/<code>H</code> env in <code>upscale_4k.sh</code>, <code>assemble_film.sh</code></td>
+</tr>
+<tr>
+<td>Session stays open</td>
+<td>the desktop app and this session must keep running; the screen may lock (the CLI needs no screen)</td>
+</tr>
+</tbody>
+</table></div>
+<h2>Phase 4 — Masters (model sheets)</h2>
+<p>One canonical image per recurring character (and per recurring hero prop, e.g. the saucer). Every later check compares against these.</p>
+<ul>
+<li><strong>From a drawing or photo</strong>: crop the character, then a <strong>klein edit at <code>--strength 1.0</code></strong> with an instruction prompt ("Re-render this boy as a character in a high-end 3D animated feature film: same face, same hairstyle, same parka … plain soft grey studio background, remove all text"). 3 seeds, ~30 s each.</li>
+<li><strong>From text only</strong>: klein text-to-image with the lock + "character portrait, plain background".</li>
+<li><strong>Don't</strong> use <code>--strength</code> 0.7–0.9 to restyle — on the released CLI it barely changes the input (<a href="headless-cli-pipeline.html">headless cli pipeline</a> §1c).</li>
+<li>Pick rule: closest to the source on face shape, hair silhouette, signature costume details. Optional human gate here if the character is a real person and the human asked to see it.</li>
+</ul>
+<h2>Phase 5 — Shot stills (first frames)</h2>
+<p>Every shot's first frame must carry identity from <strong>pixels</strong>, never text alone. Three tools, all on the released CLI:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>When</th>
+<th>How</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Diptych</strong> <code>scripts/dt_diptych.sh MASTER IN PROMPT OUT seed</code></td>
+<td>a character must match the master</td>
+<td>reference left, layout (panel / rough) right, klein edit 1.0 at 2W×H, crop the right half; ~55–60 s</td>
+</tr>
+<tr>
+<td><strong>Reference chaining</strong> — diptych with an <em>approved shot</em> as REF</td>
+<td>recurring props, places, animals, light</td>
+<td>S3's saucer → S4, S6; S2's ship → S1; S7's look → S8</td>
+</tr>
+<tr>
+<td><strong>Single edit</strong> <code>dt_diptych.sh - IN PROMPT OUT</code></td>
+<td>restyle or re-frame one image</td>
+<td>S1 = "the same scene, wide, no boy"; S6 = "the saucer now encased in ice"</td>
+</tr>
+</tbody>
+</table></div>
+<p>Prompt pattern for a diptych: <em>"Two images side by side. Left: … Right: … Re-render the right image as a frame from the same film, with the boy looking exactly like the boy on the left: same face, same hair, same costume. [framing sentence]. [scene]. [style]. Remove all text, bubbles and borders. Keep the left image unchanged."</em> <strong>Always state the framing</strong> ("medium close-up: head and shoulders fill the frame") — without it klein zooms out to full body.</p>
+<p>Render <strong>3 seeds per shot</strong> and pick by the rubric below. Typical failures to reject: subject dropped from a busy frame, an extra hand or a double gesture, a different face, text left in.</p>
+<p>Inputs are fitted to W×H by center-crop, so hand over images already at the target aspect (pad near-square panels with a blurred copy of themselves).</p>
+<h2>Phase 6 — Motion prompts</h2>
+<p>One paragraph per shot, action first, ending with the video tail. Rules from Kyle and Lost City:
+- describe <strong>motion only</strong> — the still already has the look;
+- <strong>hold wording</strong> on face shots: "keeps holding his thumbs up the whole time", "his face and hair stay exactly the same", "hair stays neat";
+- multi-subject shots: "all stay in place in the foreground … the camera holds completely still, same framing throughout";
+- name the subject and its stillness <strong>before</strong> any destruction verb (motion bleeds onto small subjects);
+- music-only films: skip sound sentences.</p>
+<h2>Phase 7 — Clip batch (unattended)</h2>
+<p>A loop script, one clip at a time, skipping clips that exist, logging one line per clip — the Kyle version is <code>raw/clips/kyle/render_clips.sh</code>:</p>
+<pre><code class="language-bash">for s in $SHOTS; do
+  out=clips/${s}_ltx_v$V.mov; [ -f &quot;$out&quot; ] &amp;&amp; continue
+  draw-things-cli generate -m ltx_2.3_22b_distilled_1.1_q8p.ckpt \
+    --prompt-file stills/${s}_v.txt --image stills/$s.png \
+    --width 576 --height 1024 --frames 249 --steps 8 --cfg 1 --seed $SEED \
+    --config-json '{&quot;sampler&quot;:19,&quot;shift&quot;:5.0,&quot;stochasticSamplingGamma&quot;:0.3,&quot;fps&quot;:25,&quot;hiresFix&quot;:false}' \
+    --offline --disable-preview --video-format prores422hq -o &quot;$out&quot;
+  echo &quot;$s $? $(date +%H:%M)&quot; &gt;&gt; render.log
+done
+</code></pre>
+<ul>
+<li>Order the batch <strong>hero shots first</strong>, so their QC (and any redo) happens while the rest render.</li>
+<li>Watch <code>render.log</code> (one event per clip) and QC each clip as it lands.</li>
+<li>Never run Real-ESRGAN while LTX renders (memory).</li>
+<li>Always 249 frames: same cost as short clips; trim later.</li>
+</ul>
+<h2>Phase 8 — QC and the redo queue (Claude as judge)</h2>
+<p><strong>Contact sheet per clip</strong>: reference (master or still) + frames 0, 62, 124, 186, 248.</p>
+<pre><code class="language-bash">ffmpeg -i master.png -i clip.mov -filter_complex \
+ &quot;[0]scale=216:384[m];[1]select='eq(n\,0)+eq(n\,62)+eq(n\,124)+eq(n\,186)+eq(n\,248)',scale=216:384,tile=5x1[t];[m][t]hstack=2&quot; \
+ -frames:v 1 qc.png
+</code></pre>
+<p><strong>Reject / trim when</strong>: face differs from the master (eyes, hair silhouette, smile) · costume loses a signature detail · count changes (extra or missing character, second prop) · animal changes species or markings · style slides (2D ↔ 3D ↔ photo) · a held gesture drops · camera pulls back and invents or loses subjects · <strong>end-of-clip fade to dark</strong> (4 of 10 Kyle clips — trim ~2–3 s before it).</p>
+<p><strong>Decision ladder per shot</strong>:
+1. clean for ≥ the planned keep length → <strong>pass</strong>, note the trim;
+2. clean for less → keep as fallback trim, <strong>queue v2</strong>: fix the prompt cause (drop the wind, add hold/still wording), new seed;
+3. v2 fails → new still seed → v3;
+4. still failing → apply the intake failure rule (restage / best attempt / drop).</p>
+<p>Log every verdict to <code>work/qc_notes.txt</code>; it becomes the report.</p>
+<h2>Phase 9 — Finish (unattended)</h2>
+<p>A spec list of <code>shot clip start end</code>, then per shot: trim → upscale → collect; then assemble → music → delivery copies. Kyle's <code>raw/clips/kyle/finish.sh</code> is the template.</p>
+<pre><code class="language-bash">ffmpeg -nostdin -i clips/$c.mov -vf &quot;trim=start=$a:end=$b,setpts=PTS-STARTPTS&quot; -an -c:v prores_ks -profile:v 3 final/${s}_t.mov
+W=2160 H=3840 scripts/upscale_4k.sh final/${s}_t.mov final/$s realesrgan-x4plus &lt;/dev/null
+W=2160 H=3840 XFADE=0.75 scripts/assemble_film.sh final/film_nomusic.mp4 final/s*_4k.mp4
+# music = the track's tail, so the film ends on the song's own ending
+ffmpeg -ss $(python3 -c &quot;print(max(0,TRACK_LEN-$D))&quot;) -i music.mp3 -t $D -af afade=t=in:d=1.5 bed.wav
+ffmpeg -i film_nomusic.mp4 -i bed.wav -map 0:v -map 1:a -c:v copy -c:a aac -b:a 192k -shortest out_master.mp4
+ffmpeg -i out_master.mp4 -vf scale=1080:1920 -c:v hevc_videotoolbox -b:v 12M -tag:v hvc1 -c:a copy out_1080.mp4
+</code></pre>
+<ul>
+<li><strong><code>-nostdin</code></strong> on every ffmpeg inside a <code>while read</code> loop (ffmpeg eats the loop's input — cost one restart on Kyle).</li>
+<li><code>x4plus</code> for 3D/photo textures, <code>realesr-animevideov3-x4</code> for flat 2D line art.</li>
+<li>Music-only: assemble <strong>without</strong> <code>MUSIC</code> and mux the bed afterwards (<code>MUSIC</code> goes through <code>amix</code>, which halves it).</li>
+<li>For phones over a 30 MB share limit, also make a ~23 MB 720p preview.</li>
+</ul>
+<h2>Phase 10 — Report and file back</h2>
+<ul>
+<li>Project page §0 <strong>Results</strong>: deliverables, what differed from the plan, every pick and rejection with reasons, QC sheets, timings, new rules.</li>
+<li><code>projects.json</code>: status, seeds, trims, files. <code>wiki/log.md</code> entry. New gotchas onto the recipe pages (<a href="headless-cli-pipeline.html">headless cli pipeline</a>, <a href="scripts-reference.html">scripts reference</a>, <a href="lost-city-plan.html">lost city plan</a> rules).</li>
+<li><code>python3 scripts/build_site.py</code>, commit, push (if the intake said so), notification, send the film (or preview) to the human.</li>
+</ul>
+<hr />
+<h2>Pick rubric (stills and masters)</h2>
+<p>Score each candidate against the reference, reject on any hard fail:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Hard fail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Identity</td>
+<td>different face shape, eyes, hair silhouette</td>
+</tr>
+<tr>
+<td>Costume</td>
+<td>signature colour split, patch, prop missing</td>
+</tr>
+<tr>
+<td>Count</td>
+<td>extra / missing character, doubled hand or gesture</td>
+</tr>
+<tr>
+<td>Framing</td>
+<td>not what the prompt named (zoomed out, subject cropped)</td>
+</tr>
+<tr>
+<td>Cleanliness</td>
+<td>leftover text, bubbles, borders, smears</td>
+</tr>
+<tr>
+<td>Style</td>
+<td>slides away from the style lock</td>
+</tr>
+</tbody>
+</table></div>
+<p>Among passes, prefer: closest to the master → most readable at phone size → most room for the planned motion.</p>
+<h2>Time budget (M4 Max 48 GB, measured on Kyle, 576×1024)</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Unit</th>
+<th>Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>klein edit / text still</td>
+<td>per image</td>
+<td>~30 s</td>
+</tr>
+<tr>
+<td>klein diptych</td>
+<td>per image</td>
+<td>55–60 s</td>
+</tr>
+<tr>
+<td>Masters + 8 shots × 3 seeds</td>
+<td>per film</td>
+<td>~35 min</td>
+</tr>
+<tr>
+<td>LTX-2.3, 249 f</td>
+<td>per clip</td>
+<td>9 min 20–30 s</td>
+</tr>
+<tr>
+<td>Redo rate</td>
+<td></td>
+<td>2 of 8 shots needed v2</td>
+</tr>
+<tr>
+<td>Real-ESRGAN x4plus → 2160×3840</td>
+<td>per clip (6–10 s)</td>
+<td>7–11 min (~20 f/min)</td>
+</tr>
+<tr>
+<td>Assembly + music + delivery</td>
+<td>per film</td>
+<td>~2 min</td>
+</tr>
+<tr>
+<td><strong>60 s film, go → pushed</strong></td>
+<td></td>
+<td><strong>~3 h 40 min</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>Rule of thumb: <strong>wall clock ≈ 0.6 h + 0.35 h per shot</strong> (stills + LTX + 25% redos + upscale).</p>
+<h2>Project folder layout</h2>
+<pre><code>raw/&lt;project&gt;/source.*                 immutable source (comic, photo) — tracked
+raw/clips/&lt;project&gt;/                   everything generated — git-ignored
+  masters/        master_*.png, cand/, prompts
+  work/           crops, pads, seed candidates, qc sheets, qc_notes.txt
+  stills/         sN.png (picked), sN.txt (still prompt), sN_v.txt (video prompt)
+  clips/          sN_ltx_vK.mov
+  final/          sN_t.mov, sN_4k.mp4, film_nomusic.mp4, &lt;film&gt;_master.mp4, &lt;film&gt;_1080.mp4
+  render_clips.sh, finish.sh, render.log, finish.log
+wiki/&lt;project&gt;-plan.md                 plan + §0 results
+wiki/assets/&lt;project&gt;-*.jpg            QC and contact sheets shown in the report
+</code></pre>
+<h2>Failure playbook</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Cause</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>restyled still looks like the input</td>
+<td><code>--strength</code> &lt; 1 with klein</td>
+<td>strength 1.0 + instruction prompt</td>
+</tr>
+<tr>
+<td>still zoomed out to full body</td>
+<td>edit prompt didn't name framing / said "fill the frame"</td>
+<td>name the framing explicitly</td>
+</tr>
+<tr>
+<td>character missing from a busy still</td>
+<td>too many subjects</td>
+<td>another seed; put the character first in the prompt</td>
+</tr>
+<tr>
+<td>hair / face restyles mid-clip</td>
+<td>wind, turn, walk in a face shot</td>
+<td>hold wording; "hair stays neat"</td>
+</tr>
+<tr>
+<td>gesture drops mid-clip</td>
+<td>not asked to persist</td>
+<td>"keeps holding … the whole time"</td>
+</tr>
+<tr>
+<td>animals vanish / morph, camera pulls back</td>
+<td>no framing lock</td>
+<td>"camera holds completely still, same framing throughout"</td>
+</tr>
+<tr>
+<td>last 2–3 s go dark</td>
+<td>LTX end fade</td>
+<td>trim before it (or keep it as the film's ending)</td>
+</tr>
+<tr>
+<td>subject destroyed with the scenery</td>
+<td>motion bleed</td>
+<td>subject large, still, named before the destruction</td>
+</tr>
+<tr>
+<td>only the first shot processed in a loop</td>
+<td>ffmpeg reading stdin</td>
+<td><code>-nostdin</code> / separate fd</td>
+</tr>
+<tr>
+<td>portrait clip cropped to landscape</td>
+<td>scripts at default size</td>
+<td><code>W=2160 H=3840</code></td>
+</tr>
+<tr>
+<td>LTX slow (~20 min instead of ~10)</td>
+<td>Draw Things app open</td>
+<td>quit the app</td>
+</tr>
+</tbody>
+</table></div>
+<h2>Not automated yet</h2>
+<ul>
+<li>A single driver (<code>scripts/film_run.sh &lt;project&gt;</code>) that reads <code>projects.json</code> scenes and runs Phases 5–9 — today the loop scripts are per project (Kyle's are the template).</li>
+<li>Programmatic identity scoring (face embeddings) — the judge is Claude reading contact sheets.</li>
+<li>Narration/TTS and captions.</li>
+<li>Chaining clips longer than 10 s (last frame → next first frame) — planned in <a href="character-consistency.html">character consistency</a> §6, not needed yet.</li>
+</ul>
+
+  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="kyle-antarctic-rescue-plan.html">kyle antarctic rescue plan</a> — the run this blueprint is distilled from</li><li><a href="headless-cli-pipeline.html">headless cli pipeline</a> — the CLI, strength-1.0 edit mode, the diptych</li><li><a href="lost-city-plan.html">lost city plan</a> — LTX prompt and staging rules</li><li><a href="character-consistency.html">character consistency</a> · <a href="identity-conditioning.html">identity conditioning</a> — why pixels carry identity</li><li><a href="scripts-reference.html">scripts reference</a> — <code>upscale_4k.sh</code>, <code>assemble_film.sh</code>, <code>dt_diptych.sh</code></li><li><a href="projects.html">projects</a> — where every project's record lives</li></ul></div>
+</div>
+<footer>video-gen-kb · built 2026-09-23 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<script>function tt(){var r=document.documentElement,
+d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
+matchMedia('(prefers-color-scheme: dark)').matches);
+r.setAttribute('data-theme',d?'light':'dark');}</script>
+</body>
+</html>

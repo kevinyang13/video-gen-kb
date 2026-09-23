@@ -8,6 +8,10 @@
 
 ---
 
+## 2026-09-23 — Blueprint: idea to video with minimal human input
+
+Kevin asked for an end-to-end blueprint. **Created** `wiki/idea-to-video-blueprint.md`, distilled from the unattended Kyle run: human input only in Phases 0–3 (12-question intake, storyboard approval, bible, preflight), then Phases 4–10 unattended (klein edit-mode masters, diptych/chained stills, motion prompt rules, LTX batch loop, QC contact sheets with a reject/redo ladder, finish script, report). Includes pick rubric, measured time budget (~0.6 h + 0.35 h per shot), folder layout, failure playbook, and what's not automated yet (a single `film_run.sh` driver, face-embedding scoring, TTS). Index and CLAUDE.md "Producing a video" now point to it.
+
 ## 2026-09-23 — Projects registry split by theme
 
 **Source**: Kevin — the projects page had grown past 960 lines and every record loaded at once.

@@ -19,6 +19,7 @@ serve.sh      -- rebuild + serve docs/ on http://localhost:8788
 scripts/finish_clip.sh -- I2V export (.mov) -> looped 1080x1920 mp4 (+ music)
 scripts/upscale_4k.sh -- clip -> 3840x2160 HEVC 10-bit via Real-ESRGAN ncnn (tools/realesrgan)
 scripts/assemble_film.sh -- N 4K clips -> one film with crossfades (+ music); see wiki/scripts-reference.md
+scripts/dt_diptych.sh -- reference-locked klein edit on the CLI (ref left, input right, keep right half)
 scripts/dt_project.sh -- list/rename/delete Draw Things projects on disk (project = NAME.sqlite3); rename new projects with this, never leave Untitled-NNNNN
 raw/clips/    -- generated stills/clips/music (git-ignored)
 wiki/assets/  -- images embedded in wiki pages (reference as assets/<file>; copied to docs/wiki/assets/)
@@ -28,7 +29,7 @@ scripts/build_projects.py -- projects.json -> wiki/projects.md (run by build_sit
 ```
 
 ## Producing a video
-Follow `wiki/runbook-living-painting.md` step by step. When a project starts, add its record to `projects.json` (prompts, seeds, any non-default settings, files, notes) and keep it updated as it renders; `wiki/projects.md` is generated from it. After each session, record timings and any new gotcha on the relevant recipe page and in `wiki/log.md`.
+For a multi-shot film, follow `wiki/idea-to-video-blueprint.md` (intake questions up front, then unattended CLI run). For a single looping painting, follow `wiki/runbook-living-painting.md` step by step. When a project starts, add its record to `projects.json` (prompts, seeds, any non-default settings, files, notes) and keep it updated as it renders; `wiki/projects.md` is generated from it. After each session, record timings and any new gotcha on the relevant recipe page and in `wiki/log.md`.
 
 ## Site
 `docs/` is a static site rendered from `wiki/`. After any wiki change, run
