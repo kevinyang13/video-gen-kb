@@ -110,7 +110,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <li><a href="video-upscaling.html">video upscaling</a> — SeedVR2, FlashVSR, Real-ESRGAN; temporal vs per-frame; Mac support</li>
 <li><a href="draw-things-setup.html">draw things setup</a> — downloading Wan 2.1/2.2, LTX-2.3, Hunyuan, SkyReels inside Draw Things; LightX2V 4-step settings; I2V step-by-step; disk budget</li>
 <li><a href="apple-silicon-inference.html">apple silicon inference</a> — FP8 trap, MPS slowness, Draw Things and MLX runtimes, 48 GB memory planning</li>
-<li><a href="headless-cli-pipeline.html">headless cli pipeline</a> — running the whole pipeline without a UI: <code>draw-things-cli</code> (multi-<code>--image</code> references, <code>--frames</code> video, config JSON), gRPCServerCLI, and why ComfyUI/MLX can't replace it on a Mac</li>
+<li><a href="headless-cli-pipeline.html">headless cli pipeline</a> — running the whole pipeline without a UI: <code>draw-things-cli</code> (klein strength 1.0 = edit mode, diptych as Moodboard substitute, <code>--frames</code> video, config JSON), gRPCServerCLI, and why ComfyUI/MLX can't replace it on a Mac</li>
 </ul>
 <h2>Projects</h2>
 <ul>
@@ -120,7 +120,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <ul>
 <li><a href="dragon-epic-plan.html">dragon epic plan</a> — 1-minute photoreal dragon short with a personal face: pipeline, Draw Things config per stage, face-identity and dragon-consistency strategy, 12-shot list, experiments, budget</li>
 <li><a href="lost-city-plan.html">lost city plan</a> — hyper-real sci-fantasy rider entering jungle ruins (OpenArt-style reference): what makes it look real, klein Moodboard stills, Wan 2.2 vs LTX-2.3 motion settings, creature/hero/city locks, 8-shot list, experiments L0–L6</li>
-<li><a href="kyle-antarctic-rescue-plan.html">kyle antarctic rescue plan</a> — 1-minute vertical 3D-animated short from Kyle's 2D comic, music only, fully headless: 3D model sheets → panel stills locked to them → LTX-2.3 via <code>draw-things-cli</code> → 4K; 8 shots, experiments K0–K7</li>
+<li><a href="kyle-antarctic-rescue-plan.html">kyle antarctic rescue plan</a> — <strong>delivered</strong>: 1-minute vertical 3D-animated short from Kyle's 2D comic, rendered unattended overnight with <code>draw-things-cli</code> — klein edit-mode masters, diptych identity lock, LTX-2.3, every pick and rejection</li>
 <li><a href="three-minute-film-plan.html">three minute film plan</a> — 3-minute narrative film (36–40 × 5 s clips) with recurring characters: structure, consistency stack, per-shot workflow, 7 gating experiments, ~23 h budget, open questions</li>
 </ul>
 <h2>Recipes</h2>
@@ -143,7 +143,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </ul>
   
 </div>
-<footer>video-gen-kb · built 2026-09-22 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<footer>video-gen-kb · built 2026-09-23 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
 <script>function tt(){var r=document.documentElement,
 d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
 matchMedia('(prefers-color-scheme: dark)').matches);

@@ -493,7 +493,7 @@
       "title": "Kyle's Antarctic Rescue — 1-minute 3D-animated vertical short from a 5-panel comic",
       "date": "2026-09-22",
       "dt_project": "none — rendered with draw-things-cli (no project file)",
-      "status": "planned — see wiki/kyle-antarctic-rescue-plan.md; experiments K0–K5 first",
+      "status": "delivered 2026-09-23 01:38 — 60.0 s, 1080x1920 + 2160x3840, rendered unattended overnight (see plan §0)",
       "source": "raw/kyle/comic_source.webp",
       "still": {
         "model": "FLUX.2 [klein] 9B (8-bit S) via draw-things-cli",
@@ -502,7 +502,7 @@
         "cfg": 1.0,
         "shift": 3,
         "sampler": "DDIM Trailing (16)",
-        "control": "no Moodboard (CLI release). Stage A: 3D masters (kyle_front, kyle_34, sidekick, chick, ufo) from comic crops at klein 0.75-0.85, Kevin picks. Stage B: panel -> 3D locked to masters via B1 multi-image (--HEAD build) / B2 diptych / B3 face transplant / B4 app Moodboard",
+        "control": "klein at --strength 1.0 = edit mode. Master = single edit of the P1 face crop (seed 2). Shots = scripts/dt_diptych.sh with the master (S2,S3,S5,S7) or an approved shot (S1<-S2, S4<-S3, S6<-S3, S8<-S7) as the left reference",
         "prompt": "per scene — see scenes"
       },
       "i2v": {
@@ -587,8 +587,40 @@
       "notes": "Kyle is Kevin's son; consent confirmed 2026-09-22.",
       "delivery": "9:16 — master 2160x3840, phone copy 1080x1920; pictures and music only (no captions, narration or SFX)",
       "files": [
-        "music/best_adventure_ever.mp3"
-      ]
+        "music/best_adventure_ever.mp3",
+        "kyle/masters/kyle_front.png",
+        "kyle/stills/s1..s8.png (+ *_v.txt video prompts)",
+        "kyle/clips/s1..s8_ltx_v1.mov, s2_ltx_v2.mov, s4_ltx_v2.mov",
+        "kyle/final/kyle_rescue_1080x1920.mp4",
+        "kyle/final/kyle_rescue_2160x3840.mp4",
+        "kyle/work/qc_notes.txt"
+      ],
+      "edit": {
+        "s1": "v1 0-6.5",
+        "s2": "v2 0-8",
+        "s3": "v1 0-9.96",
+        "s4": "v2 0-9.96",
+        "s5": "v1 0-6",
+        "s6": "v1 1.6-8.8",
+        "s7": "v1 0-8",
+        "s8": "v1 0-9.6",
+        "xfade": 0.75,
+        "music_start_s": 93.4,
+        "duration_s": 60.0
+      },
+      "seeds": {
+        "master": 2,
+        "s1": 1,
+        "s2_still": 4,
+        "s3": 1,
+        "s4": 1,
+        "s5": 1,
+        "s6": 1,
+        "s7": 1,
+        "s8": 2,
+        "ltx_v1": 1,
+        "ltx_v2": 2
+      }
     }
   ],
   "playlist": {

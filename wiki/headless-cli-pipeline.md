@@ -4,7 +4,7 @@
 
 **Sources**: [drawthingsai/draw-things-community](https://github.com/drawthingsai/draw-things-community) source read on 2026-09-22 (`Apps/DrawThingsCLI/DrawThingsCLI.swift`, `Libraries/Scripting/Sources/ScriptModels.swift`, `Libraries/Scripting/Sources/SharedScript.swift`, `Libraries/DataModels/Sources/config.fbs`); [draw-things-cli announcement](https://releases.drawthings.ai/p/draw-things-cli-local-media-generation) (2026-03-25); [draw-things-comfyui](https://github.com/drawthingsai/draw-things-comfyui); [ComfyUI FLUX.2 klein tutorial](https://docs.comfy.org/tutorials/flux/flux-2-klein); [ComfyUI-Flux2Klein-Conditioning-Toolkit](https://github.com/xmarre/ComfyUI-Flux2Klein-Conditioning-Toolkit); [MyAIForce multi-reference guide](https://myaiforce.com/improve-multi-reference-image-results-flux-2-klein/); [ComfyUI + Wan 2.2 on Apple Silicon](https://papayabytes.substack.com/p/guide-comfyui-and-wan-22-image-to); [LTX-2 vs Wan 2.2 on M1 Max](https://lilting.ch/en/articles/ltx2-wan22-mac-local-video-gen); [ltx-video-mac](https://github.com/james-see/ltx-video-mac); [mflux](https://github.com/mflux-community/mflux); ComfyUI API guides ([9elements](https://9elements.com/blog/hosting-a-comfyui-workflow-via-api/), [Runflow](https://www.runflow.io/blog/comfyui-api-developer-guide)). All as of 2026-09-22.
 
-**Last updated**: 2026-09-22 (installed and measured — §1b)
+**Last updated**: 2026-09-22 (installed and measured — §1b; klein strength semantics and the diptych trick — §1c)
 
 ---
 
@@ -133,11 +133,28 @@ draw-things-cli generate -m ltx_2.3_22b_distilled_1.1_q8p.ckpt \
 | Output | ProRes 422 HQ, 1024×576, **exactly 249 frames @ 25 fps**, plus `pcm_f32le` 48 kHz audio — identical to the app's export |
 | Klein still | **27–35 s** at 1280×768, 4 steps (the app takes ~1 min, but with 3 Moodboard refs) |
 | LTX clip | **580 s = 9 min 41 s** total, 53 s per step — **~2× faster than the same settings in the app** (~20 min), because nothing else holds memory |
-| Moodboard | **Not in this release.** Text-only stills for now |
+| Moodboard | **Not in this release** — but see §1c: klein edit mode + a side-by-side diptych does the same job |
 
 The speed difference is the headline: the app keeps a project database, a live preview and the canvas in memory; the CLI loads the checkpoints, samples, writes, exits. Same engine, same quants, half the wall clock.
 
 Practical notes: progress output is a TTY spinner, so a redirected log stays **empty until the process exits** — judge progress from `lsof`/RSS or just wait. RSS reads ~0.5 GB while the real weights are mmap'd (26 GB LTX + 13 GB Gemma), so Activity Monitor understates it.
+
+## 1c. klein edit mode and the diptych trick — Kyle's Antarctic Rescue, 2026-09-22
+
+Found while making 3D masters from a 2D comic ([[kyle-antarctic-rescue-plan]]):
+
+| `--strength` with klein 9B + `--image` | What happens |
+|---|---|
+| 0.7 / 0.8 / 0.9 | plain img2img, and a **weak** one: even at 0.9 the output was nearly the input — same background, same `delogo` smear, still 2D; the prompt barely registered |
+| **1.0** | **edit mode**: the image becomes a reference and the prompt an instruction. "Re-render this boy as a 3D animated film character … plain grey background, remove the ship and all text" did exactly that, keeping face, hair and parka |
+
+So on the released CLI, **use klein at strength 1.0 with an instruction-style prompt** for any image-conditioned still; the 0.x range is only for gentle clean-ups.
+
+**Diptych = one-image Moodboard.** The released CLI takes a single `--image`, but that image can hold two pictures. Put the reference (a character master, an earlier approved shot) on the left and the input (a comic panel, a layout) on the right, render at double width, and prompt "Two images side by side … re-render the right image … with the boy looking exactly like the boy on the left … keep the left image unchanged". Crop the right half. klein carries the face, costume and props across. `scripts/dt_diptych.sh REF IN PROMPT OUT [seed]` wraps it (`-` as REF = plain single-image edit).
+
+Measured: 1152×1024 diptych ≈ 45–60 s per still (single 576×1024 edit ≈ 30 s). In 3 seeds, 1–2 usually keep identity; failures are dropped subjects (the boy vanishes from a busy frame), an extra hand, or a different face — always check.
+
+Also tried: building `main` from source for real multi-`--image` (`swift build -c release --product draw-things-cli`, Swift 6.0.3/Xcode). Fetching dependencies alone took ~25 min, then it **failed compiling** (`ccv_nnc_mfa` Metal kernels, step 524/1254). Not needed once the diptych worked.
 
 ## 2. `gRPCServerCLI` — headless server, thin clients
 

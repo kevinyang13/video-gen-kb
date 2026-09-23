@@ -4,9 +4,60 @@
 
 **Sources**: `raw/kyle/comic_source.webp` (the 5-panel comic, 1024×1536, added 2026-09-22); [[headless-cli-pipeline]] §1b (CLI flags and timings measured 2026-09-22); [[lost-city-plan]] §3c, §7b (LTX production settings and motion rules); [[character-consistency]]; [[identity-conditioning]]; [[scripts-reference]]. Timings are estimates built from the Lost City measurements, **not yet measured on this project**.
 
-**Last updated**: 2026-09-22 (restyled from 2D comic to 3D animated film; model-sheet stage and master-locking methods added; nothing rendered yet)
+**Last updated**: 2026-09-23 (**rendered overnight, unattended** — §0 results; diptych method replaced the plan's B1–B4)
 
 ---
+
+## 0. Results — overnight run 2026-09-22 22:00 → 2026-09-23 01:38
+
+**Delivered**: `raw/clips/kyle/final/kyle_rescue_1080x1920.mp4` (60.0 s, HEVC, 95 MB) and `kyle_rescue_2160x3840.mp4` (299 MB master), music "Best Adventure Ever" from 93.4 s to its natural end (mean −18.8 dB, peak −1.6 dB). No human input after the go.
+
+![Final film, one frame every 5 s](assets/kyle-final-strip.jpg)
+
+### What actually worked (differs from the plan below)
+
+- **klein `--strength` < 1 is nearly a no-op** on the released CLI (0.7–0.9 returned the 2D panel almost unchanged, smear and all). **Strength 1.0 = edit mode**: the image becomes a reference and the prompt an instruction. That alone converted the P1 face into a clean 3D master in 30 s.
+- **Diptych = Moodboard on the released CLI**: master on the left, panel on the right, one 1152×1024 edit, crop the right half (`scripts/dt_diptych.sh`). It carried Kyle's face, hair and parka into S2, S3, S5 and S7. The same trick with an approved *shot* as the reference chained the saucer (S3 → S4, S6), the ship (S2 → S1) and the finale's look (S7 → S8). B1 (building `main`) failed to compile and wasn't needed; B3/B4 were never used.
+- In edit mode the prompt controls framing: "fill the whole tall frame" zoomed out to full body, so every prompt names the framing ("medium close-up: head and shoulders fill the frame").
+
+![K0: strength 0.7/0.8/0.9 (top two rows, barely changed) vs strength-1.0 edit (bottom)](assets/kyle-k0-strength-vs-edit.jpg)
+
+### Picks (Claude as judge, 3 seeds per still)
+
+![Master + S1–S8 stills](assets/kyle-stills-sheet.jpg)
+
+| Shot | Still | Rejected candidates | Clip | Kept |
+|---|---|---|---|---|
+| master | edit, seed 2 (darker hair, closer to comic) | 0.7–0.9 img2img ×9 (still 2D) | — | — |
+| S1 | edit of S2, seed 1 | — | v1 | 0–6.5 s (LTX fades to dark after ~f170) |
+| S2 | diptych, seed 4 | seed 3 double thumbs, seed 5 face covered, 2 zoomed-out edits | v1 ✗ thumb drops f124, hair spikes f186 ("wind" in prompt); **v2 ✓** ("keeps holding his thumbs up", "hair stays neat", seed 2) | 0–8 s |
+| S3 | diptych, seed 1 | seeds 2, 3 dropped the boy | v1 ✓ | full 10 s |
+| S4 | diptych with S3, seed 1 | — | v1 ✗ pull-back after f140, chick vanishes, orca morphs; **v2 ✓** ("camera holds completely still, same framing") | full 10 s |
+| S5 | diptych, seed 1 | seed 3 different face | v1 ✓ | 0–6 s |
+| S6 | edit of S3, seed 1 | — | v1 ✓ (saucer drops onto the ice, bursts free, flies off) | 1.6–8.8 s |
+| S7 | diptych, seed 1 | — | v1 ✓ | 0–8 s (end fade) |
+| S8 | diptych with S7, seed 2 | seed 3 no boy | v1 ✓ | 0–9.6 s (fade = ending) |
+
+![Clip QC sheets: master/still + frames 0, 62, 124, 186, 248](assets/kyle-clip-qc.jpg)
+
+### Timings (M4 Max)
+
+| Stage | Time |
+|---|---|
+| klein still, 576×1024 edit | ~30 s |
+| klein diptych, 1152×1024 | ~55–60 s |
+| 8 shots × 3 seeds + master sweep | ~35 min |
+| LTX-2.3, 576×1024 × 249 f (portrait) | **9 min 21 s – 9 min 31 s** each, 10 clips |
+| Real-ESRGAN x4plus → 2160×3840 | 6.8–11.1 min per clip (~20 frames/min), 69 min total |
+| Assembly + music + 1080 copy | ~1 min |
+| **Wall clock, go → film** | **~3 h 40 min** |
+
+### New rules learned
+
+1. LTX-2.3 **fades to dark over the last ~2–3 s** of a 249-frame clip in 4 of 10 renders — trim before the fade.
+2. Wind on hair in a face-shot prompt → the hair grows and restyles. Say "hair stays neat".
+3. For multi-subject shots, "camera holds completely still, same framing throughout" stops the pull-back that makes LTX invent (and lose) animals.
+4. `while read` loops that call ffmpeg need `-nostdin` (or a separate fd) — ffmpeg eats the loop's input. Cost one restart tonight.
 
 ## 1. What the source gives us
 

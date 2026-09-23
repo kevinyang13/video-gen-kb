@@ -21,7 +21,7 @@
 - [[video-upscaling]] — SeedVR2, FlashVSR, Real-ESRGAN; temporal vs per-frame; Mac support
 - [[draw-things-setup]] — downloading Wan 2.1/2.2, LTX-2.3, Hunyuan, SkyReels inside Draw Things; LightX2V 4-step settings; I2V step-by-step; disk budget
 - [[apple-silicon-inference]] — FP8 trap, MPS slowness, Draw Things and MLX runtimes, 48 GB memory planning
-- [[headless-cli-pipeline]] — running the whole pipeline without a UI: `draw-things-cli` (multi-`--image` references, `--frames` video, config JSON), gRPCServerCLI, and why ComfyUI/MLX can't replace it on a Mac
+- [[headless-cli-pipeline]] — running the whole pipeline without a UI: `draw-things-cli` (klein strength 1.0 = edit mode, diptych as Moodboard substitute, `--frames` video, config JSON), gRPCServerCLI, and why ComfyUI/MLX can't replace it on a Mac
 
 ## Projects
 
@@ -31,7 +31,7 @@
 
 - [[dragon-epic-plan]] — 1-minute photoreal dragon short with a personal face: pipeline, Draw Things config per stage, face-identity and dragon-consistency strategy, 12-shot list, experiments, budget
 - [[lost-city-plan]] — hyper-real sci-fantasy rider entering jungle ruins (OpenArt-style reference): what makes it look real, klein Moodboard stills, Wan 2.2 vs LTX-2.3 motion settings, creature/hero/city locks, 8-shot list, experiments L0–L6
-- [[kyle-antarctic-rescue-plan]] — 1-minute vertical 3D-animated short from Kyle's 2D comic, music only, fully headless: 3D model sheets → panel stills locked to them → LTX-2.3 via `draw-things-cli` → 4K; 8 shots, experiments K0–K7
+- [[kyle-antarctic-rescue-plan]] — **delivered**: 1-minute vertical 3D-animated short from Kyle's 2D comic, rendered unattended overnight with `draw-things-cli` — klein edit-mode masters, diptych identity lock, LTX-2.3, every pick and rejection
 - [[three-minute-film-plan]] — 3-minute narrative film (36–40 × 5 s clips) with recurring characters: structure, consistency stack, per-shot workflow, 7 gating experiments, ~23 h budget, open questions
 
 ## Recipes

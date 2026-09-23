@@ -51,6 +51,8 @@ scripts/finish_clip.sh raw/clips/NAME.mov [music.mp3] [outname]
 
 ## `scripts/upscale_4k.sh` — any clip → 3840×2160 HEVC 10-bit
 
+**Portrait (2026-09-23)**: `W=2160 H=3840 scripts/upscale_4k.sh …` — output size is now `W`/`H` env (default 3840×2160). Without it a 9:16 clip gets cropped to a landscape strip. Measured on 576×1024 LTX clips with x4plus: ~20 frames/min (6.8–11.1 min per 6–10 s clip).
+
 ```
 scripts/upscale_4k.sh raw/clips/NAME.mov [outname] [model]
 ```
@@ -80,6 +82,8 @@ scripts/upscale_4k.sh raw/clips/NAME.mov [outname] [model]
 
 ## `scripts/assemble_film.sh` — N clips → one 4K film with crossfades
 
+**Portrait (2026-09-23)**: same `W`/`H` env (`W=2160 H=3840`); `LETTERBOX` stays landscape-only. For a music-only film, assemble without `MUSIC` (mute clips get silence) and mux a pre-cut bed afterwards — `MUSIC` goes through `amix`, which halves its level.
+
 ```
 scripts/assemble_film.sh OUT.mp4 clip1.mp4 clip2.mp4 [...]
 XFADE=0.5 FPS=25 MUSIC=bed.mp3 LETTERBOX=1  scripts/assemble_film.sh ...
@@ -103,6 +107,10 @@ XFADE=0.5 FPS=25 MUSIC=bed.mp3 LETTERBOX=1  scripts/assemble_film.sh ...
 **Limits**: xfade offsets are computed in Python from probed durations, so clips must have accurate container durations (Draw Things ProRes exports do). Title cards and SFX are not in yet — add them as extra "clips" (a 2 s still rendered with `ffmpeg -loop 1`).
 
 ---
+
+## `scripts/dt_diptych.sh` — reference-locked klein edit, released CLI
+
+`scripts/dt_diptych.sh REF.png IN.png PROMPT.txt OUT.png [seed] [W] [H]` — puts REF left and IN right (each fitted to W×H, default 576×1024), runs FLUX.2 klein 9B at `--strength 1.0` (edit mode) on the 2W×H pair, keeps the right half. REF `-` = plain single-image edit. The prompt must say "Two images side by side … re-render the right image … looking exactly like the left … keep the left image unchanged" and name the framing. ~55–60 s per diptych. The CLI's substitute for Moodboard references — see [[headless-cli-pipeline]] §1c and [[kyle-antarctic-rescue-plan]] §0.
 
 ## `scripts/dt_project.sh` — Draw Things projects from the shell
 

@@ -4,7 +4,7 @@
 
 **Sources**: projects.json; per-project notes from the session logs.
 
-**Last updated**: 2026-09-22
+**Last updated**: 2026-09-23
 
 ---
 
@@ -22,7 +22,7 @@
 | 8 | [Dragon Epic — 1-minute photoreal short, family hero face](#dragon_epic) | 2026-09-21 | in progress — scene 1A posted | FLUX.2 [klein] 9B 1280x768 | Wan 2.2 High Noise 47 min | The Dragon's Breath | `—` | [▶ watch](https://youtu.be/Xzu-c5yX8uo) |
 | 9 | [Three-minute film — recurring characters (subject TBD)](#film3min) | 2026-09-21 | planning | FLUX.2 [klein] 9B 1024x576 | Wan 2.2 High Noise 15 min | TBD | `—` | — |
 | 10 | [Lost City — hyper-real rider on a raptor-dragon entering jungle ruins](#lost_city) | 2026-09-21 | in progress — clips at 4K+music: s2, s3, s7, s8, s10, s14; s9 trimmed (4.6 s, drift after); s11 stills rejected (klein duplicates the creature); s12 not started; s15 rift coda done (3 clips assembled to 30 s 4K with music) | FLUX.2 [klein] 9B 1280x768 | LTX-2.3 22B [distilled] 1.1 (production engine — see ltx_10s) — Wan 2.2 High Noise I2V (8-bit S) + Low Noise refiner 10% for locked-camera shots at 768p 49 min | Mystical orchestral theme with ancient flute | `—` | [▶ watch](https://youtu.be/68sq_jZqu6c) |
-| 11 | [Kyle's Antarctic Rescue — 1-minute 3D-animated vertical short from a 5-panel comic](#kyle_rescue) | 2026-09-22 | planned — see wiki/kyle-antarctic-rescue-plan.md; experiments K0–K5 first | FLUX.2 [klein] 9B 576x1024 | LTX-2.3 22B [distilled] 1.1 via draw-things-cli ? min | Calm Ambient Dreamscape | `—` | — |
+| 11 | [Kyle's Antarctic Rescue — 1-minute 3D-animated vertical short from a 5-panel comic](#kyle_rescue) | 2026-09-22 | delivered 2026-09-23 01:38 — 60.0 s, 1080x1920 + 2160x3840, rendered unattended overnight (see plan §0) | FLUX.2 [klein] 9B 576x1024 | LTX-2.3 22B [distilled] 1.1 via draw-things-cli ? min | Calm Ambient Dreamscape | `—` | — |
 
 ## YouTube playlist — [AI-Vids](https://www.youtube.com/playlist?list=PLJx49Sf61wKQ)
 
@@ -790,8 +790,8 @@ Prompt: `per scene — see the scenes table`
 
 ## Kyle's Antarctic Rescue — 1-minute 3D-animated vertical short from a 5-panel comic {#kyle_rescue}
 
-- **Date**: 2026-09-22 · **Status**: planned — see wiki/kyle-antarctic-rescue-plan.md; experiments K0–K5 first · **Draw Things project**: `none — rendered with draw-things-cli (no project file)`
-- **Files** (`raw/clips/`): `music/best_adventure_ever.mp3`
+- **Date**: 2026-09-22 · **Status**: delivered 2026-09-23 01:38 — 60.0 s, 1080x1920 + 2160x3840, rendered unattended overnight (see plan §0) · **Draw Things project**: `none — rendered with draw-things-cli (no project file)`
+- **Files** (`raw/clips/`): `music/best_adventure_ever.mp3`, `kyle/masters/kyle_front.png`, `kyle/stills/s1..s8.png (+ *_v.txt video prompts)`, `kyle/clips/s1..s8_ltx_v1.mov, s2_ltx_v2.mov, s4_ltx_v2.mov`, `kyle/final/kyle_rescue_1080x1920.mp4`, `kyle/final/kyle_rescue_2160x3840.mp4`, `kyle/work/qc_notes.txt`
 - **Notes**: Kyle is Kevin's son; consent confirmed 2026-09-22.
 
 **Still**

@@ -8,6 +8,14 @@
 
 ---
 
+## 2026-09-23 — Kyle's Antarctic Rescue rendered overnight, unattended
+
+Kevin's go at ~22:00; film finished 01:38 with no human input (Claude judged every pick). Delivered `raw/clips/kyle/final/kyle_rescue_1080x1920.mp4` + 2160×3840 master, 60.0 s, music tail from 93.4 s.
+
+**Key findings**: klein `--strength` 0.7–0.9 barely changes the input on the released CLI; **1.0 = edit mode** (reference + instruction) — that made the 3D Kyle master in one 30 s pass. **Diptych trick** (reference left, input right, crop right half) replaced Moodboard; `scripts/dt_diptych.sh` added. Building the CLI from `main` failed (compile error in `ccv_nnc_mfa`, step 524/1254) and wasn't needed. LTX-2.3 portrait 576×1024 × 249 f: 9:21–9:31 per clip. LTX fades to dark at the end of 4/10 clips. Two clips redone: S2 (hair restyled by "wind" wording, thumb dropped) and S4 (camera pull-back lost the chick). Upscale x4plus to 2160×3840 ~20 frames/min. Script bug: ffmpeg in a `while read` loop ate the shot list — fixed with `-nostdin` + fd 3.
+
+**Changed**: `scripts/upscale_4k.sh`, `scripts/assemble_film.sh` (`W`/`H` portrait env, default landscape unchanged), new `scripts/dt_diptych.sh`; `wiki/kyle-antarctic-rescue-plan.md` §0 results with every pick/rejection and QC sheets; `wiki/headless-cli-pipeline.md` §1c; `wiki/scripts-reference.md`; `projects.json`.
+
 ## 2026-09-22 — Kyle plan restyled: 3D animated film
 
 Kevin wants a "3D realistic world"; clarified as a **3D animated feature-film look** (stylised characters, physically real ice/snow/water), face from the comic (no photo). Consequence: 2D → 3D needs klein at ~0.75–0.9, which keeps layout but redraws the face, so the panel alone no longer locks identity. Plan rewritten around two stages: **Stage A** 3D model sheets (Kyle front and ¾, sidekick, chick, saucer) from comic crops, Kevin picks; **Stage B** every face shot locked to the masters via, in order, multi-`--image` from a `--HEAD` CLI build, a single-image diptych (master | panel), a two-pass face transplant, or the app Moodboard for failing stills only. Collages (S6, S8) now use 3D pieces so they only blend. Upscaler switched to x4plus. Experiments renumbered K0–K7; budget ~5–6 h. `projects.json` locks and shot methods updated.

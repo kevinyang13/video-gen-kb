@@ -92,7 +92,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
     <span class="spacer"></span>
     <button class="pill" onclick="tt()">◐ Theme</button>
   </nav>
-  <h1>Headless CLI Pipeline — running this project without clicking a UI</h1><p class="lede">Whether the whole pipeline — text-to-image with reference ("Moodboard") images, image-to-video, upscale, edit — can run from the command line with no GUI. Short answer: <strong>yes, and the best CLI is Draw Things' own</strong> (<code>draw-things-cli</code>, GPL-v3, same engine and same model files as the app, video output and repeatable <code>--image</code> references included). Measured on 2026-09-22: a 10-second LTX clip that takes ~20 min in the app takes <strong>9 min 41 s</strong> from the CLI. The one gap is Moodboard — multi-reference <code>--image</code> is in the source but not in the current release. ComfyUI can be driven headlessly over HTTP but its Mac video story is bad; MLX tools cover stills only.</p><div class="meta"><span><b>Updated</b> 2026-09-22 (installed and measured — §1b)</span><span><b>Sources</b> <a href="https://github.com/drawthingsai/draw-things-community">drawthingsai/draw-things-community</a> source read on 2026-09-22 (<code>Apps/DrawThingsCLI/DrawThingsCLI.swift</code>, <code>Libraries/Scripting/Sources/ScriptModels.swift</code>, <code>Libraries/Scripting/Sources/SharedScript.swift</code>, <code>Libraries/DataModels/Sources/config.fbs</code>); <a href="https://releases.drawthings.ai/p/draw-things-cli-local-media-generation">draw-things-cli announcement</a> (2026-03-25); <a href="https://github.com/drawthingsai/draw-things-comfyui">draw-things-comfyui</a>; <a href="https://docs.comfy.org/tutorials/flux/flux-2-klein">ComfyUI FLUX.2 klein tutorial</a>; <a href="https://github.com/xmarre/ComfyUI-Flux2Klein-Conditioning-Toolkit">ComfyUI-Flux2Klein-Conditioning-Toolkit</a>; <a href="https://myaiforce.com/improve-multi-reference-image-results-flux-2-klein/">MyAIForce multi-reference guide</a>; <a href="https://papayabytes.substack.com/p/guide-comfyui-and-wan-22-image-to">ComfyUI + Wan 2.2 on Apple Silicon</a>; <a href="https://lilting.ch/en/articles/ltx2-wan22-mac-local-video-gen">LTX-2 vs Wan 2.2 on M1 Max</a>; <a href="https://github.com/james-see/ltx-video-mac">ltx-video-mac</a>; <a href="https://github.com/mflux-community/mflux">mflux</a>; ComfyUI API guides (<a href="https://9elements.com/blog/hosting-a-comfyui-workflow-via-api/">9elements</a>, <a href="https://www.runflow.io/blog/comfyui-api-developer-guide">Runflow</a>). All as of 2026-09-22.</span></div>
+  <h1>Headless CLI Pipeline — running this project without clicking a UI</h1><p class="lede">Whether the whole pipeline — text-to-image with reference ("Moodboard") images, image-to-video, upscale, edit — can run from the command line with no GUI. Short answer: <strong>yes, and the best CLI is Draw Things' own</strong> (<code>draw-things-cli</code>, GPL-v3, same engine and same model files as the app, video output and repeatable <code>--image</code> references included). Measured on 2026-09-22: a 10-second LTX clip that takes ~20 min in the app takes <strong>9 min 41 s</strong> from the CLI. The one gap is Moodboard — multi-reference <code>--image</code> is in the source but not in the current release. ComfyUI can be driven headlessly over HTTP but its Mac video story is bad; MLX tools cover stills only.</p><div class="meta"><span><b>Updated</b> 2026-09-22 (installed and measured — §1b; klein strength semantics and the diptych trick — §1c)</span><span><b>Sources</b> <a href="https://github.com/drawthingsai/draw-things-community">drawthingsai/draw-things-community</a> source read on 2026-09-22 (<code>Apps/DrawThingsCLI/DrawThingsCLI.swift</code>, <code>Libraries/Scripting/Sources/ScriptModels.swift</code>, <code>Libraries/Scripting/Sources/SharedScript.swift</code>, <code>Libraries/DataModels/Sources/config.fbs</code>); <a href="https://releases.drawthings.ai/p/draw-things-cli-local-media-generation">draw-things-cli announcement</a> (2026-03-25); <a href="https://github.com/drawthingsai/draw-things-comfyui">draw-things-comfyui</a>; <a href="https://docs.comfy.org/tutorials/flux/flux-2-klein">ComfyUI FLUX.2 klein tutorial</a>; <a href="https://github.com/xmarre/ComfyUI-Flux2Klein-Conditioning-Toolkit">ComfyUI-Flux2Klein-Conditioning-Toolkit</a>; <a href="https://myaiforce.com/improve-multi-reference-image-results-flux-2-klein/">MyAIForce multi-reference guide</a>; <a href="https://papayabytes.substack.com/p/guide-comfyui-and-wan-22-image-to">ComfyUI + Wan 2.2 on Apple Silicon</a>; <a href="https://lilting.ch/en/articles/ltx2-wan22-mac-local-video-gen">LTX-2 vs Wan 2.2 on M1 Max</a>; <a href="https://github.com/james-see/ltx-video-mac">ltx-video-mac</a>; <a href="https://github.com/mflux-community/mflux">mflux</a>; ComfyUI API guides (<a href="https://9elements.com/blog/hosting-a-comfyui-workflow-via-api/">9elements</a>, <a href="https://www.runflow.io/blog/comfyui-api-developer-guide">Runflow</a>). All as of 2026-09-22.</span></div>
 <hr />
 <h2>The question</h2>
 <p>Everything in <a href="lost-city-plan.html">lost city plan</a> and <a href="dragon-epic-plan.html">dragon epic plan</a> currently runs through the Draw Things <strong>window</strong>: pick a model, load a still, drag crops into the Moodboard, press Generate, press Save. That is why this project carries a pile of UI-automation gotchas (<a href="draw-things-setup.html">draw things setup</a>, memory <code>draw-things-automation</code>): synthetic drags don't register, a double-click on Generate means Stop, a screen lock freezes the whole batch. None of that is inherent to the models — it is inherent to driving an app.</p>
@@ -289,12 +289,36 @@ draw-things-cli generate -m ltx_2.3_22b_distilled_1.1_q8p.ckpt \
 </tr>
 <tr>
 <td>Moodboard</td>
-<td><strong>Not in this release.</strong> Text-only stills for now</td>
+<td><strong>Not in this release</strong> — but see §1c: klein edit mode + a side-by-side diptych does the same job</td>
 </tr>
 </tbody>
 </table></div>
 <p>The speed difference is the headline: the app keeps a project database, a live preview and the canvas in memory; the CLI loads the checkpoints, samples, writes, exits. Same engine, same quants, half the wall clock.</p>
 <p>Practical notes: progress output is a TTY spinner, so a redirected log stays <strong>empty until the process exits</strong> — judge progress from <code>lsof</code>/RSS or just wait. RSS reads ~0.5 GB while the real weights are mmap'd (26 GB LTX + 13 GB Gemma), so Activity Monitor understates it.</p>
+<h2>1c. klein edit mode and the diptych trick — Kyle's Antarctic Rescue, 2026-09-22</h2>
+<p>Found while making 3D masters from a 2D comic (<a href="kyle-antarctic-rescue-plan.html">kyle antarctic rescue plan</a>):</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th><code>--strength</code> with klein 9B + <code>--image</code></th>
+<th>What happens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.7 / 0.8 / 0.9</td>
+<td>plain img2img, and a <strong>weak</strong> one: even at 0.9 the output was nearly the input — same background, same <code>delogo</code> smear, still 2D; the prompt barely registered</td>
+</tr>
+<tr>
+<td><strong>1.0</strong></td>
+<td><strong>edit mode</strong>: the image becomes a reference and the prompt an instruction. "Re-render this boy as a 3D animated film character … plain grey background, remove the ship and all text" did exactly that, keeping face, hair and parka</td>
+</tr>
+</tbody>
+</table></div>
+<p>So on the released CLI, <strong>use klein at strength 1.0 with an instruction-style prompt</strong> for any image-conditioned still; the 0.x range is only for gentle clean-ups.</p>
+<p><strong>Diptych = one-image Moodboard.</strong> The released CLI takes a single <code>--image</code>, but that image can hold two pictures. Put the reference (a character master, an earlier approved shot) on the left and the input (a comic panel, a layout) on the right, render at double width, and prompt "Two images side by side … re-render the right image … with the boy looking exactly like the boy on the left … keep the left image unchanged". Crop the right half. klein carries the face, costume and props across. <code>scripts/dt_diptych.sh REF IN PROMPT OUT [seed]</code> wraps it (<code>-</code> as REF = plain single-image edit).</p>
+<p>Measured: 1152×1024 diptych ≈ 45–60 s per still (single 576×1024 edit ≈ 30 s). In 3 seeds, 1–2 usually keep identity; failures are dropped subjects (the boy vanishes from a busy frame), an extra hand, or a different face — always check.</p>
+<p>Also tried: building <code>main</code> from source for real multi-<code>--image</code> (<code>swift build -c release --product draw-things-cli</code>, Swift 6.0.3/Xcode). Fetching dependencies alone took ~25 min, then it <strong>failed compiling</strong> (<code>ccv_nnc_mfa</code> Metal kernels, step 524/1254). Not needed once the diptych worked.</p>
 <h2>2. <code>gRPCServerCLI</code> — headless server, thin clients</h2>
 <pre><code class="language-bash">gRPCServerCLI-macOS ~/Library/Containers/com.liuliu.draw-things/Data/Documents/Models \
   --no-response-compression --model-browser      # listens on :7859
@@ -353,7 +377,7 @@ draw-things-cli generate -m ltx_2.3_22b_distilled_1.1_q8p.ckpt \
 
   <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="scripts-reference.html">scripts reference</a> — the CLI half of the pipeline that already exists</li><li><a href="draw-things-setup.html">draw things setup</a> · <a href="runbook-living-painting.html">runbook living painting</a> — the UI workflow this would replace</li><li><a href="apple-silicon-inference.html">apple silicon inference</a> — why Metal, FP8 and MPS decide all of this</li><li><a href="lost-city-plan.html">lost city plan</a> — the settings that would go into the config JSON</li><li><a href="image-to-video-models.html">image to video models</a> — Wan vs LTX trade-off, unchanged by the harness</li></ul></div>
 </div>
-<footer>video-gen-kb · built 2026-09-22 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<footer>video-gen-kb · built 2026-09-23 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
 <script>function tt(){var r=document.documentElement,
 d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
 matchMedia('(prefers-color-scheme: dark)').matches);
