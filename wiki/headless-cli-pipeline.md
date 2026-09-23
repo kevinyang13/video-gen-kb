@@ -1,10 +1,10 @@
 # Headless CLI Pipeline — running this project without clicking a UI
 
-**Summary**: Whether the whole pipeline — text-to-image with reference ("Moodboard") images, image-to-video, upscale, edit — can run from the command line with no GUI. Short answer: **yes, and the best CLI is Draw Things' own** (`draw-things-cli`, GPL-v3, same engine and same model files as the app, video output and repeatable `--image` references included). ComfyUI can be driven headlessly over HTTP but its Mac video story is bad; MLX tools cover stills only.
+**Summary**: Whether the whole pipeline — text-to-image with reference ("Moodboard") images, image-to-video, upscale, edit — can run from the command line with no GUI. Short answer: **yes, and the best CLI is Draw Things' own** (`draw-things-cli`, GPL-v3, same engine and same model files as the app, video output and repeatable `--image` references included). Measured on 2026-09-22: a 10-second LTX clip that takes ~20 min in the app takes **9 min 41 s** from the CLI. The one gap is Moodboard — multi-reference `--image` is in the source but not in the current release. ComfyUI can be driven headlessly over HTTP but its Mac video story is bad; MLX tools cover stills only.
 
 **Sources**: [drawthingsai/draw-things-community](https://github.com/drawthingsai/draw-things-community) source read on 2026-09-22 (`Apps/DrawThingsCLI/DrawThingsCLI.swift`, `Libraries/Scripting/Sources/ScriptModels.swift`, `Libraries/Scripting/Sources/SharedScript.swift`, `Libraries/DataModels/Sources/config.fbs`); [draw-things-cli announcement](https://releases.drawthings.ai/p/draw-things-cli-local-media-generation) (2026-03-25); [draw-things-comfyui](https://github.com/drawthingsai/draw-things-comfyui); [ComfyUI FLUX.2 klein tutorial](https://docs.comfy.org/tutorials/flux/flux-2-klein); [ComfyUI-Flux2Klein-Conditioning-Toolkit](https://github.com/xmarre/ComfyUI-Flux2Klein-Conditioning-Toolkit); [MyAIForce multi-reference guide](https://myaiforce.com/improve-multi-reference-image-results-flux-2-klein/); [ComfyUI + Wan 2.2 on Apple Silicon](https://papayabytes.substack.com/p/guide-comfyui-and-wan-22-image-to); [LTX-2 vs Wan 2.2 on M1 Max](https://lilting.ch/en/articles/ltx2-wan22-mac-local-video-gen); [ltx-video-mac](https://github.com/james-see/ltx-video-mac); [mflux](https://github.com/mflux-community/mflux); ComfyUI API guides ([9elements](https://9elements.com/blog/hosting-a-comfyui-workflow-via-api/), [Runflow](https://www.runflow.io/blog/comfyui-api-developer-guide)). All as of 2026-09-22.
 
-**Last updated**: 2026-09-22
+**Last updated**: 2026-09-22 (installed and measured — §1b)
 
 ---
 
@@ -32,7 +32,9 @@ brew tap drawthingsai/draw-things
 brew install drawthingsai/draw-things/draw-things-cli
 ```
 
-*(Not installed here yet. Comments on the announcement report Swift-version mismatches when building from source — expect friction; marked **unverified on this Mac**.)*
+**Installed and used here on 2026-09-22.** The stable formula pulls a prebuilt, sha256-pinned binary from the GitHub release (178 MB, installed in seconds — no Swift build). `--version` prints `dev`. Build-from-source (`--HEAD`) is the path where the reported Swift-version friction lives; skip it.
+
+> **Version trap**: the released binary is `1.20260430.0`, which is **behind `main`**. In the release, `--image` is a *single* img2img input — the repeatable multi-reference form, `--remote`, and `--avc` exist only in the source read above. So the Moodboard equivalent is **not available in the current release**; CLI stills are text-only until the next one.
 
 **It reads the app's own models.** `--models-dir` defaults to Draw Things' container; ours already holds the exact checkpoints this project uses:
 
@@ -103,6 +105,40 @@ and the klein still:
 
 **Unverified until we run it**: (a) that `--image still.png --frames 249` is treated as LTX *image-to-video* rather than img2img on frame 1; (b) whether reference images land in the Moodboard channel with equal weight for klein (the app lets us set per-image weight — `setMoodboardImageWeight` exists in the scripting API, no CLI flag seen); (c) that `stochasticSamplingGamma` is 0…1 and not 0…100. One test render each settles all three.
 
+## 1b. Measured on this Mac — Lost City shot 14, 2026-09-22
+
+First real job through the CLI: the final shot of Lost City, start to finish, no window, no clicks.
+
+```bash
+# still — 3 seeds, 27–35 s each at 1280x768
+draw-things-cli generate -m flux_2_klein_9b_i8x.ckpt \
+  --prompt-file s14_still.txt --width 1280 --height 768 \
+  --steps 4 --cfg 1 --seed 2 --config-json '{"shift":3.0,"sampler":16}' \
+  --offline --disable-preview -o raw/clips/lostcity/s14_still_v1.png
+
+# clip — 249 frames, 9 min 41 s
+draw-things-cli generate -m ltx_2.3_22b_distilled_1.1_q8p.ckpt \
+  --prompt-file s14_video.txt --image raw/clips/lostcity/s14_still_v1.png \
+  --width 1024 --height 576 --frames 249 --steps 8 --cfg 1 --seed 1 \
+  --config-json '{"sampler":19,"shift":5.0,"stochasticSamplingGamma":0.3,"fps":25,"hiresFix":false}' \
+  --offline --disable-preview --video-format prores422hq \
+  -o raw/clips/lostcity/s14_ltx_v1.mov
+```
+
+| Claim | Result |
+|---|---|
+| Reads the app's models | **Yes.** `flux_2_klein_9b_i8x.ckpt` and `ltx_2.3_22b_distilled_1.1_q8p.ckpt` resolved from the app container with no `--models-dir`; it also pulled the companion `gemma_3_12b_it_qat_q8p.ckpt` text encoder by itself |
+| `--image` + `--frames` = image-to-video? | **Yes.** Frame 0 of the output is the still, pixel for pixel — not img2img on frame 1 |
+| `--config-json` merge | **Works.** `sampler: 16` (DDIM Trailing) and `19` (TCD Trailing) behaved as the app's settings do; `stochasticSamplingGamma: 0.3` is the **0…1** scale, not 0…100 |
+| Output | ProRes 422 HQ, 1024×576, **exactly 249 frames @ 25 fps**, plus `pcm_f32le` 48 kHz audio — identical to the app's export |
+| Klein still | **27–35 s** at 1280×768, 4 steps (the app takes ~1 min, but with 3 Moodboard refs) |
+| LTX clip | **580 s = 9 min 41 s** total, 53 s per step — **~2× faster than the same settings in the app** (~20 min), because nothing else holds memory |
+| Moodboard | **Not in this release.** Text-only stills for now |
+
+The speed difference is the headline: the app keeps a project database, a live preview and the canvas in memory; the CLI loads the checkpoints, samples, writes, exits. Same engine, same quants, half the wall clock.
+
+Practical notes: progress output is a TTY spinner, so a redirected log stays **empty until the process exits** — judge progress from `lsof`/RSS or just wait. RSS reads ~0.5 GB while the real weights are mmap'd (26 GB LTX + 13 GB Gemma), so Activity Monitor understates it.
+
 ## 2. `gRPCServerCLI` — headless server, thin clients
 
 ```bash
@@ -130,9 +166,9 @@ The pattern is consistent with [[apple-silicon-inference]]: the models are porta
 
 ## 5. Recommendation
 
-1. **Install `draw-things-cli` and re-shoot one known clip** — s10 (drinking, the most stable result we have). Compare wall time and output against `s10_ltx_v1.mov`. That single test answers the three unverified items in §1.
-2. If it matches, add `scripts/dt_render.sh` next to the existing scripts: read a scene id out of `projects.json`, write `--prompt-file`, pick the config JSON, call the CLI, then chain straight into `upscale_4k.sh`. The whole "render 5 scenes overnight" job becomes a `for` loop with no screen lock, no drag, no crash-from-cloned-project, and no `app_*` calls at all.
-3. Keep the app for **looking** at results and for anything that needs Moodboard weights until §1(b) is settled.
+1. ~~Install and test~~ **done** — see §1b. It is faster than the app and produces an identical file.
+2. **Move rendering to the CLI for every shot whose still needs no reference images.** Write `scripts/dt_render.sh`: read a scene id out of `projects.json`, dump the prompts to files, pick the config JSON, call the CLI, chain into `upscale_4k.sh`. An overnight batch becomes a `for` loop — no screen lock, no drag, no crash-from-cloned-project, no `app_*` calls.
+3. **Keep the app for Moodboard shots** until the multi-`--image` build ships. Every consistency-critical still (creature crops, hero crops) still goes through the window; landscape and establishing shots do not.
 4. Do not migrate to ComfyUI for motion on this Mac. Revisit only if an NVIDIA box enters the picture, where it becomes the better harness.
 
 ## Related pages

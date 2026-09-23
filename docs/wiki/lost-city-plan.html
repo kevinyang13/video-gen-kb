@@ -318,6 +318,14 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <li><strong>Motion bleeds onto small subjects.</strong> In a shot where something else is destroyed, LTX applies those verbs to the subject too: s14 v1 sheared the creature's <em>head</em> off and dropped it like a falling spire. Fixes, in order of effect: make the subject large (≥ a third of the frame — a head that is ~30 px in the 32×32 latent gets re-synthesised as debris), name the subject and its stillness <strong>before</strong> any falling verb, use positive rigidity words (<em>solid, still, intact, head held level and attached, only the ribs move</em>), and add one clause pinning the destruction to the distance. Last resort: render the destruction as a plate with no creature in it.</li>
 <li>Wide shots tolerate invented foreground geometry (s2 gained palm fronds sweeping the lens — more cinematic); hero shots do not.</li>
 </ul>
+<p><strong>Headless alternative (faster)</strong> — since 2026-09-22 the same render runs from the shell with no window, at roughly half the wall clock (9 min 41 s for 249 frames vs ~20 min in the app), because nothing else holds memory:</p>
+<pre><code class="language-bash">draw-things-cli generate -m ltx_2.3_22b_distilled_1.1_q8p.ckpt \
+  --prompt-file scene.txt --image still.png \
+  --width 1024 --height 576 --frames 249 --steps 8 --cfg 1 \
+  --config-json '{&quot;sampler&quot;:19,&quot;shift&quot;:5.0,&quot;stochasticSamplingGamma&quot;:0.3,&quot;fps&quot;:25,&quot;hiresFix&quot;:false}' \
+  --offline --disable-preview --video-format prores422hq -o clip.mov
+</code></pre>
+<p><code>sampler: 19</code> is TCD Trailing (16 = DDIM Trailing), <code>stochasticSamplingGamma</code> is the 0…1 form of SSS 30%, and <code>--image</code> really is the first frame. The catch: the released CLI takes only one <code>--image</code>, so <strong>Moodboard shots still need the app</strong>. Full detail in <a href="headless-cli-pipeline.html">headless cli pipeline</a>. Shot 14 was shot this way.</p>
 <p><strong>Per-clip workflow (Draw Things)</strong></p>
 <ol>
 <li><strong>Fresh project</strong> per clip (Projects → + → <code>dt_project.sh rename-newest lostcity-sN</code>). Never a <code>dt_project.sh clone</code> — saving a <em>video</em> into a cloned project asserts in <code>ImageHistoryManager.pushHistory</code> and <strong>kills the app, wiping that project's history</strong> (two crashes, 2026-09-22). Clone is fine for stills.</li>
@@ -450,7 +458,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <td>creature large in frame; trim on first soft frame</td>
 </tr>
 <tr>
-<td>14</td>
+<td>14 ✅</td>
 <td><strong>Escape / final shot</strong> — wide landscape from a ridge: every spire falls until the skyline is empty</td>
 <td>fixed, wide</td>
 <td>creature solid and still in the near foreground (left third), rider looks back; the whole city comes down on the horizon, last tower by ~8 s, ends on a dust skyline</td>
@@ -534,6 +542,11 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>s14 v2 (final shot)</td>
+<td>2026-09-22</td>
+<td><strong>Works, and it was the first headless render.</strong> Still and clip both from <code>draw-things-cli</code> — no window, no clicks. 3 klein seeds at 27–35 s each (seed 2 kept: sheared spire tops, dust columns, creature intact and large), then LTX 249 f in <strong>9 min 41 s</strong>. The enlarged creature plus subject-first rigidity wording fixed the motion bleed: the creature stands solid for the full 10 s while the spires come down behind it, and the last second is an empty dust skyline. Frame 0 of the clip is the still pixel-for-pixel, so <code>--image</code> is true I2V. <code>s14_ltx_v1.mov</code>.</td>
+</tr>
 <tr>
 <td>s14 v1 (final shot)</td>
 <td>2026-09-22</td>

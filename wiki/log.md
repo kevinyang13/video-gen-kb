@@ -8,6 +8,20 @@
 
 ---
 
+## 2026-09-22 — First headless render: Lost City shot 14 through `draw-things-cli`
+
+**Source**: hands-on. `brew tap drawthingsai/draw-things && brew install draw-things-cli` (prebuilt binary, 178 MB, version `1.20260430.0`).
+
+**Done**: rendered the film's final shot end to end with no Draw Things window — 3 klein stills at 27–35 s each (1280×768, 4 steps, `--config-json '{"shift":3.0,"sampler":16}'`), then LTX-2.3 at 249 frames in **9 min 41 s** (~2× faster than the same settings in the app), then `upscale_4k.sh`. Files: `s14_still_v1.png` (+ s1/s3 seed variants), `s14_ltx_v1.mov`, `s14_ltx_v1_4k*.mp4`.
+
+**Verified**: the CLI resolves models from the app's own container (and pulled the Gemma 3 12B text encoder itself); `--image` + `--frames` is true image-to-video (frame 0 is the still pixel-for-pixel); the `config.fbs` sampler indices hold in practice (16 = DDIM Trailing, 19 = TCD Trailing); `stochasticSamplingGamma` is 0…1; output is ProRes 422 HQ + `pcm_f32le`, identical to the app's export.
+
+**Limitation found**: the *released* binary takes a single `--image` (img2img). Repeatable multi-reference `--image`, `--remote` and `--avc` exist only in `main`. So Moodboard-conditioned stills still need the app. Also: the progress spinner is TTY-only, so a redirected log stays empty until exit.
+
+**Story**: s14 v2 (enlarged creature, subject-first rigidity wording) fixed the motion bleed — the creature holds for the full 10 s while every spire comes down behind it, ending on an empty dust skyline.
+
+**Updated**: `wiki/headless-cli-pipeline.md` (§1b measured, recommendation rewritten), `wiki/lost-city-plan.md` (§3c headless block, 7b row, shot 14 marked shot), `projects.json`.
+
 ## 2026-09-22 — Can this run without a UI? Yes: `draw-things-cli`
 
 **Source**: Kevin's question ("can it be done via CLI"). Research: the `drawthingsai/draw-things-community` source (read directly — `Apps/DrawThingsCLI/DrawThingsCLI.swift`, `Libraries/Scripting/Sources/ScriptModels.swift`, `SharedScript.swift`, `Libraries/DataModels/Sources/config.fbs`), the draw-things-cli announcement (2026-03-25), ComfyUI FLUX.2 klein docs and multi-reference node packs, two Apple-Silicon field reports (Wan 2.2 GGUF on M1 Max, ComfyUI+Wan on M2 Max), mflux, ltx-video-mac.
