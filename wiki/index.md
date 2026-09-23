@@ -4,7 +4,7 @@
 
 **Sources**: n/a
 
-**Last updated**: 2026-09-21
+**Last updated**: 2026-09-22
 
 ---
 
@@ -21,6 +21,7 @@
 - [[video-upscaling]] — SeedVR2, FlashVSR, Real-ESRGAN; temporal vs per-frame; Mac support
 - [[draw-things-setup]] — downloading Wan 2.1/2.2, LTX-2.3, Hunyuan, SkyReels inside Draw Things; LightX2V 4-step settings; I2V step-by-step; disk budget
 - [[apple-silicon-inference]] — FP8 trap, MPS slowness, Draw Things and MLX runtimes, 48 GB memory planning
+- [[headless-cli-pipeline]] — running the whole pipeline without a UI: `draw-things-cli` (multi-`--image` references, `--frames` video, config JSON), gRPCServerCLI, and why ComfyUI/MLX can't replace it on a Mac
 
 ## Projects
 

@@ -4,9 +4,22 @@
 
 **Sources**: n/a
 
-**Last updated**: 2026-09-19
+**Last updated**: 2026-09-22
 
 ---
+
+## 2026-09-22 — Can this run without a UI? Yes: `draw-things-cli`
+
+**Source**: Kevin's question ("can it be done via CLI"). Research: the `drawthingsai/draw-things-community` source (read directly — `Apps/DrawThingsCLI/DrawThingsCLI.swift`, `Libraries/Scripting/Sources/ScriptModels.swift`, `SharedScript.swift`, `Libraries/DataModels/Sources/config.fbs`), the draw-things-cli announcement (2026-03-25), ComfyUI FLUX.2 klein docs and multi-reference node packs, two Apple-Silicon field reports (Wan 2.2 GGUF on M1 Max, ComfyUI+Wan on M2 Max), mflux, ltx-video-mac.
+
+**Created**:
+- `wiki/headless-cli-pipeline.md` — the four stages vs what has a CLI; `draw-things-cli` flags (repeatable `--image` = Moodboard, `--frames` + `--output clip.mov` = video, `--config-json` in `JSGenerationConfiguration` format for shift/sampler/SSS/refiner/LoRA), the sampler enum (16 = DDIM Trailing, 19 = TCD Trailing), our Lost City settings as config JSON, `gRPCServerCLI`, the app's HTTP API and JS scripting API (the only place Moodboard *weights* are exposed), and the non-DT routes (ComfyUI headless, mflux, mlx-video-with-audio, diffusers on MPS).
+
+**Findings that matter**: the CLI reads the app's own `Models/` directory, so our exact checkpoints (`flux_2_klein_9b_i8x.ckpt`, `ltx_2.3_22b_distilled_1.1_q8p.ckpt`, the Wan i2v pair) need no re-download; model *recommended settings* are the CLI's defaults, with `--config-json` merged on top. Against that, ComfyUI on Metal cannot load FP8 at all and a field test measured 82 min for a 2-second Wan 2.2 GGUF clip on an M1 Max — versus ~20 min for a 10-second LTX clip in Draw Things here. mflux is stills-only.
+
+**Open**: three things need one test render each — whether `--image` + `--frames` is true image-to-video, whether klein reference images land in the Moodboard channel at equal weight, and the scale of `stochasticSamplingGamma`. Next step if it passes: `scripts/dt_render.sh` driving renders straight from `projects.json`.
+
+**Updated**: `wiki/index.md` (new entry under Models & tools).
 
 ## 2026-09-19 — Wiki created; first brainstorm filed
 
