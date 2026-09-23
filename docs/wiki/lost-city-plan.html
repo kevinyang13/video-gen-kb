@@ -92,7 +92,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
     <span class="spacer"></span>
     <button class="pill" onclick="tt()">◐ Theme</button>
   </nav>
-  <h1>Lost City — Project Plan (hyper-real sci-fantasy rider)</h1><p class="lede">Plan for a hyper-realistic short in the style of the OpenArt reference (<code>raw/lostcity/ref_openart_rider_ruins.webp</code>): a hooded rider on a saddled raptor-dragon walks into an overgrown city of stone spires, god rays, waterfall. Covers what makes the reference look real, the local pipeline, Draw Things settings per stage (FLUX.2 klein stills; Wan 2.2 vs <strong>LTX-2.3</strong> for motion), creature/hero/environment consistency, shot list, experiments, budget. Living document.</p><div class="meta"><span><b>Updated</b> 2026-09-22 (LTX production settings in §3c; escape ending, shot 14 restaged as a landscape total collapse; per-scene prompts in <a href="projects.html">projects</a>)</span><span><b>Sources</b> <code>raw/lostcity/ref_openart_rider_ruins.webp</code> (reference, OpenArt watermark — generator unknown, probably a closed model such as Kling/Veo/Seedance; <em>unverified</em>); Wan 2.2 prompting guides (<a href="https://www.mimicpc.com/learn/how-to-craft-wan22-ai-video-prompts">MimicPC</a>, <a href="https://www.instasd.com/post/wan2-2-whats-new-and-how-to-write-killer-prompts">InstaSD</a>, <a href="https://whatlab.ai/guides/wan2-2-prompting-guide">WhatLab</a>); LTX docs (<a href="https://docs.ltx.io/open-source-model/usage-guides/image-to-video">I2V guide</a>, <a href="https://wiki.drawthings.ai/wiki/LTX-2">Draw Things LTX-2 wiki</a>, <a href="https://huggingface.co/Lightricks/LTX-2.3">HF LTX-2.3</a>); hands-on results from <a href="dragon-epic-plan.html">dragon epic plan</a> §7b (2026-09-21). All as of 2026-09-21.</span></div>
+  <h1>Lost City — Project Plan (hyper-real sci-fantasy rider)</h1><p class="lede">Plan for a hyper-realistic short in the style of the OpenArt reference (<code>raw/lostcity/ref_openart_rider_ruins.webp</code>): a hooded rider on a saddled raptor-dragon walks into an overgrown city of stone spires, god rays, waterfall. Covers what makes the reference look real, the local pipeline, Draw Things settings per stage (FLUX.2 klein stills; Wan 2.2 vs <strong>LTX-2.3</strong> for motion), creature/hero/environment consistency, shot list, experiments, budget. Living document.</p><div class="meta"><span><b>Updated</b> 2026-09-22 (LTX production settings in §3c; escape ending, shot 14 restaged as a landscape total collapse, creature enlarged after a motion-bleed failure; per-scene prompts in <a href="projects.html">projects</a>)</span><span><b>Sources</b> <code>raw/lostcity/ref_openart_rider_ruins.webp</code> (reference, OpenArt watermark — generator unknown, probably a closed model such as Kling/Veo/Seedance; <em>unverified</em>); Wan 2.2 prompting guides (<a href="https://www.mimicpc.com/learn/how-to-craft-wan22-ai-video-prompts">MimicPC</a>, <a href="https://www.instasd.com/post/wan2-2-whats-new-and-how-to-write-killer-prompts">InstaSD</a>, <a href="https://whatlab.ai/guides/wan2-2-prompting-guide">WhatLab</a>); LTX docs (<a href="https://docs.ltx.io/open-source-model/usage-guides/image-to-video">I2V guide</a>, <a href="https://wiki.drawthings.ai/wiki/LTX-2">Draw Things LTX-2 wiki</a>, <a href="https://huggingface.co/Lightricks/LTX-2.3">HF LTX-2.3</a>); hands-on results from <a href="dragon-epic-plan.html">dragon epic plan</a> §7b (2026-09-21). All as of 2026-09-21.</span></div>
 <hr />
 <h2>1. What the reference does — and what we copy</h2>
 <div class="tw"><table>
@@ -315,6 +315,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <li><strong>Action, not staging.</strong> "left to right, camera tracks alongside" was ignored on s1; the same wording worked on s2 and s7. Write the action you want, accept the camera you get, or shoot that frame on Wan.</li>
 <li><strong>Close-ups: hold position.</strong> Asking a close-up for locomotion (s3 v1) produced a full walk cycle that left the frame by 2 s <em>and</em> hallucinated a second rider behind. Use "stands still… only shifts its weight" and say the path behind <strong>stays empty</strong>.</li>
 <li><strong>Motion-stability rule</strong>: slow in-place actions (walk, drink, weight shift, breathing) hold the creature design for the full 10 s; fast locomotion (gallop, jump) drifts toward a horse after ~4–5 s → trim on the first soft frame (s9 → 116 f).</li>
+<li><strong>Motion bleeds onto small subjects.</strong> In a shot where something else is destroyed, LTX applies those verbs to the subject too: s14 v1 sheared the creature's <em>head</em> off and dropped it like a falling spire. Fixes, in order of effect: make the subject large (≥ a third of the frame — a head that is ~30 px in the 32×32 latent gets re-synthesised as debris), name the subject and its stillness <strong>before</strong> any falling verb, use positive rigidity words (<em>solid, still, intact, head held level and attached, only the ribs move</em>), and add one clause pinning the destruction to the distance. Last resort: render the destruction as a plate with no creature in it.</li>
 <li>Wide shots tolerate invented foreground geometry (s2 gained palm fronds sweeping the lens — more cinematic); hero shots do not.</li>
 </ul>
 <p><strong>Per-clip workflow (Draw Things)</strong></p>
@@ -450,10 +451,10 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </tr>
 <tr>
 <td>14</td>
-<td><strong>Escape / final shot</strong> — extreme wide landscape from a ridge: every spire falls until the skyline is empty</td>
-<td>fixed, extreme wide</td>
-<td>creature still and breathing in the foreground, rider looks back; the whole city comes down in the distance, last tower by ~8 s, ends on a dust skyline</td>
-<td>city (creature is scale only)</td>
+<td><strong>Escape / final shot</strong> — wide landscape from a ridge: every spire falls until the skyline is empty</td>
+<td>fixed, wide</td>
+<td>creature solid and still in the near foreground (left third), rider looks back; the whole city comes down on the horizon, last tower by ~8 s, ends on a dust skyline</td>
+<td>creature <strong>must be large</strong> — at a sixth of the frame its head collapsed with the spires (v1)</td>
 </tr>
 </tbody>
 </table></div>
@@ -533,6 +534,11 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>s14 v1 (final shot)</td>
+<td>2026-09-22</td>
+<td><strong>Motion bled onto the subject.</strong> In the extreme-wide staging the creature was about a sixth of the frame; LTX applied the city's collapse verbs to it and its <strong>head sheared off and fell like a spire</strong>. Two causes: at that scale the head is ~30 px in the 32×32 LTX latent (nothing to hold onto), and the falling verbs were in the prompt before the subject. v2 brings the creature into the near foreground at a third of the frame width, leads with the subject and positive rigidity words, and pins the destruction to the horizon in one clause. General rule now in §3c.</td>
+</tr>
 <tr>
 <td>L1 (result)</td>
 <td>2026-09-21</td>
