@@ -21,7 +21,7 @@
 | 7 | [FLL BOT Builders — Coastal Roots Farm, wide view](#fll_farm) | 2026-09-20 | done (v2) | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Calm Ambient Dreamscape | `fll_farm_v2_final.mp4` | [▶ watch](https://youtu.be/-Mf2UThasCg) |
 | 8 | [Dragon Epic — 1-minute photoreal short, family hero face](#dragon_epic) | 2026-09-21 | in progress — scene 1A posted | FLUX.2 [klein] 9B 1280x768 | Wan 2.2 High Noise 47 min | The Dragon's Breath | `—` | [▶ watch](https://youtu.be/Xzu-c5yX8uo) |
 | 9 | [Three-minute film — recurring characters (subject TBD)](#film3min) | 2026-09-21 | planning | FLUX.2 [klein] 9B 1024x576 | Wan 2.2 High Noise 15 min | TBD | `—` | — |
-| 10 | [Lost City — hyper-real rider on a raptor-dragon entering jungle ruins](#lost_city) | 2026-09-21 | in progress — clips at 4K+music: s2, s3, s7, s8, s10, s14; s9 trimmed (4.6 s, drift after); s11 stills rejected (klein duplicates the creature); s12 not started | FLUX.2 [klein] 9B 1280x768 | LTX-2.3 22B [distilled] 1.1 (production engine — see ltx_10s) — Wan 2.2 High Noise I2V (8-bit S) + Low Noise refiner 10% for locked-camera shots at 768p 49 min | Mystical orchestral theme with ancient flute | `—` | [▶ watch](https://youtu.be/68sq_jZqu6c) |
+| 10 | [Lost City — hyper-real rider on a raptor-dragon entering jungle ruins](#lost_city) | 2026-09-21 | in progress — clips at 4K+music: s2, s3, s7, s8, s10, s14; s9 trimmed (4.6 s, drift after); s11 stills rejected (klein duplicates the creature); s12 not started; s15 (3-part, 30 s rift sequence) rendering | FLUX.2 [klein] 9B 1280x768 | LTX-2.3 22B [distilled] 1.1 (production engine — see ltx_10s) — Wan 2.2 High Noise I2V (8-bit S) + Low Noise refiner 10% for locked-camera shots at 768p 49 min | Mystical orchestral theme with ancient flute | `—` | [▶ watch](https://youtu.be/68sq_jZqu6c) |
 
 ## YouTube playlist — [AI-Vids](https://www.youtube.com/playlist?list=PLJx49Sf61wKQ)
 
@@ -525,7 +525,7 @@ Prompt: `per shot — one camera move + one subject action`
 
 ## Lost City — hyper-real rider on a raptor-dragon entering jungle ruins {#lost_city}
 
-- **Date**: 2026-09-21 · **Status**: in progress — clips at 4K+music: s2, s3, s7, s8, s10, s14; s9 trimmed (4.6 s, drift after); s11 stills rejected (klein duplicates the creature); s12 not started · **Draw Things project**: `lostcity-s1, s2, s3, s7 (named); s8, s9 (cloned — clone crashes on video save); s10 and s11 in fresh Untitled projects; s14 rendered with draw-things-cli (no project file)`
+- **Date**: 2026-09-21 · **Status**: in progress — clips at 4K+music: s2, s3, s7, s8, s10, s14; s9 trimmed (4.6 s, drift after); s11 stills rejected (klein duplicates the creature); s12 not started; s15 (3-part, 30 s rift sequence) rendering · **Draw Things project**: `lostcity-s1, s2, s3, s7 (named); s8, s9 (cloned — clone crashes on video save); s10 and s11 in fresh Untitled projects; s14 rendered with draw-things-cli (no project file)`
 - **Files** (`raw/clips/`): `lostcity/ref_openart_rider_ruins.webp (reference, raw/)`, `lostcity/crop_creature_rider.png, crop_spires.png, crop_foreground.png (Moodboard refs, raw/)`, `lostcity/s1_still_v1.png (shot 1 still, klein)`, `lostcity/s1_ltx_v1.mov (LTX-2.3 test, 1024x576x97 @25fps + audio)`, `lostcity/s2_still_v1.png (shot 2 still, klein, refs: our s1 skyline + spires crop, seed 1)`, `lostcity/s7_still_v2.png (shot 7 still, wingless; s7_still_v1_winged.png = rejected v1)`, `lostcity/s2_wan_v1.mov (shot 2 I2V, Wan 2.2, 1280x768x81)`, `lostcity/s2_wan_v1_4k.mp4 (3840x2160 HEVC 10-bit)`, `lostcity/s2_ltx_v1.mov (shot 2 via LTX-2.3, 1024x576x97 @25fps + audio)`, `lostcity/s2_ltx_v1_4k_audio.mp4 (LTX shot 2 at 3840x2160 + audio)`, `lostcity/s3_still_v1.png (shot 3 still, ref = crop of our s1 creature body)`, `music/mystical_flute.mp3`, `lostcity/s3_ltx_v2.mov (shot 3 LTX v2, hold-position prompt)`, `lostcity/s3_ltx_v2_4k_music.mp4 (4K + ambience + music bed)`, `lostcity/s3_ltx_v1_walkout.mov (v1, rejected: walk-out + phantom rider)`, `lostcity/s7_still_v1.png (side profile, anatomy OK)`, `lostcity/s7_ltx_v1.mov (LTX 1024x576x249 @25fps)`, `lostcity/s7_ltx_v1_4k_music.mp4`, `lostcity/s8_still_v1.png (gallop)`, `lostcity/s8_ltx_v1.mov + s8_ltx_v1_4k_music.mp4 (gallop, 10 s)`, `lostcity/s9_still_v1.png, s9_ltx_v1.mov (jump; drifts after ~4.6 s), s9_ltx_v1_trim.mov (clean 116 f)`, `lostcity/s10_still_v1.png, s10_ltx_v1.mov, s10_ltx_v1_4k_music.mp4 (drinking, 10.3 s, holds design)`, `lostcity/s14_still_v1.png (seed 2; s1/s3 variants kept)`, `lostcity/s14_ltx_v1.mov (ProRes 422 HQ, 249 f @ 25 fps + PCM audio)`, `lostcity/s14_ltx_v1_4k_music.mp4`
 - **Notes**: Plan: wiki/lost-city-plan.md. Reference is an OpenArt render (closed model, unknown); we re-generate our own frame. 8 shots × 5 s first. Experiments L0–L6 gate rendering; L1 = first LTX-2.3 test on this Mac.
 
@@ -744,6 +744,48 @@ Prompt: `per scene — see the scenes table`
 *Video prompt*
 
 > Fixed camera, wide landscape. In the foreground the creature stands solid and completely still on the ridge, its whole body intact and upright, the long neck steady and the head held level and attached, only its ribs moving with deep slow breaths and its tail swaying gently; the rider sits upright in the saddle and watches, cloak moving in the wind; grass and ferns bend around their feet. All of the destruction is far away on the horizon and nowhere near them: out there in the distance the city finishes falling, spire after spire leaning, buckling and dropping in slow heavy arcs, the tallest towers going last, each collapse throwing up a fresh dust plume until the plumes merge into one grey wall rolling outward, and by the end nothing is left standing on the skyline, only a flat bank of dust over rubble. Distant thunderous collapse, grinding stone, rising wind, heavy animal breathing, no music.
+
+
+#### s15a — The crack — a rift opens in the sky above the ruined city
+
+- **Engine**: LTX 1024x576 x257 (10.3 s) — draw-things-cli
+- **Note**: No creature and no rider in this shot: the ground mount must never share a frame with winged animals or klein grows wings on it. City is already ruined here — this follows s14. Never write 'lightning' — klein renders a literal lightning bolt instead of a rift; say torn sky, broken glass, hard-edged crack.
+
+*Still prompt*
+
+> Cinematic film still, anamorphic 35mm, muted colours, low contrast, subtle film grain. Low wide angle looking up across a ruined city. Broken sandstone spires and shattered ziggurat towers fill the lower third of the frame, rubble and snapped stone, thick dust still hanging in the air, jungle canopy pressing in at the edges. Above them the overcast sky is torn wide open by a long jagged crack that runs across the clouds like a sheet of glass broken from edge to edge, hard-edged and forked, blinding white light pouring through the gap from behind the sky, the torn edges sharp and glowing, the clouds curling and peeling back along them, pale light spilling down onto the ruins in hard shafts. Far away and tiny, a few small dark winged shapes are just slipping out of the crack. Huge sense of scale, deep depth of field, Layered atmospheric perspective, photorealistic, highly detailed, cold pale light spilling from the crack against a dull overcast sky.
+
+*Video prompt*
+
+> Fixed camera, very slow push in on the crack. The tear in the sky splits further open, its glowing edges flaring and shifting, the pale light pulsing brighter over the ruins; clouds peel back and drag in toward the opening, dust lifts from the rubble below and turns in the shafts of light. The small dark winged shapes grow larger as more of them slip out of the tear, one after another. Deep resonant hum from the torn sky, low rumbling air, distant falling stones, wind, no music.
+
+
+#### s15b — Exodus — the flock pours out of the rift
+
+- **Engine**: LTX 1024x576 x257 (10.3 s) — draw-things-cli, --image = last frame of s15a
+- **Note**: Chaining test: extract the last frame with ffmpeg and hand it to the CLI as --image. Flying animals are the subject here, so wings are wanted — never mention the ground creature.
+
+*Still prompt*
+
+> none — chained: first frame is the last frame of s15a (keeps the rift shape and cloud spiral continuous)
+
+*Video prompt*
+
+> The torn crack holds open above the ruins as a dense stream of large leathery-winged flying reptiles pours out of it, long crested heads and beating wings, spilling downward and fanning apart across the sky; the camera tilts slowly down with them toward the broken spires. Their shadows sweep over the rubble, dust swirls up through the shafts of light, the torn edges of the sky keep flaring. Massed leathery wingbeats, harsh distant shrieks, deep rift hum, wind, no music.
+
+
+#### s15c — The circling — the flock wheels above the dead city
+
+- **Engine**: LTX 1024x576 x257 (10.3 s) — draw-things-cli
+- **Note**: Slow, in-place swarm motion — the stable pattern. Nothing large and detailed in the foreground to drift.
+
+*Still prompt*
+
+> Cinematic film still, anamorphic 35mm, muted colours, low contrast, subtle film grain. Very wide high vantage looking down and across the ruined lost city, the broken spires and collapsed ziggurats small in a wide bowl of jungle, dust and haze lying over the rubble. Dozens of large leathery-winged flying reptiles wheel in one slow enormous circle above the ruins, silhouetted at different distances, some near and sharp with crested heads and outstretched wings, others tiny specks far away, their shadows crossing the stone below. Behind and above them the sky is still torn wide open by a long jagged crack like broken glass, white light pouring through the gap, its glow lighting the underside of the flock and the dust. Enormous sense of scale, deep depth of field, Layered atmospheric perspective, photorealistic, highly detailed, cold pale light spilling from the rift against a dull overcast sky.
+
+*Video prompt*
+
+> Fixed wide camera. Dozens of winged reptiles wheel slowly in one great circle above the ruined city, gliding and banking, wings beating now and then, the whole ring turning steadily and unbroken; nearer birds cross the frame and away, their shadows sliding over the rubble. Behind them the torn crack in the sky glows and flares, its edges shifting, clouds peeling back along it, dust drifting over the ruins below. Massed wingbeats, layered distant shrieks, deep rift hum, wind, no music.
 
 ## Related pages
 - [[runbook-living-painting]]
