@@ -222,7 +222,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </tr>
 <tr>
 <td style="text-align: right;">11</td>
-<td><a href="#kyle_rescue">Kyle's Antarctic Rescue — 1-minute illustrated short from a 5-panel comic</a></td>
+<td><a href="#kyle_rescue">Kyle's Antarctic Rescue — 1-minute 3D-animated vertical short from a 5-panel comic</a></td>
 <td>2026-09-22</td>
 <td>planned — see wiki/kyle-antarctic-rescue-plan.md; experiments K0–K5 first</td>
 <td>FLUX.2 [klein] 9B 576x1024</td>
@@ -1914,10 +1914,10 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <blockquote>
 <p>Fixed wide camera. Dozens of winged reptiles wheel slowly in one great circle above the ruined city, gliding and banking, wings beating now and then, the whole ring turning steadily and unbroken; nearer birds cross the frame and away, their shadows sliding over the rubble. Behind them the torn crack in the sky glows and flares, its edges shifting, clouds peeling back along it, dust drifting over the ruins below. Massed wingbeats, layered distant shrieks, deep rift hum, wind, no music.</p>
 </blockquote>
-<h2 id="kyle_rescue">Kyle's Antarctic Rescue — 1-minute illustrated short from a 5-panel comic</h2>
+<h2 id="kyle_rescue">Kyle's Antarctic Rescue — 1-minute 3D-animated vertical short from a 5-panel comic</h2>
 <ul>
 <li><strong>Date</strong>: 2026-09-22 · <strong>Status</strong>: planned — see wiki/kyle-antarctic-rescue-plan.md; experiments K0–K5 first · <strong>Draw Things project</strong>: <code>none — rendered with draw-things-cli (no project file)</code></li>
-<li><strong>Files</strong> (<code>raw/clips/</code>): </li>
+<li><strong>Files</strong> (<code>raw/clips/</code>): <code>music/best_adventure_ever.mp3</code></li>
 <li><strong>Notes</strong>: Kyle is Kevin's son; consent confirmed 2026-09-22.</li>
 </ul>
 <p><strong>Still</strong></p>
@@ -2041,13 +2041,21 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <h3>Scene prompts</h3>
 <p><strong>Locks</strong> (paste verbatim into every prompt):</p>
 <ul>
-<li><em>style head</em> — Hand-painted comic book illustration, bold clean ink outlines, soft cel shading, vivid saturated colours, bright cheerful children's storybook style.</li>
-<li><em>kyle</em> — Kyle, a cheerful young East Asian boy with short spiky black hair, dark brown eyes and a wide smile, wearing a bright red and black insulated expedition parka with a round blue Antarctica patch on the left chest, black backpack straps over both shoulders, black gloves.</li>
+<li><em>style head</em> — High-end 3D animated feature film still. Stylised characters in a realistic world: physically based lighting, real-looking ice, snow and ocean water, soft global illumination, subsurface scattering on skin, detailed fur and feathers, cinematic depth of field, rich natural colour.</li>
+<li><em>kyle</em> — Kyle, one cheerful young East Asian boy with slightly stylised proportions, short spiky black hair, dark brown eyes and a wide smile, wearing a bright red and black insulated expedition parka with a round blue Antarctica patch on the left chest, black backpack straps over both shoulders, black gloves.</li>
 <li><em>world</em> — Antarctica: turquoise icebergs, snowy white mountains, deep blue polar ocean.</li>
-<li><em>video tail</em> — Smooth gentle motion, consistent character, hand-painted animated illustration style, no text, no speech bubbles.</li>
+<li><em>video tail</em> — 3D animated feature film, smooth expressive character animation, soft cinematic lighting, consistent character, no text.</li>
+<li><em>ufo</em> — a large silver-grey flying saucer with a glowing blue-violet dome on top and a ring of cyan and purple lights around its rim, crackling purple energy beams from its underside, no aliens visible.</li>
+<li><em>penguins</em> — emperor penguins with black backs, white bellies and yellow-orange neck patches.</li>
+<li><em>chick</em> — a fluffy grey emperor penguin chick with a white face and a black cap.</li>
+<li><em>sidekick</em> — a small cheerful penguin wearing a little blue backpack.</li>
+<li><em>seal</em> — a round silver-grey seal pup with big dark eyes.</li>
+<li><em>orca</em> — an orca, glossy black with a white belly and a white eye patch.</li>
+<li><em>whale</em> — a dark blue-grey humpback whale with long white-edged flippers.</li>
+<li><em>ship</em> — an expedition icebreaker ship with a dark blue hull, a red band and a white superstructure.</li>
 </ul>
-<p><strong>Rules</strong>: No on-screen text at all (film is pictures + music). Face shots use hold-position wording. Fast action drifts after ~4-5 s: trim. Hand the CLI an image already at 9:16 — it center-crops otherwise.</p>
-<h4>s1 — text-only, keep 7 s</h4>
+<p><strong>Rules</strong>: Two stages: approved 3D masters first, then every shot locked to them. Paste only the locks for entities in the shot; say 'one boy'. Never write 'UFO' or 'alien'. No on-screen text. Face shots hold position; fast action ≤ 6 s; little camera motion. QC contact sheet vs the master before a shot counts. Hand the CLI a 9:16 image.</p>
+<h4>s1 — P1 ship crop (pad) → 3D at 0.8, keep 7 s</h4>
 <ul>
 <li><strong>Engine</strong>: LTX-2.3 via draw-things-cli</li>
 </ul>
@@ -2059,7 +2067,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <blockquote>
 <p>The camera tilts slowly down from the gliding seagulls to the ship as the sea swells gently around the icebergs.</p>
 </blockquote>
-<h4>s2 — panel 1 (method B pad + img2img), keep 8 s</h4>
+<h4>s2 — P1 + kyle_front master (B1/B2/B3), keep 8 s</h4>
 <ul>
 <li><strong>Engine</strong>: LTX-2.3 via draw-things-cli</li>
 </ul>
@@ -2071,7 +2079,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <blockquote>
 <p>Kyle stays in place and smiles wider, his thumbs-up bobs once, his hair and parka stir in the wind; the camera holds still.</p>
 </blockquote>
-<h4>s3 — panel 2 (method A tight + img2img), keep 10 s</h4>
+<h4>s3 — P2 → 3D at 0.8, saucer vs ufo master, keep 10 s</h4>
 <ul>
 <li><strong>Engine</strong>: LTX-2.3 via draw-things-cli</li>
 </ul>
@@ -2083,7 +2091,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <blockquote>
 <p>Kyle stays still at the bottom of the frame and turns his head slightly; above him the saucer hovers and pulses, purple beams crackle down onto the ice, which glows and cracks.</p>
 </blockquote>
-<h4>s4 — panel 3 (method B pad + img2img), keep 10 s</h4>
+<h4>s4 — P3 → 3D at 0.8, keep 10 s</h4>
 <ul>
 <li><strong>Engine</strong>: LTX-2.3 via draw-things-cli</li>
 </ul>
@@ -2095,7 +2103,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <blockquote>
 <p>Blocks of ice rise slowly into the beams as the floes split apart; the penguins huddle and flap, the seal looks up, the orca surfaces.</p>
 </blockquote>
-<h4>s5 — panel 4 (method B pad + img2img), keep 6 s</h4>
+<h4>s5 — P4 + kyle_34 + sidekick masters (B1/B2), keep 6 s</h4>
 <ul>
 <li><strong>Engine</strong>: LTX-2.3 via draw-things-cli</li>
 </ul>
@@ -2107,7 +2115,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <blockquote>
 <p>Kyle glides forward and the gadget fires a bright blue snowflake beam; frost spreads across the frame.</p>
 </blockquote>
-<h4>s6 — last frame of S5, text-only fallback, keep 6 s</h4>
+<h4>s6 — collage: ufo master over S4's 3D ice → klein 0.5, keep 6 s</h4>
 <ul>
 <li><strong>Engine</strong>: LTX-2.3 via draw-things-cli</li>
 </ul>
@@ -2119,7 +2127,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <blockquote>
 <p>The ice crust cracks, the saucer shakes free and zips up into the stars, its light fading.</p>
 </blockquote>
-<h4>s7 — panel 5 (method A tight + img2img), keep 10 s</h4>
+<h4>s7 — P5 + kyle_front + chick masters (B1/B2/B3), keep 10 s</h4>
 <ul>
 <li><strong>Engine</strong>: LTX-2.3 via draw-things-cli</li>
 </ul>
@@ -2131,7 +2139,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <blockquote>
 <p>Kyle hugs the chick and rocks gently, the chick nuzzles him, the penguins bob at the edges, the sun glints behind.</p>
 </blockquote>
-<h4>s8 — text-only, keep 8 s</h4>
+<h4>s8 — collage: S7's 3D animals + sunrise sky → klein 0.55, keep 8 s</h4>
 <ul>
 <li><strong>Engine</strong>: LTX-2.3 via draw-things-cli</li>
 </ul>

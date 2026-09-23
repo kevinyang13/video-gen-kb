@@ -8,6 +8,18 @@
 
 ---
 
+## 2026-09-22 — Kyle plan restyled: 3D animated film
+
+Kevin wants a "3D realistic world"; clarified as a **3D animated feature-film look** (stylised characters, physically real ice/snow/water), face from the comic (no photo). Consequence: 2D → 3D needs klein at ~0.75–0.9, which keeps layout but redraws the face, so the panel alone no longer locks identity. Plan rewritten around two stages: **Stage A** 3D model sheets (Kyle front and ¾, sidekick, chick, saucer) from comic crops, Kevin picks; **Stage B** every face shot locked to the masters via, in order, multi-`--image` from a `--HEAD` CLI build, a single-image diptych (master | panel), a two-pass face transplant, or the app Moodboard for failing stills only. Collages (S6, S8) now use 3D pieces so they only blend. Upscaler switched to x4plus. Experiments renumbered K0–K7; budget ~5–6 h. `projects.json` locks and shot methods updated.
+
+## 2026-09-22 — Kyle plan: consistency strategy
+
+Kevin asked how Kyle's face, the animals and the UFO stay consistent. Added §4b to the plan: (1) **pixel anchors** — every shot now starts from comic pixels; the three former text-only shots get a P1 ship crop (S1) or a **panel-cutout collage** blended by klein img2img (S6 saucer over ice, S8 animals + sky), which stands in for the Moodboard the CLI lacks; (2) a verbatim text lock per entity (UFO, penguins, chick, sidekick, seal, orca, whale, ship added; never write "UFO"/"alien"; say "one boy"); (3) drift limits inside clips (hold-position faces, slow foreground, S5 ≤ 6 s, little camera motion); (4) one look — same style/model/upscaler, optional shared colour pass; (5) a QC contact sheet per clip with explicit reject criteria; fallbacks: CLI from `main`, one Moodboard still in the app, or a cloud Kyle LoRA. K4 is now the collage test. `projects.json` locks updated.
+
+## 2026-09-22 — Kyle plan: music chosen
+
+Searched Pixabay (adventure kids / family orchestral / heroic kids) — ~20 candidates. Can't listen, so ranked by tags, play count and an in-browser loudness profile (WebAudio decode, 5 s RMS windows). Kevin picked **"Best Adventure Ever"** (geoffharvey, 2:33, 417k plays, Disney/quest tags) → `raw/clips/music/best_adventure_ever.mp3`. Runners-up recorded in chat: "Wonders of the Earth" (Grand_Project; best build-and-drop but epic and overused), "Magical Journey" (geoffharvey; 1:21, flat). Plan step 6: use the track's last 60 s — its dip, climb and ending line up with the UFO, freeze-ray and happy-ending beats; pre-cut the bed with ffmpeg since `assemble_film.sh` has no music offset. All open questions on the plan are now answered.
+
 ## 2026-09-22 — Kyle plan: Kevin's answers (9:16, music only)
 
 Kevin answered the open questions: **9:16 for phones**, **pictures and music only**, **no narration**, and Kyle is his son (consent settled). Plan updated: stills/clips at 576×1024; each panel gets a 9:16 window by tight crop (panels 2, 5) or pad-and-repaint at higher klein strength (panels 1, 3, 4); LTX audio discarded, no remux, no captions or end card; master 2160×3840 plus a 1080×1920 phone copy. New prerequisite found: `upscale_4k.sh` and `assemble_film.sh` both hardcode 3840×2160 and would crop a portrait clip to a landscape strip — they need a `W`/`H` option (plan step 5a). New experiment K6 (portrait LTX). Music still open. `projects.json` `kyle_rescue` updated.

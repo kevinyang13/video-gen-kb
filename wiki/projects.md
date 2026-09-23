@@ -22,7 +22,7 @@
 | 8 | [Dragon Epic — 1-minute photoreal short, family hero face](#dragon_epic) | 2026-09-21 | in progress — scene 1A posted | FLUX.2 [klein] 9B 1280x768 | Wan 2.2 High Noise 47 min | The Dragon's Breath | `—` | [▶ watch](https://youtu.be/Xzu-c5yX8uo) |
 | 9 | [Three-minute film — recurring characters (subject TBD)](#film3min) | 2026-09-21 | planning | FLUX.2 [klein] 9B 1024x576 | Wan 2.2 High Noise 15 min | TBD | `—` | — |
 | 10 | [Lost City — hyper-real rider on a raptor-dragon entering jungle ruins](#lost_city) | 2026-09-21 | in progress — clips at 4K+music: s2, s3, s7, s8, s10, s14; s9 trimmed (4.6 s, drift after); s11 stills rejected (klein duplicates the creature); s12 not started; s15 rift coda done (3 clips assembled to 30 s 4K with music) | FLUX.2 [klein] 9B 1280x768 | LTX-2.3 22B [distilled] 1.1 (production engine — see ltx_10s) — Wan 2.2 High Noise I2V (8-bit S) + Low Noise refiner 10% for locked-camera shots at 768p 49 min | Mystical orchestral theme with ancient flute | `—` | [▶ watch](https://youtu.be/68sq_jZqu6c) |
-| 11 | [Kyle's Antarctic Rescue — 1-minute illustrated short from a 5-panel comic](#kyle_rescue) | 2026-09-22 | planned — see wiki/kyle-antarctic-rescue-plan.md; experiments K0–K5 first | FLUX.2 [klein] 9B 576x1024 | LTX-2.3 22B [distilled] 1.1 via draw-things-cli ? min | Calm Ambient Dreamscape | `—` | — |
+| 11 | [Kyle's Antarctic Rescue — 1-minute 3D-animated vertical short from a 5-panel comic](#kyle_rescue) | 2026-09-22 | planned — see wiki/kyle-antarctic-rescue-plan.md; experiments K0–K5 first | FLUX.2 [klein] 9B 576x1024 | LTX-2.3 22B [distilled] 1.1 via draw-things-cli ? min | Calm Ambient Dreamscape | `—` | — |
 
 ## YouTube playlist — [AI-Vids](https://www.youtube.com/playlist?list=PLJx49Sf61wKQ)
 
@@ -788,10 +788,10 @@ Prompt: `per scene — see the scenes table`
 
 > Fixed wide camera. Dozens of winged reptiles wheel slowly in one great circle above the ruined city, gliding and banking, wings beating now and then, the whole ring turning steadily and unbroken; nearer birds cross the frame and away, their shadows sliding over the rubble. Behind them the torn crack in the sky glows and flares, its edges shifting, clouds peeling back along it, dust drifting over the ruins below. Massed wingbeats, layered distant shrieks, deep rift hum, wind, no music.
 
-## Kyle's Antarctic Rescue — 1-minute illustrated short from a 5-panel comic {#kyle_rescue}
+## Kyle's Antarctic Rescue — 1-minute 3D-animated vertical short from a 5-panel comic {#kyle_rescue}
 
 - **Date**: 2026-09-22 · **Status**: planned — see wiki/kyle-antarctic-rescue-plan.md; experiments K0–K5 first · **Draw Things project**: `none — rendered with draw-things-cli (no project file)`
-- **Files** (`raw/clips/`): 
+- **Files** (`raw/clips/`): `music/best_adventure_ever.mp3`
 - **Notes**: Kyle is Kevin's son; consent confirmed 2026-09-22.
 
 **Still**
@@ -836,15 +836,23 @@ Prompt: `per scene — see scenes`
 
 **Locks** (paste verbatim into every prompt):
 
-- *style head* — Hand-painted comic book illustration, bold clean ink outlines, soft cel shading, vivid saturated colours, bright cheerful children's storybook style.
-- *kyle* — Kyle, a cheerful young East Asian boy with short spiky black hair, dark brown eyes and a wide smile, wearing a bright red and black insulated expedition parka with a round blue Antarctica patch on the left chest, black backpack straps over both shoulders, black gloves.
+- *style head* — High-end 3D animated feature film still. Stylised characters in a realistic world: physically based lighting, real-looking ice, snow and ocean water, soft global illumination, subsurface scattering on skin, detailed fur and feathers, cinematic depth of field, rich natural colour.
+- *kyle* — Kyle, one cheerful young East Asian boy with slightly stylised proportions, short spiky black hair, dark brown eyes and a wide smile, wearing a bright red and black insulated expedition parka with a round blue Antarctica patch on the left chest, black backpack straps over both shoulders, black gloves.
 - *world* — Antarctica: turquoise icebergs, snowy white mountains, deep blue polar ocean.
-- *video tail* — Smooth gentle motion, consistent character, hand-painted animated illustration style, no text, no speech bubbles.
+- *video tail* — 3D animated feature film, smooth expressive character animation, soft cinematic lighting, consistent character, no text.
+- *ufo* — a large silver-grey flying saucer with a glowing blue-violet dome on top and a ring of cyan and purple lights around its rim, crackling purple energy beams from its underside, no aliens visible.
+- *penguins* — emperor penguins with black backs, white bellies and yellow-orange neck patches.
+- *chick* — a fluffy grey emperor penguin chick with a white face and a black cap.
+- *sidekick* — a small cheerful penguin wearing a little blue backpack.
+- *seal* — a round silver-grey seal pup with big dark eyes.
+- *orca* — an orca, glossy black with a white belly and a white eye patch.
+- *whale* — a dark blue-grey humpback whale with long white-edged flippers.
+- *ship* — an expedition icebreaker ship with a dark blue hull, a red band and a white superstructure.
 
-**Rules**: No on-screen text at all (film is pictures + music). Face shots use hold-position wording. Fast action drifts after ~4-5 s: trim. Hand the CLI an image already at 9:16 — it center-crops otherwise.
+**Rules**: Two stages: approved 3D masters first, then every shot locked to them. Paste only the locks for entities in the shot; say 'one boy'. Never write 'UFO' or 'alien'. No on-screen text. Face shots hold position; fast action ≤ 6 s; little camera motion. QC contact sheet vs the master before a shot counts. Hand the CLI a 9:16 image.
 
 
-#### s1 — text-only, keep 7 s
+#### s1 — P1 ship crop (pad) → 3D at 0.8, keep 7 s
 
 - **Engine**: LTX-2.3 via draw-things-cli
 
@@ -857,7 +865,7 @@ Prompt: `per scene — see scenes`
 > The camera tilts slowly down from the gliding seagulls to the ship as the sea swells gently around the icebergs.
 
 
-#### s2 — panel 1 (method B pad + img2img), keep 8 s
+#### s2 — P1 + kyle_front master (B1/B2/B3), keep 8 s
 
 - **Engine**: LTX-2.3 via draw-things-cli
 
@@ -870,7 +878,7 @@ Prompt: `per scene — see scenes`
 > Kyle stays in place and smiles wider, his thumbs-up bobs once, his hair and parka stir in the wind; the camera holds still.
 
 
-#### s3 — panel 2 (method A tight + img2img), keep 10 s
+#### s3 — P2 → 3D at 0.8, saucer vs ufo master, keep 10 s
 
 - **Engine**: LTX-2.3 via draw-things-cli
 
@@ -883,7 +891,7 @@ Prompt: `per scene — see scenes`
 > Kyle stays still at the bottom of the frame and turns his head slightly; above him the saucer hovers and pulses, purple beams crackle down onto the ice, which glows and cracks.
 
 
-#### s4 — panel 3 (method B pad + img2img), keep 10 s
+#### s4 — P3 → 3D at 0.8, keep 10 s
 
 - **Engine**: LTX-2.3 via draw-things-cli
 
@@ -896,7 +904,7 @@ Prompt: `per scene — see scenes`
 > Blocks of ice rise slowly into the beams as the floes split apart; the penguins huddle and flap, the seal looks up, the orca surfaces.
 
 
-#### s5 — panel 4 (method B pad + img2img), keep 6 s
+#### s5 — P4 + kyle_34 + sidekick masters (B1/B2), keep 6 s
 
 - **Engine**: LTX-2.3 via draw-things-cli
 
@@ -909,7 +917,7 @@ Prompt: `per scene — see scenes`
 > Kyle glides forward and the gadget fires a bright blue snowflake beam; frost spreads across the frame.
 
 
-#### s6 — last frame of S5, text-only fallback, keep 6 s
+#### s6 — collage: ufo master over S4's 3D ice → klein 0.5, keep 6 s
 
 - **Engine**: LTX-2.3 via draw-things-cli
 
@@ -922,7 +930,7 @@ Prompt: `per scene — see scenes`
 > The ice crust cracks, the saucer shakes free and zips up into the stars, its light fading.
 
 
-#### s7 — panel 5 (method A tight + img2img), keep 10 s
+#### s7 — P5 + kyle_front + chick masters (B1/B2/B3), keep 10 s
 
 - **Engine**: LTX-2.3 via draw-things-cli
 
@@ -935,7 +943,7 @@ Prompt: `per scene — see scenes`
 > Kyle hugs the chick and rocks gently, the chick nuzzles him, the penguins bob at the edges, the sun glints behind.
 
 
-#### s8 — text-only, keep 8 s
+#### s8 — collage: S7's 3D animals + sunrise sky → klein 0.55, keep 8 s
 
 - **Engine**: LTX-2.3 via draw-things-cli
 

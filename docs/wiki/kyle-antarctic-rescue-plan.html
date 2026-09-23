@@ -92,7 +92,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
     <span class="spacer"></span>
     <button class="pill" onclick="tt()">◐ Theme</button>
   </nav>
-  <h1>Kyle's Antarctic Rescue — 1-Minute Headless Plan</h1><p class="lede">Plan for a 60-second <strong>vertical (9:16)</strong> illustrated short made from a 5-panel comic: Kyle, a boy on an Antarctic expedition, sees a UFO attacking the ice, rescues the animals with a freeze-ray gadget and ends hugging a penguin chick. Rendered <strong>entirely with <code>draw-things-cli</code></strong>: comic panels become cleaned first frames through klein img2img, LTX-2.3 animates each one, and the existing scripts handle the 4K upscale and the final cut. Pictures and music only — no captions, no narration, no sound effects. No Draw Things window, no Moodboard.</p><div class="meta"><span><b>Updated</b> 2026-09-22 (Kevin's answers folded in: 9:16, music only, no narration; nothing rendered yet)</span><span><b>Sources</b> <code>raw/kyle/comic_source.webp</code> (the 5-panel comic, 1024×1536, added 2026-09-22); <a href="headless-cli-pipeline.html">headless cli pipeline</a> §1b (CLI flags and timings measured 2026-09-22); <a href="lost-city-plan.html">lost city plan</a> §3c, §7b (LTX production settings and motion rules); <a href="character-consistency.html">character consistency</a>; <a href="scripts-reference.html">scripts reference</a>. Timings below are estimates built from the Lost City measurements, <strong>not yet measured on this project</strong>.</span></div>
+  <h1>Kyle's Antarctic Rescue — 1-Minute Headless Plan</h1><p class="lede">Plan for a 60-second <strong>vertical (9:16)</strong> short in a <strong>3D animated feature-film look</strong> — stylised characters in a physically real world of ice, snow and ocean — made from a 5-panel 2D comic: Kyle, a boy on an Antarctic expedition, sees a UFO attacking the ice, rescues the animals with a freeze-ray gadget and ends hugging a penguin chick. Rendered <strong>entirely with <code>draw-things-cli</code></strong>: the comic is first turned into approved 3D <strong>model sheets</strong> (Kyle, sidekick penguin, chick, saucer); each shot's first frame is the panel converted to 3D and locked to those masters; LTX-2.3 animates it; the existing scripts upscale and cut. Pictures and music only.</p><div class="meta"><span><b>Updated</b> 2026-09-22 (restyled from 2D comic to 3D animated film; model-sheet stage and master-locking methods added; nothing rendered yet)</span><span><b>Sources</b> <code>raw/kyle/comic_source.webp</code> (the 5-panel comic, 1024×1536, added 2026-09-22); <a href="headless-cli-pipeline.html">headless cli pipeline</a> §1b (CLI flags and timings measured 2026-09-22); <a href="lost-city-plan.html">lost city plan</a> §3c, §7b (LTX production settings and motion rules); <a href="character-consistency.html">character consistency</a>; <a href="identity-conditioning.html">identity conditioning</a>; <a href="scripts-reference.html">scripts reference</a>. Timings are estimates built from the Lost City measurements, <strong>not yet measured on this project</strong>.</span></div>
 <hr />
 <h2>1. What the source gives us</h2>
 <div class="tw"><table>
@@ -133,30 +133,15 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <td>5 "A happy ending"</td>
 <td>sunrise, Kyle hugging a chick among penguins, seal, whale, orca, wooden sign</td>
 <td>face, frontal</td>
-<td>title, caption, slogan (sign is part of the scene)</td>
+<td>title, caption, slogan</td>
 </tr>
 </tbody>
 </table></div>
-<p>The comic already fixes the character design, the palette and every composition. That is the main asset: instead of generating Kyle from text and hoping he stays the same, <strong>each Kyle shot starts from a panel that already shows him.</strong> Identity comes in as pixels, which is the strongest channel in <a href="identity-conditioning.html">identity conditioning</a>.</p>
-<p>Style: keep the look — hand-painted comic illustration, bold ink lines, vivid saturated colour. Not photoreal. Illustration hides the small face drift that I2V causes over 10 s, and it matches the source.</p>
+<p>The comic fixes the character designs, the palette and every composition. It is drawn in 2D, and the film is 3D — so the comic is now the <strong>layout and design reference</strong>, and the thing every shot must match is a <strong>3D master</strong> made from it once (§4b, stage A).</p>
 <blockquote>
-<p>Kyle is Kevin's son; consent is Kevin's (confirmed 2026-09-22). Sharing is his call.</p>
+<p>Kyle is Kevin's son; consent is Kevin's (confirmed 2026-09-22). No photo of Kyle is used — his face comes from the comic only.</p>
 </blockquote>
-<h2>2. Why the CLI changes the plan</h2>
-<p>From <a href="headless-cli-pipeline.html">headless cli pipeline</a> §1b, measured on this Mac:</p>
-<ul>
-<li>the released CLI (<code>1.20260430.0</code>) takes <strong>one</strong> <code>--image</code>. With <code>--strength &lt; 1</code> it is img2img on a still model, and with <code>--frames</code> on LTX it is true image-to-video (frame 0 = the image, pixel for pixel);</li>
-<li><strong>no Moodboard</strong> — multi-reference <code>--image</code> exists only on <code>main</code>;</li>
-<li>LTX 249 frames (10 s) takes <strong>9 min 41 s</strong>, about 2× faster than the app; a klein still takes 27–35 s.</li>
-</ul>
-<p>So consistency can't come from reference images the way it did on Lost City. It comes from three things the CLI <em>can</em> do:</p>
-<ol>
-<li><strong>Panel → img2img.</strong> The cropped panel is the <code>--image</code>, at strength 0.45–0.6. Klein keeps the layout, the face and the parka, repaints the parts under the removed text and adds detail at 576×1024.</li>
-<li><strong>A text lock</strong> pasted verbatim into every prompt (§4).</li>
-<li><strong>Chaining.</strong> For the non-panel shots next to Kyle shots, the last frame of the previous clip becomes the next <code>--image</code> (see <a href="character-consistency.html">character consistency</a> §6).</li>
-</ol>
-<p>Fallback if img2img loses Kyle's face: build the CLI from <code>main</code> (<code>brew install --HEAD</code>, Swift-version friction reported) to get multi-<code>--image</code>, or do only the 3 Kyle stills in the app's Moodboard and everything else from the CLI.</p>
-<h2>2b. Decisions (Kevin, 2026-09-22)</h2>
+<h2>2. Decisions (Kevin, 2026-09-22)</h2>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -167,64 +152,219 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </thead>
 <tbody>
 <tr>
+<td>Look</td>
+<td><strong>3D animated film</strong> — stylised characters, physically real world</td>
+<td>2D panels must be <em>converted</em>, not just cleaned → higher klein strength → the panel alone no longer guarantees the face → new model-sheet stage and master-locking (§4b)</td>
+</tr>
+<tr>
+<td>Face reference</td>
+<td><strong>the comic</strong>, no photo</td>
+<td>Kyle's 3D face is designed from P1/P4/P5; Kevin approves it once and it becomes canonical</td>
+</tr>
+<tr>
 <td>Aspect</td>
 <td><strong>9:16 for phones</strong></td>
-<td>stills and clips at <strong>576×1024</strong>; master 2160×3840, delivery copy 1080×1920; both scripts need a portrait option (step 5a); every panel crop changes (step 1)</td>
+<td>stills and clips at <strong>576×1024</strong>; master 2160×3840, delivery 1080×1920; both scripts need a portrait option (step 5a)</td>
 </tr>
 <tr>
 <td>Text on screen</td>
-<td><strong>none</strong> — pictures and music</td>
-<td>no captions, no title, no end card; bubbles and caption boxes still have to be painted out</td>
+<td><strong>none</strong></td>
+<td>no captions, title or end card; bubbles still painted out</td>
 </tr>
 <tr>
 <td>Narration</td>
 <td><strong>none</strong></td>
-<td>no TTS tool needed</td>
+<td>—</td>
 </tr>
 <tr>
 <td>Sound</td>
 <td>music only</td>
-<td>LTX's generated audio is discarded, so the remux step goes away; <code>assemble_film.sh</code> pads mute clips with silence under <code>MUSIC</code></td>
-</tr>
-<tr>
-<td>Consent</td>
-<td>Kyle is Kevin's son</td>
-<td>settled</td>
+<td>LTX audio discarded; <code>assemble_film.sh</code> pads mute clips with silence under <code>MUSIC</code></td>
 </tr>
 <tr>
 <td>Music</td>
-<td><em>still open</em></td>
-<td>on disk: <code>mystical_flute</code>, <code>dragons_breath</code>, <code>calm_ambient_dreamscape</code>, <code>neon_synthwave_drive</code> — none is bright and adventurous; pick one or add a new track</td>
+<td><strong>"Best Adventure Ever" — geoffharvey</strong> (Pixabay, 2:33) → <code>raw/clips/music/best_adventure_ever.mp3</code></td>
+<td>last 60 s of the track (step 6)</td>
 </tr>
 </tbody>
 </table></div>
-<h2>3. Pipeline</h2>
-<pre><code>comic_source.webp
-  │ ffmpeg: 9:16 window per panel (tight crop, or pad-and-repaint) → delogo bubbles → scale to 576 wide   (§5 step 1–2)
-  ▼
-panel_N_clean.png ──draw-things-cli klein img2img, strength 0.45–0.7────────┐
-text-only shots  ──draw-things-cli klein txt2img (style lock, no Kyle close-up)┤ 576×1024 still, 3 seeds
-                                                                             ▼
-                    draw-things-cli LTX-2.3 --image still --frames 249 → sN_ltx_v1.mov (audio ignored)
-                                                                             ▼
-                    ffmpeg trim → upscale_4k.sh W=2160 H=3840 (realesr-animevideov3-x4)
-                                                                             ▼
-                    assemble_film.sh W=2160 H=3840 XFADE=0.75 MUSIC=… → kyle_rescue_2160x3840.mp4
-                                                                             ▼
-                    ffmpeg scale 1080:1920 → kyle_rescue_1080x1920.mp4 (phone delivery)
-</code></pre>
+<h2>3. What the CLI can and can't do here</h2>
+<p>From <a href="headless-cli-pipeline.html">headless cli pipeline</a> §1b: the released CLI (<code>1.20260430.0</code>) takes <strong>one</strong> <code>--image</code> (img2img for klein; true I2V for LTX with <code>--frames</code>), <strong>no Moodboard</strong>, LTX 249 f in 9 min 41 s, klein still in ~30 s.</p>
+<p>For a 2D comic kept 2D, one image was enough: img2img at 0.5 keeps the face. <strong>Converting to 3D needs strength ~0.75–0.9</strong>, and at that strength klein keeps the layout but redraws the face. Each shot would then get its <em>own</em> 3D Kyle. So each shot needs two inputs — the panel (layout) and the master (identity) — and the released CLI takes one. §4b lists four ways around that, in order of preference.</p>
 <h2>4. Locks (paste verbatim, never paraphrase)</h2>
 <ul>
-<li><strong>style_head</strong>: <code>Hand-painted comic book illustration, bold clean ink outlines, soft cel shading, vivid saturated colours, bright cheerful children's storybook style.</code></li>
-<li><strong>kyle</strong>: <code>Kyle, a cheerful young East Asian boy with short spiky black hair, dark brown eyes and a wide smile, wearing a bright red and black insulated expedition parka with a round blue Antarctica patch on the left chest, black backpack straps over both shoulders, black gloves.</code></li>
+<li><strong>style_head</strong>: <code>High-end 3D animated feature film still. Stylised characters in a realistic world: physically based lighting, real-looking ice, snow and ocean water, soft global illumination, subsurface scattering on skin, detailed fur and feathers, cinematic depth of field, rich natural colour.</code> (if klein renders too plastic or too flat, K0 tries adding "Pixar-style")</li>
+<li><strong>kyle</strong>: <code>Kyle, one cheerful young East Asian boy with slightly stylised proportions, short spiky black hair, dark brown eyes and a wide smile, wearing a bright red and black insulated expedition parka with a round blue Antarctica patch on the left chest, black backpack straps over both shoulders, black gloves.</code></li>
 <li><strong>world</strong>: <code>Antarctica: turquoise icebergs, snowy white mountains, deep blue polar ocean.</code></li>
-<li><strong>video tail</strong> (LTX): <code>Smooth gentle motion, consistent character, hand-painted animated illustration style, no text, no speech bubbles.</code></li>
-<li><strong>rules</strong>: never ask for readable text from the model — the film has no on-screen text at all. Kyle's face shots use hold-position wording (Lost City close-up rule: a "step" walks the subject out of frame). Fast action drifts after ~4–5 s: trim.</li>
+<li><strong>ufo</strong>: <code>a large silver-grey flying saucer with a glowing blue-violet dome on top and a ring of cyan and purple lights around its rim, crackling purple energy beams from its underside, no aliens visible.</code></li>
+<li><strong>penguins</strong>: <code>emperor penguins with black backs, white bellies and yellow-orange neck patches.</code></li>
+<li><strong>chick</strong>: <code>a fluffy grey emperor penguin chick with a white face and a black cap.</code></li>
+<li><strong>sidekick</strong>: <code>a small cheerful penguin wearing a little blue backpack.</code></li>
+<li><strong>seal</strong>: <code>a round silver-grey seal pup with big dark eyes.</code></li>
+<li><strong>orca</strong>: <code>an orca, glossy black with a white belly and a white eye patch.</code></li>
+<li><strong>whale</strong>: <code>a dark blue-grey humpback whale with long white-edged flippers.</code></li>
+<li><strong>ship</strong>: <code>an expedition icebreaker ship with a dark blue hull, a red band and a white superstructure.</code></li>
+<li><strong>video tail</strong> (LTX): <code>3D animated feature film, smooth expressive character animation, soft cinematic lighting, consistent character, no text.</code></li>
+<li><strong>rules</strong>: paste only the locks for what is in the shot; say "one boy". Never write "UFO" or "alien". No readable text from the model. Face shots use hold-position wording. Fast action drifts after ~4–5 s: trim. Hand the CLI an image already at 9:16.</li>
 </ul>
-<h2>5. Step-by-step</h2>
+<h2>4b. Consistency strategy — Kyle, animals, UFO</h2>
+<p>Two stages, like a real animation studio: <strong>design the characters once, then shoot every scene against those designs.</strong></p>
+<h3>Stage A — 3D model sheets (once, Kevin approves)</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Master</th>
+<th>From</th>
+<th>File</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kyle — face + upper body, frontal</td>
+<td>P1 face crop (bubble removed)</td>
+<td><code>raw/kyle/masters/kyle_front.png</code></td>
+</tr>
+<tr>
+<td>Kyle — ¾ view</td>
+<td>P4 face crop</td>
+<td><code>raw/kyle/masters/kyle_34.png</code></td>
+</tr>
+<tr>
+<td>Sidekick penguin</td>
+<td>P4</td>
+<td><code>raw/kyle/masters/sidekick.png</code></td>
+</tr>
+<tr>
+<td>Chick</td>
+<td>P5</td>
+<td><code>raw/kyle/masters/chick.png</code></td>
+</tr>
+<tr>
+<td>Saucer</td>
+<td>P2 top</td>
+<td><code>raw/kyle/masters/ufo.png</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Adult penguins, seal, orca, whale and ship don't get masters: real-looking animals are generic enough that the text lock carries them.</p>
+<pre><code class="language-bash"># one candidate per strength × seed; pick by eye
+for st in 0.75 0.85; do for sd in 1 2 3 4; do
+draw-things-cli generate -m flux_2_klein_9b_i8x.ckpt \
+  --prompt-file raw/kyle/masters/kyle_front.txt \
+  --image raw/clips/kyle/p1_face_clean.png --strength $st \
+  --width 576 --height 1024 --steps 4 --cfg 1 --seed $sd \
+  --config-json '{&quot;shift&quot;:3.0,&quot;sampler&quot;:16}' --offline --disable-preview \
+  -o raw/kyle/masters/cand/kyle_front_s${st}_${sd}.png
+done; done
+</code></pre>
+<p>Prompt = style_head + kyle lock + "plain soft grey studio background, front view, head and shoulders". Kevin picks one per master; the ¾ Kyle must visibly be the same boy as the front one. <strong>Every later check is against these files</strong>, not the comic.</p>
+<h3>Stage B — shot stills locked to the masters</h3>
+<p>Each shot starts from its panel (layout) and must carry the master (identity). Methods, tried in this order — K1 decides:</p>
+<ol>
+<li><strong>CLI from <code>main</code>, multi-<code>--image</code></strong> — <code>brew install --HEAD drawthingsai/draw-things/draw-things-cli</code>. Then <code>--image p1_clean.png --image masters/kyle_front.png</code> with "Turn picture 1 into a 3D animated film frame; the boy is the boy in picture 2". The clean, real answer; Swift-version build friction reported, so it's a test, not a given.</li>
+<li><strong>Diptych in one image</strong> — works on the released CLI. Canvas 1152×1024 = master on the left, cleaned panel on the right; klein at high strength with "The right half is the same boy as the left half, in a 3D animated film frame"; crop the right 576×1024. In-context identity through a side-by-side is a known trick for edit models; <em>unverified for klein 9B in Draw Things</em>.</li>
+<li><strong>Two-pass face transplant</strong> — released CLI, no tricks. Pass 1: panel → 3D at 0.8 (layout and world right, face wrong). Pass 2: ffmpeg <code>overlay</code> the master face, scaled and placed over the face → klein at 0.3–0.35 to blend the seam and light. Reliable for frontal faces (S2, S7); hard for S5's ¾ in flight.</li>
+<li><strong>App Moodboard</strong> for only the failing face stills, with the master in the Moodboard at full weight; the clip still renders from the CLI.</li>
+</ol>
+<p>Shots without a face (S1, S3, S4) need none of this: panel → 3D at 0.8 is enough, since Kyle is seen from behind in S3 and is carried by the parka.</p>
+<h3>Shot anchors</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Shot</th>
+<th>Layout from</th>
+<th>Identity from</th>
+<th>Method</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S1 ship</td>
+<td>P1 left side (ship), padded</td>
+<td>ship lock</td>
+<td>panel → 3D 0.8</td>
+</tr>
+<tr>
+<td>S2</td>
+<td>P1</td>
+<td>kyle_front</td>
+<td>B1 → B2 → B3</td>
+</tr>
+<tr>
+<td>S3</td>
+<td>P2</td>
+<td>parka + back of head; ufo master</td>
+<td>panel → 3D 0.8; saucer checked against master</td>
+</tr>
+<tr>
+<td>S4</td>
+<td>P3</td>
+<td>animal locks</td>
+<td>panel → 3D 0.8</td>
+</tr>
+<tr>
+<td>S5</td>
+<td>P4</td>
+<td>kyle_34, sidekick</td>
+<td>B1 → B2 (B3 weak for ¾)</td>
+</tr>
+<tr>
+<td>S6 frozen saucer</td>
+<td>collage: <strong>ufo master</strong> over S4's 3D ice</td>
+<td>ufo master</td>
+<td>collage → klein 0.5 (both inputs already 3D, so low strength)</td>
+</tr>
+<tr>
+<td>S7</td>
+<td>P5</td>
+<td>kyle_front, chick</td>
+<td>B1 → B2 → B3</td>
+</tr>
+<tr>
+<td>S8 finale</td>
+<td>collage: S7's 3D animals along the bottom, sunrise sky above</td>
+<td>locks</td>
+<td>collage → klein 0.55</td>
+</tr>
+</tbody>
+</table></div>
+<p>Collages now use <strong>3D pieces</strong> — masters and earlier approved shots — so they only need blending, not converting. That keeps the saucer in S6 identical to S3's, and S8's animals identical to S7's.</p>
+<h3>Stage C — hold it through the motion</h3>
+<p>LTX keeps frame 0 exactly, then drifts. Lost City rules:
+- <strong>face shots (S2, S5, S7)</strong>: hold-position wording — Kyle smiles, rocks, turns his head; he doesn't walk, spin or leave frame;
+- <strong>slow foreground, busy background</strong> (S3, S4): the action goes to beams and ice;
+- <strong>fast action short</strong>: S5 ≤ 6 s, cut at the first changed frame;
+- <strong>little camera motion</strong>: camera moves make LTX invent picture at the edges, where extra penguins and second saucers come from.</p>
+<h3>Stage D — one look, and a QC gate</h3>
+<ul>
+<li>Same style lock, model, sampler and strength per method on every still; x4plus Real-ESRGAN on every clip; one shared ffmpeg colour pass if a clip's palette shifts (night S3 excepted).</li>
+<li>Per clip, a contact sheet — <strong>master</strong> | still | frame 0 | middle | last:</li>
+</ul>
+<pre><code class="language-bash">ffmpeg -i raw/clips/kyle/s2_ltx_v1.mov -vf &quot;select='eq(n,0)+eq(n,124)+eq(n,248)',scale=288:-1,tile=3x1&quot; \
+  -frames:v 1 raw/clips/kyle/s2_qc.png
+</code></pre>
+<p>Reject or trim if: Kyle's face differs from the master (eye shape, hair silhouette, smile); the parka loses its red/black split or the blue patch; a count changes (two boys, a second saucer, merged penguins); an animal changes species or markings; the look slides to 2D or to live-action photo. Retry: new seed → next method → shorter trim.</p>
+<p>Last resort if no method holds the face: a cloud-trained <strong>Kyle LoRA</strong> (klein, ~$1, <a href="character-consistency.html">character consistency</a> §3) on the approved masters plus the kept stills.</p>
+<h2>5. Pipeline</h2>
+<pre><code>comic_source.webp
+  │ ffmpeg: 9:16 windows + face crops → delogo bubbles → scale              (steps 1–2)
+  ▼
+Stage A  face/entity crops ──klein img2img 0.75–0.85, 8 candidates──► masters/ (Kevin picks)
+  ▼
+Stage B  panel_N_clean + master ──B1 multi-image │ B2 diptych │ B3 transplant──► sN_still.png (576×1024)
+         no-face shots        ──klein img2img 0.8──────────────────────────────►
+         collage shots        ──ffmpeg overlay of 3D pieces → klein 0.5–0.55──►
+  ▼
+         draw-things-cli LTX-2.3 --image still --frames 249 → sN_ltx_v1.mov   (QC sheet)
+  ▼
+         trim → upscale_4k.sh W=2160 H=3840 (realesrgan-x4plus)
+  ▼
+         assemble_film.sh W=2160 H=3840 XFADE=0.75 MUSIC=bed → 2160×3840 → 1080×1920 copy
+</code></pre>
+<h2>6. Step-by-step</h2>
 <h3>Step 0 — project record</h3>
-<p>Add <code>kyle_rescue</code> to <code>projects.json</code> (done at plan time, status <code>planned</code>). Every still and clip lands in <code>raw/clips/kyle/</code>.</p>
-<h3>Step 1 — cut a 9:16 window from each panel</h3>
+<p><code>kyle_rescue</code> in <code>projects.json</code> (status <code>planned</code>). Stills and clips in <code>raw/clips/kyle/</code>, masters in <code>raw/kyle/masters/</code>.</p>
+<h3>Step 1 — crops</h3>
 <p>Whole-panel boxes in the 1024×1536 source (approximate — measure on the first run):</p>
 <div class="tw"><table>
 <thead>
@@ -246,7 +386,7 @@ text-only shots  ──draw-things-cli klein txt2img (style lock, no Kyle close-
 <td>2</td>
 <td><code>500:470:518:6</code></td>
 <td><strong>A tight</strong> <code>264:470:~560:6</code></td>
-<td>Kyle's head bottom, saucer top — already a vertical composition</td>
+<td>boy at the bottom, saucer at the top — already vertical</td>
 </tr>
 <tr>
 <td>3</td>
@@ -258,83 +398,69 @@ text-only shots  ──draw-things-cli klein txt2img (style lock, no Kyle close-
 <td>4</td>
 <td><code>488:514:530:486</code></td>
 <td><strong>B pad</strong></td>
-<td>Kyle and the gadget run diagonally across the width</td>
+<td>Kyle and the gadget run diagonally</td>
 </tr>
 <tr>
 <td>5</td>
 <td><code>1012:520:6:1010</code></td>
 <td><strong>A tight</strong> <code>292:520:~270:1010</code></td>
-<td>Kyle hugging the chick fills a vertical window by itself</td>
+<td>the hug fills a vertical window by itself</td>
 </tr>
 </tbody>
 </table></div>
-<p>The panels are near-square, so a 9:16 window is either narrow or needs new picture above and below.</p>
 <ul>
-<li><strong>A — tight crop.</strong> Cut <code>h×9/16</code> wide around the subject. Only ~260–290 px wide, so klein at 576 wide is working from a 2× upscale: expect softer detail, fix it with strength 0.55–0.6.</li>
-<li><strong>B — pad and repaint.</strong> Keep the full panel width, extend to 9:16 with a blurred, stretched copy of the panel behind it, and let klein paint real sky and ice into the padding at strength 0.65–0.7. Keeps the whole composition; the risk is Kyle changing at that strength (K0 measures it).</li>
+<li><strong>A — tight crop</strong>: <code>h×9/16</code> wide around the subject.</li>
+<li><strong>B — pad</strong>: full panel width, extended to 9:16 with a blurred stretched copy behind; the 3D conversion at 0.8 paints real sky and ice into the padding anyway.</li>
 </ul>
-<pre><code class="language-bash">mkdir -p raw/clips/kyle
-# A: tight
-ffmpeg -i raw/kyle/comic_source.webp -vf &quot;crop=292:520:270:1010&quot; raw/clips/kyle/p5_crop.png
-# B: pad (panel 1 → 506 wide × 900 tall, blurred copy behind, panel centred)
+<pre><code class="language-bash">mkdir -p raw/clips/kyle raw/kyle/masters/cand
+ffmpeg -i raw/kyle/comic_source.webp -vf &quot;crop=292:520:270:1010&quot; raw/clips/kyle/p5_crop.png          # A
 ffmpeg -i raw/kyle/comic_source.webp -filter_complex \
   &quot;[0]crop=506:470:6:6,split[a][b];[a]scale=506:900,boxblur=30[bg];[bg][b]overlay=0:(H-h)/2&quot; \
-  raw/clips/kyle/p1_crop.png
+  raw/clips/kyle/p1_crop.png                                                                        # B
 </code></pre>
-<p>Always hand the CLI an image that is already 9:16: it center-crops <code>--image</code> to the output aspect, and on a square panel that would silently throw away the sides.</p>
+<p>Plus face crops for Stage A (P1 head and shoulders, P4 head, P4 penguin, P5 chick, P2 saucer). Always hand the CLI a 9:16 image — it center-crops otherwise.</p>
 <h3>Step 2 — remove the text</h3>
-<p>Speech bubbles, starbursts and caption boxes inside the window get covered with ffmpeg <code>delogo</code> (it fills the box from the pixels around it), then scaled to 576 wide so klein gets the output size:</p>
+<p><code>delogo</code> over each bubble, starburst or caption box, then scale to 576×1024 (or the crop's own size for masters):</p>
 <pre><code class="language-bash">ffmpeg -i raw/clips/kyle/p1_crop.png \
-  -vf &quot;delogo=x=290:y=215:w=210:h=150,scale=576:1024:flags=lanczos&quot; \
-  raw/clips/kyle/p1_clean.png
+  -vf &quot;delogo=x=290:y=215:w=210:h=150,scale=576:1024:flags=lanczos&quot; raw/clips/kyle/p1_clean.png
 </code></pre>
-<p>The smear left by <code>delogo</code> doesn't matter: klein repaints it in step 3. Box coordinates are per panel — read them off the crop.</p>
-<h3>Step 3 — stills with klein (CLI)</h3>
-<pre><code class="language-bash"># panel shot: img2img from the cleaned panel
-draw-things-cli generate -m flux_2_klein_9b_i8x.ckpt \
-  --prompt-file raw/clips/kyle/s2_still.txt \
-  --image raw/clips/kyle/p1_clean.png --strength 0.5 \
-  --width 576 --height 1024 --steps 4 --cfg 1 --seed 1 \
-  --config-json '{&quot;shift&quot;:3.0,&quot;sampler&quot;:16}' \
-  --offline --disable-preview -o raw/clips/kyle/s2_still_v1.png
-
-# text-only shot: same command without --image/--strength
-</code></pre>
-<p>Loop over <code>--seed 1 2 3</code> and keep the best. Strength guide: 0.4 ≈ panel redrawn cleaner; 0.6 ≈ more painterly detail with the pose kept; 0.65–0.7 needed to paint real picture into method-B padding; &gt; 0.7 Kyle probably starts turning into a different boy (<em>to verify in K0</em>).</p>
-<h3>Step 4 — motion with LTX-2.3 (CLI)</h3>
+<p>The conversion repaints the smear.</p>
+<h3>Step 3 — Stage A masters, then Stage B stills</h3>
+<p>Commands in §4b. Strength guide for klein converting 2D → 3D (<em>K0 verifies</em>): 0.6 ≈ still reads as a drawing; 0.75 ≈ 3D shading, face close to the comic; 0.85 ≈ full 3D, face starts changing; 1.0 ≈ layout only.</p>
+<h3>Step 4 — motion with LTX-2.3</h3>
 <pre><code class="language-bash">draw-things-cli generate -m ltx_2.3_22b_distilled_1.1_q8p.ckpt \
-  --prompt-file raw/clips/kyle/s2_video.txt \
-  --image raw/clips/kyle/s2_still_v1.png \
+  --prompt-file raw/clips/kyle/s2_video.txt --image raw/clips/kyle/s2_still_v1.png \
   --width 576 --height 1024 --frames 249 --steps 8 --cfg 1 --seed 1 \
   --config-json '{&quot;sampler&quot;:19,&quot;shift&quot;:5.0,&quot;stochasticSamplingGamma&quot;:0.3,&quot;fps&quot;:25,&quot;hiresFix&quot;:false}' \
-  --offline --disable-preview --video-format prores422hq \
-  -o raw/clips/kyle/s2_ltx_v1.mov
+  --offline --disable-preview --video-format prores422hq -o raw/clips/kyle/s2_ltx_v1.mov
 </code></pre>
-<p>Always render 249 frames: same cost per clip as a shorter one in practice (Lost City §7b), and the trim happens in the edit. 576×1024 is the same pixel count as Lost City's 1024×576, so expect the same ~10 min per clip (<em>portrait LTX not yet tested here</em>). The clip comes with LTX audio; it is simply not used. Progress is a TTY spinner — a redirected log stays empty until the process exits.</p>
-<h3>Step 5a — prerequisite: portrait output in the two scripts</h3>
-<p>Both scripts hardcode landscape — <code>upscale_4k.sh</code> scales and crops to <code>3840:2160</code>, and <code>assemble_film.sh</code> conforms every clip to <code>3840:2160</code>. Fed a 576×1024 clip, both would crop it to a landscape strip. Before the batch, add <code>W</code>/<code>H</code> env vars (default 3840/2160) to both, and pass <code>W=2160 H=3840</code>. Also update <a href="scripts-reference.html">scripts reference</a>.</p>
+<p>Always 249 frames; trim in the edit. 576×1024 = the same pixel count as Lost City's 1024×576, so ~10 min per clip (<em>portrait not yet tested</em>). Audio is ignored. The progress spinner is TTY-only.</p>
+<h3>Step 5a — prerequisite: portrait in the scripts</h3>
+<p><code>upscale_4k.sh</code> and <code>assemble_film.sh</code> hardcode <code>3840:2160</code> and would crop a portrait clip to a landscape strip. Add <code>W</code>/<code>H</code> env vars (default 3840/2160) to both; pass <code>W=2160 H=3840</code>. Update <a href="scripts-reference.html">scripts reference</a>.</p>
 <h3>Step 5 — trim and upscale</h3>
 <pre><code class="language-bash">ffmpeg -i raw/clips/kyle/s2_ltx_v1.mov -t 8 -an -c:v copy raw/clips/kyle/s2_ltx_v1_t.mov
-W=2160 H=3840 scripts/upscale_4k.sh raw/clips/kyle/s2_ltx_v1_t.mov s2 realesr-animevideov3-x4
+W=2160 H=3840 scripts/upscale_4k.sh raw/clips/kyle/s2_ltx_v1_t.mov s2 realesrgan-x4plus
 </code></pre>
-<p>Use the <strong>anime</strong> Real-ESRGAN model: it is built for flat-shaded line art and runs faster than x4plus (<a href="scripts-reference.html">scripts reference</a>). No audio remux — music only. Never upscale while LTX is rendering.</p>
+<p><strong>x4plus</strong> now, not the anime model: 3D renders have fur, snow and water texture that the line-art model flattens (K5 confirms). Never upscale while LTX renders.</p>
 <h3>Step 6 — assemble and deliver</h3>
-<pre><code class="language-bash">W=2160 H=3840 XFADE=0.75 MUSIC=raw/clips/music/&lt;track&gt;.mp3 \
+<p>Music = the <strong>tail</strong> of the track, so the film ends on the song's own ending. Its loudness from 93 s on (5 s windows, dB): −20 −19 <strong>−24 −23 −22 −22</strong> −20 −19 <strong>−18</strong> −19 −23 −38 — a dip under the UFO (S3–S4), the peak near the freeze-ray (S5–S6), the ending under S7–S8.</p>
+<pre><code class="language-bash">D=$(ffprobe -v error -show_entries format=duration -of csv=p=0 film_nomusic.mp4)   # or kept lengths − fades
+ffmpeg -ss $(echo &quot;153.5 - $D&quot; | bc) -i raw/clips/music/best_adventure_ever.mp3 -t $D \
+  -af &quot;afade=t=in:d=1.5&quot; raw/clips/kyle/music_bed.wav
+W=2160 H=3840 XFADE=0.75 MUSIC=raw/clips/kyle/music_bed.wav \
   scripts/assemble_film.sh raw/clips/kyle/kyle_rescue_2160x3840.mp4 s1_4k.mp4 … s8_4k.mp4
 ffmpeg -i raw/clips/kyle/kyle_rescue_2160x3840.mp4 -vf scale=1080:1920:flags=lanczos \
   -c:v hevc_videotoolbox -b:v 12M -tag:v hvc1 -c:a copy raw/clips/kyle/kyle_rescue_1080x1920.mp4
 </code></pre>
-<p>Fade the music out over the last 2 s. No text overlays.</p>
 <h3>Step 7 — batch it</h3>
-<p>Once the per-shot commands work, write <code>scripts/dt_render.sh &lt;project&gt; &lt;scene&gt;</code> (proposed in <a href="headless-cli-pipeline.html">headless cli pipeline</a> §5): read the locks and the scene's prompts from <code>projects.json</code>, write the prompt files, run step 3 over 3 seeds and step 4 on the chosen still. Stills first (≈ 12 min, pick by eye), then one <code>for</code> loop renders all 8 clips overnight — no screen lock, no app.</p>
-<h2>6. Shot list (60 s)</h2>
-<p>8 clips, 7 crossfades of 0.75 s. Kept lengths add up to ~65 s, ~60 s after the fades.</p>
+<p><code>scripts/dt_render.sh &lt;project&gt; &lt;scene&gt;</code> (proposed in <a href="headless-cli-pipeline.html">headless cli pipeline</a> §5): prompts from <code>projects.json</code>, stills over 3 seeds, LTX on the chosen still. Masters and stills are picked by eye first; the 8 clips then render in one overnight loop.</p>
+<h2>7. Shot list (60 s)</h2>
+<p>8 clips, 7 crossfades of 0.75 s: ~65 s kept, ~60 s after fades.</p>
 <div class="tw"><table>
 <thead>
 <tr>
 <th>#</th>
 <th>Keep</th>
-<th>Source</th>
 <th>Still</th>
 <th>Motion (LTX prompt core)</th>
 </tr>
@@ -343,63 +469,54 @@ ffmpeg -i raw/clips/kyle/kyle_rescue_2160x3840.mp4 -vf scale=1080:1920:flags=lan
 <tr>
 <td>S1</td>
 <td>7 s</td>
-<td>text-only</td>
-<td>Tall frame: expedition ship small at the bottom on a turquoise sea, towering iceberg and sky above, seagulls</td>
+<td>tall frame: expedition ship small at the bottom on a turquoise sea, towering iceberg and sky above, gulls</td>
 <td>slow tilt down from the gulls to the ship, gentle swell</td>
 </tr>
 <tr>
 <td>S2</td>
 <td>8 s</td>
-<td>panel 1</td>
-<td>Kyle close-up, ship behind, thumbs up (bubble removed)</td>
-<td>Kyle holds his place, smiles wider, thumbs-up bobs once, hair and parka hood stir in the wind; camera still (method B keeps the thumb in frame)</td>
+<td>Kyle close-up, ship behind, thumbs up</td>
+<td>holds his place, smiles wider, thumb bobs once, hair and parka stir; camera still</td>
 </tr>
 <tr>
 <td>S3</td>
 <td>10 s</td>
-<td>panel 2</td>
-<td>night, Kyle from behind, saucer overhead</td>
-<td>foreground still (Kyle only turns his head a little), saucer hovers and pulses at the top of the frame, purple beams crackle down onto the ice, ice glows and cracks — suits 9:16: boy at the bottom, threat at the top</td>
+<td>night, Kyle from behind at the bottom, saucer overhead</td>
+<td>Kyle only turns his head; saucer hovers and pulses, purple beams crackle onto the ice, ice glows and cracks</td>
 </tr>
 <tr>
 <td>S4</td>
 <td>10 s</td>
-<td>panel 3</td>
 <td>penguins, seal, orca, whale on breaking ice</td>
-<td>slow background violence: ice blocks rise into the beams, floes split, penguins huddle and flap, seal looks up; the s10/s14 Lost City pattern — slow foreground, violent background</td>
+<td>ice blocks rise slowly into the beams, floes split, penguins huddle and flap, seal looks up</td>
 </tr>
 <tr>
 <td>S5</td>
 <td>6 s</td>
-<td>panel 4</td>
-<td>Kyle mid-air aiming the freeze-ray, penguin sidekick</td>
-<td>Kyle glides forward, the gadget fires a bright blue snowflake beam, frost spreads across the frame; trim at the first sign of drift</td>
+<td>Kyle mid-air aiming the freeze-ray, sidekick beside him</td>
+<td>glides forward, gadget fires a blue snowflake beam, frost spreads; cut at first drift</td>
 </tr>
 <tr>
 <td>S6</td>
 <td>6 s</td>
-<td>last frame of S5 → text-only fallback</td>
-<td>the saucer frozen in blue ice, beams gone</td>
-<td>ice crust cracks, saucer shakes free and zips away up into the stars, light fades</td>
+<td>saucer encased in cracked blue ice</td>
+<td>ice cracks, saucer shakes free and zips up into the stars</td>
 </tr>
 <tr>
 <td>S7</td>
 <td>10 s</td>
-<td>panel 5</td>
-<td>sunrise, Kyle hugging the chick (tight vertical window)</td>
-<td>slow and warm: Kyle hugs and rocks gently, chick nuzzles, penguins bob at the edges, sun glints behind</td>
+<td>sunrise, Kyle hugging the chick</td>
+<td>hugs and rocks gently, chick nuzzles, penguins bob at the edges, sun glints</td>
 </tr>
 <tr>
 <td>S8</td>
 <td>8 s</td>
-<td>text-only</td>
-<td>Tall sunrise frame: sky and sun above, a whale's tail and a line of penguins with a small boy far away on the ice below</td>
+<td>tall sunrise: sky above, whale tail and penguins with a small boy far away below</td>
 <td>slow rise into the sky as the music ends</td>
 </tr>
 </tbody>
 </table></div>
-<p>S2, S5 and S7 are the only face shots; S3 shows Kyle from behind (identity from wardrobe, free).</p>
-<h2>7. Experiments (run before the batch)</h2>
+<h2>8. Experiments (before the batch)</h2>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -412,49 +529,55 @@ ffmpeg -i raw/clips/kyle/kyle_rescue_2160x3840.mp4 -vf scale=1080:1920:flags=lan
 <tbody>
 <tr>
 <td>K0</td>
-<td>Does img2img keep Kyle — and which 9:16 method?</td>
-<td>panel 1 via method B at strength 0.55 / 0.65 / 0.75, panel 5 via method A at 0.45 / 0.55 / 0.65, seed 1</td>
-<td>the boy reads as Kyle; padding becomes real sky/ice; bubble area painted over</td>
+<td>2D → 3D conversion</td>
+<td>P1 face crop at 0.6 / 0.75 / 0.85 / 1.0, ± "Pixar-style", 2 seeds</td>
+<td>a 3D boy who still reads as the comic's Kyle; Kevin picks the master</td>
 </tr>
 <tr>
 <td>K1</td>
-<td>Does LTX keep the illustrated style?</td>
-<td>S2 clip</td>
-<td>no drift to photoreal or 3D over 10 s; if it drifts, add "2D" and "flat colour" to the tail, or try Wan 2.2 via CLI with <code>refinerModel</code></td>
+<td>Which master-locking method?</td>
+<td>S2 via B1 (try the <code>--HEAD</code> build), then B2 diptych, then B3 transplant</td>
+<td>S2 still matches <code>kyle_front</code> on the QC sheet</td>
 </tr>
 <tr>
 <td>K2</td>
-<td>Face drift over 10 s</td>
-<td>S2 and S7</td>
-<td>face and parka unchanged at frame 249; else trim to 5–6 s</td>
+<td>Does LTX keep the 3D-animated look?</td>
+<td>S2 clip</td>
+<td>no slide to live-action photo or back to 2D over 10 s</td>
 </tr>
 <tr>
 <td>K3</td>
-<td>Fast action</td>
-<td>S5</td>
-<td>clean for ≥ 5 s</td>
+<td>Face drift over 10 s</td>
+<td>S2, S7</td>
+<td>face matches master at frame 249; else trim to 5–6 s</td>
 </tr>
 <tr>
 <td>K4</td>
-<td>Chaining</td>
-<td>last frame of S5 → S6</td>
-<td>saucer and frost carry over</td>
+<td>Fast action</td>
+<td>S5</td>
+<td>clean ≥ 5 s</td>
 </tr>
 <tr>
 <td>K5</td>
 <td>Upscaler</td>
-<td>anime vs x4plus on S2</td>
-<td>pick by eye; anime expected cleaner lines</td>
+<td>x4plus vs anime on S2</td>
+<td>x4plus expected better on fur and snow</td>
 </tr>
 <tr>
 <td>K6</td>
+<td>Collage blend</td>
+<td>S6 at klein 0.4 / 0.5 / 0.6</td>
+<td>saucer = master; seams gone; one saucer</td>
+</tr>
+<tr>
+<td>K7</td>
 <td>Portrait LTX</td>
 <td>S2 at 576×1024</td>
-<td>renders in ~10 min, motion as good as landscape</td>
+<td>~10 min, motion as good as landscape</td>
 </tr>
 </tbody>
 </table></div>
-<h2>8. Budget (estimate)</h2>
+<h2>9. Budget (estimate)</h2>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -466,10 +589,22 @@ ffmpeg -i raw/clips/kyle/kyle_rescue_2160x3840.mp4 -vf scale=1080:1920:flags=lan
 </thead>
 <tbody>
 <tr>
-<td>klein stills</td>
-<td>8 shots × 3 seeds + K0 sweep</td>
+<td>Masters (Stage A)</td>
+<td>5 masters × 8 candidates</td>
 <td>~30 s</td>
-<td>~15 min</td>
+<td>~20 min + Kevin's pick</td>
+</tr>
+<tr>
+<td><code>--HEAD</code> build attempt (K1)</td>
+<td>1</td>
+<td>—</td>
+<td>~30 min, once</td>
+</tr>
+<tr>
+<td>Shot stills (Stage B)</td>
+<td>8 shots × 3 seeds, some two-pass</td>
+<td>~30–60 s</td>
+<td>~20 min</td>
 </tr>
 <tr>
 <td>LTX clips</td>
@@ -478,33 +613,30 @@ ffmpeg -i raw/clips/kyle/kyle_rescue_2160x3840.mp4 -vf scale=1080:1920:flags=lan
 <td>~2 h</td>
 </tr>
 <tr>
-<td>Upscale (trimmed clips, ~65 s total ≈ 1 625 frames)</td>
+<td>Upscale x4plus (~1 625 frames)</td>
 <td>8</td>
-<td>~13 frames/min (81 f ≈ 6 min)</td>
+<td>~13 frames/min</td>
 <td>~2 h</td>
 </tr>
 <tr>
 <td>Script change (step 5a)</td>
 <td>1</td>
 <td>—</td>
-<td>~15 min, once</td>
+<td>~15 min</td>
 </tr>
 <tr>
-<td>Assembly + delivery copy</td>
+<td>Assembly + delivery</td>
 <td>1</td>
 <td>—</td>
 <td>~10 min</td>
 </tr>
 </tbody>
 </table></div>
-<p>About <strong>4–5 h of machine time</strong>, mostly unattended, plus ~1 h of picking stills and trims.</p>
-<h2>9. Open questions for Kevin</h2>
-<ol>
-<li><strong>Music</strong>: which track? The four on disk are all mood or synth; a bright, adventurous one would need adding.</li>
-<li>~~Aspect~~ 9:16 · ~~Captions~~ none · ~~Voice~~ none · ~~Consent~~ Kevin's son — answered 2026-09-22 (§2b).</li>
-</ol>
+<p>About <strong>5–6 h of machine time</strong>, plus ~1.5 h picking masters, stills and trims.</p>
+<h2>10. Open questions</h2>
+<p>None — all answered 2026-09-22 (§2). The master Kyle is Kevin's pick after K0.</p>
 
-  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="headless-cli-pipeline.html">headless cli pipeline</a> — the CLI, its flags, and the measured timings this plan relies on</li><li><a href="lost-city-plan.html">lost city plan</a> — LTX production settings and motion rules</li><li><a href="character-consistency.html">character consistency</a> · <a href="identity-conditioning.html">identity conditioning</a> — why panel pixels beat text for identity</li><li><a href="face-identity-workflows.html">face identity workflows</a> — if the face drifts</li><li><a href="scripts-reference.html">scripts reference</a> — <code>upscale_4k.sh</code>, <code>assemble_film.sh</code></li><li><a href="projects.html">projects</a> — the <code>kyle_rescue</code> record</li></ul></div>
+  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="headless-cli-pipeline.html">headless cli pipeline</a> — the CLI, its flags, and the measured timings this plan relies on</li><li><a href="lost-city-plan.html">lost city plan</a> — LTX production settings and motion rules</li><li><a href="character-consistency.html">character consistency</a> · <a href="identity-conditioning.html">identity conditioning</a> — why identity needs its own channel once the style changes</li><li><a href="face-identity-workflows.html">face identity workflows</a> — face-transplant and LoRA background</li><li><a href="scripts-reference.html">scripts reference</a> — <code>upscale_4k.sh</code>, <code>assemble_film.sh</code></li><li><a href="projects.html">projects</a> — the <code>kyle_rescue</code> record</li></ul></div>
 </div>
 <footer>video-gen-kb · built 2026-09-22 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
 <script>function tt(){var r=document.documentElement,
