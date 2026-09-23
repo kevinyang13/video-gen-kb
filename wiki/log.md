@@ -8,6 +8,16 @@
 
 ---
 
+## 2026-09-23 — Projects registry split by theme
+
+**Source**: Kevin — the projects page had grown past 960 lines and every record loaded at once.
+
+**Changed**: `projects.json` gains a `theme` per project (`anime` / `realistic` / `3d`) and a `themes` block holding each theme's slug, title and blurb. `scripts/build_projects.py` now writes four pages instead of one: `wiki/projects.md` is a hub with the summary table grouped by theme (rows link straight into the theme page), and `wiki/projects-anime.md` (7), `wiki/projects-realistic.md` (3), `wiki/projects-3d.md` (1) carry the full records. 961 lines became 93 + 386 + 385 + 189. Adding a theme means adding it to `themes` — no code change.
+
+**Also**: `scripts/build_site.py` now understands `[[slug|display text]]` wiki-links.
+
+**Updated**: `wiki/index.md` (one card per theme page).
+
 ## 2026-09-23 — Kyle's Antarctic Rescue rendered overnight, unattended
 
 Kevin's go at ~22:00; film finished 01:38 with no human input (Claude judged every pick). Delivered `raw/clips/kyle/final/kyle_rescue_1080x1920.mp4` + 2160×3840 master, 60.0 s, music tail from 93.4 s.

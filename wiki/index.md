@@ -4,7 +4,7 @@
 
 **Sources**: n/a
 
-**Last updated**: 2026-09-22
+**Last updated**: 2026-09-23
 
 ---
 
@@ -25,7 +25,10 @@
 
 ## Projects
 
-- [[projects]] — registry of every video: models, settings, prompts, seeds, music, files; generated from `projects.json`
+- [[projects]] — index of every video, grouped by theme; generated from `projects.json`
+- [[projects-anime]] — Shinkai/Ghibli living-painting loops: coast, Torrey Pines, Golden Gate, Rainier, cyberpunk, FLL farm
+- [[projects-realistic]] — photoreal shorts: Dragon Epic, Lost City, the three-minute film
+- [[projects-3d]] — 3D-animated shorts: Kyle's Antarctic Rescue
 
 ## Plans
 

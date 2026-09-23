@@ -173,7 +173,10 @@ def md_to_html(body, slugs):
 
     def link(m):
         target = m.group(1).strip()
-        label = target.replace("-", " ")
+        label = None
+        if "|" in target:                      # [[slug|display text]]
+            target, label = (x.strip() for x in target.split("|", 1))
+        label = label or target.replace("-", " ")
         if target in slugs:
             return f'<a href="{target}.html">{label}</a>'
         return f'<span class="missing" title="page not written yet">{label}</span>'

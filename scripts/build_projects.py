@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
-"""Render projects.json -> wiki/projects.md (summary table + one record per project).
+"""Render projects.json -> wiki/projects.md (hub) + one page per theme.
 
 projects.json is the source of truth. Edit it, then run this (build_site.py
 calls it automatically). A project's still/i2v/post dicts only need the keys
-that differ from `defaults`; the rest is filled in here.
+that differ from `defaults`; the rest is filled in here. Each project carries a
+`theme` ("anime" / "realistic" / "3d"); the themes themselves — slug, title,
+blurb — are defined in projects.json under `themes`, and each one becomes its
+own wiki page so no single page carries every record.
 """
 
 import json
@@ -13,6 +16,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "projects.json"
 OUT = ROOT / "wiki" / "projects.md"
+WIKI = ROOT / "wiki"
 
 ORDER = {
     "still": ["model", "size", "steps", "cfg", "shift", "sampler", "lora", "refiner", "seed"],
@@ -40,34 +44,91 @@ def block(title, defaults, override, suffix):
     return "\n".join(lines)
 
 
-def main():
-    data = json.loads(SRC.read_text())
-    defs, suffix = data["defaults"], data["defaults"]["style_suffix"]
-    projects = data["projects"]
-
-    out = [
-        "# Projects Registry",
-        "",
-        "**Summary**: Every video project so far — one record each with the exact models, settings, prompts, seeds, music and output files. Generated from `projects.json`; edit that file, not this page.",
-        "",
-        "**Sources**: projects.json; per-project notes from the session logs.",
-        "",
-        f"**Last updated**: {date.today().isoformat()}",
-        "",
-        "---",
-        "",
-        "## Summary",
-        "",
-        "| # | Project | Date | Status | Still | I2V | Music | Final file | YouTube |",
-        "|--:|---|---|---|---|---|---|---|---|",
-    ]
+def summary_rows(projects, defs, link_page=None):
+    """Table rows; link_page=None keeps the anchor local, else points at that page."""
+    rows = []
     for i, p in enumerate(projects, 1):
         s = merged(defs["still"], p.get("still"))
         v = merged(defs["i2v"], p.get("i2v"))
         m = merged(defs["post"], p.get("post")).get("music") or "—"
         final = next((f for f in p.get("files", []) if f.endswith("_final.mp4")), "—")
         yt = f"[▶ watch](https://youtu.be/{p['youtube']})" if p.get("youtube") else "—"
-        out.append(f"| {i} | [{p['title']}](#{p['id']}) | {p['date']} | {p['status']} | {s['model'].split(' (')[0]} {s['size'].split(' ')[0]} | {v['model'].split(' Expert')[0]} {v.get('time_min', '?')} min | {m.split(' —')[0].split(' (')[0]} | `{final}` | {yt} |")
+        href = f"#{p['id']}" if link_page is None else f"{link_page}.html#{p['id']}"
+        rows.append(
+            f"| {i} | [{p['title']}]({href}) | {p['date']} | {p['status']} | "
+            f"{s['model'].split(' (')[0]} {s['size'].split(' ')[0]} | "
+            f"{v['model'].split(' Expert')[0]} {v.get('time_min', '?')} min | "
+            f"{m.split(' —')[0].split(' (')[0]} | `{final}` | {yt} |")
+    return rows
+
+
+HEAD = ["| # | Project | Date | Status | Still | I2V | Music | Final file | YouTube |",
+        "|--:|---|---|---|---|---|---|---|---|"]
+
+
+def record(p, defs, suffix):
+    out = [f"## {p['title']} {{#{p['id']}}}", "",
+           f"- **Date**: {p['date']} · **Status**: {p['status']} · **Draw Things project**: `{p['dt_project']}`",
+           f"- **Files** (`raw/clips/`): " + ", ".join(f"`{f}`" for f in p.get("files", [])),
+           f"- **Notes**: {p.get('notes', '')}", ""]
+    if p.get("youtube"):
+        note = f" *({p['youtube_note']})*" if p.get("youtube_note") else ""
+        size = (p.get("i2v") or {}).get("size") or defs["i2v"].get("size", "576x1024")
+        w, h = (int(x) for x in size.lower().split("x"))
+        cls = "yt" if w > h else "yt yt-v"
+        out += [f"- **YouTube**: [youtu.be/{p['youtube']}](https://youtu.be/{p['youtube']}){note}", "",
+                f'<div class="{cls}"><iframe src="https://www.youtube.com/embed/{p["youtube"]}" title="{p["title"]}" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>', ""]
+    out += [block("Still", defs["still"], p.get("still"), suffix), "",
+            block("I2V", defs["i2v"], p.get("i2v"), suffix), "",
+            block("Post", defs["post"], p.get("post"), suffix), ""]
+    if p.get("scenes"):
+        sc = p["scenes"]
+        out += ["### Scene prompts", ""]
+        if "locks" in sc:
+            L = sc["locks"]
+            out += ["**Locks** (paste verbatim into every prompt):", ""]
+            for k in [k for k in L if k != "rules"]:
+                if L.get(k): out += [f"- *{k.replace('_', ' ')}* — {L[k]}"]
+            if L.get("rules"): out += ["", f"**Rules**: {L['rules']}", ""]
+        for key in [k for k in sc if k != "locks"]:
+            v = sc[key]
+            out += ["", f"#### {key} — {v.get('title', '')}", ""]
+            if v.get("engine"): out += [f"- **Engine**: {v['engine']}"]
+            if v.get("files"): out += [f"- **Files**: {v['files']}"]
+            if v.get("note"): out += [f"- **Note**: {v['note']}"]
+            if v.get("still"): out += ["", "*Still prompt*", "", f"> {v['still']}"]
+            for label, k in (("Video prompt", "video"), ("Video prompt (Wan)", "video_wan"), ("Video prompt (LTX)", "video_ltx")):
+                if v.get(k): out += ["", f"*{label}*", "", f"> {v[k]}"]
+            out += [""]
+    return out
+
+
+def main():
+    data = json.loads(SRC.read_text())
+    defs, suffix = data["defaults"], data["defaults"]["style_suffix"]
+    projects = data["projects"]
+    themes = data["themes"]
+    today = date.today().isoformat()
+
+    # ---- hub page: every project in one table, grouped by theme, records live elsewhere
+    out = [
+        "# Projects Registry",
+        "",
+        "**Summary**: Index of every video project so far, grouped by theme. The full record for each one — models, settings, prompts, seeds, music, files — lives on its theme page. Generated from `projects.json`; edit that file, not these pages.",
+        "",
+        "**Sources**: projects.json; per-project notes from the session logs.",
+        "",
+        f"**Last updated**: {today}",
+        "",
+        "---",
+        "",
+    ]
+    for key, t in themes.items():
+        group = [p for p in projects if p.get("theme") == key]
+        if not group:
+            continue
+        out += [f"## [[{t['slug']}|{t['title']}]] ({len(group)})", "", t["blurb"], ""] + HEAD
+        out += summary_rows(group, defs, link_page=t["slug"]) + [""]
 
     pl = data.get("playlist")
     if pl:
@@ -78,47 +139,32 @@ def main():
             block("Still", defs["still"], None, suffix), "",
             block("I2V", defs["i2v"], None, suffix), "",
             block("Post", defs["post"], None, suffix), "",
-            f"Style suffix appended to every still prompt: `{suffix}`", ""]
-
-    for p in projects:
-        out += [f"## {p['title']} {{#{p['id']}}}", "",
-                f"- **Date**: {p['date']} · **Status**: {p['status']} · **Draw Things project**: `{p['dt_project']}`",
-                f"- **Files** (`raw/clips/`): " + ", ".join(f"`{f}`" for f in p.get("files", [])),
-                f"- **Notes**: {p.get('notes', '')}", ""]
-        if p.get("youtube"):
-            note = f" *({p['youtube_note']})*" if p.get("youtube_note") else ""
-            size = (p.get("i2v") or {}).get("size") or defs["i2v"].get("size", "576x1024")
-            w, h = (int(x) for x in size.lower().split("x"))
-            cls = "yt" if w > h else "yt yt-v"
-            out += [f"- **YouTube**: [youtu.be/{p['youtube']}](https://youtu.be/{p['youtube']}){note}", "",
-                    f'<div class="{cls}"><iframe src="https://www.youtube.com/embed/{p["youtube"]}" title="{p["title"]}" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>', ""]
-        out += [
-                block("Still", defs["still"], p.get("still"), suffix), "",
-                block("I2V", defs["i2v"], p.get("i2v"), suffix), "",
-                block("Post", defs["post"], p.get("post"), suffix), ""]
-        if p.get("scenes"):
-            sc = p["scenes"]
-            out += ["### Scene prompts", ""]
-            if "locks" in sc:
-                L = sc["locks"]
-                out += ["**Locks** (paste verbatim into every prompt):", ""]
-                for k in [k for k in L if k != "rules"]:
-                    if L.get(k): out += [f"- *{k.replace('_', ' ')}* — {L[k]}"]
-                if L.get("rules"): out += ["", f"**Rules**: {L['rules']}", ""]
-            for key in [k for k in sc if k != "locks"]:
-                v = sc[key]
-                out += ["", f"#### {key} — {v.get('title', '')}", ""]
-                if v.get("engine"): out += [f"- **Engine**: {v['engine']}"]
-                if v.get("files"): out += [f"- **Files** (`raw/clips/lostcity/`): {v['files']}"]
-                if v.get("note"): out += [f"- **Note**: {v['note']}"]
-                if v.get("still"): out += ["", "*Still prompt*", "", f"> {v['still']}"]
-                for label, k in (("Video prompt", "video"), ("Video prompt (Wan)", "video_wan"), ("Video prompt (LTX)", "video_ltx")):
-                    if v.get(k): out += ["", f"*{label}*", "", f"> {v[k]}"]
-                out += [""]
-
-    out += ["## Related pages", "- [[runbook-living-painting]]", "- [[living-painting-loop]]", "- [[draw-things-setup]]", ""]
+            f"Style suffix appended to every still prompt: `{suffix}`", "",
+            "## Related pages",
+            "- " + " · ".join(f"[[{t['slug']}]]" for t in themes.values()),
+            "- [[runbook-living-painting]]", "- [[living-painting-loop]]", "- [[draw-things-setup]]", ""]
     OUT.write_text("\n".join(out), encoding="utf-8")
-    print(f"wrote {OUT.relative_to(ROOT)} ({len(projects)} projects)")
+
+    # ---- one page per theme with the full records
+    wrote = [(OUT.name, len(projects))]
+    for key, t in themes.items():
+        group = [p for p in projects if p.get("theme") == key]
+        if not group:
+            continue
+        others = " · ".join(f"[[{o['slug']}]]" for k, o in themes.items() if k != key)
+        page = [f"# {t['title']}", "",
+                f"**Summary**: {t['blurb']} Full record per project: models, settings, prompts, seeds, music and output files. Generated from `projects.json`.",
+                "", "**Sources**: projects.json; per-project notes from the session logs.",
+                "", f"**Last updated**: {today}", "", "---", "",
+                f"Index of every project: [[projects]]. Other themes: {others}.", "",
+                "## Summary", ""] + HEAD + summary_rows(group, defs) + [""]
+        for p in group:
+            page += record(p, defs, suffix)
+        page += ["## Related pages", "- [[projects]]", "- [[runbook-living-painting]]", "- [[draw-things-setup]]", ""]
+        path = WIKI / f"{t['slug']}.md"
+        path.write_text("\n".join(page), encoding="utf-8")
+        wrote.append((path.name, len(group)))
+    print("wrote " + ", ".join(f"{n} ({c})" for n, c in wrote))
 
 
 if __name__ == "__main__":
