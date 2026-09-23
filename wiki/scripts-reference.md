@@ -1,6 +1,6 @@
 # Scripts Reference
 
-**Summary**: What each script in `scripts/` does, which tools and APIs it calls, and the exact processing steps. Since 2026-09-23 the whole [[idea-to-video-blueprint]] runs on these scripts, driven by a `film` spec in `projects.json` through `film_run.py`: every size, model, frame count, upscaler, crossfade, music and delivery setting comes from the spec, not from the script. Covers the generation scripts (`dt_diptych.sh`, `dt_clip.sh`), QC (`qc_sheet.sh`), post (`upscale_4k.sh`, `assemble_film.sh`, `finish_clip.sh`), `preflight.sh`, the driver, and the site/registry builders.
+**Summary**: What each script in `scripts/` does, which tools and APIs it calls, and the exact processing steps. Since 2026-09-23 the whole [[idea-to-video-blueprint]] runs on these scripts, driven by a **run-spec** (the `run-spec` block in `projects.json`) through `film_run.py`: every size, model, frame count, upscaler, crossfade, music and delivery setting comes from the run-spec, not from the script. Covers the generation scripts (`dt_diptych.sh`, `dt_clip.sh`), QC (`qc_sheet.sh`), post (`upscale_4k.sh`, `assemble_film.sh`, `finish_clip.sh`), `preflight.sh`, the driver, and the site/registry builders.
 
 **Sources**: the scripts themselves (`scripts/*.sh`, `scripts/*.py`); hands-on timings in [[log]] 2026-09-20/21; Real-ESRGAN ncnn README (`tools/realesrgan/README_macos.md`).
 
@@ -25,7 +25,7 @@ Draw Things exports are **ProRes 422 `.mov`** (video) — 8-bit 4:2:2, 16 fps fo
 
 ## Scripts by production phase (audit 2026-09-23)
 
-| Phase ([[idea-to-video-blueprint]]) | Script | Decided by the spec | Validates |
+| Phase ([[idea-to-video-blueprint]]) | Script | Decided by the run-spec | Validates |
 |---|---|---|---|
 | 3 Preflight | `preflight.sh [--fix] [models…]` | models to check | CLI, ffmpeg, Real-ESRGAN, models, AC, disk, app closed, caffeinate, no overlapping jobs |
 | 4–5 Masters, stills | `dt_diptych.sh REF IN PROMPT OUT [seed] [W] [H]` | `film.still` (model, steps, cfg, config, strength, seeds), `film.size` or per-shot `still.size` | W/H ÷64, files exist, REF needs IN |
@@ -34,17 +34,17 @@ Draw Things exports are **ProRes 422 `.mov`** (video) — 8-bit 4:2:2, 16 fps fo
 | 9 Upscale | `upscale_4k.sh IN [out] [model]` | `film.upscale` (model, size, fit, bitrate), `assemble.clip_audio` → `KEEP_AUDIO` | model/scale exists, even W/H, frame count out = in |
 | 9 Assemble + music | `assemble_film.sh OUT clip…` | `film.assemble` (fps, xfade, clip_audio, bitrate), `film.music` (file, start / `tail`, vol, fades) | clips/music exist, letterbox landscape-only, music-too-short note, expected vs actual length |
 | 9 Deliver | inside `film_run.py finish` | `film.deliver[]` sizes and bitrates | — |
-| all | **`film_run.py PROJECT check·status·stills·pick·clips·qc·finish`** | the whole `film` block (or a standalone `.json` spec) | spec sanity: sizes, frame rules, paths, refs, trims, planned length |
+| all | **`film_run.py PROJECT check·status·stills·pick·clips·qc·finish`** | the whole run-spec (or a standalone `.json` run-spec file) | run-spec sanity: sizes, frame rules, paths, refs, trims, planned length |
 | loop posts | `finish_clip.sh IN [music] [out]` | env: W, H, LOOPS, SEAM, FPS, MUSIC_VOL | clip long enough for the seam |
 
 Every script: `set -euo pipefail`, a clear `die` message, `ffmpeg -nostdin` everywhere (ffmpeg inside a `while read` loop eats the loop's input — the Kyle overnight bug), and `DRY_RUN=1` on the two CLI wrappers.
 
-### The `film` spec
+### The run-spec
 
-Lives in `projects.json → projects[].film` (Kyle's is the reference). Paths are relative to `film.dir`, except `music.file` (repo root). Only `dir`, `size`, `shots` are required; everything else has the defaults used so far (klein 9B still, LTX-2.3 249 f clip, x4plus → 3840×2160, 0.5 s crossfades).
+Lives in `projects.json → projects[]["run-spec"]` (Kyle's is the reference). It is the machine-readable half of a project: the plan page says *what and why*, the run-spec says *exactly how*, and it is the only thing a run reads. Paths are relative to `run-spec.dir`, except `music.file` (repo root). Only `dir`, `size`, `shots` are required; everything else has the defaults used so far (klein 9B still, LTX-2.3 249 f clip, x4plus → 3840×2160, 0.5 s crossfades).
 
 ```json
-"film": {
+"run-spec": {
   "dir": "raw/clips/kyle", "name": "kyle_rescue", "size": [576, 1024],
   "still":   {"model": "flux_2_klein_9b_i8x.ckpt", "steps": 4, "cfg": 1, "config": {"shift": 3.0, "sampler": 16}, "seeds": [1,2,3], "strength": 1.0},
   "clip":    {"model": "ltx_2.3_22b_distilled_1.1_q8p.ckpt", "frames": 249, "steps": 8, "cfg": 1,
@@ -66,17 +66,17 @@ Still mode per shot: `ref` + `input` = diptych; `input` only = single edit; neit
 
 ```bash
 scripts/preflight.sh --fix
-scripts/film_run.py kyle_rescue check          # spec sanity + planned length
+scripts/film_run.py kyle_rescue check          # run-spec sanity + planned length
 scripts/film_run.py kyle_rescue stills         # 3 seeds per shot → work/<id>_c<seed>.png   (skips shots with a picked still)
 scripts/film_run.py kyle_rescue pick s2 4      # → stills/s2.png  (judge picks)
 scripts/film_run.py kyle_rescue clips          # clips/<id>_v1.mov (skips existing);  --v 2 --seed 2 s2 for a redo
 scripts/film_run.py kyle_rescue qc             # work/<id>_v1_qc.png
-#   judge sets take + trim per shot in the spec
+#   judge sets take + trim per shot in the run-spec
 scripts/film_run.py kyle_rescue finish         # trim → upscale → assemble + music → delivery copies
 scripts/film_run.py kyle_rescue status         # where every shot is
 ```
 
-`--dry-run` prints every command; `--force` redoes existing outputs. `finish` caches each shot's upscale against a stamp of *take, trim, model, size, fit*, so changing one trim re-upscales only that shot (a no-change re-run takes < 1 s). A standalone spec file works in place of the project id: `film_run.py path/to/spec.json …`.
+`--dry-run` prints every command; `--force` redoes existing outputs. `finish` caches each shot's upscale against a stamp of *take, trim, model, size, fit*, so changing one trim re-upscales only that shot (a no-change re-run takes < 1 s). A standalone run-spec file works in place of the project id: `film_run.py path/to/run-spec.json …`.
 
 **Tested 2026-09-23**: validation paths (bad sizes, 8k+1/4k+1 frames, unknown upscaler, portrait letterbox, missing IN); text / edit / landscape stills; LTX 33 f at 1024×576 (104 s); **Wan 2.2 I2V via the CLI with the low-noise refiner + Lightning LoRA in `CONFIG_JSON`** (9 f at 512² in 57 s — first CLI Wan run); upscale with `realesr-animevideov3` at 2× to 1080p with audio kept, and x4plus padded into 2160×3840; assembly single-clip, music tail + fades, landscape letterbox + clip audio; a 2-shot landscape film end to end through `film_run.py` (text still → chained edit → 2 clips → QC → finish → 720p copy). `assemble_film.sh` defaults reproduce the previous script's mix exactly (same length, −35.9 dB mean, −20.9 dB peak on the same inputs); `finish_clip.sh` reproduces the old 27.375 s coast loop.
 

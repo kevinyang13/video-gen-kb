@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Run a multi-shot film from its spec in projects.json (the `film` block of a project).
+"""Run a multi-shot film from its run-spec in projects.json (the `run-spec` block of a project).
 
-PROJECT is a projects.json id, or a path to a .json file holding the film block (handy for tests).
-  scripts/film_run.py PROJECT check              validate the spec (paths, sizes, frame rules)
+PROJECT is a projects.json id, or a path to a .json file holding the run-spec (handy for tests).
+  scripts/film_run.py PROJECT check              validate the run-spec (paths, sizes, frame rules)
   scripts/film_run.py PROJECT status             one line per shot: still / candidates / clips / take / 4K
   scripts/film_run.py PROJECT stills [ids]       seed candidates for shots with no picked still -> work/<id>_c<seed>.png
   scripts/film_run.py PROJECT pick ID SEED       candidate -> stills/<id>.png
@@ -11,8 +11,8 @@ PROJECT is a projects.json id, or a path to a .json file holding the film block 
   scripts/film_run.py PROJECT finish [--force]   trim takes -> upscale -> assemble (+music) -> delivery copies
 Global flags: --dry-run (print commands), --force (redo existing outputs).
 
-Spec (all paths relative to film.dir; every block optional except dir, size, shots):
-  "film": {
+Run-spec (all paths relative to run-spec.dir; every block optional except dir, size, shots):
+  "run-spec": {
     "dir": "raw/clips/<project>", "name": "<film file stem>", "size": [576, 1024],
     "still":   {"model": ..., "steps": 4, "cfg": 1, "config": {...}, "seeds": [1, 2, 3], "strength": 1.0},
     "clip":    {"model": ..., "frames": 249, "steps": 8, "cfg": 1, "config": {...}, "seed": 1, "video_format": "prores422hq"},
@@ -47,18 +47,18 @@ def die(msg):
 
 
 def load(project):
-    if project.endswith(".json"):                       # a standalone spec file: {"film": {...}} or the film block itself
+    if project.endswith(".json"):                       # a standalone run-spec file: {"run-spec": {...}} or the block itself
         j = json.loads(Path(project).read_text())
-        f = j.get("film", j)
+        f = j.get("run-spec", j)
     else:
         data = json.loads((ROOT / "projects.json").read_text())
         p = next((x for x in data["projects"] if x["id"] == project), None)
         if not p:
             die(f"no project '{project}' in projects.json")
-        f = p.get("film") or die(f"project '{project}' has no 'film' block")
+        f = p.get("run-spec") or die(f"project '{project}' has no 'run-spec' block")
     for k in ("dir", "size", "shots"):
         if k not in f:
-            die(f"film.{k} missing")
+            die(f"run-spec.{k} missing")
     return f
 
 
@@ -116,7 +116,7 @@ def cmd_check(f, _):
     errs, warns = [], []
     w, h = f["size"]
     if w % 64 or h % 64:
-        errs.append(f"film.size {w}x{h} not multiples of 64")
+        errs.append(f"run-spec.size {w}x{h} not multiples of 64")
     cc = {**DEFAULT_CLIP, **f.get("clip", {})}
     fr = cc.get("frames", 249 if "ltx" in cc["model"] else 81)
     if "ltx" in cc["model"] and (fr - 1) % 8:
@@ -311,5 +311,5 @@ if __name__ == "__main__":
     if len(pos) < 2 or pos[1] not in CMDS:
         print(__doc__)
         sys.exit(2)
-    film = load(pos[0])
-    sys.exit(CMDS[pos[1]](film, pos[2:]))
+    spec = load(pos[0])
+    sys.exit(CMDS[pos[1]](spec, pos[2:]))

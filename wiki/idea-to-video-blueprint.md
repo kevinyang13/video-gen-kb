@@ -4,7 +4,7 @@
 
 **Sources**: [[kyle-antarctic-rescue-plan]] §0 (the unattended run, 2026-09-22/23 — every timing below is from it unless marked); [[lost-city-plan]] §3c prompt rules; [[headless-cli-pipeline]] §1b–1c; [[character-consistency]]; [[identity-conditioning]]; [[scripts-reference]].
 
-**Last updated**: 2026-09-23 (phases 3–9 now run through `scripts/film_run.py` from a `film` spec — see [[scripts-reference]])
+**Last updated**: 2026-09-23 (phases 3–9 now run through `scripts/film_run.py` from a run-spec — see [[scripts-reference]])
 
 ---
 
@@ -27,15 +27,15 @@ The rule that makes it work: **every decision the machine will face must have a 
 
 ## One command per phase
 
-The intake answers become a **`film` spec** in `projects.json` (size, still/clip models, frames, upscaler and output size, crossfade, music, deliveries, and per shot: still recipe, prompts, take, trim). Every script reads its settings from there through the driver — nothing is hardcoded to Kyle's 9:16 LTX setup. Spec schema and per-script options: [[scripts-reference]].
+The intake answers become a **run-spec** (the `run-spec` block in `projects.json`) (size, still/clip models, frames, upscaler and output size, crossfade, music, deliveries, and per shot: still recipe, prompts, take, trim). Every script reads its settings from there through the driver — nothing is hardcoded to Kyle's 9:16 LTX setup. The plan page keeps the story, decisions, rules and results; the run-spec keeps the exact settings and is the only thing the run reads. Run-spec schema and per-script options: [[scripts-reference]].
 
 | Phase | Command |
 |---|---|
 | 3 Preflight | `scripts/preflight.sh --fix` |
-| 2 → spec sanity | `scripts/film_run.py P check` |
+| 2 → run-spec sanity | `scripts/film_run.py P check` |
 | 4–5 Masters, stills | `film_run.py P stills` → judge → `film_run.py P pick ID SEED` |
 | 7 Clips | `film_run.py P clips` (redo: `clips ID --v 2 --seed 2`) |
-| 8 QC | `film_run.py P qc` → judge sets `take` + `trim` in the spec |
+| 8 QC | `film_run.py P qc` → judge sets `take` + `trim` in the run-spec |
 | 9 Finish | `film_run.py P finish` |
 | any time | `film_run.py P status` |
 
@@ -124,7 +124,7 @@ One paragraph per shot, action first, ending with the video tail. Rules from Kyl
 
 ## Phase 7 — Clip batch (unattended)
 
-`film_run.py P clips` runs this loop from the spec (one clip at a time, skipping clips that exist). What it does per shot, equivalent to Kyle's hand-written `raw/clips/kyle/render_clips.sh`:
+`film_run.py P clips` runs this loop from the run-spec (one clip at a time, skipping clips that exist). What it does per shot, equivalent to Kyle's hand-written `raw/clips/kyle/render_clips.sh`:
 
 ```bash
 for s in $SHOTS; do
@@ -165,7 +165,7 @@ Log every verdict to `work/qc_notes.txt`; it becomes the report.
 
 ## Phase 9 — Finish (unattended)
 
-`film_run.py P finish` does this from each shot's `take` + `trim` and the spec's upscale / assemble / music / deliver blocks, caching each shot's upscale so a changed trim only redoes that shot. The underlying commands (Kyle's hand-written `raw/clips/kyle/finish.sh` did the same):
+`film_run.py P finish` does this from each shot's `take` + `trim` and the run-spec's upscale / assemble / music / deliver blocks, caching each shot's upscale so a changed trim only redoes that shot. The underlying commands (Kyle's hand-written `raw/clips/kyle/finish.sh` did the same):
 
 ```bash
 ffmpeg -nostdin -i clips/$c.mov -vf "trim=start=$a:end=$b,setpts=PTS-STARTPTS" -an -c:v prores_ks -profile:v 3 final/${s}_t.mov

@@ -632,7 +632,7 @@
         "ltx_v1": 1,
         "ltx_v2": 2
       },
-      "film": {
+      "run-spec": {
         "dir": "raw/clips/kyle",
         "name": "kyle_rescue",
         "size": [

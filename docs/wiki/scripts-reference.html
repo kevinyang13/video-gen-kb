@@ -92,7 +92,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
     <span class="spacer"></span>
     <button class="pill" onclick="tt()">◐ Theme</button>
   </nav>
-  <h1>Scripts Reference</h1><p class="lede">What each script in <code>scripts/</code> does, which tools and APIs it calls, and the exact processing steps. Since 2026-09-23 the whole <a href="idea-to-video-blueprint.html">idea to video blueprint</a> runs on these scripts, driven by a <code>film</code> spec in <code>projects.json</code> through <code>film_run.py</code>: every size, model, frame count, upscaler, crossfade, music and delivery setting comes from the spec, not from the script. Covers the generation scripts (<code>dt_diptych.sh</code>, <code>dt_clip.sh</code>), QC (<code>qc_sheet.sh</code>), post (<code>upscale_4k.sh</code>, <code>assemble_film.sh</code>, <code>finish_clip.sh</code>), <code>preflight.sh</code>, the driver, and the site/registry builders.</p><div class="meta"><span><b>Updated</b> 2026-09-23 (audit: every script parameterised and validated; new <code>dt_clip.sh</code>, <code>qc_sheet.sh</code>, <code>preflight.sh</code>, <code>film_run.py</code>)</span><span><b>Sources</b> the scripts themselves (<code>scripts/*.sh</code>, <code>scripts/*.py</code>); hands-on timings in <a href="log.html">log</a> 2026-09-20/21; Real-ESRGAN ncnn README (<code>tools/realesrgan/README_macos.md</code>).</span></div>
+  <h1>Scripts Reference</h1><p class="lede">What each script in <code>scripts/</code> does, which tools and APIs it calls, and the exact processing steps. Since 2026-09-23 the whole <a href="idea-to-video-blueprint.html">idea to video blueprint</a> runs on these scripts, driven by a <strong>run-spec</strong> (the <code>run-spec</code> block in <code>projects.json</code>) through <code>film_run.py</code>: every size, model, frame count, upscaler, crossfade, music and delivery setting comes from the run-spec, not from the script. Covers the generation scripts (<code>dt_diptych.sh</code>, <code>dt_clip.sh</code>), QC (<code>qc_sheet.sh</code>), post (<code>upscale_4k.sh</code>, <code>assemble_film.sh</code>, <code>finish_clip.sh</code>), <code>preflight.sh</code>, the driver, and the site/registry builders.</p><div class="meta"><span><b>Updated</b> 2026-09-23 (audit: every script parameterised and validated; new <code>dt_clip.sh</code>, <code>qc_sheet.sh</code>, <code>preflight.sh</code>, <code>film_run.py</code>)</span><span><b>Sources</b> the scripts themselves (<code>scripts/*.sh</code>, <code>scripts/*.py</code>); hands-on timings in <a href="log.html">log</a> 2026-09-20/21; Real-ESRGAN ncnn README (<code>tools/realesrgan/README_macos.md</code>).</span></div>
 <hr />
 <h2>The toolchain (all local, all free)</h2>
 <div class="tw"><table>
@@ -140,7 +140,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <tr>
 <th>Phase (<a href="idea-to-video-blueprint.html">idea to video blueprint</a>)</th>
 <th>Script</th>
-<th>Decided by the spec</th>
+<th>Decided by the run-spec</th>
 <th>Validates</th>
 </tr>
 </thead>
@@ -190,8 +190,8 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <tr>
 <td>all</td>
 <td><strong><code>film_run.py PROJECT check·status·stills·pick·clips·qc·finish</code></strong></td>
-<td>the whole <code>film</code> block (or a standalone <code>.json</code> spec)</td>
-<td>spec sanity: sizes, frame rules, paths, refs, trims, planned length</td>
+<td>the whole run-spec (or a standalone <code>.json</code> run-spec file)</td>
+<td>run-spec sanity: sizes, frame rules, paths, refs, trims, planned length</td>
 </tr>
 <tr>
 <td>loop posts</td>
@@ -202,9 +202,9 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </tbody>
 </table></div>
 <p>Every script: <code>set -euo pipefail</code>, a clear <code>die</code> message, <code>ffmpeg -nostdin</code> everywhere (ffmpeg inside a <code>while read</code> loop eats the loop's input — the Kyle overnight bug), and <code>DRY_RUN=1</code> on the two CLI wrappers.</p>
-<h3>The <code>film</code> spec</h3>
-<p>Lives in <code>projects.json → projects[].film</code> (Kyle's is the reference). Paths are relative to <code>film.dir</code>, except <code>music.file</code> (repo root). Only <code>dir</code>, <code>size</code>, <code>shots</code> are required; everything else has the defaults used so far (klein 9B still, LTX-2.3 249 f clip, x4plus → 3840×2160, 0.5 s crossfades).</p>
-<pre><code class="language-json">&quot;film&quot;: {
+<h3>The run-spec</h3>
+<p>Lives in <code>projects.json → projects[]["run-spec"]</code> (Kyle's is the reference). It is the machine-readable half of a project: the plan page says <em>what and why</em>, the run-spec says <em>exactly how</em>, and it is the only thing a run reads. Paths are relative to <code>run-spec.dir</code>, except <code>music.file</code> (repo root). Only <code>dir</code>, <code>size</code>, <code>shots</code> are required; everything else has the defaults used so far (klein 9B still, LTX-2.3 249 f clip, x4plus → 3840×2160, 0.5 s crossfades).</p>
+<pre><code class="language-json">&quot;run-spec&quot;: {
   &quot;dir&quot;: &quot;raw/clips/kyle&quot;, &quot;name&quot;: &quot;kyle_rescue&quot;, &quot;size&quot;: [576, 1024],
   &quot;still&quot;:   {&quot;model&quot;: &quot;flux_2_klein_9b_i8x.ckpt&quot;, &quot;steps&quot;: 4, &quot;cfg&quot;: 1, &quot;config&quot;: {&quot;shift&quot;: 3.0, &quot;sampler&quot;: 16}, &quot;seeds&quot;: [1,2,3], &quot;strength&quot;: 1.0},
   &quot;clip&quot;:    {&quot;model&quot;: &quot;ltx_2.3_22b_distilled_1.1_q8p.ckpt&quot;, &quot;frames&quot;: 249, &quot;steps&quot;: 8, &quot;cfg&quot;: 1,
@@ -222,16 +222,16 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <p>Still mode per shot: <code>ref</code> + <code>input</code> = diptych; <code>input</code> only = single edit; neither = text-to-image. <code>ref</code> is a master name or a path (an approved shot = reference chaining). A shot can override <code>still.seeds/size/model…</code> and <code>clip.frames/model/seed…</code> — e.g. one Wan shot in an LTX film.</p>
 <h3><code>film_run.py</code> workflow</h3>
 <pre><code class="language-bash">scripts/preflight.sh --fix
-scripts/film_run.py kyle_rescue check          # spec sanity + planned length
+scripts/film_run.py kyle_rescue check          # run-spec sanity + planned length
 scripts/film_run.py kyle_rescue stills         # 3 seeds per shot → work/&lt;id&gt;_c&lt;seed&gt;.png   (skips shots with a picked still)
 scripts/film_run.py kyle_rescue pick s2 4      # → stills/s2.png  (judge picks)
 scripts/film_run.py kyle_rescue clips          # clips/&lt;id&gt;_v1.mov (skips existing);  --v 2 --seed 2 s2 for a redo
 scripts/film_run.py kyle_rescue qc             # work/&lt;id&gt;_v1_qc.png
-#   judge sets take + trim per shot in the spec
+#   judge sets take + trim per shot in the run-spec
 scripts/film_run.py kyle_rescue finish         # trim → upscale → assemble + music → delivery copies
 scripts/film_run.py kyle_rescue status         # where every shot is
 </code></pre>
-<p><code>--dry-run</code> prints every command; <code>--force</code> redoes existing outputs. <code>finish</code> caches each shot's upscale against a stamp of <em>take, trim, model, size, fit</em>, so changing one trim re-upscales only that shot (a no-change re-run takes &lt; 1 s). A standalone spec file works in place of the project id: <code>film_run.py path/to/spec.json …</code>.</p>
+<p><code>--dry-run</code> prints every command; <code>--force</code> redoes existing outputs. <code>finish</code> caches each shot's upscale against a stamp of <em>take, trim, model, size, fit</em>, so changing one trim re-upscales only that shot (a no-change re-run takes &lt; 1 s). A standalone run-spec file works in place of the project id: <code>film_run.py path/to/run-spec.json …</code>.</p>
 <p><strong>Tested 2026-09-23</strong>: validation paths (bad sizes, 8k+1/4k+1 frames, unknown upscaler, portrait letterbox, missing IN); text / edit / landscape stills; LTX 33 f at 1024×576 (104 s); <strong>Wan 2.2 I2V via the CLI with the low-noise refiner + Lightning LoRA in <code>CONFIG_JSON</code></strong> (9 f at 512² in 57 s — first CLI Wan run); upscale with <code>realesr-animevideov3</code> at 2× to 1080p with audio kept, and x4plus padded into 2160×3840; assembly single-clip, music tail + fades, landscape letterbox + clip audio; a 2-shot landscape film end to end through <code>film_run.py</code> (text still → chained edit → 2 clips → QC → finish → 720p copy). <code>assemble_film.sh</code> defaults reproduce the previous script's mix exactly (same length, −35.9 dB mean, −20.9 dB peak on the same inputs); <code>finish_clip.sh</code> reproduces the old 27.375 s coast loop.</p>
 <h3><code>scripts/dt_clip.sh</code> — any I2V clip</h3>
 <p>Model family from the name sets the defaults — <strong>ltx</strong>: 249 f, 8 steps, TCD Trailing (19), shift 5, SSS 0.3, 25 fps, hi-res fix off; <strong>wan</strong>: 81 f, 4 steps, UniPC Trailing (17), shift 5, 16 fps, <code>refinerModel</code> = the low-noise expert at <code>refinerStart</code> 0.1, Lightning LoRA at 1.0. Env <code>MODEL STEPS CFG CONFIG_JSON VIDEO_FORMAT NEGATIVE FORCE DRY_RUN</code> override any of it. W/H default to the still's size. Prints size, frame count and wall time.</p>

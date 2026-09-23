@@ -19,7 +19,7 @@ serve.sh      -- rebuild + serve docs/ on http://localhost:8788
 scripts/finish_clip.sh -- I2V export (.mov) -> looped 1080x1920 mp4 (+ music)
 scripts/upscale_4k.sh -- clip -> 3840x2160 HEVC 10-bit via Real-ESRGAN ncnn (tools/realesrgan)
 scripts/assemble_film.sh -- N 4K clips -> one film with crossfades (+ music); see wiki/scripts-reference.md
-scripts/film_run.py -- runs a film from the projects.json `film` spec: check/status/stills/pick/clips/qc/finish (wiki/scripts-reference.md)
+scripts/film_run.py -- runs a film from its run-spec (projects.json `run-spec` block): check/status/stills/pick/clips/qc/finish (wiki/scripts-reference.md)
 scripts/dt_diptych.sh -- klein still on the CLI: diptych (ref left, input right) / single edit / text-to-image
 scripts/dt_clip.sh -- I2V clip on the CLI (LTX or Wan presets, frame-rule checks)
 scripts/qc_sheet.sh -- contact sheet: reference + N evenly spaced frames

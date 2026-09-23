@@ -8,6 +8,10 @@
 
 ---
 
+## 2026-09-23 — "film spec" renamed to "run-spec"
+
+Kevin's call. The `projects.json` block is now `run-spec` (was `film`); `film_run.py` reads `run-spec` from a project or from a standalone file (`{"run-spec": {...}}` or the bare block). Docs updated: [[scripts-reference]], [[idea-to-video-blueprint]], index, CLAUDE.md. The blueprint now states the split: the plan page holds story, decisions, rules and results; the run-spec holds the exact settings and is the only thing a run reads.
+
 ## 2026-09-23 — Script audit: every pipeline step driven by the film spec
 
 Kevin asked for the list of scripts the blueprint needs, each able to handle whatever size/model the plan's spec decides. **Audit findings fixed**: `dt_diptych.sh` hardcoded klein steps/cfg/sampler (now env, + text-to-image mode, validation, DRY_RUN); `upscale_4k.sh` fixed 4× (now SCALE / anime 2×–3×), crop-only (FIT=pad), no audio (KEEP_AUDIO; dropped `-shortest`, which lost a frame), fixed bitrate, progress spam, no frame-count check; `assemble_film.sh` needed ≥2 clips, letterbox coordinates hardcoded to 3840×2160, no music offset/tail/level/fades (amix normalisation halved music — now explicit levels whose defaults reproduce the old mix exactly), no music-only mode; `finish_clip.sh` hardcoded 81 frames/16 fps/576×1024; an ffprobe `csv=s=' '` parse bug. **New**: `dt_clip.sh` (LTX/Wan presets, 8k+1/4k+1 frame checks), `qc_sheet.sh`, `preflight.sh`, `film_run.py` driver (check/status/stills/pick/clips/qc/finish; projects.json id or spec file; per-shot upscale cache). Kyle's run is encoded as the reference `film` spec in `projects.json`. **Tested**: every validation path, text/edit/landscape stills, LTX 33 f, the first **Wan 2.2 run via the CLI** (refiner + Lightning LoRA in config JSON, 9 f at 512² in 57 s), anime-2× and padded-portrait upscales, assembly variants, and a 2-shot landscape film end to end through `film_run.py`. Docs: [[scripts-reference]] (phase table, spec, workflow, tests), [[idea-to-video-blueprint]] (one command per phase), CLAUDE.md folder list.
