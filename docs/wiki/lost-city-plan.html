@@ -92,7 +92,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
     <span class="spacer"></span>
     <button class="pill" onclick="tt()">◐ Theme</button>
   </nav>
-  <h1>Lost City — Project Plan (hyper-real sci-fantasy rider)</h1><p class="lede">Plan for a hyper-realistic short in the style of the OpenArt reference (<code>raw/lostcity/ref_openart_rider_ruins.webp</code>): a hooded rider on a saddled raptor-dragon walks into an overgrown city of stone spires, god rays, waterfall. Covers what makes the reference look real, the local pipeline, Draw Things settings per stage (FLUX.2 klein stills; Wan 2.2 vs <strong>LTX-2.3</strong> for motion), creature/hero/environment consistency, shot list, experiments, budget. Living document.</p><div class="meta"><span><b>Updated</b> 2026-09-22 (LTX production settings in §3c; escape ending; per-scene prompts in <a href="projects.html">projects</a>)</span><span><b>Sources</b> <code>raw/lostcity/ref_openart_rider_ruins.webp</code> (reference, OpenArt watermark — generator unknown, probably a closed model such as Kling/Veo/Seedance; <em>unverified</em>); Wan 2.2 prompting guides (<a href="https://www.mimicpc.com/learn/how-to-craft-wan22-ai-video-prompts">MimicPC</a>, <a href="https://www.instasd.com/post/wan2-2-whats-new-and-how-to-write-killer-prompts">InstaSD</a>, <a href="https://whatlab.ai/guides/wan2-2-prompting-guide">WhatLab</a>); LTX docs (<a href="https://docs.ltx.io/open-source-model/usage-guides/image-to-video">I2V guide</a>, <a href="https://wiki.drawthings.ai/wiki/LTX-2">Draw Things LTX-2 wiki</a>, <a href="https://huggingface.co/Lightricks/LTX-2.3">HF LTX-2.3</a>); hands-on results from <a href="dragon-epic-plan.html">dragon epic plan</a> §7b (2026-09-21). All as of 2026-09-21.</span></div>
+  <h1>Lost City — Project Plan (hyper-real sci-fantasy rider)</h1><p class="lede">Plan for a hyper-realistic short in the style of the OpenArt reference (<code>raw/lostcity/ref_openart_rider_ruins.webp</code>): a hooded rider on a saddled raptor-dragon walks into an overgrown city of stone spires, god rays, waterfall. Covers what makes the reference look real, the local pipeline, Draw Things settings per stage (FLUX.2 klein stills; Wan 2.2 vs <strong>LTX-2.3</strong> for motion), creature/hero/environment consistency, shot list, experiments, budget. Living document.</p><div class="meta"><span><b>Updated</b> 2026-09-22 (LTX production settings in §3c; escape ending, shot 14 restaged as a landscape total collapse; per-scene prompts in <a href="projects.html">projects</a>)</span><span><b>Sources</b> <code>raw/lostcity/ref_openart_rider_ruins.webp</code> (reference, OpenArt watermark — generator unknown, probably a closed model such as Kling/Veo/Seedance; <em>unverified</em>); Wan 2.2 prompting guides (<a href="https://www.mimicpc.com/learn/how-to-craft-wan22-ai-video-prompts">MimicPC</a>, <a href="https://www.instasd.com/post/wan2-2-whats-new-and-how-to-write-killer-prompts">InstaSD</a>, <a href="https://whatlab.ai/guides/wan2-2-prompting-guide">WhatLab</a>); LTX docs (<a href="https://docs.ltx.io/open-source-model/usage-guides/image-to-video">I2V guide</a>, <a href="https://wiki.drawthings.ai/wiki/LTX-2">Draw Things LTX-2 wiki</a>, <a href="https://huggingface.co/Lightricks/LTX-2.3">HF LTX-2.3</a>); hands-on results from <a href="dragon-epic-plan.html">dragon epic plan</a> §7b (2026-09-21). All as of 2026-09-21.</span></div>
 <hr />
 <h2>1. What the reference does — and what we copy</h2>
 <div class="tw"><table>
@@ -450,15 +450,15 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </tr>
 <tr>
 <td>14</td>
-<td><strong>Escape</strong> — clear of the city on the plain, skyline collapsing behind</td>
-<td>fixed</td>
-<td>creature still and breathing, rider looks back; all motion in the distance</td>
-<td>creature + city</td>
+<td><strong>Escape / final shot</strong> — extreme wide landscape from a ridge: every spire falls until the skyline is empty</td>
+<td>fixed, extreme wide</td>
+<td>creature still and breathing in the foreground, rider looks back; the whole city comes down in the distance, last tower by ~8 s, ends on a dust skyline</td>
+<td>city (creature is scale only)</td>
 </tr>
 </tbody>
 </table></div>
 <p>Cheap shots first: 2, 3, 5, 7 have no hero face and simple motion — render them to test the look before the tracking shots.</p>
-<p><strong>Story (v2, 2026-09-22)</strong>: arrival and exploration (1–3, 7), life with the creature (9–11), then the city comes down and the rider escapes (13–14). The collapse gives the film an ending that needs no dialogue and no face.</p>
+<p><strong>Story (v2, 2026-09-22)</strong>: arrival and exploration (1–3, 7), life with the creature (9–11), then the city comes down and the rider escapes (13–14). Shot 14 is the last frame of the film: a distant landscape view where every spire collapses until nothing is left standing. The collapse gives the film an ending that needs no dialogue and no face.</p>
 <h2>7. Experiments (in order)</h2>
 <div class="tw"><table>
 <thead>
