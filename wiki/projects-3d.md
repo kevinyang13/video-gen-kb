@@ -14,7 +14,7 @@ Index of every project: [[projects]]. Other themes: [[projects-anime]] · [[proj
 
 | # | Project | Date | Status | Still | I2V | Music | Final file | YouTube |
 |--:|---|---|---|---|---|---|---|---|
-| 1 | [Kyle's Antarctic Rescue — 1-minute 3D-animated vertical short from a 5-panel comic](#kyle_rescue) | 2026-09-22 | delivered 2026-09-23 01:38 — 60.0 s, 1080x1920 + 2160x3840, rendered unattended overnight (see plan §0) | FLUX.2 [klein] 9B 576x1024 | LTX-2.3 22B [distilled] 1.1 via draw-things-cli ? min | Calm Ambient Dreamscape | `—` | — |
+| 1 | [Kyle's Antarctic Rescue — 1-minute 3D-animated vertical short from a 5-panel comic](#kyle_rescue) | 2026-09-22 | delivered 2026-09-23 01:38 — 60.0 s, 1080x1920 + 2160x3840, rendered unattended overnight (see plan §0) | FLUX.2 [klein] 9B 576x1024 | LTX-2.3 22B [distilled] 1.1 via draw-things-cli ? min | Calm Ambient Dreamscape | `—` | [▶ watch](https://youtu.be/KscAwvCi6iQ) |
 | 2 | [Lindsey: A Small Dream — 1-minute 3D-animated vertical short from Lindsey's 5-panel art comic](#lindsey_art) | 2026-09-23 | delivered 2026-09-23 17:26 — 59.96 s, 1080x1920 + 2160x3840 + 720x1280 (see plan §0) | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | [▶ watch](https://youtu.be/lbU-_73MliI) |
 
 ## Kyle's Antarctic Rescue — 1-minute 3D-animated vertical short from a 5-panel comic {#kyle_rescue}
@@ -22,6 +22,10 @@ Index of every project: [[projects]]. Other themes: [[projects-anime]] · [[proj
 - **Date**: 2026-09-22 · **Status**: delivered 2026-09-23 01:38 — 60.0 s, 1080x1920 + 2160x3840, rendered unattended overnight (see plan §0) · **Draw Things project**: `none — rendered with draw-things-cli (no project file)`
 - **Files** (`raw/clips/`): `music/best_adventure_ever.mp3`, `kyle/masters/kyle_front.png`, `kyle/stills/s1..s8.png (+ *_v.txt video prompts)`, `kyle/clips/s1..s8_ltx_v1.mov, s2_ltx_v2.mov, s4_ltx_v2.mov`, `kyle/final/kyle_rescue_1080x1920.mp4`, `kyle/final/kyle_rescue_2160x3840.mp4`, `kyle/work/qc_notes.txt`
 - **Notes**: Kyle is Kevin's son; consent confirmed 2026-09-22.
+
+- **YouTube**: [youtu.be/KscAwvCi6iQ](https://youtu.be/KscAwvCi6iQ) *(YouTube Short, 2160x3840 master)*
+
+<div class="yt yt-v"><iframe src="https://www.youtube.com/embed/KscAwvCi6iQ" title="Kyle's Antarctic Rescue — 1-minute 3D-animated vertical short from a 5-panel comic" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
 **Still**
 

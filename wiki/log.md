@@ -8,6 +8,10 @@
 
 ---
 
+## 2026-09-23 — Kyle film on YouTube
+
+Kevin uploaded the 2160×3840 master as a Short: https://youtube.com/shorts/KscAwvCi6iQ. Recorded in `projects.json` (`youtube`) and the plan's results; the projects page embeds it.
+
 ## 2026-09-23 — Lindsey film on YouTube
 
 Kevin uploaded the 2160×3840 master as a Short: https://youtube.com/shorts/lbU-_73MliI. Recorded in `projects.json` (`youtube`) and the plan's results; the projects page embeds it.

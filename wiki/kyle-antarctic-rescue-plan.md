@@ -10,6 +10,8 @@
 
 ## 0. Results — overnight run 2026-09-22 22:00 → 2026-09-23 01:38
 
+**Watch**: [YouTube Short](https://youtube.com/shorts/KscAwvCi6iQ) (uploaded 2026-09-23, the 2160×3840 master).
+
 **Delivered**: `raw/clips/kyle/final/kyle_rescue_1080x1920.mp4` (60.0 s, HEVC, 95 MB) and `kyle_rescue_2160x3840.mp4` (299 MB master), music "Best Adventure Ever" from 93.4 s to its natural end (mean −18.8 dB, peak −1.6 dB). No human input after the go.
 
 ![Final film, one frame every 5 s](assets/kyle-final-strip.jpg)
