@@ -4,7 +4,7 @@
 
 **Sources**: projects.json; per-project notes from the session logs.
 
-**Last updated**: 2026-09-23
+**Last updated**: 2026-09-24
 
 ---
 
@@ -16,6 +16,7 @@ Index of every project: [[projects]]. Other themes: [[projects-anime]] · [[proj
 |--:|---|---|---|---|---|---|---|---|
 | 1 | [Kyle's Antarctic Rescue — 1-minute 3D-animated vertical short from a 5-panel comic](#kyle_rescue) | 2026-09-22 | delivered 2026-09-23 01:38 — 60.0 s, 1080x1920 + 2160x3840, rendered unattended overnight (see plan §0) | FLUX.2 [klein] 9B 576x1024 | LTX-2.3 22B [distilled] 1.1 via draw-things-cli ? min | Calm Ambient Dreamscape | `—` | [▶ watch](https://youtu.be/KscAwvCi6iQ) |
 | 2 | [Lindsey: A Small Dream — 1-minute 3D-animated vertical short from Lindsey's 5-panel art comic](#lindsey_art) | 2026-09-23 | delivered 2026-09-23 17:26 — 59.96 s, 1080x1920 + 2160x3840 + 720x1280 (see plan §0) | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | [▶ watch](https://youtu.be/lbU-_73MliI) |
+| 3 | [BOT Builders — 1-minute 3D-animated short of an FLL robotics season](#fll_champions) | 2026-09-23 | rendering — storyboard approved 2026-09-23, unattended run started | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 10 min | Light Adventure | `—` | — |
 
 ## Kyle's Antarctic Rescue — 1-minute 3D-animated vertical short from a 5-panel comic {#kyle_rescue}
 
@@ -233,6 +234,64 @@ Prompt: `per scene — see scenes`
 | Loop | forward, 8-frame tail->head crossfade, x6 = 27.4 s |
 | Upscale | lanczos 1080x1920 |
 | Music | Calm Ambient Dreamscape — morgan-ambient, Pixabay, 1 s fade in / 2 s fade out, vol 0.9 |
+
+## BOT Builders — 1-minute 3D-animated short of an FLL robotics season {#fll_champions}
+
+- **Date**: 2026-09-23 · **Status**: rendering — storyboard approved 2026-09-23, unattended run started · **Draw Things project**: `none — draw-things-cli via scripts/film_run.py`
+- **Files** (`raw/clips/`): `fll/stills/*.png`, `fll/clips/*.mov`, `fll/final/fll_champions_3840x2160.mp4`
+- **Notes**: Kevin is the team's coach; consent for all five children confirmed by him 2026-09-23. 3D-animated look chosen over photoreal precisely because five recurring child faces are the heaviest identity load attempted here — stylised faces hold through LTX motion. No on-screen text. Source photos are real: every shot still is a klein edit of a photo (identity from pixels), and the two invented shots (s6, s7) chain off approved stills.
+
+**Still**
+
+| Setting | Value |
+|---|---|
+| Model | FLUX.2 [klein] 9B (8-bit S) |
+| Size | 1024x576 |
+| Steps | 4 |
+| CFG | 1.0 |
+| Shift | 3 |
+| Sampler | DDIM Trailing |
+
+Prompt: `per shot — raw/clips/fll/stills/sN.txt`
+
+**I2V**
+
+| Setting | Value |
+|---|---|
+| Model | LTX-2.3 22B [distilled] 1.1 |
+| Refiner | Wan 2.2 Low Noise Expert I2V A14B (8-bit S) @ 10% |
+| LoRA | Wan 2.2 A14B Lightning High-Noise T2V v2.0 @ 100% |
+| Size | 1024x576 |
+| Frames | 249 |
+| FPS | 25 |
+| Steps | 8 |
+| CFG | 1.0 |
+| Shift | 5.0 |
+| Sampler | TCD Trailing |
+| Strength | 100% |
+| I2V time (min) | 10 |
+
+Prompt: `per shot — raw/clips/fll/stills/sN_v.txt`
+
+**Post**
+
+| Setting | Value |
+|---|---|
+| Script | scripts/finish_clip.sh |
+| Loop | none — xfade 0.75 via scripts/assemble_film.sh |
+| Upscale | scripts/upscale_4k.sh — Real-ESRGAN x4plus -> 3840x2160 HEVC 10-bit |
+| Music | Light Adventure — 331music, Pixabay (cdn.pixabay.com/download/audio/2026/08/26/audio_f1cf54e839.mp3), 2:12, orchestral energetic; first 60 s under the LTX ambience at 0.45, 2 s fade out |
+
+### Scene prompts
+
+**Locks** (paste verbatim into every prompt):
+
+- *style head* — Re-render this photograph as a frame from a high-end 3D animated feature film — stylised Pixar-style children in a physically real world, soft cinematic lighting, shallow depth of field, warm colour grade. Keep every child's face shape, hairstyle and clothing recognisable.
+- *style tail* — Remove all text, lettering, logos and brand marks from clothing, signs and props. Photoreal materials, no outlines, cinematic 16:9 framing, no extra people beyond those described.
+- *team* — five children: a boy in a white t-shirt with a straight dark fringe; a boy in an orange t-shirt with short dark hair; a girl with long straight black hair; a girl in a pink t-shirt with her hair tied back; a girl in a white textured top with two braids
+- *video tail* — Smooth cinematic motion, 3D animated feature film look.
+
+**Rules**: Every still is an edit of a real photo at --strength 1.0 (identity comes from pixels, never from text). No on-screen text anywhere — the model cannot spell, and the team emblem is described as 'a small round colourful emblem with no lettering'. Group shots must say 'their faces, hair and clothes stay exactly the same' or LTX restyles them. Camera holds still in every shot: a moving camera makes LTX invent people at the frame edge. Face shots (s5, s7, s8) are the only ones where all five are recognisable; s3 is backs, s4 is wide, s2 and s6 have no people.
 
 ## Related pages
 - [[projects]]

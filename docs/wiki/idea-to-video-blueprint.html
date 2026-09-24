@@ -235,7 +235,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <h2>Phase 1 — Story and storyboard (Claude drafts, human approves ✔)</h2>
 <ol>
 <li><strong>Beats.</strong> Reduce the idea to 4–6 story beats (Kyle: arrival → threat → danger → rescue → happy ending).</li>
-<li><strong>Shot count.</strong> 249-frame LTX clips are ~10 s; after trimming the end fade and drift, a shot keeps 6–10 s. With 0.75 s crossfades: <strong>60 s ≈ 8 shots, 30 s ≈ 4–5, 3 min ≈ 24</strong>. Sum of kept lengths − (shots−1)×0.75 = film length.</li>
+<li><strong>Shot count.</strong> 249-frame LTX clips are ~10 s; after trimming the end fade and drift, a shot keeps 6–10 s. <strong>Group shots (3+ people) keep only ~5 s</strong> before LTX pulls back and invents people — plan roughly twice as many shots for group-heavy films (Bot Builders: 12 planned shots gave 63 s, not 90). With 0.75 s crossfades: <strong>60 s ≈ 8 shots, 30 s ≈ 4–5, 3 min ≈ 24</strong>. Sum of kept lengths − (shots−1)×0.75 = film length.</li>
 <li><strong>One line per shot</strong>: what's in the still, what moves, how long it's kept, and whether it is a <strong>face shot</strong>. Keep face shots to ~⅓ of the film; the rest are from behind, wide, or without the character — identity is free there.</li>
 <li><strong>Stage for the model, not just the story</strong> (rules from <a href="lost-city-plan.html">lost city plan</a> §3c and Kyle §0):
    - close-ups <strong>hold position</strong> — the character smiles, blinks, rocks; doesn't walk or turn away;
@@ -538,6 +538,11 @@ wiki/assets/&lt;project&gt;-*.jpg            QC and contact sheets shown in the 
 <td>prompt the props out; "each person solid and clearly separate, walks only on the floor"</td>
 </tr>
 <tr>
+<td>an extra person appears at the frame edge mid-clip</td>
+<td>tight group frame + LTX pull-back invents people in the new margin (Bot Builders S5: a 6th kid)</td>
+<td>"the camera does not move at all: no zoom, no pull-back, no pan" + "no one enters from any edge"; check the last frames for head count</td>
+</tr>
+<tr>
 <td>subject sinks out of frame</td>
 <td>"camera rises" executed as subject motion (horizon stays put)</td>
 <td>"camera holds completely still", or an eye-level pull-back</td>
@@ -589,7 +594,7 @@ wiki/assets/&lt;project&gt;-*.jpg            QC and contact sheets shown in the 
 
   <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="kyle-antarctic-rescue-plan.html">kyle antarctic rescue plan</a> — the run this blueprint is distilled from</li><li><a href="headless-cli-pipeline.html">headless cli pipeline</a> — the CLI, strength-1.0 edit mode, the diptych</li><li><a href="lost-city-plan.html">lost city plan</a> — LTX prompt and staging rules</li><li><a href="character-consistency.html">character consistency</a> · <a href="identity-conditioning.html">identity conditioning</a> — why pixels carry identity</li><li><a href="scripts-reference.html">scripts reference</a> — <code>upscale_4k.sh</code>, <code>assemble_film.sh</code>, <code>dt_diptych.sh</code></li><li><a href="projects.html">projects</a> — where every project's record lives</li></ul></div>
 </div>
-<footer>video-gen-kb · built 2026-09-23 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<footer>video-gen-kb · built 2026-09-24 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
 <script>function tt(){var r=document.documentElement,
 d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
 matchMedia('(prefers-color-scheme: dark)').matches);

@@ -92,7 +92,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
     <span class="spacer"></span>
     <button class="pill" onclick="tt()">◐ Theme</button>
   </nav>
-  <h1>3D-animated projects</h1><p class="lede">Pixar-style 3D-animated shorts. Kyle's Antarctic Rescue, Lindsey: A Small Dream. Full record per project: models, settings, prompts, seeds, music and output files. Generated from <code>projects.json</code>.</p><div class="meta"><span><b>Updated</b> 2026-09-23</span><span><b>Sources</b> projects.json; per-project notes from the session logs.</span></div>
+  <h1>3D-animated projects</h1><p class="lede">Pixar-style 3D-animated shorts. Kyle's Antarctic Rescue, Lindsey: A Small Dream. Full record per project: models, settings, prompts, seeds, music and output files. Generated from <code>projects.json</code>.</p><div class="meta"><span><b>Updated</b> 2026-09-24</span><span><b>Sources</b> projects.json; per-project notes from the session logs.</span></div>
 <hr />
 <p>Index of every project: <a href="projects.html">projects</a>. Other themes: <a href="projects-anime.html">projects anime</a> · <a href="projects-realistic.html">projects realistic</a>.</p>
 <h2>Summary</h2>
@@ -132,6 +132,17 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <td>Calm Ambient Dreamscape</td>
 <td><code>—</code></td>
 <td><a href="https://youtu.be/lbU-_73MliI">▶ watch</a></td>
+</tr>
+<tr>
+<td style="text-align: right;">3</td>
+<td><a href="#fll_champions">BOT Builders — 1-minute 3D-animated short of an FLL robotics season</a></td>
+<td>2026-09-23</td>
+<td>rendering — storyboard approved 2026-09-23, unattended run started</td>
+<td>FLUX.2 [klein] 9B 1024x576</td>
+<td>LTX-2.3 22B [distilled] 1.1 10 min</td>
+<td>Light Adventure</td>
+<td><code>—</code></td>
+<td>—</td>
 </tr>
 </tbody>
 </table></div>
@@ -509,10 +520,148 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </tr>
 </tbody>
 </table></div>
+<h2 id="fll_champions">BOT Builders — 1-minute 3D-animated short of an FLL robotics season</h2>
+<ul>
+<li><strong>Date</strong>: 2026-09-23 · <strong>Status</strong>: rendering — storyboard approved 2026-09-23, unattended run started · <strong>Draw Things project</strong>: <code>none — draw-things-cli via scripts/film_run.py</code></li>
+<li><strong>Files</strong> (<code>raw/clips/</code>): <code>fll/stills/*.png</code>, <code>fll/clips/*.mov</code>, <code>fll/final/fll_champions_3840x2160.mp4</code></li>
+<li><strong>Notes</strong>: Kevin is the team's coach; consent for all five children confirmed by him 2026-09-23. 3D-animated look chosen over photoreal precisely because five recurring child faces are the heaviest identity load attempted here — stylised faces hold through LTX motion. No on-screen text. Source photos are real: every shot still is a klein edit of a photo (identity from pixels), and the two invented shots (s6, s7) chain off approved stills.</li>
+</ul>
+<p><strong>Still</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Model</td>
+<td>FLUX.2 [klein] 9B (8-bit S)</td>
+</tr>
+<tr>
+<td>Size</td>
+<td>1024x576</td>
+</tr>
+<tr>
+<td>Steps</td>
+<td>4</td>
+</tr>
+<tr>
+<td>CFG</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Shift</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Sampler</td>
+<td>DDIM Trailing</td>
+</tr>
+</tbody>
+</table></div>
+<p>Prompt: <code>per shot — raw/clips/fll/stills/sN.txt</code></p>
+<p><strong>I2V</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Model</td>
+<td>LTX-2.3 22B [distilled] 1.1</td>
+</tr>
+<tr>
+<td>Refiner</td>
+<td>Wan 2.2 Low Noise Expert I2V A14B (8-bit S) @ 10%</td>
+</tr>
+<tr>
+<td>LoRA</td>
+<td>Wan 2.2 A14B Lightning High-Noise T2V v2.0 @ 100%</td>
+</tr>
+<tr>
+<td>Size</td>
+<td>1024x576</td>
+</tr>
+<tr>
+<td>Frames</td>
+<td>249</td>
+</tr>
+<tr>
+<td>FPS</td>
+<td>25</td>
+</tr>
+<tr>
+<td>Steps</td>
+<td>8</td>
+</tr>
+<tr>
+<td>CFG</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Shift</td>
+<td>5.0</td>
+</tr>
+<tr>
+<td>Sampler</td>
+<td>TCD Trailing</td>
+</tr>
+<tr>
+<td>Strength</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>I2V time (min)</td>
+<td>10</td>
+</tr>
+</tbody>
+</table></div>
+<p>Prompt: <code>per shot — raw/clips/fll/stills/sN_v.txt</code></p>
+<p><strong>Post</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Script</td>
+<td>scripts/finish_clip.sh</td>
+</tr>
+<tr>
+<td>Loop</td>
+<td>none — xfade 0.75 via scripts/assemble_film.sh</td>
+</tr>
+<tr>
+<td>Upscale</td>
+<td>scripts/upscale_4k.sh — Real-ESRGAN x4plus -&gt; 3840x2160 HEVC 10-bit</td>
+</tr>
+<tr>
+<td>Music</td>
+<td>Light Adventure — 331music, Pixabay (cdn.pixabay.com/download/audio/2026/08/26/audio_f1cf54e839.mp3), 2:12, orchestral energetic; first 60 s under the LTX ambience at 0.45, 2 s fade out</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Scene prompts</h3>
+<p><strong>Locks</strong> (paste verbatim into every prompt):</p>
+<ul>
+<li><em>style head</em> — Re-render this photograph as a frame from a high-end 3D animated feature film — stylised Pixar-style children in a physically real world, soft cinematic lighting, shallow depth of field, warm colour grade. Keep every child's face shape, hairstyle and clothing recognisable.</li>
+<li><em>style tail</em> — Remove all text, lettering, logos and brand marks from clothing, signs and props. Photoreal materials, no outlines, cinematic 16:9 framing, no extra people beyond those described.</li>
+<li><em>team</em> — five children: a boy in a white t-shirt with a straight dark fringe; a boy in an orange t-shirt with short dark hair; a girl with long straight black hair; a girl in a pink t-shirt with her hair tied back; a girl in a white textured top with two braids</li>
+<li><em>video tail</em> — Smooth cinematic motion, 3D animated feature film look.</li>
+</ul>
+<p><strong>Rules</strong>: Every still is an edit of a real photo at --strength 1.0 (identity comes from pixels, never from text). No on-screen text anywhere — the model cannot spell, and the team emblem is described as 'a small round colourful emblem with no lettering'. Group shots must say 'their faces, hair and clothes stay exactly the same' or LTX restyles them. Camera holds still in every shot: a moving camera makes LTX invent people at the frame edge. Face shots (s5, s7, s8) are the only ones where all five are recognisable; s3 is backs, s4 is wide, s2 and s6 have no people.</p>
 
   <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="projects.html">projects</a></li><li><a href="runbook-living-painting.html">runbook living painting</a></li><li><a href="draw-things-setup.html">draw things setup</a></li></ul></div>
 </div>
-<footer>video-gen-kb · built 2026-09-23 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<footer>video-gen-kb · built 2026-09-24 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
 <script>function tt(){var r=document.documentElement,
 d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
 matchMedia('(prefers-color-scheme: dark)').matches);

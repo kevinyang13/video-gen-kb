@@ -8,6 +8,10 @@
 
 ---
 
+## 2026-09-24 — Bot Builders delivered (63.5 s of a planned 90)
+
+Third blueprint film, first with five recurring kids. Intake: separate project from fll_farm, faces OK (all families consent), **no extra kids**, 16:9, 90 s, full group close-ups, "Victory" (The_Mountain). New per-kid masters (Kyle's and Lindsey's re-dressed) + a **team master** used as the diptych reference for every shot. Stills: 4 of 12 failed the child count first time (comic panels with 6 figures are copied regardless of prompt → rebuilt S10 as an edit of the approved S5). Clips: in 7 of 12, LTX pulled back and invented extra children after 3–6 s; "no zoom, no pull-back, no one enters from any edge" held S8 but not S5/S7/S10. Every clip trimmed before the first wrong frame → 63.5 s, zero frames with six kids. Rules for group films added to [[idea-to-video-blueprint]] (frame groups wide, ~5 s usable per group clip, double the shot count). Report in [[fll-bot-builders-plan]] §0.
+
 ## 2026-09-23 — Kyle film on YouTube
 
 Kevin uploaded the 2160×3840 master as a Short: https://youtube.com/shorts/KscAwvCi6iQ. Recorded in `projects.json` (`youtube`) and the plan's results; the projects page embeds it.

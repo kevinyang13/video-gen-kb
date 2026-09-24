@@ -61,7 +61,7 @@ Ask these once, all together, and record the answers in the project page's "Deci
 ## Phase 1 — Story and storyboard (Claude drafts, human approves ✔)
 
 1. **Beats.** Reduce the idea to 4–6 story beats (Kyle: arrival → threat → danger → rescue → happy ending).
-2. **Shot count.** 249-frame LTX clips are ~10 s; after trimming the end fade and drift, a shot keeps 6–10 s. With 0.75 s crossfades: **60 s ≈ 8 shots, 30 s ≈ 4–5, 3 min ≈ 24**. Sum of kept lengths − (shots−1)×0.75 = film length.
+2. **Shot count.** 249-frame LTX clips are ~10 s; after trimming the end fade and drift, a shot keeps 6–10 s. **Group shots (3+ people) keep only ~5 s** before LTX pulls back and invents people — plan roughly twice as many shots for group-heavy films (Bot Builders: 12 planned shots gave 63 s, not 90). With 0.75 s crossfades: **60 s ≈ 8 shots, 30 s ≈ 4–5, 3 min ≈ 24**. Sum of kept lengths − (shots−1)×0.75 = film length.
 3. **One line per shot**: what's in the still, what moves, how long it's kept, and whether it is a **face shot**. Keep face shots to ~⅓ of the film; the rest are from behind, wide, or without the character — identity is free there.
 4. **Stage for the model, not just the story** (rules from [[lost-city-plan]] §3c and Kyle §0):
    - close-ups **hold position** — the character smiles, blinks, rocks; doesn't walk or turn away;
@@ -247,6 +247,7 @@ wiki/assets/<project>-*.jpg            QC and contact sheets shown in the report
 | second hand appears in a hand close-up | LTX invents the other hand | restage without hands (pencil lying on the page) or keep the hand small in frame |
 | a pet / small animal changes breed or doubles | partly hidden subject is re-invented | "exactly one cat: the same grey tabby stays … in the same place"; show it larger |
 | people pass through a sign, frame or each other | standing props in a crowd still | prompt the props out; "each person solid and clearly separate, walks only on the floor" |
+| an extra person appears at the frame edge mid-clip | tight group frame + LTX pull-back invents people in the new margin (Bot Builders S5: a 6th kid) | "the camera does not move at all: no zoom, no pull-back, no pan" + "no one enters from any edge"; check the last frames for head count |
 | subject sinks out of frame | "camera rises" executed as subject motion (horizon stays put) | "camera holds completely still", or an eye-level pull-back |
 | gesture drops mid-clip | not asked to persist | "keeps holding … the whole time" |
 | animals vanish / morph, camera pulls back | no framing lock | "camera holds completely still, same framing throughout" |

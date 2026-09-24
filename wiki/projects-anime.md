@@ -4,7 +4,7 @@
 
 **Sources**: projects.json; per-project notes from the session logs.
 
-**Last updated**: 2026-09-23
+**Last updated**: 2026-09-24
 
 ---
 
@@ -21,6 +21,7 @@ Index of every project: [[projects]]. Other themes: [[projects-realistic]] · [[
 | 5 | [Mt. Rainier from Paradise](#rainier) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 15.5 min | Calm Ambient Dreamscape | `rainier_final.mp4` | [▶ watch](https://youtu.be/JJB154LbBi0) |
 | 6 | [Cyberpunk city, rain, neon](#cyberpunk) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Neon Synthwave Drive | `cyberpunk_final.mp4` | [▶ watch](https://youtu.be/GrNTNQCqKnk) |
 | 7 | [FLL BOT Builders — Coastal Roots Farm, wide view](#fll_farm) | 2026-09-20 | done (v2) | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Calm Ambient Dreamscape | `fll_farm_v2_final.mp4` | [▶ watch](https://youtu.be/-Mf2UThasCg) |
+| 8 | [Bot Builders — 90-second 16:9 3D-animated FLL team film from a 3-page comic](#fll_bot_builders) | 2026-09-23 | delivered 2026-09-24 04:11 — 63.5 s (planned 90; five-kid rule), 1920x1080 + 3840x2160 + 1280x720 (see plan §0) | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
 
 ## Coastal wildflowers (v1) {#coast}
 
@@ -370,6 +371,48 @@ Prompt: `A breathtaking anime background painting, wide view from a low hill loo
 | I2V time (min) | 16 |
 
 Prompt: `static camera, the six people stand completely still in place, tree branches and leaves swaying in a steady wind, willow fronds swinging, vegetable rows and netting rippling in the breeze, chickens pecking slowly at the ground, birds drifting across the sky, clouds moving slowly, subtle motion`
+
+**Post**
+
+| Setting | Value |
+|---|---|
+| Script | scripts/finish_clip.sh |
+| Loop | forward, 8-frame tail->head crossfade, x6 = 27.4 s |
+| Upscale | lanczos 1080x1920 |
+| Music | Calm Ambient Dreamscape — morgan-ambient, Pixabay, 1 s fade in / 2 s fade out, vol 0.9 |
+
+## Bot Builders — 90-second 16:9 3D-animated FLL team film from a 3-page comic {#fll_bot_builders}
+
+- **Date**: 2026-09-23 · **Status**: delivered 2026-09-24 04:11 — 63.5 s (planned 90; five-kid rule), 1920x1080 + 3840x2160 + 1280x720 (see plan §0) · **Draw Things project**: `none — draw-things-cli via scripts/film_run.py`
+- **Files** (`raw/clips/`): `fll_bot/masters/{kyle,boy2,lindsey,girla,girlb,team}.png`, `fll_bot/stills/s1..s12.png`, `fll_bot/clips/s*_v*.mov`, `fll_bot/final/bot_builders_1920x1080.mp4`, `fll_bot/final/bot_builders_3840x2160.mp4`, `fll_bot/final/bot_builders_1280x720.mp4`, `fll_bot/work/qc_notes.txt`, `music/victory_the_mountain.mp3`
+- **Notes**: Separate project from fll_farm. Faces OK: Kevin says all five families consent (2026-09-23). Exactly five children in every frame, no extra kids; background people adults only. Kyle and Lindsey masters reused (re-dressed). Logos and lettering removed.
+
+**Still**
+
+| Setting | Value |
+|---|---|
+| Model | FLUX.2 [klein] 9B (8-bit S) |
+| Size | 576x1024 |
+| Steps | 4 |
+| CFG | 1.0 |
+| Shift | 3.0 |
+| Sampler | DDIM Trailing |
+
+**I2V**
+
+| Setting | Value |
+|---|---|
+| Model | Wan 2.2 High Noise Expert I2V A14B (8-bit S) |
+| Refiner | Wan 2.2 Low Noise Expert I2V A14B (8-bit S) @ 10% |
+| LoRA | Wan 2.2 A14B Lightning High-Noise T2V v2.0 @ 100% |
+| Size | 576x1024 |
+| Frames | 81 |
+| FPS | 16 |
+| Steps | 4 |
+| CFG | 1.0 |
+| Shift | 4.95 |
+| Sampler | DDIM Trailing |
+| Strength | 100% |
 
 **Post**
 
