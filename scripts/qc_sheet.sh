@@ -4,6 +4,8 @@
 # Works for any size/aspect/frame count: frame indices come from the clip itself.
 # Compare the reference (character master or the shot's still) against frame 0 … last:
 # identity, costume, count, style, held gestures, end-of-clip fade.
+# Also prints where an end-of-clip fade to dark starts (LTX-2.3 does this in ~half its clips):
+# the first frame after which brightness stays > 8% below the clip's median. Trim before it.
 set -euo pipefail
 
 CLIP="${1:?clip}"; OUT="${2:?out .png}"; REF="${3:--}"; N="${4:-5}"; TH="${5:-384}"
@@ -22,4 +24,17 @@ if [ "$REF" != "-" ]; then
 else
   ffmpeg -nostdin -v error -y -i "$CLIP" -vf "select='${sel}',scale=-2:${TH},tile=${N}x1" -frames:v 1 "$OUT"
 fi
-echo "$OUT  (frames: ${idx}of $total)"
+fps=$(ffprobe -v error -select_streams v:0 -show_entries stream=r_frame_rate -of csv=p=0 "$CLIP" | awk -F/ '{print $1/$2}')
+fade=$(ffmpeg -nostdin -i "$CLIP" -vf "scale=64:-2,signalstats,metadata=print:key=lavfi.signalstats.YAVG:file=-" -f null - 2>/dev/null \
+  | sed -n 's/.*YAVG=//p' | python3 -c "
+import sys, statistics
+y = [float(v) for v in sys.stdin.read().split()]
+if not y: print('?'); sys.exit()
+m = statistics.median(y); cut = None
+for i in range(len(y) - 1, -1, -1):
+    if y[i] >= 0.92 * m: break
+    cut = i
+print('none' if cut is None or len(y) - cut < 5 else cut)")
+if [ "$fade" = none ] || [ "$fade" = "?" ]; then note="no end fade"
+else note="END FADE from frame $fade = $(python3 -c "print(round($fade / $fps, 2))") s — trim before it"; fi
+echo "$OUT  (frames: ${idx}of $total; $note)"

@@ -8,6 +8,12 @@
 
 ---
 
+## 2026-09-23 — Lindsey: A Small Dream delivered (second blueprint film)
+
+Intake (2 batches of 4 questions), storyboard approval and a Pixabay music pick ("Emotional Children Piano", ranked by loudness curve), then the whole run through `scripts/film_run.py` from the `lindsey_art` run-spec: master (4 seeds, picked 3), 36 still candidates, 13 LTX renders for 8 shots, 73 min of upscale. Delivered 59.96 s at 1080×1920, 2160×3840 and 720×1280 (`raw/clips/lindsey/final/`).
+
+**Kevin caught two errors I had passed on thumbnails**: S3 two hands on one pencil, S6 people walking through signboards. A full-size recheck then caught S8 v1 (girl sinking, horizon fixed). Fixes: S3 restaged hands-free (LTX re-grew a second hand even from a one-hand still), S6 new still with no standing props and separated people, S8 v2 camera still, S2 v3 cat pinned ("exactly one cat"). New rules → [[idea-to-video-blueprint]] failure playbook and rubric (judge at full size). `qc_sheet.sh` now detects the LTX end fade automatically. zsh gotcha: `for p in "s2 3"; do cmd $p` doesn't split in zsh — pass arguments explicitly.
+
 ## 2026-09-23 — "film spec" renamed to "run-spec"
 
 Kevin's call. The `projects.json` block is now `run-spec` (was `film`); `film_run.py` reads `run-spec` from a project or from a standalone file (`{"run-spec": {...}}` or the bare block). Docs updated: [[scripts-reference]], [[idea-to-video-blueprint]], index, CLAUDE.md. The blueprint now states the split: the plan page holds story, decisions, rules and results; the run-spec holds the exact settings and is the only thing a run reads.

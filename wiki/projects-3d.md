@@ -15,7 +15,7 @@ Index of every project: [[projects]]. Other themes: [[projects-anime]] · [[proj
 | # | Project | Date | Status | Still | I2V | Music | Final file | YouTube |
 |--:|---|---|---|---|---|---|---|---|
 | 1 | [Kyle's Antarctic Rescue — 1-minute 3D-animated vertical short from a 5-panel comic](#kyle_rescue) | 2026-09-22 | delivered 2026-09-23 01:38 — 60.0 s, 1080x1920 + 2160x3840, rendered unattended overnight (see plan §0) | FLUX.2 [klein] 9B 576x1024 | LTX-2.3 22B [distilled] 1.1 via draw-things-cli ? min | Calm Ambient Dreamscape | `—` | — |
-| 2 | [Lindsey: A Small Dream — 1-minute 3D-animated vertical short from Lindsey's 5-panel art comic](#lindsey_art) | 2026-09-23 | rendering — unattended run started 2026-09-23 (see wiki/lindsey-art-plan.md) | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
+| 2 | [Lindsey: A Small Dream — 1-minute 3D-animated vertical short from Lindsey's 5-panel art comic](#lindsey_art) | 2026-09-23 | delivered 2026-09-23 17:26 — 59.96 s, 1080x1920 + 2160x3840 + 720x1280 (see plan §0) | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
 
 ## Kyle's Antarctic Rescue — 1-minute 3D-animated vertical short from a 5-panel comic {#kyle_rescue}
 
@@ -186,8 +186,8 @@ Prompt: `per scene — see scenes`
 
 ## Lindsey: A Small Dream — 1-minute 3D-animated vertical short from Lindsey's 5-panel art comic {#lindsey_art}
 
-- **Date**: 2026-09-23 · **Status**: rendering — unattended run started 2026-09-23 (see wiki/lindsey-art-plan.md) · **Draw Things project**: `none — draw-things-cli via scripts/film_run.py`
-- **Files** (`raw/clips/`): 
+- **Date**: 2026-09-23 · **Status**: delivered 2026-09-23 17:26 — 59.96 s, 1080x1920 + 2160x3840 + 720x1280 (see plan §0) · **Draw Things project**: `none — draw-things-cli via scripts/film_run.py`
+- **Files** (`raw/clips/`): `lindsey/masters/lindsey_front.png`, `lindsey/stills/s1..s8.png`, `lindsey/clips/s*_v*.mov`, `lindsey/final/lindsey_art_1080x1920.mp4`, `lindsey/final/lindsey_art_2160x3840.mp4`, `lindsey/final/lindsey_art_720x1280.mp4`, `lindsey/work/qc_notes.txt`, `music/emotional_children_piano.mp3`
 - **Notes**: Lindsey is Kevin's daughter; consent confirmed 2026-09-23. Face from the comic, no photo.
 
 **Still**

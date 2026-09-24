@@ -323,7 +323,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </tbody>
 </table></div>
 <p>Prompt pattern for a diptych: <em>"Two images side by side. Left: … Right: … Re-render the right image as a frame from the same film, with the boy looking exactly like the boy on the left: same face, same hair, same costume. [framing sentence]. [scene]. [style]. Remove all text, bubbles and borders. Keep the left image unchanged."</em> <strong>Always state the framing</strong> ("medium close-up: head and shoulders fill the frame") — without it klein zooms out to full body.</p>
-<p>Render <strong>3 seeds per shot</strong> and pick by the rubric below. Typical failures to reject: subject dropped from a busy frame, an extra hand or a double gesture, a different face, text left in.</p>
+<p>Render <strong>3 seeds per shot</strong> and pick by the rubric below — <strong>at full size</strong> (open each candidate, don't judge a strip of thumbnails). Typical failures to reject: subject dropped from a busy frame, an extra hand or a double gesture, a different face, text left in.</p>
 <p>Inputs are fitted to W×H by center-crop, so hand over images already at the target aspect (pad near-square panels with a blurred copy of themselves).</p>
 <h2>Phase 6 — Motion prompts</h2>
 <p>One paragraph per shot, action first, ending with the video tail. Rules from Kyle and Lost City:
@@ -351,7 +351,7 @@ done
 <li>Always 249 frames: same cost as short clips; trim later.</li>
 </ul>
 <h2>Phase 8 — QC and the redo queue (Claude as judge)</h2>
-<p><strong>Contact sheet per clip</strong>: reference (master or still) + frames 0, 62, 124, 186, 248.</p>
+<p><strong>Contact sheet per clip</strong>: reference (master or still) + frames 0, 62, 124, 186, 248. <code>qc_sheet.sh</code> also prints where an end-of-clip fade starts. <strong>Judge stills and sheets at full size</strong> (open the candidate PNGs, not a 200-px strip): hand counts and intersections are invisible in thumbnails.</p>
 <pre><code class="language-bash">ffmpeg -i master.png -i clip.mov -filter_complex \
  &quot;[0]scale=216:384[m];[1]select='eq(n\,0)+eq(n\,62)+eq(n\,124)+eq(n\,186)+eq(n\,248)',scale=216:384,tile=5x1[t];[m][t]hstack=2&quot; \
  -frames:v 1 qc.png
@@ -406,7 +406,11 @@ ffmpeg -i out_master.mp4 -vf scale=1080:1920 -c:v hevc_videotoolbox -b:v 12M -ta
 </tr>
 <tr>
 <td>Count</td>
-<td>extra / missing character, doubled hand or gesture</td>
+<td>extra / missing character, doubled hand or gesture — <strong>count hands per person</strong> (two hands on one pencil passed thumbnail QC on Lindsey S3)</td>
+</tr>
+<tr>
+<td>Physics</td>
+<td>people or objects intersecting: a body passing through a sign, frame, wall or another person (Lindsey S6: the comic's chalkboard became dark boards the crowd walked through). Any standing prop in a crowd shot is a risk — prompt it out</td>
 </tr>
 <tr>
 <td>Framing</td>
@@ -517,6 +521,26 @@ wiki/assets/&lt;project&gt;-*.jpg            QC and contact sheets shown in the 
 <td>hair / face restyles mid-clip</td>
 <td>wind, turn, walk in a face shot</td>
 <td>hold wording; "hair stays neat"</td>
+</tr>
+<tr>
+<td>second hand appears in a hand close-up</td>
+<td>LTX invents the other hand</td>
+<td>restage without hands (pencil lying on the page) or keep the hand small in frame</td>
+</tr>
+<tr>
+<td>a pet / small animal changes breed or doubles</td>
+<td>partly hidden subject is re-invented</td>
+<td>"exactly one cat: the same grey tabby stays … in the same place"; show it larger</td>
+</tr>
+<tr>
+<td>people pass through a sign, frame or each other</td>
+<td>standing props in a crowd still</td>
+<td>prompt the props out; "each person solid and clearly separate, walks only on the floor"</td>
+</tr>
+<tr>
+<td>subject sinks out of frame</td>
+<td>"camera rises" executed as subject motion (horizon stays put)</td>
+<td>"camera holds completely still", or an eye-level pull-back</td>
 </tr>
 <tr>
 <td>gesture drops mid-clip</td>

@@ -835,7 +835,7 @@
       "date": "2026-09-23",
       "theme": "3d",
       "dt_project": "none — draw-things-cli via scripts/film_run.py",
-      "status": "rendering — unattended run started 2026-09-23 (see wiki/lindsey-art-plan.md)",
+      "status": "delivered 2026-09-23 17:26 — 59.96 s, 1080x1920 + 2160x3840 + 720x1280 (see plan §0)",
       "source": "raw/lindsey/comic_source.jpg",
       "music": "Emotional Children Piano — Music_For_Videos, Pixabay (cdn.pixabay.com/download/audio/2023/09/03/audio_2c0ed5a272.mp3), 1:55; first 60 s (build to ~50 s, section ends at 60 s), 2 s fade out",
       "notes": "Lindsey is Kevin's daughter; consent confirmed 2026-09-23. Face from the comic, no photo.",
@@ -925,7 +925,12 @@
               "input": "stills/s2.png",
               "prompt": "stills/s1.txt"
             },
-            "video_prompt": "stills/s1_v.txt"
+            "video_prompt": "stills/s1_v.txt",
+            "take": "clips/s1_v1.mov",
+            "trim": [
+              0,
+              5.4
+            ]
           },
           {
             "id": "s2",
@@ -935,7 +940,12 @@
               "prompt": "stills/s2.txt"
             },
             "video_prompt": "stills/s2_v.txt",
-            "qc_ref": "lindsey"
+            "qc_ref": "lindsey",
+            "take": "clips/s2_v3.mov",
+            "trim": [
+              0,
+              6.5
+            ]
           },
           {
             "id": "s3",
@@ -944,7 +954,12 @@
               "input": "work/s3_in.png",
               "prompt": "stills/s3.txt"
             },
-            "video_prompt": "stills/s3_v.txt"
+            "video_prompt": "stills/s3_v.txt",
+            "take": "clips/s3_v3.mov",
+            "trim": [
+              0,
+              9
+            ]
           },
           {
             "id": "s4",
@@ -954,7 +969,12 @@
               "prompt": "stills/s4.txt"
             },
             "video_prompt": "stills/s4_v.txt",
-            "qc_ref": "lindsey"
+            "qc_ref": "lindsey",
+            "take": "clips/s4_v1.mov",
+            "trim": [
+              0,
+              9.96
+            ]
           },
           {
             "id": "s5",
@@ -963,7 +983,12 @@
               "input": "work/s5_in.png",
               "prompt": "stills/s5.txt"
             },
-            "video_prompt": "stills/s5_v.txt"
+            "video_prompt": "stills/s5_v.txt",
+            "take": "clips/s5_v1.mov",
+            "trim": [
+              0,
+              9.96
+            ]
           },
           {
             "id": "s6",
@@ -972,7 +997,12 @@
               "input": "work/s6_in.png",
               "prompt": "stills/s6.txt"
             },
-            "video_prompt": "stills/s6_v.txt"
+            "video_prompt": "stills/s6_v.txt",
+            "take": "clips/s6_v2.mov",
+            "trim": [
+              0,
+              8.5
+            ]
           },
           {
             "id": "s7",
@@ -982,7 +1012,12 @@
               "prompt": "stills/s7.txt"
             },
             "video_prompt": "stills/s7_v.txt",
-            "qc_ref": "lindsey"
+            "qc_ref": "lindsey",
+            "take": "clips/s7_v1.mov",
+            "trim": [
+              0,
+              6.5
+            ]
           },
           {
             "id": "s8",
@@ -992,10 +1027,37 @@
               "prompt": "stills/s8.txt"
             },
             "video_prompt": "stills/s8_v.txt",
-            "qc_ref": "lindsey"
+            "qc_ref": "lindsey",
+            "take": "clips/s8_v2.mov",
+            "trim": [
+              0,
+              9.3
+            ]
           }
         ]
-      }
+      },
+      "seeds": {
+        "master": 3,
+        "s1": 1,
+        "s2": 3,
+        "s3": "restage edit 1",
+        "s4": 2,
+        "s5": 1,
+        "s6": "new still 2",
+        "s7": 3,
+        "s8": 2,
+        "clips": "v1 seed 1, v2 seed 2, v3 seed 3"
+      },
+      "files": [
+        "lindsey/masters/lindsey_front.png",
+        "lindsey/stills/s1..s8.png",
+        "lindsey/clips/s*_v*.mov",
+        "lindsey/final/lindsey_art_1080x1920.mp4",
+        "lindsey/final/lindsey_art_2160x3840.mp4",
+        "lindsey/final/lindsey_art_720x1280.mp4",
+        "lindsey/work/qc_notes.txt",
+        "music/emotional_children_piano.mp3"
+      ]
     }
   ],
   "playlist": {

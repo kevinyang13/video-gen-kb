@@ -109,7 +109,7 @@ Every shot's first frame must carry identity from **pixels**, never text alone. 
 
 Prompt pattern for a diptych: *"Two images side by side. Left: … Right: … Re-render the right image as a frame from the same film, with the boy looking exactly like the boy on the left: same face, same hair, same costume. [framing sentence]. [scene]. [style]. Remove all text, bubbles and borders. Keep the left image unchanged."* **Always state the framing** ("medium close-up: head and shoulders fill the frame") — without it klein zooms out to full body.
 
-Render **3 seeds per shot** and pick by the rubric below. Typical failures to reject: subject dropped from a busy frame, an extra hand or a double gesture, a different face, text left in.
+Render **3 seeds per shot** and pick by the rubric below — **at full size** (open each candidate, don't judge a strip of thumbnails). Typical failures to reject: subject dropped from a busy frame, an extra hand or a double gesture, a different face, text left in.
 
 Inputs are fitted to W×H by center-crop, so hand over images already at the target aspect (pad near-square panels with a blurred copy of themselves).
 
@@ -145,7 +145,7 @@ done
 
 ## Phase 8 — QC and the redo queue (Claude as judge)
 
-**Contact sheet per clip**: reference (master or still) + frames 0, 62, 124, 186, 248.
+**Contact sheet per clip**: reference (master or still) + frames 0, 62, 124, 186, 248. `qc_sheet.sh` also prints where an end-of-clip fade starts. **Judge stills and sheets at full size** (open the candidate PNGs, not a 200-px strip): hand counts and intersections are invisible in thumbnails.
 
 ```bash
 ffmpeg -i master.png -i clip.mov -filter_complex \
@@ -198,7 +198,8 @@ Score each candidate against the reference, reject on any hard fail:
 |---|---|
 | Identity | different face shape, eyes, hair silhouette |
 | Costume | signature colour split, patch, prop missing |
-| Count | extra / missing character, doubled hand or gesture |
+| Count | extra / missing character, doubled hand or gesture — **count hands per person** (two hands on one pencil passed thumbnail QC on Lindsey S3) |
+| Physics | people or objects intersecting: a body passing through a sign, frame, wall or another person (Lindsey S6: the comic's chalkboard became dark boards the crowd walked through). Any standing prop in a crowd shot is a risk — prompt it out |
 | Framing | not what the prompt named (zoomed out, subject cropped) |
 | Cleanliness | leftover text, bubbles, borders, smears |
 | Style | slides away from the style lock |
@@ -243,6 +244,10 @@ wiki/assets/<project>-*.jpg            QC and contact sheets shown in the report
 | still zoomed out to full body | edit prompt didn't name framing / said "fill the frame" | name the framing explicitly |
 | character missing from a busy still | too many subjects | another seed; put the character first in the prompt |
 | hair / face restyles mid-clip | wind, turn, walk in a face shot | hold wording; "hair stays neat" |
+| second hand appears in a hand close-up | LTX invents the other hand | restage without hands (pencil lying on the page) or keep the hand small in frame |
+| a pet / small animal changes breed or doubles | partly hidden subject is re-invented | "exactly one cat: the same grey tabby stays … in the same place"; show it larger |
+| people pass through a sign, frame or each other | standing props in a crowd still | prompt the props out; "each person solid and clearly separate, walks only on the floor" |
+| subject sinks out of frame | "camera rises" executed as subject motion (horizon stays put) | "camera holds completely still", or an eye-level pull-back |
 | gesture drops mid-clip | not asked to persist | "keeps holding … the whole time" |
 | animals vanish / morph, camera pulls back | no framing lock | "camera holds completely still, same framing throughout" |
 | last 2–3 s go dark | LTX end fade | trim before it (or keep it as the film's ending) |

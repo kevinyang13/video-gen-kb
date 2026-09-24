@@ -92,8 +92,106 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
     <span class="spacer"></span>
     <button class="pill" onclick="tt()">◐ Theme</button>
   </nav>
-  <h1>Lindsey: A Small Dream — 1-Minute Plan</h1><p class="lede">A 60-second vertical 3D-animated short made from Lindsey's 5-panel comic. She draws at the kitchen table, practises every day, finds her own style, holds her first art exhibition, and ends hugging her favourite animals at sunrise. It's the second film through the <a href="idea-to-video-blueprint.html">idea to video blueprint</a>, the first run entirely by <code>scripts/film_run.py</code> from a run-spec, unattended after "go".</p><div class="meta"><span><b>Updated</b> 2026-09-23 (plan approved, run started)</span><span><b>Sources</b> <code>raw/lindsey/comic_source.jpg</code> (5-panel comic, 1374×1145, added 2026-09-23); <a href="idea-to-video-blueprint.html">idea to video blueprint</a>; <a href="kyle-antarctic-rescue-plan.html">kyle antarctic rescue plan</a> §0 (method and rules this reuses); <a href="scripts-reference.html">scripts reference</a> (run-spec format).</span></div>
+  <h1>Lindsey: A Small Dream — 1-Minute Plan</h1><p class="lede">A 60-second vertical 3D-animated short made from Lindsey's 5-panel comic. She draws at the kitchen table, practises every day, finds her own style, holds her first art exhibition, and ends hugging her favourite animals at sunrise. It's the second film through the <a href="idea-to-video-blueprint.html">idea to video blueprint</a>, the first run entirely by <code>scripts/film_run.py</code> from a run-spec, unattended after "go".</p><div class="meta"><span><b>Updated</b> 2026-09-23 (<strong>delivered</strong> — §0 results; 5 redos, 2 caught by Kevin)</span><span><b>Sources</b> <code>raw/lindsey/comic_source.jpg</code> (5-panel comic, 1374×1145, added 2026-09-23); <a href="idea-to-video-blueprint.html">idea to video blueprint</a>; <a href="kyle-antarctic-rescue-plan.html">kyle antarctic rescue plan</a> §0 (method and rules this reuses); <a href="scripts-reference.html">scripts reference</a> (run-spec format).</span></div>
 <hr />
+<h2>0. Results — 2026-09-23 12:50 → 17:26</h2>
+<p><strong>Delivered</strong>: <code>raw/clips/lindsey/final/lindsey_art_1080x1920.mp4</code> (59.96 s, HEVC, 95 MB), <code>lindsey_art_2160x3840.mp4</code> master (301 MB), <code>lindsey_art_720x1280.mp4</code> phone preview (23 MB). Music from 0 s with a 2 s fade out; mean −15.8 dB, peak −0.8 dB. Everything ran through <code>scripts/film_run.py</code> from the run-spec.</p>
+<p><img alt="Final film, one frame every 5 s" src="assets/lindsey-final-strip.jpg" /></p>
+<p><img alt="Master + S1–S8 first frames (final)" src="assets/lindsey-stills-sheet.jpg" /></p>
+<h3>Takes</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Shot</th>
+<th>Still</th>
+<th>Take</th>
+<th>Kept</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S1</td>
+<td>edit of S2, seed 1</td>
+<td>v1</td>
+<td>0–5.4 s</td>
+<td>camera drifts and the cat shrinks to a tail after ~f140</td>
+</tr>
+<tr>
+<td>S2</td>
+<td>diptych, seed 3</td>
+<td><strong>v3</strong></td>
+<td>0–6.5 s</td>
+<td>v1: grey tabby → black-and-white cat (f124). v2: second cat head + pan (f140). v3: one cat, looks up and smiles</td>
+</tr>
+<tr>
+<td>S3</td>
+<td><strong>restaged</strong>: no hands, pencil lying flat</td>
+<td><strong>v3</strong></td>
+<td>0–9 s</td>
+<td>v1 + v2 stills/clips had two hands on the pencil — see below</td>
+</tr>
+<tr>
+<td>S4</td>
+<td>diptych, seed 2</td>
+<td>v1</td>
+<td>0–9.96 s</td>
+<td>clean for the full clip</td>
+</tr>
+<tr>
+<td>S5</td>
+<td>diptych, seed 1</td>
+<td>v1</td>
+<td>0–9.96 s</td>
+<td>push-in ends on the turtle canvas</td>
+</tr>
+<tr>
+<td>S6</td>
+<td>diptych with S7, <strong>new still</strong> seed 2</td>
+<td><strong>v2</strong></td>
+<td>0–8.5 s</td>
+<td>v1: people walked through dark signboards</td>
+</tr>
+<tr>
+<td>S7</td>
+<td>diptych, seed 3</td>
+<td>v1</td>
+<td>0–6.5 s</td>
+<td>end fade from f169 (auto-detected)</td>
+</tr>
+<tr>
+<td>S8</td>
+<td>diptych, seed 2</td>
+<td><strong>v2</strong></td>
+<td>0–9.3 s</td>
+<td>v1: she sank out of frame with the horizon fixed</td>
+</tr>
+</tbody>
+</table></div>
+<p>13 LTX renders for 8 shots (9 min 20 s – 9 min 29 s each), 24 + 12 still candidates, 8 upscales in 73 min.</p>
+<h3>What went wrong — and who caught it</h3>
+<p><img alt="Rejected frames: S2 v1 cat swap · S3 v2 second hand · S6 v1 people through signboards · S8 v1 girl sinking" src="assets/lindsey-rejects.jpg" /></p>
+<ul>
+<li><strong>Kevin caught two errors I had passed.</strong> Both were visible only at full size; I had judged 216-px thumbnails.</li>
+<li><strong>S3:</strong> two hands on one pencil.</li>
+<li><strong>S6:</strong> the comic's chalkboard became dark standing boards that people walked through.</li>
+<li><strong>Once I re-checked at full size, I found a third: S8 v1.</strong> She slid down out of frame while the horizon stayed put, so "the camera rises" had become "the girl sinks".</li>
+<li><strong>S3 needed a restage.</strong></li>
+<li>"Exactly one hand" in the still prompt gave two hands in 2 of 3 seeds, and a stray sleeve in the third. A follow-up edit removed the sleeve.</li>
+<li>The clip then grew a second hand anyway (v2, from f80).</li>
+<li>LTX keeps inventing the other hand on a hand close-up, so S3 became the sketches alone with a pencil lying on them. A candidate with the pencil balanced on its tip was rejected.</li>
+<li><strong>S6's new still</strong> banned signboards, easels and stands, and put about 8 people well apart on an open floor. The motion prompt also says "never passes through another person, the walls, the frames or the flower pots".</li>
+</ul>
+<p><img alt="Still fixes: S6 before/after, S3 before/after" src="assets/lindsey-still-fixes.jpg" /></p>
+<h3>New rules (added to <a href="idea-to-video-blueprint.html">idea to video blueprint</a>)</h3>
+<ol>
+<li><strong>Judge at full size.</strong> Count hands per person; look for bodies passing through props. Thumbnails hide both.</li>
+<li><strong>Hand close-ups on LTX grow a second hand</strong>; restage as hands-free or keep the hand small.</li>
+<li><strong>Standing props in crowd shots</strong> (signboards, easels) invite intersections; prompt them out.</li>
+<li><strong>A small or partly hidden animal gets re-invented</strong>; pin it ("exactly one cat, the same grey tabby stays curled up asleep in the same place").</li>
+<li><strong>"Camera rises" can become "subject sinks"</strong>: check that the horizon moves. For endings, "camera holds completely still" or an eye-level pull-back is safer.</li>
+<li><code>qc_sheet.sh</code> now <strong>auto-detects the end-of-clip fade</strong> (S6 f222, S7 f169, S8 v2 f238).</li>
+</ol>
 <h2>1. Decisions (Kevin, 2026-09-23 intake)</h2>
 <div class="tw"><table>
 <thead>

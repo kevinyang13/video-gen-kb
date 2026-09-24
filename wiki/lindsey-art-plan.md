@@ -4,9 +4,57 @@
 
 **Sources**: `raw/lindsey/comic_source.jpg` (5-panel comic, 1374×1145, added 2026-09-23); [[idea-to-video-blueprint]]; [[kyle-antarctic-rescue-plan]] §0 (method and rules this reuses); [[scripts-reference]] (run-spec format).
 
-**Last updated**: 2026-09-23 (plan approved, run started)
+**Last updated**: 2026-09-23 (**delivered** — §0 results; 5 redos, 2 caught by Kevin)
 
 ---
+
+## 0. Results — 2026-09-23 12:50 → 17:26
+
+**Delivered**: `raw/clips/lindsey/final/lindsey_art_1080x1920.mp4` (59.96 s, HEVC, 95 MB), `lindsey_art_2160x3840.mp4` master (301 MB), `lindsey_art_720x1280.mp4` phone preview (23 MB). Music from 0 s with a 2 s fade out; mean −15.8 dB, peak −0.8 dB. Everything ran through `scripts/film_run.py` from the run-spec.
+
+![Final film, one frame every 5 s](assets/lindsey-final-strip.jpg)
+
+![Master + S1–S8 first frames (final)](assets/lindsey-stills-sheet.jpg)
+
+### Takes
+
+| Shot | Still | Take | Kept | Notes |
+|---|---|---|---|---|
+| S1 | edit of S2, seed 1 | v1 | 0–5.4 s | camera drifts and the cat shrinks to a tail after ~f140 |
+| S2 | diptych, seed 3 | **v3** | 0–6.5 s | v1: grey tabby → black-and-white cat (f124). v2: second cat head + pan (f140). v3: one cat, looks up and smiles |
+| S3 | **restaged**: no hands, pencil lying flat | **v3** | 0–9 s | v1 + v2 stills/clips had two hands on the pencil — see below |
+| S4 | diptych, seed 2 | v1 | 0–9.96 s | clean for the full clip |
+| S5 | diptych, seed 1 | v1 | 0–9.96 s | push-in ends on the turtle canvas |
+| S6 | diptych with S7, **new still** seed 2 | **v2** | 0–8.5 s | v1: people walked through dark signboards |
+| S7 | diptych, seed 3 | v1 | 0–6.5 s | end fade from f169 (auto-detected) |
+| S8 | diptych, seed 2 | **v2** | 0–9.3 s | v1: she sank out of frame with the horizon fixed |
+
+13 LTX renders for 8 shots (9 min 20 s – 9 min 29 s each), 24 + 12 still candidates, 8 upscales in 73 min.
+
+### What went wrong — and who caught it
+
+![Rejected frames: S2 v1 cat swap · S3 v2 second hand · S6 v1 people through signboards · S8 v1 girl sinking](assets/lindsey-rejects.jpg)
+
+- **Kevin caught two errors I had passed.** Both were visible only at full size; I had judged 216-px thumbnails.
+  - **S3:** two hands on one pencil.
+  - **S6:** the comic's chalkboard became dark standing boards that people walked through.
+- **Once I re-checked at full size, I found a third: S8 v1.** She slid down out of frame while the horizon stayed put, so "the camera rises" had become "the girl sinks".
+- **S3 needed a restage.**
+  - "Exactly one hand" in the still prompt gave two hands in 2 of 3 seeds, and a stray sleeve in the third. A follow-up edit removed the sleeve.
+  - The clip then grew a second hand anyway (v2, from f80).
+  - LTX keeps inventing the other hand on a hand close-up, so S3 became the sketches alone with a pencil lying on them. A candidate with the pencil balanced on its tip was rejected.
+- **S6's new still** banned signboards, easels and stands, and put about 8 people well apart on an open floor. The motion prompt also says "never passes through another person, the walls, the frames or the flower pots".
+
+![Still fixes: S6 before/after, S3 before/after](assets/lindsey-still-fixes.jpg)
+
+### New rules (added to [[idea-to-video-blueprint]])
+
+1. **Judge at full size.** Count hands per person; look for bodies passing through props. Thumbnails hide both.
+2. **Hand close-ups on LTX grow a second hand**; restage as hands-free or keep the hand small.
+3. **Standing props in crowd shots** (signboards, easels) invite intersections; prompt them out.
+4. **A small or partly hidden animal gets re-invented**; pin it ("exactly one cat, the same grey tabby stays curled up asleep in the same place").
+5. **"Camera rises" can become "subject sinks"**: check that the horizon moves. For endings, "camera holds completely still" or an eye-level pull-back is safer.
+6. `qc_sheet.sh` now **auto-detects the end-of-clip fade** (S6 f222, S7 f169, S8 v2 f238).
 
 ## 1. Decisions (Kevin, 2026-09-23 intake)
 
