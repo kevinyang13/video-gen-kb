@@ -10,6 +10,8 @@
 
 ## 0. Results — 2026-09-23 12:50 → 17:26
 
+**Watch**: [YouTube Short](https://youtube.com/shorts/lbU-_73MliI) (uploaded 2026-09-23, the 2160×3840 master).
+
 **Delivered**: `raw/clips/lindsey/final/lindsey_art_1080x1920.mp4` (59.96 s, HEVC, 95 MB), `lindsey_art_2160x3840.mp4` master (301 MB), `lindsey_art_720x1280.mp4` phone preview (23 MB). Music from 0 s with a 2 s fade out; mean −15.8 dB, peak −0.8 dB. Everything ran through `scripts/film_run.py` from the run-spec.
 
 ![Final film, one frame every 5 s](assets/lindsey-final-strip.jpg)

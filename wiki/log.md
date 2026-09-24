@@ -8,6 +8,10 @@
 
 ---
 
+## 2026-09-23 — Lindsey film on YouTube
+
+Kevin uploaded the 2160×3840 master as a Short: https://youtube.com/shorts/lbU-_73MliI. Recorded in `projects.json` (`youtube`) and the plan's results; the projects page embeds it.
+
 ## 2026-09-23 — Lindsey: A Small Dream delivered (second blueprint film)
 
 Intake (2 batches of 4 questions), storyboard approval and a Pixabay music pick ("Emotional Children Piano", ranked by loudness curve), then the whole run through `scripts/film_run.py` from the `lindsey_art` run-spec: master (4 seeds, picked 3), 36 still candidates, 13 LTX renders for 8 shots, 73 min of upscale. Delivered 59.96 s at 1080×1920, 2160×3840 and 720×1280 (`raw/clips/lindsey/final/`).
