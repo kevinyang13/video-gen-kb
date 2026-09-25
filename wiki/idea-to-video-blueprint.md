@@ -113,6 +113,14 @@ Render **3 seeds per shot** and pick by the rubric below — **at full size** (o
 
 Inputs are fitted to W×H by center-crop, so hand over images already at the target aspect (pad near-square panels with a blurred copy of themselves).
 
+## Phase 5b — One generation per film
+
+Everything a film is cut from must come from the same generation: the same style head, the same masters, the same prompt wording. If any of those change mid-project — a different look, a rebuilt master, a corrected recipe — **every still is stale**, including the ones whose clips already rendered fine. Re-render them all.
+
+This is easy to get wrong, because a stale still is not broken: it matches its own clip, and QC passes. The damage only appears in the cut, where the same character is drawn two ways (BOT Builders photo cut, 2026-09-25 — seven shots from the pre-master pipeline cut against four from the rebuilt masters). A still costs about a minute to re-render; a film with two faces for one child costs the film.
+
+Practical guard: stamp each shot with the generation that produced its still, bump the stamp whenever the style head or a master changes, and refuse to assemble while stamps differ.
+
 ## Phase 6 — Motion prompts
 
 One paragraph per shot, action first, ending with the video tail. Rules from Kyle and Lost City:

@@ -4,7 +4,7 @@
 
 **Sources**: 13 photographs from Kevin (team coach) in `raw/fll_champions/`, added 2026-09-23/24; [[idea-to-video-blueprint]] (the process); [[headless-cli-pipeline]] (CLI settings); [[lost-city-plan]] §3c (LTX motion rules); [[scripts-reference]] (run-spec, `film_run.py`).
 
-**Last updated**: 2026-09-25 (delivered)
+**Last updated**: 2026-09-25 (delivered; §3b records the mixed-generation mistake)
 
 ---
 
@@ -64,6 +64,16 @@ What worked: **master as the input image, scene from the prompt** — "Keep this
 Two smaller rules from the same stage:
 - Team shirts rendered with garbled lettering until the prompt said **"plain black t-shirt with no printing, no graphics and no letters"**.
 - "No text anywhere" has to name clothing, boards and signs explicitly, or it applies only to the background.
+
+## 3b. The mistake: two generations of stills in one cut
+
+**The film mixes stills from two different pipelines, and it shows.** Shots 1, 3, 4, 5, 6, 10 and 11 were rendered on 2026-09-23 — old style head, no masters yet, identity coming straight from a klein edit of the source photograph. Shots 2, 7, 8 and 9 were rendered on 2026-09-25 from the rebuilt Pixar masters after three rounds of recipe changes. Their clips were still valid in the narrow sense (each still matched its own clip), so they were carried forward instead of re-rendered.
+
+The result is a cut where the same five children are drawn by two different recipes: the older shots have the softer, more generic faces that drove the master rework in the first place, the newer ones have the corrected ones. Face shape, hair colour and the degree of stylisation all shift across cuts.
+
+**Rule**: *when the look or the master recipe changes, every still is stale — re-render all of them, not just the new shots.* A still is only reusable if it was made with the same style head, the same masters and the same prompt generation as everything it will be cut against. The cost of re-rendering a still is about a minute; the cost of a mismatched film is the film.
+
+**How to avoid it next time**: stamp each still with the generation that produced it (a `gen` field per shot in the run-spec, bumped whenever the style head or a master changes), and have `film_run.py check` refuse to finish while shots carry different stamps.
 
 ## 4. Settings
 

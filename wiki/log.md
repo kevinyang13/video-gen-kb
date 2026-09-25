@@ -25,6 +25,8 @@
 - Signature features vanish unless named (Kyle's spiked fringe), and then overshoot — take the mildest seed.
 - Shirts print garbled text unless told "plain, no printing, no graphics, no letters"; "no text anywhere" must name clothing and props explicitly.
 
+**The mistake worth keeping**: the delivered cut mixes two generations of stills — seven shots from 2026-09-23 (before masters existed, identity from raw photo edits) cut against four restaged from the rebuilt Pixar masters on 2026-09-25. Their clips were individually fine, so they were carried forward rather than re-rendered, and the film ends up drawing the same five children two ways. **When the look or the master recipe changes, every still is stale — re-render all of them.** A stale still is not broken and passes QC; the damage only appears in the cut. Filed as [[idea-to-video-blueprint]] Phase 5b and [[fll-champions-plan]] §3b.
+
 **Updated**: `projects.json` (delivered, files, music), `wiki/index.md`.
 
 ## 2026-09-24 — Two FLL films; the photo cut retired
