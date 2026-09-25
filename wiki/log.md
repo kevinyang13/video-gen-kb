@@ -8,6 +8,16 @@
 
 ---
 
+## 2026-09-24 — Two FLL films; the photo cut retired
+
+**What happened**: an overnight run in another session delivered **`fll_bot_builders`** (Bot Builders, 63.5 s 16:9, 12 shots from a 3-page comic, 1920×1080 + 3840×2160 + 1280×720, music "Victory"). This session had separately taken the same team through the blueprint from the family's **photographs** — intake, consent, 8-shot storyboard, 5 character masters, 8 picked stills, 8 rendered clips — but stopped before QC. With the comic film shipped, `fll_champions` is marked **superseded**; its stills and clips stay in `raw/clips/fll/` (818 MB).
+
+**Kept from it** — two klein-edit rules now in that project's `scenes.locks.rules`:
+- **An edit inherits the source pose.** Chaining the calm closing portrait off the celebration still reproduced the jump in all three seeds. Fix: name the new pose positively *and* negatively — "both feet flat on the ground, arms relaxed at their sides… nobody jumping".
+- **klein drops people from crowded groups.** Only 1 of 3 seeds of the celebration shot kept all five children. Group shots need 3 seeds and a headcount at pick time, not a glance at a thumbnail strip.
+
+**Also fixed**: `fll_bot_builders` shipped without a `theme`, so the registry builder was filing it under *anime*; tagged `3d`.
+
 ## 2026-09-24 — Bot Builders delivered (63.5 s of a planned 90)
 
 Third blueprint film, first with five recurring kids. Intake: separate project from fll_farm, faces OK (all families consent), **no extra kids**, 16:9, 90 s, full group close-ups, "Victory" (The_Mountain). New per-kid masters (Kyle's and Lindsey's re-dressed) + a **team master** used as the diptych reference for every shot. Stills: 4 of 12 failed the child count first time (comic panels with 6 figures are copied regardless of prompt → rebuilt S10 as an edit of the approved S5). Clips: in 7 of 12, LTX pulled back and invented extra children after 3–6 s; "no zoom, no pull-back, no one enters from any edge" held S8 but not S5/S7/S10. Every clip trimmed before the first wrong frame → 63.5 s, zero frames with six kids. Rules for group films added to [[idea-to-video-blueprint]] (frame groups wide, ~5 s usable per group clip, double the shot count). Report in [[fll-bot-builders-plan]] §0.

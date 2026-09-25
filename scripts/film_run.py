@@ -148,16 +148,16 @@ def cmd_check(f, _):
             errs.append(f"{i}: still.ref '{ref}' is neither a master name nor a path")
         if not s.get("video_prompt") or not d(f, s["video_prompt"]).exists():
             errs.append(f"{i}: video_prompt missing: {s.get('video_prompt')}")
-        if "trim" in s:
+        if s.get("trim"):
             a, b = s["trim"]
             if not 0 <= a < b:
                 errs.append(f"{i}: bad trim {s['trim']}")
         if s.get("take") and not d(f, s["take"]).exists():
             warns.append(f"{i}: take not rendered yet: {s['take']}")
-    total = sum(s["trim"][1] - s["trim"][0] for s in f["shots"] if "trim" in s)
+    total = sum(s["trim"][1] - s["trim"][0] for s in f["shots"] if s.get("trim"))
     if total:
         xf = f.get("assemble", {}).get("xfade", 0.5)
-        n = sum(1 for s in f["shots"] if "trim" in s)
+        n = sum(1 for s in f["shots"] if s.get("trim"))
         print(f"planned length: {total:.2f} s kept − {max(0, n - 1)}×{xf} fades = {total - max(0, n - 1) * xf:.2f} s")
     for x in warns:
         print("  WARN ", x)
