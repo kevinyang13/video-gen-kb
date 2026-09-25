@@ -1065,13 +1065,13 @@
     },
     {
       "id": "fll_champions",
-      "title": "BOT Builders (photo cut) — abandoned 8-shot 3D short from the team's own photos",
+      "title": "BOT Builders (photo cut) — 12-shot 3D-animated short from the team's own photos",
       "date": "2026-09-23",
       "theme": "3d",
       "dt_project": "none — draw-things-cli via scripts/film_run.py",
-      "status": "superseded by fll_bot_builders (delivered 2026-09-24). 8 stills picked and 8 clips rendered 2026-09-23; never trimmed, upscaled or cut. Files kept in raw/clips/fll/.",
+      "status": "paused 2026-09-24 at the masters stage. Five Pixar-style masters rendered from good solo photos (candidates raw/clips/fll/work/p_<name>_c1..c3, not yet installed); suggested picks Kei c2, Kyle c3, Lindsey c1, Lola c1, Cheryl c3. Kyle needs one re-run with his spiked fringe named. Then: re-render the 5 location plates, rewrite the 12 shot prompts, render 12 stills, get Kevin's sign-off — no video until he approves the stills.",
       "source": "raw/fll_champions/*.jpg (5 photos, 2576x1932, added 2026-09-23)",
-      "notes": "Kevin is the team's coach; consent for all five children confirmed by him 2026-09-23. 3D-animated look chosen over photoreal precisely because five recurring child faces are the heaviest identity load attempted here — stylised faces hold through LTX motion. No on-screen text. Source photos are real: every shot still is a klein edit of a photo (identity from pixels), and the two invented shots (s6, s7) chain off approved stills. Superseded 2026-09-24 by the comic-derived fll_bot_builders film, which covers the same team. Kept because the approach differs and the parts are reusable: every still here is a klein edit of a real photo at --strength 1.0 (the garage build table, the farm gate, the logs, the team portrait), where the comic film works from drawn panels. Two rules came out of it — see the run notes.",
+      "notes": "Kevin is the team's coach; consent for all five children confirmed by him 2026-09-23. 3D-animated look chosen over photoreal precisely because five recurring child faces are the heaviest identity load attempted here — stylised faces hold through LTX motion. No on-screen text. Source photos are real: every shot still is a klein edit of a photo (identity from pixels), and the two invented shots (s6, s7) chain off approved stills. Companion to the comic-derived fll_bot_builders film, which covers the same team from drawn panels. This one differs in approach: every still here is a klein edit of a real photo at --strength 1.0 (the garage build table, the farm gate, the logs, the team portrait), where the comic film works from drawn panels. Two rules came out of it — see the run notes.",
       "still": {
         "model": "FLUX.2 [klein] 9B (8-bit S)",
         "size": "1024x576",
@@ -1097,20 +1097,25 @@
       "post": {
         "upscale": "scripts/upscale_4k.sh — Real-ESRGAN x4plus -> 3840x2160 HEVC 10-bit",
         "loop": "none — xfade 0.75 via scripts/assemble_film.sh",
-        "music": "Light Adventure — 331music, Pixabay (cdn.pixabay.com/download/audio/2026/08/26/audio_f1cf54e839.mp3), 2:12 — downloaded, never used"
+        "music": "Light Adventure — 331music, Pixabay (cdn.pixabay.com/download/audio/2026/08/26/audio_f1cf54e839.mp3), 2:12"
       },
       "files": [
-        "fll/stills/*.png",
-        "fll/clips/*.mov",
-        "fll/final/fll_champions_3840x2160.mp4"
+        "fll_champions/*.jpg|webp|png (source photos, 13 of them)",
+        "fll/masters/*.png (5 kids + table + 3 farm + venue)",
+        "fll/work/p_*.png (Pixar master candidates)",
+        "fll/stills/s1..s12.png + prompts",
+        "fll/clips/s1..s8_v1.mov (old 3D cut, superseded)"
       ],
       "scenes": {
         "locks": {
-          "style_head": "Re-render this photograph as a frame from a high-end 3D animated feature film — stylised Pixar-style children in a physically real world, soft cinematic lighting, shallow depth of field, warm colour grade. Keep every child's face shape, hairstyle and clothing recognisable.",
+          "style_head": "Re-render this photograph as a frame from a high-end 3D animated feature film — Pixar-style stylisation with photoreal skin, hair and fabric, soft cinematic lighting, shallow depth of field, warm colour grade. Keep every child recognisable: same ethnicity and skin tone, pure black hair, same haircut, same eye and eyelid shape, same face shape.",
           "style_tail": "Remove all text, lettering, logos and brand marks from clothing, signs and props. Photoreal materials, no outlines, cinematic 16:9 framing, no extra people beyond those described.",
-          "team": "five children: a boy in a white t-shirt with a straight dark fringe; a boy in an orange t-shirt with short dark hair; a girl with long straight black hair; a girl in a pink t-shirt with her hair tied back; a girl in a white textured top with two braids",
+          "team": "five children, left to right in the team photo: **Kei** (boy, white t-shirt, straight dark fringe); **Kyle** (boy, orange t-shirt, short dark hair); **Lindsey** (girl, long straight black hair, dark sleeveless dress); **Lola** (girl, pink t-shirt, hair tied back); **Cheryl** (girl, white textured top, hair in braids)",
           "video_tail": "Smooth cinematic motion, 3D animated feature film look.",
-          "rules": "Every still is an edit of a real photo at --strength 1.0 (identity comes from pixels, never from text). No on-screen text anywhere — the model cannot spell, and the team emblem is described as 'a small round colourful emblem with no lettering'. Group shots must say 'their faces, hair and clothes stay exactly the same' or LTX restyles them. Camera holds still in every shot: a moving camera makes LTX invent people at the frame edge. Face shots (s5, s7, s8) are the only ones where all five are recognisable; s3 is backs, s4 is wide, s2 and s6 have no people. Learned 2026-09-23: (1) an edit inherits the SOURCE POSE — chaining the closing portrait off the celebration still reproduced the jump across three seeds; naming the new pose both ways fixed it ('both feet flat on the ground, arms relaxed at their sides… nobody jumping'). (2) klein drops people from a crowded group: only 1 of 3 seeds of the celebration shot kept all five children, so group shots need 3 seeds and a headcount at pick time."
+          "rules": "Every still is an edit of a real photo at --strength 1.0 (identity comes from pixels, never from text). No on-screen text anywhere — the model cannot spell, and the team emblem is described as 'a small round colourful emblem with no lettering'. Group shots must say 'their faces, hair and clothes stay exactly the same' or LTX restyles them. Camera holds still in every shot: a moving camera makes LTX invent people at the frame edge. Face shots (s5, s7, s8) are the only ones where all five are recognisable; s3 is backs, s4 is wide, s2 and s6 have no people. Learned 2026-09-23: (1) an edit inherits the SOURCE POSE — chaining the closing portrait off the celebration still reproduced the jump across three seeds; naming the new pose both ways fixed it ('both feet flat on the ground, arms relaxed at their sides… nobody jumping'). (2) klein drops people from a crowded group: only 1 of 3 seeds of the celebration shot kept all five children, so group shots need 3 seeds and a headcount at pick time. Names mapped 2026-09-24 (Kei, Kyle, Lindsey, Lola, Cheryl). Kyle and Lindsey also have masters in the kyle_rescue and lindsey_art films — those came from drawings, this project's come from photographs. A table master (masters/table.png) locks the mission mat and the brick models so every build/competition shot shows the same table. Look changed 2026-09-24 from 3D-animated to photoreal. Master recipe that preserves a real child: name the features to keep (ethnicity, skin tone, hair colour/texture/cut, eye and eyelid shape, eyebrows, nose, mouth, jawline, age) and ban the drifts (do not westernise, do not enlarge or round the eyes, do not lighten hair or eyes, do not make the child look older, do not idealise). Asking for '3D animated character' substitutes klein's default face. Also neutralise the source photo's light: a sunset backlight turned black hair brown until the prompt said so. klein warms dark hair toward brown on every pass — say 'pure black hair, not brown, not chestnut, no warm highlights' for the black-haired children. Master sources that worked: Kyle = ship-deck photo, Lindsey = indoor portrait, Kei = garage crop, Lola + Cheryl = kitchen photo. Style history: started 3D-animated, tried photoreal on 2026-09-24 (faces read as strangers), returned to Pixar. Open issues at pause: Kyle's spiked fringe is combed flat by the model and must be named explicitly; the five faces read similar under Pixar styling, so wardrobe and hair have to carry who-is-who in group shots.",
+          "table": "the team's LEGO mission table: a wooden-framed table holding the printed jungle mission mat — winding blue river, sandy clearings, dense pale-green canopy — with the same brick models on it: a tall brown tree tower in the middle, lime-green ring structures, small grey machine buildings, and the team's little wheeled robot",
+          "farm": "Coastal Roots Farm: huge pale fallen logs crossing on wood-chip ground under a big sycamore; a red-brown timber barn with pale metal roof and blue trim above rows of vegetables and artichokes; a small brown wheeled chicken coop in a netted run of dry straw with brown and white hens",
+          "venue": "the tournament: a school gymnasium with pale timber floor and painted court lines, folded basketball hoops, rows of plain gold and cream banners with no lettering, tall windows, dark folded bleachers; black-framed competition tables holding printed jungle mission mats, low white net barriers, adult referees in black and white striped shirts, background crowd distant and out of focus with no recognisable faces"
         }
       },
       "run-spec": {
@@ -1151,11 +1156,16 @@
           "video_format": "prores422hq"
         },
         "masters": {
-          "b_white": "masters/b_white.png",
-          "b_orange": "masters/b_orange.png",
-          "g_poster": "masters/g_poster.png",
-          "g_pink": "masters/g_pink.png",
-          "g_braids": "masters/g_braids.png"
+          "kei": "masters/kei.png",
+          "kyle": "masters/kyle.png",
+          "lindsey": "masters/lindsey.png",
+          "lola": "masters/lola.png",
+          "cheryl": "masters/cheryl.png",
+          "table": "masters/table.png",
+          "farm_logs": "masters/farm_logs.png",
+          "farm_barn": "masters/farm_barn.png",
+          "farm_coop": "masters/farm_coop.png",
+          "venue": "masters/venue.png"
         },
         "upscale": {
           "model": "realesrgan-x4plus",
@@ -1196,7 +1206,22 @@
               "input": "work/in_s1.png",
               "prompt": "stills/s1.txt"
             },
-            "video_prompt": "stills/s1_v.txt"
+            "video_prompt": "stills/s1_v.txt",
+            "take": "clips/s1_v1.mov",
+            "trim": [
+              0,
+              5.5
+            ]
+          },
+          {
+            "id": "s11",
+            "still": {
+              "ref": "cheryl",
+              "input": "stills/s1.png",
+              "prompt": "stills/s11.txt"
+            },
+            "video_prompt": "stills/s11_v.txt",
+            "qc_ref": "cheryl"
           },
           {
             "id": "s2",
@@ -1205,25 +1230,12 @@
               "input": "stills/s1.png",
               "prompt": "stills/s2.txt"
             },
-            "video_prompt": "stills/s2_v.txt"
-          },
-          {
-            "id": "s3",
-            "still": {
-              "ref": null,
-              "input": "work/in_s3.png",
-              "prompt": "stills/s3.txt"
-            },
-            "video_prompt": "stills/s3_v.txt"
-          },
-          {
-            "id": "s4",
-            "still": {
-              "ref": null,
-              "input": "work/in_s4.png",
-              "prompt": "stills/s4.txt"
-            },
-            "video_prompt": "stills/s4_v.txt"
+            "video_prompt": "stills/s2_v.txt",
+            "take": "clips/s2_v1.mov",
+            "trim": [
+              0,
+              9.9
+            ]
           },
           {
             "id": "s5",
@@ -1232,7 +1244,50 @@
               "input": "work/in_s5.png",
               "prompt": "stills/s5.txt"
             },
-            "video_prompt": "stills/s5_v.txt"
+            "video_prompt": "stills/s5_v.txt",
+            "take": "clips/s5_v1.mov",
+            "trim": [
+              0,
+              9.0
+            ]
+          },
+          {
+            "id": "s3",
+            "still": {
+              "ref": null,
+              "input": "work/in_s3.png",
+              "prompt": "stills/s3.txt"
+            },
+            "video_prompt": "stills/s3_v.txt",
+            "take": "clips/s3_v1.mov",
+            "trim": [
+              0,
+              8.0
+            ]
+          },
+          {
+            "id": "s4",
+            "still": {
+              "ref": null,
+              "input": "work/in_s4.png",
+              "prompt": "stills/s4.txt"
+            },
+            "video_prompt": "stills/s4_v.txt",
+            "take": "clips/s4_v1.mov",
+            "trim": [
+              0,
+              6.5
+            ]
+          },
+          {
+            "id": "s10",
+            "still": {
+              "ref": "lindsey",
+              "input": "stills/s6.png",
+              "prompt": "stills/s10.txt"
+            },
+            "video_prompt": "stills/s10_v.txt",
+            "qc_ref": "lindsey"
           },
           {
             "id": "s6",
@@ -1241,7 +1296,32 @@
               "input": "stills/s2.png",
               "prompt": "stills/s6.txt"
             },
-            "video_prompt": "stills/s6_v.txt"
+            "video_prompt": "stills/s6_v.txt",
+            "take": "clips/s6_v1.mov",
+            "trim": [
+              0,
+              9.9
+            ]
+          },
+          {
+            "id": "s9",
+            "still": {
+              "ref": "kyle",
+              "input": "stills/s6.png",
+              "prompt": "stills/s9.txt"
+            },
+            "video_prompt": "stills/s9_v.txt",
+            "qc_ref": "kyle"
+          },
+          {
+            "id": "s12",
+            "still": {
+              "ref": "kei",
+              "input": "stills/s6.png",
+              "prompt": "stills/s12.txt"
+            },
+            "video_prompt": "stills/s12_v.txt",
+            "qc_ref": "kei"
           },
           {
             "id": "s7",
@@ -1250,7 +1330,12 @@
               "input": "stills/s5.png",
               "prompt": "stills/s7.txt"
             },
-            "video_prompt": "stills/s7_v.txt"
+            "video_prompt": "stills/s7_v.txt",
+            "take": "clips/s7_v1.mov",
+            "trim": [
+              0,
+              5.5
+            ]
           },
           {
             "id": "s8",
@@ -1259,9 +1344,15 @@
               "input": "stills/s7.png",
               "prompt": "stills/s8.txt"
             },
-            "video_prompt": "stills/s8_v.txt"
+            "video_prompt": "stills/s8_v.txt",
+            "take": "clips/s8_v1.mov",
+            "trim": [
+              0,
+              9.9
+            ]
           }
-        ]
+        ],
+        "order_note": "cut order = list order: s1 → s11 → s2 → s5 → s3 → s4 → s10 → s6 → s9 → s12 → s7 → s8"
       }
     },
     {
