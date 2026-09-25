@@ -33,6 +33,7 @@
 ## Plans
 
 - [[dragon-epic-plan]] — 1-minute photoreal dragon short with a personal face: pipeline, Draw Things config per stage, face-identity and dragon-consistency strategy, 12-shot list, experiments, budget
+- [[fll-champions-plan]] — 59 s FLL season film built from the team's own photographs: master recipe that keeps a real child's likeness, restaging beats from a portrait, what photoreal cost
 - [[lost-city-plan]] — hyper-real sci-fantasy rider entering jungle ruins (OpenArt-style reference): what makes it look real, klein Moodboard stills, Wan 2.2 vs LTX-2.3 motion settings, creature/hero/city locks, 8-shot list, experiments L0–L6
 - [[fll-bot-builders-plan]] — **delivered** (63.5 s): 16:9 3D-animated FLL team film, five kids locked to a team master; why group shots cost half their length
 - [[lindsey-art-plan]] — **delivered**: 1-minute vertical 3D-animated short from Lindsey's art comic; first film fully through `film_run.py`; every take, redo and the errors Kevin caught

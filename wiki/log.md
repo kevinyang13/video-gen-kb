@@ -8,6 +8,25 @@
 
 ---
 
+## 2026-09-25 — BOT Builders photo cut delivered (59 s, from family photographs)
+
+**Source**: 13 photographs from Kevin in `raw/fll_champions/`; rendered unattended overnight with `film_run.py` after he went to sleep.
+
+**Delivered**: `raw/clips/fll/final/fll_champions_3840x2160.mp4` (59.08 s) and the 1920×1080 copy, music "Light Adventure", mean −18.8 dB / peak −5.5 dB. Eleven shots; the competition-floor wide was dropped after two failed passes and its neighbours stretched.
+
+**Created**: `wiki/fll-champions-plan.md` with the full record.
+
+**What this project taught** — all of it about getting a *real* child's likeness through klein:
+- Asking to "convert this photo into a 3D animated character" makes klein substitute its own default face. Ask it to **stylise the rendering, not the identity**, and name every feature to keep (ethnicity, skin tone, hair colour/texture/cut, eye and eyelid shape, eyebrows, nose, mouth, jawline, age) plus the drifts to avoid (no westernising, no enlarged eyes, no lightened hair, no ageing up).
+- **Photoreal made it worse, not better.** Tried at Kevin's request mid-project: the sharper the render, the more obvious the mismatch. Stylisation forgives what photorealism exposes. Reverted to Pixar.
+- **klein warms black hair to brown on every pass** — say "pure black hair, not brown, not chestnut, no warm highlights".
+- **It copies the source photo's lighting**, so a sunset backlight bakes orange into hair and skin unless the prompt neutralises it.
+- **A diptych needs a person in the layout image.** Pointed at an empty venue plate, klein renders the room and leaves the child out entirely — two shots came back with nobody in them. Restaging from the master portrait (identity from pixels, scene from text) worked first time.
+- Signature features vanish unless named (Kyle's spiked fringe), and then overshoot — take the mildest seed.
+- Shirts print garbled text unless told "plain, no printing, no graphics, no letters"; "no text anywhere" must name clothing and props explicitly.
+
+**Updated**: `projects.json` (delivered, files, music), `wiki/index.md`.
+
 ## 2026-09-24 — Two FLL films; the photo cut retired
 
 **What happened**: an overnight run in another session delivered **`fll_bot_builders`** (Bot Builders, 63.5 s 16:9, 12 shots from a 3-page comic, 1920×1080 + 3840×2160 + 1280×720, music "Victory"). This session had separately taken the same team through the blueprint from the family's **photographs** — intake, consent, 8-shot storyboard, 5 character masters, 8 picked stills, 8 rendered clips — but stopped before QC. With the comic film shipped, `fll_champions` is marked **superseded**; its stills and clips stay in `raw/clips/fll/` (818 MB).

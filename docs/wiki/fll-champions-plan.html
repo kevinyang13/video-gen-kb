@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BOT Builders (photo cut) — 1-Minute Film from the Team's Own Photos — video-gen-kb</title>
+<style>
+:root{--bg:#0B0D12;--panel:#141822;--panel-2:#1B2130;--stroke:#2A3245;--text:#E6E9F0;
+--muted:#8B94A7;--accent:#F5B84B;--accent-2:#4BC9F5;--on-accent:#12131A;
+--rule:rgba(139,148,167,.22);--code:#F5B84B}
+@media(prefers-color-scheme:light){:root:not([data-theme=dark]){--bg:#F4F1EA;--panel:#fff;
+--panel-2:#FAF8F3;--stroke:#D9D3C6;--text:#16181F;--muted:#5D6473;--accent:#B8781A;
+--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}}
+:root[data-theme=light]{--bg:#F4F1EA;--panel:#fff;--panel-2:#FAF8F3;--stroke:#D9D3C6;
+--text:#16181F;--muted:#5D6473;--accent:#B8781A;--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);
+line-height:1.65;padding:0 1rem 4rem}
+.shell{max-width:840px;margin:0 auto}
+a{color:var(--accent);text-decoration:none;font-weight:600}
+a:hover{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--accent-2);outline-offset:3px;border-radius:4px}
+.bar{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;padding:1.1rem 0;margin-bottom:1.5rem;
+border-bottom:1px solid var(--stroke)}
+.crumb{font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.spacer{flex:1}
+.pill{border:1px solid var(--stroke);background:var(--panel);border-radius:999px;padding:.28rem .8rem;
+font-size:.75rem;font-weight:700;color:var(--text);cursor:pointer;font-family:inherit}
+.pill:hover{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+h1{font-size:clamp(1.7rem,5vw,2.5rem);margin:.2rem 0 1rem;line-height:1.1;letter-spacing:-.015em;text-wrap:balance}
+h2{font-size:1.25rem;margin:2.2rem 0 .7rem;padding-bottom:.35rem;border-bottom:1px solid var(--rule);text-wrap:balance}
+h3{font-size:1.02rem;margin:1.5rem 0 .5rem;color:var(--accent)}
+p{margin:.7rem 0}
+ul,ol{margin:.7rem 0 .7rem 1.3rem}
+li{margin:.28rem 0}
+li::marker{color:var(--accent)}
+em{color:var(--muted)}
+hr{border:none;border-top:1px solid var(--stroke);margin:2rem 0}
+blockquote{border-left:3px solid var(--accent);background:var(--panel);border-radius:0 10px 10px 0;
+padding:.8rem 1.1rem;margin:1.1rem 0;color:var(--muted);font-size:.92rem}
+code{background:var(--panel);border:1px solid var(--stroke);border-radius:5px;padding:.1rem .35rem;
+font-size:.85em;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--code)}
+img{max-width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--stroke);margin:1.1rem 0}
+pre{background:var(--panel);border:1px solid var(--stroke);border-radius:12px;padding:1rem;overflow-x:auto;margin:1.1rem 0}
+pre code{background:none;border:none;padding:0;color:var(--text);font-size:.83rem;line-height:1.55}
+.tw{overflow-x:auto;border:1px solid var(--stroke);border-radius:12px;background:var(--panel);margin:1.1rem 0}
+table{width:100%;border-collapse:collapse;font-size:.85rem;min-width:min(100%,460px)}
+th{background:var(--panel-2);color:var(--accent);text-align:left;padding:.55rem .8rem;font-size:.68rem;
+letter-spacing:.09em;text-transform:uppercase;white-space:nowrap;border-bottom:1px solid var(--stroke)}
+td{padding:.5rem .8rem;border-bottom:1px solid var(--rule);color:var(--muted);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td strong{color:var(--text)}
+.meta{display:flex;flex-wrap:wrap;gap:.4rem .9rem;font-size:.78rem;color:var(--muted);margin:-.4rem 0 1.2rem}
+.meta b{color:var(--text);font-weight:600}
+.missing{color:var(--muted);border-bottom:1px dashed var(--muted);cursor:help}
+.related{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--stroke)}
+.related h2{border:none;margin:0 0 .7rem;font-size:.95rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:0}
+.chips li{margin:0}
+.chips a,.chips .missing{display:inline-block;border:1px solid var(--stroke);background:var(--panel);
+border-radius:999px;padding:.28rem .8rem;font-size:.8rem}
+.chips a:hover{background:var(--accent);color:var(--on-accent);text-decoration:none;border-color:var(--accent)}
+footer{max-width:840px;margin:2.5rem auto 0;padding-top:1.2rem;border-top:1px solid var(--stroke);
+font-size:.75rem;color:var(--muted);text-align:center}
+/* landing */
+.hero{padding:2.4rem 0 1.6rem}
+.kicker{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2)}
+.hero h1{font-size:clamp(2rem,6vw,3.2rem);margin:.35rem 0 .5rem}
+.hero p{color:var(--muted);font-size:1.05rem;max-width:56ch}
+.hw{display:inline-flex;gap:.5rem;align-items:center;margin-top:1rem;border:1px solid var(--stroke);
+background:var(--panel);border-radius:999px;padding:.3rem .9rem;font-size:.78rem;color:var(--muted)}
+.hw .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.sec{margin-top:2.2rem}
+.sec h2{border:none;padding:0;margin:0 0 .8rem;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.9rem}
+.card{display:block;border:1px solid var(--stroke);background:var(--panel);border-radius:14px;padding:1rem 1.1rem;
+color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+.card b{display:block;color:var(--accent);font-size:1rem;margin-bottom:.3rem}
+.card span{font-size:.85rem;color:var(--muted);line-height:1.5}
+.stubs{font-size:.82rem;color:var(--muted);margin-top:.6rem}
+.yt{position:relative;width:100%;aspect-ratio:16/9;border:1px solid var(--stroke);border-radius:12px;overflow:hidden;background:#000;margin:1rem 0}
+.yt.yt-v{aspect-ratio:9/16;max-width:360px}
+.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="bar">
+    <span class="crumb"><a href="../">video-gen-kb</a> / <a href="index.html">Wiki</a></span>
+    <span class="spacer"></span>
+    <button class="pill" onclick="tt()">◐ Theme</button>
+  </nav>
+  <h1>BOT Builders (photo cut) — 1-Minute Film from the Team's Own Photos</h1><p class="lede">A 59-second 16:9 short about an FIRST LEGO League season — build, research at Coastal Roots Farm, the lacewing project, the competition, the win — made from the team's real photographs rather than a comic. Eleven shots, 3D-animated look, rendered entirely with <code>draw-things-cli</code>. The companion piece to <a href="projects-3d.html">projects 3d</a>'s comic-derived Bot Builders film: same five children, different source material and a different route to identity.</p><div class="meta"><span><b>Updated</b> 2026-09-25 (delivered)</span><span><b>Sources</b> 13 photographs from Kevin (team coach) in <code>raw/fll_champions/</code>, added 2026-09-23/24; <a href="idea-to-video-blueprint.html">idea to video blueprint</a> (the process); <a href="headless-cli-pipeline.html">headless cli pipeline</a> (CLI settings); <a href="lost-city-plan.html">lost city plan</a> §3c (LTX motion rules); <a href="scripts-reference.html">scripts reference</a> (run-spec, <code>film_run.py</code>).</span></div>
+<hr />
+<h2>0. Result</h2>
+<p><strong>Delivered</strong> 2026-09-25 03:00: <code>raw/clips/fll/final/fll_champions_3840x2160.mp4</code> (59.08 s, 274 MB) and <code>fll_champions_1920x1080.mp4</code> (89 MB). Music "Light Adventure" (331music, Pixabay) under the LTX ambience; mean −18.8 dB, peak −5.5 dB.</p>
+<p><strong>The cut</strong> (11 shots, 0.75 s crossfades):</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Shot</th>
+<th>Built from</th>
+<th>Kept</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Garage build night, five kids around the mission table</td>
+<td>edit of the garage photo</td>
+<td>5.5 s</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Cheryl and Lola building together</td>
+<td>Cheryl's master, restaged</td>
+<td>7.0 s</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Macro: the robot alone on the jungle mat</td>
+<td>chained from shot 1</td>
+<td>6.0 s</td>
+</tr>
+<tr>
+<td>4</td>
+<td>The team holding their emblem poster</td>
+<td>edit of the living-room photo</td>
+<td>6.0 s</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Walking in through the farm gate, backs to camera</td>
+<td>edit of the farm photo</td>
+<td>6.0 s</td>
+</tr>
+<tr>
+<td>6</td>
+<td>On the logs with the farmer, taking notes</td>
+<td>edit of the farm photo</td>
+<td>5.5 s</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Lindsey presenting the lacewing board</td>
+<td>Lindsey's master, restaged</td>
+<td>5.0 s</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Kyle launching the robot at the competition table</td>
+<td>Kyle's master, restaged</td>
+<td>7.0 s</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Kei timing the run, stopwatch up</td>
+<td>Kei's master, restaged</td>
+<td>6.0 s</td>
+</tr>
+<tr>
+<td>10</td>
+<td>The win — arms up, trophy, confetti</td>
+<td>chained from shot 4</td>
+<td>5.5 s</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Closing portrait, medals in late light</td>
+<td>chained from shot 10</td>
+<td>7.0 s</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Dropped</strong>: the competition-floor wide. LTX invented a walking humanoid robot and marched a crowd into an empty gym (v2); a third pass fixed the crowd but left a stray toy robot wandering the court (v3). Applied the agreed failure rule — drop it, stretch the neighbours — since shots 8 and 9 already cover the competition.</p>
+<h2>1. What this project was for</h2>
+<p>The comic-derived film had already shipped. This one asks a different question: <strong>can a film be built from a family's actual photographs</strong>, where identity has to come from real faces rather than drawn panels? The answer is yes, but the master stage is where the work is.</p>
+<h2>2. Masters — the part that took the longest</h2>
+<p>Ten masters: five children, the mission table, three Coastal Roots Farm plates, the competition gym. Everything else in the film was chained off them or off an approved still.</p>
+<p><strong>Three failed attempts before the recipe worked</strong>:</p>
+<ol>
+<li><strong>"Convert this photo into a 3D animated character"</strong> → klein substituted its own default face. Recognisable as children, not as <em>these</em> children.</li>
+<li><strong>Photoreal</strong> (Kevin's call after seeing attempt 1) → sharper, but the drift became obvious rather than hidden: faces came back westernised, eyes rounder and larger, hair lightened, children aged up. Photoreal exposes a likeness gap that stylisation forgives.</li>
+<li><strong>Pixar again, with the identity clauses kept</strong> → worked.</li>
+</ol>
+<p><strong>The recipe</strong> (now in <code>projects.json</code> → <code>scenes.locks.rules</code>):</p>
+<ul>
+<li><strong>Name what to keep</strong>: ethnicity and skin tone, hair colour, texture, length, cut and hairline, eye colour, eye shape, eyelid shape and spacing, eyebrows, nose, mouth, ears, jawline, age.</li>
+<li><strong>Ban the drifts explicitly</strong>: do not westernise, do not enlarge or round the eyes, do not lighten hair or eyes, do not make the child look older, do not idealise or beautify.</li>
+<li><strong>Frame it as "stylise the rendering, not the identity"</strong>, never "convert into a character".</li>
+<li><strong>Force dark hair</strong>: klein warms black hair toward brown on <em>every</em> pass. "Pure black hair — not brown, not chestnut, no warm highlights."</li>
+<li><strong>Neutralise the source photo's light</strong>: a sunset backlight baked orange into the hair and skin until the prompt said to remove it.</li>
+<li><strong>Name a signature feature or lose it</strong>: Kyle's spiked fringe was combed flat until described, then over-spiked into anime; the mildest of three seeds was the keeper.</li>
+</ul>
+<p><strong>Source photos matter as much as prompts.</strong> The first masters came from crops of group photos and were the weakest. Solo shots — Kyle on a ship deck, Lindsey indoors, the two girls in the kitchen — produced masters good enough to carry the film.</p>
+<h2>3. Restaging beats a diptych when the layout is empty</h2>
+<p>Four character beats were first attempted as diptychs (master left, venue plate right). Two came back <strong>with no child in them at all</strong> and one with three girls instead of two: with no person in the layout image, klein renders the room and ignores the instruction to add someone.</p>
+<p>What worked: <strong>master as the input image, scene from the prompt</strong> — "Keep this exact character … and place them in a new scene. Medium close-up … he stands at the edge of a robotics competition table …". Identity comes from the portrait's pixels, staging from text. All four beats landed on the first pass after the switch.</p>
+<p>Two smaller rules from the same stage:
+- Team shirts rendered with garbled lettering until the prompt said <strong>"plain black t-shirt with no printing, no graphics and no letters"</strong>.
+- "No text anywhere" has to name clothing, boards and signs explicitly, or it applies only to the background.</p>
+<h2>4. Settings</h2>
+<p>Unchanged from <a href="headless-cli-pipeline.html">headless cli pipeline</a>: klein 9B at 4 steps / CFG 1 / shift 3 / DDIM Trailing for stills (512×768 masters, 1024×576 shots, <code>--strength 1.0</code> edit mode); LTX-2.3 distilled at 8 steps / CFG 1 / TCD Trailing / SSS 0.3 / shift 5, 249 frames at 1024×576, ~9.5 min per clip; Real-ESRGAN x4plus to 3840×2160; <code>assemble_film.sh</code> at 0.75 s crossfades.</p>
+<p>Timings: masters ~25 s each, shot stills ~55 s each, clips ~9.5 min each, upscales ~6.5 min each, whole finish pass 1 h 15 m.</p>
+<h2>5. Consent</h2>
+<p>Kevin is the team's coach and confirmed consent for all five children on 2026-09-23. The film shows no text, no team name and no school. Background people in the competition shots are distant, out of focus and have no recognisable faces.</p>
+
+  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="idea-to-video-blueprint.html">idea to video blueprint</a> — the process this follows</li><li><a href="headless-cli-pipeline.html">headless cli pipeline</a> — the CLI that rendered it</li><li><a href="projects.html">projects</a> · <a href="projects-3d.html">projects 3d</a> — the registry and the comic-derived companion film</li><li><a href="character-consistency.html">character consistency</a> · <a href="identity-conditioning.html">identity conditioning</a> — why masters work</li></ul></div>
+</div>
+<footer>video-gen-kb · built 2026-09-25 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<script>function tt(){var r=document.documentElement,
+d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
+matchMedia('(prefers-color-scheme: dark)').matches);
+r.setAttribute('data-theme',d?'light':'dark');}</script>
+</body>
+</html>

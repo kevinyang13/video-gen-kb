@@ -92,7 +92,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
     <span class="spacer"></span>
     <button class="pill" onclick="tt()">◐ Theme</button>
   </nav>
-  <h1>3D-animated projects</h1><p class="lede">Pixar-style 3D-animated shorts. Kyle's Antarctic Rescue, Lindsey: A Small Dream. Full record per project: models, settings, prompts, seeds, music and output files. Generated from <code>projects.json</code>.</p><div class="meta"><span><b>Updated</b> 2026-09-24</span><span><b>Sources</b> projects.json; per-project notes from the session logs.</span></div>
+  <h1>3D-animated projects</h1><p class="lede">Pixar-style 3D-animated shorts. Kyle's Antarctic Rescue, Lindsey: A Small Dream. Full record per project: models, settings, prompts, seeds, music and output files. Generated from <code>projects.json</code>.</p><div class="meta"><span><b>Updated</b> 2026-09-25</span><span><b>Sources</b> projects.json; per-project notes from the session logs.</span></div>
 <hr />
 <p>Index of every project: <a href="projects.html">projects</a>. Other themes: <a href="projects-anime.html">projects anime</a> · <a href="projects-realistic.html">projects realistic</a>.</p>
 <h2>Summary</h2>
@@ -137,7 +137,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <td style="text-align: right;">3</td>
 <td><a href="#fll_champions">BOT Builders (photo cut) — 12-shot 3D-animated short from the team's own photos</a></td>
 <td>2026-09-23</td>
-<td>paused 2026-09-24 at the masters stage. Five Pixar-style masters rendered from good solo photos (candidates raw/clips/fll/work/p_<name>_c1..c3, not yet installed); suggested picks Kei c2, Kyle c3, Lindsey c1, Lola c1, Cheryl c3. Kyle needs one re-run with his spiked fringe named. Then: re-render the 5 location plates, rewrite the 12 shot prompts, render 12 stills, get Kevin's sign-off — no video until he approves the stills.</td>
+<td>delivered 2026-09-25 03:00 — 59.08 s, 3840x2160 + 1920x1080, 11 shots (competition-floor wide dropped); see wiki/fll-champions-plan.md</td>
 <td>FLUX.2 [klein] 9B 1024x576</td>
 <td>LTX-2.3 22B [distilled] 1.1 10 min</td>
 <td>Light Adventure</td>
@@ -533,8 +533,8 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </table></div>
 <h2 id="fll_champions">BOT Builders (photo cut) — 12-shot 3D-animated short from the team's own photos</h2>
 <ul>
-<li><strong>Date</strong>: 2026-09-23 · <strong>Status</strong>: paused 2026-09-24 at the masters stage. Five Pixar-style masters rendered from good solo photos (candidates raw/clips/fll/work/p_<name>_c1..c3, not yet installed); suggested picks Kei c2, Kyle c3, Lindsey c1, Lola c1, Cheryl c3. Kyle needs one re-run with his spiked fringe named. Then: re-render the 5 location plates, rewrite the 12 shot prompts, render 12 stills, get Kevin's sign-off — no video until he approves the stills. · <strong>Draw Things project</strong>: <code>none — draw-things-cli via scripts/film_run.py</code></li>
-<li><strong>Files</strong> (<code>raw/clips/</code>): <code>fll_champions/*.jpg|webp|png (source photos, 13 of them)</code>, <code>fll/masters/*.png (5 kids + table + 3 farm + venue)</code>, <code>fll/work/p_*.png (Pixar master candidates)</code>, <code>fll/stills/s1..s12.png + prompts</code>, <code>fll/clips/s1..s8_v1.mov (old 3D cut, superseded)</code></li>
+<li><strong>Date</strong>: 2026-09-23 · <strong>Status</strong>: delivered 2026-09-25 03:00 — 59.08 s, 3840x2160 + 1920x1080, 11 shots (competition-floor wide dropped); see wiki/fll-champions-plan.md · <strong>Draw Things project</strong>: <code>none — draw-things-cli via scripts/film_run.py</code></li>
+<li><strong>Files</strong> (<code>raw/clips/</code>): <code>fll_champions/*.jpg|webp|png (13 source photos)</code>, <code>fll/masters/{kei,kyle,lindsey,lola,cheryl,table,venue,farm_logs,farm_barn,farm_coop}.png</code>, <code>fll/stills/s1..s12.png + per-shot prompts</code>, <code>fll/clips/s*_v*.mov</code>, <code>fll/final/fll_champions_3840x2160.mp4</code>, <code>fll/final/fll_champions_1920x1080.mp4</code></li>
 <li><strong>Notes</strong>: Kevin is the team's coach; consent for all five children confirmed by him 2026-09-23. 3D-animated look chosen over photoreal precisely because five recurring child faces are the heaviest identity load attempted here — stylised faces hold through LTX motion. No on-screen text. Source photos are real: every shot still is a klein edit of a photo (identity from pixels), and the two invented shots (s6, s7) chain off approved stills. Companion to the comic-derived fll_bot_builders film, which covers the same team from drawn panels. This one differs in approach: every still here is a klein edit of a real photo at --strength 1.0 (the garage build table, the farm gate, the logs, the team portrait), where the comic film works from drawn panels. Two rules came out of it — see the run notes.</li>
 </ul>
 <p><strong>Still</strong></p>
@@ -656,7 +656,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </tr>
 <tr>
 <td>Music</td>
-<td>Light Adventure — 331music, Pixabay (cdn.pixabay.com/download/audio/2026/08/26/audio_f1cf54e839.mp3), 2:12</td>
+<td>Light Adventure — 331music, Pixabay (cdn.pixabay.com/download/audio/2026/08/26/audio_f1cf54e839.mp3), 2:12; first 59 s under the LTX ambience at 0.45, 2 s fade out; final mean -18.8 dB, peak -5.5 dB</td>
 </tr>
 </tbody>
 </table></div>
@@ -798,7 +798,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 
   <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="projects.html">projects</a></li><li><a href="runbook-living-painting.html">runbook living painting</a></li><li><a href="draw-things-setup.html">draw things setup</a></li></ul></div>
 </div>
-<footer>video-gen-kb · built 2026-09-24 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<footer>video-gen-kb · built 2026-09-25 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
 <script>function tt(){var r=document.documentElement,
 d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
 matchMedia('(prefers-color-scheme: dark)').matches);

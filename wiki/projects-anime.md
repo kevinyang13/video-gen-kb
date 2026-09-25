@@ -4,7 +4,7 @@
 
 **Sources**: projects.json; per-project notes from the session logs.
 
-**Last updated**: 2026-09-24
+**Last updated**: 2026-09-25
 
 ---
 

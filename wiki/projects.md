@@ -4,7 +4,7 @@
 
 **Sources**: projects.json; per-project notes from the session logs.
 
-**Last updated**: 2026-09-24
+**Last updated**: 2026-09-25
 
 ---
 
@@ -48,7 +48,7 @@ Pixar-style 3D-animated shorts. Kyle's Antarctic Rescue, Lindsey: A Small Dream.
 |--:|---|---|---|---|---|---|---|---|
 | 1 | [Kyle's Antarctic Rescue — 1-minute 3D-animated vertical short from a 5-panel comic](projects-3d.html#kyle_rescue) | 2026-09-22 | delivered 2026-09-23 01:38 — 60.0 s, 1080x1920 + 2160x3840, rendered unattended overnight (see plan §0) | FLUX.2 [klein] 9B 576x1024 | LTX-2.3 22B [distilled] 1.1 via draw-things-cli ? min | Calm Ambient Dreamscape | `—` | [▶ watch](https://youtu.be/KscAwvCi6iQ) |
 | 2 | [Lindsey: A Small Dream — 1-minute 3D-animated vertical short from Lindsey's 5-panel art comic](projects-3d.html#lindsey_art) | 2026-09-23 | delivered 2026-09-23 17:26 — 59.96 s, 1080x1920 + 2160x3840 + 720x1280 (see plan §0) | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | [▶ watch](https://youtu.be/lbU-_73MliI) |
-| 3 | [BOT Builders (photo cut) — 12-shot 3D-animated short from the team's own photos](projects-3d.html#fll_champions) | 2026-09-23 | paused 2026-09-24 at the masters stage. Five Pixar-style masters rendered from good solo photos (candidates raw/clips/fll/work/p_<name>_c1..c3, not yet installed); suggested picks Kei c2, Kyle c3, Lindsey c1, Lola c1, Cheryl c3. Kyle needs one re-run with his spiked fringe named. Then: re-render the 5 location plates, rewrite the 12 shot prompts, render 12 stills, get Kevin's sign-off — no video until he approves the stills. | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 10 min | Light Adventure | `—` | — |
+| 3 | [BOT Builders (photo cut) — 12-shot 3D-animated short from the team's own photos](projects-3d.html#fll_champions) | 2026-09-23 | delivered 2026-09-25 03:00 — 59.08 s, 3840x2160 + 1920x1080, 11 shots (competition-floor wide dropped); see wiki/fll-champions-plan.md | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 10 min | Light Adventure | `—` | — |
 | 4 | [Bot Builders — 90-second 16:9 3D-animated FLL team film from a 3-page comic](projects-3d.html#fll_bot_builders) | 2026-09-23 | delivered 2026-09-24 04:11 — 63.5 s (planned 90; five-kid rule), 1920x1080 + 3840x2160 + 1280x720 (see plan §0) | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
 
 → full records for all 4: [[projects-3d|3D-animated projects]]

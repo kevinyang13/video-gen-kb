@@ -4,7 +4,7 @@
 
 **Sources**: projects.json; per-project notes from the session logs.
 
-**Last updated**: 2026-09-24
+**Last updated**: 2026-09-25
 
 ---
 
@@ -16,7 +16,7 @@ Index of every project: [[projects]]. Other themes: [[projects-anime]] · [[proj
 |--:|---|---|---|---|---|---|---|---|
 | 1 | [Kyle's Antarctic Rescue — 1-minute 3D-animated vertical short from a 5-panel comic](#kyle_rescue) | 2026-09-22 | delivered 2026-09-23 01:38 — 60.0 s, 1080x1920 + 2160x3840, rendered unattended overnight (see plan §0) | FLUX.2 [klein] 9B 576x1024 | LTX-2.3 22B [distilled] 1.1 via draw-things-cli ? min | Calm Ambient Dreamscape | `—` | [▶ watch](https://youtu.be/KscAwvCi6iQ) |
 | 2 | [Lindsey: A Small Dream — 1-minute 3D-animated vertical short from Lindsey's 5-panel art comic](#lindsey_art) | 2026-09-23 | delivered 2026-09-23 17:26 — 59.96 s, 1080x1920 + 2160x3840 + 720x1280 (see plan §0) | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | [▶ watch](https://youtu.be/lbU-_73MliI) |
-| 3 | [BOT Builders (photo cut) — 12-shot 3D-animated short from the team's own photos](#fll_champions) | 2026-09-23 | paused 2026-09-24 at the masters stage. Five Pixar-style masters rendered from good solo photos (candidates raw/clips/fll/work/p_<name>_c1..c3, not yet installed); suggested picks Kei c2, Kyle c3, Lindsey c1, Lola c1, Cheryl c3. Kyle needs one re-run with his spiked fringe named. Then: re-render the 5 location plates, rewrite the 12 shot prompts, render 12 stills, get Kevin's sign-off — no video until he approves the stills. | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 10 min | Light Adventure | `—` | — |
+| 3 | [BOT Builders (photo cut) — 12-shot 3D-animated short from the team's own photos](#fll_champions) | 2026-09-23 | delivered 2026-09-25 03:00 — 59.08 s, 3840x2160 + 1920x1080, 11 shots (competition-floor wide dropped); see wiki/fll-champions-plan.md | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 10 min | Light Adventure | `—` | — |
 | 4 | [Bot Builders — 90-second 16:9 3D-animated FLL team film from a 3-page comic](#fll_bot_builders) | 2026-09-23 | delivered 2026-09-24 04:11 — 63.5 s (planned 90; five-kid rule), 1920x1080 + 3840x2160 + 1280x720 (see plan §0) | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
 
 ## Kyle's Antarctic Rescue — 1-minute 3D-animated vertical short from a 5-panel comic {#kyle_rescue}
@@ -238,8 +238,8 @@ Prompt: `per scene — see scenes`
 
 ## BOT Builders (photo cut) — 12-shot 3D-animated short from the team's own photos {#fll_champions}
 
-- **Date**: 2026-09-23 · **Status**: paused 2026-09-24 at the masters stage. Five Pixar-style masters rendered from good solo photos (candidates raw/clips/fll/work/p_<name>_c1..c3, not yet installed); suggested picks Kei c2, Kyle c3, Lindsey c1, Lola c1, Cheryl c3. Kyle needs one re-run with his spiked fringe named. Then: re-render the 5 location plates, rewrite the 12 shot prompts, render 12 stills, get Kevin's sign-off — no video until he approves the stills. · **Draw Things project**: `none — draw-things-cli via scripts/film_run.py`
-- **Files** (`raw/clips/`): `fll_champions/*.jpg|webp|png (source photos, 13 of them)`, `fll/masters/*.png (5 kids + table + 3 farm + venue)`, `fll/work/p_*.png (Pixar master candidates)`, `fll/stills/s1..s12.png + prompts`, `fll/clips/s1..s8_v1.mov (old 3D cut, superseded)`
+- **Date**: 2026-09-23 · **Status**: delivered 2026-09-25 03:00 — 59.08 s, 3840x2160 + 1920x1080, 11 shots (competition-floor wide dropped); see wiki/fll-champions-plan.md · **Draw Things project**: `none — draw-things-cli via scripts/film_run.py`
+- **Files** (`raw/clips/`): `fll_champions/*.jpg|webp|png (13 source photos)`, `fll/masters/{kei,kyle,lindsey,lola,cheryl,table,venue,farm_logs,farm_barn,farm_coop}.png`, `fll/stills/s1..s12.png + per-shot prompts`, `fll/clips/s*_v*.mov`, `fll/final/fll_champions_3840x2160.mp4`, `fll/final/fll_champions_1920x1080.mp4`
 - **Notes**: Kevin is the team's coach; consent for all five children confirmed by him 2026-09-23. 3D-animated look chosen over photoreal precisely because five recurring child faces are the heaviest identity load attempted here — stylised faces hold through LTX motion. No on-screen text. Source photos are real: every shot still is a klein edit of a photo (identity from pixels), and the two invented shots (s6, s7) chain off approved stills. Companion to the comic-derived fll_bot_builders film, which covers the same team from drawn panels. This one differs in approach: every still here is a klein edit of a real photo at --strength 1.0 (the garage build table, the farm gate, the logs, the team portrait), where the comic film works from drawn panels. Two rules came out of it — see the run notes.
 
 **Still**
@@ -281,7 +281,7 @@ Prompt: `per shot — raw/clips/fll/stills/sN_v.txt`
 | Script | scripts/finish_clip.sh |
 | Loop | none — xfade 0.75 via scripts/assemble_film.sh |
 | Upscale | scripts/upscale_4k.sh — Real-ESRGAN x4plus -> 3840x2160 HEVC 10-bit |
-| Music | Light Adventure — 331music, Pixabay (cdn.pixabay.com/download/audio/2026/08/26/audio_f1cf54e839.mp3), 2:12 |
+| Music | Light Adventure — 331music, Pixabay (cdn.pixabay.com/download/audio/2026/08/26/audio_f1cf54e839.mp3), 2:12; first 59 s under the LTX ambience at 0.45, 2 s fade out; final mean -18.8 dB, peak -5.5 dB |
 
 ### Scene prompts
 
