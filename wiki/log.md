@@ -8,6 +8,16 @@
 
 ---
 
+## 2026-09-26 — Blueprint v2 research page
+
+Kevin's framing for the pasted pipeline: it is **research for a new blueprint with a different strategy**, not a benchmark for the current one. Added [[blueprint-v2-research]] and left every existing page alone.
+
+The page proposes four substitutions, each independently testable: identity from a **trained LoRA** instead of reference-image tokens, motion from **pose/depth control** instead of prose, **TTS and lip-sync** for dialogue, and an **NLE cut with a LUT grade** instead of scripted crossfades. Seven experiments (B1–B7) with pass criteria, ordered so the cheapest kill comes first.
+
+Two findings worth keeping from writing it: the **seeding phase is strategy-independent** — a turnaround sheet is both a good reference set and a good LoRA training set, so step 2 survives either way and the dataset problem that usually blocks LoRA work is already half-solved. And **B7 (one LUT across an assembly) is worth doing regardless** — an afternoon, no new models, and it would fix the colour drift between the two city shots in [[nightelf-hunter-plan]].
+
+The bar for switching is stated on the page: a LoRA must visibly beat a sheet on angles the sheet does not cover, pose control or dialogue must actually work, and any cloud dependency has to be recorded as the change of character it is.
+
 ## 2026-09-26 — Ingested a standard AI film pipeline, compared against ours
 
 **Source**: `raw/2026-09-26-ai-film-production-pipeline.md` — an eight-step industry-practice pipeline Kevin pasted; origin unattributed, so treated as general practice rather than a verified source.

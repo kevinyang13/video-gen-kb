@@ -44,6 +44,7 @@ Each project owns a folder — `projects/<id>/<version>/` — and its plan page 
 
 ## Recipes
 
+- [[blueprint-v2-research]] — research toward a second pipeline: LoRA identity, pose-driven motion, dialogue, a real edit and grade; what each would cost here, what is unverified, and the experiments that would decide it
 - [[ai-film-production-pipeline]] — the standard eight-step AI film route (LoRA training, ComfyUI, Topaz, TTS) set against what this setup does instead, and the three things it has that we lack
 
 - [[idea-to-video-blueprint]] — **start here for a new film**: idea → intake questionnaire → storyboard approval → unattended CLI run (masters, diptych stills, LTX batch, QC/redo, upscale, music, report); rules, rubric, time budget, failure playbook

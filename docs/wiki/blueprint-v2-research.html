@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blueprint v2 — Research Notes for a Different Pipeline Strategy — video-gen-kb</title>
+<style>
+:root{--bg:#0B0D12;--panel:#141822;--panel-2:#1B2130;--stroke:#2A3245;--text:#E6E9F0;
+--muted:#8B94A7;--accent:#F5B84B;--accent-2:#4BC9F5;--on-accent:#12131A;
+--rule:rgba(139,148,167,.22);--code:#F5B84B}
+@media(prefers-color-scheme:light){:root:not([data-theme=dark]){--bg:#F4F1EA;--panel:#fff;
+--panel-2:#FAF8F3;--stroke:#D9D3C6;--text:#16181F;--muted:#5D6473;--accent:#B8781A;
+--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}}
+:root[data-theme=light]{--bg:#F4F1EA;--panel:#fff;--panel-2:#FAF8F3;--stroke:#D9D3C6;
+--text:#16181F;--muted:#5D6473;--accent:#B8781A;--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);
+line-height:1.65;padding:0 1rem 4rem}
+.shell{max-width:840px;margin:0 auto}
+a{color:var(--accent);text-decoration:none;font-weight:600}
+a:hover{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--accent-2);outline-offset:3px;border-radius:4px}
+.bar{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;padding:1.1rem 0;margin-bottom:1.5rem;
+border-bottom:1px solid var(--stroke)}
+.crumb{font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.spacer{flex:1}
+.pill{border:1px solid var(--stroke);background:var(--panel);border-radius:999px;padding:.28rem .8rem;
+font-size:.75rem;font-weight:700;color:var(--text);cursor:pointer;font-family:inherit}
+.pill:hover{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+h1{font-size:clamp(1.7rem,5vw,2.5rem);margin:.2rem 0 1rem;line-height:1.1;letter-spacing:-.015em;text-wrap:balance}
+h2{font-size:1.25rem;margin:2.2rem 0 .7rem;padding-bottom:.35rem;border-bottom:1px solid var(--rule);text-wrap:balance}
+h3{font-size:1.02rem;margin:1.5rem 0 .5rem;color:var(--accent)}
+p{margin:.7rem 0}
+ul,ol{margin:.7rem 0 .7rem 1.3rem}
+li{margin:.28rem 0}
+li::marker{color:var(--accent)}
+em{color:var(--muted)}
+hr{border:none;border-top:1px solid var(--stroke);margin:2rem 0}
+blockquote{border-left:3px solid var(--accent);background:var(--panel);border-radius:0 10px 10px 0;
+padding:.8rem 1.1rem;margin:1.1rem 0;color:var(--muted);font-size:.92rem}
+code{background:var(--panel);border:1px solid var(--stroke);border-radius:5px;padding:.1rem .35rem;
+font-size:.85em;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--code)}
+img{max-width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--stroke);margin:1.1rem 0}
+pre{background:var(--panel);border:1px solid var(--stroke);border-radius:12px;padding:1rem;overflow-x:auto;margin:1.1rem 0}
+pre code{background:none;border:none;padding:0;color:var(--text);font-size:.83rem;line-height:1.55}
+.tw{overflow-x:auto;border:1px solid var(--stroke);border-radius:12px;background:var(--panel);margin:1.1rem 0}
+table{width:100%;border-collapse:collapse;font-size:.85rem;min-width:min(100%,460px)}
+th{background:var(--panel-2);color:var(--accent);text-align:left;padding:.55rem .8rem;font-size:.68rem;
+letter-spacing:.09em;text-transform:uppercase;white-space:nowrap;border-bottom:1px solid var(--stroke)}
+td{padding:.5rem .8rem;border-bottom:1px solid var(--rule);color:var(--muted);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td strong{color:var(--text)}
+.meta{display:flex;flex-wrap:wrap;gap:.4rem .9rem;font-size:.78rem;color:var(--muted);margin:-.4rem 0 1.2rem}
+.meta b{color:var(--text);font-weight:600}
+.missing{color:var(--muted);border-bottom:1px dashed var(--muted);cursor:help}
+.related{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--stroke)}
+.related h2{border:none;margin:0 0 .7rem;font-size:.95rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:0}
+.chips li{margin:0}
+.chips a,.chips .missing{display:inline-block;border:1px solid var(--stroke);background:var(--panel);
+border-radius:999px;padding:.28rem .8rem;font-size:.8rem}
+.chips a:hover{background:var(--accent);color:var(--on-accent);text-decoration:none;border-color:var(--accent)}
+footer{max-width:840px;margin:2.5rem auto 0;padding-top:1.2rem;border-top:1px solid var(--stroke);
+font-size:.75rem;color:var(--muted);text-align:center}
+/* landing */
+.hero{padding:2.4rem 0 1.6rem}
+.kicker{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2)}
+.hero h1{font-size:clamp(2rem,6vw,3.2rem);margin:.35rem 0 .5rem}
+.hero p{color:var(--muted);font-size:1.05rem;max-width:56ch}
+.hw{display:inline-flex;gap:.5rem;align-items:center;margin-top:1rem;border:1px solid var(--stroke);
+background:var(--panel);border-radius:999px;padding:.3rem .9rem;font-size:.78rem;color:var(--muted)}
+.hw .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.sec{margin-top:2.2rem}
+.sec h2{border:none;padding:0;margin:0 0 .8rem;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.9rem}
+.card{display:block;border:1px solid var(--stroke);background:var(--panel);border-radius:14px;padding:1rem 1.1rem;
+color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+.card b{display:block;color:var(--accent);font-size:1rem;margin-bottom:.3rem}
+.card span{font-size:.85rem;color:var(--muted);line-height:1.5}
+.stubs{font-size:.82rem;color:var(--muted);margin-top:.6rem}
+.yt{position:relative;width:100%;aspect-ratio:16/9;border:1px solid var(--stroke);border-radius:12px;overflow:hidden;background:#000;margin:1rem 0}
+.yt.yt-v{aspect-ratio:9/16;max-width:360px}
+.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="bar">
+    <span class="crumb"><a href="../">video-gen-kb</a> / <a href="index.html">Wiki</a></span>
+    <span class="spacer"></span>
+    <button class="pill" onclick="tt()">◐ Theme</button>
+  </nav>
+  <h1>Blueprint v2 — Research Notes for a Different Pipeline Strategy</h1><p class="lede">Research toward a second production pipeline built on a different strategy from <a href="idea-to-video-blueprint.html">idea to video blueprint</a>: identity from <strong>trained weights</strong> rather than reference images, motion from <strong>pose and depth control</strong> rather than prose, and a real <strong>edit, grade and dialogue</strong> stage instead of a scripted ffmpeg assembly. Records what the standard industry route does, what each piece would cost on this hardware, what is unknown, and the experiments that would decide whether to adopt it. Nothing here is implemented — the current blueprint is unchanged and still the production route.</p><div class="meta"><span><b>Updated</b> 2026-09-26</span><span><b>Sources</b> <code>raw/2026-09-26-ai-film-production-pipeline.md</code> (pasted 2026-09-26, origin unattributed, <em>unverified</em>); our measured results in <a href="idea-to-video-blueprint.html">idea to video blueprint</a>, <a href="headless-cli-pipeline.html">headless cli pipeline</a>, <a href="character-consistency.html">character consistency</a>, <a href="identity-conditioning.html">identity conditioning</a>, <a href="apple-silicon-inference.html">apple silicon inference</a>, <a href="nightelf-hunter-plan.html">nightelf hunter plan</a>, <a href="bot-builders-champion-photo-cut-plan.html">bot builders champion photo cut plan</a>. Capability claims about tools we have not installed are marked <em>needs verification</em>.</span></div>
+<hr />
+<h2>1. Why look for a different strategy</h2>
+<p>The current pipeline is fast, local, free and reliable, and it has delivered six films. Its limits are structural rather than incidental, and they all trace to the same choice — identity carried by <strong>reference-image tokens</strong> instead of trained weights (<a href="identity-conditioning.html">identity conditioning</a> channels 2 and 4):</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Limit</th>
+<th>Where it bit</th>
+<th>Root cause</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A character only survives angles the reference shows</td>
+<td>night-elf ears vanish under hair at distance; turnaround sheets exist precisely to patch this</td>
+<td>reference tokens copy visible pixels; they do not generalise</td>
+</tr>
+<tr>
+<td>Faces drift after ~5 s of motion, so shots are trimmed short and face shots rationed to ⅓ of a film</td>
+<td>every film so far</td>
+<td>first-frame latent conditioning decays with motion</td>
+</tr>
+<tr>
+<td>The camera does what the model wants</td>
+<td>"LTX obeys the action, not the staging"</td>
+<td>no pose/depth control channel</td>
+</tr>
+<tr>
+<td>No dialogue at all</td>
+<td>every film is wordless</td>
+<td>no TTS or lip-sync installed</td>
+</tr>
+<tr>
+<td>Colour drifts between shots</td>
+<td>the two city shots in <a href="nightelf-hunter-plan.html">nightelf hunter plan</a></td>
+<td>no grade; colour is prompted, not corrected</td>
+</tr>
+<tr>
+<td>Editing is a script</td>
+<td>fine at 60 s; no J-cuts, ramps or trimming to music</td>
+<td>ffmpeg assembly by design</td>
+</tr>
+</tbody>
+</table></div>
+<p>A v2 worth building is one that removes several of these at once, not one that swaps a tool.</p>
+<h2>2. The strategy being researched</h2>
+<p>Four substitutions, each independently testable:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th></th>
+<th>Current</th>
+<th>v2 candidate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Identity</strong></td>
+<td>seed sheet + klein edit per shot</td>
+<td><strong>character LoRA</strong> trained on 25–40 images, used in every still</td>
+</tr>
+<tr>
+<td><strong>Motion</strong></td>
+<td>prose motion prompt</td>
+<td><strong>pose / depth control</strong> (OpenPose, depth maps) driving the clip</td>
+</tr>
+<tr>
+<td><strong>Dialogue</strong></td>
+<td>none</td>
+<td><strong>TTS + lip-sync</strong> on a talking shot</td>
+</tr>
+<tr>
+<td><strong>Finish</strong></td>
+<td>ffmpeg crossfades</td>
+<td><strong>NLE cut + LUT grade</strong>, ffmpeg only for encode</td>
+</tr>
+</tbody>
+</table></div>
+<h3>2a. Identity from a LoRA</h3>
+<p>The source route trains a character LoRA on 25–40 images with a trigger word, 1,500–3,000 steps, then validates across extreme angles.</p>
+<p>What makes this newly plausible for us: <strong>we can now generate the dataset ourselves.</strong> <code>scripts/seed_sheet.sh</code> turns one photo into consistent views; extending it to 25–40 images across angles, expressions and lighting is a loop, not new science. The dataset problem that normally blocks a LoRA is already half-solved by the seeding phase.</p>
+<p>Open questions:
+- <strong>Where to train.</strong> Local LoRA training is impractical on Apple Silicon (<a href="character-consistency.html">character consistency</a>); cloud is quoted around \$1 per character <em>(needs verification of current pricing and of which services accept FLUX.2 klein)</em>.
+- <strong>Whether klein can consume a LoRA at all in our runtime.</strong> <code>draw-things-cli</code> accepts <code>loras[]</code> in its config JSON with a <code>version</code> field, so the plumbing exists — but whether a klein-compatible character LoRA can be trained and loaded is <strong>unverified</strong> and is experiment B1.
+- <strong>Whether it actually beats a sheet.</strong> A LoRA should generalise to unseen angles; our sheets cover four. The honest test is a profile and a three-quarter-back shot neither approach was given directly.</p>
+<h3>2b. Motion from pose and depth</h3>
+<p>No ControlNet is klein-compatible, so this cannot live in the still stage as the source describes. It would have to live in the <strong>video</strong> stage, where open options exist: <strong>Wan 2.1 VACE</strong> and <strong>Wan 2.2 Animate</strong> take reference frames plus control signals; both are <em>unverified</em> in Draw Things and may require ComfyUI (<a href="image-to-video-models.html">image to video models</a>).</p>
+<p>The prize is specific: a shot where the character performs a named action (draws a bow, kneels, turns to camera on a beat) instead of whatever LTX decides. Every action shot in every film so far has been chosen from what the model offered.</p>
+<h3>2c. Dialogue</h3>
+<p>Two pieces, both absent: TTS and lip-sync. Local candidates exist — MLX-Audio for speech, and lip-sync models that may or may not run on MPS — all <em>unverified</em>. This is the single largest expansion of what the wiki can produce: every film to date is wordless because the tooling isn't here, not because the stories wanted silence.</p>
+<h3>2d. Finish</h3>
+<p>The cheapest win on this list. DaVinci Resolve is free and runs on Apple Silicon; a single LUT across an assembly would fix the colour drift we currently cannot address. Frame interpolation stays unnecessary — LTX is natively 25 fps.</p>
+<h2>3. What v2 would look like end to end</h2>
+<pre><code>1  Intake + shot list                     unchanged
+2  Seeds: turnaround sheets                unchanged, but extended to a 25-40 image dataset
+3  TRAIN a character LoRA (cloud)          NEW — replaces per-shot reference editing
+4  Shot stills with the LoRA               changed: prompt + trigger word, no diptych
+5  Clips with pose/depth control           changed: named actions instead of prose motion
+6  Dialogue: TTS + lip-sync                NEW
+7  Upscale (Real-ESRGAN, unchanged)        + LUT grade in an NLE
+8  Cut in an NLE, export, QC               changed: ffmpeg becomes the encoder, not the editor
+</code></pre>
+<p>Steps 1, 2 and 7's upscale survive intact. That is the useful finding: <strong>the seeding phase is strategy-independent</strong> — a turnaround sheet is a good reference set <em>and</em> a good training set.</p>
+<h2>4. Experiments to run before adopting anything</h2>
+<p>Each is small, and each can kill the idea cheaply. Ordered by what would block the rest.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Question</th>
+<th>Test</th>
+<th>Pass</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>B1</strong></td>
+<td>Can a character LoRA be trained and then used in our runtime at all?</td>
+<td>train one on the existing night-elf dataset via a cloud service; load it through <code>draw-things-cli --config-json loras[]</code></td>
+<td>it loads and the character is recognisable</td>
+</tr>
+<tr>
+<td><strong>B2</strong></td>
+<td>Does a LoRA beat a turnaround sheet?</td>
+<td>same three shots — profile, three-quarter back, extreme wide — both ways, judged blind against the source photo</td>
+<td>LoRA wins on the angles the sheet does not cover</td>
+</tr>
+<tr>
+<td><strong>B3</strong></td>
+<td>Can pose control reach the clip stage?</td>
+<td>VACE or Wan Animate in Draw Things; if absent, ComfyUI on MPS with a GGUF build</td>
+<td>a named action renders at all, at any speed</td>
+</tr>
+<tr>
+<td><strong>B4</strong></td>
+<td>Is ComfyUI usable here in 2026?</td>
+<td>re-measure a single Wan clip; the 82 min/2 s figure is from an M1 Max and may be stale</td>
+<td>under 15 min for a 5 s clip</td>
+</tr>
+<tr>
+<td><strong>B5</strong></td>
+<td>Local TTS quality and Mac support</td>
+<td>MLX-Audio on a paragraph of dialogue</td>
+<td>intelligible, no cloud dependency</td>
+</tr>
+<tr>
+<td><strong>B6</strong></td>
+<td>Lip-sync on MPS</td>
+<td>drive an existing face clip with B5's audio</td>
+<td>mouth tracks the audio without destroying the face</td>
+</tr>
+<tr>
+<td><strong>B7</strong></td>
+<td>Does a LUT fix inter-shot colour drift?</td>
+<td>grade the night-elf film's eight shots to one LUT in Resolve</td>
+<td>the two city shots stop disagreeing</td>
+</tr>
+</tbody>
+</table></div>
+<p>B7 is worth doing first regardless of the rest: it is an afternoon, it needs no new models, and it improves films we have already delivered.</p>
+<h2>5. What would make this worth switching to</h2>
+<p>Not "the industry does it this way". The bar is:</p>
+<ul>
+<li><strong>B2 must show a visible win on unseen angles.</strong> If a sheet holds, the LoRA's hours and dollars buy nothing — reference tokens at 25 seconds per seed are the better trade.</li>
+<li><strong>B3 or B6 must succeed.</strong> Pose control or dialogue would each open work the current pipeline cannot do at all. Identity alone is not a reason to rebuild.</li>
+<li><strong>Nothing may become cloud-dependent without saying so.</strong> The whole wiki's premise is local and free; a cloud LoRA step is a real change of character for the project and should be recorded as one.</li>
+</ul>
+<p>Until then the current blueprint stays the production route, and this page stays research.</p>
+
+  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="idea-to-video-blueprint.html">idea to video blueprint</a> — the current pipeline, unchanged</li><li><a href="ai-film-production-pipeline.html">ai film production pipeline</a> — the source route recorded step by step</li><li><a href="identity-conditioning.html">identity conditioning</a> — why trained weights and reference tokens differ</li><li><a href="character-consistency.html">character consistency</a> · <a href="image-to-video-models.html">image to video models</a> · <a href="apple-silicon-inference.html">apple silicon inference</a></li></ul></div>
+</div>
+<footer>video-gen-kb · built 2026-09-26 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<script>function tt(){var r=document.documentElement,
+d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
+matchMedia('(prefers-color-scheme: dark)').matches);
+r.setAttribute('data-theme',d?'light':'dark');}</script>
+</body>
+</html>
