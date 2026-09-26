@@ -8,6 +8,10 @@
 
 ---
 
+## 2026-09-25 — final/ means the film, not the shots
+
+**Convention fixed** (Kevin): `final/` holds only the assembled film and its delivery copies; everything shot-scoped — the `.mov` export, the trimmed ProRes, the per-shot `_4k.mp4` and its stamp — belongs in `clips/`. `film_run.py finish` now writes per-shot output to `clips/` and only the master plus deliveries to `final/`; 105 existing files were moved to match. lost_city's `final/` is down to the 30 s rift coda (an assembled sequence, so still a deliverable) and kyle_rescue's stray `music_bed.wav` went to `music/`. [[repo-structure]] and `CLAUDE.md` updated.
+
 ## 2026-09-25 — Structure written up as a page
 
 **Created**: `wiki/repo-structure.md` — the shared-root vs per-project split, what each folder holds (`seed/` being the non-obvious one), tracked vs generated, how `run-spec.dir` ties the registry to a folder, how plan pages publish with the wiki, a checklist for starting a project, and the intermediate-deletion table with the sole-copy guard. `CLAUDE.md` now points at it instead of carrying a second copy of the tree. Indexed under Recipes.

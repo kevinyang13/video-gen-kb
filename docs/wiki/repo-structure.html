@@ -111,12 +111,13 @@ projects.json  the registry: one record per project
   raw/     its source photos, comics, references (immutable)
   seed/    masters, crops, candidate renders, prompt inputs
   stills/  picked first frames + per-shot prompt files
-  clips/   image-to-video exports (.mov)
+  clips/   everything shot-scoped: I2V exports (.mov), trims, per-shot 4K
   music/   the track(s) this film is cut to
-  final/   trimmed, upscaled and assembled deliverables
+  final/   the film itself — the assembled master and its delivery copies
   logs/    run logs
 </code></pre>
 <p>Not every project uses every folder: the early 9:16 loops (<a href="living-painting-loop.html">living painting loop</a>) have only <code>clips/ final/ music/</code>, while a multi-shot film uses all eight.</p>
+<p><strong><code>final/</code> is the film, not the shots.</strong> One folder, one question: <em>what do I hand over?</em> Every shot-scoped artefact — the <code>.mov</code> export, the trimmed ProRes, the per-shot <code>_4k.mp4</code> and its stamp — stays in <code>clips/</code> next to the clip it came from. Only the assembled master and its delivery copies (1920×1080, 720p, and so on) belong in <code>final/</code>. <code>film_run.py finish</code> writes to both accordingly. An assembled <em>sequence</em> that isn't the whole film still counts as a deliverable — lost_city's 30-second rift coda sits in <code>final/</code> even though the film around it isn't cut yet.</p>
 <p><strong><code>seed/</code> is the one to understand.</strong> It holds everything a render <em>starts from</em> that isn't a finished still: character and location masters, the face crops they were made from, rejected candidates, and any prepared input images. Masters are the valuable part — they're what makes shot 9 look like shot 2 (see <a href="character-consistency.html">character consistency</a>).</p>
 <h2>Tracked vs generated</h2>
 <p>Only <code>plan/</code> and <code>raw/</code> are committed. Everything else is git-ignored:</p>
@@ -154,7 +155,7 @@ projects/lost_city/raw/     # large
 <td>PNG dumps from the upscaler — by far the biggest thing on disk (23 GB across 13 projects)</td>
 </tr>
 <tr>
-<td><code>*_t.mov</code> in <code>final/</code></td>
+<td><code>*_t.mov</code> in <code>clips/</code></td>
 <td>trimmed ProRes, re-cut from the source clip in seconds</td>
 </tr>
 <tr>
@@ -162,12 +163,12 @@ projects/lost_city/raw/     # large
 <td>rejected seeds; the picks are already in <code>stills/</code> and <code>seed/</code></td>
 </tr>
 <tr>
-<td><code>clips/*.mov</code> <strong>that have a 4K counterpart</strong></td>
+<td><code>clips/*.mov</code> <strong>that have a <code>_4k.mp4</code> beside them</strong></td>
 <td>the upscaled mp4 carries the shot</td>
 </tr>
 </tbody>
 </table></div>
-<p><strong>Always keep</strong>: the finished films, the per-shot <code>*_4k.mp4</code> (they let a film be re-cut, re-ordered or re-scored without re-rendering), picked stills, masters, prompt files, music and <code>raw/</code>.</p>
+<p><strong>Always keep</strong>: the finished films in <code>final/</code>, the per-shot <code>clips/*_4k.mp4</code> (they let a film be re-cut, re-ordered or re-scored without re-rendering), picked stills, masters, prompt files, music and <code>raw/</code>.</p>
 <p><strong>The guard</strong>: a <code>.mov</code> with no 4K counterpart is the <em>only</em> copy of that shot — deleting it means a ~10-minute re-render. Check before a sweep. On 2026-09-25 that rule spared lost_city's s9 pair and an old fll_farm drone test while 30 GB went.</p>
 
   <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="scripts-reference.html">scripts reference</a> — what each script does and the flags that matter</li><li><a href="idea-to-video-blueprint.html">idea to video blueprint</a> — the process a project follows once its folder exists</li><li><a href="projects.html">projects</a> — the registry rendered from <code>projects.json</code></li><li><a href="headless-cli-pipeline.html">headless cli pipeline</a> — the CLI that produces most of what lands in these folders</li></ul></div>

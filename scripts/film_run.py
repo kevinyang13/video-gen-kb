@@ -259,22 +259,26 @@ def cmd_finish(f, _):
     missing = [s["id"] for s in f["shots"] if s not in shots]
     if missing:
         die(f"shots without take/trim: {', '.join(missing)} — set them after QC")
+    # per-shot pieces (trims, per-shot 4K) live with the clips they came from;
+    # final/ holds only the assembled film and its delivery copies
+    cl = ROOT / f["dir"] / "clips"
     fin = ROOT / f["dir"] / "final"
+    cl.mkdir(parents=True, exist_ok=True)
     fin.mkdir(parents=True, exist_ok=True)
     W, H = up["size"]
     outs = []
     for s in shots:
         i, (a, b) = s["id"], s["trim"]
-        k4, stamp = fin / f"{i}_4k.mp4", fin / f"{i}_trim.txt"
+        k4, stamp = cl / f"{i}_4k.mp4", cl / f"{i}_trim.txt"
         key = f"{s['take']} {a} {b} {up['model']} {W}x{H} {up['fit']}"
         if k4.exists() and stamp.exists() and stamp.read_text() == key and not FORCE:
             print(f"{i}: 4K up to date")
         else:
-            t = fin / f"{i}_t.mov"
+            t = cl / f"{i}_t.mov"
             rc = run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-i", d(f, s["take"]), "-vf",
                       f"trim=start={a}:end={b},setpts=PTS-STARTPTS", "-af", f"atrim=start={a}:end={b},asetpts=PTS-STARTPTS",
                       "-c:v", "prores_ks", "-profile:v", "3", "-c:a", "pcm_s16le", t])
-            rc = rc or run([S / "upscale_4k.sh", t, fin / i, up["model"]],
+            rc = rc or run([S / "upscale_4k.sh", t, cl / i, up["model"]],
                            {"W": W, "H": H, "FIT": up["fit"], "BITRATE": up["bitrate"], "KEEP_FRAMES": 0,
                             "KEEP_AUDIO": 1 if asm["clip_audio"] else 0})
             if rc:

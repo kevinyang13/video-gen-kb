@@ -94,6 +94,8 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
   </nav>
   <h1>Log</h1><p class="lede">Append-only record of every operation performed on this wiki.</p><div class="meta"><span><b>Updated</b> 2026-09-22</span><span><b>Sources</b> n/a</span></div>
 <hr />
+<h2>2026-09-25 — final/ means the film, not the shots</h2>
+<p><strong>Convention fixed</strong> (Kevin): <code>final/</code> holds only the assembled film and its delivery copies; everything shot-scoped — the <code>.mov</code> export, the trimmed ProRes, the per-shot <code>_4k.mp4</code> and its stamp — belongs in <code>clips/</code>. <code>film_run.py finish</code> now writes per-shot output to <code>clips/</code> and only the master plus deliveries to <code>final/</code>; 105 existing files were moved to match. lost_city's <code>final/</code> is down to the 30 s rift coda (an assembled sequence, so still a deliverable) and kyle_rescue's stray <code>music_bed.wav</code> went to <code>music/</code>. <a href="repo-structure.html">repo structure</a> and <code>CLAUDE.md</code> updated.</p>
 <h2>2026-09-25 — Structure written up as a page</h2>
 <p><strong>Created</strong>: <code>wiki/repo-structure.md</code> — the shared-root vs per-project split, what each folder holds (<code>seed/</code> being the non-obvious one), tracked vs generated, how <code>run-spec.dir</code> ties the registry to a folder, how plan pages publish with the wiki, a checklist for starting a project, and the intermediate-deletion table with the sole-copy guard. <code>CLAUDE.md</code> now points at it instead of carrying a second copy of the tree. Indexed under Recipes.</p>
 <h2>2026-09-25 — Repo reorganised into one folder per project; film3min removed</h2>

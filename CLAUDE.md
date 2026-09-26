@@ -14,6 +14,7 @@ Full detail, including what is tracked vs generated and how to start a project: 
 ```
 wiki/  docs/  raw/  scripts/  tools/  projects.json     <- shared across projects
 projects/<id>/{plan,raw,seed,stills,clips,music,final,logs}
+  clips/ = everything shot-scoped (exports, trims, per-shot 4K); final/ = the assembled film only
 ```
 Only `plan/` and `raw/` are tracked per project; the rest is generated and git-ignored.
 A project's `run-spec.dir` in `projects.json` is `projects/<id>`, and paths inside it are relative.

@@ -31,13 +31,15 @@ projects/<id>/
   raw/     its source photos, comics, references (immutable)
   seed/    masters, crops, candidate renders, prompt inputs
   stills/  picked first frames + per-shot prompt files
-  clips/   image-to-video exports (.mov)
+  clips/   everything shot-scoped: I2V exports (.mov), trims, per-shot 4K
   music/   the track(s) this film is cut to
-  final/   trimmed, upscaled and assembled deliverables
+  final/   the film itself — the assembled master and its delivery copies
   logs/    run logs
 ```
 
 Not every project uses every folder: the early 9:16 loops ([[living-painting-loop]]) have only `clips/ final/ music/`, while a multi-shot film uses all eight.
+
+**`final/` is the film, not the shots.** One folder, one question: *what do I hand over?* Every shot-scoped artefact — the `.mov` export, the trimmed ProRes, the per-shot `_4k.mp4` and its stamp — stays in `clips/` next to the clip it came from. Only the assembled master and its delivery copies (1920×1080, 720p, and so on) belong in `final/`. `film_run.py finish` writes to both accordingly. An assembled *sequence* that isn't the whole film still counts as a deliverable — lost_city's 30-second rift coda sits in `final/` even though the film around it isn't cut yet.
 
 **`seed/` is the one to understand.** It holds everything a render *starts from* that isn't a finished still: character and location masters, the face crops they were made from, rejected candidates, and any prepared input images. Masters are the valuable part — they're what makes shot 9 look like shot 2 (see [[character-consistency]]).
 
@@ -78,11 +80,11 @@ Safe to delete once a film is delivered:
 | Category | Why it's disposable |
 |---|---|
 | `*_4k_frames/` | PNG dumps from the upscaler — by far the biggest thing on disk (23 GB across 13 projects) |
-| `*_t.mov` in `final/` | trimmed ProRes, re-cut from the source clip in seconds |
+| `*_t.mov` in `clips/` | trimmed ProRes, re-cut from the source clip in seconds |
 | candidate and QC images in `seed/` (`*_c[0-9].png`, `*_qc.png`) | rejected seeds; the picks are already in `stills/` and `seed/` |
-| `clips/*.mov` **that have a 4K counterpart** | the upscaled mp4 carries the shot |
+| `clips/*.mov` **that have a `_4k.mp4` beside them** | the upscaled mp4 carries the shot |
 
-**Always keep**: the finished films, the per-shot `*_4k.mp4` (they let a film be re-cut, re-ordered or re-scored without re-rendering), picked stills, masters, prompt files, music and `raw/`.
+**Always keep**: the finished films in `final/`, the per-shot `clips/*_4k.mp4` (they let a film be re-cut, re-ordered or re-scored without re-rendering), picked stills, masters, prompt files, music and `raw/`.
 
 **The guard**: a `.mov` with no 4K counterpart is the *only* copy of that shot — deleting it means a ~10-minute re-render. Check before a sweep. On 2026-09-25 that rule spared lost_city's s9 pair and an old fll_farm drone test while 30 GB went.
 
