@@ -8,6 +8,16 @@
 
 ---
 
+## 2026-09-26 — Ingested a standard AI film pipeline, compared against ours
+
+**Source**: `raw/2026-09-26-ai-film-production-pipeline.md` — an eight-step industry-practice pipeline Kevin pasted; origin unattributed, so treated as general practice rather than a verified source.
+
+**Created**: [[ai-film-production-pipeline]] — the eight steps recorded in full beside what we actually do, because three of them do not apply here and the reasons are worth keeping next to the advice. No LoRA (training is impractical on Apple Silicon; klein takes reference images directly, which is [[identity-conditioning]] channel 2 rather than channel 4 — 25 seconds per seed against hours, at the cost of only copying angles the reference shows, which is why seeds are turnaround sheets). No ComfyUI (Metal has no FP8; 82 min for a 2 s Wan clip in a field test against ~10 min for a 10 s LTX clip here). No ControlNet (nothing klein-compatible exists). No Topaz (Real-ESRGAN is free, local and fast enough).
+
+**What the source has that we lack**, stated plainly on the page: dialogue and lip-sync, a unified colour grade, and a real NLE. The grade is the cheapest to adopt and would fix the colour drift between plates visible in [[nightelf-hunter-plan]].
+
+**Updated**: `wiki/index.md`.
+
 ## 2026-09-26 — Night Elf Hunter delivered (57.6 s, photoreal, seeded cast)
 
 New project, rendered unattended overnight: a half-elf hunter with Kyle's face and a brown bear walking the grassland toward a distant city. Eight shots, `final/nightelf_hunter_3840x2160.mp4` (57.64 s) plus a 1920×1080 copy, music "Adventure Journey" picked for its rising arc (−18.5 dB climbing to −10 across the first minute, matching grassland → city revealed → crest). Nothing dropped; every trim is a drift point, not taste.
