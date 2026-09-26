@@ -31,6 +31,7 @@ scripts/build_site.py     -- wiki/ + projects/*/plan/ -> docs/
 scripts/build_projects.py -- projects.json -> wiki/projects*.md (run by build_site.py)
 scripts/film_run.py       -- run a film from its run-spec; PROJECT is <id> (newest version) or <id>@<version>
 scripts/dt_diptych.sh     -- klein still: diptych / single edit / text-to-image
+scripts/seed_sheet.sh     -- one master -> turnaround sheet (front/34/profile/back, or custom views)
 scripts/dt_clip.sh        -- I2V clip (LTX or Wan presets)
 scripts/qc_sheet.sh       -- contact sheet: reference + N frames
 scripts/upscale_4k.sh     -- clip -> 3840x2160 (W/H configurable) via Real-ESRGAN

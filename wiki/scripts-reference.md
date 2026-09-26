@@ -84,7 +84,22 @@ scripts/film_run.py kyle_rescue status         # where every shot is
 
 Model family from the name sets the defaults — **ltx**: 249 f, 8 steps, TCD Trailing (19), shift 5, SSS 0.3, 25 fps, hi-res fix off; **wan**: 81 f, 4 steps, UniPC Trailing (17), shift 5, 16 fps, `refinerModel` = the low-noise expert at `refinerStart` 0.1, Lightning LoRA at 1.0. Env `MODEL STEPS CFG CONFIG_JSON VIDEO_FORMAT NEGATIVE FORCE DRY_RUN` override any of it. W/H default to the still's size. Prints size, frame count and wall time.
 
-### `scripts/qc_sheet.sh` — contact sheet
+### `scripts/seed_sheet.sh` — one master → a turnaround sheet
+
+```
+scripts/seed_sheet.sh MASTER.png OUT_PREFIX [SUBJECT] [SEED]
+VIEWS="34 side back"  STYLE="…"  W=512 H=768  scripts/seed_sheet.sh …
+```
+
+**Purpose**: a frontal master cannot tell the model what the back of a head looks like, so every shot from behind is an invention ([[identity-conditioning]]: reference tokens copy what they can see). This renders the missing angles from the master and composes them into one sheet.
+
+**Steps**: for each view in `VIEWS`, build a prompt from a keep-clause (*exactly the same face, hair, colours and clothing, no change to the features or the age*) plus a rotation clause, run `dt_diptych.sh - MASTER prompt out.png` (klein edit at strength 1.0), then `hstack` front + views into `OUT_PREFIX_sheet.png`.
+
+Built-in views: `34`, `side`, `back`. Anything else in `VIEWS` is passed through as a prompt sentence, which is how you get a top-down, a head close-up or a clawed foot for a creature. `SUBJECT` is the noun used in the prompts ("boy", "creature"); `STYLE` overrides the look clause for non-3D projects.
+
+**Cost**: ~25 s per view. **Gotcha**: klein amplifies a signature feature a little with each edit — Kyle's spiked fringe is taller on the sheet than on the master — so judge the sheet against the master, not against the previous view.
+
+## `scripts/qc_sheet.sh` — contact sheet
 
 `qc_sheet.sh CLIP OUT [REF|-] [N=5] [TILE_H=384]` — reference + N frames spread evenly from first to last (indices computed from the clip, so a 33-frame test and a 249-frame shot both work).
 

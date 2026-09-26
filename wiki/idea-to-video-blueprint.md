@@ -145,6 +145,31 @@ A diffusion model keeps no memory between generations ([[identity-conditioning]]
 
 **Pick rule**: closest to the source on face shape, hair silhouette and signature details — judged at full size, not from a thumbnail strip. Optional human gate here when the subject is a real person.
 
+### The seed is a sheet, not a portrait
+
+A single frontal image gives the model nothing to copy when a shot needs a profile, so it invents one, and the character changes the moment they turn their head. Once a master is picked, expand it into a **turnaround sheet** — front, three-quarter, profile, back — by editing the master itself:
+
+```bash
+scripts/seed_sheet.sh seed/kyle.png seed/kyle boy 1
+#   -> seed/kyle_34.png  seed/kyle_side.png  seed/kyle_back.png  seed/kyle_sheet.png
+```
+
+Each view is a klein edit at strength 1.0 that says *"the same character, exactly the same face, hair, colours and clothing … turn to a three-quarter view / full side profile / seen from directly behind"*, keeping the same lighting and grey background so the views read as one sheet. ~25 s per view.
+
+For a creature, vehicle or location, add the views that matter with free text — `VIEWS` accepts a prompt sentence as well as the three built-ins:
+
+```bash
+VIEWS="34 side back" SUBJECT=creature scripts/seed_sheet.sh seed/mount.png seed/mount creature
+VIEWS="seen from directly above, wings folded|a close-up of the head in profile|a close-up of one clawed foot" \
+  scripts/seed_sheet.sh seed/mount.png seed/mount_detail creature
+```
+
+That is what a professional model sheet carries: the four orbit views plus detail insets (eye, mouth, foot, tack) and a few gait thumbnails. Render the insets the same way — each is just another edit of the master.
+
+**Then use the right panel.** A shot that shows the character from behind should be seeded with `seed/kyle_back.png`, not the front portrait — hand the angle the shot needs as the reference and the model copies instead of inventing. The whole sheet is also useful as a single reference when the shot shows the character at an unusual angle.
+
+Costs about 75 s per character on top of the master. On a film with a recurring cast it pays for itself the first time someone turns around.
+
 ## Phase 4b — Feeding a seed into a shot
 
 Three mechanisms, and choosing wrong is the most common way a shot fails:

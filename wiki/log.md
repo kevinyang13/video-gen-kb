@@ -8,6 +8,16 @@
 
 ---
 
+## 2026-09-25 — Seeds become turnaround sheets
+
+Kevin showed what a seed should look like: a proper model sheet — front, three-quarter, profile, back, plus detail insets (eye, mouth, clawed foot, saddle) and gait thumbnails — not the single frontal portrait we had been making. He is right, and [[identity-conditioning]] already said why: reference tokens copy what they can *see*, so a frontal-only seed leaves the model inventing the side and back of a head, and the character changes the moment they turn.
+
+Tested whether klein can orbit a master before writing any of it down: editing `seed/kyle.png` at strength 1.0 with "the same boy … turn to a three-quarter view / full side profile / seen from directly behind" held the face, hair, lighting and background across all four views. Same on Lindsey.
+
+**New `scripts/seed_sheet.sh`** — master in, `_34 / _side / _back` plus a composed `_sheet.png` out, ~25 s per view. `VIEWS` takes the three built-ins or any free-text instruction separated by `|`, which is how a creature gets a top-down, a head close-up or a foot inset. `SUBJECT` sets the noun, `STYLE` the look clause for non-3D projects.
+
+Blueprint Phase 4 now ends with **"the seed is a sheet, not a portrait"** and says to hand a shot the *panel that matches its angle* rather than the front view. Documented in [[scripts-reference]] with the one gotcha found: klein amplifies a signature feature slightly with each edit (Kyle's spiked fringe grows), so judge each view against the master, not against the previous view.
+
 ## 2026-09-25 — Blueprint: seeding as its own phase
 
 Phase 4 was "Masters (model sheets)" and covered recurring characters plus the odd hero prop. It now covers **everything that must stay the same** — characters, locations and props alike — under the name it deserves: a diffusion model keeps no memory, so anything recurring has to be rendered once and fed back in. Bot Builders needed five children *and* the mission table, the gym and three farm plates; a location you skip is one the model re-invents every shot.

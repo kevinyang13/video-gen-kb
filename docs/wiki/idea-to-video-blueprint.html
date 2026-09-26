@@ -364,6 +364,20 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <li><code>--strength</code> 0.7–0.9 is a near no-op on the released CLI; only 1.0 is edit mode (<a href="headless-cli-pipeline.html">headless cli pipeline</a> §1c).</li>
 </ul>
 <p><strong>Pick rule</strong>: closest to the source on face shape, hair silhouette and signature details — judged at full size, not from a thumbnail strip. Optional human gate here when the subject is a real person.</p>
+<h3>The seed is a sheet, not a portrait</h3>
+<p>A single frontal image gives the model nothing to copy when a shot needs a profile, so it invents one, and the character changes the moment they turn their head. Once a master is picked, expand it into a <strong>turnaround sheet</strong> — front, three-quarter, profile, back — by editing the master itself:</p>
+<pre><code class="language-bash">scripts/seed_sheet.sh seed/kyle.png seed/kyle boy 1
+#   -&gt; seed/kyle_34.png  seed/kyle_side.png  seed/kyle_back.png  seed/kyle_sheet.png
+</code></pre>
+<p>Each view is a klein edit at strength 1.0 that says <em>"the same character, exactly the same face, hair, colours and clothing … turn to a three-quarter view / full side profile / seen from directly behind"</em>, keeping the same lighting and grey background so the views read as one sheet. ~25 s per view.</p>
+<p>For a creature, vehicle or location, add the views that matter with free text — <code>VIEWS</code> accepts a prompt sentence as well as the three built-ins:</p>
+<pre><code class="language-bash">VIEWS=&quot;34 side back&quot; SUBJECT=creature scripts/seed_sheet.sh seed/mount.png seed/mount creature
+VIEWS=&quot;seen from directly above, wings folded|a close-up of the head in profile|a close-up of one clawed foot&quot; \
+  scripts/seed_sheet.sh seed/mount.png seed/mount_detail creature
+</code></pre>
+<p>That is what a professional model sheet carries: the four orbit views plus detail insets (eye, mouth, foot, tack) and a few gait thumbnails. Render the insets the same way — each is just another edit of the master.</p>
+<p><strong>Then use the right panel.</strong> A shot that shows the character from behind should be seeded with <code>seed/kyle_back.png</code>, not the front portrait — hand the angle the shot needs as the reference and the model copies instead of inventing. The whole sheet is also useful as a single reference when the shot shows the character at an unusual angle.</p>
+<p>Costs about 75 s per character on top of the master. On a film with a recurring cast it pays for itself the first time someone turns around.</p>
 <h2>Phase 4b — Feeding a seed into a shot</h2>
 <p>Three mechanisms, and choosing wrong is the most common way a shot fails:</p>
 <div class="tw"><table>
