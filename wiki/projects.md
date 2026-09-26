@@ -8,25 +8,24 @@
 
 ---
 
-**Project pages**: [[projects-anime|Anime projects]] (7) · [[projects-realistic|Photoreal projects]] (2) · [[projects-3d|3D-animated projects]] (4)
+**Project pages**: [[projects-anime|Anime projects]] (6) · [[projects-realistic|Photoreal projects]] (2) · [[projects-3d|3D-animated projects]] (4)
 
 Each theme page holds the full records — settings, prompts, seeds, files. The tables below link straight to a project's record on its page.
 
-## [[projects-anime|Anime projects]] (7)
+## [[projects-anime|Anime projects]] (6)
 
 Shinkai/Ghibli-styled living paintings: a still from FLUX or Wan T2V, ambient motion from Wan 2.2 I2V, looped 9:16 with music. Coastal wildflowers, Torrey Pines, Golden Gate, Mt. Rainier, a cyberpunk street, the FLL farm.
 
 | # | Project | Date | Status | Still | I2V | Music | Final file | YouTube |
 |--:|---|---|---|---|---|---|---|---|
-| 1 | [Coastal wildflowers (v1)](projects-anime.html#coast) | 2026-09-20 | superseded by coast_v2 | Wan 2.2 High Noise Expert T2V A14B 576x1280 | Wan 2.2 High Noise 24 min | — | `—` | — |
-| 2 | [Coastal wildflowers (v2)](projects-anime.html#coast_v2) | 2026-09-20 | done | FLUX.2 [klein] 9B 1024x1792 | Wan 2.2 High Noise 15.5 min | Calm Ambient Dreamscape | `coast_v2_final.mp4` | [▶ watch](https://youtu.be/W8fy4bhGOEU) |
-| 3 | [Torrey Pines, San Diego](projects-anime.html#torrey) | 2026-09-20 | done | FLUX.2 [klein] 9B 1024x1792 | Wan 2.2 High Noise 15 min | Calm Ambient Dreamscape | `torrey_final.mp4` | [▶ watch](https://youtu.be/nRU-Upd2E3o) |
-| 4 | [Golden Gate, San Francisco](projects-anime.html#goldengate) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Calm Ambient Dreamscape | `goldengate_final.mp4` | [▶ watch](https://youtu.be/h8ic1_9Q9mI) |
-| 5 | [Mt. Rainier from Paradise](projects-anime.html#rainier) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 15.5 min | Calm Ambient Dreamscape | `rainier_final.mp4` | [▶ watch](https://youtu.be/JJB154LbBi0) |
-| 6 | [Cyberpunk city, rain, neon](projects-anime.html#cyberpunk) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Neon Synthwave Drive | `cyberpunk_final.mp4` | [▶ watch](https://youtu.be/GrNTNQCqKnk) |
-| 7 | [FLL BOT Builders — Coastal Roots Farm, wide view](projects-anime.html#fll_farm) | 2026-09-20 | done (v2) | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Calm Ambient Dreamscape | `fll_farm_v2_final.mp4` | [▶ watch](https://youtu.be/-Mf2UThasCg) |
+| 1 | [Coastal wildflowers](projects-anime.html#coast) | 2026-09-20 | done | FLUX.2 [klein] 9B 1024x1792 | Wan 2.2 High Noise 15.5 min | Calm Ambient Dreamscape | `coast_v2_final.mp4` | [▶ watch](https://youtu.be/W8fy4bhGOEU) |
+| 2 | [Torrey Pines, San Diego](projects-anime.html#torrey) | 2026-09-20 | done | FLUX.2 [klein] 9B 1024x1792 | Wan 2.2 High Noise 15 min | Calm Ambient Dreamscape | `torrey_final.mp4` | [▶ watch](https://youtu.be/nRU-Upd2E3o) |
+| 3 | [Golden Gate, San Francisco](projects-anime.html#goldengate) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Calm Ambient Dreamscape | `goldengate_final.mp4` | [▶ watch](https://youtu.be/h8ic1_9Q9mI) |
+| 4 | [Mt. Rainier from Paradise](projects-anime.html#rainier) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 15.5 min | Calm Ambient Dreamscape | `rainier_final.mp4` | [▶ watch](https://youtu.be/JJB154LbBi0) |
+| 5 | [Cyberpunk city, rain, neon](projects-anime.html#cyberpunk) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Neon Synthwave Drive | `cyberpunk_final.mp4` | [▶ watch](https://youtu.be/GrNTNQCqKnk) |
+| 6 | [FLL BOT Builders — Coastal Roots Farm, wide view](projects-anime.html#fll_farm) | 2026-09-20 | done (v2) | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Calm Ambient Dreamscape | `fll_farm_v2_final.mp4` | [▶ watch](https://youtu.be/-Mf2UThasCg) |
 
-→ full records for all 7: [[projects-anime|Anime projects]]
+→ full records for all 6: [[projects-anime|Anime projects]]
 
 ## [[projects-realistic|Photoreal projects]] (2)
 

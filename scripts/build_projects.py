@@ -77,7 +77,8 @@ def record(p, defs, suffix):
         out.append("- **All versions**: " + " · ".join(
             f"`{v['version']}`" for v in p["versions"]))
     out += [
-           f"- **Files** (`raw/clips/`): " + ", ".join(f"`{f}`" for f in p.get("files", [])),
+           (f"- **Files** (`projects/{p['id']}/{p['version']}/`): " if p.get("version")
+            else "- **Files**: ") + ", ".join(f"`{f}`" for f in p.get("files", [])),
            f"- **Notes**: {p.get('notes', '')}", ""]
     if p.get("youtube"):
         note = f" *({p['youtube_note']})*" if p.get("youtube_note") else ""

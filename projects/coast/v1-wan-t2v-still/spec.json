@@ -1,13 +1,13 @@
 {
   "order": 0,
   "id": "coast",
-  "version": "v1-drawthings-ui",
-  "variant": "Rendered by driving the Draw Things app window (accessibility automation).",
+  "version": "v1-wan-t2v-still",
+  "variant": "Still generated with Wan 2.2 T2V at 576x1280, then Wan I2V; superseded because the still lacked detail.",
   "title": "Coastal wildflowers (v1)",
   "date": "2026-09-20",
   "theme": "anime",
   "dt_project": "Untitled-35903",
-  "status": "superseded by coast_v2",
+  "status": "superseded by v2-klein-still — kept as the record of the Wan-still attempt",
   "still": {
     "model": "Wan 2.2 High Noise Expert T2V A14B (q8) @ 1 frame",
     "lora": "Lightning High-Noise 100%",

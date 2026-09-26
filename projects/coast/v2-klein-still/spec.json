@@ -1,9 +1,9 @@
 {
-  "order": 1,
-  "id": "coast_v2",
-  "version": "v1-drawthings-ui",
-  "variant": "Rendered by driving the Draw Things app window (accessibility automation).",
-  "title": "Coastal wildflowers (v2)",
+  "order": 0,
+  "id": "coast",
+  "version": "v2-klein-still",
+  "variant": "Still generated with FLUX.2 klein at 1024x1792 then cropped to 576x1024; the detail this added is what closed the gap with the reference.",
+  "title": "Coastal wildflowers",
   "date": "2026-09-20",
   "theme": "anime",
   "dt_project": "Untitled-35903",
@@ -27,6 +27,6 @@
     "coast_v2_loop.mp4",
     "coast_v2_final.mp4"
   ],
-  "notes": "First run with wrong refiner (6-bit, not downloaded) produced washed-out noise; re-run with 8-bit S.",
+  "notes": "First run with wrong refiner (6-bit, not downloaded) produced washed-out noise; re-run with 8-bit S. Merged with the former coast_v2 project on 2026-09-25: the two were one film made twice, so they are now v1 and v2 of a single project.",
   "youtube": "W8fy4bhGOEU"
 }

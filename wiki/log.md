@@ -8,6 +8,10 @@
 
 ---
 
+## 2026-09-25 — coast and coast_v2 merged into one project
+
+They were one film made twice — same scene, same music, different still model — so they are now `projects/coast/v1-wan-t2v-still` (Wan 2.2 T2V still, superseded) and `projects/coast/v2-klein-still` (FLUX.2 klein still at 1024×1792 cropped to 576×1024, the version on YouTube). The registry is down to 12 projects and shows coast once, newest version first, with both listed. Exactly the case the version scheme was for: the second attempt is a variant of the same project, not a separate one.
+
 ## 2026-09-25 — Versions inside each project
 
 **Structure**: `projects/<id>/<version>/` where version is `v<n>-<short-description>` of the *variant* — how that attempt was made. 655 items moved. Existing work retrofitted by method: the seven loops and dragon_epic are `v1-drawthings-ui`; kyle_rescue, lindsey_art and fll_bot_builders are `v1-drawthings-cli`; lost_city splits into `v1-drawthings-ui` (shots 1–13, through the app) and `v2-drawthings-cli` (s14, s15); fll_champions is `v2-master-restage` (the Pixar rebuild that shipped).

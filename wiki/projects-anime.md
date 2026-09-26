@@ -14,72 +14,24 @@ Index of every project: [[projects]]. Other themes: [[projects-realistic]] · [[
 
 | # | Project | Date | Status | Still | I2V | Music | Final file | YouTube |
 |--:|---|---|---|---|---|---|---|---|
-| 1 | [Coastal wildflowers (v1)](#coast) | 2026-09-20 | superseded by coast_v2 | Wan 2.2 High Noise Expert T2V A14B 576x1280 | Wan 2.2 High Noise 24 min | — | `—` | — |
-| 2 | [Coastal wildflowers (v2)](#coast_v2) | 2026-09-20 | done | FLUX.2 [klein] 9B 1024x1792 | Wan 2.2 High Noise 15.5 min | Calm Ambient Dreamscape | `coast_v2_final.mp4` | [▶ watch](https://youtu.be/W8fy4bhGOEU) |
-| 3 | [Torrey Pines, San Diego](#torrey) | 2026-09-20 | done | FLUX.2 [klein] 9B 1024x1792 | Wan 2.2 High Noise 15 min | Calm Ambient Dreamscape | `torrey_final.mp4` | [▶ watch](https://youtu.be/nRU-Upd2E3o) |
-| 4 | [Golden Gate, San Francisco](#goldengate) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Calm Ambient Dreamscape | `goldengate_final.mp4` | [▶ watch](https://youtu.be/h8ic1_9Q9mI) |
-| 5 | [Mt. Rainier from Paradise](#rainier) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 15.5 min | Calm Ambient Dreamscape | `rainier_final.mp4` | [▶ watch](https://youtu.be/JJB154LbBi0) |
-| 6 | [Cyberpunk city, rain, neon](#cyberpunk) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Neon Synthwave Drive | `cyberpunk_final.mp4` | [▶ watch](https://youtu.be/GrNTNQCqKnk) |
-| 7 | [FLL BOT Builders — Coastal Roots Farm, wide view](#fll_farm) | 2026-09-20 | done (v2) | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Calm Ambient Dreamscape | `fll_farm_v2_final.mp4` | [▶ watch](https://youtu.be/-Mf2UThasCg) |
+| 1 | [Coastal wildflowers](#coast) | 2026-09-20 | done | FLUX.2 [klein] 9B 1024x1792 | Wan 2.2 High Noise 15.5 min | Calm Ambient Dreamscape | `coast_v2_final.mp4` | [▶ watch](https://youtu.be/W8fy4bhGOEU) |
+| 2 | [Torrey Pines, San Diego](#torrey) | 2026-09-20 | done | FLUX.2 [klein] 9B 1024x1792 | Wan 2.2 High Noise 15 min | Calm Ambient Dreamscape | `torrey_final.mp4` | [▶ watch](https://youtu.be/nRU-Upd2E3o) |
+| 3 | [Golden Gate, San Francisco](#goldengate) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Calm Ambient Dreamscape | `goldengate_final.mp4` | [▶ watch](https://youtu.be/h8ic1_9Q9mI) |
+| 4 | [Mt. Rainier from Paradise](#rainier) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 15.5 min | Calm Ambient Dreamscape | `rainier_final.mp4` | [▶ watch](https://youtu.be/JJB154LbBi0) |
+| 5 | [Cyberpunk city, rain, neon](#cyberpunk) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Neon Synthwave Drive | `cyberpunk_final.mp4` | [▶ watch](https://youtu.be/GrNTNQCqKnk) |
+| 6 | [FLL BOT Builders — Coastal Roots Farm, wide view](#fll_farm) | 2026-09-20 | done (v2) | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Calm Ambient Dreamscape | `fll_farm_v2_final.mp4` | [▶ watch](https://youtu.be/-Mf2UThasCg) |
 
-## Coastal wildflowers (v1) {#coast}
+## Coastal wildflowers {#coast}
 
-- **Date**: 2026-09-20 · **Status**: superseded by coast_v2 · **Version**: `v1-drawthings-ui` · **Draw Things project**: `Untitled-35903`
-- **This version**: Rendered by driving the Draw Things app window (accessibility automation).
-- **Files** (`raw/clips/`): `coast.mov`, `coast_loop.mp4`
-- **Notes**: First end-to-end run. Still too soft — Wan-T2V at native res. Led to FLUX for stills.
-
-**Still**
-
-| Setting | Value |
-|---|---|
-| Model | Wan 2.2 High Noise Expert T2V A14B (q8) @ 1 frame |
-| Size | 576x1280 |
-| Steps | 4 |
-| CFG | 1.0 |
-| Shift | 5 |
-| Sampler | UniPC Trailing |
-| LoRA | Lightning High-Noise 100% |
-
-Prompt: `anime painting of a coastal hillside at golden hour, wildflowers in the foreground, tall grass, ocean waves below a cliff, towering orange and pink cumulus clouds, warm sunset light, birds in the sky, Makoto Shinkai style, highly detailed, soft painterly light`
-
-**I2V**
-
-| Setting | Value |
-|---|---|
-| Model | Wan 2.2 High Noise Expert I2V A14B (8-bit S) |
-| Refiner | Wan 2.2 Low Noise Expert I2V A14B (8-bit S) @ 10% |
-| LoRA | Wan 2.2 A14B Lightning High-Noise T2V v2.0 @ 100% |
-| Size | 576x1280 |
-| Frames | 81 |
-| FPS | 16 |
-| Steps | 4 |
-| CFG | 1.0 |
-| Shift | 5 |
-| Sampler | UniPC Trailing |
-| Strength | 100% |
-| I2V time (min) | 24 |
-
-Prompt: `static camera, gentle ocean waves rolling onto the shore, grass and wildflowers swaying in a soft breeze, birds drifting slowly across the sky, clouds moving slowly, subtle motion, minimal movement`
-
-**Post**
-
-| Setting | Value |
-|---|---|
-| Script | scripts/finish_clip.sh |
-| Loop | ping-pong x3 (rejected: reverses motion), then forward crossfade |
-| Upscale | lanczos 1080x1920 |
-
-## Coastal wildflowers (v2) {#coast_v2}
-
-- **Date**: 2026-09-20 · **Status**: done · **Version**: `v1-drawthings-ui` · **Draw Things project**: `Untitled-35903`
-- **This version**: Rendered by driving the Draw Things app window (accessibility automation).
-- **Files** (`raw/clips/`): `coast_flux_1024x1792.png`, `coast_flux_576x1024.png`, `coast_v2.mov`, `coast_v2_loop.mp4`, `coast_v2_final.mp4`
-- **Notes**: First run with wrong refiner (6-bit, not downloaded) produced washed-out noise; re-run with 8-bit S.
+- **Date**: 2026-09-20 · **Status**: done · **Version**: `v2-klein-still` · **Draw Things project**: `Untitled-35903`
+- **This version**: Still generated with FLUX.2 klein at 1024x1792 then cropped to 576x1024; the detail this added is what closed the gap with the reference.
+- **All versions**: `v1-wan-t2v-still` · `v2-klein-still`
+- **Files** (`projects/coast/v2-klein-still/`): `coast_flux_1024x1792.png`, `coast_flux_576x1024.png`, `coast_v2.mov`, `coast_v2_loop.mp4`, `coast_v2_final.mp4`
+- **Notes**: First run with wrong refiner (6-bit, not downloaded) produced washed-out noise; re-run with 8-bit S. Merged with the former coast_v2 project on 2026-09-25: the two were one film made twice, so they are now v1 and v2 of a single project.
 
 - **YouTube**: [youtu.be/W8fy4bhGOEU](https://youtu.be/W8fy4bhGOEU)
 
-<div class="yt yt-v"><iframe src="https://www.youtube.com/embed/W8fy4bhGOEU" title="Coastal wildflowers (v2)" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<div class="yt yt-v"><iframe src="https://www.youtube.com/embed/W8fy4bhGOEU" title="Coastal wildflowers" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
 **Still**
 
@@ -128,7 +80,7 @@ Prompt: `static camera, gentle ocean waves rolling onto the shore, grass and wil
 
 - **Date**: 2026-09-20 · **Status**: done · **Version**: `v1-drawthings-ui` · **Draw Things project**: `Untitled-91451`
 - **This version**: Rendered by driving the Draw Things app window (accessibility automation).
-- **Files** (`raw/clips/`): `torrey_flux_1024x1792.png`, `torrey_flux_576x1024.png`, `torrey.mov`, `torrey_loop.mp4`, `torrey_final.mp4`
+- **Files** (`projects/torrey/v1-drawthings-ui/`): `torrey_flux_1024x1792.png`, `torrey_flux_576x1024.png`, `torrey.mov`, `torrey_loop.mp4`, `torrey_final.mp4`
 - **Notes**: Second run of the runbook; refiner trap caught by checklist.
 
 - **YouTube**: [youtu.be/nRU-Upd2E3o](https://youtu.be/nRU-Upd2E3o)
@@ -182,7 +134,7 @@ Prompt: `static camera, gentle ocean waves rolling onto the beach below the clif
 
 - **Date**: 2026-09-20 · **Status**: done · **Version**: `v1-drawthings-ui` · **Draw Things project**: `Untitled-82025`
 - **This version**: Rendered by driving the Draw Things app window (accessibility automation).
-- **Files** (`raw/clips/`): `goldengate.mov`, `goldengate_loop.mp4`, `goldengate_final.mp4`
+- **Files** (`projects/goldengate/v1-drawthings-ui/`): `goldengate.mov`, `goldengate_loop.mp4`, `goldengate_final.mp4`
 - **Notes**: Proved native 576x1024 still is good enough; runbook switched to it. Mac was locked 2.5 h with Save sheet open — render survived.
 
 - **YouTube**: [youtu.be/h8ic1_9Q9mI](https://youtu.be/h8ic1_9Q9mI)
@@ -235,7 +187,7 @@ Prompt: `static camera, fog slowly drifting under the bridge, gentle waves on th
 
 - **Date**: 2026-09-20 · **Status**: done · **Version**: `v1-drawthings-ui` · **Draw Things project**: `Untitled-70762`
 - **This version**: Rendered by driving the Draw Things app window (accessibility automation).
-- **Files** (`raw/clips/`): `rainier.mov`, `rainier_loop.mp4`, `rainier_final.mp4`
+- **Files** (`projects/rainier/v1-drawthings-ui/`): `rainier.mov`, `rainier_loop.mp4`, `rainier_final.mp4`
 - **Notes**: First zero-click run — export Save button pressed by automation.
 
 - **YouTube**: [youtu.be/JJB154LbBi0](https://youtu.be/JJB154LbBi0)
@@ -287,7 +239,7 @@ Prompt: `static camera, wildflowers and meadow grass swaying in a soft breeze, t
 
 - **Date**: 2026-09-20 · **Status**: done · **Version**: `v1-drawthings-ui` · **Draw Things project**: `Untitled-76300`
 - **This version**: Rendered by driving the Draw Things app window (accessibility automation).
-- **Files** (`raw/clips/`): `cyberpunk.mov`, `cyberpunk_loop.mp4`, `cyberpunk_final.mp4`
+- **Files** (`projects/cyberpunk/v1-drawthings-ui/`): `cyberpunk.mov`, `cyberpunk_loop.mp4`, `cyberpunk_final.mp4`
 - **Notes**: Night scene works with the same style suffix. Music swapped from the calm-ambient default to synthwave on 2026-09-20.
 
 - **YouTube**: [youtu.be/GrNTNQCqKnk](https://youtu.be/GrNTNQCqKnk)
@@ -339,7 +291,7 @@ Prompt: `static camera, rain falling steadily, neon signs flickering and glowing
 
 - **Date**: 2026-09-20 · **Status**: done (v2) · **Version**: `v1-drawthings-ui` · **Draw Things project**: `Untitled-91574`
 - **This version**: Rendered by driving the Draw Things app window (accessibility automation).
-- **Files** (`raw/clips/`): `fll_farm_v2.mov`, `fll_farm_v2_loop.mp4`, `fll_farm_v2_final.mp4`, `fll_farm.mov (v1, rejected)`, `fll_farm_final.mp4 (v1, rejected)`, `fll/team_entrance.webp (reference only)`, `fll/chickens.webp (reference only)`, `fll/crop_rows.webp (reference only)`, `fll/logo.webp`
+- **Files** (`projects/fll_farm/v1-drawthings-ui/`): `fll_farm_v2.mov`, `fll_farm_v2_loop.mp4`, `fll_farm_v2_final.mp4`, `fll_farm.mov (v1, rejected)`, `fll_farm_final.mp4 (v1, rejected)`, `fll/team_entrance.webp (reference only)`, `fll/chickens.webp (reference only)`, `fll/crop_rows.webp (reference only)`, `fll/logo.webp`
 - **Notes**: Kids must be distant, no faces, no close-ups (Kevin's rule). Real photos used only as reference for farm features; a photoreal attempt and a real-photo I2V attempt were both abandoned. Farm details from FLL-kb: berms/swales, elderberry+pomegranate alleys with rotating chickens, sunflower mural shed, trellis netting. v1 (6 kids + adult, 'walking' prompt) had figures teleporting and merging; v2 regenerated with exactly 5+1 standing still and a wind-only motion prompt.
 
 - **YouTube**: [youtu.be/-Mf2UThasCg](https://youtu.be/-Mf2UThasCg)

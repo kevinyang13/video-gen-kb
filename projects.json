@@ -57,45 +57,9 @@
   "projects": [
     {
       "id": "coast",
-      "version": "v1-drawthings-ui",
-      "variant": "Rendered by driving the Draw Things app window (accessibility automation).",
-      "title": "Coastal wildflowers (v1)",
-      "date": "2026-09-20",
-      "theme": "anime",
-      "dt_project": "Untitled-35903",
-      "status": "superseded by coast_v2",
-      "still": {
-        "model": "Wan 2.2 High Noise Expert T2V A14B (q8) @ 1 frame",
-        "lora": "Lightning High-Noise 100%",
-        "steps": 4,
-        "cfg": 1.0,
-        "shift": 5,
-        "sampler": "UniPC Trailing",
-        "size": "576x1280",
-        "prompt": "anime painting of a coastal hillside at golden hour, wildflowers in the foreground, tall grass, ocean waves below a cliff, towering orange and pink cumulus clouds, warm sunset light, birds in the sky, Makoto Shinkai style, highly detailed, soft painterly light"
-      },
-      "i2v": {
-        "size": "576x1280",
-        "sampler": "UniPC Trailing",
-        "shift": 5,
-        "time_min": 24,
-        "prompt": "static camera, gentle ocean waves rolling onto the shore, grass and wildflowers swaying in a soft breeze, birds drifting slowly across the sky, clouds moving slowly, subtle motion, minimal movement"
-      },
-      "post": {
-        "loop": "ping-pong x3 (rejected: reverses motion), then forward crossfade",
-        "music": null
-      },
-      "files": [
-        "coast.mov",
-        "coast_loop.mp4"
-      ],
-      "notes": "First end-to-end run. Still too soft — Wan-T2V at native res. Led to FLUX for stills."
-    },
-    {
-      "id": "coast_v2",
-      "version": "v1-drawthings-ui",
-      "variant": "Rendered by driving the Draw Things app window (accessibility automation).",
-      "title": "Coastal wildflowers (v2)",
+      "version": "v2-klein-still",
+      "variant": "Still generated with FLUX.2 klein at 1024x1792 then cropped to 576x1024; the detail this added is what closed the gap with the reference.",
+      "title": "Coastal wildflowers",
       "date": "2026-09-20",
       "theme": "anime",
       "dt_project": "Untitled-35903",
@@ -119,8 +83,20 @@
         "coast_v2_loop.mp4",
         "coast_v2_final.mp4"
       ],
-      "notes": "First run with wrong refiner (6-bit, not downloaded) produced washed-out noise; re-run with 8-bit S.",
-      "youtube": "W8fy4bhGOEU"
+      "notes": "First run with wrong refiner (6-bit, not downloaded) produced washed-out noise; re-run with 8-bit S. Merged with the former coast_v2 project on 2026-09-25: the two were one film made twice, so they are now v1 and v2 of a single project.",
+      "youtube": "W8fy4bhGOEU",
+      "versions": [
+        {
+          "version": "v1-wan-t2v-still",
+          "variant": "Still generated with Wan 2.2 T2V at 576x1280, then Wan I2V; superseded because the still lacked detail.",
+          "status": "superseded by v2-klein-still — kept as the record of the Wan-still attempt"
+        },
+        {
+          "version": "v2-klein-still",
+          "variant": "Still generated with FLUX.2 klein at 1024x1792 then cropped to 576x1024; the detail this added is what closed the gap with the reference.",
+          "status": "done"
+        }
+      ]
     },
     {
       "id": "torrey",
