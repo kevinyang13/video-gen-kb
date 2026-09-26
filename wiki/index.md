@@ -34,6 +34,7 @@ Each project owns a folder — `projects/<id>/<version>/` — and its plan page 
 
 **Project plans** — the story, decisions and results behind each film:
 
+- [[nightelf-hunter-plan]] — Night Elf Hunter: **delivered** (57.6 s), photoreal half-elf with a real face and a bear companion; seeding a cast from one photo, and what happens when a seed and its prompts disagree
 - [[lost-city-plan]] — Lost City: hyper-real rider entering jungle ruins; klein Moodboard stills, Wan 2.2 vs LTX-2.3 motion settings, creature/hero/city locks, 15-shot list, experiments L0–L6
 - [[dragon-epic-plan]] — Dragon Epic: 1-minute photoreal short with a personal face; config per stage, face-identity and dragon-consistency strategy, 12-shot list, budget
 - [[kyle-antarctic-rescue-plan]] — Kyle's Antarctic Rescue: **delivered**, 1-minute vertical from a 2D comic, rendered unattended overnight; klein edit-mode masters, diptych identity lock, every pick and rejection

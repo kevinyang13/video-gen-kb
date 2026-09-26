@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Night Elf Hunter — a Hunter and His Bear Crossing the Grassland — video-gen-kb</title>
+<style>
+:root{--bg:#0B0D12;--panel:#141822;--panel-2:#1B2130;--stroke:#2A3245;--text:#E6E9F0;
+--muted:#8B94A7;--accent:#F5B84B;--accent-2:#4BC9F5;--on-accent:#12131A;
+--rule:rgba(139,148,167,.22);--code:#F5B84B}
+@media(prefers-color-scheme:light){:root:not([data-theme=dark]){--bg:#F4F1EA;--panel:#fff;
+--panel-2:#FAF8F3;--stroke:#D9D3C6;--text:#16181F;--muted:#5D6473;--accent:#B8781A;
+--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}}
+:root[data-theme=light]{--bg:#F4F1EA;--panel:#fff;--panel-2:#FAF8F3;--stroke:#D9D3C6;
+--text:#16181F;--muted:#5D6473;--accent:#B8781A;--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);
+line-height:1.65;padding:0 1rem 4rem}
+.shell{max-width:840px;margin:0 auto}
+a{color:var(--accent);text-decoration:none;font-weight:600}
+a:hover{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--accent-2);outline-offset:3px;border-radius:4px}
+.bar{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;padding:1.1rem 0;margin-bottom:1.5rem;
+border-bottom:1px solid var(--stroke)}
+.crumb{font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.spacer{flex:1}
+.pill{border:1px solid var(--stroke);background:var(--panel);border-radius:999px;padding:.28rem .8rem;
+font-size:.75rem;font-weight:700;color:var(--text);cursor:pointer;font-family:inherit}
+.pill:hover{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+h1{font-size:clamp(1.7rem,5vw,2.5rem);margin:.2rem 0 1rem;line-height:1.1;letter-spacing:-.015em;text-wrap:balance}
+h2{font-size:1.25rem;margin:2.2rem 0 .7rem;padding-bottom:.35rem;border-bottom:1px solid var(--rule);text-wrap:balance}
+h3{font-size:1.02rem;margin:1.5rem 0 .5rem;color:var(--accent)}
+p{margin:.7rem 0}
+ul,ol{margin:.7rem 0 .7rem 1.3rem}
+li{margin:.28rem 0}
+li::marker{color:var(--accent)}
+em{color:var(--muted)}
+hr{border:none;border-top:1px solid var(--stroke);margin:2rem 0}
+blockquote{border-left:3px solid var(--accent);background:var(--panel);border-radius:0 10px 10px 0;
+padding:.8rem 1.1rem;margin:1.1rem 0;color:var(--muted);font-size:.92rem}
+code{background:var(--panel);border:1px solid var(--stroke);border-radius:5px;padding:.1rem .35rem;
+font-size:.85em;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--code)}
+img{max-width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--stroke);margin:1.1rem 0}
+pre{background:var(--panel);border:1px solid var(--stroke);border-radius:12px;padding:1rem;overflow-x:auto;margin:1.1rem 0}
+pre code{background:none;border:none;padding:0;color:var(--text);font-size:.83rem;line-height:1.55}
+.tw{overflow-x:auto;border:1px solid var(--stroke);border-radius:12px;background:var(--panel);margin:1.1rem 0}
+table{width:100%;border-collapse:collapse;font-size:.85rem;min-width:min(100%,460px)}
+th{background:var(--panel-2);color:var(--accent);text-align:left;padding:.55rem .8rem;font-size:.68rem;
+letter-spacing:.09em;text-transform:uppercase;white-space:nowrap;border-bottom:1px solid var(--stroke)}
+td{padding:.5rem .8rem;border-bottom:1px solid var(--rule);color:var(--muted);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td strong{color:var(--text)}
+.meta{display:flex;flex-wrap:wrap;gap:.4rem .9rem;font-size:.78rem;color:var(--muted);margin:-.4rem 0 1.2rem}
+.meta b{color:var(--text);font-weight:600}
+.missing{color:var(--muted);border-bottom:1px dashed var(--muted);cursor:help}
+.related{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--stroke)}
+.related h2{border:none;margin:0 0 .7rem;font-size:.95rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:0}
+.chips li{margin:0}
+.chips a,.chips .missing{display:inline-block;border:1px solid var(--stroke);background:var(--panel);
+border-radius:999px;padding:.28rem .8rem;font-size:.8rem}
+.chips a:hover{background:var(--accent);color:var(--on-accent);text-decoration:none;border-color:var(--accent)}
+footer{max-width:840px;margin:2.5rem auto 0;padding-top:1.2rem;border-top:1px solid var(--stroke);
+font-size:.75rem;color:var(--muted);text-align:center}
+/* landing */
+.hero{padding:2.4rem 0 1.6rem}
+.kicker{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2)}
+.hero h1{font-size:clamp(2rem,6vw,3.2rem);margin:.35rem 0 .5rem}
+.hero p{color:var(--muted);font-size:1.05rem;max-width:56ch}
+.hw{display:inline-flex;gap:.5rem;align-items:center;margin-top:1rem;border:1px solid var(--stroke);
+background:var(--panel);border-radius:999px;padding:.3rem .9rem;font-size:.78rem;color:var(--muted)}
+.hw .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.sec{margin-top:2.2rem}
+.sec h2{border:none;padding:0;margin:0 0 .8rem;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.9rem}
+.card{display:block;border:1px solid var(--stroke);background:var(--panel);border-radius:14px;padding:1rem 1.1rem;
+color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+.card b{display:block;color:var(--accent);font-size:1rem;margin-bottom:.3rem}
+.card span{font-size:.85rem;color:var(--muted);line-height:1.5}
+.stubs{font-size:.82rem;color:var(--muted);margin-top:.6rem}
+.yt{position:relative;width:100%;aspect-ratio:16/9;border:1px solid var(--stroke);border-radius:12px;overflow:hidden;background:#000;margin:1rem 0}
+.yt.yt-v{aspect-ratio:9/16;max-width:360px}
+.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="bar">
+    <span class="crumb"><a href="../">video-gen-kb</a> / <a href="index.html">Wiki</a></span>
+    <span class="spacer"></span>
+    <button class="pill" onclick="tt()">◐ Theme</button>
+  </nav>
+  <h1>Night Elf Hunter — a Hunter and His Bear Crossing the Grassland</h1><p class="lede">A 57-second 16:9 photoreal fantasy short: a half-elf hunter with Kevin's son's face walks the grassland toward a distant walled city, a brown bear at his side. Eight shots, rendered entirely with <code>draw-things-cli</code>. The project's real subject is <strong>seeding</strong> — a character turnaround sheet, an animal, and two location plates made before a single shot was rendered — and what happens when a seed and its prompts disagree.</p><div class="meta"><span><b>Updated</b> 2026-09-26 (delivered)</span><span><b>Sources</b> <code>raw/kyle_ship.jpg</code>, <code>kyle_breakfast.jpg</code> (Kyle's face); <a href="idea-to-video-blueprint.html">idea to video blueprint</a> Phase 4/4b; <a href="identity-conditioning.html">identity conditioning</a>; <a href="headless-cli-pipeline.html">headless cli pipeline</a>.</span></div>
+<hr />
+<h2>0. Result</h2>
+<p><strong>Delivered</strong> 2026-09-26 05:16: <code>final/nightelf_hunter_3840x2160.mp4</code> (57.64 s, 278 MB) and <code>nightelf_hunter_1920x1080.mp4</code> (85 MB). Music "Adventure Journey" (The_Mountain, Pixabay) under the LTX ambience; mean −18.8 dB, peak −5.9 dB.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Shot</th>
+<th>Seeded from</th>
+<th>Kept</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>s1</td>
+<td>Establishing: the pair small in the grassland, city on the horizon</td>
+<td>land plate</td>
+<td>9.5 s</td>
+</tr>
+<tr>
+<td>s2</td>
+<td>Tracking alongside, hunter and bear walking</td>
+<td>hunter master</td>
+<td>6.5 s</td>
+</tr>
+<tr>
+<td>s3</td>
+<td>The bear's head pushing through the grass</td>
+<td>bear plate</td>
+<td>9.9 s</td>
+</tr>
+<tr>
+<td>s4</td>
+<td>He stops and looks toward the city — the one face shot</td>
+<td>hunter master</td>
+<td>8.0 s</td>
+</tr>
+<tr>
+<td>s5</td>
+<td>Low through the grass: boots and paws passing</td>
+<td>land plate</td>
+<td>5.0 s</td>
+</tr>
+<tr>
+<td>s6</td>
+<td>The bear stops, his hand on its shoulder</td>
+<td>hunter <strong>back</strong> panel</td>
+<td>9.9 s</td>
+</tr>
+<tr>
+<td>s7</td>
+<td>The city closer, towers catching the light</td>
+<td>city plate</td>
+<td>6.0 s</td>
+</tr>
+<tr>
+<td>s8</td>
+<td>Cresting the rise, the last look before the gates</td>
+<td>land plate</td>
+<td>8.0 s</td>
+</tr>
+</tbody>
+</table></div>
+<p>No shot was dropped. Every trim is a drift point, not an aesthetic choice: s2 loses the hunter entirely after ~6 s and the bear walks on alone; s5 empties as both leave frame; s7 hits an LTX end-fade at 6.28 s; s8 loses the bear late. The two steadiest clips — s3 (bear close-up) and s6 (hand on the bear's shoulder) — held the full 10 s, which matches the motion-stability rule from <a href="lost-city-plan.html">lost city plan</a>: slow, in-place action survives, travel does not.</p>
+<h2>1. Decisions</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Look</td>
+<td>photoreal live-action fantasy</td>
+</tr>
+<tr>
+<td>Elf treatment</td>
+<td><strong>half-elf</strong> — Kyle's face and skin, long pointed ears, faint blue-green markings; no purple skin, no glowing eyes</td>
+</tr>
+<tr>
+<td>Age</td>
+<td>adult, about twenty-eight</td>
+</tr>
+<tr>
+<td>Format</td>
+<td>16:9, 60 s target, 8 shots</td>
+</tr>
+<tr>
+<td>Sound</td>
+<td>LTX ambience + one music bed</td>
+</tr>
+<tr>
+<td>Gate</td>
+<td>seeds approved, then unattended to delivery</td>
+</tr>
+</tbody>
+</table></div>
+<p>Photoreal was chosen knowing it exposes likeness gaps that stylisation hides (<a href="bot-builders-champion-photo-cut-plan.html">bot builders champion photo cut plan</a> §2). The mitigation is staging: <strong>one face shot out of eight</strong>, everything else from behind, small in frame, or the animal alone.</p>
+<h2>2. Seeds</h2>
+<p>Four seeds carried the whole film:</p>
+<ul>
+<li><strong>Hunter</strong> — Kyle's ship photo → klein edit at strength 1.0 adding ears, markings and leather armour → aged to an adult → a four-view turnaround (<code>seed_sheet.sh</code>).</li>
+<li><strong>Bear</strong> — text-to-image plate, real grizzly build, leather harness, on all fours.</li>
+<li><strong>Grassland plate</strong> and <strong>city plate</strong> — empty landscapes, "no people, no text".</li>
+</ul>
+<p>Shots then used the panel that matched their angle: s6 is seeded from <code>hunter_back.png</code>, not the front portrait, which is the entire point of a sheet.</p>
+<p><strong>Ageing took two passes.</strong> "A grown man in his early thirties" produced a 45–55-year-old; adding <em>"about twenty-eight, in his athletic prime, clear taut skin, no deep wrinkles, no crow's feet, not middle-aged"</em> landed it.</p>
+<p><strong>The profile came back with two faces</strong> — a Janus artifact, the frontal face kept and a profile added beside it with the ear between them. Fixed in <code>seed_sheet.sh</code> itself: the side prompt now demands one visible eye and forbids a second face.</p>
+<h2>3. The mistake: a seed and its prompts disagreeing</h2>
+<p>The first full still batch came back with <strong>a ten-year-old boy in adult armour</strong> in seven of eight shots.</p>
+<p>The master had been aged up on request, but the character lock embedded in every shot prompt still read <em>"a young half-elf hunter boy of about ten"</em>. klein follows the text. The seed was an adult; the prompts said child; the prompts won.</p>
+<p><strong>Rule</strong>: changing a master does not propagate. The lock and every prompt that embeds it must change with it, and the run-spec must be re-synced from the scenes afterwards. This is the same family as the mixed-generation failure on the Bot Builders photo cut — a stale ingredient that passes every per-shot check because nothing compares the shot against its own seed.</p>
+<p>Cost: 24 wasted candidate renders, about 25 minutes.</p>
+<h2>4. Settings</h2>
+<p>klein 9B, 4 steps, CFG 1, shift 3, DDIM Trailing, 1024×576, edit mode at <code>--strength 1.0</code>. LTX-2.3 distilled, 8 steps, CFG 1, TCD Trailing, SSS 0.3, shift 5, 249 frames at 25 fps, ~10 min per clip. Real-ESRGAN x4plus to 3840×2160; crossfades 0.75 s.</p>
+<p>Whole run: seeds ~15 min, stills 2 × 25 min (one wasted), clips 78 min, finish 72 min.</p>
+<h2>5. What to fix in a v2</h2>
+<ul>
+<li>The city changes character between shots — a fairy-tale castle in s7, a denser skyline in s8. One city plate is not enough; seed the gate, the walls and the skyline separately, or chain s8 from the approved s7 still.</li>
+<li>The hunter's ears are hidden by hair in several shots; naming them in the prompt is not enough at small scale.</li>
+<li>s2's disappearing hunter is a tracking-shot failure — the same "subject slides out of frame" problem Lost City solved by phrasing the move as the camera keeping the subject centred.</li>
+</ul>
+
+  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="idea-to-video-blueprint.html">idea to video blueprint</a> — Phase 4 and 4b, seeding and how to feed a seed into a shot</li><li><a href="identity-conditioning.html">identity conditioning</a> · <a href="character-consistency.html">character consistency</a></li><li><a href="headless-cli-pipeline.html">headless cli pipeline</a> · <a href="scripts-reference.html">scripts reference</a></li></ul></div>
+</div>
+<footer>video-gen-kb · built 2026-09-26 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<script>function tt(){var r=document.documentElement,
+d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
+matchMedia('(prefers-color-scheme: dark)').matches);
+r.setAttribute('data-theme',d?'light':'dark');}</script>
+</body>
+</html>

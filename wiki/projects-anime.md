@@ -4,7 +4,7 @@
 
 **Sources**: projects/*/*/spec.json; per-project notes from the session logs.
 
-**Last updated**: 2026-09-25
+**Last updated**: 2026-09-26
 
 ---
 

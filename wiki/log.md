@@ -8,6 +8,18 @@
 
 ---
 
+## 2026-09-26 — Night Elf Hunter delivered (57.6 s, photoreal, seeded cast)
+
+New project, rendered unattended overnight: a half-elf hunter with Kyle's face and a brown bear walking the grassland toward a distant city. Eight shots, `final/nightelf_hunter_3840x2160.mp4` (57.64 s) plus a 1920×1080 copy, music "Adventure Journey" picked for its rising arc (−18.5 dB climbing to −10 across the first minute, matching grassland → city revealed → crest). Nothing dropped; every trim is a drift point, not taste.
+
+**First project built the new way** — [[idea-to-video-blueprint]] Phase 4/4b in anger. Four seeds before any shot: a hunter turnaround sheet from one photo, a bear, a grassland plate and a city plate. s6 is seeded from the sheet's **back** panel rather than the front portrait, which is the whole reason a sheet exists.
+
+**The mistake worth keeping**: the first still batch returned a ten-year-old boy in adult armour in seven of eight shots. The master had been aged up on request, but the character lock embedded in every shot prompt still said *"a young half-elf hunter boy of about ten"* — and klein follows the text. **Changing a master does not propagate**: the lock, every prompt embedding it, and the run-spec must all change together. Same family as the Bot Builders mixed-generation failure — a stale ingredient that passes every per-shot check because nothing compares a shot against its own seed. 24 candidates and 25 minutes wasted.
+
+Also fixed in the tooling: `seed_sheet.sh` produced a **Janus profile** (frontal face kept, profile added beside it, ear between), so its side prompt now demands one visible eye and forbids a second face. And two zsh traps cost a restart: `set -- $var` and `for x in $list` do not word-split in zsh, so a pick loop silently failed eight times while the clip batch started against zero picked stills — pick loops now run under `bash -c`.
+
+Report: [[nightelf-hunter-plan]].
+
 ## 2026-09-25 — Seeds become turnaround sheets
 
 Kevin showed what a seed should look like: a proper model sheet — front, three-quarter, profile, back, plus detail insets (eye, mouth, clawed foot, saddle) and gait thumbnails — not the single frontal portrait we had been making. He is right, and [[identity-conditioning]] already said why: reference tokens copy what they can *see*, so a frontal-only seed leaves the model inventing the side and back of a head, and the character changes the moment they turn.

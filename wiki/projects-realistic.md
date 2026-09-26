@@ -4,7 +4,7 @@
 
 **Sources**: projects/*/*/spec.json; per-project notes from the session logs.
 
-**Last updated**: 2026-09-25
+**Last updated**: 2026-09-26
 
 ---
 
@@ -16,6 +16,7 @@ Index of every project: [[projects]]. Other themes: [[projects-anime]] · [[proj
 |--:|---|---|---|---|---|---|---|---|
 | 1 | [Dragon Epic — 1-minute photoreal short, family hero face](#dragon_epic) | 2026-09-21 | in progress — scene 1A posted | FLUX.2 [klein] 9B 1280x768 | Wan 2.2 High Noise 47 min | The Dragon's Breath | `—` | [▶ watch](https://youtu.be/Xzu-c5yX8uo) |
 | 2 | [Lost City — hyper-real rider on a raptor-dragon entering jungle ruins](#lost_city) | 2026-09-21 | in progress — 4K with music: s3, s4, s5, s8, s9; s1 and s2 at 4K without music; s6 trimmed to 4.6 s and never upscaled; **s7 (escape run) not rendered**; no film assembled yet | FLUX.2 [klein] 9B 1280x768 | LTX-2.3 22B [distilled] 1.1 (production engine — see ltx_10s) — Wan 2.2 High Noise I2V (8-bit S) + Low Noise refiner 10% for locked-camera shots at 768p 49 min | Mystical orchestral theme with ancient flute | `—` | [▶ watch](https://youtu.be/68sq_jZqu6c) |
+| 3 | [Night Elf Hunter — a boy and his bear crossing the grassland](#nightelf_hunter) | 2026-09-25 | delivered 2026-09-26 05:16 — 57.64 s, 3840x2160 + 1920x1080, 8 shots, none dropped (see plan §0) | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 10 min | Adventure Journey | `—` | — |
 
 ## Dragon Epic — 1-minute photoreal short, family hero face {#dragon_epic}
 
@@ -273,6 +274,168 @@ Prompt: `per scene — see the scenes table`
 *Video prompt*
 
 > Fixed camera, wide landscape. In the foreground the creature stands solid and completely still on the ridge, its whole body intact and upright, the long neck steady and the head held level and attached, only its ribs moving with deep slow breaths and its tail swaying gently; the rider sits upright in the saddle and watches, cloak moving in the wind; grass and ferns bend around their feet. All of the destruction is far away on the horizon and nowhere near them: out there in the distance the city finishes falling, spire after spire leaning, buckling and dropping in slow heavy arcs, the tallest towers going last, each collapse throwing up a fresh dust plume until the plumes merge into one grey wall rolling outward, and by the end nothing is left standing on the skyline, only a flat bank of dust over rubble. Distant thunderous collapse, grinding stone, rising wind, heavy animal breathing, no music.
+
+## Night Elf Hunter — a boy and his bear crossing the grassland {#nightelf_hunter}
+
+- **Date**: 2026-09-25 · **Status**: delivered 2026-09-26 05:16 — 57.64 s, 3840x2160 + 1920x1080, 8 shots, none dropped (see plan §0) · **Version**: `v1-drawthings-cli` · **Draw Things project**: `none — draw-things-cli via scripts/film_run.py`
+- **This version**: First version: photoreal live-action fantasy, half-elf treatment (Kyle's face, elf ears and markings), rendered headless with draw-things-cli.
+- **Files** (`projects/nightelf_hunter/v1-drawthings-cli/`): `raw/kyle_ship.jpg, kyle_breakfast.jpg (source photos)`, `seed/hunter{,_34,_side,_back,_sheet}.png, bear.png, land.png, city.png`, `stills/s1..s8.png`, `clips/s1..s8_v1.mov + _4k.mp4`, `final/nightelf_hunter_3840x2160.mp4, _1920x1080.mp4, _preview.mp4`, `music/adventure_journey.mp3`
+- **Notes**: Kyle is Kevin's son; consent settled. Half-elf treatment chosen so the face stays recognisable: normal skin tone and eyes, long pointed ears and faint night-elf markings. Photoreal was chosen with eyes open — it exposes likeness gaps that stylisation hides (see bot-builders-champion-photo-cut-plan §2), so face shots are limited to one (s4) and trimmed short.
+
+**Still**
+
+| Setting | Value |
+|---|---|
+| Model | FLUX.2 [klein] 9B (8-bit S) |
+| Size | 1024x576 |
+| Steps | 4 |
+| CFG | 1.0 |
+| Shift | 3 |
+| Sampler | DDIM Trailing |
+
+Prompt: `per shot — see scenes`
+
+**I2V**
+
+| Setting | Value |
+|---|---|
+| Model | LTX-2.3 22B [distilled] 1.1 |
+| Refiner | Wan 2.2 Low Noise Expert I2V A14B (8-bit S) @ 10% |
+| LoRA | Wan 2.2 A14B Lightning High-Noise T2V v2.0 @ 100% |
+| Size | 1024x576 |
+| Frames | 249 |
+| FPS | 25 |
+| Steps | 8 |
+| CFG | 1.0 |
+| Shift | 5.0 |
+| Sampler | TCD Trailing |
+| Strength | 100% |
+| I2V time (min) | 10 |
+
+**Post**
+
+| Setting | Value |
+|---|---|
+| Script | scripts/finish_clip.sh |
+| Loop | none — xfade 0.75 |
+| Upscale | scripts/upscale_4k.sh — Real-ESRGAN x4plus -> 3840x2160 |
+| Music | Adventure Journey — The_Mountain, Pixabay (cdn.pixabay.com/download/audio/2025/03/23/audio_51e1fddfd9.mp3), 2:07; first 60 s under the LTX ambience at 0.45, 2 s fade out. Picked for its rising arc: -18.5 dB at the start climbing to -10 dB by 60 s, which matches quiet grassland → city revealed → the crest. |
+
+### Scene prompts
+
+**Locks** (paste verbatim into every prompt):
+
+- *style head* — Cinematic film still from a live-action fantasy film, anamorphic 35mm, photoreal skin, cloth and fur, natural daylight, shallow depth of field, subtle film grain, muted natural colour.
+- *style tail* — Photorealistic, highly detailed, no cartoon or animation styling, no text, no lettering, no logos, no HUD, no extra people beyond those described.
+- *hunter* — a half-elf hunter, a grown man of about twenty-eight with a strong jaw, light stubble and an athletic build, this exact face, long slender pointed ears swept back, faint pale blue-green night-elf markings curving under each eye, dark green and brown worn leather hunter's armour with a hooded cloak thrown back, a longbow and a quiver of arrows across his back
+- *bear* — a large brown bear companion walking at his side, thick shaggy brown fur, broad head, small dark eyes, a simple worn leather harness across the shoulders, calm and watchful, the size of a real grizzly
+- *land* — rolling green grassland under a wide sky, waist-high grass moving in the wind, scattered boulders and wildflowers, a far-distant walled city of pale stone towers and spires on the horizon, hazy with atmospheric perspective
+
+**Rules**: One face shot only (s4), trimmed short — photoreal faces drift after ~5 s under motion. Everywhere else the boy is from behind, three-quarter back, silhouetted or small in frame. Never say 'night elf' alone without the half-elf qualifiers or klein renders purple skin and glowing eyes. The bear is a real brown bear, never a cartoon bear and never standing on two legs. Camera holds still in every shot except s2's tracking move. The hunter is an ADULT man of about twenty-eight — never 'boy', never 'young': the first still batch rendered a ten-year-old in adult armour because the shot prompts still carried the child wording after the master was aged up. Prompt and seed must agree; the prompt wins.
+
+
+#### s1 — Establishing — the pair tiny in the grassland, city on the horizon
+
+- **Note**: No face: backs to camera. Safest shot in the film, so it opens.
+
+*Still prompt*
+
+> Cinematic film still from a live-action fantasy film, anamorphic 35mm, photoreal skin, cloth and fur, natural daylight, shallow depth of field, subtle film grain, muted natural colour. Extreme wide landscape. rolling green grassland under a wide sky, waist-high grass moving in the wind, scattered boulders and wildflowers, a far-distant walled city of pale stone towers and spires on the horizon, hazy with atmospheric perspective Small in the lower third of frame and seen from behind, a half-elf hunter, a grown man of about twenty-eight with a strong jaw, light stubble and an athletic build, this exact face, long slender pointed ears swept back, faint pale blue-green night-elf markings curving under each eye, dark green and brown worn leather hunter's armour with a hooded cloak thrown back, a longbow and a quiver of arrows across his back, walking away from camera through the grass beside a large brown bear companion walking at his side, thick shaggy brown fur, broad head, small dark eyes, a simple worn leather harness across the shoulders, calm and watchful, the size of a real grizzly. Enormous sense of scale, deep depth of field, layered atmospheric perspective. Photorealistic, highly detailed, no cartoon or animation styling, no text, no lettering, no logos, no HUD, no extra people beyond those described.
+
+*Video prompt*
+
+> Fixed camera. The hunter and the bear walk slowly away from the camera through the tall grass, the grass bending in long waves around them, cloud shadows sliding across the plain, the distant city steady on the horizon. Nothing else moves. Wind through grass, distant birds, muffled footfalls, no music.
+
+
+#### s2 — Tracking alongside — hunter and bear walking, three-quarter back
+
+- **Note**: Tracking phrasing keeps the subject centred — see lost-city-plan §3b.
+
+*Still prompt*
+
+> Cinematic film still from a live-action fantasy film, anamorphic 35mm, photoreal skin, cloth and fur, natural daylight, shallow depth of field, subtle film grain, muted natural colour. Medium wide, tracking alongside at walking height: a half-elf hunter, a grown man of about twenty-eight with a strong jaw, light stubble and an athletic build, this exact face, long slender pointed ears swept back, faint pale blue-green night-elf markings curving under each eye, dark green and brown worn leather hunter's armour with a hooded cloak thrown back, a longbow and a quiver of arrows across his back, seen from three-quarters behind so his face is turned away, walking through waist-high grass beside a large brown bear companion walking at his side, thick shaggy brown fur, broad head, small dark eyes, a simple worn leather harness across the shoulders, calm and watchful, the size of a real grizzly. Warm afternoon light raking across the plain, the city small and hazy far behind them. Photorealistic, highly detailed, no cartoon or animation styling, no text, no lettering, no logos, no HUD, no extra people beyond those described.
+
+*Video prompt*
+
+> Tracking shot, the camera moves alongside at walking pace so the hunter and the bear stay centred and the grassland slides past behind them. He walks steadily, the cloak and the quiver shifting with his stride; the bear lumbers beside him, head swinging slowly. Grass whips past the lens. Footsteps, grass, wind, the bear's heavy breathing, no music.
+
+
+#### s3 — The bear's head pushing through the grass
+
+- **Note**: Animal close-up, no human face: identity risk is zero here.
+
+*Still prompt*
+
+> Cinematic film still from a live-action fantasy film, anamorphic 35mm, photoreal skin, cloth and fur, natural daylight, shallow depth of field, subtle film grain, muted natural colour. Close on a large brown bear companion walking at his side, thick shaggy brown fur, broad head, small dark eyes, a simple worn leather harness across the shoulders, calm and watchful, the size of a real grizzly, head and shoulders filling the right of frame, pushing through tall grass toward the camera, individual guard hairs and the wet of the nose sharp, the hunter's cloaked shoulder blurred at the edge of frame. Photorealistic, highly detailed, no cartoon or animation styling, no text, no lettering, no logos, no HUD, no extra people beyond those described.
+
+*Video prompt*
+
+> The bear pushes forward through the grass, head swinging low and then lifting to sniff the air, ears twitching, breath moving its chest; grass slides across its shoulders. The camera holds completely still. Heavy breathing, rustling grass, wind, no music.
+
+
+#### s4 — Hunter stops and looks toward the city — the face shot
+
+- **Note**: The only clear face shot. Hold-position wording, trim short — photoreal faces drift after ~5 s.
+
+*Still prompt*
+
+> Cinematic film still from a live-action fantasy film, anamorphic 35mm, photoreal skin, cloth and fur, natural daylight, shallow depth of field, subtle film grain, muted natural colour. Medium close-up, head and shoulders: a half-elf hunter, a grown man of about twenty-eight with a strong jaw, light stubble and an athletic build, this exact face, long slender pointed ears swept back, faint pale blue-green night-elf markings curving under each eye, dark green and brown worn leather hunter's armour with a hooded cloak thrown back, a longbow and a quiver of arrows across his back, stopped in the grass and turned to look off toward the horizon, chin slightly lifted, the low sun on one side of his face, the plain soft behind him. Exactly one person in the frame. Photorealistic, highly detailed, no cartoon or animation styling, no text, no lettering, no logos, no HUD, no extra people beyond those described.
+
+*Video prompt*
+
+> He stands still and looks off toward the horizon, blinking once, the wind moving only the loose hair at his temple and the edge of his hood; his face, ears and markings stay exactly the same. The camera holds completely still. Wind, distant birds, no music.
+
+
+#### s5 — Low through the grass — boots and paws passing
+
+- **Note**: Pure texture shot, no faces. Buys screen time cheaply.
+
+*Still prompt*
+
+> Cinematic film still from a live-action fantasy film, anamorphic 35mm, photoreal skin, cloth and fur, natural daylight, shallow depth of field, subtle film grain, muted natural colour. Very low angle at ground level among the grass stems, looking up: worn leather boots and the lower legs of a half-elf hunter, a grown man of about twenty-eight with a strong jaw, light stubble and an athletic build, this exact face, long slender pointed ears swept back, faint pale blue-green night-elf markings curving under each eye, dark green and brown worn leather hunter's armour with a hooded cloak thrown back, a longbow and a quiver of arrows across his back passing close to camera, and beside them the heavy forepaws and shaggy legs of a large brown bear companion walking at his side, thick shaggy brown fur, broad head, small dark eyes, a simple worn leather harness across the shoulders, calm and watchful, the size of a real grizzly, grass and seed heads in the foreground catching the light. Only the legs and paws are in frame — the camera is below knee height and neither head is visible, no faces at all. Photorealistic, highly detailed, no cartoon or animation styling, no text, no lettering, no logos, no HUD, no extra people beyond those described.
+
+*Video prompt*
+
+> Boots and paws pass the camera one stride at a time, grass springing back behind them, dust and seed heads lifting in the light. The camera holds completely still at ground level. Footfalls, grass, wind, no music.
+
+
+#### s6 — The bear stops; the hunter's hand on its shoulder
+
+- **Note**: Back of head only; the emotional beat carries on posture, not expression.
+
+*Still prompt*
+
+> Cinematic film still from a live-action fantasy film, anamorphic 35mm, photoreal skin, cloth and fur, natural daylight, shallow depth of field, subtle film grain, muted natural colour. Medium two-shot from behind and slightly to the side: a half-elf hunter, a grown man of about twenty-eight with a strong jaw, light stubble and an athletic build, this exact face, long slender pointed ears swept back, faint pale blue-green night-elf markings curving under each eye, dark green and brown worn leather hunter's armour with a hooded cloak thrown back, a longbow and a quiver of arrows across his back stands with one gloved hand resting on the shoulder of a large brown bear companion walking at his side, thick shaggy brown fur, broad head, small dark eyes, a simple worn leather harness across the shoulders, calm and watchful, the size of a real grizzly, both of them looking ahead toward the distant city, his face turned away from camera. Late gold light, grass to the horizon. Photorealistic, highly detailed, no cartoon or animation styling, no text, no lettering, no logos, no HUD, no extra people beyond those described.
+
+*Video prompt*
+
+> Both stand still, looking ahead. The bear's flank rises and falls with its breathing, its ear flicks, the hunter's cloak and the grass move in the wind, his hand stays on the bear's shoulder. Nothing else changes. The camera holds completely still. Wind, breathing, distant birds, no music.
+
+
+#### s7 — The city closer — towers catching the light
+
+- **Note**: The reveal. Keep them small — a distant figure cannot drift.
+
+*Still prompt*
+
+> Cinematic film still from a live-action fantasy film, anamorphic 35mm, photoreal skin, cloth and fur, natural daylight, shallow depth of field, subtle film grain, muted natural colour. Wide, the camera low behind the grass: the walled city much closer now, pale stone towers and spires catching the late sun above a long wall, banners too far to read, the plain running up to its gates. In the lower left, small and seen from behind, a half-elf hunter, a grown man of about twenty-eight with a strong jaw, light stubble and an athletic build, this exact face, long slender pointed ears swept back, faint pale blue-green night-elf markings curving under each eye, dark green and brown worn leather hunter's armour with a hooded cloak thrown back, a longbow and a quiver of arrows across his back and a large brown bear companion walking at his side, thick shaggy brown fur, broad head, small dark eyes, a simple worn leather harness across the shoulders, calm and watchful, the size of a real grizzly walking toward it. Photorealistic, highly detailed, no cartoon or animation styling, no text, no lettering, no logos, no HUD, no extra people beyond those described.
+
+*Video prompt*
+
+> The grass in the foreground moves in the wind while the hunter and the bear walk slowly on toward the city; light shifts across the distant towers as cloud shadow passes. The camera holds completely still. Wind, faint distant bells, birds, no music.
+
+
+#### s8 — Cresting the rise — the last look before the gates
+
+- **Note**: Closing hold. Silhouette, so no identity load at all.
+
+*Still prompt*
+
+> Cinematic film still from a live-action fantasy film, anamorphic 35mm, photoreal skin, cloth and fur, natural daylight, shallow depth of field, subtle film grain, muted natural colour. Wide, from behind and slightly below: a half-elf hunter, a grown man of about twenty-eight with a strong jaw, light stubble and an athletic build, this exact face, long slender pointed ears swept back, faint pale blue-green night-elf markings curving under each eye, dark green and brown worn leather hunter's armour with a hooded cloak thrown back, a longbow and a quiver of arrows across his back and a large brown bear companion walking at his side, thick shaggy brown fur, broad head, small dark eyes, a simple worn leather harness across the shoulders, calm and watchful, the size of a real grizzly stopped on the crest of a low rise, silhouetted against the bright sky, the city spread out ahead of them below, the grass streaming in the wind around their legs. Photorealistic, highly detailed, no cartoon or animation styling, no text, no lettering, no logos, no HUD, no extra people beyond those described.
+
+*Video prompt*
+
+> They stand on the crest, the grass streaming around them in the wind, the cloak snapping once; the bear shifts its weight and settles; far below, light moves over the city. The camera holds completely still. Wind, grass, a distant bell, no music.
 
 ## Related pages
 - [[projects]]
