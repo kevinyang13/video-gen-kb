@@ -92,7 +92,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
     <span class="spacer"></span>
     <button class="pill" onclick="tt()">◐ Theme</button>
   </nav>
-  <h1>Lost City — Project Plan (hyper-real sci-fantasy rider)</h1><p class="lede">Plan for a hyper-realistic short in the style of the OpenArt reference (<code>raw/lostcity/ref_openart_rider_ruins.webp</code>): a hooded rider on a saddled raptor-dragon walks into an overgrown city of stone spires, god rays, waterfall. Covers what makes the reference look real, the local pipeline, Draw Things settings per stage (FLUX.2 klein stills; Wan 2.2 vs <strong>LTX-2.3</strong> for motion), creature/hero/environment consistency, shot list, experiments, budget. Living document.</p><div class="meta"><span><b>Updated</b> 2026-09-25 (shots renumbered to the cut order; shot 15 rift coda; LTX production settings in §3c; escape ending, shot 14 restaged as a landscape total collapse, creature enlarged after a motion-bleed failure; per-scene prompts in <a href="projects.html">projects</a>)</span><span><b>Sources</b> <code>raw/lostcity/ref_openart_rider_ruins.webp</code> (reference, OpenArt watermark — generator unknown, probably a closed model such as Kling/Veo/Seedance; <em>unverified</em>); Wan 2.2 prompting guides (<a href="https://www.mimicpc.com/learn/how-to-craft-wan22-ai-video-prompts">MimicPC</a>, <a href="https://www.instasd.com/post/wan2-2-whats-new-and-how-to-write-killer-prompts">InstaSD</a>, <a href="https://whatlab.ai/guides/wan2-2-prompting-guide">WhatLab</a>); LTX docs (<a href="https://docs.ltx.io/open-source-model/usage-guides/image-to-video">I2V guide</a>, <a href="https://wiki.drawthings.ai/wiki/LTX-2">Draw Things LTX-2 wiki</a>, <a href="https://huggingface.co/Lightricks/LTX-2.3">HF LTX-2.3</a>); hands-on results from <a href="dragon-epic-plan.html">dragon epic plan</a> §7b (2026-09-21). All as of 2026-09-21.</span></div>
+  <h1>Lost City — Project Plan (hyper-real sci-fantasy rider)</h1><p class="lede">Plan for a hyper-realistic short in the style of the OpenArt reference (<code>raw/lostcity/ref_openart_rider_ruins.webp</code>): a hooded rider on a saddled raptor-dragon walks into an overgrown city of stone spires, god rays, waterfall. Covers what makes the reference look real, the local pipeline, Draw Things settings per stage (FLUX.2 klein stills; Wan 2.2 vs <strong>LTX-2.3</strong> for motion), creature/hero/environment consistency, shot list, experiments, budget. Living document.</p><div class="meta"><span><b>Updated</b> 2026-09-25 (rift coda cut; shots renumbered to the cut order; LTX production settings in §3c; escape ending, shot 14 restaged as a landscape total collapse, creature enlarged after a motion-bleed failure; per-scene prompts in <a href="projects.html">projects</a>)</span><span><b>Sources</b> <code>raw/lostcity/ref_openart_rider_ruins.webp</code> (reference, OpenArt watermark — generator unknown, probably a closed model such as Kling/Veo/Seedance; <em>unverified</em>); Wan 2.2 prompting guides (<a href="https://www.mimicpc.com/learn/how-to-craft-wan22-ai-video-prompts">MimicPC</a>, <a href="https://www.instasd.com/post/wan2-2-whats-new-and-how-to-write-killer-prompts">InstaSD</a>, <a href="https://whatlab.ai/guides/wan2-2-prompting-guide">WhatLab</a>); LTX docs (<a href="https://docs.ltx.io/open-source-model/usage-guides/image-to-video">I2V guide</a>, <a href="https://wiki.drawthings.ai/wiki/LTX-2">Draw Things LTX-2 wiki</a>, <a href="https://huggingface.co/Lightricks/LTX-2.3">HF LTX-2.3</a>); hands-on results from <a href="dragon-epic-plan.html">dragon epic plan</a> §7b (2026-09-21). All as of 2026-09-21.</span></div>
 <hr />
 <h2>1. What the reference does — and what we copy</h2>
 <div class="tw"><table>
@@ -315,7 +315,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <li><strong>Action, not staging.</strong> "left to right, camera tracks alongside" was ignored on s1; the same wording worked on s2 and s5. Write the action you want, accept the camera you get, or shoot that frame on Wan.</li>
 <li><strong>Close-ups: hold position.</strong> Asking a close-up for locomotion (s4 v1) produced a full walk cycle that left the frame by 2 s <em>and</em> hallucinated a second rider behind. Use "stands still… only shifts its weight" and say the path behind <strong>stays empty</strong>.</li>
 <li><strong>Motion-stability rule</strong>: slow in-place actions (walk, drink, weight shift, breathing) hold the creature design for the full 10 s; fast locomotion (gallop, jump) drifts toward a horse after ~4–5 s → trim on the first soft frame (s6 → 116 f).</li>
-<li><strong>Never write "lightning" for a sky rift.</strong> klein renders a literal lightning bolt and ignores the tear. Torn-sky vocabulary works instead: <em>the sky is torn wide open by a long jagged crack like a sheet of glass broken from edge to edge, white light pouring through the gap, the torn edges glowing, clouds peeling back along them</em> (shot 15a, three seeds).</li>
+<li><strong>Never write "lightning" for a sky rift.</strong> klein renders a literal lightning bolt and ignores the tear. Torn-sky vocabulary works instead: <em>the sky is torn wide open by a long jagged crack like a sheet of glass broken from edge to edge, white light pouring through the gap, the torn edges glowing, clouds peeling back along them</em> (the rift shot, three seeds — since cut).</li>
 <li><strong>Motion bleeds onto small subjects.</strong> In a shot where something else is destroyed, LTX applies those verbs to the subject too: s9 v1 sheared the creature's <em>head</em> off and dropped it like a falling spire. Fixes, in order of effect: make the subject large (≥ a third of the frame — a head that is ~30 px in the 32×32 latent gets re-synthesised as debris), name the subject and its stillness <strong>before</strong> any falling verb, use positive rigidity words (<em>solid, still, intact, head held level and attached, only the ribs move</em>), and add one clause pinning the destruction to the distance. Last resort: render the destruction as a plate with no creature in it.</li>
 <li>Wide shots tolerate invented foreground geometry (s2 gained palm fronds sweeping the lens — more cinematic); hero shots do not.</li>
 </ul>
@@ -356,7 +356,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <p><strong>Motion prompt 1 (Wan)</strong>: see §3b tracking-shot prompt.
 <strong>Motion prompt 1 (LTX)</strong>: <code>The creature walks slowly from left to right with a heavy four-legged gait, its head bobbing and tail swaying, while the camera tracks alongside at the same pace so the rider stays centred. The rider sways gently in the saddle, the cloak lifting in a light breeze. Behind them the waterfall pours steadily and thin mist drifts through the shafts of light; two birds glide across the distant spires. Heavy footsteps on damp earth, the far roar of the waterfall, faint jungle birdsong, no music.</code></p>
 <h2>6. Shot list (the cut, renumbered 2026-09-25)</h2>
-<p>Nine shots plus the rift coda, numbered in the order they play. Old → new: s10→s3, s3→s4, s7→s5, s9→s6, s13→s7, s14→s9; s1, s2, s8 and s15a–c unchanged.</p>
+<p>Nine shots, numbered in the order they play. Old → new: s10→s3, s3→s4, s7→s5, s9→s6, s13→s7, s14→s9; s1, s2, s8 and s15a–c unchanged.</p>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -431,17 +431,10 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <td>creature solid and still in the near foreground, rider looks back; the city comes down on the horizon, last tower by ~8 s</td>
 <td>4K + music</td>
 </tr>
-<tr>
-<td>s15a–c</td>
-<td><strong>The rift coda</strong> — a crack tears the sky, the flock pours out and circles the dead city</td>
-<td>fixed · tilt down · fixed wide</td>
-<td>see §5</td>
-<td>assembled: 30 s 4K with music</td>
-</tr>
 </tbody>
 </table></div>
-<p><strong>Dropped</strong>: the dismount / mount-up beat (old s11, s12) — klein rendered two creatures for every "rider beside the mount" phrasing across three seeds, and the story reads without it. Never rendered from the original design: the ¾-back on the rider's shoulders, the creature head in profile, and the stone-bridge crossing.</p>
-<p><strong>Story order</strong>: arrival and exploration (s1, s2, s4, s5) → life with the creature (s3, s8, s6) → the city falls and the rider escapes (s7, s9) → the coda (s15). <strong>s7 is the only unrendered shot</strong>, and without it the film cuts from the build-up straight to the aftermath.</p>
+<p><strong>Dropped</strong>: the s15 rift coda — a crack tearing the sky with winged reptiles pouring out and circling the ruins; it was rendered and assembled (30 s, 4K, music) but cut on 2026-09-25 as a different film from the one this plan tells, and the media was deleted. The prompts survive in this plan's §5 history and in the log. Also the dismount / mount-up beat (old s11, s12) — klein rendered two creatures for every "rider beside the mount" phrasing across three seeds, and the story reads without it. Never rendered from the original design: the ¾-back on the rider's shoulders, the creature head in profile, and the stone-bridge crossing.</p>
+<p><strong>Story order</strong>: arrival and exploration (s1, s2, s4, s5) → life with the creature (s3, s8, s6) → the city falls and the rider escapes (s7, s9). <strong>s7 is the only unrendered shot</strong>, and without it the film cuts from the build-up straight to the aftermath.</p>
 <h2>7. Experiments (in order)</h2>
 <div class="tw"><table>
 <thead>
@@ -516,11 +509,6 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>s15 rift coda</td>
-<td>2026-09-22</td>
-<td><strong>30 s from three chained clips, start to finish with no UI.</strong> 15a crack → 15b exodus (first frame = last frame of 15a, pulled with <code>ffmpeg -sseof</code>) → 15c circling; each 257 f, ~9.6 min LTX + ~11.5 min upscale. Assembled with <code>assemble_film.sh</code> (xfade 0.5, flute bed) → 29.76 s 4K, then +6 dB. Two lessons: klein renders "lightning" literally, so a sky rift needs torn-glass wording; and the rising-dust clause produces puffy cumulus blobs in 15a/15b — drop it on a re-shoot. <code>s15_rift_30s_4k_music.mp4</code>.</td>
-</tr>
 <tr>
 <td>s9 v2 (final shot)</td>
 <td>2026-09-22</td>

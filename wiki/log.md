@@ -8,6 +8,16 @@
 
 ---
 
+## 2026-09-25 — Lost City: shots renumbered, rift coda cut
+
+**Renumbered** to the order the film plays: old s10 (drinking) → s3, s3 (feet on flagstones) → s4, s7 (canyon) → s5, s9 (jumping) → s6, s13 (escape run) → s7, s14 (final collapse) → s9; s1, s2 and s8 unchanged. 26 files renamed, both specs and the plan rewritten, mapping recorded in each.
+
+Two traps in doing it, both worth remembering for the next renumber: **chained renames double-apply** if you substitute rule by rule — s10→s3 then s3→s4 turns the drinking shot into s4 — and wrapping the replacement in placeholders does not help, because `@@s3@@` still matches the next rule. The fix is one regex pass with a lookup function so each id is visited exactly once. Files need the same care: rename through temporary names or s3→s4 clobbers the real s4. I got this wrong twice and restored from git rather than patching over it.
+
+**Cut the s15 rift coda** — the crack in the sky, the flock pouring out, the circling over the dead city. Three clips and the assembled 30 s 4K film, deleted at Kevin's instruction (596 MB, roughly 50 minutes of GPU). It was a fine sequence but a different film from the one the plan tells: the rider's story ends with the escape, not with a monster arrival. The prompts and the rules it taught — never write "lightning" for a sky rift; a diptych needs a person in the layout image — stay in the plan and here.
+
+Lost City now stands at nine shots, seven finished at 4K, **s7 (the escape run) the only one unrendered**, and no film assembled yet.
+
 ## 2026-09-25 — Script audit against the new structure
 
 Audited all 13 scripts. The nine shell scripts take every path as an argument and needed no changes. The two Python drivers encoded the old layout:
