@@ -313,7 +313,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <ol>
 <li><strong>Automated pre-animation QC is worth stealing regardless of strategy.</strong> Director's shape — critic rejects a keyframe before it becomes a clip — maps directly onto our <code>pick</code> step and would have caught the two Bot Builders shots with no child in them, and the seven night-elf stills showing a ten-year-old, without a human looking. That is experiment <strong>B10</strong>, and it is cheap.</li>
 <li><strong>Serverless bursting is the lever that makes v2 possible</strong>, not the orchestrator choice. LoRA training, ComfyUI-only control models and parallel renders all need GPU we do not have; Modal/RunPod is how the source's stack gets it. It also breaks the "everything local and free" premise, so it is a decision, not a detail.</li>
-<li><strong><code>musubi-tuner</code> and <code>kohya_ss</code> are CUDA-centric.</strong> Whether either trains on Apple Silicon at all is <em>unverified</em> and is the gate on local LoRA — if the answer is no, B1 becomes a cloud experiment or nothing.</li>
+<li>~~<strong><code>musubi-tuner</code> and <code>kohya_ss</code> are CUDA-centric.</strong>~~ <strong>Answered 2026-09-26, and the answer makes the question moot</strong>: <code>draw-things-cli</code> ships its own <code>train lora</code> subcommand, native on Apple Silicon. No CUDA trainer, no ComfyUI, no cloud. See the B8/B1 result below.</li>
 </ol>
 <h2>4. Experiments to run before adopting anything</h2>
 <p>Each is small, and each can kill the idea cheaply. Ordered by what would block the rest.</p>
@@ -334,9 +334,9 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <td>30 usable images of one character, consistent identity, varied everything else — <strong>partial pass</strong>, see below</td>
 </tr>
 <tr>
-<td><strong>B1</strong></td>
+<td><strong>B1</strong> 🔄 <strong>running 2026-09-26</strong></td>
 <td>Can a character LoRA be trained and then used in our runtime at all?</td>
-<td>B0's dataset, rank 32 / alpha 16, 1e-4, bf16, ~2,000 steps; load through <code>draw-things-cli --config-json loras[]</code></td>
+<td>B0's dataset, rank 32, 1e-4, ~2,000 steps; load through <code>draw-things-cli --config-json loras[]</code></td>
 <td>it loads and the character is recognisable</td>
 </tr>
 <tr>
@@ -376,10 +376,10 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <td>the two city shots stop disagreeing</td>
 </tr>
 <tr>
-<td><strong>B8</strong></td>
+<td><strong>B8</strong> ✅ <strong>run 2026-09-26</strong></td>
 <td>Can a LoRA be trained on this Mac at all?</td>
-<td><code>musubi-tuner</code> / <code>kohya_ss</code> on MPS with the night-elf dataset</td>
-<td>it runs to completion; if not, B1 goes to cloud or dies</td>
+<td>~~<code>musubi-tuner</code> / <code>kohya_ss</code> on MPS~~ → <code>draw-things-cli train lora</code></td>
+<td><strong>pass</strong> — native trainer, runs to completion, ~5.5 s/step</td>
 </tr>
 <tr>
 <td><strong>B9</strong></td>
@@ -417,6 +417,50 @@ angles, or frames pulled out of v1's rendered clips, where the hunter is already
 <p>This also sharpens <strong>B8</strong>: the gate on the LoRA route is now two questions, not one — can a
 trainer run on this Mac at all, <em>and</em> can we source enough non-frontal images of a synthetic
 character to train on.</p>
+<h3>B8 — result (2026-09-26): the trainer was already installed</h3>
+<p>The whole CUDA question was wrong. <code>draw-things-cli</code> — the same binary we already render
+with — carries a <code>train lora</code> subcommand:</p>
+<pre><code>draw-things-cli train lora --model flux_2_klein_9b_i8x.ckpt --dataset ./dataset \
+  --steps 2000 --rank 32 --learning-rate 1e-4 --use-aspect-ratio --save-every 500 -o my_lora
+</code></pre>
+<p>Measured here, klein 9B at 8-bit, rank 32, 30 images:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dataset format</td>
+<td>a directory of images with matching <code>.txt</code> captions — <strong>exactly what B0 already writes</strong>, no conversion step</td>
+</tr>
+<tr>
+<td>Throughput</td>
+<td>0.18–0.20 it/s, ≈ 5.5 s/step → <strong>~3 h for 2,000 steps</strong></td>
+</tr>
+<tr>
+<td>Aspect buckets</td>
+<td><code>--use-aspect-ratio</code> bucketed our three canvases as 48×80, 64×64 and 80×48 latents, so B0's framing variety survives into training</td>
+</tr>
+<tr>
+<td>Checkpoint</td>
+<td>402 MB f32 each; <code>--save-every</code> lets you pick an earlier one if it overfits</td>
+</tr>
+<tr>
+<td>Runtime load</td>
+<td><code>--config-json '{"loras":[{"file":"…","weight":1.0}]}'</code> at <code>generate</code> time. Verified it actually applies: same prompt and seed give different pixels with and without it</td>
+</tr>
+<tr>
+<td>Cost</td>
+<td>nothing. No cloud, no rented GPU, no ComfyUI</td>
+</tr>
+</tbody>
+</table></div>
+<p>So the LoRA route is <strong>not cloud-dependent after all</strong>, which removes the one objection in §5
+that would have changed the character of the project. <code>--version</code> reports <code>dev</code>, so pin the
+brew build when recording results <em>(as of 2026-09-26)</em>.</p>
 <h2>5. What would make this worth switching to</h2>
 <p>Not "the industry does it this way". The bar is:</p>
 <ul>

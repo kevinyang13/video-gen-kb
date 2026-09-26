@@ -116,6 +116,44 @@ Set `KEEP` per character; the default keep-clause is generic and will drift. `ON
 **Cost**: ~25–40 s per image, ~20 min for 30. Captions are tracked in git; the images are not.
 
 
+## `draw-things-cli train lora` — train a character LoRA locally
+
+```
+draw-things-cli train lora --model flux_2_klein_9b_i8x.ckpt \
+  --dataset projects/<id>/<version>/seed/dataset \
+  --steps 2000 --rank 32 --learning-rate 1e-4 --seed 1 \
+  --use-aspect-ratio --save-every 500 -o <name> --offline
+```
+
+Not one of our scripts — a subcommand of the binary we already render with, and the answer to
+experiment **B8** ([[blueprint-v2-research]]). The dataset is a directory of images with matching
+`.txt` captions, which is exactly what `seed_sheet.sh --dataset` writes.
+
+~5.5 s/step for klein 9B at rank 32, so **2,000 steps is about 3 hours**. Each checkpoint is
+402 MB, written into the Draw Things `Models/` directory; `--save-every` keeps earlier ones so an
+overfit run is recoverable without retraining. `--use-aspect-ratio` buckets by shape, so a dataset
+mixing portrait, square and landscape keeps its framing variety. Use the LoRA at generate time
+with `--config-json '{"loras":[{"file":"<name>_2000_lora_f32.ckpt","weight":1.0}]}'`.
+
+**Always run the control.** A LoRA that fails to load and a LoRA that does nothing look identical;
+render the same prompt and seed with and without it and check the pixels differ.
+
+## `scripts/lora_eval.sh` — one prompt set through several checkpoints
+
+```
+scripts/lora_eval.sh OUT_DIR "ckpt_a.ckpt,ckpt_b.ckpt,-" [WEIGHT] [SEED]
+PROMPTS="…"  TRIGGER=nelf_kyle  W=512 H=768  MODEL=…  scripts/lora_eval.sh …
+```
+
+Renders every prompt through every checkpoint and tiles the lot into `grid.png`, one column per
+checkpoint (or per weight, if `WEIGHT` is a comma list). A `-` in the list is the **no-LoRA
+control column**.
+
+The built-in prompt set runs in-distribution → out-of-distribution on purpose: studio portrait,
+profile, back view, a full-body wide in snow, a market at dusk. The studio portrait always looks
+fine; what decides a LoRA is the angle and the scene the dataset never showed.
+
+
 ## `scripts/qc_sheet.sh` — contact sheet
 
 `qc_sheet.sh CLIP OUT [REF|-] [N=5] [TILE_H=384]` — reference + N frames spread evenly from first to last (indices computed from the clip, so a 33-frame test and a 249-frame shot both work).

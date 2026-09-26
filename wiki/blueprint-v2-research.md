@@ -121,7 +121,7 @@ Three things follow:
 
 1. **Automated pre-animation QC is worth stealing regardless of strategy.** Director's shape — critic rejects a keyframe before it becomes a clip — maps directly onto our `pick` step and would have caught the two Bot Builders shots with no child in them, and the seven night-elf stills showing a ten-year-old, without a human looking. That is experiment **B10**, and it is cheap.
 2. **Serverless bursting is the lever that makes v2 possible**, not the orchestrator choice. LoRA training, ComfyUI-only control models and parallel renders all need GPU we do not have; Modal/RunPod is how the source's stack gets it. It also breaks the "everything local and free" premise, so it is a decision, not a detail.
-3. **`musubi-tuner` and `kohya_ss` are CUDA-centric.** Whether either trains on Apple Silicon at all is *unverified* and is the gate on local LoRA — if the answer is no, B1 becomes a cloud experiment or nothing.
+3. ~~**`musubi-tuner` and `kohya_ss` are CUDA-centric.**~~ **Answered 2026-09-26, and the answer makes the question moot**: `draw-things-cli` ships its own `train lora` subcommand, native on Apple Silicon. No CUDA trainer, no ComfyUI, no cloud. See the B8/B1 result below.
 
 ## 4. Experiments to run before adopting anything
 
@@ -130,14 +130,14 @@ Each is small, and each can kill the idea cheaply. Ordered by what would block t
 | # | Question | Test | Pass |
 |---|---|---|---|
 | **B0** ✅ **run 2026-09-26** | Can we build the dataset at all? | `seed_sheet.sh --dataset`: 30 images over angle × framing × lighting × expression, captioned by the Isolation Rule | 30 usable images of one character, consistent identity, varied everything else — **partial pass**, see below |
-| **B1** | Can a character LoRA be trained and then used in our runtime at all? | B0's dataset, rank 32 / alpha 16, 1e-4, bf16, ~2,000 steps; load through `draw-things-cli --config-json loras[]` | it loads and the character is recognisable |
+| **B1** 🔄 **running 2026-09-26** | Can a character LoRA be trained and then used in our runtime at all? | B0's dataset, rank 32, 1e-4, ~2,000 steps; load through `draw-things-cli --config-json loras[]` | it loads and the character is recognisable |
 | **B2** | Does a LoRA beat a turnaround sheet? | same three shots — profile, three-quarter back, extreme wide — both ways, judged blind against the source photo | LoRA wins on the angles the sheet does not cover |
 | **B3** | Can pose control reach the clip stage? | VACE or Wan Animate in Draw Things; if absent, ComfyUI on MPS with a GGUF build | a named action renders at all, at any speed |
 | **B4** | Is ComfyUI usable here in 2026? | re-measure a single Wan clip; the 82 min/2 s figure is from an M1 Max and may be stale | under 15 min for a 5 s clip |
 | **B5** | Local TTS quality and Mac support | MLX-Audio on a paragraph of dialogue | intelligible, no cloud dependency |
 | **B6** | Lip-sync on MPS | drive an existing face clip with B5's audio | mouth tracks the audio without destroying the face |
 | **B7** | Does a LUT fix inter-shot colour drift? | grade the night-elf film's eight shots to one LUT in Resolve | the two city shots stop disagreeing |
-| **B8** | Can a LoRA be trained on this Mac at all? | `musubi-tuner` / `kohya_ss` on MPS with the night-elf dataset | it runs to completion; if not, B1 goes to cloud or dies |
+| **B8** ✅ **run 2026-09-26** | Can a LoRA be trained on this Mac at all? | ~~`musubi-tuner` / `kohya_ss` on MPS~~ → `draw-things-cli train lora` | **pass** — native trainer, runs to completion, ~5.5 s/step |
 | **B9** | What does serverless bursting cost per film? | price a LoRA train + 8 clips on Modal or RunPod | under a few dollars per film, and the local route stays the default |
 | **B10** | Can the judge be automated? | a critic pass over existing candidates that scores identity, subject count and framing, run before `pick` | it rejects the known failures: the empty-room shots, the child-in-adult-armour stills |
 
@@ -169,6 +169,31 @@ angles, or frames pulled out of v1's rendered clips, where the hunter is already
 This also sharpens **B8**: the gate on the LoRA route is now two questions, not one — can a
 trainer run on this Mac at all, *and* can we source enough non-frontal images of a synthetic
 character to train on.
+
+### B8 — result (2026-09-26): the trainer was already installed
+
+The whole CUDA question was wrong. `draw-things-cli` — the same binary we already render
+with — carries a `train lora` subcommand:
+
+```
+draw-things-cli train lora --model flux_2_klein_9b_i8x.ckpt --dataset ./dataset \
+  --steps 2000 --rank 32 --learning-rate 1e-4 --use-aspect-ratio --save-every 500 -o my_lora
+```
+
+Measured here, klein 9B at 8-bit, rank 32, 30 images:
+
+| | |
+|---|---|
+| Dataset format | a directory of images with matching `.txt` captions — **exactly what B0 already writes**, no conversion step |
+| Throughput | 0.18–0.20 it/s, ≈ 5.5 s/step → **~3 h for 2,000 steps** |
+| Aspect buckets | `--use-aspect-ratio` bucketed our three canvases as 48×80, 64×64 and 80×48 latents, so B0's framing variety survives into training |
+| Checkpoint | 402 MB f32 each; `--save-every` lets you pick an earlier one if it overfits |
+| Runtime load | `--config-json '{"loras":[{"file":"…","weight":1.0}]}'` at `generate` time. Verified it actually applies: same prompt and seed give different pixels with and without it |
+| Cost | nothing. No cloud, no rented GPU, no ComfyUI |
+
+So the LoRA route is **not cloud-dependent after all**, which removes the one objection in §5
+that would have changed the character of the project. `--version` reports `dev`, so pin the
+brew build when recording results *(as of 2026-09-26)*.
 
 ## 5. What would make this worth switching to
 

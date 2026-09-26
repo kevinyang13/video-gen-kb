@@ -252,6 +252,32 @@ ONLY=&quot;1 10 25&quot;  CELLS=&quot;…&quot;  WD=512 HD=768  DRY_RUN=1
 <p><strong>The two strings.</strong> Each cell writes a <strong>prompt</strong> that names every feature to preserve (our reference-token practice — klein substitutes its own face otherwise) and a <strong>caption</strong> that names only what varies. Permanent features are absent from the caption on purpose, so they bind to the trigger token rather than to words a later prompt can contradict — the Isolation Rule, which is the exact inverse of how we write shot prompts. Captioned axes (wardrobe, lighting, framing) stay steerable after training.</p>
 <p>Set <code>KEEP</code> per character; the default keep-clause is generic and will drift. <code>ONLY</code> renders a numbered subset — render two or three cells first and look at them before spending the full run. Captions are written even under <code>DRY_RUN</code>, so the text is reviewable before any pixels exist.</p>
 <p><strong>Cost</strong>: ~25–40 s per image, ~20 min for 30. Captions are tracked in git; the images are not.</p>
+<h2><code>draw-things-cli train lora</code> — train a character LoRA locally</h2>
+<pre><code>draw-things-cli train lora --model flux_2_klein_9b_i8x.ckpt \
+  --dataset projects/&lt;id&gt;/&lt;version&gt;/seed/dataset \
+  --steps 2000 --rank 32 --learning-rate 1e-4 --seed 1 \
+  --use-aspect-ratio --save-every 500 -o &lt;name&gt; --offline
+</code></pre>
+<p>Not one of our scripts — a subcommand of the binary we already render with, and the answer to
+experiment <strong>B8</strong> (<a href="blueprint-v2-research.html">blueprint v2 research</a>). The dataset is a directory of images with matching
+<code>.txt</code> captions, which is exactly what <code>seed_sheet.sh --dataset</code> writes.</p>
+<p>~5.5 s/step for klein 9B at rank 32, so <strong>2,000 steps is about 3 hours</strong>. Each checkpoint is
+402 MB, written into the Draw Things <code>Models/</code> directory; <code>--save-every</code> keeps earlier ones so an
+overfit run is recoverable without retraining. <code>--use-aspect-ratio</code> buckets by shape, so a dataset
+mixing portrait, square and landscape keeps its framing variety. Use the LoRA at generate time
+with <code>--config-json '{"loras":[{"file":"&lt;name&gt;_2000_lora_f32.ckpt","weight":1.0}]}'</code>.</p>
+<p><strong>Always run the control.</strong> A LoRA that fails to load and a LoRA that does nothing look identical;
+render the same prompt and seed with and without it and check the pixels differ.</p>
+<h2><code>scripts/lora_eval.sh</code> — one prompt set through several checkpoints</h2>
+<pre><code>scripts/lora_eval.sh OUT_DIR &quot;ckpt_a.ckpt,ckpt_b.ckpt,-&quot; [WEIGHT] [SEED]
+PROMPTS=&quot;…&quot;  TRIGGER=nelf_kyle  W=512 H=768  MODEL=…  scripts/lora_eval.sh …
+</code></pre>
+<p>Renders every prompt through every checkpoint and tiles the lot into <code>grid.png</code>, one column per
+checkpoint (or per weight, if <code>WEIGHT</code> is a comma list). A <code>-</code> in the list is the <strong>no-LoRA
+control column</strong>.</p>
+<p>The built-in prompt set runs in-distribution → out-of-distribution on purpose: studio portrait,
+profile, back view, a full-body wide in snow, a market at dusk. The studio portrait always looks
+fine; what decides a LoRA is the angle and the scene the dataset never showed.</p>
 <h2><code>scripts/qc_sheet.sh</code> — contact sheet</h2>
 <p><code>qc_sheet.sh CLIP OUT [REF|-] [N=5] [TILE_H=384]</code> — reference + N frames spread evenly from first to last (indices computed from the clip, so a 33-frame test and a 249-frame shot both work).</p>
 <h3><code>scripts/preflight.sh</code></h3>
