@@ -32,6 +32,28 @@
     },
     "style_suffix": "Makoto Shinkai and Studio Ghibli background art style, ultra detailed, rich painterly brushwork, soft volumetric light, vibrant saturated colors, masterpiece."
   },
+  "playlist": {
+    "title": "AI-Vids",
+    "url": "https://www.youtube.com/playlist?list=PLJx49Sf61wKQ",
+    "id": "PLJx49Sf61wKQ"
+  },
+  "themes": {
+    "anime": {
+      "slug": "projects-anime",
+      "title": "Anime projects",
+      "blurb": "Shinkai/Ghibli-styled living paintings: a still from FLUX or Wan T2V, ambient motion from Wan 2.2 I2V, looped 9:16 with music. Coastal wildflowers, Torrey Pines, Golden Gate, Mt. Rainier, a cyberpunk street, the FLL farm."
+    },
+    "realistic": {
+      "slug": "projects-realistic",
+      "title": "Photoreal projects",
+      "blurb": "Cinematic photoreal shorts: FLUX.2 klein stills with Moodboard references, motion from LTX-2.3 or Wan 2.2, Real-ESRGAN to 4K, cut with crossfades. Dragon Epic, Lost City, the three-minute film."
+    },
+    "3d": {
+      "slug": "projects-3d",
+      "title": "3D-animated projects",
+      "blurb": "Pixar-style 3D-animated shorts. Kyle's Antarctic Rescue, Lindsey: A Small Dream."
+    }
+  },
   "projects": [
     {
       "id": "coast",
@@ -1626,27 +1648,5 @@
       ],
       "theme": "3d"
     }
-  ],
-  "playlist": {
-    "title": "AI-Vids",
-    "url": "https://www.youtube.com/playlist?list=PLJx49Sf61wKQ",
-    "id": "PLJx49Sf61wKQ"
-  },
-  "themes": {
-    "anime": {
-      "slug": "projects-anime",
-      "title": "Anime projects",
-      "blurb": "Shinkai/Ghibli-styled living paintings: a still from FLUX or Wan T2V, ambient motion from Wan 2.2 I2V, looped 9:16 with music. Coastal wildflowers, Torrey Pines, Golden Gate, Mt. Rainier, a cyberpunk street, the FLL farm."
-    },
-    "realistic": {
-      "slug": "projects-realistic",
-      "title": "Photoreal projects",
-      "blurb": "Cinematic photoreal shorts: FLUX.2 klein stills with Moodboard references, motion from LTX-2.3 or Wan 2.2, Real-ESRGAN to 4K, cut with crossfades. Dragon Epic, Lost City, the three-minute film."
-    },
-    "3d": {
-      "slug": "projects-3d",
-      "title": "3D-animated projects",
-      "blurb": "Pixar-style 3D-animated shorts. Kyle's Antarctic Rescue, Lindsey: A Small Dream."
-    }
-  }
+  ]
 }

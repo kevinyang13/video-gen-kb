@@ -51,10 +51,14 @@ def load(project):
         j = json.loads(Path(project).read_text())
         f = j.get("run-spec", j)
     else:
-        data = json.loads((ROOT / "projects.json").read_text())
-        p = next((x for x in data["projects"] if x["id"] == project), None)
+        spec = ROOT / "projects" / project / "spec.json"
+        if spec.exists():                               # the project's own record
+            p = json.loads(spec.read_text())
+        else:                                           # fall back to the aggregate
+            data = json.loads((ROOT / "projects.json").read_text())
+            p = next((x for x in data["projects"] if x["id"] == project), None)
         if not p:
-            die(f"no project '{project}' in projects.json")
+            die(f"no project '{project}': expected projects/{project}/spec.json")
         f = p.get("run-spec") or die(f"project '{project}' has no 'run-spec' block")
     for k in ("dir", "size", "shots"):
         if k not in f:

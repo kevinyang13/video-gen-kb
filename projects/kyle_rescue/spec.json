@@ -1,0 +1,334 @@
+{
+  "order": 9,
+  "id": "kyle_rescue",
+  "title": "Kyle's Antarctic Rescue — 1-minute 3D-animated vertical short from a 5-panel comic",
+  "date": "2026-09-22",
+  "theme": "3d",
+  "dt_project": "none — rendered with draw-things-cli (no project file)",
+  "status": "delivered 2026-09-23 01:38 — 60.0 s, 1080x1920 + 2160x3840, rendered unattended overnight (see plan §0)",
+  "youtube": "KscAwvCi6iQ",
+  "youtube_note": "YouTube Short, 2160x3840 master",
+  "source": "projects/kyle_rescue/raw/comic_source.webp",
+  "still": {
+    "model": "FLUX.2 [klein] 9B (8-bit S) via draw-things-cli",
+    "size": "576x1024",
+    "steps": 4,
+    "cfg": 1.0,
+    "shift": 3,
+    "sampler": "DDIM Trailing (16)",
+    "control": "klein at --strength 1.0 = edit mode. Master = single edit of the P1 face crop (seed 2). Shots = scripts/dt_diptych.sh with the master (S2,S3,S5,S7) or an approved shot (S1<-S2, S4<-S3, S6<-S3, S8<-S7) as the left reference",
+    "prompt": "per scene — see scenes"
+  },
+  "i2v": {
+    "model": "LTX-2.3 22B [distilled] 1.1 via draw-things-cli",
+    "size": "576x1024",
+    "frames": 249,
+    "fps": 25,
+    "steps": 8,
+    "cfg": 1.0,
+    "sampler": "TCD Trailing (19)",
+    "sss": "30%",
+    "shift": 5.0,
+    "hires_fix": "off"
+  },
+  "upscale": "W=2160 H=3840 scripts/upscale_4k.sh … realesrgan-x4plus (3D textures; needs the portrait option, plan step 5a); no audio remux",
+  "music": "Best Adventure Ever — geoffharvey, Pixabay (cdn.pixabay.com/download/audio/2022/10/13/audio_f917a5a4fc.mp3), 2:33; tail-aligned: last D s of the track (starts at 153.5 − D), 1.5 s fade in, natural ending",
+  "scenes": {
+    "locks": {
+      "style_head": "High-end 3D animated feature film still. Stylised characters in a realistic world: physically based lighting, real-looking ice, snow and ocean water, soft global illumination, subsurface scattering on skin, detailed fur and feathers, cinematic depth of field, rich natural colour.",
+      "kyle": "Kyle, one cheerful young East Asian boy with slightly stylised proportions, short spiky black hair, dark brown eyes and a wide smile, wearing a bright red and black insulated expedition parka with a round blue Antarctica patch on the left chest, black backpack straps over both shoulders, black gloves.",
+      "world": "Antarctica: turquoise icebergs, snowy white mountains, deep blue polar ocean.",
+      "video_tail": "3D animated feature film, smooth expressive character animation, soft cinematic lighting, consistent character, no text.",
+      "ufo": "a large silver-grey flying saucer with a glowing blue-violet dome on top and a ring of cyan and purple lights around its rim, crackling purple energy beams from its underside, no aliens visible.",
+      "penguins": "emperor penguins with black backs, white bellies and yellow-orange neck patches.",
+      "chick": "a fluffy grey emperor penguin chick with a white face and a black cap.",
+      "sidekick": "a small cheerful penguin wearing a little blue backpack.",
+      "seal": "a round silver-grey seal pup with big dark eyes.",
+      "orca": "an orca, glossy black with a white belly and a white eye patch.",
+      "whale": "a dark blue-grey humpback whale with long white-edged flippers.",
+      "ship": "an expedition icebreaker ship with a dark blue hull, a red band and a white superstructure.",
+      "rules": "Two stages: approved 3D masters first, then every shot locked to them. Paste only the locks for entities in the shot; say 'one boy'. Never write 'UFO' or 'alien'. No on-screen text. Face shots hold position; fast action ≤ 6 s; little camera motion. QC contact sheet vs the master before a shot counts. Hand the CLI a 9:16 image."
+    },
+    "s1": {
+      "title": "P1 ship crop (pad) → 3D at 0.8, keep 7 s",
+      "engine": "LTX-2.3 via draw-things-cli",
+      "still": "Tall vertical frame: an expedition ship with a red and white hull small at the bottom on a turquoise sea, a towering iceberg and blue sky above, seagulls overhead.",
+      "video": "The camera tilts slowly down from the gliding seagulls to the ship as the sea swells gently around the icebergs."
+    },
+    "s2": {
+      "title": "P1 + kyle_front master (B1/B2/B3), keep 8 s",
+      "engine": "LTX-2.3 via draw-things-cli",
+      "still": "Close-up of Kyle smiling and giving a thumbs up, the expedition ship and icebergs behind him.",
+      "video": "Kyle stays in place and smiles wider, his thumbs-up bobs once, his hair and parka stir in the wind; the camera holds still."
+    },
+    "s3": {
+      "title": "P2 → 3D at 0.8, saucer vs ufo master, keep 10 s",
+      "engine": "LTX-2.3 via draw-things-cli",
+      "still": "Night: Kyle seen from behind looking up at a huge glowing flying saucer firing purple energy beams onto the ice.",
+      "video": "Kyle stays still at the bottom of the frame and turns his head slightly; above him the saucer hovers and pulses, purple beams crackle down onto the ice, which glows and cracks."
+    },
+    "s4": {
+      "title": "P3 → 3D at 0.8, keep 10 s",
+      "engine": "LTX-2.3 via draw-things-cli",
+      "still": "Frightened penguins, a seal pup, an orca and a whale on breaking ice floes, purple beams lifting blocks of ice into the sky.",
+      "video": "Blocks of ice rise slowly into the beams as the floes split apart; the penguins huddle and flap, the seal looks up, the orca surfaces."
+    },
+    "s5": {
+      "title": "P4 + kyle_34 + sidekick masters (B1/B2), keep 6 s",
+      "engine": "LTX-2.3 via draw-things-cli",
+      "still": "Kyle flying through the air aiming a glowing freeze-ray gadget, a small penguin with a backpack beside him.",
+      "video": "Kyle glides forward and the gadget fires a bright blue snowflake beam; frost spreads across the frame."
+    },
+    "s6": {
+      "title": "collage: ufo master over S4's 3D ice → klein 0.5, keep 6 s",
+      "engine": "LTX-2.3 via draw-things-cli",
+      "still": "The flying saucer frozen inside a crust of blue ice above the icebergs, its beams gone.",
+      "video": "The ice crust cracks, the saucer shakes free and zips up into the stars, its light fading."
+    },
+    "s7": {
+      "title": "P5 + kyle_front + chick masters (B1/B2/B3), keep 10 s",
+      "engine": "LTX-2.3 via draw-things-cli",
+      "still": "Sunrise: Kyle kneeling and hugging a fluffy penguin chick, happy penguins at the edges of the frame.",
+      "video": "Kyle hugs the chick and rocks gently, the chick nuzzles him, the penguins bob at the edges, the sun glints behind."
+    },
+    "s8": {
+      "title": "collage: S7's 3D animals + sunrise sky → klein 0.55, keep 8 s",
+      "engine": "LTX-2.3 via draw-things-cli",
+      "still": "Tall sunrise frame: sky and sun above, a whale's tail and a line of penguins with a small boy far away on the ice below.",
+      "video": "The camera rises slowly into the glowing sky as the sun climbs."
+    }
+  },
+  "notes": "Kyle is Kevin's son; consent confirmed 2026-09-22.",
+  "delivery": "9:16 — master 2160x3840, phone copy 1080x1920; pictures and music only (no captions, narration or SFX)",
+  "files": [
+    "music/best_adventure_ever.mp3",
+    "kyle/masters/kyle_front.png",
+    "kyle/stills/s1..s8.png (+ *_v.txt video prompts)",
+    "kyle/clips/s1..s8_ltx_v1.mov, s2_ltx_v2.mov, s4_ltx_v2.mov",
+    "kyle/final/kyle_rescue_1080x1920.mp4",
+    "kyle/final/kyle_rescue_2160x3840.mp4",
+    "kyle/work/qc_notes.txt"
+  ],
+  "edit": {
+    "s1": "v1 0-6.5",
+    "s2": "v2 0-8",
+    "s3": "v1 0-9.96",
+    "s4": "v2 0-9.96",
+    "s5": "v1 0-6",
+    "s6": "v1 1.6-8.8",
+    "s7": "v1 0-8",
+    "s8": "v1 0-9.6",
+    "xfade": 0.75,
+    "music_start_s": 93.4,
+    "duration_s": 60.0
+  },
+  "seeds": {
+    "master": 2,
+    "s1": 1,
+    "s2_still": 4,
+    "s3": 1,
+    "s4": 1,
+    "s5": 1,
+    "s6": 1,
+    "s7": 1,
+    "s8": 2,
+    "ltx_v1": 1,
+    "ltx_v2": 2
+  },
+  "run-spec": {
+    "dir": "projects/kyle_rescue",
+    "name": "kyle_rescue",
+    "size": [
+      576,
+      1024
+    ],
+    "still": {
+      "model": "flux_2_klein_9b_i8x.ckpt",
+      "steps": 4,
+      "cfg": 1,
+      "config": {
+        "shift": 3.0,
+        "sampler": 16
+      },
+      "seeds": [
+        1,
+        2,
+        3
+      ],
+      "strength": 1.0
+    },
+    "clip": {
+      "model": "ltx_2.3_22b_distilled_1.1_q8p.ckpt",
+      "frames": 249,
+      "steps": 8,
+      "cfg": 1,
+      "config": {
+        "sampler": 19,
+        "shift": 5.0,
+        "stochasticSamplingGamma": 0.3,
+        "fps": 25,
+        "hiresFix": false
+      },
+      "seed": 1,
+      "video_format": "prores422hq"
+    },
+    "masters": {
+      "kyle": "seed/kyle_front.png"
+    },
+    "upscale": {
+      "model": "realesrgan-x4plus",
+      "size": [
+        2160,
+        3840
+      ],
+      "fit": "crop",
+      "bitrate": "40M"
+    },
+    "assemble": {
+      "fps": 25,
+      "xfade": 0.75,
+      "clip_audio": false,
+      "bitrate": "40M"
+    },
+    "music": {
+      "file": "projects/kyle_rescue/music/best_adventure_ever.mp3",
+      "start": "tail",
+      "vol": 1.0,
+      "fade_in": 1.5,
+      "fade_out": 0
+    },
+    "deliver": [
+      {
+        "size": [
+          1080,
+          1920
+        ],
+        "bitrate": "12M"
+      },
+      {
+        "size": [
+          720,
+          1280
+        ],
+        "bitrate": "2.8M"
+      }
+    ],
+    "shots": [
+      {
+        "id": "s1",
+        "still": {
+          "ref": null,
+          "input": "stills/s2.png",
+          "prompt": "stills/s1.txt"
+        },
+        "video_prompt": "stills/s1_v.txt",
+        "take": "clips/s1_ltx_v1.mov",
+        "trim": [
+          0,
+          6.5
+        ]
+      },
+      {
+        "id": "s2",
+        "still": {
+          "ref": "kyle",
+          "input": "seed/s2_in.png",
+          "prompt": "stills/s2.txt"
+        },
+        "video_prompt": "stills/s2_v.txt",
+        "qc_ref": "kyle",
+        "take": "clips/s2_ltx_v2.mov",
+        "trim": [
+          0,
+          8
+        ]
+      },
+      {
+        "id": "s3",
+        "still": {
+          "ref": "kyle",
+          "input": "seed/s3_in.png",
+          "prompt": "stills/s3.txt"
+        },
+        "video_prompt": "stills/s3_v.txt",
+        "take": "clips/s3_ltx_v1.mov",
+        "trim": [
+          0,
+          9.96
+        ]
+      },
+      {
+        "id": "s4",
+        "still": {
+          "ref": "stills/s3.png",
+          "input": "seed/s4_in.png",
+          "prompt": "stills/s4.txt"
+        },
+        "video_prompt": "stills/s4_v.txt",
+        "take": "clips/s4_ltx_v2.mov",
+        "trim": [
+          0,
+          9.96
+        ]
+      },
+      {
+        "id": "s5",
+        "still": {
+          "ref": "kyle",
+          "input": "seed/s5_in.png",
+          "prompt": "stills/s5.txt"
+        },
+        "video_prompt": "stills/s5_v.txt",
+        "qc_ref": "kyle",
+        "take": "clips/s5_ltx_v1.mov",
+        "trim": [
+          0,
+          6
+        ]
+      },
+      {
+        "id": "s6",
+        "still": {
+          "ref": null,
+          "input": "stills/s3.png",
+          "prompt": "stills/s6.txt"
+        },
+        "video_prompt": "stills/s6_v.txt",
+        "take": "clips/s6_ltx_v1.mov",
+        "trim": [
+          1.6,
+          8.8
+        ]
+      },
+      {
+        "id": "s7",
+        "still": {
+          "ref": "kyle",
+          "input": "seed/s7_in.png",
+          "prompt": "stills/s7.txt"
+        },
+        "video_prompt": "stills/s7_v.txt",
+        "qc_ref": "kyle",
+        "take": "clips/s7_ltx_v1.mov",
+        "trim": [
+          0,
+          8
+        ]
+      },
+      {
+        "id": "s8",
+        "still": {
+          "ref": "stills/s7.png",
+          "input": "seed/s8_in.png",
+          "prompt": "stills/s8.txt"
+        },
+        "video_prompt": "stills/s8_v.txt",
+        "take": "clips/s8_ltx_v1.mov",
+        "trim": [
+          0,
+          9.6
+        ]
+      }
+    ]
+  }
+}

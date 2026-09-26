@@ -1,0 +1,233 @@
+{
+  "order": 10,
+  "id": "lindsey_art",
+  "title": "Lindsey: A Small Dream — 1-minute 3D-animated vertical short from Lindsey's 5-panel art comic",
+  "date": "2026-09-23",
+  "theme": "3d",
+  "dt_project": "none — draw-things-cli via scripts/film_run.py",
+  "status": "delivered 2026-09-23 17:26 — 59.96 s, 1080x1920 + 2160x3840 + 720x1280 (see plan §0)",
+  "youtube": "lbU-_73MliI",
+  "youtube_note": "YouTube Short, 2160x3840 master",
+  "source": "projects/lindsey_art/raw/comic_source.jpg",
+  "music": "Emotional Children Piano — Music_For_Videos, Pixabay (cdn.pixabay.com/download/audio/2023/09/03/audio_2c0ed5a272.mp3), 1:55; first 60 s (build to ~50 s, section ends at 60 s), 2 s fade out",
+  "notes": "Lindsey is Kevin's daughter; consent confirmed 2026-09-23. Face from the comic, no photo.",
+  "run-spec": {
+    "dir": "projects/lindsey_art",
+    "name": "lindsey_art",
+    "size": [
+      576,
+      1024
+    ],
+    "still": {
+      "model": "flux_2_klein_9b_i8x.ckpt",
+      "steps": 4,
+      "cfg": 1,
+      "config": {
+        "shift": 3.0,
+        "sampler": 16
+      },
+      "seeds": [
+        1,
+        2,
+        3
+      ],
+      "strength": 1.0
+    },
+    "clip": {
+      "model": "ltx_2.3_22b_distilled_1.1_q8p.ckpt",
+      "frames": 249,
+      "steps": 8,
+      "cfg": 1,
+      "config": {
+        "sampler": 19,
+        "shift": 5.0,
+        "stochasticSamplingGamma": 0.3,
+        "fps": 25,
+        "hiresFix": false
+      },
+      "seed": 1,
+      "video_format": "prores422hq"
+    },
+    "masters": {
+      "lindsey": "seed/lindsey_front.png"
+    },
+    "upscale": {
+      "model": "realesrgan-x4plus",
+      "size": [
+        2160,
+        3840
+      ],
+      "fit": "crop",
+      "bitrate": "40M"
+    },
+    "assemble": {
+      "fps": 25,
+      "xfade": 0.75,
+      "clip_audio": false,
+      "bitrate": "40M"
+    },
+    "music": {
+      "file": "projects/lindsey_art/music/emotional_children_piano.mp3",
+      "start": 0,
+      "vol": 1.0,
+      "fade_in": 0,
+      "fade_out": 2
+    },
+    "deliver": [
+      {
+        "size": [
+          1080,
+          1920
+        ],
+        "bitrate": "12M"
+      },
+      {
+        "size": [
+          720,
+          1280
+        ],
+        "bitrate": "2.8M"
+      }
+    ],
+    "shots": [
+      {
+        "id": "s1",
+        "still": {
+          "ref": null,
+          "input": "stills/s2.png",
+          "prompt": "stills/s1.txt"
+        },
+        "video_prompt": "stills/s1_v.txt",
+        "take": "clips/s1_v1.mov",
+        "trim": [
+          0,
+          5.4
+        ]
+      },
+      {
+        "id": "s2",
+        "still": {
+          "ref": "lindsey",
+          "input": "seed/s2_in.png",
+          "prompt": "stills/s2.txt"
+        },
+        "video_prompt": "stills/s2_v.txt",
+        "qc_ref": "lindsey",
+        "take": "clips/s2_v3.mov",
+        "trim": [
+          0,
+          6.5
+        ]
+      },
+      {
+        "id": "s3",
+        "still": {
+          "ref": "stills/s4.png",
+          "input": "seed/s3_in.png",
+          "prompt": "stills/s3.txt"
+        },
+        "video_prompt": "stills/s3_v.txt",
+        "take": "clips/s3_v3.mov",
+        "trim": [
+          0,
+          9
+        ]
+      },
+      {
+        "id": "s4",
+        "still": {
+          "ref": "lindsey",
+          "input": "seed/s4_in.png",
+          "prompt": "stills/s4.txt"
+        },
+        "video_prompt": "stills/s4_v.txt",
+        "qc_ref": "lindsey",
+        "take": "clips/s4_v1.mov",
+        "trim": [
+          0,
+          9.96
+        ]
+      },
+      {
+        "id": "s5",
+        "still": {
+          "ref": "lindsey",
+          "input": "seed/s5_in.png",
+          "prompt": "stills/s5.txt"
+        },
+        "video_prompt": "stills/s5_v.txt",
+        "take": "clips/s5_v1.mov",
+        "trim": [
+          0,
+          9.96
+        ]
+      },
+      {
+        "id": "s6",
+        "still": {
+          "ref": "stills/s7.png",
+          "input": "seed/s6_in.png",
+          "prompt": "stills/s6.txt"
+        },
+        "video_prompt": "stills/s6_v.txt",
+        "take": "clips/s6_v2.mov",
+        "trim": [
+          0,
+          8.5
+        ]
+      },
+      {
+        "id": "s7",
+        "still": {
+          "ref": "lindsey",
+          "input": "seed/s7_in.png",
+          "prompt": "stills/s7.txt"
+        },
+        "video_prompt": "stills/s7_v.txt",
+        "qc_ref": "lindsey",
+        "take": "clips/s7_v1.mov",
+        "trim": [
+          0,
+          6.5
+        ]
+      },
+      {
+        "id": "s8",
+        "still": {
+          "ref": "lindsey",
+          "input": "seed/s8_in.png",
+          "prompt": "stills/s8.txt"
+        },
+        "video_prompt": "stills/s8_v.txt",
+        "qc_ref": "lindsey",
+        "take": "clips/s8_v2.mov",
+        "trim": [
+          0,
+          9.3
+        ]
+      }
+    ]
+  },
+  "seeds": {
+    "master": 3,
+    "s1": 1,
+    "s2": 3,
+    "s3": "restage edit 1",
+    "s4": 2,
+    "s5": 1,
+    "s6": "new still 2",
+    "s7": 3,
+    "s8": 2,
+    "clips": "v1 seed 1, v2 seed 2, v3 seed 3"
+  },
+  "files": [
+    "lindsey/masters/lindsey_front.png",
+    "lindsey/stills/s1..s8.png",
+    "lindsey/clips/s*_v*.mov",
+    "lindsey/final/lindsey_art_1080x1920.mp4",
+    "lindsey/final/lindsey_art_2160x3840.mp4",
+    "lindsey/final/lindsey_art_720x1280.mp4",
+    "lindsey/work/qc_notes.txt",
+    "music/emotional_children_piano.mp3"
+  ]
+}

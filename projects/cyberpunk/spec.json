@@ -1,0 +1,26 @@
+{
+  "order": 5,
+  "id": "cyberpunk",
+  "title": "Cyberpunk city, rain, neon",
+  "date": "2026-09-20",
+  "theme": "anime",
+  "dt_project": "Untitled-76300",
+  "status": "done",
+  "still": {
+    "prompt": "A breathtaking anime background painting of a rain-soaked cyberpunk city street at night. Foreground: wet asphalt reflecting neon, a noodle stall with steam rising, stacked crates, a puddle mirroring the signs. Middle ground: narrow street canyon lined with holographic billboards in magenta, cyan and orange, tangled cables, kanji and katakana neon signs, a few silhouetted pedestrians with umbrellas. Background: towering megastructures fading into purple haze, flying vehicles with red tail lights, a giant glowing advertisement screen. {style_suffix}"
+  },
+  "i2v": {
+    "time_min": 16,
+    "prompt": "static camera, rain falling steadily, neon signs flickering and glowing, steam rising from the noodle stall, puddle reflections rippling, pedestrians walking slowly with umbrellas, flying vehicles drifting across the sky, subtle motion, minimal movement"
+  },
+  "post": {
+    "music": "Neon Synthwave Drive — alex-morgan, Pixabay (cdn.pixabay.com/audio/2026/06/04/audio_ae113c6d69.mp3), 2:48; 1 s fade in / 2 s fade out, vol 0.9"
+  },
+  "files": [
+    "cyberpunk.mov",
+    "cyberpunk_loop.mp4",
+    "cyberpunk_final.mp4"
+  ],
+  "notes": "Night scene works with the same style suffix. Music swapped from the calm-ambient default to synthwave on 2026-09-20.",
+  "youtube": "GrNTNQCqKnk"
+}

@@ -1,0 +1,35 @@
+{
+  "order": 0,
+  "id": "coast",
+  "title": "Coastal wildflowers (v1)",
+  "date": "2026-09-20",
+  "theme": "anime",
+  "dt_project": "Untitled-35903",
+  "status": "superseded by coast_v2",
+  "still": {
+    "model": "Wan 2.2 High Noise Expert T2V A14B (q8) @ 1 frame",
+    "lora": "Lightning High-Noise 100%",
+    "steps": 4,
+    "cfg": 1.0,
+    "shift": 5,
+    "sampler": "UniPC Trailing",
+    "size": "576x1280",
+    "prompt": "anime painting of a coastal hillside at golden hour, wildflowers in the foreground, tall grass, ocean waves below a cliff, towering orange and pink cumulus clouds, warm sunset light, birds in the sky, Makoto Shinkai style, highly detailed, soft painterly light"
+  },
+  "i2v": {
+    "size": "576x1280",
+    "sampler": "UniPC Trailing",
+    "shift": 5,
+    "time_min": 24,
+    "prompt": "static camera, gentle ocean waves rolling onto the shore, grass and wildflowers swaying in a soft breeze, birds drifting slowly across the sky, clouds moving slowly, subtle motion, minimal movement"
+  },
+  "post": {
+    "loop": "ping-pong x3 (rejected: reverses motion), then forward crossfade",
+    "music": null
+  },
+  "files": [
+    "coast.mov",
+    "coast_loop.mp4"
+  ],
+  "notes": "First end-to-end run. Still too soft — Wan-T2V at native res. Led to FLUX for stills."
+}

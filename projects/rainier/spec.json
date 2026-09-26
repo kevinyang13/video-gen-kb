@@ -1,0 +1,23 @@
+{
+  "order": 4,
+  "id": "rainier",
+  "title": "Mt. Rainier from Paradise",
+  "date": "2026-09-20",
+  "theme": "anime",
+  "dt_project": "Untitled-70762",
+  "status": "done",
+  "still": {
+    "prompt": "A breathtaking anime background painting of Mount Rainier from the Paradise meadows near Seattle at golden hour. Foreground: subalpine meadow dense with purple lupine, magenta paintbrush and white avalanche lilies, a few dark pointed fir trees. Middle ground: rolling green slopes and a small glacial stream catching the light. Background: the massive glaciated volcano filling the sky, its snow and ice lit pink and orange by the setting sun. Sky: enormous towering cumulus clouds lit orange and pink, a few tiny birds in silhouette. {style_suffix}"
+  },
+  "i2v": {
+    "time_min": 15.5,
+    "prompt": "static camera, wildflowers and meadow grass swaying in a soft breeze, the stream flowing gently, birds drifting slowly across the sky, clouds moving slowly over the mountain, subtle motion, minimal movement"
+  },
+  "files": [
+    "rainier.mov",
+    "rainier_loop.mp4",
+    "rainier_final.mp4"
+  ],
+  "notes": "First zero-click run — export Save button pressed by automation.",
+  "youtube": "JJB154LbBi0"
+}

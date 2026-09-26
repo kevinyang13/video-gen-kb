@@ -2,15 +2,24 @@
 .obsidian/workspace.json
 .claude/settings.local.json
 raw/photos/
-# generated per project: everything except plan/ and raw/
-projects/*/seed/
-projects/*/stills/
-projects/*/clips/
-projects/*/final/
-projects/*/music/
-projects/*/logs/
-# large or personal source sets, as before
+# Per project: keep the recipe, drop the pixels.
+# Tracked: plan/*.md, spec.json, every prompt and lock .txt, raw/ sources.
+# Ignored: images, video, audio and logs wherever they sit.
+projects/**/*.png
+projects/**/*.jpg
+projects/**/*.jpeg
+projects/**/*.webp
+projects/**/*.gif
+projects/**/*.mov
+projects/**/*.mp4
+projects/**/*.mp3
+projects/**/*.wav
+projects/**/*.log
+# film_run up-to-date stamps, not recipe
+projects/*/clips/*_trim.txt
+# large or personal source sets stay out entirely
 projects/dragon_epic/raw/
 projects/lost_city/raw/
+
 tools/draw-things-community/
 tools/*.log

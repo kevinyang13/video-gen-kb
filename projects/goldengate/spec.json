@@ -1,0 +1,25 @@
+{
+  "order": 3,
+  "id": "goldengate",
+  "title": "Golden Gate, San Francisco",
+  "date": "2026-09-20",
+  "theme": "anime",
+  "dt_project": "Untitled-82025",
+  "status": "done",
+  "still": {
+    "size": "576x1024 (first native-res run, no downscale)",
+    "prompt": "A breathtaking anime background painting of the Golden Gate Bridge in San Francisco at golden hour, viewed from the Marin Headlands. Foreground: golden coastal grass and orange California poppies on a rocky bluff, a windswept cypress tree. Middle ground: the International Orange suspension bridge spanning the bay, its towers rising out of a low bank of fog, small sailboats on the water. Background: the San Francisco skyline glowing in warm light, Alcatraz in the distance. Sky: enormous towering cumulus clouds lit orange and pink by the setting sun, a few tiny seagulls in silhouette. {style_suffix}"
+  },
+  "i2v": {
+    "seed": 601904108,
+    "time_min": 16,
+    "prompt": "static camera, fog slowly drifting under the bridge, gentle waves on the bay, sailboats gliding slowly, grass and poppies swaying in a soft breeze, seagulls drifting slowly across the sky, clouds moving slowly, subtle motion, minimal movement"
+  },
+  "files": [
+    "goldengate.mov",
+    "goldengate_loop.mp4",
+    "goldengate_final.mp4"
+  ],
+  "notes": "Proved native 576x1024 still is good enough; runbook switched to it. Mac was locked 2.5 h with Save sheet open — render survived.",
+  "youtube": "h8ic1_9Q9mI"
+}

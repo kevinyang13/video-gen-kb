@@ -1,0 +1,30 @@
+{
+  "order": 2,
+  "id": "torrey",
+  "title": "Torrey Pines, San Diego",
+  "date": "2026-09-20",
+  "theme": "anime",
+  "dt_project": "Untitled-91451",
+  "status": "done",
+  "still": {
+    "size": "1024x1792 then downscale to 576x1024",
+    "seed": 1190544862,
+    "prompt": "A breathtaking anime background painting of Torrey Pines State Reserve in San Diego at golden hour. Foreground: a windswept Torrey pine tree with twisted branches and long needles, golden coastal sage and yellow wildflowers on a sandy bluff. Middle ground: dramatic eroded golden sandstone cliffs with deep gullies dropping to a wide sandy beach and the Pacific Ocean, small white surf lines. Sky: enormous towering cumulus clouds lit orange and pink by the setting sun over the ocean, a few tiny seagulls in silhouette. {style_suffix}"
+  },
+  "i2v": {
+    "seed": 284526412,
+    "sampler": "UniPC Trailing",
+    "shift": 5,
+    "time_min": 15,
+    "prompt": "static camera, gentle ocean waves rolling onto the beach below the cliffs, pine needles and coastal grass swaying in a soft breeze, seagulls drifting slowly across the sky, clouds moving slowly, subtle motion, minimal movement"
+  },
+  "files": [
+    "torrey_flux_1024x1792.png",
+    "torrey_flux_576x1024.png",
+    "torrey.mov",
+    "torrey_loop.mp4",
+    "torrey_final.mp4"
+  ],
+  "notes": "Second run of the runbook; refiner trap caught by checklist.",
+  "youtube": "nRU-Upd2E3o"
+}

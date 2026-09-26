@@ -1,0 +1,10 @@
+s2 v1: clean to ~f110; thumb drops f124, hair spikes f186 (wind wording). v2 queued seed 2.
+s3 v1: PASS full 10 s; saucer stable, boy drifts slightly left.
+s5 v1: PASS identity to f200+; motion gentle (glide), keep 6 s.
+s7 v1: PASS; nice hug motion; darkens after ~f200 → keep 8 s.
+s4 v1: clean to ~f140; then pull-back, chick vanishes, orca morphs. v2 queued seed 2 (hold framing).
+s1 v1: PASS; darkens after ~f170 (LTX end fade, also s7) → keep 6.5 s.
+s6 v1: PASS; saucer drops onto ice, bursts free, flies off — keep f40-220 (7.2 s). Saucer shape = frozen S3 saucer.
+s8 v1: PASS; rise + whale + boy, natural fade at end → keep 0-9.6 s.
+s2 v2: PASS; thumb held, face+hair stable; end fade → keep 0-8 s. Fix = drop wind-on-hair wording + 'keeps holding'.
+s4 v2: PASS full 10 s; framing held, saucer = S3.

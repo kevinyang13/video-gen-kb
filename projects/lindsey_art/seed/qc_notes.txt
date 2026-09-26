@@ -1,0 +1,27 @@
+s2: c3 (side part, pencil in hand)
+s4: c2
+s5: c1 (wall art clearest)
+s7: c3
+s8: c2 (all four plush)
+s1: c1 (girl removed, same drawing + cat)
+s3: c2 (c3 rejected: extra hand)
+s6: c2
+s2 v1: FAIL cat changes (grey tabby → black-white, green eyes) from f124; face OK. v2 queued seed 2, cat pinned asleep.
+s4 v1: PASS full clip; face/hair/drawings stable → keep 0-8
+s7 v1: PASS; arms open, face OK; END FADE f169 (auto) → keep 0-6.5
+s8 v1: PASS; hug holds, camera rises to sunrise sky (ending); no fade → keep 0-9.6
+s5 v1: PASS; push-in ends close on the turtle canvas (as prompted); art unchanged → keep 0-9.96
+s1 v1: PASS short; camera drifts + cat reduced to tail after ~f140 → keep 0-5.4 (compensate with s4 full length)
+s3 v1: PASS full clip; sketches stay, 2nd hand = her other hand (natural) → keep 0-8
+s6 v1: PASS; visitors walk in, frames unchanged; END FADE f222 → keep 0-8.5
+s3 v1: FAIL (Kevin) — two hands on one pencil, already in the still. New still: prompt 'exactly one hand … left hand out of frame' → seeds 2,3 still two hands, seed 1 one hand + stray sleeve → single edit 'remove the second sleeve' seed 1 = clean.
+s6 v1: FAIL (Kevin) — dark signboards (P4 chalkboard) in the crowd, people pass through them. New still: 'no signboards/easels, ~8 people well apart on open floor' → seed 2.
+s2 v2: clean 0-5.4 then pan + 2nd cat head. v3 queued (camera fully still, exactly one cat).
+s8 v1: FAIL physics (full-size recheck) — horizon fixed while she slides down out of frame from ~f110 (sinks; 'camera rises' was not obeyed as a camera move). v2 queued: stays standing, camera fully still.
+s4, s5, s7 v1: recheck at full size PASS (hands natural, no intersections).
+s6 v2: PASS full size — people separate, floor only, frames unchanged → keep 0-8.5
+s3 v2: FAIL — second hand enters ~f80 and smears pink over the panda despite 'exactly one hand'. Restage (failure rule): no hands, pencil lying on the sketch.
+s3 restage still: no-hand edit seed 1 (pencil flat; seed 3 rejected — pencil balanced on its tip). v3 queued.
+s2 v3: PASS 0-6.5 — one grey tabby throughout, looks up and smiles ~f140; camera drifts right, she nears the edge after ~7 s
+s8 v2: PASS; stays standing, gentle eye-level pull-back (horizon fixed = consistent), plush intact; END FADE f238 → keep 0-9.3
+s3 v3: PASS — no hands, pencil flat, push-in to the gecko → keep 0-9

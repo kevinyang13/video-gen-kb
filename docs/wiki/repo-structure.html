@@ -107,6 +107,7 @@ projects.json  the registry: one record per project
 </code></pre>
 <p><strong>One folder per project</strong>, named for its <code>projects.json</code> id:</p>
 <pre><code>projects/&lt;id&gt;/
+  spec.json  its registry record: settings, prompts, run-spec, music, status
   plan/    the project's page(s) — published with the wiki
   raw/     its source photos, comics, references (immutable)
   seed/    masters, crops, candidate renders, prompt inputs
@@ -119,14 +120,12 @@ projects.json  the registry: one record per project
 <p>Not every project uses every folder: the early 9:16 loops (<a href="living-painting-loop.html">living painting loop</a>) have only <code>clips/ final/ music/</code>, while a multi-shot film uses all eight.</p>
 <p><strong><code>final/</code> is the film, not the shots.</strong> One folder, one question: <em>what do I hand over?</em> Every shot-scoped artefact — the <code>.mov</code> export, the trimmed ProRes, the per-shot <code>_4k.mp4</code> and its stamp — stays in <code>clips/</code> next to the clip it came from. Only the assembled master and its delivery copies (1920×1080, 720p, and so on) belong in <code>final/</code>. <code>film_run.py finish</code> writes to both accordingly. An assembled <em>sequence</em> that isn't the whole film still counts as a deliverable — lost_city's 30-second rift coda sits in <code>final/</code> even though the film around it isn't cut yet.</p>
 <p><strong><code>seed/</code> is the one to understand.</strong> It holds everything a render <em>starts from</em> that isn't a finished still: character and location masters, the face crops they were made from, rejected candidates, and any prepared input images. Masters are the valuable part — they're what makes shot 9 look like shot 2 (see <a href="character-consistency.html">character consistency</a>).</p>
+<h2>A project must be re-runnable from its own folder</h2>
+<p><code>projects/&lt;id&gt;/spec.json</code> is the <strong>source of truth</strong> for that project: the same record that used to sit in the root <code>projects.json</code> — models, sizes, seeds, per-scene prompts, the run-spec, music, status, file list. <code>scripts/build_projects.py</code> reads every <code>projects/*/spec.json</code> plus <code>projects/_shared.json</code> (defaults, themes, playlist), regenerates the root <code>projects.json</code> as an aggregate, and renders the registry pages from it. <code>film_run.py &lt;id&gt;</code> reads the project's own spec first and falls back to the aggregate.</p>
+<p>So: <strong>edit <code>projects/&lt;id&gt;/spec.json</code></strong>, never the root <code>projects.json</code> — that one is generated and will be overwritten on the next build.</p>
 <h2>Tracked vs generated</h2>
-<p>Only <code>plan/</code> and <code>raw/</code> are committed. Everything else is git-ignored:</p>
-<pre><code class="language-gitignore">projects/*/seed/  projects/*/stills/  projects/*/clips/
-projects/*/final/ projects/*/music/   projects/*/logs/
-projects/dragon_epic/raw/   # large
-projects/lost_city/raw/     # large
-</code></pre>
-<p>The two ignored <code>raw/</code> folders are exceptions from before the move and stay ignored. Everything git-ignored is either re-derivable or a deliverable that belongs on YouTube rather than in git.</p>
+<p>The rule is <em>keep the recipe, drop the pixels</em>. Tracked: <code>plan/*.md</code>, <code>spec.json</code>, every prompt and lock <code>.txt</code>, the run scripts, and <code>raw/</code> sources. Ignored by extension wherever they sit: <code>.png .jpg .jpeg .webp .gif .mov .mp4 .mp3 .wav .log</code>, plus <code>clips/*_trim.txt</code> (upscale stamps, not recipe) and the two large source sets <code>dragon_epic/raw/</code> and <code>lost_city/raw/</code>.</p>
+<p>A fresh clone therefore carries every plan, spec and prompt — enough to re-run any project from scratch — without a byte of media. Note that <code>.gitignore</code> does not support trailing comments on a pattern line; put the comment on its own line or the pattern silently matches nothing.</p>
 <h2>How the pieces connect</h2>
 <p><strong><code>projects.json</code> → a folder.</strong> Each record's <code>run-spec.dir</code> is <code>projects/&lt;id&gt;</code>, and every path inside the spec — <code>seed/kyle.png</code>, <code>stills/s3.txt</code>, <code>clips/s3_v1.mov</code> — is relative to it. <code>scripts/film_run.py</code> resolves them, which is why the reorganisation needed no changes to any shell script: they all take paths as arguments.</p>
 <p><strong>Plan pages publish with the wiki.</strong> <code>scripts/build_site.py</code> collects <code>wiki/*.md</code> <strong>and</strong> <code>projects/*/plan/*.md</code> into one slug namespace, so <code>&lt;a href="lost-city-plan.html"&gt;lost city plan&lt;/a&gt;</code> resolves from anywhere and the page lands at <code>docs/wiki/lost-city-plan.html</code> like any other. A project folder stays self-contained without splitting the knowledge base in two.</p>

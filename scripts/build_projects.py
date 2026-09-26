@@ -14,7 +14,8 @@ from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SRC = ROOT / "projects.json"
+SRC = ROOT / "projects.json"          # generated aggregate, written by load()
+SPECS = ROOT / "projects"             # source of truth: projects/<id>/spec.json + _shared.json
 OUT = ROOT / "wiki" / "projects.md"
 WIKI = ROOT / "wiki"
 
@@ -103,8 +104,23 @@ def record(p, defs, suffix):
     return out
 
 
+def load():
+    """Assemble the registry from projects/*/spec.json + projects/_shared.json.
+
+    Each project owns its record so its folder is self-contained and re-runnable;
+    projects.json is regenerated from them for anything that wants one file.
+    """
+    data = json.loads((SPECS / "_shared.json").read_text())
+    data.pop("_note", None)
+    recs = [json.loads(f.read_text()) for f in SPECS.glob("*/spec.json")]
+    recs.sort(key=lambda r: (r.get("order", 999), r["id"]))
+    data["projects"] = [{k: v for k, v in r.items() if k != "order"} for r in recs]
+    SRC.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
+    return data
+
+
 def main():
-    data = json.loads(SRC.read_text())
+    data = load()
     defs, suffix = data["defaults"], data["defaults"]["style_suffix"]
     projects = data["projects"]
     themes = data["themes"]

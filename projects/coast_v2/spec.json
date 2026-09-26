@@ -1,0 +1,30 @@
+{
+  "order": 1,
+  "id": "coast_v2",
+  "title": "Coastal wildflowers (v2)",
+  "date": "2026-09-20",
+  "theme": "anime",
+  "dt_project": "Untitled-35903",
+  "status": "done",
+  "still": {
+    "size": "1024x1792 then lanczos crop/downscale to 576x1024",
+    "seed": 20104302,
+    "prompt": "A breathtaking anime background painting of a coastal hillside at golden hour. Foreground: dense wildflowers in white, pink, yellow and blue with tall swaying grass, every petal crisply painted. Middle ground: lush green cliffs dropping to a turquoise bay with rolling white surf on a sandy cove. Sky: enormous towering cumulus clouds lit orange and pink by the setting sun, a few tiny birds in silhouette. {style_suffix}"
+  },
+  "i2v": {
+    "seed": 1180755429,
+    "sampler": "UniPC Trailing",
+    "shift": 5,
+    "time_min": 15.5,
+    "prompt": "static camera, gentle ocean waves rolling onto the shore, grass and wildflowers swaying in a soft breeze, birds drifting slowly across the sky, clouds moving slowly, subtle motion, minimal movement"
+  },
+  "files": [
+    "coast_flux_1024x1792.png",
+    "coast_flux_576x1024.png",
+    "coast_v2.mov",
+    "coast_v2_loop.mp4",
+    "coast_v2_final.mp4"
+  ],
+  "notes": "First run with wrong refiner (6-bit, not downloaded) produced washed-out noise; re-run with 8-bit S.",
+  "youtube": "W8fy4bhGOEU"
+}

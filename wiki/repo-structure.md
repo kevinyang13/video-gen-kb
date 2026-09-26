@@ -27,6 +27,7 @@ projects.json  the registry: one record per project
 
 ```
 projects/<id>/
+  spec.json  its registry record: settings, prompts, run-spec, music, status
   plan/    the project's page(s) — published with the wiki
   raw/     its source photos, comics, references (immutable)
   seed/    masters, crops, candidate renders, prompt inputs
@@ -43,18 +44,17 @@ Not every project uses every folder: the early 9:16 loops ([[living-painting-loo
 
 **`seed/` is the one to understand.** It holds everything a render *starts from* that isn't a finished still: character and location masters, the face crops they were made from, rejected candidates, and any prepared input images. Masters are the valuable part — they're what makes shot 9 look like shot 2 (see [[character-consistency]]).
 
+## A project must be re-runnable from its own folder
+
+`projects/<id>/spec.json` is the **source of truth** for that project: the same record that used to sit in the root `projects.json` — models, sizes, seeds, per-scene prompts, the run-spec, music, status, file list. `scripts/build_projects.py` reads every `projects/*/spec.json` plus `projects/_shared.json` (defaults, themes, playlist), regenerates the root `projects.json` as an aggregate, and renders the registry pages from it. `film_run.py <id>` reads the project's own spec first and falls back to the aggregate.
+
+So: **edit `projects/<id>/spec.json`**, never the root `projects.json` — that one is generated and will be overwritten on the next build.
+
 ## Tracked vs generated
 
-Only `plan/` and `raw/` are committed. Everything else is git-ignored:
+The rule is *keep the recipe, drop the pixels*. Tracked: `plan/*.md`, `spec.json`, every prompt and lock `.txt`, the run scripts, and `raw/` sources. Ignored by extension wherever they sit: `.png .jpg .jpeg .webp .gif .mov .mp4 .mp3 .wav .log`, plus `clips/*_trim.txt` (upscale stamps, not recipe) and the two large source sets `dragon_epic/raw/` and `lost_city/raw/`.
 
-```gitignore
-projects/*/seed/  projects/*/stills/  projects/*/clips/
-projects/*/final/ projects/*/music/   projects/*/logs/
-projects/dragon_epic/raw/   # large
-projects/lost_city/raw/     # large
-```
-
-The two ignored `raw/` folders are exceptions from before the move and stay ignored. Everything git-ignored is either re-derivable or a deliverable that belongs on YouTube rather than in git.
+A fresh clone therefore carries every plan, spec and prompt — enough to re-run any project from scratch — without a byte of media. Note that `.gitignore` does not support trailing comments on a pattern line; put the comment on its own line or the pattern silently matches nothing.
 
 ## How the pieces connect
 

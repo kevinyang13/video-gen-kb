@@ -1,0 +1,58 @@
+{
+  "_schema": "one entry per Draw Things project; still = text-to-image step, i2v = image-to-video step; settings omitted means 'same as defaults' below",
+  "defaults": {
+    "still": {
+      "model": "FLUX.2 [klein] 9B (8-bit S)",
+      "steps": 4,
+      "cfg": 1.0,
+      "shift": 3.0,
+      "sampler": "DDIM Trailing",
+      "size": "576x1024",
+      "lora": null,
+      "refiner": null
+    },
+    "i2v": {
+      "model": "Wan 2.2 High Noise Expert I2V A14B (8-bit S)",
+      "refiner": "Wan 2.2 Low Noise Expert I2V A14B (8-bit S) @ 10%",
+      "lora": "Wan 2.2 A14B Lightning High-Noise T2V v2.0 @ 100%",
+      "steps": 4,
+      "cfg": 1.0,
+      "shift": 4.95,
+      "sampler": "DDIM Trailing",
+      "size": "576x1024",
+      "frames": 81,
+      "fps": 16,
+      "strength": "100%"
+    },
+    "post": {
+      "script": "scripts/finish_clip.sh",
+      "loop": "forward, 8-frame tail->head crossfade, x6 = 27.4 s",
+      "upscale": "lanczos 1080x1920",
+      "music": "Calm Ambient Dreamscape — morgan-ambient, Pixabay, 1 s fade in / 2 s fade out, vol 0.9"
+    },
+    "style_suffix": "Makoto Shinkai and Studio Ghibli background art style, ultra detailed, rich painterly brushwork, soft volumetric light, vibrant saturated colors, masterpiece."
+  },
+  "playlist": {
+    "title": "AI-Vids",
+    "url": "https://www.youtube.com/playlist?list=PLJx49Sf61wKQ",
+    "id": "PLJx49Sf61wKQ"
+  },
+  "themes": {
+    "anime": {
+      "slug": "projects-anime",
+      "title": "Anime projects",
+      "blurb": "Shinkai/Ghibli-styled living paintings: a still from FLUX or Wan T2V, ambient motion from Wan 2.2 I2V, looped 9:16 with music. Coastal wildflowers, Torrey Pines, Golden Gate, Mt. Rainier, a cyberpunk street, the FLL farm."
+    },
+    "realistic": {
+      "slug": "projects-realistic",
+      "title": "Photoreal projects",
+      "blurb": "Cinematic photoreal shorts: FLUX.2 klein stills with Moodboard references, motion from LTX-2.3 or Wan 2.2, Real-ESRGAN to 4K, cut with crossfades. Dragon Epic, Lost City, the three-minute film."
+    },
+    "3d": {
+      "slug": "projects-3d",
+      "title": "3D-animated projects",
+      "blurb": "Pixar-style 3D-animated shorts. Kyle's Antarctic Rescue, Lindsey: A Small Dream."
+    }
+  },
+  "_note": "Shared config for every project: generation defaults, themes and the YouTube playlist. Each project's own record lives in projects/<id>/spec.json."
+}

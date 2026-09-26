@@ -1,0 +1,17 @@
+stills pass1: s1 c2, s2 c1 (c2/c3 extra girl), s4 c1 (c2 six kids), s5 c2, s7 c1, s8 c2 (c1/c3 shirt text), s9 c1 (c2/c3 BOT text), s12 c2. REDO s3 (6 kids / girl A lost braids), s6 (heads cropped — new pad input), s10 (6-7 kids + background kids), s11 (4 kids / trophy over face). Seeds 4-6, left-to-right roster in prompt.
+s6 c4, s11 c5 (round 2). s10: rebuilt as edit of approved s5 (comic layout gave 6 kids x6) → e2. s3: girl A renders with straight hair in all 9 candidates + 2 targeted edits (braids went to boy2, then to Lindsey); the comic panel itself draws her that way. Count = 5 → keep c7 (failure rule: best attempt), flagged.
+s1 v1: PASS 5 kids all frames; END FADE f174 → keep 0-6.8
+s12 v1: PASS 5 kids; fade from f144 used as the film's ending → keep 0-9.96
+s11 v1: PASS 5 kids + announcer; END FADE f138 → keep 0-5.4
+s6 v1: PASS 5 kids, gasp reaction; emblems morph (no text); fade f191 → keep 0-7
+s3 v1: FAIL after f90 — standing girl walks out of frame + camera pans (4 kids). fallback 0-3.6. v2 queued: she stays at the poster.
+s5 v1: FAIL — camera pulls back from ~f120, a 6th (brown-haired) boy enters right ~f130. fallback 0-4.8. v2 queued: no zoom/pan, no one enters from any edge.
+s4 v1: PASS 5 kids all frames; fade f204 → keep 0-8
+s7 v1: FAIL — pull-back from ~f100 reveals 6th+7th kids. v2 queued. Pre-emptively added no-zoom/no-entry wording to s8, s9, s10, s2 before render.
+s8 v1: PASS 5 kids, framing held (new no-zoom wording); fade f133 → keep 0-5.2
+s9 v1: PASS trimmed — 5 kids + judge to f160; camera slides right after (cap boy + judge leave by f240) → keep 0-6.4
+s10 v1: PASS trimmed — pull-back from f110 despite no-zoom wording, extra girl ~f140 → keep 0-4.4. Note: her hand is on the robot arm in the still (reads as guiding).
+s2 v1: PASS trimmed — 2 boys + larva; black edge bar from ~f140, pull-back reveals 2 kids by f240 → keep 0-5.2
+s3 v2: PASS trimmed — she stays through f130, exits after → keep 0-5.2 (v1 was 3.6)
+s5 v2: FAIL same pull-back ~f110 (wording didn't stop it; tight still invites it). Use v1 0-4.8.
+s7 v2: FAIL extra kids by f80 (worse). Use v1 0-3.4.
