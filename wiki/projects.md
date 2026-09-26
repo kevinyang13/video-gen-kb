@@ -8,7 +8,7 @@
 
 ---
 
-**Project pages**: [[projects-anime|Anime projects]] (5) · [[projects-realistic|Photoreal projects]] (3) · [[projects-3d|3D-animated projects]] (3)
+**Project pages**: [[projects-anime|Anime projects]] (5) · [[projects-realistic|Photoreal projects]] (4) · [[projects-3d|3D-animated projects]] (3)
 
 Each theme page holds the full records — settings, prompts, seeds, files. The tables below link straight to a project's record on its page.
 
@@ -26,7 +26,7 @@ Shinkai/Ghibli-styled living paintings: a still from FLUX or Wan T2V, ambient mo
 
 → full records for all 5: [[projects-anime|Anime projects]]
 
-## [[projects-realistic|Photoreal projects]] (3)
+## [[projects-realistic|Photoreal projects]] (4)
 
 Cinematic photoreal shorts: FLUX.2 klein stills with Moodboard references, motion from LTX-2.3 or Wan 2.2, Real-ESRGAN to 4K, cut with crossfades. Dragon Epic, Lost City, the three-minute film.
 
@@ -35,8 +35,9 @@ Cinematic photoreal shorts: FLUX.2 klein stills with Moodboard references, motio
 | 1 | [Dragon Epic — 1-minute photoreal short, family hero face](projects-realistic.html#dragon_epic) | 2026-09-21 | in progress — scene 1A posted | FLUX.2 [klein] 9B 1280x768 | Wan 2.2 High Noise 47 min | The Dragon's Breath | `—` | [▶ watch](https://youtu.be/Xzu-c5yX8uo) |
 | 2 | [Lost City — hyper-real rider on a raptor-dragon entering jungle ruins](projects-realistic.html#lost_city) | 2026-09-21 | in progress — 4K with music: s3, s4, s5, s8, s9; s1 and s2 at 4K without music; s6 trimmed to 4.6 s and never upscaled; **s7 (escape run) not rendered**; no film assembled yet | FLUX.2 [klein] 9B 1280x768 | LTX-2.3 22B [distilled] 1.1 (production engine — see ltx_10s) — Wan 2.2 High Noise I2V (8-bit S) + Low Noise refiner 10% for locked-camera shots at 768p 49 min | Mystical orchestral theme with ancient flute | `—` | [▶ watch](https://youtu.be/68sq_jZqu6c) |
 | 3 | [Night Elf Hunter — a boy and his bear crossing the grassland](projects-realistic.html#nightelf_hunter) | 2026-09-26 | research — B0 partial pass 2026-09-26: 30 images, identity 30/30, angles skewed (back 1/3, over-shoulder 0/2); v1 remains the delivered film | FLUX.2 [klein] 9B 512x768 | Wan 2.2 High Noise ? min | none | `—` | — |
+| 4 | [Ivy — character LoRA](projects-realistic.html#ivy_lora) | 2026-09-26 | scaffolded — waiting on source photographs | FLUX.2 [klein] 9B aspect-bucketed, | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
 
-→ full records for all 3: [[projects-realistic|Photoreal projects]]
+→ full records for all 4: [[projects-realistic|Photoreal projects]]
 
 ## [[projects-3d|3D-animated projects]] (3)
 

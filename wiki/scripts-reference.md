@@ -116,6 +116,26 @@ Set `KEEP` per character; the default keep-clause is generic and will drift. `ON
 **Cost**: ~25–40 s per image, ~20 min for 30. Captions are tracked in git; the images are not.
 
 
+## `scripts/photo_dataset.sh` — real photographs → a training set
+
+```
+scripts/photo_dataset.sh SRC_DIR OUT_DIR [MAXPX=1024] [TRIGGER]
+```
+
+Converts every jpg/jpeg/png/heic in `SRC_DIR` to `OUT_DIR/NN.png` and writes a caption **stub**
+`OUT_DIR/NN.txt`. Existing captions are never overwritten, so it is safe to re-run after adding
+photos.
+
+Uses `sips` rather than ffmpeg for two reasons: it honours EXIF orientation (ffmpeg silently does
+not for still JPEGs, so portraits come out sideways), and writing PNG drops the EXIF block
+**including GPS** — which is the point when the subject is family. Aspect is preserved and only
+the long side is capped, because `--use-aspect-ratio` buckets by shape and cropping square here
+would throw away the framing variety that made photographs worth using.
+
+Captions are stubs by design: fill each one by looking at the photo and naming only what varies.
+An auto-caption that mentions hair or face silently un-binds that feature from the trigger token.
+
+
 ## `draw-things-cli train lora` — train a character LoRA locally
 
 ```

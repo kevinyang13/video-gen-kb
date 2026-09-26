@@ -252,6 +252,19 @@ ONLY=&quot;1 10 25&quot;  CELLS=&quot;…&quot;  WD=512 HD=768  DRY_RUN=1
 <p><strong>The two strings.</strong> Each cell writes a <strong>prompt</strong> that names every feature to preserve (our reference-token practice — klein substitutes its own face otherwise) and a <strong>caption</strong> that names only what varies. Permanent features are absent from the caption on purpose, so they bind to the trigger token rather than to words a later prompt can contradict — the Isolation Rule, which is the exact inverse of how we write shot prompts. Captioned axes (wardrobe, lighting, framing) stay steerable after training.</p>
 <p>Set <code>KEEP</code> per character; the default keep-clause is generic and will drift. <code>ONLY</code> renders a numbered subset — render two or three cells first and look at them before spending the full run. Captions are written even under <code>DRY_RUN</code>, so the text is reviewable before any pixels exist.</p>
 <p><strong>Cost</strong>: ~25–40 s per image, ~20 min for 30. Captions are tracked in git; the images are not.</p>
+<h2><code>scripts/photo_dataset.sh</code> — real photographs → a training set</h2>
+<pre><code>scripts/photo_dataset.sh SRC_DIR OUT_DIR [MAXPX=1024] [TRIGGER]
+</code></pre>
+<p>Converts every jpg/jpeg/png/heic in <code>SRC_DIR</code> to <code>OUT_DIR/NN.png</code> and writes a caption <strong>stub</strong>
+<code>OUT_DIR/NN.txt</code>. Existing captions are never overwritten, so it is safe to re-run after adding
+photos.</p>
+<p>Uses <code>sips</code> rather than ffmpeg for two reasons: it honours EXIF orientation (ffmpeg silently does
+not for still JPEGs, so portraits come out sideways), and writing PNG drops the EXIF block
+<strong>including GPS</strong> — which is the point when the subject is family. Aspect is preserved and only
+the long side is capped, because <code>--use-aspect-ratio</code> buckets by shape and cropping square here
+would throw away the framing variety that made photographs worth using.</p>
+<p>Captions are stubs by design: fill each one by looking at the photo and naming only what varies.
+An auto-caption that mentions hair or face silently un-binds that feature from the trigger token.</p>
 <h2><code>draw-things-cli train lora</code> — train a character LoRA locally</h2>
 <pre><code>draw-things-cli train lora --model flux_2_klein_9b_i8x.ckpt \
   --dataset projects/&lt;id&gt;/&lt;version&gt;/seed/dataset \
