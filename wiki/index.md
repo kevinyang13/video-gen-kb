@@ -25,19 +25,21 @@
 
 ## Projects
 
-- [[projects]] — index of every video, grouped by theme; generated from `projects.json`
-- [[projects-anime]] — Shinkai/Ghibli living-painting loops: coast, Torrey Pines, Golden Gate, Rainier, cyberpunk, FLL farm
-- [[projects-realistic]] — photoreal shorts: Dragon Epic, Lost City, the three-minute film
-- [[projects-3d]] — 3D-animated shorts: Kyle's Antarctic Rescue
+Each project owns a folder — `projects/<id>/<version>/` — and its plan page lives with it, under `plan/`. The registry pages below are generated from every version's `spec.json`; see [[repo-structure]] for the layout.
 
-## Plans
+- [[projects]] — every video, grouped by theme, newest version of each
+- [[projects-anime]] — Shinkai/Ghibli living-painting loops: coast, Torrey Pines, Golden Gate, Rainier, cyberpunk
+- [[projects-realistic]] — photoreal shorts: Dragon Epic, Lost City
+- [[projects-3d]] — 3D-animated shorts: Kyle's Antarctic Rescue, Lindsey's A Small Dream, BOT Builders Champion
 
-- [[dragon-epic-plan]] — 1-minute photoreal dragon short with a personal face: pipeline, Draw Things config per stage, face-identity and dragon-consistency strategy, 12-shot list, experiments, budget
-- [[bot-builders-champion-photo-cut-plan]] — 59 s FLL season film built from the team's own photographs: master recipe that keeps a real child's likeness, restaging beats from a portrait, what photoreal cost
-- [[lost-city-plan]] — hyper-real sci-fantasy rider entering jungle ruins (OpenArt-style reference): what makes it look real, klein Moodboard stills, Wan 2.2 vs LTX-2.3 motion settings, creature/hero/city locks, 8-shot list, experiments L0–L6
-- [[bot-builders-champion-comic-cut-plan]] — **delivered** (63.5 s): 16:9 3D-animated FLL team film from a 3-page comic, five kids locked to a team master; why group shots cost half their length
-- [[lindsey-art-plan]] — **delivered**: 1-minute vertical 3D-animated short from Lindsey's art comic; first film fully through `film_run.py`; every take, redo and the errors Kevin caught
-- [[kyle-antarctic-rescue-plan]] — **delivered**: 1-minute vertical 3D-animated short from Kyle's 2D comic, rendered unattended overnight with `draw-things-cli` — klein edit-mode masters, diptych identity lock, LTX-2.3, every pick and rejection
+**Project plans** — the story, decisions and results behind each film:
+
+- [[lost-city-plan]] — Lost City: hyper-real rider entering jungle ruins; klein Moodboard stills, Wan 2.2 vs LTX-2.3 motion settings, creature/hero/city locks, 15-shot list, experiments L0–L6
+- [[dragon-epic-plan]] — Dragon Epic: 1-minute photoreal short with a personal face; config per stage, face-identity and dragon-consistency strategy, 12-shot list, budget
+- [[kyle-antarctic-rescue-plan]] — Kyle's Antarctic Rescue: **delivered**, 1-minute vertical from a 2D comic, rendered unattended overnight; klein edit-mode masters, diptych identity lock, every pick and rejection
+- [[lindsey-art-plan]] — Lindsey: A Small Dream: **delivered**, 1-minute vertical from her art comic; first film fully through `film_run.py`, every take and redo
+- [[bot-builders-champion-comic-cut-plan]] — BOT Builders Champion `v2-comic-cut`: **delivered** 63.5 s from a 3-page comic; five kids locked to a team master, why group shots cost half their length
+- [[bot-builders-champion-photo-cut-plan]] — BOT Builders Champion `v3-photo-cut`: **delivered** 59 s from the family's photographs; the master recipe that keeps a real child's likeness, and what photoreal cost
 
 ## Recipes
 

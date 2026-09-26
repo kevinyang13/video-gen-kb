@@ -1,4 +1,4 @@
-# Bot Builders — 90-Second FLL Team Film Plan
+# BOT Builders Champion, comic cut — 90-Second Team Film from a 3-Page Comic
 
 **Summary**: A 90-second, 16:9, 3D-animated film of Kevin's FIRST LEGO League team, made from a 3-page, 15-panel comic. The team discovers a tiny insect at the farm, studies it, builds it a habitat, tests the robot through failures, and wins the competition. It's the third film through the [[idea-to-video-blueprint]] and the first with five recurring characters, all shown in group close-ups.
 

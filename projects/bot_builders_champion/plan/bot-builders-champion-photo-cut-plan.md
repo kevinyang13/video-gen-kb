@@ -1,4 +1,4 @@
-# BOT Builders (photo cut) — 1-Minute Film from the Team's Own Photos
+# BOT Builders Champion, photo cut — 1-Minute Film from the Team's Own Photos
 
 **Summary**: A 59-second 16:9 short about an FIRST LEGO League season — build, research at Coastal Roots Farm, the lacewing project, the competition, the win — made from the team's real photographs rather than a comic. Eleven shots, 3D-animated look, rendered entirely with `draw-things-cli`. Version 3 of the [[bot-builders-champion-comic-cut-plan|Bot Builders]] project: same five children as the comic cut, different source material and a different route to identity.
 

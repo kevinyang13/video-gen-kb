@@ -113,20 +113,21 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <li><a href="headless-cli-pipeline.html">headless cli pipeline</a> — running the whole pipeline without a UI: <code>draw-things-cli</code> (klein strength 1.0 = edit mode, diptych as Moodboard substitute, <code>--frames</code> video, config JSON), gRPCServerCLI, and why ComfyUI/MLX can't replace it on a Mac</li>
 </ul>
 <h2>Projects</h2>
+<p>Each project owns a folder — <code>projects/&lt;id&gt;/&lt;version&gt;/</code> — and its plan page lives with it, under <code>plan/</code>. The registry pages below are generated from every version's <code>spec.json</code>; see <a href="repo-structure.html">repo structure</a> for the layout.</p>
 <ul>
-<li><a href="projects.html">projects</a> — index of every video, grouped by theme; generated from <code>projects.json</code></li>
-<li><a href="projects-anime.html">projects anime</a> — Shinkai/Ghibli living-painting loops: coast, Torrey Pines, Golden Gate, Rainier, cyberpunk, FLL farm</li>
-<li><a href="projects-realistic.html">projects realistic</a> — photoreal shorts: Dragon Epic, Lost City, the three-minute film</li>
-<li><a href="projects-3d.html">projects 3d</a> — 3D-animated shorts: Kyle's Antarctic Rescue</li>
+<li><a href="projects.html">projects</a> — every video, grouped by theme, newest version of each</li>
+<li><a href="projects-anime.html">projects anime</a> — Shinkai/Ghibli living-painting loops: coast, Torrey Pines, Golden Gate, Rainier, cyberpunk</li>
+<li><a href="projects-realistic.html">projects realistic</a> — photoreal shorts: Dragon Epic, Lost City</li>
+<li><a href="projects-3d.html">projects 3d</a> — 3D-animated shorts: Kyle's Antarctic Rescue, Lindsey's A Small Dream, BOT Builders Champion</li>
 </ul>
-<h2>Plans</h2>
+<p><strong>Project plans</strong> — the story, decisions and results behind each film:</p>
 <ul>
-<li><a href="dragon-epic-plan.html">dragon epic plan</a> — 1-minute photoreal dragon short with a personal face: pipeline, Draw Things config per stage, face-identity and dragon-consistency strategy, 12-shot list, experiments, budget</li>
-<li><a href="bot-builders-champion-photo-cut-plan.html">bot builders champion photo cut plan</a> — 59 s FLL season film built from the team's own photographs: master recipe that keeps a real child's likeness, restaging beats from a portrait, what photoreal cost</li>
-<li><a href="lost-city-plan.html">lost city plan</a> — hyper-real sci-fantasy rider entering jungle ruins (OpenArt-style reference): what makes it look real, klein Moodboard stills, Wan 2.2 vs LTX-2.3 motion settings, creature/hero/city locks, 8-shot list, experiments L0–L6</li>
-<li><a href="bot-builders-champion-comic-cut-plan.html">bot builders champion comic cut plan</a> — <strong>delivered</strong> (63.5 s): 16:9 3D-animated FLL team film from a 3-page comic, five kids locked to a team master; why group shots cost half their length</li>
-<li><a href="lindsey-art-plan.html">lindsey art plan</a> — <strong>delivered</strong>: 1-minute vertical 3D-animated short from Lindsey's art comic; first film fully through <code>film_run.py</code>; every take, redo and the errors Kevin caught</li>
-<li><a href="kyle-antarctic-rescue-plan.html">kyle antarctic rescue plan</a> — <strong>delivered</strong>: 1-minute vertical 3D-animated short from Kyle's 2D comic, rendered unattended overnight with <code>draw-things-cli</code> — klein edit-mode masters, diptych identity lock, LTX-2.3, every pick and rejection</li>
+<li><a href="lost-city-plan.html">lost city plan</a> — Lost City: hyper-real rider entering jungle ruins; klein Moodboard stills, Wan 2.2 vs LTX-2.3 motion settings, creature/hero/city locks, 15-shot list, experiments L0–L6</li>
+<li><a href="dragon-epic-plan.html">dragon epic plan</a> — Dragon Epic: 1-minute photoreal short with a personal face; config per stage, face-identity and dragon-consistency strategy, 12-shot list, budget</li>
+<li><a href="kyle-antarctic-rescue-plan.html">kyle antarctic rescue plan</a> — Kyle's Antarctic Rescue: <strong>delivered</strong>, 1-minute vertical from a 2D comic, rendered unattended overnight; klein edit-mode masters, diptych identity lock, every pick and rejection</li>
+<li><a href="lindsey-art-plan.html">lindsey art plan</a> — Lindsey: A Small Dream: <strong>delivered</strong>, 1-minute vertical from her art comic; first film fully through <code>film_run.py</code>, every take and redo</li>
+<li><a href="bot-builders-champion-comic-cut-plan.html">bot builders champion comic cut plan</a> — BOT Builders Champion <code>v2-comic-cut</code>: <strong>delivered</strong> 63.5 s from a 3-page comic; five kids locked to a team master, why group shots cost half their length</li>
+<li><a href="bot-builders-champion-photo-cut-plan.html">bot builders champion photo cut plan</a> — BOT Builders Champion <code>v3-photo-cut</code>: <strong>delivered</strong> 59 s from the family's photographs; the master recipe that keeps a real child's likeness, and what photoreal cost</li>
 </ul>
 <h2>Recipes</h2>
 <ul>

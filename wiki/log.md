@@ -8,6 +8,12 @@
 
 ---
 
+## 2026-09-25 — Wiki index reorganised around projects
+
+The index had a separate **Plans** section listing project pages away from the registry, and its descriptions had gone stale (FLL farm under anime, the deleted three-minute film, only Kyle under 3D). Plans now sit inside **Projects**, under a line explaining that each project owns its folder and its plan lives in it, with the registry pages first and the six plan pages after, each labelled by project and version.
+
+Landing-page cards also gained two fixes while the section was being rewritten: they now use each page's own `# H1` (trimmed at the subtitle dash, so "Lost City" rather than "lost city plan") and render inline `**bold**` and `` `code` `` instead of printing the asterisks. Both were long-standing, just more obvious with ten cards in one section.
+
 ## 2026-09-25 — All three FLL projects consolidated as bot_builders_champion
 
 `fll_farm`, `fll_bot_builders` and `fll_champions` were one team filmed three ways, so they are now one project with three versions: `v1-anime-loop` (the Shinkai-style 9:16 loop of the Coastal Roots Farm visit, no faces, driven through the app), `v2-comic-cut` (63.5 s 16:9 film from the 3-page comic) and `v3-photo-cut` (59 s 16:9 film from the family's photographs). Both plan pages moved to `projects/bot_builders_champion/plan/` and were renamed to match; the registry is down to **10 projects**.

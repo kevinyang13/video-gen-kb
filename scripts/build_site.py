@@ -11,6 +11,7 @@ served or published. Run after editing any wiki page:
     python3 scripts/build_site.py
 """
 
+import html
 import re
 import shutil
 from datetime import date
@@ -228,8 +229,29 @@ def split_related(html):
     return html[: m.start()] + html[m.end() :], related
 
 
-def build_landing(slugs, today):
+def card_title(slug, pages):
+    """The page's own H1 if it has one, else the slug with hyphens as spaces."""
+    path = pages.get(slug)
+    if path:
+        for line in path.read_text(encoding="utf-8").splitlines():
+            if line.startswith("# "):
+                # "Lost City — Project Plan (…)" -> "Lost City": the card wants the name,
+                # the description beside it already carries the subtitle
+                return html.escape(re.split(r"\s+[—–]\s+", line[2:].strip())[0])
+    return slug.replace("-", " ")
+
+
+def inline_md(text):
+    """Bold, italic and code inside a card description."""
+    text = html.escape(text)
+    text = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", text)
+    text = re.sub(r"`(.+?)`", r"<code>\1</code>", text)
+    return re.sub(r"(?<!\*)\*([^*]+?)\*(?!\*)", r"<em>\1</em>", text)
+
+
+def build_landing(slugs, today, pages=None):
     """Render wiki/index.md sections as card grids."""
+    pages = pages or {}
     text = (WIKI / "index.md").read_text(encoding="utf-8")
     body = text.split("\n---\n", 1)[-1]
     sections = []
@@ -245,8 +267,8 @@ def build_landing(slugs, today):
                 slug, desc = m.group(1).strip(), m.group(2).strip()
                 if slug in slugs:
                     cards.append(
-                        f'<a class="card" href="wiki/{slug}.html"><b>{slug.replace("-", " ")}</b>'
-                        f"<span>{desc}</span></a>"
+                        f'<a class="card" href="wiki/{slug}.html"><b>{card_title(slug, pages)}</b>'
+                        f"<span>{inline_md(desc)}</span></a>"
                     )
             elif line.strip().startswith("_("):
                 stubs = f'<p class="stubs">{line.strip().strip("_")}</p>'
@@ -297,7 +319,7 @@ def build():
             encoding="utf-8",
         )
 
-    build_landing(slugs, today)
+    build_landing(slugs, today, {p.stem: p for p in pages})
     print(f"built {len(slugs)} wiki pages + landing -> {DOCS.relative_to(ROOT)}/")
 
 
