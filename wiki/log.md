@@ -8,6 +8,14 @@
 
 ---
 
+## 2026-09-26 — Orchestration options added to the v2 research
+
+Second pasted source (`raw/2026-09-26-ai-film-orchestration-options.md`): Claude-Code-driven skills over ComfyUI/Kohya, and three open-source orchestrators. Verified all three repos exist before recording them — `OpenX-Inc/flow` and `juspay/director` are real and single-source; **OpenMontage appears under a dozen near-identical forks**, so its provenance is unclear and the page says so.
+
+The honest framing added to [[blueprint-v2-research]]: **we already are that orchestrator** — `film_run.py` plus `spec.json` is the shots-manifest-then-render pattern the source recommends building. What the projects have that we lack is narrower and more interesting: Director's **critic that rejects a keyframe before animating it** (we judge by eye; it would have caught the empty-room Bot Builders shots and the child-in-adult-armour night-elf stills for free), and OpenX Flow's **serverless bursting**, which is the actual lever that makes LoRA training and control models possible on a Mac — and which breaks the local-and-free premise, so it is a decision rather than a detail. Also noted that `musubi-tuner` and `kohya_ss` are CUDA-centric, so local training is gated on an unverified question.
+
+Three experiments added: B8 (does a LoRA train on MPS at all), B9 (cost per film of bursting), B10 (automate the judge).
+
 ## 2026-09-26 — Blueprint v2 research page
 
 Kevin's framing for the pasted pipeline: it is **research for a new blueprint with a different strategy**, not a benchmark for the current one. Added [[blueprint-v2-research]] and left every existing page alone.

@@ -92,7 +92,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
     <span class="spacer"></span>
     <button class="pill" onclick="tt()">◐ Theme</button>
   </nav>
-  <h1>Blueprint v2 — Research Notes for a Different Pipeline Strategy</h1><p class="lede">Research toward a second production pipeline built on a different strategy from <a href="idea-to-video-blueprint.html">idea to video blueprint</a>: identity from <strong>trained weights</strong> rather than reference images, motion from <strong>pose and depth control</strong> rather than prose, and a real <strong>edit, grade and dialogue</strong> stage instead of a scripted ffmpeg assembly. Records what the standard industry route does, what each piece would cost on this hardware, what is unknown, and the experiments that would decide whether to adopt it. Nothing here is implemented — the current blueprint is unchanged and still the production route.</p><div class="meta"><span><b>Updated</b> 2026-09-26</span><span><b>Sources</b> <code>raw/2026-09-26-ai-film-production-pipeline.md</code> (pasted 2026-09-26, origin unattributed, <em>unverified</em>); our measured results in <a href="idea-to-video-blueprint.html">idea to video blueprint</a>, <a href="headless-cli-pipeline.html">headless cli pipeline</a>, <a href="character-consistency.html">character consistency</a>, <a href="identity-conditioning.html">identity conditioning</a>, <a href="apple-silicon-inference.html">apple silicon inference</a>, <a href="nightelf-hunter-plan.html">nightelf hunter plan</a>, <a href="bot-builders-champion-photo-cut-plan.html">bot builders champion photo cut plan</a>. Capability claims about tools we have not installed are marked <em>needs verification</em>.</span></div>
+  <h1>Blueprint v2 — Research Notes for a Different Pipeline Strategy</h1><p class="lede">Research toward a second production pipeline built on a different strategy from <a href="idea-to-video-blueprint.html">idea to video blueprint</a>: identity from <strong>trained weights</strong> rather than reference images, motion from <strong>pose and depth control</strong> rather than prose, and a real <strong>edit, grade and dialogue</strong> stage instead of a scripted ffmpeg assembly. Records what the standard industry route does, what each piece would cost on this hardware, what is unknown, and the experiments that would decide whether to adopt it. Nothing here is implemented — the current blueprint is unchanged and still the production route.</p><div class="meta"><span><b>Updated</b> 2026-09-26 (orchestration options and B8–B10 added)</span><span><b>Sources</b> <code>raw/2026-09-26-ai-film-production-pipeline.md</code> and <code>raw/2026-09-26-ai-film-orchestration-options.md</code> (both pasted 2026-09-26, origin unattributed; the three orchestrator repos were verified to exist on 2026-09-26, their capabilities were not tested); our measured results in <a href="idea-to-video-blueprint.html">idea to video blueprint</a>, <a href="headless-cli-pipeline.html">headless cli pipeline</a>, <a href="character-consistency.html">character consistency</a>, <a href="identity-conditioning.html">identity conditioning</a>, <a href="apple-silicon-inference.html">apple silicon inference</a>, <a href="nightelf-hunter-plan.html">nightelf hunter plan</a>, <a href="bot-builders-champion-photo-cut-plan.html">bot builders champion photo cut plan</a>. Capability claims about tools we have not installed are marked <em>needs verification</em>.</span></div>
 <hr />
 <h2>1. Why look for a different strategy</h2>
 <p>The current pipeline is fast, local, free and reliable, and it has delivered six films. Its limits are structural rather than incidental, and they all trace to the same choice — identity carried by <strong>reference-image tokens</strong> instead of trained weights (<a href="identity-conditioning.html">identity conditioning</a> channels 2 and 4):</p>
@@ -196,6 +196,46 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 8  Cut in an NLE, export, QC               changed: ffmpeg becomes the encoder, not the editor
 </code></pre>
 <p>Steps 1, 2 and 7's upscale survive intact. That is the useful finding: <strong>the seeding phase is strategy-independent</strong> — a turnaround sheet is a good reference set <em>and</em> a good training set.</p>
+<h2>3b. Who drives it: orchestration options</h2>
+<p>A second question, separate from the four substitutions: <strong>what runs the pipeline.</strong> The source proposes Claude-Code-driven skills over local tools, or one of three open-source orchestrators (source: <code>raw/2026-09-26-ai-film-orchestration-options.md</code>; repo names verified 2026-09-26, capabilities not tested).</p>
+<p>Worth stating first: <strong>this project already is that orchestrator.</strong> <code>scripts/film_run.py</code> + <code>spec.json</code> is the "turn a story into a <code>shots.json</code> manifest, then render it" pattern — a spec with per-shot prompts, takes and trims, driven from one command, with a model judging picks and QC. The interesting question is not whether to adopt an orchestrator but which parts of theirs we lack.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Project</th>
+<th>What it is</th>
+<th>What it would add here</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/OpenX-Inc/flow"><code>OpenX-Inc/flow</code></a></td>
+<td>autonomous pipeline; topic → scenes → Wan 2.2 clips → stitched with narration and subtitles; last-frame conditioning for coherence; can burst to Modal/RunPod</td>
+<td><strong>serverless GPU bursting</strong> — the only credible route to LoRA training and to parallel clip renders. Its last-frame chaining we already do by hand (the rift coda, Lindsey)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/juspay/director"><code>juspay/director</code></a></td>
+<td>TypeScript; shot planning, a <strong>consistency critic that rejects off-brand keyframes before animating</strong>, multi-judge scoring across weighted dimensions, self-critique before mastering</td>
+<td><strong>automated QC.</strong> Today I judge every still and clip by eye. A critic that rejects a still <em>before</em> 10 minutes of LTX time is the single highest-value idea in the whole source</td>
+</tr>
+<tr>
+<td>OpenMontage</td>
+<td>agentic production system for coding assistants; 12 pipelines, tool + skill layers, Remotion or ffmpeg assembly</td>
+<td>a <strong>skills/knowledge layering</strong> pattern, and Remotion for titles and captions. Note: it exists under a dozen near-identical GitHub forks, so provenance is unclear — treat with care</td>
+</tr>
+<tr>
+<td>Claude film skill / ComfyUI + Kohya API</td>
+<td>Claude captions the dataset, fires <code>kohya_ss</code> / <code>musubi-tuner</code> training, queues ComfyUI jobs over HTTP</td>
+<td>the <strong>dataset-and-training half of a LoRA route</strong>, which is exactly what B1 needs</td>
+</tr>
+</tbody>
+</table></div>
+<p>Three things follow:</p>
+<ol>
+<li><strong>Automated pre-animation QC is worth stealing regardless of strategy.</strong> Director's shape — critic rejects a keyframe before it becomes a clip — maps directly onto our <code>pick</code> step and would have caught the two Bot Builders shots with no child in them, and the seven night-elf stills showing a ten-year-old, without a human looking. That is experiment <strong>B10</strong>, and it is cheap.</li>
+<li><strong>Serverless bursting is the lever that makes v2 possible</strong>, not the orchestrator choice. LoRA training, ComfyUI-only control models and parallel renders all need GPU we do not have; Modal/RunPod is how the source's stack gets it. It also breaks the "everything local and free" premise, so it is a decision, not a detail.</li>
+<li><strong><code>musubi-tuner</code> and <code>kohya_ss</code> are CUDA-centric.</strong> Whether either trains on Apple Silicon at all is <em>unverified</em> and is the gate on local LoRA — if the answer is no, B1 becomes a cloud experiment or nothing.</li>
+</ol>
 <h2>4. Experiments to run before adopting anything</h2>
 <p>Each is small, and each can kill the idea cheaply. Ordered by what would block the rest.</p>
 <div class="tw"><table>
@@ -250,6 +290,24 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <td>grade the night-elf film's eight shots to one LUT in Resolve</td>
 <td>the two city shots stop disagreeing</td>
 </tr>
+<tr>
+<td><strong>B8</strong></td>
+<td>Can a LoRA be trained on this Mac at all?</td>
+<td><code>musubi-tuner</code> / <code>kohya_ss</code> on MPS with the night-elf dataset</td>
+<td>it runs to completion; if not, B1 goes to cloud or dies</td>
+</tr>
+<tr>
+<td><strong>B9</strong></td>
+<td>What does serverless bursting cost per film?</td>
+<td>price a LoRA train + 8 clips on Modal or RunPod</td>
+<td>under a few dollars per film, and the local route stays the default</td>
+</tr>
+<tr>
+<td><strong>B10</strong></td>
+<td>Can the judge be automated?</td>
+<td>a critic pass over existing candidates that scores identity, subject count and framing, run before <code>pick</code></td>
+<td>it rejects the known failures: the empty-room shots, the child-in-adult-armour stills</td>
+</tr>
 </tbody>
 </table></div>
 <p>B7 is worth doing first regardless of the rest: it is an afternoon, it needs no new models, and it improves films we have already delivered.</p>
@@ -262,7 +320,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </ul>
 <p>Until then the current blueprint stays the production route, and this page stays research.</p>
 
-  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="idea-to-video-blueprint.html">idea to video blueprint</a> — the current pipeline, unchanged</li><li><a href="ai-film-production-pipeline.html">ai film production pipeline</a> — the source route recorded step by step</li><li><a href="identity-conditioning.html">identity conditioning</a> — why trained weights and reference tokens differ</li><li><a href="character-consistency.html">character consistency</a> · <a href="image-to-video-models.html">image to video models</a> · <a href="apple-silicon-inference.html">apple silicon inference</a></li></ul></div>
+  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="idea-to-video-blueprint.html">idea to video blueprint</a> — the current pipeline, unchanged</li><li><a href="ai-film-production-pipeline.html">ai film production pipeline</a> — the source route recorded step by step</li><li><a href="scripts-reference.html">scripts reference</a> — <code>film_run.py</code>, the orchestrator we already have</li><li><a href="identity-conditioning.html">identity conditioning</a> — why trained weights and reference tokens differ</li><li><a href="character-consistency.html">character consistency</a> · <a href="image-to-video-models.html">image to video models</a> · <a href="apple-silicon-inference.html">apple silicon inference</a></li></ul></div>
 </div>
 <footer>video-gen-kb · built 2026-09-26 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
 <script>function tt(){var r=document.documentElement,

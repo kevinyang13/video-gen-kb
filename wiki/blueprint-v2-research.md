@@ -2,9 +2,9 @@
 
 **Summary**: Research toward a second production pipeline built on a different strategy from [[idea-to-video-blueprint]]: identity from **trained weights** rather than reference images, motion from **pose and depth control** rather than prose, and a real **edit, grade and dialogue** stage instead of a scripted ffmpeg assembly. Records what the standard industry route does, what each piece would cost on this hardware, what is unknown, and the experiments that would decide whether to adopt it. Nothing here is implemented — the current blueprint is unchanged and still the production route.
 
-**Sources**: `raw/2026-09-26-ai-film-production-pipeline.md` (pasted 2026-09-26, origin unattributed, *unverified*); our measured results in [[idea-to-video-blueprint]], [[headless-cli-pipeline]], [[character-consistency]], [[identity-conditioning]], [[apple-silicon-inference]], [[nightelf-hunter-plan]], [[bot-builders-champion-photo-cut-plan]]. Capability claims about tools we have not installed are marked *needs verification*.
+**Sources**: `raw/2026-09-26-ai-film-production-pipeline.md` and `raw/2026-09-26-ai-film-orchestration-options.md` (both pasted 2026-09-26, origin unattributed; the three orchestrator repos were verified to exist on 2026-09-26, their capabilities were not tested); our measured results in [[idea-to-video-blueprint]], [[headless-cli-pipeline]], [[character-consistency]], [[identity-conditioning]], [[apple-silicon-inference]], [[nightelf-hunter-plan]], [[bot-builders-champion-photo-cut-plan]]. Capability claims about tools we have not installed are marked *needs verification*.
 
-**Last updated**: 2026-09-26
+**Last updated**: 2026-09-26 (orchestration options and B8–B10 added)
 
 ---
 
@@ -74,6 +74,25 @@ The cheapest win on this list. DaVinci Resolve is free and runs on Apple Silicon
 
 Steps 1, 2 and 7's upscale survive intact. That is the useful finding: **the seeding phase is strategy-independent** — a turnaround sheet is a good reference set *and* a good training set.
 
+## 3b. Who drives it: orchestration options
+
+A second question, separate from the four substitutions: **what runs the pipeline.** The source proposes Claude-Code-driven skills over local tools, or one of three open-source orchestrators (source: `raw/2026-09-26-ai-film-orchestration-options.md`; repo names verified 2026-09-26, capabilities not tested).
+
+Worth stating first: **this project already is that orchestrator.** `scripts/film_run.py` + `spec.json` is the "turn a story into a `shots.json` manifest, then render it" pattern — a spec with per-shot prompts, takes and trims, driven from one command, with a model judging picks and QC. The interesting question is not whether to adopt an orchestrator but which parts of theirs we lack.
+
+| Project | What it is | What it would add here |
+|---|---|---|
+| [`OpenX-Inc/flow`](https://github.com/OpenX-Inc/flow) | autonomous pipeline; topic → scenes → Wan 2.2 clips → stitched with narration and subtitles; last-frame conditioning for coherence; can burst to Modal/RunPod | **serverless GPU bursting** — the only credible route to LoRA training and to parallel clip renders. Its last-frame chaining we already do by hand (the rift coda, Lindsey) |
+| [`juspay/director`](https://github.com/juspay/director) | TypeScript; shot planning, a **consistency critic that rejects off-brand keyframes before animating**, multi-judge scoring across weighted dimensions, self-critique before mastering | **automated QC.** Today I judge every still and clip by eye. A critic that rejects a still *before* 10 minutes of LTX time is the single highest-value idea in the whole source |
+| OpenMontage | agentic production system for coding assistants; 12 pipelines, tool + skill layers, Remotion or ffmpeg assembly | a **skills/knowledge layering** pattern, and Remotion for titles and captions. Note: it exists under a dozen near-identical GitHub forks, so provenance is unclear — treat with care |
+| Claude film skill / ComfyUI + Kohya API | Claude captions the dataset, fires `kohya_ss` / `musubi-tuner` training, queues ComfyUI jobs over HTTP | the **dataset-and-training half of a LoRA route**, which is exactly what B1 needs |
+
+Three things follow:
+
+1. **Automated pre-animation QC is worth stealing regardless of strategy.** Director's shape — critic rejects a keyframe before it becomes a clip — maps directly onto our `pick` step and would have caught the two Bot Builders shots with no child in them, and the seven night-elf stills showing a ten-year-old, without a human looking. That is experiment **B10**, and it is cheap.
+2. **Serverless bursting is the lever that makes v2 possible**, not the orchestrator choice. LoRA training, ComfyUI-only control models and parallel renders all need GPU we do not have; Modal/RunPod is how the source's stack gets it. It also breaks the "everything local and free" premise, so it is a decision, not a detail.
+3. **`musubi-tuner` and `kohya_ss` are CUDA-centric.** Whether either trains on Apple Silicon at all is *unverified* and is the gate on local LoRA — if the answer is no, B1 becomes a cloud experiment or nothing.
+
 ## 4. Experiments to run before adopting anything
 
 Each is small, and each can kill the idea cheaply. Ordered by what would block the rest.
@@ -87,6 +106,9 @@ Each is small, and each can kill the idea cheaply. Ordered by what would block t
 | **B5** | Local TTS quality and Mac support | MLX-Audio on a paragraph of dialogue | intelligible, no cloud dependency |
 | **B6** | Lip-sync on MPS | drive an existing face clip with B5's audio | mouth tracks the audio without destroying the face |
 | **B7** | Does a LUT fix inter-shot colour drift? | grade the night-elf film's eight shots to one LUT in Resolve | the two city shots stop disagreeing |
+| **B8** | Can a LoRA be trained on this Mac at all? | `musubi-tuner` / `kohya_ss` on MPS with the night-elf dataset | it runs to completion; if not, B1 goes to cloud or dies |
+| **B9** | What does serverless bursting cost per film? | price a LoRA train + 8 clips on Modal or RunPod | under a few dollars per film, and the local route stays the default |
+| **B10** | Can the judge be automated? | a critic pass over existing candidates that scores identity, subject count and framing, run before `pick` | it rejects the known failures: the empty-room shots, the child-in-adult-armour stills |
 
 B7 is worth doing first regardless of the rest: it is an afternoon, it needs no new models, and it improves films we have already delivered.
 
@@ -103,5 +125,6 @@ Until then the current blueprint stays the production route, and this page stays
 ## Related pages
 - [[idea-to-video-blueprint]] — the current pipeline, unchanged
 - [[ai-film-production-pipeline]] — the source route recorded step by step
+- [[scripts-reference]] — `film_run.py`, the orchestrator we already have
 - [[identity-conditioning]] — why trained weights and reference tokens differ
 - [[character-consistency]] · [[image-to-video-models]] · [[apple-silicon-inference]]
