@@ -2,7 +2,7 @@
 
 **Summary**: A 90-second, 16:9, 3D-animated film of Kevin's FIRST LEGO League team, made from a 3-page, 15-panel comic. The team discovers a tiny insect at the farm, studies it, builds it a habitat, tests the robot through failures, and wins the competition. It's the third film through the [[idea-to-video-blueprint]] and the first with five recurring characters, all shown in group close-ups.
 
-**Sources**: `raw/fll_bot/comic_page1.jpg`, `comic_page2.jpg`, `comic_page3.jpg` (1024×1536 each, added 2026-09-23); [[idea-to-video-blueprint]]; [[lindsey-art-plan]] §0 and [[kyle-antarctic-rescue-plan]] §0 (method, masters, rules).
+**Sources**: `projects/bot_builders_champion/v2-comic-cut/raw/comic_page1.jpg`, `comic_page2.jpg`, `comic_page3.jpg` (1024×1536 each, added 2026-09-23); [[idea-to-video-blueprint]]; [[lindsey-art-plan]] §0 and [[kyle-antarctic-rescue-plan]] §0 (method, masters, rules).
 
 **Last updated**: 2026-09-24 (**delivered** at 63.5 s — §0 results; the five-kid rule cost ~27 s against the 90 s plan)
 
@@ -10,7 +10,7 @@
 
 ## 0. Results — 2026-09-23 23:20 → 2026-09-24 04:11
 
-**Delivered**: `raw/clips/fll_bot/final/bot_builders_1920x1080.mp4` (**63.5 s**, 100 MB), `bot_builders_3840x2160.mp4` master (308 MB), `bot_builders_1280x720.mp4` preview (27 MB). Music from 0 s with a 2 s fade; mean −15.8 dB, peak −0.4 dB.
+**Delivered**: `projects/bot_builders_champion/v2-comic-cut/final/bot_builders_1920x1080.mp4` (**63.5 s**, 100 MB), `bot_builders_3840x2160.mp4` master (308 MB), `bot_builders_1280x720.mp4` preview (27 MB). Music from 0 s with a 2 s fade; mean −15.8 dB, peak −0.4 dB.
 
 ![Final film, one frame every 4 s](assets/fll-bot-final-strip.jpg)
 

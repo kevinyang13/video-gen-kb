@@ -39,7 +39,7 @@ projects/<id>/
     logs/        run logs and the scripts a run used
 ```
 
-**A version is a variant of the same film, not a revision of a file.** The name is `v<n>-<short-description>`: what changed about *how* it was made. Existing ones: `v1-drawthings-ui` (driven through the app window), `v1-drawthings-cli` (headless from the start), `v2-drawthings-cli` (lost_city's shots 14–15, after the CLI arrived), `v2-master-restage` (fll_champions, after the masters were rebuilt and the beats restaged).
+**A version is a variant of the same film, not a revision of a file.** The name is `v<n>-<short-description>`: what changed about *how* it was made. Existing ones: `v1-drawthings-ui` (driven through the app window), `v1-drawthings-cli` (headless from the start), `v2-drawthings-cli` (lost_city's shots 14–15, after the CLI arrived), `v3-photo-cut` (bot_builders, built from photographs after the masters were rebuilt).
 
 Each version folder is **self-contained and independently re-runnable** — it carries its own sources, prompts and spec, at the cost of duplicating the source photos between versions of the same project. The plan page stays at project level and tells the whole story.
 
@@ -67,7 +67,7 @@ So: **edit `projects/<id>/<version>/spec.json`**, never the root `projects.json`
 | `spec.json` — its full record | …except the `.txt` prompts and locks and the `.sh` run scripts inside them |
 | `stills/*.txt`, `seed/*.txt` — prompts and locks | `clips/*_trim.txt` (upscale stamps: build cache) |
 | `logs/*.sh` — the scripts a run used | every generated image, video and audio file |
-| `raw/` — source photos, comics, references | `dragon_epic/raw/` (personal faces) and `lost_city/raw/` (someone else's render) |
+| `raw/` — source photos, comics, references | `dragon_epic/*/raw/` (personal faces) and `lost_city/*/raw/` (someone else's render) |
 
 Source material in `raw/` **is** tracked — it's an input, not an output, and it's small (12 MB for the largest project). Only the two noted exceptions stay out.
 

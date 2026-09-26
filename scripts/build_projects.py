@@ -74,8 +74,11 @@ def record(p, defs, suffix):
     if p.get("variant"):
         out.append(f"- **This version**: {p['variant']}")
     if p.get("versions"):
-        out.append("- **All versions**: " + " · ".join(
-            f"`{v['version']}`" for v in p["versions"]))
+        out += ["", "**Versions**", "", "| Version | What it is | Status | YouTube |", "|---|---|---|---|"]
+        for v in p["versions"]:
+            yt = f"[▶ watch](https://youtu.be/{v['youtube']})" if v.get("youtube") else "—"
+            out.append(f"| `{v['version']}` | {v['variant']} | {v['status']} | {yt} |")
+        out.append("")
     out += [
            (f"- **Files** (`projects/{p['id']}/{p['version']}/`): " if p.get("version")
             else "- **Files**: ") + ", ".join(f"`{f}`" for f in p.get("files", [])),
@@ -132,7 +135,8 @@ def load():
         newest = dict(versions[-1])
         if len(versions) > 1:
             newest["versions"] = [{"version": v["version"], "variant": v.get("variant", ""),
-                                   "status": v.get("status", "")} for v in versions]
+                                   "status": v.get("status", ""), "youtube": v.get("youtube")}
+                                  for v in versions]
         recs.append(newest)
     recs.sort(key=lambda r: (r.get("order", 999), r["id"]))
     data["projects"] = [{k: v for k, v in r.items() if k != "order"} for r in recs]

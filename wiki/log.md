@@ -8,6 +8,14 @@
 
 ---
 
+## 2026-09-25 — All three FLL projects consolidated as bot_builders_champion
+
+`fll_farm`, `fll_bot_builders` and `fll_champions` were one team filmed three ways, so they are now one project with three versions: `v1-anime-loop` (the Shinkai-style 9:16 loop of the Coastal Roots Farm visit, no faces, driven through the app), `v2-comic-cut` (63.5 s 16:9 film from the 3-page comic) and `v3-photo-cut` (59 s 16:9 film from the family's photographs). Both plan pages moved to `projects/bot_builders_champion/plan/` and were renamed to match; the registry is down to **10 projects**.
+
+The registry now renders a **Versions table** per project — version, what it is, status and its own YouTube link — because a project's older versions can have their own uploads. Without it the anime loop's video would have vanished when the newest version took the summary row.
+
+Two notes on the merge: the project's theme follows its newest version, so this one now sits under [[projects-3d]] and the anime loop no longer appears on [[projects-anime]]; and consent differs by version — v1 is a faceless wide of the farm, v2 and v3 show the children with all five families' consent.
+
 ## 2026-09-25 — coast and coast_v2 merged into one project
 
 They were one film made twice — same scene, same music, different still model — so they are now `projects/coast/v1-wan-t2v-still` (Wan 2.2 T2V still, superseded) and `projects/coast/v2-klein-still` (FLUX.2 klein still at 1024×1792 cropped to 576×1024, the version on YouTube). The registry is down to 12 projects and shows coast once, newest version first, with both listed. Exactly the case the version scheme was for: the second attempt is a variant of the same project, not a separate one.
@@ -51,7 +59,7 @@ Each version folder is self-contained — its own `raw/ seed/ stills/ clips/ mus
 - Signature features vanish unless named (Kyle's spiked fringe), and then overshoot — take the mildest seed.
 - Shirts print garbled text unless told "plain, no printing, no graphics, no letters"; "no text anywhere" must name clothing and props explicitly.
 
-**The mistake worth keeping**: the delivered cut mixes two generations of stills — seven shots from 2026-09-23 (before masters existed, identity from raw photo edits) cut against four restaged from the rebuilt Pixar masters on 2026-09-25. Their clips were individually fine, so they were carried forward rather than re-rendered, and the film ends up drawing the same five children two ways. **When the look or the master recipe changes, every still is stale — re-render all of them.** A stale still is not broken and passes QC; the damage only appears in the cut. Filed as [[idea-to-video-blueprint]] Phase 5b and [[fll-champions-plan]] §3b.
+**The mistake worth keeping**: the delivered cut mixes two generations of stills — seven shots from 2026-09-23 (before masters existed, identity from raw photo edits) cut against four restaged from the rebuilt Pixar masters on 2026-09-25. Their clips were individually fine, so they were carried forward rather than re-rendered, and the film ends up drawing the same five children two ways. **When the look or the master recipe changes, every still is stale — re-render all of them.** A stale still is not broken and passes QC; the damage only appears in the cut. Filed as [[idea-to-video-blueprint]] Phase 5b and [[bot-builders-champion-photo-cut-plan]] §3b.
 
 **Updated**: `projects.json` (delivered, files, music), `wiki/index.md`.
 
@@ -67,7 +75,7 @@ Each version folder is self-contained — its own `raw/ seed/ stills/ clips/ mus
 
 ## 2026-09-24 — Bot Builders delivered (63.5 s of a planned 90)
 
-Third blueprint film, first with five recurring kids. Intake: separate project from fll_farm, faces OK (all families consent), **no extra kids**, 16:9, 90 s, full group close-ups, "Victory" (The_Mountain). New per-kid masters (Kyle's and Lindsey's re-dressed) + a **team master** used as the diptych reference for every shot. Stills: 4 of 12 failed the child count first time (comic panels with 6 figures are copied regardless of prompt → rebuilt S10 as an edit of the approved S5). Clips: in 7 of 12, LTX pulled back and invented extra children after 3–6 s; "no zoom, no pull-back, no one enters from any edge" held S8 but not S5/S7/S10. Every clip trimmed before the first wrong frame → 63.5 s, zero frames with six kids. Rules for group films added to [[idea-to-video-blueprint]] (frame groups wide, ~5 s usable per group clip, double the shot count). Report in [[fll-bot-builders-plan]] §0.
+Third blueprint film, first with five recurring kids. Intake: separate project from fll_farm, faces OK (all families consent), **no extra kids**, 16:9, 90 s, full group close-ups, "Victory" (The_Mountain). New per-kid masters (Kyle's and Lindsey's re-dressed) + a **team master** used as the diptych reference for every shot. Stills: 4 of 12 failed the child count first time (comic panels with 6 figures are copied regardless of prompt → rebuilt S10 as an edit of the approved S5). Clips: in 7 of 12, LTX pulled back and invented extra children after 3–6 s; "no zoom, no pull-back, no one enters from any edge" held S8 but not S5/S7/S10. Every clip trimmed before the first wrong frame → 63.5 s, zero frames with six kids. Rules for group films added to [[idea-to-video-blueprint]] (frame groups wide, ~5 s usable per group clip, double the shot count). Report in [[bot-builders-champion-comic-cut-plan]] §0.
 
 ## 2026-09-23 — Kyle film on YouTube
 

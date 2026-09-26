@@ -1,8 +1,8 @@
 # BOT Builders (photo cut) — 1-Minute Film from the Team's Own Photos
 
-**Summary**: A 59-second 16:9 short about an FIRST LEGO League season — build, research at Coastal Roots Farm, the lacewing project, the competition, the win — made from the team's real photographs rather than a comic. Eleven shots, 3D-animated look, rendered entirely with `draw-things-cli`. The companion piece to [[projects-3d]]'s comic-derived Bot Builders film: same five children, different source material and a different route to identity.
+**Summary**: A 59-second 16:9 short about an FIRST LEGO League season — build, research at Coastal Roots Farm, the lacewing project, the competition, the win — made from the team's real photographs rather than a comic. Eleven shots, 3D-animated look, rendered entirely with `draw-things-cli`. Version 3 of the [[bot-builders-champion-comic-cut-plan|Bot Builders]] project: same five children as the comic cut, different source material and a different route to identity.
 
-**Sources**: 13 photographs from Kevin (team coach) in `raw/fll_champions/`, added 2026-09-23/24; [[idea-to-video-blueprint]] (the process); [[headless-cli-pipeline]] (CLI settings); [[lost-city-plan]] §3c (LTX motion rules); [[scripts-reference]] (run-spec, `film_run.py`).
+**Sources**: 13 photographs from Kevin (team coach) in `projects/bot_builders_champion/v3-photo-cut/raw/`, added 2026-09-23/24; [[idea-to-video-blueprint]] (the process); [[headless-cli-pipeline]] (CLI settings); [[lost-city-plan]] §3c (LTX motion rules); [[scripts-reference]] (run-spec, `film_run.py`).
 
 **Last updated**: 2026-09-25 (delivered; §3b records the mixed-generation mistake)
 
@@ -10,7 +10,7 @@
 
 ## 0. Result
 
-**Delivered** 2026-09-25 03:00: `raw/clips/fll/final/fll_champions_3840x2160.mp4` (59.08 s, 274 MB) and `fll_champions_1920x1080.mp4` (89 MB). Music "Light Adventure" (331music, Pixabay) under the LTX ambience; mean −18.8 dB, peak −5.5 dB.
+**Delivered** 2026-09-25 03:00: `projects/bot_builders_champion/v3-photo-cut/final/fll_champions_3840x2160.mp4` (59.08 s, 274 MB) and `fll_champions_1920x1080.mp4` (89 MB). Music "Light Adventure" (331music, Pixabay) under the LTX ambience; mean −18.8 dB, peak −5.5 dB.
 
 **The cut** (11 shots, 0.75 s crossfades):
 

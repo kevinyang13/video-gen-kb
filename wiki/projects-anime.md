@@ -19,13 +19,19 @@ Index of every project: [[projects]]. Other themes: [[projects-realistic]] · [[
 | 3 | [Golden Gate, San Francisco](#goldengate) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Calm Ambient Dreamscape | `goldengate_final.mp4` | [▶ watch](https://youtu.be/h8ic1_9Q9mI) |
 | 4 | [Mt. Rainier from Paradise](#rainier) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 15.5 min | Calm Ambient Dreamscape | `rainier_final.mp4` | [▶ watch](https://youtu.be/JJB154LbBi0) |
 | 5 | [Cyberpunk city, rain, neon](#cyberpunk) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Neon Synthwave Drive | `cyberpunk_final.mp4` | [▶ watch](https://youtu.be/GrNTNQCqKnk) |
-| 6 | [FLL BOT Builders — Coastal Roots Farm, wide view](#fll_farm) | 2026-09-20 | done (v2) | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Calm Ambient Dreamscape | `fll_farm_v2_final.mp4` | [▶ watch](https://youtu.be/-Mf2UThasCg) |
 
 ## Coastal wildflowers {#coast}
 
 - **Date**: 2026-09-20 · **Status**: done · **Version**: `v2-klein-still` · **Draw Things project**: `Untitled-35903`
 - **This version**: Still generated with FLUX.2 klein at 1024x1792 then cropped to 576x1024; the detail this added is what closed the gap with the reference.
-- **All versions**: `v1-wan-t2v-still` · `v2-klein-still`
+
+**Versions**
+
+| Version | What it is | Status | YouTube |
+|---|---|---|---|
+| `v1-wan-t2v-still` | Still generated with Wan 2.2 T2V at 576x1280, then Wan I2V; superseded because the still lacked detail. | superseded by v2-klein-still — kept as the record of the Wan-still attempt | — |
+| `v2-klein-still` | Still generated with FLUX.2 klein at 1024x1792 then cropped to 576x1024; the detail this added is what closed the gap with the reference. | done | [▶ watch](https://youtu.be/W8fy4bhGOEU) |
+
 - **Files** (`projects/coast/v2-klein-still/`): `coast_flux_1024x1792.png`, `coast_flux_576x1024.png`, `coast_v2.mov`, `coast_v2_loop.mp4`, `coast_v2_final.mp4`
 - **Notes**: First run with wrong refiner (6-bit, not downloaded) produced washed-out noise; re-run with 8-bit S. Merged with the former coast_v2 project on 2026-09-25: the two were one film made twice, so they are now v1 and v2 of a single project.
 
@@ -286,58 +292,6 @@ Prompt: `static camera, rain falling steadily, neon signs flickering and glowing
 | Loop | forward, 8-frame tail->head crossfade, x6 = 27.4 s |
 | Upscale | lanczos 1080x1920 |
 | Music | Neon Synthwave Drive — alex-morgan, Pixabay (cdn.pixabay.com/audio/2026/06/04/audio_ae113c6d69.mp3), 2:48; 1 s fade in / 2 s fade out, vol 0.9 |
-
-## FLL BOT Builders — Coastal Roots Farm, wide view {#fll_farm}
-
-- **Date**: 2026-09-20 · **Status**: done (v2) · **Version**: `v1-drawthings-ui` · **Draw Things project**: `Untitled-91574`
-- **This version**: Rendered by driving the Draw Things app window (accessibility automation).
-- **Files** (`projects/fll_farm/v1-drawthings-ui/`): `fll_farm_v2.mov`, `fll_farm_v2_loop.mp4`, `fll_farm_v2_final.mp4`, `fll_farm.mov (v1, rejected)`, `fll_farm_final.mp4 (v1, rejected)`, `fll/team_entrance.webp (reference only)`, `fll/chickens.webp (reference only)`, `fll/crop_rows.webp (reference only)`, `fll/logo.webp`
-- **Notes**: Kids must be distant, no faces, no close-ups (Kevin's rule). Real photos used only as reference for farm features; a photoreal attempt and a real-photo I2V attempt were both abandoned. Farm details from FLL-kb: berms/swales, elderberry+pomegranate alleys with rotating chickens, sunflower mural shed, trellis netting. v1 (6 kids + adult, 'walking' prompt) had figures teleporting and merging; v2 regenerated with exactly 5+1 standing still and a wind-only motion prompt.
-
-- **YouTube**: [youtu.be/-Mf2UThasCg](https://youtu.be/-Mf2UThasCg)
-
-<div class="yt yt-v"><iframe src="https://www.youtube.com/embed/-Mf2UThasCg" title="FLL BOT Builders — Coastal Roots Farm, wide view" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-
-**Still**
-
-| Setting | Value |
-|---|---|
-| Model | FLUX.2 [klein] 9B (8-bit S) |
-| Size | 576x1024 |
-| Steps | 4 |
-| CFG | 1.0 |
-| Shift | 3.0 |
-| Sampler | DDIM Trailing |
-
-Prompt: `A breathtaking anime background painting, wide view from a low hill looking down over Coastal Roots Farm in Encinitas at golden hour. Foreground: rows of orchard trees on raised earth berms with shallow swales between them, alleys of elderberry and pomegranate trees where a flock of chickens pecks inside a white portable net fence, a small red barn-style chicken coop on wheels. Middle ground: long rows of squash and vegetables under white trellis netting, a shed painted with a bright sunflower mural, a corrugated-metal welcome-sign shelter, wooden fences. On the dirt path, exactly six people standing still in a tight group: one adult farm guide in a sun hat and five small children in matching black t-shirts, all facing the crops and listening, tiny distant figures, faces not visible. Background: tall coastal eucalyptus and a weeping willow, distant hills. Sky: enormous towering cumulus clouds lit orange and pink by the setting sun, a few tiny birds in silhouette. Makoto Shinkai and Studio Ghibli background art style, ultra detailed, rich painterly brushwork, soft volumetric light, vibrant saturated colors, masterpiece.`
-
-**I2V**
-
-| Setting | Value |
-|---|---|
-| Model | Wan 2.2 High Noise Expert I2V A14B (8-bit S) |
-| Refiner | Wan 2.2 Low Noise Expert I2V A14B (8-bit S) @ 10% |
-| LoRA | Wan 2.2 A14B Lightning High-Noise T2V v2.0 @ 100% |
-| Size | 576x1024 |
-| Frames | 81 |
-| FPS | 16 |
-| Steps | 4 |
-| CFG | 1.0 |
-| Shift | 4.95 |
-| Sampler | DDIM Trailing |
-| Strength | 100% |
-| I2V time (min) | 16 |
-
-Prompt: `static camera, the six people stand completely still in place, tree branches and leaves swaying in a steady wind, willow fronds swinging, vegetable rows and netting rippling in the breeze, chickens pecking slowly at the ground, birds drifting across the sky, clouds moving slowly, subtle motion`
-
-**Post**
-
-| Setting | Value |
-|---|---|
-| Script | scripts/finish_clip.sh |
-| Loop | forward, 8-frame tail->head crossfade, x6 = 27.4 s |
-| Upscale | lanczos 1080x1920 |
-| Music | Calm Ambient Dreamscape — morgan-ambient, Pixabay, 1 s fade in / 2 s fade out, vol 0.9 |
 
 ## Related pages
 - [[projects]]

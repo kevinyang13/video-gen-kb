@@ -8,11 +8,11 @@
 
 ---
 
-**Project pages**: [[projects-anime|Anime projects]] (6) · [[projects-realistic|Photoreal projects]] (2) · [[projects-3d|3D-animated projects]] (4)
+**Project pages**: [[projects-anime|Anime projects]] (5) · [[projects-realistic|Photoreal projects]] (2) · [[projects-3d|3D-animated projects]] (3)
 
 Each theme page holds the full records — settings, prompts, seeds, files. The tables below link straight to a project's record on its page.
 
-## [[projects-anime|Anime projects]] (6)
+## [[projects-anime|Anime projects]] (5)
 
 Shinkai/Ghibli-styled living paintings: a still from FLUX or Wan T2V, ambient motion from Wan 2.2 I2V, looped 9:16 with music. Coastal wildflowers, Torrey Pines, Golden Gate, Mt. Rainier, a cyberpunk street, the FLL farm.
 
@@ -23,9 +23,8 @@ Shinkai/Ghibli-styled living paintings: a still from FLUX or Wan T2V, ambient mo
 | 3 | [Golden Gate, San Francisco](projects-anime.html#goldengate) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Calm Ambient Dreamscape | `goldengate_final.mp4` | [▶ watch](https://youtu.be/h8ic1_9Q9mI) |
 | 4 | [Mt. Rainier from Paradise](projects-anime.html#rainier) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 15.5 min | Calm Ambient Dreamscape | `rainier_final.mp4` | [▶ watch](https://youtu.be/JJB154LbBi0) |
 | 5 | [Cyberpunk city, rain, neon](projects-anime.html#cyberpunk) | 2026-09-20 | done | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Neon Synthwave Drive | `cyberpunk_final.mp4` | [▶ watch](https://youtu.be/GrNTNQCqKnk) |
-| 6 | [FLL BOT Builders — Coastal Roots Farm, wide view](projects-anime.html#fll_farm) | 2026-09-20 | done (v2) | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise 16 min | Calm Ambient Dreamscape | `fll_farm_v2_final.mp4` | [▶ watch](https://youtu.be/-Mf2UThasCg) |
 
-→ full records for all 6: [[projects-anime|Anime projects]]
+→ full records for all 5: [[projects-anime|Anime projects]]
 
 ## [[projects-realistic|Photoreal projects]] (2)
 
@@ -38,18 +37,17 @@ Cinematic photoreal shorts: FLUX.2 klein stills with Moodboard references, motio
 
 → full records for all 2: [[projects-realistic|Photoreal projects]]
 
-## [[projects-3d|3D-animated projects]] (4)
+## [[projects-3d|3D-animated projects]] (3)
 
 Pixar-style 3D-animated shorts. Kyle's Antarctic Rescue, Lindsey: A Small Dream.
 
 | # | Project | Date | Status | Still | I2V | Music | Final file | YouTube |
 |--:|---|---|---|---|---|---|---|---|
-| 1 | [Kyle's Antarctic Rescue — 1-minute 3D-animated vertical short from a 5-panel comic](projects-3d.html#kyle_rescue) | 2026-09-22 | delivered 2026-09-23 01:38 — 60.0 s, 1080x1920 + 2160x3840, rendered unattended overnight (see plan §0) | FLUX.2 [klein] 9B 576x1024 | LTX-2.3 22B [distilled] 1.1 via draw-things-cli ? min | Calm Ambient Dreamscape | `—` | [▶ watch](https://youtu.be/KscAwvCi6iQ) |
-| 2 | [Lindsey: A Small Dream — 1-minute 3D-animated vertical short from Lindsey's 5-panel art comic](projects-3d.html#lindsey_art) | 2026-09-23 | delivered 2026-09-23 17:26 — 59.96 s, 1080x1920 + 2160x3840 + 720x1280 (see plan §0) | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | [▶ watch](https://youtu.be/lbU-_73MliI) |
-| 3 | [BOT Builders (photo cut) — 12-shot 3D-animated short from the team's own photos](projects-3d.html#fll_champions) | 2026-09-23 | delivered 2026-09-25 03:00 — 59.08 s, 3840x2160 + 1920x1080, 11 shots (competition-floor wide dropped); see wiki/fll-champions-plan.md | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 10 min | Light Adventure | `—` | — |
-| 4 | [Bot Builders — 90-second 16:9 3D-animated FLL team film from a 3-page comic](projects-3d.html#fll_bot_builders) | 2026-09-23 | delivered 2026-09-24 04:11 — 63.5 s (planned 90; five-kid rule), 1920x1080 + 3840x2160 + 1280x720 (see plan §0) | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
+| 1 | [BOT Builders Champion — the FLL team's films](projects-3d.html#bot_builders_champion) | 2026-09-23 | delivered 2026-09-25 03:00 — 59.08 s, 3840x2160 + 1920x1080, 11 shots (competition-floor wide dropped); see wiki/fll-champions-plan.md | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 10 min | Light Adventure | `—` | — |
+| 2 | [Kyle's Antarctic Rescue — 1-minute 3D-animated vertical short from a 5-panel comic](projects-3d.html#kyle_rescue) | 2026-09-22 | delivered 2026-09-23 01:38 — 60.0 s, 1080x1920 + 2160x3840, rendered unattended overnight (see plan §0) | FLUX.2 [klein] 9B 576x1024 | LTX-2.3 22B [distilled] 1.1 via draw-things-cli ? min | Calm Ambient Dreamscape | `—` | [▶ watch](https://youtu.be/KscAwvCi6iQ) |
+| 3 | [Lindsey: A Small Dream — 1-minute 3D-animated vertical short from Lindsey's 5-panel art comic](projects-3d.html#lindsey_art) | 2026-09-23 | delivered 2026-09-23 17:26 — 59.96 s, 1080x1920 + 2160x3840 + 720x1280 (see plan §0) | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | [▶ watch](https://youtu.be/lbU-_73MliI) |
 
-→ full records for all 4: [[projects-3d|3D-animated projects]]
+→ full records for all 3: [[projects-3d|3D-animated projects]]
 
 
 ## YouTube playlist — [AI-Vids](https://www.youtube.com/playlist?list=PLJx49Sf61wKQ)

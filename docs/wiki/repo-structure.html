@@ -118,7 +118,7 @@ projects.json  the registry: one record per project
     final/       the film itself — assembled master and delivery copies
     logs/        run logs and the scripts a run used
 </code></pre>
-<p><strong>A version is a variant of the same film, not a revision of a file.</strong> The name is <code>v&lt;n&gt;-&lt;short-description&gt;</code>: what changed about <em>how</em> it was made. Existing ones: <code>v1-drawthings-ui</code> (driven through the app window), <code>v1-drawthings-cli</code> (headless from the start), <code>v2-drawthings-cli</code> (lost_city's shots 14–15, after the CLI arrived), <code>v2-master-restage</code> (fll_champions, after the masters were rebuilt and the beats restaged).</p>
+<p><strong>A version is a variant of the same film, not a revision of a file.</strong> The name is <code>v&lt;n&gt;-&lt;short-description&gt;</code>: what changed about <em>how</em> it was made. Existing ones: <code>v1-drawthings-ui</code> (driven through the app window), <code>v1-drawthings-cli</code> (headless from the start), <code>v2-drawthings-cli</code> (lost_city's shots 14–15, after the CLI arrived), <code>v3-photo-cut</code> (bot_builders, built from photographs after the masters were rebuilt).</p>
 <p>Each version folder is <strong>self-contained and independently re-runnable</strong> — it carries its own sources, prompts and spec, at the cost of duplicating the source photos between versions of the same project. The plan page stays at project level and tells the whole story.</p>
 <p><code>scripts/film_run.py &lt;id&gt;</code> uses the newest version; <code>&lt;id&gt;@&lt;version&gt;</code> pins one, e.g. <code>film_run.py lost_city@v1-drawthings-ui status</code>. The registry shows each project's newest version and lists the others.</p>
 <p>Not every version uses every folder: the early 9:16 loops (<a href="living-painting-loop.html">living painting loop</a>) have only <code>clips/ final/ music/</code>, while a multi-shot film uses all eight.</p>
@@ -155,7 +155,7 @@ projects.json  the registry: one record per project
 </tr>
 <tr>
 <td><code>raw/</code> — source photos, comics, references</td>
-<td><code>dragon_epic/raw/</code> (personal faces) and <code>lost_city/raw/</code> (someone else's render)</td>
+<td><code>dragon_epic/*/raw/</code> (personal faces) and <code>lost_city/*/raw/</code> (someone else's render)</td>
 </tr>
 </tbody>
 </table></div>
