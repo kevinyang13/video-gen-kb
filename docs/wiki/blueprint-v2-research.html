@@ -92,7 +92,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
     <span class="spacer"></span>
     <button class="pill" onclick="tt()">◐ Theme</button>
   </nav>
-  <h1>Blueprint v2 — Research Notes for a Different Pipeline Strategy</h1><p class="lede">Research toward a second production pipeline built on a different strategy from <a href="idea-to-video-blueprint.html">idea to video blueprint</a>: identity from <strong>trained weights</strong> rather than reference images, motion from <strong>pose and depth control</strong> rather than prose, and a real <strong>edit, grade and dialogue</strong> stage instead of a scripted ffmpeg assembly. Records what the standard industry route does, what each piece would cost on this hardware, what is unknown, and the experiments that would decide whether to adopt it. Nothing here is implemented — the current blueprint is unchanged and still the production route.</p><div class="meta"><span><b>Updated</b> 2026-09-26 (orchestration options and B8–B10 added)</span><span><b>Sources</b> <code>raw/2026-09-26-ai-film-production-pipeline.md</code> and <code>raw/2026-09-26-ai-film-orchestration-options.md</code> (both pasted 2026-09-26, origin unattributed; the three orchestrator repos were verified to exist on 2026-09-26, their capabilities were not tested); our measured results in <a href="idea-to-video-blueprint.html">idea to video blueprint</a>, <a href="headless-cli-pipeline.html">headless cli pipeline</a>, <a href="character-consistency.html">character consistency</a>, <a href="identity-conditioning.html">identity conditioning</a>, <a href="apple-silicon-inference.html">apple silicon inference</a>, <a href="nightelf-hunter-plan.html">nightelf hunter plan</a>, <a href="bot-builders-champion-photo-cut-plan.html">bot builders champion photo cut plan</a>. Capability claims about tools we have not installed are marked <em>needs verification</em>.</span></div>
+  <h1>Blueprint v2 — Research Notes for a Different Pipeline Strategy</h1><p class="lede">Research toward a second production pipeline built on a different strategy from <a href="idea-to-video-blueprint.html">idea to video blueprint</a>: identity from <strong>trained weights</strong> rather than reference images, motion from <strong>pose and depth control</strong> rather than prose, and a real <strong>edit, grade and dialogue</strong> stage instead of a scripted ffmpeg assembly. Records what the standard industry route does, what each piece would cost on this hardware, what is unknown, and the experiments that would decide whether to adopt it. Nothing here is implemented — the current blueprint is unchanged and still the production route.</p><div class="meta"><span><b>Updated</b> 2026-09-26 (LoRA dataset and hyperparameters; orchestration options; experiments B0–B10)</span><span><b>Sources</b> <code>raw/2026-09-26-ai-film-production-pipeline.md</code> , <code>raw/2026-09-26-ai-film-orchestration-options.md</code> and <code>raw/2026-09-26-character-lora-training.md</code> (all pasted 2026-09-26, origin unattributed; the three orchestrator repos were verified to exist on 2026-09-26, their capabilities were not tested); our measured results in <a href="idea-to-video-blueprint.html">idea to video blueprint</a>, <a href="headless-cli-pipeline.html">headless cli pipeline</a>, <a href="character-consistency.html">character consistency</a>, <a href="identity-conditioning.html">identity conditioning</a>, <a href="apple-silicon-inference.html">apple silicon inference</a>, <a href="nightelf-hunter-plan.html">nightelf hunter plan</a>, <a href="bot-builders-champion-photo-cut-plan.html">bot builders champion photo cut plan</a>. Capability claims about tools we have not installed are marked <em>needs verification</em>.</span></div>
 <hr />
 <h2>1. Why look for a different strategy</h2>
 <p>The current pipeline is fast, local, free and reliable, and it has delivered six films. Its limits are structural rather than incidental, and they all trace to the same choice — identity carried by <strong>reference-image tokens</strong> instead of trained weights (<a href="identity-conditioning.html">identity conditioning</a> channels 2 and 4):</p>
@@ -178,6 +178,85 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 - <strong>Where to train.</strong> Local LoRA training is impractical on Apple Silicon (<a href="character-consistency.html">character consistency</a>); cloud is quoted around \$1 per character <em>(needs verification of current pricing and of which services accept FLUX.2 klein)</em>.
 - <strong>Whether klein can consume a LoRA at all in our runtime.</strong> <code>draw-things-cli</code> accepts <code>loras[]</code> in its config JSON with a <code>version</code> field, so the plumbing exists — but whether a klein-compatible character LoRA can be trained and loaded is <strong>unverified</strong> and is experiment B1.
 - <strong>Whether it actually beats a sheet.</strong> A LoRA should generalise to unseen angles; our sheets cover four. The honest test is a profile and a three-quarter-back shot neither approach was given directly.</p>
+<h3>2a-i. What training a character LoRA actually requires</h3>
+<p>From the third source (<code>raw/2026-09-26-character-lora-training.md</code>, <em>hyperparameters unverified</em>):</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th></th>
+<th>Recipe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dataset</td>
+<td><strong>25–50 images</strong>: 40% close-ups at varied angles and expressions, 40% medium (waist-up), 20% wide / full body</td>
+</tr>
+<tr>
+<td>Lighting</td>
+<td>deliberately varied, so the LoRA does not bind to one lighting style</td>
+</tr>
+<tr>
+<td>Trigger</td>
+<td>a unique token, e.g. <code>sks_alex_man</code></td>
+</tr>
+<tr>
+<td>Captions</td>
+<td>describe background, camera angle, wardrobe and lighting — <strong>not</strong> permanent facial features</td>
+</tr>
+<tr>
+<td>Rank / alpha</td>
+<td>32 or 64 / 16 or 32</td>
+</tr>
+<tr>
+<td>Learning rate</td>
+<td>1e-4 to 2e-4 (AdamW or Prodigy)</td>
+</tr>
+<tr>
+<td>Precision</td>
+<td>bf16</td>
+</tr>
+<tr>
+<td>Steps</td>
+<td>1,500–3,000</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>The Isolation Rule is the interesting part, because it inverts our practice.</strong> For reference-token editing we <em>name</em> every feature to preserve — "same eye shape, same jawline, same hairline, pure black hair" — because the prompt has to stop klein substituting its own face. For LoRA training you deliberately <em>omit</em> those features from the caption: anything left uncaptioned gets absorbed into the trigger token, while anything captioned stays steerable. Caption the leather jacket and it becomes optional; caption the nose and the model learns the nose is a variable.</p>
+<p>Same goal, opposite technique. Worth writing on the wall before anyone reuses our master prompts as training captions — they are precisely the wrong shape.</p>
+<p><strong>Our seeding phase is two-thirds of the dataset work.</strong> <code>seed_sheet.sh</code> already produces consistent views from one photo by editing the master; the source's distribution is a superset of what it does:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Source wants</th>
+<th>We have</th>
+<th>Gap</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>40% close-ups, varied angle + expression</td>
+<td>4 views, one expression</td>
+<td>expressions, and more angles between the four</td>
+</tr>
+<tr>
+<td>40% medium, waist-up</td>
+<td>none — masters are head-and-shoulders</td>
+<td>a framing variant</td>
+</tr>
+<tr>
+<td>20% wide / full body</td>
+<td>none</td>
+<td>a full-body variant</td>
+</tr>
+<tr>
+<td>varied lighting</td>
+<td>none — all on the same grey studio background</td>
+<td>a lighting variant, which is the real risk: a LoRA trained only on flat grey may refuse to sit in a landscape</td>
+</tr>
+</tbody>
+</table></div>
+<p>A <code>--dataset</code> mode for <code>seed_sheet.sh</code> — loop the existing edit over angle × framing × lighting × expression, then caption each by the Isolation Rule with a vision model — is maybe an afternoon, and it is the same afternoon whether training happens locally or in the cloud. That makes it the first thing to build if B8 says training is possible at all.</p>
 <h3>2b. Motion from pose and depth</h3>
 <p>No ControlNet is klein-compatible, so this cannot live in the still stage as the source describes. It would have to live in the <strong>video</strong> stage, where open options exist: <strong>Wan 2.1 VACE</strong> and <strong>Wan 2.2 Animate</strong> take reference frames plus control signals; both are <em>unverified</em> in Draw Things and may require ComfyUI (<a href="image-to-video-models.html">image to video models</a>).</p>
 <p>The prize is specific: a shot where the character performs a named action (draws a bow, kneels, turns to camera on a beat) instead of whatever LTX decides. Every action shot in every film so far has been chosen from what the model offered.</p>
@@ -249,9 +328,15 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </thead>
 <tbody>
 <tr>
+<td><strong>B0</strong></td>
+<td>Can we build the dataset at all?</td>
+<td><code>seed_sheet.sh --dataset</code>: 30 images over angle × framing × lighting × expression, captioned by the Isolation Rule</td>
+<td>30 usable images of one character, consistent identity, varied everything else</td>
+</tr>
+<tr>
 <td><strong>B1</strong></td>
 <td>Can a character LoRA be trained and then used in our runtime at all?</td>
-<td>train one on the existing night-elf dataset via a cloud service; load it through <code>draw-things-cli --config-json loras[]</code></td>
+<td>B0's dataset, rank 32 / alpha 16, 1e-4, bf16, ~2,000 steps; load through <code>draw-things-cli --config-json loras[]</code></td>
 <td>it loads and the character is recognisable</td>
 </tr>
 <tr>

@@ -2,9 +2,9 @@
 
 **Summary**: Research toward a second production pipeline built on a different strategy from [[idea-to-video-blueprint]]: identity from **trained weights** rather than reference images, motion from **pose and depth control** rather than prose, and a real **edit, grade and dialogue** stage instead of a scripted ffmpeg assembly. Records what the standard industry route does, what each piece would cost on this hardware, what is unknown, and the experiments that would decide whether to adopt it. Nothing here is implemented — the current blueprint is unchanged and still the production route.
 
-**Sources**: `raw/2026-09-26-ai-film-production-pipeline.md` and `raw/2026-09-26-ai-film-orchestration-options.md` (both pasted 2026-09-26, origin unattributed; the three orchestrator repos were verified to exist on 2026-09-26, their capabilities were not tested); our measured results in [[idea-to-video-blueprint]], [[headless-cli-pipeline]], [[character-consistency]], [[identity-conditioning]], [[apple-silicon-inference]], [[nightelf-hunter-plan]], [[bot-builders-champion-photo-cut-plan]]. Capability claims about tools we have not installed are marked *needs verification*.
+**Sources**: `raw/2026-09-26-ai-film-production-pipeline.md` , `raw/2026-09-26-ai-film-orchestration-options.md` and `raw/2026-09-26-character-lora-training.md` (all pasted 2026-09-26, origin unattributed; the three orchestrator repos were verified to exist on 2026-09-26, their capabilities were not tested); our measured results in [[idea-to-video-blueprint]], [[headless-cli-pipeline]], [[character-consistency]], [[identity-conditioning]], [[apple-silicon-inference]], [[nightelf-hunter-plan]], [[bot-builders-champion-photo-cut-plan]]. Capability claims about tools we have not installed are marked *needs verification*.
 
-**Last updated**: 2026-09-26 (orchestration options and B8–B10 added)
+**Last updated**: 2026-09-26 (LoRA dataset and hyperparameters; orchestration options; experiments B0–B10)
 
 ---
 
@@ -44,6 +44,36 @@ Open questions:
 - **Where to train.** Local LoRA training is impractical on Apple Silicon ([[character-consistency]]); cloud is quoted around \$1 per character *(needs verification of current pricing and of which services accept FLUX.2 klein)*.
 - **Whether klein can consume a LoRA at all in our runtime.** `draw-things-cli` accepts `loras[]` in its config JSON with a `version` field, so the plumbing exists — but whether a klein-compatible character LoRA can be trained and loaded is **unverified** and is experiment B1.
 - **Whether it actually beats a sheet.** A LoRA should generalise to unseen angles; our sheets cover four. The honest test is a profile and a three-quarter-back shot neither approach was given directly.
+
+### 2a-i. What training a character LoRA actually requires
+
+From the third source (`raw/2026-09-26-character-lora-training.md`, *hyperparameters unverified*):
+
+| | Recipe |
+|---|---|
+| Dataset | **25–50 images**: 40% close-ups at varied angles and expressions, 40% medium (waist-up), 20% wide / full body |
+| Lighting | deliberately varied, so the LoRA does not bind to one lighting style |
+| Trigger | a unique token, e.g. `sks_alex_man` |
+| Captions | describe background, camera angle, wardrobe and lighting — **not** permanent facial features |
+| Rank / alpha | 32 or 64 / 16 or 32 |
+| Learning rate | 1e-4 to 2e-4 (AdamW or Prodigy) |
+| Precision | bf16 |
+| Steps | 1,500–3,000 |
+
+**The Isolation Rule is the interesting part, because it inverts our practice.** For reference-token editing we *name* every feature to preserve — "same eye shape, same jawline, same hairline, pure black hair" — because the prompt has to stop klein substituting its own face. For LoRA training you deliberately *omit* those features from the caption: anything left uncaptioned gets absorbed into the trigger token, while anything captioned stays steerable. Caption the leather jacket and it becomes optional; caption the nose and the model learns the nose is a variable.
+
+Same goal, opposite technique. Worth writing on the wall before anyone reuses our master prompts as training captions — they are precisely the wrong shape.
+
+**Our seeding phase is two-thirds of the dataset work.** `seed_sheet.sh` already produces consistent views from one photo by editing the master; the source's distribution is a superset of what it does:
+
+| Source wants | We have | Gap |
+|---|---|---|
+| 40% close-ups, varied angle + expression | 4 views, one expression | expressions, and more angles between the four |
+| 40% medium, waist-up | none — masters are head-and-shoulders | a framing variant |
+| 20% wide / full body | none | a full-body variant |
+| varied lighting | none — all on the same grey studio background | a lighting variant, which is the real risk: a LoRA trained only on flat grey may refuse to sit in a landscape |
+
+A `--dataset` mode for `seed_sheet.sh` — loop the existing edit over angle × framing × lighting × expression, then caption each by the Isolation Rule with a vision model — is maybe an afternoon, and it is the same afternoon whether training happens locally or in the cloud. That makes it the first thing to build if B8 says training is possible at all.
 
 ### 2b. Motion from pose and depth
 
@@ -99,7 +129,8 @@ Each is small, and each can kill the idea cheaply. Ordered by what would block t
 
 | # | Question | Test | Pass |
 |---|---|---|---|
-| **B1** | Can a character LoRA be trained and then used in our runtime at all? | train one on the existing night-elf dataset via a cloud service; load it through `draw-things-cli --config-json loras[]` | it loads and the character is recognisable |
+| **B0** | Can we build the dataset at all? | `seed_sheet.sh --dataset`: 30 images over angle × framing × lighting × expression, captioned by the Isolation Rule | 30 usable images of one character, consistent identity, varied everything else |
+| **B1** | Can a character LoRA be trained and then used in our runtime at all? | B0's dataset, rank 32 / alpha 16, 1e-4, bf16, ~2,000 steps; load through `draw-things-cli --config-json loras[]` | it loads and the character is recognisable |
 | **B2** | Does a LoRA beat a turnaround sheet? | same three shots — profile, three-quarter back, extreme wide — both ways, judged blind against the source photo | LoRA wins on the angles the sheet does not cover |
 | **B3** | Can pose control reach the clip stage? | VACE or Wan Animate in Draw Things; if absent, ComfyUI on MPS with a GGUF build | a named action renders at all, at any speed |
 | **B4** | Is ComfyUI usable here in 2026? | re-measure a single Wan clip; the 82 min/2 s figure is from an M1 Max and may be stale | under 15 min for a 5 s clip |

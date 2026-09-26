@@ -8,6 +8,14 @@
 
 ---
 
+## 2026-09-26 — LoRA training deep-dive added to the v2 research
+
+Third pasted source (`raw/2026-09-26-character-lora-training.md`): dataset curation (25–50 images, 40/40/20 close-up / medium / wide, varied lighting), the captioning strategy, and hyperparameters (rank 32–64, alpha 16–32, 1e-4 to 2e-4, bf16, 1,500–3,000 steps — unverified).
+
+**The finding worth keeping is that the Isolation Rule inverts our practice.** For reference-token editing we name every feature to preserve, or klein substitutes its own face. For LoRA training you deliberately leave permanent features *out* of the caption so they bind to the trigger token, and caption only what should stay steerable — background, angle, wardrobe, lighting. Same goal, opposite technique: our master prompts would make precisely the wrong training captions.
+
+Also mapped our seeding phase against the required dataset: `seed_sheet.sh` covers angles but not expressions, framing or lighting, and everything sits on flat grey — which is the real risk, since a LoRA trained only on studio grey may refuse to sit in a landscape. Added **B0**: build the dataset first (`--dataset` mode over angle × framing × lighting × expression, captioned by the Isolation Rule), since that work is identical whether training ends up local or cloud.
+
 ## 2026-09-26 — Orchestration options added to the v2 research
 
 Second pasted source (`raw/2026-09-26-ai-film-orchestration-options.md`): Claude-Code-driven skills over ComfyUI/Kohya, and three open-source orchestrators. Verified all three repos exist before recording them — `OpenX-Inc/flow` and `juspay/director` are real and single-source; **OpenMontage appears under a dozen near-identical forks**, so its provenance is unclear and the page says so.
