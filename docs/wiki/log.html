@@ -386,6 +386,25 @@ square); back views came back 1 in 3 and over-shoulder 0 in 2 even when seeded f
 turnaround sheet's back panel. So the set skews to front and three-quarter faces, the angles
 reference tokens already cover, and B2 would measure dataset bias rather than method. B0 stands
 as a partial pass with a named blocker: the rear share needs a non-frontal source.</p>
+<h2>2026-09-26 — B1 twice: a LoRA for the night elf, and one for Ivy</h2>
+<p><code>draw-things-cli</code> turns out to ship <code>train lora</code>, native on Apple Silicon, taking a directory of
+images with matching <code>.txt</code> captions — exactly what <code>seed_sheet.sh --dataset</code> already writes. That
+answers <strong>B8</strong> and removes the cloud dependency the LoRA route was assumed to carry. ~5.5 s/step
+for klein 9B at rank 32, so 2,000 steps is about two and a half hours, 402 MB per checkpoint.</p>
+<p><strong>Night elf</strong> (30 synthetic images from one master): passed at 500 steps, best at 2,000, carried
+identity into snow and a night market the dataset never showed. It also settled B0's open
+question by accident — back views render fine from text alone, so klein's refusal to produce them
+in B0 was the <em>reference image</em>, not the prompt.</p>
+<p><strong>Ivy</strong> (new project, 22 real photographs — 16 supplied plus 6 reframes cropped from their 2048 px
+originals, captions written by hand after looking at each frame): passes at <strong>weight 0.5</strong>. Above
+that the LoRA damages the angles its dataset lacks — a ghosted second face on a profile at 0.7, a
+shapeless mass for a back view at 1.0. Checkpoint length is irrelevant to this; the limit is the
+data, which is entirely frontal and three-quarter.</p>
+<p>Gotcha, verified by md5: <strong>a LoRA file that does not exist is silently ignored</strong> — no error, output
+identical to no LoRA. Hence the control column in <code>lora_eval.sh</code>.</p>
+<p>New scripts: <code>photo_dataset.sh</code> (photographs → training pairs, EXIF and GPS dropped via <code>sips</code>,
+which also fixes the orientation ffmpeg gets wrong on still JPEGs) and <code>lora_eval.sh</code> (one prompt
+set through N checkpoints or weights → one grid, with a control column).</p>
   
 </div>
 <footer>video-gen-kb · built 2026-09-26 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>

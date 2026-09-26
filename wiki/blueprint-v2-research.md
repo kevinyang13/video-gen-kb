@@ -130,7 +130,7 @@ Each is small, and each can kill the idea cheaply. Ordered by what would block t
 | # | Question | Test | Pass |
 |---|---|---|---|
 | **B0** ✅ **run 2026-09-26** | Can we build the dataset at all? | `seed_sheet.sh --dataset`: 30 images over angle × framing × lighting × expression, captioned by the Isolation Rule | 30 usable images of one character, consistent identity, varied everything else — **partial pass**, see below |
-| **B1** 🔄 **running 2026-09-26** | Can a character LoRA be trained and then used in our runtime at all? | B0's dataset, rank 32, 1e-4, ~2,000 steps; load through `draw-things-cli --config-json loras[]` | it loads and the character is recognisable |
+| **B1** ✅ **run 2026-09-26, twice** | Can a character LoRA be trained and then used in our runtime at all? | B0's dataset, rank 32, 1e-4, ~2,000 steps; load through `draw-things-cli --config-json loras[]` | it loads and the character is recognisable |
 | **B2** | Does a LoRA beat a turnaround sheet? | same three shots — profile, three-quarter back, extreme wide — both ways, judged blind against the source photo | LoRA wins on the angles the sheet does not cover |
 | **B3** | Can pose control reach the clip stage? | VACE or Wan Animate in Draw Things; if absent, ComfyUI on MPS with a GGUF build | a named action renders at all, at any speed |
 | **B4** | Is ComfyUI usable here in 2026? | re-measure a single Wan clip; the 82 min/2 s figure is from an M1 Max and may be stale | under 15 min for a 5 s clip |
@@ -169,6 +169,27 @@ angles, or frames pulled out of v1's rendered clips, where the hunter is already
 This also sharpens **B8**: the gate on the LoRA route is now two questions, not one — can a
 trainer run on this Mac at all, *and* can we source enough non-frontal images of a synthetic
 character to train on.
+
+### B1 — result (2026-09-26): it works, and the dataset sets the ceiling
+
+Run twice. The night-elf LoRA (30 synthetic images) passed its criterion at 500 steps and was
+best at 2,000 with no overfitting. The Ivy LoRA (22 real photographs, see [[ivy-lora-plan]])
+passed as well but only at **weight 0.5**, and the reason is the finding worth keeping:
+
+**A LoRA does not merely fail at an angle its dataset lacks — it damages it.** Every Ivy frame
+was frontal or three-quarter. At weight 0.7 a requested profile grew a ghosted second face; at
+1.0 a back view collapsed into a shapeless dark mass. At 0.5 identity held and both angles came
+back clean. The LoRA is strong enough to impose frontality on a sample that was asked to turn
+away, and the two intentions collide. Checkpoint length barely mattered — 400 and 2,000 fail
+identically, because the limit is in the data.
+
+So **B2's comparison is now well posed**: reference tokens and a LoRA fail on the *same* angles
+when both are fed the same frontal material. The interesting experiment is a LoRA trained on a
+dataset that actually contains profiles and backs.
+
+One operational trap found on the way: `draw-things-cli` **silently ignores a LoRA file it cannot
+find** — no error, and pixel-identical output to no LoRA. A mistyped filename looks exactly like a
+LoRA that learned nothing, which is why every evaluation grid carries a no-LoRA control column.
 
 ### B8 — result (2026-09-26): the trainer was already installed
 

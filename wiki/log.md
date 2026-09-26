@@ -549,3 +549,28 @@ square); back views came back 1 in 3 and over-shoulder 0 in 2 even when seeded f
 turnaround sheet's back panel. So the set skews to front and three-quarter faces, the angles
 reference tokens already cover, and B2 would measure dataset bias rather than method. B0 stands
 as a partial pass with a named blocker: the rear share needs a non-frontal source.
+
+## 2026-09-26 — B1 twice: a LoRA for the night elf, and one for Ivy
+
+`draw-things-cli` turns out to ship `train lora`, native on Apple Silicon, taking a directory of
+images with matching `.txt` captions — exactly what `seed_sheet.sh --dataset` already writes. That
+answers **B8** and removes the cloud dependency the LoRA route was assumed to carry. ~5.5 s/step
+for klein 9B at rank 32, so 2,000 steps is about two and a half hours, 402 MB per checkpoint.
+
+**Night elf** (30 synthetic images from one master): passed at 500 steps, best at 2,000, carried
+identity into snow and a night market the dataset never showed. It also settled B0's open
+question by accident — back views render fine from text alone, so klein's refusal to produce them
+in B0 was the *reference image*, not the prompt.
+
+**Ivy** (new project, 22 real photographs — 16 supplied plus 6 reframes cropped from their 2048 px
+originals, captions written by hand after looking at each frame): passes at **weight 0.5**. Above
+that the LoRA damages the angles its dataset lacks — a ghosted second face on a profile at 0.7, a
+shapeless mass for a back view at 1.0. Checkpoint length is irrelevant to this; the limit is the
+data, which is entirely frontal and three-quarter.
+
+Gotcha, verified by md5: **a LoRA file that does not exist is silently ignored** — no error, output
+identical to no LoRA. Hence the control column in `lora_eval.sh`.
+
+New scripts: `photo_dataset.sh` (photographs → training pairs, EXIF and GPS dropped via `sips`,
+which also fixes the orientation ffmpeg gets wrong on still JPEGs) and `lora_eval.sh` (one prompt
+set through N checkpoints or weights → one grid, with a control column).

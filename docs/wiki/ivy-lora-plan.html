@@ -181,9 +181,81 @@ best at 2,000 with no sign of overfitting:</p>
 <p>The <code>-</code> column is the <strong>no-LoRA control</strong>, and it is not optional: a LoRA that fails to load and
 a LoRA that does nothing produce the same grid without it. Judge on the out-of-distribution rows
 — an unseen scene and an unseen angle — never on the studio portrait, which always looks fine.</p>
-<h2>6. Status</h2>
-<p>Dataset built 2026-09-26: 22 image/caption pairs. Training run started the same day — 2,000
-steps, checkpoints every 400.</p>
+<h2>6. Result</h2>
+<p>Trained 2026-09-26: 2,000 steps in <strong>2 h 35 m</strong>, five checkpoints, 402 MB each. Loss 0.83 → 0.55.</p>
+<p><strong>It works, at half weight.</strong> <code>ivy_lora_2000_lora_f32.ckpt</code> at <strong>weight 0.5</strong> is the recommended
+setting. Identity carries into scenes the dataset never contained — a red coat in deep snow, a
+night market under lanterns — and the no-LoRA control renders a different person every time.</p>
+<p><strong>Weight is not a volume knob here, it is a trade against angle.</strong> The sweep says so plainly:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Weight</th>
+<th>Identity</th>
+<th>Profile</th>
+<th>Back of head</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.3</td>
+<td>not her</td>
+<td>clean</td>
+<td>clean</td>
+</tr>
+<tr>
+<td><strong>0.5</strong></td>
+<td><strong>her, sharp</strong></td>
+<td><strong>clean, though it renders three-quarter rather than a true 90°</strong></td>
+<td><strong>clean</strong></td>
+</tr>
+<tr>
+<td>0.7</td>
+<td>her, softer</td>
+<td>ghosting, a second face forming</td>
+<td>blurred blob</td>
+</tr>
+<tr>
+<td>1.0</td>
+<td>her, flattest</td>
+<td>badly doubled</td>
+<td>shapeless dark mass</td>
+</tr>
+</tbody>
+</table></div>
+<p>The cause is the dataset gap recorded in §2 before training: all 22 frames are frontal or
+three-quarter. Past ~0.5 the LoRA is strong enough to impose frontality on a sample that was
+asked to turn away, and the two intentions collide into a ghosted double-face. This is the
+clearest evidence yet for the B0 finding — <strong>a LoRA cannot generalise to an angle no frame in
+its dataset contains</strong>; it actively damages it.</p>
+<p>Checkpoint choice barely mattered next to weight. 400 through 2000 all read as her at the
+studio prompt; the failure mode is identical at every checkpoint, because it comes from the data,
+not the training length.</p>
+<h2>7. Using it</h2>
+<pre><code>draw-things-cli generate -m flux_2_klein_9b_i8x.ckpt \
+  --prompt &quot;ivy_kx woman, medium shot, three-quarter view, laughing, a linen shirt, a night market&quot; \
+  --width 512 --height 768 --steps 4 --cfg 1 \
+  --config-json '{&quot;shift&quot;:3.0,&quot;sampler&quot;:16,&quot;loras&quot;:[{&quot;file&quot;:&quot;ivy_lora_2000_lora_f32.ckpt&quot;,&quot;weight&quot;:0.5}]}'
+</code></pre>
+<ul>
+<li>Trigger <code>ivy_kx</code>, always followed by <code>woman</code>.</li>
+<li><strong>Weight 0.5.</strong> Raise it only for a frontal close-up, and look at the result.</li>
+<li>Do not ask for a true profile or a back view yet. Fix that by adding real photographs at those
+  angles and retraining — nothing else will.</li>
+</ul>
+<p><strong>A gotcha worth more than the rest of this page</strong>: <code>draw-things-cli</code> <strong>silently ignores a LoRA
+file it cannot find</strong>. No error, no warning, and the output is pixel-identical to no LoRA at all.
+Verified by md5. A typo in the filename therefore looks exactly like a LoRA that did not learn
+anything, which is why <code>lora_eval.sh</code> renders a control column.</p>
+<h2>8. Next</h2>
+<ul>
+<li>Add profile and back-of-head photographs, retrain, and re-run the same grid. That is the only
+  open defect.</li>
+<li>The source photographs are Facebook-compressed JPEGs; the LoRA renders slightly soft at high
+  weight, and re-exporting from originals may be worth testing.</li>
+<li>With identity in weights rather than reference tokens, a film of Ivy no longer needs a master
+  portrait carried into every shot — which is the whole point of <a href="blueprint-v2-research.html">blueprint v2 research</a> B2.</li>
+</ul>
 
   <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="blueprint-v2-research.html">blueprint v2 research</a> — B0/B1/B8, the experiments this project applies</li><li><a href="nightelf-hunter-plan.html">nightelf hunter plan</a> — §6, the synthetic-dataset version and what it could not do</li><li><a href="identity-conditioning.html">identity conditioning</a> — why trained weights beat reference tokens on unseen angles</li><li><a href="scripts-reference.html">scripts reference</a> — <code>photo_dataset.sh</code>, <code>lora_eval.sh</code>, <code>train lora</code></li></ul></div>
 </div>

@@ -93,10 +93,60 @@ The `-` column is the **no-LoRA control**, and it is not optional: a LoRA that f
 a LoRA that does nothing produce the same grid without it. Judge on the out-of-distribution rows
 — an unseen scene and an unseen angle — never on the studio portrait, which always looks fine.
 
-## 6. Status
+## 6. Result
 
-Dataset built 2026-09-26: 22 image/caption pairs. Training run started the same day — 2,000
-steps, checkpoints every 400.
+Trained 2026-09-26: 2,000 steps in **2 h 35 m**, five checkpoints, 402 MB each. Loss 0.83 → 0.55.
+
+**It works, at half weight.** `ivy_lora_2000_lora_f32.ckpt` at **weight 0.5** is the recommended
+setting. Identity carries into scenes the dataset never contained — a red coat in deep snow, a
+night market under lanterns — and the no-LoRA control renders a different person every time.
+
+**Weight is not a volume knob here, it is a trade against angle.** The sweep says so plainly:
+
+| Weight | Identity | Profile | Back of head |
+|---|---|---|---|
+| 0.3 | not her | clean | clean |
+| **0.5** | **her, sharp** | **clean, though it renders three-quarter rather than a true 90°** | **clean** |
+| 0.7 | her, softer | ghosting, a second face forming | blurred blob |
+| 1.0 | her, flattest | badly doubled | shapeless dark mass |
+
+The cause is the dataset gap recorded in §2 before training: all 22 frames are frontal or
+three-quarter. Past ~0.5 the LoRA is strong enough to impose frontality on a sample that was
+asked to turn away, and the two intentions collide into a ghosted double-face. This is the
+clearest evidence yet for the B0 finding — **a LoRA cannot generalise to an angle no frame in
+its dataset contains**; it actively damages it.
+
+Checkpoint choice barely mattered next to weight. 400 through 2000 all read as her at the
+studio prompt; the failure mode is identical at every checkpoint, because it comes from the data,
+not the training length.
+
+## 7. Using it
+
+```
+draw-things-cli generate -m flux_2_klein_9b_i8x.ckpt \
+  --prompt "ivy_kx woman, medium shot, three-quarter view, laughing, a linen shirt, a night market" \
+  --width 512 --height 768 --steps 4 --cfg 1 \
+  --config-json '{"shift":3.0,"sampler":16,"loras":[{"file":"ivy_lora_2000_lora_f32.ckpt","weight":0.5}]}'
+```
+
+- Trigger `ivy_kx`, always followed by `woman`.
+- **Weight 0.5.** Raise it only for a frontal close-up, and look at the result.
+- Do not ask for a true profile or a back view yet. Fix that by adding real photographs at those
+  angles and retraining — nothing else will.
+
+**A gotcha worth more than the rest of this page**: `draw-things-cli` **silently ignores a LoRA
+file it cannot find**. No error, no warning, and the output is pixel-identical to no LoRA at all.
+Verified by md5. A typo in the filename therefore looks exactly like a LoRA that did not learn
+anything, which is why `lora_eval.sh` renders a control column.
+
+## 8. Next
+
+- Add profile and back-of-head photographs, retrain, and re-run the same grid. That is the only
+  open defect.
+- The source photographs are Facebook-compressed JPEGs; the LoRA renders slightly soft at high
+  weight, and re-exporting from originals may be worth testing.
+- With identity in weights rather than reference tokens, a film of Ivy no longer needs a master
+  portrait carried into every shot — which is the whole point of [[blueprint-v2-research]] B2.
 
 ## Related pages
 - [[blueprint-v2-research]] — B0/B1/B8, the experiments this project applies

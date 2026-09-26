@@ -279,8 +279,14 @@ experiment <strong>B8</strong> (<a href="blueprint-v2-research.html">blueprint v
 overfit run is recoverable without retraining. <code>--use-aspect-ratio</code> buckets by shape, so a dataset
 mixing portrait, square and landscape keeps its framing variety. Use the LoRA at generate time
 with <code>--config-json '{"loras":[{"file":"&lt;name&gt;_2000_lora_f32.ckpt","weight":1.0}]}'</code>.</p>
-<p><strong>Always run the control.</strong> A LoRA that fails to load and a LoRA that does nothing look identical;
-render the same prompt and seed with and without it and check the pixels differ.</p>
+<p><strong>Always run the control</strong>, because <code>draw-things-cli</code> <strong>silently ignores a LoRA file it cannot
+find</strong> — no error, no warning, and output that is pixel-identical to no LoRA at all (verified by
+md5, 2026-09-26). A typo in the filename is indistinguishable from a LoRA that learned nothing.
+Render the same prompt and seed with and without the LoRA and check the pixels differ.</p>
+<p><strong>Weight is a trade against unseen angles, not a volume knob.</strong> On the Ivy LoRA, 0.5 held identity
+while leaving profiles and back views intact; 0.7 ghosted a second face onto a profile and 1.0
+turned a back view into a shapeless mass, because every training frame was frontal. If a LoRA
+damages an angle, look at the dataset before touching the learning rate.</p>
 <h2><code>scripts/lora_eval.sh</code> — one prompt set through several checkpoints</h2>
 <pre><code>scripts/lora_eval.sh OUT_DIR &quot;ckpt_a.ckpt,ckpt_b.ckpt,-&quot; [WEIGHT] [SEED]
 PROMPTS=&quot;…&quot;  TRIGGER=nelf_kyle  W=512 H=768  MODEL=…  scripts/lora_eval.sh …

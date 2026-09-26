@@ -1427,7 +1427,7 @@
       "date": "2026-09-26",
       "theme": "realistic",
       "dt_project": "none — draw-things-cli train lora",
-      "status": "training 2026-09-26 — 22 image/caption pairs, 2000 steps, checkpoints every 400",
+      "status": "delivered 2026-09-26 — ivy_lora_2000_lora_f32.ckpt at weight 0.5; identity holds in unseen scenes, profile and back-of-head degrade (dataset has neither)",
       "source": "real photographs of Ivy, curated into raw/ (git-ignored)",
       "notes": "Ivy is family, an adult; consent settled, same standing as Kyle and Lindsey. Real photos are the better dataset: B0 proved klein will not synthesize back views or true camera-height variation from a frontal master, because the reference image overrides the prompt. Photographs have those angles already — except that this particular set does not: all 22 frames are frontal or three-quarter. raw/ is git-ignored because consent to train on a face is not consent to publish the source photographs to a public repo.",
       "still": {
@@ -1456,13 +1456,23 @@
         "command": "draw-things-cli train lora --model flux_2_klein_9b_i8x.ckpt --dataset projects/ivy_lora/v1-photo-dataset/seed/dataset --steps 2000 --rank 32 --learning-rate 1e-4 --seed 1 --use-aspect-ratio --save-every 500 -o ivy_lora --name \"Ivy (ivy_kx)\" --offline",
         "measured_on_nightelf": "0.22 it/s, 2 h 31 m for 2000 steps, 402 MB per checkpoint",
         "evaluate": "scripts/lora_eval.sh with a no-LoRA control column; the 2000-step checkpoint won on the night elf with no sign of overfitting",
-        "started": "2026-09-26, 2000 steps, rank 32, lr 1e-4, --use-aspect-ratio, --save-every 400"
+        "started": "2026-09-26, 2000 steps, rank 32, lr 1e-4, --use-aspect-ratio, --save-every 400",
+        "completed": "2026-09-26, 9277 s (2 h 35 m), loss 0.83 -> 0.55",
+        "checkpoints": "ivy_lora_{400,800,1200,1600,2000}_lora_f32.ckpt in the Draw Things Models dir, 402 MB each",
+        "recommended": "ivy_lora_2000_lora_f32.ckpt at weight 0.5"
       },
       "files": [
         "raw/ (source photographs, git-ignored)",
         "seed/dataset/NN.png + NN.txt (training pairs; captions tracked)",
         "logs/train.log"
-      ]
+      ],
+      "result": {
+        "pass": "identity carries into scenes the dataset never contained (snow, night market); the no-LoRA control renders a different person",
+        "weight": "0.5 is the setting. 0.3 loses identity; 0.7 ghosts a second face onto profiles; 1.0 turns a back view into a shapeless mass",
+        "cause": "all 22 frames are frontal or three-quarter, so past ~0.5 the LoRA imposes frontality on a sample asked to turn away",
+        "checkpoint": "barely mattered — the failure mode is identical from 400 to 2000 because it comes from the data, not the training length",
+        "gotcha": "draw-things-cli silently ignores a LoRA file it cannot find: no error, and output pixel-identical to no LoRA (verified by md5)"
+      }
     }
   ]
 }

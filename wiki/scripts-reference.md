@@ -155,8 +155,15 @@ overfit run is recoverable without retraining. `--use-aspect-ratio` buckets by s
 mixing portrait, square and landscape keeps its framing variety. Use the LoRA at generate time
 with `--config-json '{"loras":[{"file":"<name>_2000_lora_f32.ckpt","weight":1.0}]}'`.
 
-**Always run the control.** A LoRA that fails to load and a LoRA that does nothing look identical;
-render the same prompt and seed with and without it and check the pixels differ.
+**Always run the control**, because `draw-things-cli` **silently ignores a LoRA file it cannot
+find** — no error, no warning, and output that is pixel-identical to no LoRA at all (verified by
+md5, 2026-09-26). A typo in the filename is indistinguishable from a LoRA that learned nothing.
+Render the same prompt and seed with and without the LoRA and check the pixels differ.
+
+**Weight is a trade against unseen angles, not a volume knob.** On the Ivy LoRA, 0.5 held identity
+while leaving profiles and back views intact; 0.7 ghosted a second face onto a profile and 1.0
+turned a back view into a shapeless mass, because every training frame was frontal. If a LoRA
+damages an angle, look at the dataset before touching the learning rate.
 
 ## `scripts/lora_eval.sh` — one prompt set through several checkpoints
 

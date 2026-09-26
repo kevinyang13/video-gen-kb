@@ -334,7 +334,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <td>30 usable images of one character, consistent identity, varied everything else — <strong>partial pass</strong>, see below</td>
 </tr>
 <tr>
-<td><strong>B1</strong> 🔄 <strong>running 2026-09-26</strong></td>
+<td><strong>B1</strong> ✅ <strong>run 2026-09-26, twice</strong></td>
 <td>Can a character LoRA be trained and then used in our runtime at all?</td>
 <td>B0's dataset, rank 32, 1e-4, ~2,000 steps; load through <code>draw-things-cli --config-json loras[]</code></td>
 <td>it loads and the character is recognisable</td>
@@ -417,6 +417,22 @@ angles, or frames pulled out of v1's rendered clips, where the hunter is already
 <p>This also sharpens <strong>B8</strong>: the gate on the LoRA route is now two questions, not one — can a
 trainer run on this Mac at all, <em>and</em> can we source enough non-frontal images of a synthetic
 character to train on.</p>
+<h3>B1 — result (2026-09-26): it works, and the dataset sets the ceiling</h3>
+<p>Run twice. The night-elf LoRA (30 synthetic images) passed its criterion at 500 steps and was
+best at 2,000 with no overfitting. The Ivy LoRA (22 real photographs, see <a href="ivy-lora-plan.html">ivy lora plan</a>)
+passed as well but only at <strong>weight 0.5</strong>, and the reason is the finding worth keeping:</p>
+<p><strong>A LoRA does not merely fail at an angle its dataset lacks — it damages it.</strong> Every Ivy frame
+was frontal or three-quarter. At weight 0.7 a requested profile grew a ghosted second face; at
+1.0 a back view collapsed into a shapeless dark mass. At 0.5 identity held and both angles came
+back clean. The LoRA is strong enough to impose frontality on a sample that was asked to turn
+away, and the two intentions collide. Checkpoint length barely mattered — 400 and 2,000 fail
+identically, because the limit is in the data.</p>
+<p>So <strong>B2's comparison is now well posed</strong>: reference tokens and a LoRA fail on the <em>same</em> angles
+when both are fed the same frontal material. The interesting experiment is a LoRA trained on a
+dataset that actually contains profiles and backs.</p>
+<p>One operational trap found on the way: <code>draw-things-cli</code> <strong>silently ignores a LoRA file it cannot
+find</strong> — no error, and pixel-identical output to no LoRA. A mistyped filename looks exactly like a
+LoRA that learned nothing, which is why every evaluation grid carries a no-LoRA control column.</p>
 <h3>B8 — result (2026-09-26): the trainer was already installed</h3>
 <p>The whole CUDA question was wrong. <code>draw-things-cli</code> — the same binary we already render
 with — carries a <code>train lora</code> subcommand:</p>
