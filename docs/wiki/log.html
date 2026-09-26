@@ -370,6 +370,22 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <h2>2026-09-22 — Lost City: escape ending, and every prompt in one place</h2>
 <p>Kevin added a story turn: the lost city collapses and the rider escapes. Wrote two scenes for it — <strong>s13</strong> (gallop down the avenue while a spire shears and falls, dust wall rolling after them) and <strong>s14</strong> (out on the plain, creature still and breathing while the whole skyline comes down behind). s14 deliberately uses the s10 pattern — slow foreground, violent background — because that is what holds the creature design for a full 10 s clip.</p>
 <p>Also consolidated prompts: <code>projects.json</code> now has a <code>scenes</code> block per project (shared locks + still and video prompt for every shot), and <code>build_projects.py</code> renders it as a "Scene prompts" section on the projects page. Previously the prompts were scattered across <code>still.shot2_prompt</code>, <code>i2v.shot3_ltx_prompt</code> and similar keys, and several were never recorded. Shot list in the plan updated to v2 (10 s clips, shots 9–14 added).</p>
+<h2>2026-09-26 — B0: a LoRA dataset for the night-elf hunter</h2>
+<p>Ran experiment <strong>B0</strong> from <a href="blueprint-v2-research.html">blueprint v2 research</a> as a new version of an existing project:
+<code>projects/nightelf_hunter/v2-lora-identity/</code>. v1 stays the delivered film; v2 renders no shots
+and exists only to answer the B-series. New <code>scripts/seed_sheet.sh --dataset</code> mode: 30 images over
+framing × angle × lighting × expression × wardrobe × background, each with a caption <code>.txt</code>.</p>
+<p>Each cell writes <strong>two different strings</strong> — a prompt that names every feature to preserve (our
+practice, because klein substitutes its own face otherwise) and a caption that names only what
+varies (the Isolation Rule, so permanent features bind to the trigger <code>nelf_kyle</code>). Captions are
+tracked in git; the images are ignored.</p>
+<p>Result: identity passed 30/30, variation did not. klein obeys the prompt for anything it can
+repaint — light, background, wardrobe, expression — and obeys the reference for anything that
+needs the camera moved. Framing only changed when the <strong>canvas</strong> changed (medium cells rendered
+square); back views came back 1 in 3 and over-shoulder 0 in 2 even when seeded from the
+turnaround sheet's back panel. So the set skews to front and three-quarter faces, the angles
+reference tokens already cover, and B2 would measure dataset bias rather than method. B0 stands
+as a partial pass with a named blocker: the rear share needs a non-frontal source.</p>
   
 </div>
 <footer>video-gen-kb · built 2026-09-26 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>

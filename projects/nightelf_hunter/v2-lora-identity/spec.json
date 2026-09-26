@@ -1,0 +1,67 @@
+{
+  "order": 20,
+  "id": "nightelf_hunter",
+  "version": "v2-lora-identity",
+  "variant": "Research version: carry the same character with trained LoRA weights instead of reference tokens. Phase 1 (experiment B0) builds the training dataset; no film is rendered from this version yet.",
+  "title": "Night Elf Hunter — a boy and his bear crossing the grassland",
+  "date": "2026-09-26",
+  "theme": "realistic",
+  "dt_project": "none — draw-things-cli via scripts/seed_sheet.sh --dataset",
+  "status": "research — B0 partial pass 2026-09-26: 30 images, identity 30/30, angles skewed (back 1/3, over-shoulder 0/2); v1 remains the delivered film",
+  "source": "projects/nightelf_hunter/v1-drawthings-cli/seed/hunter.png — v1's adult master, itself edited from raw/kyle_ship.jpg",
+  "notes": "This version exists to answer the B-series experiments in wiki/blueprint-v2-research.md, not to make a second film. v1 stays the delivered cut. The dataset deliberately breaks v1's practice in one place: v1 prompts name every feature to preserve, while these CAPTIONS name only what varies, so the permanent features bind to the trigger token nelf_kyle (the Isolation Rule). The generation prompts still name everything — two different strings per image, one to make the pixels and one to train on.",
+  "still": {
+    "model": "FLUX.2 [klein] 9B (8-bit S)",
+    "size": "512x768 portrait, 768x512 for the six wides",
+    "steps": 4,
+    "cfg": 1.0,
+    "shift": 3,
+    "sampler": "DDIM Trailing",
+    "control": "edit mode: --image seed/hunter.png --strength 1.0, one seed per cell (1..30)",
+    "prompt": "generated per cell by scripts/seed_sheet.sh --dataset"
+  },
+  "post": {
+    "upscale": "none — training images stay at native size",
+    "music": "none"
+  },
+  "files": [
+    "seed/dataset/ds_01..ds_30.png (images, git-ignored)",
+    "seed/dataset/ds_01..ds_30.txt (captions, tracked)",
+    "seed/dataset_contact.png (QC contact sheet, generated)"
+  ],
+  "dataset": {
+    "experiment": "B0 — can we build a LoRA dataset at all?",
+    "trigger": "nelf_kyle",
+    "subject": "half-elf hunter",
+    "master": "projects/nightelf_hunter/v1-drawthings-cli/seed/hunter.png",
+    "count": 30,
+    "split": "12 close-up / 12 medium / 6 wide — the 40/40/20 split in the source",
+    "axes": {
+      "framing": "close, medium, wide",
+      "angle": "front, three-quarter, side profile, back, over-shoulder, low, high",
+      "light": "studio, overcast, golden hour, hard noon, open shade, firelight, rim, window, storm, moonlight",
+      "expression": "neutral, faint smile, focused, alert, weary, laughing, frowning, speaking, eyes closed",
+      "wardrobe": "armour, hood up, no cloak, linen tunic, fur cloak, bare shoulders, rain-soaked",
+      "background": "grey studio, grassland, forest, night camp, city street, river bank, stone hall"
+    },
+    "keep_clause": "exactly the same face and the same identity — the same East Asian features, the same strong jaw and light stubble, the same age of about twenty-eight, the same straight jet-black side-parted hair, the same long slender pointed ears, the same faint pale blue-green markings curving under each eye",
+    "caption_rule": "trigger, framing, angle, wardrobe, background, light, expression. Face, ears, markings, hair and age are omitted on purpose — captioned features stay steerable, uncaptioned ones bind to the trigger.",
+    "command": "KEEP=\"...\" scripts/seed_sheet.sh --dataset projects/nightelf_hunter/v1-drawthings-cli/seed/hunter.png projects/nightelf_hunter/v2-lora-identity/seed/dataset \"half-elf hunter\" nelf_kyle",
+    "hyperparameters_for_B1": {
+      "rank": 32,
+      "alpha": 16,
+      "lr": "1e-4",
+      "precision": "bf16",
+      "steps": "1500-3000",
+      "note": "unverified — from the source deep-dive, not measured here"
+    },
+    "result": {
+      "built": 30,
+      "wall_time": "13 min for 30 + 10 min re-rendering 17 cells, ~26 s per image",
+      "identity": "recognisable in 30/30; no two-face artifact in 5 profile cells; ds_19 hair drifted brown on the first pass and cleared on re-render",
+      "honoured": "lighting 10/10, background 7/7, wardrobe 7/7, expression 9/9, framing after switching the canvas per framing (close 512x768, medium 512x512, wide 768x512)",
+      "refused": "back 1/3, over-shoulder 0/2, camera height 2/4 — klein repaints anything, but recomposes the camera only as far as the canvas forces it, and will not hide a face it can see in the reference",
+      "blocker_for_B1": "the set is skewed toward front and three-quarter faces, the angles reference tokens already cover, so B2 would measure dataset bias rather than method. Back and profile cells need a non-frontal source: real photos, or frames pulled from v1's clips."
+    }
+  }
+}

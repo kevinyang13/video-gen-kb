@@ -328,10 +328,10 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </thead>
 <tbody>
 <tr>
-<td><strong>B0</strong></td>
+<td><strong>B0</strong> ✅ <strong>run 2026-09-26</strong></td>
 <td>Can we build the dataset at all?</td>
 <td><code>seed_sheet.sh --dataset</code>: 30 images over angle × framing × lighting × expression, captioned by the Isolation Rule</td>
-<td>30 usable images of one character, consistent identity, varied everything else</td>
+<td>30 usable images of one character, consistent identity, varied everything else — <strong>partial pass</strong>, see below</td>
 </tr>
 <tr>
 <td><strong>B1</strong></td>
@@ -396,6 +396,27 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </tbody>
 </table></div>
 <p>B7 is worth doing first regardless of the rest: it is an afternoon, it needs no new models, and it improves films we have already delivered.</p>
+<h3>B0 — result (2026-09-26, <code>nightelf_hunter@v2-lora-identity</code>)</h3>
+<p>Built with <code>scripts/seed_sheet.sh --dataset</code> from the night-elf film's approved master: 30 images,
+13 min at ~26 s each, plus 10 min re-rendering 17 cells. Full audit in
+<a href="nightelf-hunter-plan.html">nightelf hunter plan</a> §6; the images are git-ignored, the 30 captions are tracked.</p>
+<p><strong>Identity passed.</strong> All 30 read as the same man, through rain, firelight, moonlight, a linen
+tunic and bare shoulders. No Janus double-face in five profile cells — the ban wording from the
+sheet mode holds in dataset mode too.</p>
+<p><strong>Variation failed along one line</strong>, and the line is informative: klein obeys the prompt for
+anything it can <strong>repaint</strong> — light, background, wardrobe, expression, all 100 % — and obeys the
+reference image for anything that requires <strong>recomposing the camera</strong>. Framing only moved once
+the <em>canvas</em> changed (close 512×768, medium 512×512, wide 768×512); asking in words did nothing.
+Back views came back 1 in 3 and over-shoulder 0 in 2, even when pointed at the turnaround sheet's
+back panel: klein will not hide a face it can see in the reference.</p>
+<p><strong>Consequence for B1 and B2.</strong> The dataset skews toward front and three-quarter faces, which is
+exactly what reference tokens already do well. Training on it would test the LoRA on its weakest
+ground, so <strong>B2 would be measuring dataset bias, not method</strong>. B0 is therefore <em>not</em> finished by
+30 images: the rear and profile share needs a non-frontal source — real photographs at those
+angles, or frames pulled out of v1's rendered clips, where the hunter is already walking away.</p>
+<p>This also sharpens <strong>B8</strong>: the gate on the LoRA route is now two questions, not one — can a
+trainer run on this Mac at all, <em>and</em> can we source enough non-frontal images of a synthetic
+character to train on.</p>
 <h2>5. What would make this worth switching to</h2>
 <p>Not "the industry does it this way". The bar is:</p>
 <ul>

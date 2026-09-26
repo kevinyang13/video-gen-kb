@@ -4,7 +4,7 @@
 
 **Sources**: `raw/kyle_ship.jpg`, `kyle_breakfast.jpg` (Kyle's face); [[idea-to-video-blueprint]] Phase 4/4b; [[identity-conditioning]]; [[headless-cli-pipeline]].
 
-**Last updated**: 2026-09-26 (delivered)
+**Last updated**: 2026-09-26 (v2: experiment B0, the LoRA dataset)
 
 ---
 
@@ -74,7 +74,72 @@ Whole run: seeds ~15 min, stills 2 × 25 min (one wasted), clips 78 min, finish 
 - The hunter's ears are hidden by hair in several shots; naming them in the prompt is not enough at small scale.
 - s2's disappearing hunter is a tracking-shot failure — the same "subject slides out of frame" problem Lost City solved by phrasing the move as the camera keeping the subject centred.
 
+## 6. v2 — the LoRA identity route (research, not a second film)
+
+`projects/nightelf_hunter/v2-lora-identity/` exists to answer the B-series experiments in
+[[blueprint-v2-research]]. v1 stays the delivered cut; v2 renders no shots. Phase 1 is
+**experiment B0 — can we build a training dataset at all?**
+
+**What B0 builds**: 30 images edited from v1's approved master (`seed/hunter.png`) across
+six axes — framing (12 close / 12 medium / 6 wide), angle, lighting, expression, wardrobe
+and background — one klein seed per cell, plus a caption `.txt` beside each image.
+
+**The one thing that inverts our practice.** Every prompt on every project so far names
+each feature to *preserve*, because klein substitutes its own face otherwise. A LoRA caption
+does the opposite: it names only what **varies**, so that everything left uncaptioned binds
+to the trigger token instead. So each cell carries two different strings:
+
+```
+PROMPT  (makes the pixels)  The same half-elf hunter, exactly the same face … the same long
+                            slender pointed ears, the same faint pale blue-green markings …
+CAPTION (trains the LoRA)   nelf_kyle, close-up portrait, three-quarter view, a rain-soaked
+                            cloak, a dense forest edge, dim grey storm light, alert, eyes wide
+```
+
+Face, ears, markings, hair and age appear in the prompt and are **absent from the caption on
+purpose**. Wardrobe *is* captioned and *is* varied, so the armour stays steerable rather than
+being welded to the character.
+
+**What it cost**: ~26 s per image — 13 min for the 30, plus a 10 min second pass over 17 cells. No new models, no cloud, 21 MB.
+
+**Results**: the dataset builds, and identity is the part that works. All 30 images read as the
+same man; no Janus double-face appeared in five profile cells; the pointed ears and the eye
+markings survive rain, firelight, moonlight and a shaved-down tunic. One first-pass failure
+(`ds_19`, hair lightened to brown under a rim light) cleared on a re-render.
+
+What does **not** work is the variation, and it fails along one clean line:
+
+| Axis | Honoured | Why |
+|---|---|---|
+| lighting | 10/10 | prompt-only, and klein repaints light freely |
+| background | 7/7 | same |
+| wardrobe | 7/7 | same |
+| expression | 9/9 | same |
+| framing | after the fix | **the canvas decides it**, not the prompt |
+| angle — profile | 4/5 | the master shows enough of the head to rotate |
+| angle — back | 1/3 | klein will not hide a face it can see in the reference |
+| angle — over-shoulder | 0/2 | same |
+| camera height | 2/4, weakly | same |
+
+**The mechanism**: everything klein can *repaint* obeys the prompt; everything that requires
+*recomposing the camera* obeys the reference image instead. A head-and-shoulders master asked
+for a medium shot returns a head-and-shoulders shot. The fix that worked was to stop asking and
+change the canvas — close cells stay 512×768, medium cells became 512×512, wides are 768×512 —
+and the medium row visibly pulled back. The fix that did **not** work was pointing the back and
+over-shoulder cells at v1's `hunter_back.png` panel: only one of three came back facing away.
+
+**Why this matters for B1 and B2**: the dataset is skewed toward front and three-quarter faces —
+precisely the angles reference tokens already handle well. Training on it would test the LoRA on
+its weakest possible ground, and **B2 would measure dataset bias rather than method**. Before B1,
+the back and profile cells need a source that is not a frontal portrait: real photos at those
+angles, or frames lifted from v1's rendered clips, where the hunter is already turned away.
+
+**What it does not answer**: whether any trainer runs on Apple Silicon (**B8**) — until that is
+known, B1 cannot start locally, and the dataset is the only part of the LoRA route that is
+identical whether training ends up local or rented.
+
 ## Related pages
 - [[idea-to-video-blueprint]] — Phase 4 and 4b, seeding and how to feed a seed into a shot
+- [[blueprint-v2-research]] — the B-series experiments v2 exists to answer
 - [[identity-conditioning]] · [[character-consistency]]
 - [[headless-cli-pipeline]] · [[scripts-reference]]

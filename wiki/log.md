@@ -529,3 +529,23 @@ s8 gallop and s10 drinking finished at 4K with music; s9 jump trimmed to its cle
 Kevin added a story turn: the lost city collapses and the rider escapes. Wrote two scenes for it — **s13** (gallop down the avenue while a spire shears and falls, dust wall rolling after them) and **s14** (out on the plain, creature still and breathing while the whole skyline comes down behind). s14 deliberately uses the s10 pattern — slow foreground, violent background — because that is what holds the creature design for a full 10 s clip.
 
 Also consolidated prompts: `projects.json` now has a `scenes` block per project (shared locks + still and video prompt for every shot), and `build_projects.py` renders it as a "Scene prompts" section on the projects page. Previously the prompts were scattered across `still.shot2_prompt`, `i2v.shot3_ltx_prompt` and similar keys, and several were never recorded. Shot list in the plan updated to v2 (10 s clips, shots 9–14 added).
+
+## 2026-09-26 — B0: a LoRA dataset for the night-elf hunter
+
+Ran experiment **B0** from [[blueprint-v2-research]] as a new version of an existing project:
+`projects/nightelf_hunter/v2-lora-identity/`. v1 stays the delivered film; v2 renders no shots
+and exists only to answer the B-series. New `scripts/seed_sheet.sh --dataset` mode: 30 images over
+framing × angle × lighting × expression × wardrobe × background, each with a caption `.txt`.
+
+Each cell writes **two different strings** — a prompt that names every feature to preserve (our
+practice, because klein substitutes its own face otherwise) and a caption that names only what
+varies (the Isolation Rule, so permanent features bind to the trigger `nelf_kyle`). Captions are
+tracked in git; the images are ignored.
+
+Result: identity passed 30/30, variation did not. klein obeys the prompt for anything it can
+repaint — light, background, wardrobe, expression — and obeys the reference for anything that
+needs the camera moved. Framing only changed when the **canvas** changed (medium cells rendered
+square); back views came back 1 in 3 and over-shoulder 0 in 2 even when seeded from the
+turnaround sheet's back panel. So the set skews to front and three-quarter faces, the angles
+reference tokens already cover, and B2 would measure dataset bias rather than method. B0 stands
+as a partial pass with a named blocker: the rear share needs a non-frontal source.

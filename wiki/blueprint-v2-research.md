@@ -129,7 +129,7 @@ Each is small, and each can kill the idea cheaply. Ordered by what would block t
 
 | # | Question | Test | Pass |
 |---|---|---|---|
-| **B0** | Can we build the dataset at all? | `seed_sheet.sh --dataset`: 30 images over angle × framing × lighting × expression, captioned by the Isolation Rule | 30 usable images of one character, consistent identity, varied everything else |
+| **B0** ✅ **run 2026-09-26** | Can we build the dataset at all? | `seed_sheet.sh --dataset`: 30 images over angle × framing × lighting × expression, captioned by the Isolation Rule | 30 usable images of one character, consistent identity, varied everything else — **partial pass**, see below |
 | **B1** | Can a character LoRA be trained and then used in our runtime at all? | B0's dataset, rank 32 / alpha 16, 1e-4, bf16, ~2,000 steps; load through `draw-things-cli --config-json loras[]` | it loads and the character is recognisable |
 | **B2** | Does a LoRA beat a turnaround sheet? | same three shots — profile, three-quarter back, extreme wide — both ways, judged blind against the source photo | LoRA wins on the angles the sheet does not cover |
 | **B3** | Can pose control reach the clip stage? | VACE or Wan Animate in Draw Things; if absent, ComfyUI on MPS with a GGUF build | a named action renders at all, at any speed |
@@ -142,6 +142,33 @@ Each is small, and each can kill the idea cheaply. Ordered by what would block t
 | **B10** | Can the judge be automated? | a critic pass over existing candidates that scores identity, subject count and framing, run before `pick` | it rejects the known failures: the empty-room shots, the child-in-adult-armour stills |
 
 B7 is worth doing first regardless of the rest: it is an afternoon, it needs no new models, and it improves films we have already delivered.
+
+### B0 — result (2026-09-26, `nightelf_hunter@v2-lora-identity`)
+
+Built with `scripts/seed_sheet.sh --dataset` from the night-elf film's approved master: 30 images,
+13 min at ~26 s each, plus 10 min re-rendering 17 cells. Full audit in
+[[nightelf-hunter-plan]] §6; the images are git-ignored, the 30 captions are tracked.
+
+**Identity passed.** All 30 read as the same man, through rain, firelight, moonlight, a linen
+tunic and bare shoulders. No Janus double-face in five profile cells — the ban wording from the
+sheet mode holds in dataset mode too.
+
+**Variation failed along one line**, and the line is informative: klein obeys the prompt for
+anything it can **repaint** — light, background, wardrobe, expression, all 100 % — and obeys the
+reference image for anything that requires **recomposing the camera**. Framing only moved once
+the *canvas* changed (close 512×768, medium 512×512, wide 768×512); asking in words did nothing.
+Back views came back 1 in 3 and over-shoulder 0 in 2, even when pointed at the turnaround sheet's
+back panel: klein will not hide a face it can see in the reference.
+
+**Consequence for B1 and B2.** The dataset skews toward front and three-quarter faces, which is
+exactly what reference tokens already do well. Training on it would test the LoRA on its weakest
+ground, so **B2 would be measuring dataset bias, not method**. B0 is therefore *not* finished by
+30 images: the rear and profile share needs a non-frontal source — real photographs at those
+angles, or frames pulled out of v1's rendered clips, where the hunter is already walking away.
+
+This also sharpens **B8**: the gate on the LoRA route is now two questions, not one — can a
+trainer run on this Mac at all, *and* can we source enough non-frontal images of a synthetic
+character to train on.
 
 ## 5. What would make this worth switching to
 

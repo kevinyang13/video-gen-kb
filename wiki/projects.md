@@ -34,7 +34,7 @@ Cinematic photoreal shorts: FLUX.2 klein stills with Moodboard references, motio
 |--:|---|---|---|---|---|---|---|---|
 | 1 | [Dragon Epic — 1-minute photoreal short, family hero face](projects-realistic.html#dragon_epic) | 2026-09-21 | in progress — scene 1A posted | FLUX.2 [klein] 9B 1280x768 | Wan 2.2 High Noise 47 min | The Dragon's Breath | `—` | [▶ watch](https://youtu.be/Xzu-c5yX8uo) |
 | 2 | [Lost City — hyper-real rider on a raptor-dragon entering jungle ruins](projects-realistic.html#lost_city) | 2026-09-21 | in progress — 4K with music: s3, s4, s5, s8, s9; s1 and s2 at 4K without music; s6 trimmed to 4.6 s and never upscaled; **s7 (escape run) not rendered**; no film assembled yet | FLUX.2 [klein] 9B 1280x768 | LTX-2.3 22B [distilled] 1.1 (production engine — see ltx_10s) — Wan 2.2 High Noise I2V (8-bit S) + Low Noise refiner 10% for locked-camera shots at 768p 49 min | Mystical orchestral theme with ancient flute | `—` | [▶ watch](https://youtu.be/68sq_jZqu6c) |
-| 3 | [Night Elf Hunter — a boy and his bear crossing the grassland](projects-realistic.html#nightelf_hunter) | 2026-09-25 | delivered 2026-09-26 05:16 — 57.64 s, 3840x2160 + 1920x1080, 8 shots, none dropped (see plan §0) | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 10 min | Adventure Journey | `—` | — |
+| 3 | [Night Elf Hunter — a boy and his bear crossing the grassland](projects-realistic.html#nightelf_hunter) | 2026-09-26 | research — B0 partial pass 2026-09-26: 30 images, identity 30/30, angles skewed (back 1/3, over-shoulder 0/2); v1 remains the delivered film | FLUX.2 [klein] 9B 512x768 | Wan 2.2 High Noise ? min | none | `—` | — |
 
 → full records for all 3: [[projects-realistic|Photoreal projects]]
 

@@ -84,7 +84,7 @@ scripts/film_run.py kyle_rescue status         # where every shot is
 
 Model family from the name sets the defaults — **ltx**: 249 f, 8 steps, TCD Trailing (19), shift 5, SSS 0.3, 25 fps, hi-res fix off; **wan**: 81 f, 4 steps, UniPC Trailing (17), shift 5, 16 fps, `refinerModel` = the low-noise expert at `refinerStart` 0.1, Lightning LoRA at 1.0. Env `MODEL STEPS CFG CONFIG_JSON VIDEO_FORMAT NEGATIVE FORCE DRY_RUN` override any of it. W/H default to the still's size. Prints size, frame count and wall time.
 
-### `scripts/seed_sheet.sh` — one master → a turnaround sheet
+### `scripts/seed_sheet.sh` — one master → a turnaround sheet, or a LoRA dataset
 
 ```
 scripts/seed_sheet.sh MASTER.png OUT_PREFIX [SUBJECT] [SEED]
@@ -98,6 +98,23 @@ VIEWS="34 side back"  STYLE="…"  W=512 H=768  scripts/seed_sheet.sh …
 Built-in views: `34`, `side`, `back`. Anything else in `VIEWS` is passed through as a prompt sentence, which is how you get a top-down, a head close-up or a clawed foot for a creature. `SUBJECT` is the noun used in the prompts ("boy", "creature"); `STYLE` overrides the look clause for non-3D projects.
 
 **Cost**: ~25 s per view. **Gotcha**: klein amplifies a signature feature a little with each edit — Kyle's spiked fringe is taller on the sheet than on the master — so judge the sheet against the master, not against the previous view.
+
+#### `--dataset` — 30 training images and their captions
+
+```
+KEEP="exactly the same face … the same pointed ears …" \
+scripts/seed_sheet.sh --dataset MASTER.png OUT_DIR [SUBJECT] [TRIGGER]
+ONLY="1 10 25"  CELLS="…"  WD=512 HD=768  DRY_RUN=1
+```
+
+**Purpose**: experiment **B0** in [[blueprint-v2-research]] — build the dataset a character LoRA would need. 30 cells over framing × angle × lighting × expression × wardrobe × background, 12 close / 12 medium / 6 wide, one klein seed per cell, written as `ds_NN.png` + `ds_NN.txt`.
+
+**The two strings.** Each cell writes a **prompt** that names every feature to preserve (our reference-token practice — klein substitutes its own face otherwise) and a **caption** that names only what varies. Permanent features are absent from the caption on purpose, so they bind to the trigger token rather than to words a later prompt can contradict — the Isolation Rule, which is the exact inverse of how we write shot prompts. Captioned axes (wardrobe, lighting, framing) stay steerable after training.
+
+Set `KEEP` per character; the default keep-clause is generic and will drift. `ONLY` renders a numbered subset — render two or three cells first and look at them before spending the full run. Captions are written even under `DRY_RUN`, so the text is reviewable before any pixels exist.
+
+**Cost**: ~25–40 s per image, ~20 min for 30. Captions are tracked in git; the images are not.
+
 
 ## `scripts/qc_sheet.sh` — contact sheet
 

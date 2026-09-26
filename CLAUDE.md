@@ -32,6 +32,7 @@ scripts/build_projects.py -- projects.json -> wiki/projects*.md (run by build_si
 scripts/film_run.py       -- run a film from its run-spec; PROJECT is <id> (newest version) or <id>@<version>
 scripts/dt_diptych.sh     -- klein still: diptych / single edit / text-to-image
 scripts/seed_sheet.sh     -- one master -> turnaround sheet (front/34/profile/back, or custom views)
+                             --dataset MASTER OUT_DIR: 30 captioned LoRA training images
 scripts/dt_clip.sh        -- I2V clip (LTX or Wan presets)
 scripts/qc_sheet.sh       -- contact sheet: reference + N frames
 scripts/upscale_4k.sh     -- clip -> 3840x2160 (W/H configurable) via Real-ESRGAN
