@@ -1,6 +1,8 @@
 {
   "order": 1,
   "id": "coast_v2",
+  "version": "v1-drawthings-ui",
+  "variant": "Rendered by driving the Draw Things app window (accessibility automation).",
   "title": "Coastal wildflowers (v2)",
   "date": "2026-09-20",
   "theme": "anime",

@@ -8,6 +8,12 @@
 
 ---
 
+## 2026-09-25 — Versions inside each project
+
+**Structure**: `projects/<id>/<version>/` where version is `v<n>-<short-description>` of the *variant* — how that attempt was made. 655 items moved. Existing work retrofitted by method: the seven loops and dragon_epic are `v1-drawthings-ui`; kyle_rescue, lindsey_art and fll_bot_builders are `v1-drawthings-cli`; lost_city splits into `v1-drawthings-ui` (shots 1–13, through the app) and `v2-drawthings-cli` (s14, s15); fll_champions is `v2-master-restage` (the Pixar rebuild that shipped).
+
+Each version folder is self-contained — its own `raw/ seed/ stills/ clips/ music/ final/ logs/` and its own `spec.json`, stamped with `version` and a one-line `variant`. The plan page stays at project level and tells the story across versions. `film_run.py <id>` runs the newest version, `<id>@<version>` pins one. `build_projects.py` reads `projects/*/*/spec.json`, shows each project's newest version and lists the rest. Verified: four run-specs still PASS, and `lost_city@v1-drawthings-ui` correctly reports no run-spec because the app-driven version never had one.
+
 ## 2026-09-25 — final/ means the film, not the shots
 
 **Convention fixed** (Kevin): `final/` holds only the assembled film and its delivery copies; everything shot-scoped — the `.mov` export, the trimmed ProRes, the per-shot `_4k.mp4` and its stamp — belongs in `clips/`. `film_run.py finish` now writes per-shot output to `clips/` and only the master plus deliveries to `final/`; 105 existing files were moved to match. lost_city's `final/` is down to the 30 s rift coda (an assembled sequence, so still a deliverable) and kyle_rescue's stray `music_bed.wav` went to `music/`. [[repo-structure]] and `CLAUDE.md` updated.

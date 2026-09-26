@@ -13,8 +13,10 @@ Full detail, including what is tracked vs generated and how to start a project: 
 
 ```
 wiki/  docs/  raw/  scripts/  tools/  projects.json     <- shared across projects
-projects/<id>/{plan,raw,seed,stills,clips,music,final,logs}
-  spec.json = that project's record (edit this, not the root projects.json)
+projects/<id>/plan/                       one plan page per project
+projects/<id>/<version>/{spec.json,raw,seed,stills,clips,music,final,logs}
+  version = v<n>-<short-description>, e.g. v1-drawthings-ui, v2-drawthings-cli
+  spec.json = that VERSION's record (edit this, not the root projects.json)
   clips/ = everything shot-scoped (exports, trims, per-shot 4K); final/ = the assembled film only
   tracked: plan/*.md, spec.json, prompt and lock .txt, raw/; ignored: all media by extension
 ```
@@ -26,7 +28,7 @@ Key scripts:
 ```
 scripts/build_site.py     -- wiki/ + projects/*/plan/ -> docs/
 scripts/build_projects.py -- projects.json -> wiki/projects*.md (run by build_site.py)
-scripts/film_run.py       -- run a film from its run-spec: check/status/stills/pick/clips/qc/finish
+scripts/film_run.py       -- run a film from its run-spec; PROJECT is <id> (newest version) or <id>@<version>
 scripts/dt_diptych.sh     -- klein still: diptych / single edit / text-to-image
 scripts/dt_clip.sh        -- I2V clip (LTX or Wan presets)
 scripts/qc_sheet.sh       -- contact sheet: reference + N frames

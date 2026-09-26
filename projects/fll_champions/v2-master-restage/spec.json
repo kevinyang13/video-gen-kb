@@ -1,12 +1,14 @@
 {
   "order": 11,
   "id": "fll_champions",
+  "version": "v2-master-restage",
+  "variant": "Photoreal masters abandoned, Pixar masters rebuilt from solo photos and the character beats restaged from them; rendered headless with draw-things-cli.",
   "title": "BOT Builders (photo cut) — 12-shot 3D-animated short from the team's own photos",
   "date": "2026-09-23",
   "theme": "3d",
   "dt_project": "none — draw-things-cli via scripts/film_run.py",
   "status": "delivered 2026-09-25 03:00 — 59.08 s, 3840x2160 + 1920x1080, 11 shots (competition-floor wide dropped); see wiki/fll-champions-plan.md",
-  "source": "projects/fll_champions/raw/*.jpg (5 photos, 2576x1932, added 2026-09-23)",
+  "source": "projects/fll_champions/v2-master-restage/raw/*.jpg (5 photos, 2576x1932, added 2026-09-23)",
   "notes": "Kevin is the team's coach; consent for all five children confirmed by him 2026-09-23. 3D-animated look chosen over photoreal precisely because five recurring child faces are the heaviest identity load attempted here — stylised faces hold through LTX motion. No on-screen text. Source photos are real: every shot still is a klein edit of a photo (identity from pixels), and the two invented shots (s6, s7) chain off approved stills. Companion to the comic-derived fll_bot_builders film, which covers the same team from drawn panels. This one differs in approach: every still here is a klein edit of a real photo at --strength 1.0 (the garage build table, the farm gate, the logs, the team portrait), where the comic film works from drawn panels. Two rules came out of it — see the run notes. Known flaw in the delivered cut: it mixes two generations of stills — seven shots rendered 2026-09-23 before the masters existed, four restaged 2026-09-25 from the rebuilt Pixar masters. The same children are drawn by two recipes and it is visible across cuts. Not re-done; recorded as the lesson (wiki/fll-champions-plan.md §3b).",
   "still": {
     "model": "FLUX.2 [klein] 9B (8-bit S)",
@@ -56,7 +58,7 @@
     }
   },
   "run-spec": {
-    "dir": "projects/fll_champions",
+    "dir": "projects/fll_champions/v2-master-restage",
     "name": "fll_champions",
     "size": [
       1024,
@@ -120,7 +122,7 @@
       "bitrate": "40M"
     },
     "music": {
-      "file": "projects/fll_champions/music/light_adventure.mp3",
+      "file": "projects/fll_champions/v2-master-restage/music/light_adventure.mp3",
       "start": 0,
       "vol": 0.45,
       "fade_in": 0,

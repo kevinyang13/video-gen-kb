@@ -24,7 +24,8 @@ Index of every project: [[projects]]. Other themes: [[projects-realistic]] · [[
 
 ## Coastal wildflowers (v1) {#coast}
 
-- **Date**: 2026-09-20 · **Status**: superseded by coast_v2 · **Draw Things project**: `Untitled-35903`
+- **Date**: 2026-09-20 · **Status**: superseded by coast_v2 · **Version**: `v1-drawthings-ui` · **Draw Things project**: `Untitled-35903`
+- **This version**: Rendered by driving the Draw Things app window (accessibility automation).
 - **Files** (`raw/clips/`): `coast.mov`, `coast_loop.mp4`
 - **Notes**: First end-to-end run. Still too soft — Wan-T2V at native res. Led to FLUX for stills.
 
@@ -71,7 +72,8 @@ Prompt: `static camera, gentle ocean waves rolling onto the shore, grass and wil
 
 ## Coastal wildflowers (v2) {#coast_v2}
 
-- **Date**: 2026-09-20 · **Status**: done · **Draw Things project**: `Untitled-35903`
+- **Date**: 2026-09-20 · **Status**: done · **Version**: `v1-drawthings-ui` · **Draw Things project**: `Untitled-35903`
+- **This version**: Rendered by driving the Draw Things app window (accessibility automation).
 - **Files** (`raw/clips/`): `coast_flux_1024x1792.png`, `coast_flux_576x1024.png`, `coast_v2.mov`, `coast_v2_loop.mp4`, `coast_v2_final.mp4`
 - **Notes**: First run with wrong refiner (6-bit, not downloaded) produced washed-out noise; re-run with 8-bit S.
 
@@ -124,7 +126,8 @@ Prompt: `static camera, gentle ocean waves rolling onto the shore, grass and wil
 
 ## Torrey Pines, San Diego {#torrey}
 
-- **Date**: 2026-09-20 · **Status**: done · **Draw Things project**: `Untitled-91451`
+- **Date**: 2026-09-20 · **Status**: done · **Version**: `v1-drawthings-ui` · **Draw Things project**: `Untitled-91451`
+- **This version**: Rendered by driving the Draw Things app window (accessibility automation).
 - **Files** (`raw/clips/`): `torrey_flux_1024x1792.png`, `torrey_flux_576x1024.png`, `torrey.mov`, `torrey_loop.mp4`, `torrey_final.mp4`
 - **Notes**: Second run of the runbook; refiner trap caught by checklist.
 
@@ -177,7 +180,8 @@ Prompt: `static camera, gentle ocean waves rolling onto the beach below the clif
 
 ## Golden Gate, San Francisco {#goldengate}
 
-- **Date**: 2026-09-20 · **Status**: done · **Draw Things project**: `Untitled-82025`
+- **Date**: 2026-09-20 · **Status**: done · **Version**: `v1-drawthings-ui` · **Draw Things project**: `Untitled-82025`
+- **This version**: Rendered by driving the Draw Things app window (accessibility automation).
 - **Files** (`raw/clips/`): `goldengate.mov`, `goldengate_loop.mp4`, `goldengate_final.mp4`
 - **Notes**: Proved native 576x1024 still is good enough; runbook switched to it. Mac was locked 2.5 h with Save sheet open — render survived.
 
@@ -229,7 +233,8 @@ Prompt: `static camera, fog slowly drifting under the bridge, gentle waves on th
 
 ## Mt. Rainier from Paradise {#rainier}
 
-- **Date**: 2026-09-20 · **Status**: done · **Draw Things project**: `Untitled-70762`
+- **Date**: 2026-09-20 · **Status**: done · **Version**: `v1-drawthings-ui` · **Draw Things project**: `Untitled-70762`
+- **This version**: Rendered by driving the Draw Things app window (accessibility automation).
 - **Files** (`raw/clips/`): `rainier.mov`, `rainier_loop.mp4`, `rainier_final.mp4`
 - **Notes**: First zero-click run — export Save button pressed by automation.
 
@@ -280,7 +285,8 @@ Prompt: `static camera, wildflowers and meadow grass swaying in a soft breeze, t
 
 ## Cyberpunk city, rain, neon {#cyberpunk}
 
-- **Date**: 2026-09-20 · **Status**: done · **Draw Things project**: `Untitled-76300`
+- **Date**: 2026-09-20 · **Status**: done · **Version**: `v1-drawthings-ui` · **Draw Things project**: `Untitled-76300`
+- **This version**: Rendered by driving the Draw Things app window (accessibility automation).
 - **Files** (`raw/clips/`): `cyberpunk.mov`, `cyberpunk_loop.mp4`, `cyberpunk_final.mp4`
 - **Notes**: Night scene works with the same style suffix. Music swapped from the calm-ambient default to synthwave on 2026-09-20.
 
@@ -331,7 +337,8 @@ Prompt: `static camera, rain falling steadily, neon signs flickering and glowing
 
 ## FLL BOT Builders — Coastal Roots Farm, wide view {#fll_farm}
 
-- **Date**: 2026-09-20 · **Status**: done (v2) · **Draw Things project**: `Untitled-91574`
+- **Date**: 2026-09-20 · **Status**: done (v2) · **Version**: `v1-drawthings-ui` · **Draw Things project**: `Untitled-91574`
+- **This version**: Rendered by driving the Draw Things app window (accessibility automation).
 - **Files** (`raw/clips/`): `fll_farm_v2.mov`, `fll_farm_v2_loop.mp4`, `fll_farm_v2_final.mp4`, `fll_farm.mov (v1, rejected)`, `fll_farm_final.mp4 (v1, rejected)`, `fll/team_entrance.webp (reference only)`, `fll/chickens.webp (reference only)`, `fll/crop_rows.webp (reference only)`, `fll/logo.webp`
 - **Notes**: Kids must be distant, no faces, no close-ups (Kevin's rule). Real photos used only as reference for farm features; a photoreal attempt and a real-photo I2V attempt were both abandoned. Farm details from FLL-kb: berms/swales, elderberry+pomegranate alleys with rotating chickens, sunflower mural shed, trellis netting. v1 (6 kids + adult, 'walking' prompt) had figures teleporting and merging; v2 regenerated with exactly 5+1 standing still and a wind-only motion prompt.
 

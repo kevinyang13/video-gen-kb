@@ -2,6 +2,7 @@
 """Run a multi-shot film from its run-spec in projects.json (the `run-spec` block of a project).
 
 PROJECT is a projects.json id, or a path to a .json file holding the run-spec (handy for tests).
+  PROJECT is "<id>" (newest version) or "<id>@<version>", e.g. lost_city@v1-drawthings-ui
   scripts/film_run.py PROJECT check              validate the run-spec (paths, sizes, frame rules)
   scripts/film_run.py PROJECT status             one line per shot: still / candidates / clips / take / 4K
   scripts/film_run.py PROJECT stills [ids]       seed candidates for shots with no picked still -> work/<id>_c<seed>.png
@@ -51,14 +52,20 @@ def load(project):
         j = json.loads(Path(project).read_text())
         f = j.get("run-spec", j)
     else:
-        spec = ROOT / "projects" / project / "spec.json"
+        # "<id>" uses the newest version folder; "<id>@<version>" pins one
+        pid, _, want = project.partition("@")
+        vers = sorted((ROOT / "projects" / pid).glob("*/spec.json"))
+        if want:
+            vers = [v for v in vers if v.parent.name == want] or die(
+                f"no version '{want}' in projects/{pid}")
+        spec = vers[-1] if vers else ROOT / "projects" / pid / "spec.json"
         if spec.exists():                               # the project's own record
             p = json.loads(spec.read_text())
         else:                                           # fall back to the aggregate
             data = json.loads((ROOT / "projects.json").read_text())
             p = next((x for x in data["projects"] if x["id"] == project), None)
         if not p:
-            die(f"no project '{project}': expected projects/{project}/spec.json")
+            die(f"no project '{project}': expected projects/{pid}/<version>/spec.json")
         f = p.get("run-spec") or die(f"project '{project}' has no 'run-spec' block")
     for k in ("dir", "size", "shots"):
         if k not in f:

@@ -105,24 +105,28 @@ scripts/       the whole pipeline
 tools/         realesrgan and other binaries
 projects.json  the registry: one record per project
 </code></pre>
-<p><strong>One folder per project</strong>, named for its <code>projects.json</code> id:</p>
+<p><strong>One folder per project</strong>, named for its <code>projects.json</code> id, with <strong>one folder per version</strong> inside it:</p>
 <pre><code>projects/&lt;id&gt;/
-  spec.json  its registry record: settings, prompts, run-spec, music, status
-  plan/    the project's page(s) — published with the wiki
-  raw/     its source photos, comics, references (immutable)
-  seed/    masters, crops, candidate renders, prompt inputs
-  stills/  picked first frames + per-shot prompt files
-  clips/   everything shot-scoped: I2V exports (.mov), trims, per-shot 4K
-  music/   the track(s) this film is cut to
-  final/   the film itself — the assembled master and its delivery copies
-  logs/    run logs
+  plan/          the project's page(s) — one story across all versions
+  &lt;version&gt;/     e.g. v1-drawthings-ui, v2-drawthings-cli, v2-master-restage
+    spec.json    this version's record: settings, prompts, run-spec, music, status
+    raw/         its source photos, comics, references
+    seed/        masters, crops, candidate renders, prompt inputs
+    stills/      picked first frames + per-shot prompt files
+    clips/       shot-scoped output: I2V exports, trims, per-shot 4K
+    music/       the track(s) this version is cut to
+    final/       the film itself — assembled master and delivery copies
+    logs/        run logs and the scripts a run used
 </code></pre>
-<p>Not every project uses every folder: the early 9:16 loops (<a href="living-painting-loop.html">living painting loop</a>) have only <code>clips/ final/ music/</code>, while a multi-shot film uses all eight.</p>
+<p><strong>A version is a variant of the same film, not a revision of a file.</strong> The name is <code>v&lt;n&gt;-&lt;short-description&gt;</code>: what changed about <em>how</em> it was made. Existing ones: <code>v1-drawthings-ui</code> (driven through the app window), <code>v1-drawthings-cli</code> (headless from the start), <code>v2-drawthings-cli</code> (lost_city's shots 14–15, after the CLI arrived), <code>v2-master-restage</code> (fll_champions, after the masters were rebuilt and the beats restaged).</p>
+<p>Each version folder is <strong>self-contained and independently re-runnable</strong> — it carries its own sources, prompts and spec, at the cost of duplicating the source photos between versions of the same project. The plan page stays at project level and tells the whole story.</p>
+<p><code>scripts/film_run.py &lt;id&gt;</code> uses the newest version; <code>&lt;id&gt;@&lt;version&gt;</code> pins one, e.g. <code>film_run.py lost_city@v1-drawthings-ui status</code>. The registry shows each project's newest version and lists the others.</p>
+<p>Not every version uses every folder: the early 9:16 loops (<a href="living-painting-loop.html">living painting loop</a>) have only <code>clips/ final/ music/</code>, while a multi-shot film uses all eight.</p>
 <p><strong><code>final/</code> is the film, not the shots.</strong> One folder, one question: <em>what do I hand over?</em> Every shot-scoped artefact — the <code>.mov</code> export, the trimmed ProRes, the per-shot <code>_4k.mp4</code> and its stamp — stays in <code>clips/</code> next to the clip it came from. Only the assembled master and its delivery copies (1920×1080, 720p, and so on) belong in <code>final/</code>. <code>film_run.py finish</code> writes to both accordingly. An assembled <em>sequence</em> that isn't the whole film still counts as a deliverable — lost_city's 30-second rift coda sits in <code>final/</code> even though the film around it isn't cut yet.</p>
 <p><strong><code>seed/</code> is the one to understand.</strong> It holds everything a render <em>starts from</em> that isn't a finished still: character and location masters, the face crops they were made from, rejected candidates, and any prepared input images. Masters are the valuable part — they're what makes shot 9 look like shot 2 (see <a href="character-consistency.html">character consistency</a>).</p>
 <h2>A project must be re-runnable from its own folder</h2>
-<p><code>projects/&lt;id&gt;/spec.json</code> is the <strong>source of truth</strong> for that project: the same record that used to sit in the root <code>projects.json</code> — models, sizes, seeds, per-scene prompts, the run-spec, music, status, file list. <code>scripts/build_projects.py</code> reads every <code>projects/*/spec.json</code> plus <code>projects/_shared.json</code> (defaults, themes, playlist), regenerates the root <code>projects.json</code> as an aggregate, and renders the registry pages from it. <code>film_run.py &lt;id&gt;</code> reads the project's own spec first and falls back to the aggregate.</p>
-<p>So: <strong>edit <code>projects/&lt;id&gt;/spec.json</code></strong>, never the root <code>projects.json</code> — that one is generated and will be overwritten on the next build.</p>
+<p><code>projects/&lt;id&gt;/&lt;version&gt;/spec.json</code> is the <strong>source of truth</strong> for that project: the same record that used to sit in the root <code>projects.json</code> — models, sizes, seeds, per-scene prompts, the run-spec, music, status, file list. <code>scripts/build_projects.py</code> reads every <code>projects/*/*/spec.json</code> plus <code>projects/_shared.json</code> (defaults, themes, playlist), regenerates the root <code>projects.json</code> as an aggregate, and renders the registry pages from it. <code>film_run.py &lt;id&gt;</code> reads the project's own spec first and falls back to the aggregate.</p>
+<p>So: <strong>edit <code>projects/&lt;id&gt;/&lt;version&gt;/spec.json</code></strong>, never the root <code>projects.json</code> — that one is generated and will be overwritten on the next build.</p>
 <h2>Tracked vs generated</h2>
 <p><em>Keep the recipe, drop the generated pixels.</em></p>
 <div class="tw"><table>
@@ -167,12 +171,13 @@ projects.json  the registry: one record per project
 <h2>Starting a new project</h2>
 <ol>
 <li>Pick an id (lowercase, underscores — it's the folder name and the registry key).</li>
-<li><code>mkdir -p projects/&lt;id&gt;/{plan,raw,seed,stills,clips,music,final,logs}</code> — or just the folders you need.</li>
-<li>Put the source material in <code>projects/&lt;id&gt;/raw/</code>.</li>
-<li>Add the record to <code>projects.json</code>: <code>id</code>, <code>title</code>, <code>date</code>, <strong><code>theme</code></strong>, <code>dt_project</code>, <code>status</code>, plus <code>still</code>/<code>i2v</code>/<code>post</code> blocks and, for a multi-shot film, a <code>run-spec</code>.</li>
+<li><code>mkdir -p projects/&lt;id&gt;/plan projects/&lt;id&gt;/v1-&lt;how&gt;/{raw,seed,stills,clips,music,final,logs}</code> — or just the folders you need. Name the version for the method, e.g. <code>v1-drawthings-cli</code>.</li>
+<li>Put the source material in <code>projects/&lt;id&gt;/v1-&lt;how&gt;/raw/</code>.</li>
+<li>Write <code>projects/&lt;id&gt;/v1-&lt;how&gt;/spec.json</code>: <code>id</code>, <code>title</code>, <code>date</code>, <strong><code>theme</code></strong>, <code>dt_project</code>, <code>status</code>, <code>version</code>, <code>variant</code>, plus <code>still</code>/<code>i2v</code>/<code>post</code> blocks and, for a multi-shot film, a <code>run-spec</code> whose <code>dir</code> is <code>projects/&lt;id&gt;/&lt;version&gt;</code>.</li>
 <li>Write <code>projects/&lt;id&gt;/plan/&lt;id&gt;-plan.md</code> following the standard page format, and add a card for it to <code>wiki/index.md</code> under <strong>Plans</strong>.</li>
 <li>Run <code>python3 scripts/build_site.py</code>, then follow <a href="idea-to-video-blueprint.html">idea to video blueprint</a>.</li>
 </ol>
+<p><strong>Start a new version</strong> when the method changes materially — a different engine, a rebuilt cast, a new look. Copy the sources across, write a fresh spec, and leave the old version untouched as the record of what was tried.</p>
 <h2>What is an intermediate</h2>
 <p>Safe to delete once a film is delivered:</p>
 <div class="tw"><table>

@@ -1,6 +1,8 @@
 {
   "order": 10,
   "id": "lindsey_art",
+  "version": "v1-drawthings-cli",
+  "variant": "Rendered headless with draw-things-cli via scripts/film_run.py.",
   "title": "Lindsey: A Small Dream — 1-minute 3D-animated vertical short from Lindsey's 5-panel art comic",
   "date": "2026-09-23",
   "theme": "3d",
@@ -8,11 +10,11 @@
   "status": "delivered 2026-09-23 17:26 — 59.96 s, 1080x1920 + 2160x3840 + 720x1280 (see plan §0)",
   "youtube": "lbU-_73MliI",
   "youtube_note": "YouTube Short, 2160x3840 master",
-  "source": "projects/lindsey_art/raw/comic_source.jpg",
+  "source": "projects/lindsey_art/v1-drawthings-cli/raw/comic_source.jpg",
   "music": "Emotional Children Piano — Music_For_Videos, Pixabay (cdn.pixabay.com/download/audio/2023/09/03/audio_2c0ed5a272.mp3), 1:55; first 60 s (build to ~50 s, section ends at 60 s), 2 s fade out",
   "notes": "Lindsey is Kevin's daughter; consent confirmed 2026-09-23. Face from the comic, no photo.",
   "run-spec": {
-    "dir": "projects/lindsey_art",
+    "dir": "projects/lindsey_art/v1-drawthings-cli",
     "name": "lindsey_art",
     "size": [
       576,
@@ -67,7 +69,7 @@
       "bitrate": "40M"
     },
     "music": {
-      "file": "projects/lindsey_art/music/emotional_children_piano.mp3",
+      "file": "projects/lindsey_art/v1-drawthings-cli/music/emotional_children_piano.mp3",
       "start": 0,
       "vol": 1.0,
       "fade_in": 0,

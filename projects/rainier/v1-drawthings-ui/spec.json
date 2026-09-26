@@ -1,6 +1,8 @@
 {
   "order": 4,
   "id": "rainier",
+  "version": "v1-drawthings-ui",
+  "variant": "Rendered by driving the Draw Things app window (accessibility automation).",
   "title": "Mt. Rainier from Paradise",
   "date": "2026-09-20",
   "theme": "anime",

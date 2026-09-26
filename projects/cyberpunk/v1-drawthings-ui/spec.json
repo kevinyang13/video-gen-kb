@@ -1,6 +1,8 @@
 {
   "order": 5,
   "id": "cyberpunk",
+  "version": "v1-drawthings-ui",
+  "variant": "Rendered by driving the Draw Things app window (accessibility automation).",
   "title": "Cyberpunk city, rain, neon",
   "date": "2026-09-20",
   "theme": "anime",

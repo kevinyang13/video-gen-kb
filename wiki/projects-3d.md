@@ -21,7 +21,8 @@ Index of every project: [[projects]]. Other themes: [[projects-anime]] · [[proj
 
 ## Kyle's Antarctic Rescue — 1-minute 3D-animated vertical short from a 5-panel comic {#kyle_rescue}
 
-- **Date**: 2026-09-22 · **Status**: delivered 2026-09-23 01:38 — 60.0 s, 1080x1920 + 2160x3840, rendered unattended overnight (see plan §0) · **Draw Things project**: `none — rendered with draw-things-cli (no project file)`
+- **Date**: 2026-09-22 · **Status**: delivered 2026-09-23 01:38 — 60.0 s, 1080x1920 + 2160x3840, rendered unattended overnight (see plan §0) · **Version**: `v1-drawthings-cli` · **Draw Things project**: `none — rendered with draw-things-cli (no project file)`
+- **This version**: Rendered headless with draw-things-cli via scripts/film_run.py.
 - **Files** (`raw/clips/`): `music/best_adventure_ever.mp3`, `kyle/masters/kyle_front.png`, `kyle/stills/s1..s8.png (+ *_v.txt video prompts)`, `kyle/clips/s1..s8_ltx_v1.mov, s2_ltx_v2.mov, s4_ltx_v2.mov`, `kyle/final/kyle_rescue_1080x1920.mp4`, `kyle/final/kyle_rescue_2160x3840.mp4`, `kyle/work/qc_notes.txt`
 - **Notes**: Kyle is Kevin's son; consent confirmed 2026-09-22.
 
@@ -192,7 +193,8 @@ Prompt: `per scene — see scenes`
 
 ## Lindsey: A Small Dream — 1-minute 3D-animated vertical short from Lindsey's 5-panel art comic {#lindsey_art}
 
-- **Date**: 2026-09-23 · **Status**: delivered 2026-09-23 17:26 — 59.96 s, 1080x1920 + 2160x3840 + 720x1280 (see plan §0) · **Draw Things project**: `none — draw-things-cli via scripts/film_run.py`
+- **Date**: 2026-09-23 · **Status**: delivered 2026-09-23 17:26 — 59.96 s, 1080x1920 + 2160x3840 + 720x1280 (see plan §0) · **Version**: `v1-drawthings-cli` · **Draw Things project**: `none — draw-things-cli via scripts/film_run.py`
+- **This version**: Rendered headless with draw-things-cli via scripts/film_run.py.
 - **Files** (`raw/clips/`): `lindsey/masters/lindsey_front.png`, `lindsey/stills/s1..s8.png`, `lindsey/clips/s*_v*.mov`, `lindsey/final/lindsey_art_1080x1920.mp4`, `lindsey/final/lindsey_art_2160x3840.mp4`, `lindsey/final/lindsey_art_720x1280.mp4`, `lindsey/work/qc_notes.txt`, `music/emotional_children_piano.mp3`
 - **Notes**: Lindsey is Kevin's daughter; consent confirmed 2026-09-23. Face from the comic, no photo.
 
@@ -238,7 +240,8 @@ Prompt: `per scene — see scenes`
 
 ## BOT Builders (photo cut) — 12-shot 3D-animated short from the team's own photos {#fll_champions}
 
-- **Date**: 2026-09-23 · **Status**: delivered 2026-09-25 03:00 — 59.08 s, 3840x2160 + 1920x1080, 11 shots (competition-floor wide dropped); see wiki/fll-champions-plan.md · **Draw Things project**: `none — draw-things-cli via scripts/film_run.py`
+- **Date**: 2026-09-23 · **Status**: delivered 2026-09-25 03:00 — 59.08 s, 3840x2160 + 1920x1080, 11 shots (competition-floor wide dropped); see wiki/fll-champions-plan.md · **Version**: `v2-master-restage` · **Draw Things project**: `none — draw-things-cli via scripts/film_run.py`
+- **This version**: Photoreal masters abandoned, Pixar masters rebuilt from solo photos and the character beats restaged from them; rendered headless with draw-things-cli.
 - **Files** (`raw/clips/`): `fll_champions/*.jpg|webp|png (13 source photos)`, `fll/masters/{kei,kyle,lindsey,lola,cheryl,table,venue,farm_logs,farm_barn,farm_coop}.png`, `fll/stills/s1..s12.png + per-shot prompts`, `fll/clips/s*_v*.mov`, `fll/final/fll_champions_3840x2160.mp4`, `fll/final/fll_champions_1920x1080.mp4`
 - **Notes**: Kevin is the team's coach; consent for all five children confirmed by him 2026-09-23. 3D-animated look chosen over photoreal precisely because five recurring child faces are the heaviest identity load attempted here — stylised faces hold through LTX motion. No on-screen text. Source photos are real: every shot still is a klein edit of a photo (identity from pixels), and the two invented shots (s6, s7) chain off approved stills. Companion to the comic-derived fll_bot_builders film, which covers the same team from drawn panels. This one differs in approach: every still here is a klein edit of a real photo at --strength 1.0 (the garage build table, the farm gate, the logs, the team portrait), where the comic film works from drawn panels. Two rules came out of it — see the run notes. Known flaw in the delivered cut: it mixes two generations of stills — seven shots rendered 2026-09-23 before the masters existed, four restaged 2026-09-25 from the rebuilt Pixar masters. The same children are drawn by two recipes and it is visible across cuts. Not re-done; recorded as the lesson (wiki/fll-champions-plan.md §3b).
 
@@ -299,7 +302,8 @@ Prompt: `per shot — projects/fll_champions/stills/sN_v.txt`
 
 ## Bot Builders — 90-second 16:9 3D-animated FLL team film from a 3-page comic {#fll_bot_builders}
 
-- **Date**: 2026-09-23 · **Status**: delivered 2026-09-24 04:11 — 63.5 s (planned 90; five-kid rule), 1920x1080 + 3840x2160 + 1280x720 (see plan §0) · **Draw Things project**: `none — draw-things-cli via scripts/film_run.py`
+- **Date**: 2026-09-23 · **Status**: delivered 2026-09-24 04:11 — 63.5 s (planned 90; five-kid rule), 1920x1080 + 3840x2160 + 1280x720 (see plan §0) · **Version**: `v1-drawthings-cli` · **Draw Things project**: `none — draw-things-cli via scripts/film_run.py`
+- **This version**: Rendered headless with draw-things-cli via scripts/film_run.py.
 - **Files** (`raw/clips/`): `fll_bot/masters/{kyle,boy2,lindsey,girla,girlb,team}.png`, `fll_bot/stills/s1..s12.png`, `fll_bot/clips/s*_v*.mov`, `fll_bot/final/bot_builders_1920x1080.mp4`, `fll_bot/final/bot_builders_3840x2160.mp4`, `fll_bot/final/bot_builders_1280x720.mp4`, `fll_bot/work/qc_notes.txt`, `music/victory_the_mountain.mp3`
 - **Notes**: Separate project from fll_farm. Faces OK: Kevin says all five families consent (2026-09-23). Exactly five children in every frame, no extra kids; background people adults only. Kyle and Lindsey masters reused (re-dressed). Logos and lettering removed.
 

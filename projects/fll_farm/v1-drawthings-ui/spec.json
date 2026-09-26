@@ -1,6 +1,8 @@
 {
   "order": 6,
   "id": "fll_farm",
+  "version": "v1-drawthings-ui",
+  "variant": "Rendered by driving the Draw Things app window (accessibility automation).",
   "title": "FLL BOT Builders — Coastal Roots Farm, wide view",
   "date": "2026-09-20",
   "theme": "anime",

@@ -1,6 +1,8 @@
 {
   "order": 7,
   "id": "dragon_epic",
+  "version": "v1-drawthings-ui",
+  "variant": "Rendered by driving the Draw Things app window (accessibility automation).",
   "title": "Dragon Epic — 1-minute photoreal short, family hero face",
   "date": "2026-09-21",
   "theme": "realistic",
@@ -33,6 +35,6 @@
     "dragon/scene1a.mov (v1, ghosting)",
     "dragon/scene1a_4k.mp4 (v1)"
   ],
-  "notes": "Plan page: wiki/dragon-epic-plan.md. Experiments E1–E7 must pass before rendering the shot list. Needs face photos in projects/dragon_epic/raw/face/. Delivery is 4K UHD. Scene 1A: v1 ghosted (push-in + translation), v2 noise (refiner 50%), v3 clean (10%, articulation-only prompt).",
+  "notes": "Plan page: wiki/dragon-epic-plan.md. Experiments E1–E7 must pass before rendering the shot list. Needs face photos in projects/dragon_epic/v1-drawthings-ui/raw/face/. Delivery is 4K UHD. Scene 1A: v1 ghosted (push-in + translation), v2 noise (refiner 50%), v3 clean (10%, articulation-only prompt).",
   "youtube": "Xzu-c5yX8uo"
 }

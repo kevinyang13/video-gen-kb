@@ -68,8 +68,15 @@ HEAD = ["| # | Project | Date | Status | Still | I2V | Music | Final file | YouT
 
 
 def record(p, defs, suffix):
+    ver = f" · **Version**: `{p['version']}`" if p.get("version") else ""
     out = [f"## {p['title']} {{#{p['id']}}}", "",
-           f"- **Date**: {p['date']} · **Status**: {p['status']} · **Draw Things project**: `{p['dt_project']}`",
+           f"- **Date**: {p['date']} · **Status**: {p['status']}{ver} · **Draw Things project**: `{p['dt_project']}`",]
+    if p.get("variant"):
+        out.append(f"- **This version**: {p['variant']}")
+    if p.get("versions"):
+        out.append("- **All versions**: " + " · ".join(
+            f"`{v['version']}`" for v in p["versions"]))
+    out += [
            f"- **Files** (`raw/clips/`): " + ", ".join(f"`{f}`" for f in p.get("files", [])),
            f"- **Notes**: {p.get('notes', '')}", ""]
     if p.get("youtube"):
@@ -112,7 +119,20 @@ def load():
     """
     data = json.loads((SPECS / "_shared.json").read_text())
     data.pop("_note", None)
-    recs = [json.loads(f.read_text()) for f in SPECS.glob("*/spec.json")]
+    # one spec per project VERSION; the registry shows the newest version of each
+    # project and lists the older ones alongside it
+    by_id = {}
+    for f in SPECS.glob("*/*/spec.json"):
+        r = json.loads(f.read_text())
+        by_id.setdefault(r["id"], []).append(r)
+    recs = []
+    for pid, versions in by_id.items():
+        versions.sort(key=lambda r: r.get("version", ""))
+        newest = dict(versions[-1])
+        if len(versions) > 1:
+            newest["versions"] = [{"version": v["version"], "variant": v.get("variant", ""),
+                                   "status": v.get("status", "")} for v in versions]
+        recs.append(newest)
     recs.sort(key=lambda r: (r.get("order", 999), r["id"]))
     data["projects"] = [{k: v for k, v in r.items() if k != "order"} for r in recs]
     SRC.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")

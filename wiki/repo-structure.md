@@ -23,22 +23,29 @@ tools/         realesrgan and other binaries
 projects.json  the registry: one record per project
 ```
 
-**One folder per project**, named for its `projects.json` id:
+**One folder per project**, named for its `projects.json` id, with **one folder per version** inside it:
 
 ```
 projects/<id>/
-  spec.json  its registry record: settings, prompts, run-spec, music, status
-  plan/    the project's page(s) — published with the wiki
-  raw/     its source photos, comics, references (immutable)
-  seed/    masters, crops, candidate renders, prompt inputs
-  stills/  picked first frames + per-shot prompt files
-  clips/   everything shot-scoped: I2V exports (.mov), trims, per-shot 4K
-  music/   the track(s) this film is cut to
-  final/   the film itself — the assembled master and its delivery copies
-  logs/    run logs
+  plan/          the project's page(s) — one story across all versions
+  <version>/     e.g. v1-drawthings-ui, v2-drawthings-cli, v2-master-restage
+    spec.json    this version's record: settings, prompts, run-spec, music, status
+    raw/         its source photos, comics, references
+    seed/        masters, crops, candidate renders, prompt inputs
+    stills/      picked first frames + per-shot prompt files
+    clips/       shot-scoped output: I2V exports, trims, per-shot 4K
+    music/       the track(s) this version is cut to
+    final/       the film itself — assembled master and delivery copies
+    logs/        run logs and the scripts a run used
 ```
 
-Not every project uses every folder: the early 9:16 loops ([[living-painting-loop]]) have only `clips/ final/ music/`, while a multi-shot film uses all eight.
+**A version is a variant of the same film, not a revision of a file.** The name is `v<n>-<short-description>`: what changed about *how* it was made. Existing ones: `v1-drawthings-ui` (driven through the app window), `v1-drawthings-cli` (headless from the start), `v2-drawthings-cli` (lost_city's shots 14–15, after the CLI arrived), `v2-master-restage` (fll_champions, after the masters were rebuilt and the beats restaged).
+
+Each version folder is **self-contained and independently re-runnable** — it carries its own sources, prompts and spec, at the cost of duplicating the source photos between versions of the same project. The plan page stays at project level and tells the whole story.
+
+`scripts/film_run.py <id>` uses the newest version; `<id>@<version>` pins one, e.g. `film_run.py lost_city@v1-drawthings-ui status`. The registry shows each project's newest version and lists the others.
+
+Not every version uses every folder: the early 9:16 loops ([[living-painting-loop]]) have only `clips/ final/ music/`, while a multi-shot film uses all eight.
 
 **`final/` is the film, not the shots.** One folder, one question: *what do I hand over?* Every shot-scoped artefact — the `.mov` export, the trimmed ProRes, the per-shot `_4k.mp4` and its stamp — stays in `clips/` next to the clip it came from. Only the assembled master and its delivery copies (1920×1080, 720p, and so on) belong in `final/`. `film_run.py finish` writes to both accordingly. An assembled *sequence* that isn't the whole film still counts as a deliverable — lost_city's 30-second rift coda sits in `final/` even though the film around it isn't cut yet.
 
@@ -46,9 +53,9 @@ Not every project uses every folder: the early 9:16 loops ([[living-painting-loo
 
 ## A project must be re-runnable from its own folder
 
-`projects/<id>/spec.json` is the **source of truth** for that project: the same record that used to sit in the root `projects.json` — models, sizes, seeds, per-scene prompts, the run-spec, music, status, file list. `scripts/build_projects.py` reads every `projects/*/spec.json` plus `projects/_shared.json` (defaults, themes, playlist), regenerates the root `projects.json` as an aggregate, and renders the registry pages from it. `film_run.py <id>` reads the project's own spec first and falls back to the aggregate.
+`projects/<id>/<version>/spec.json` is the **source of truth** for that project: the same record that used to sit in the root `projects.json` — models, sizes, seeds, per-scene prompts, the run-spec, music, status, file list. `scripts/build_projects.py` reads every `projects/*/*/spec.json` plus `projects/_shared.json` (defaults, themes, playlist), regenerates the root `projects.json` as an aggregate, and renders the registry pages from it. `film_run.py <id>` reads the project's own spec first and falls back to the aggregate.
 
-So: **edit `projects/<id>/spec.json`**, never the root `projects.json` — that one is generated and will be overwritten on the next build.
+So: **edit `projects/<id>/<version>/spec.json`**, never the root `projects.json` — that one is generated and will be overwritten on the next build.
 
 ## Tracked vs generated
 
@@ -81,11 +88,13 @@ Two traps, both hit in practice on 2026-09-25:
 ## Starting a new project
 
 1. Pick an id (lowercase, underscores — it's the folder name and the registry key).
-2. `mkdir -p projects/<id>/{plan,raw,seed,stills,clips,music,final,logs}` — or just the folders you need.
-3. Put the source material in `projects/<id>/raw/`.
-4. Add the record to `projects.json`: `id`, `title`, `date`, **`theme`**, `dt_project`, `status`, plus `still`/`i2v`/`post` blocks and, for a multi-shot film, a `run-spec`.
+2. `mkdir -p projects/<id>/plan projects/<id>/v1-<how>/{raw,seed,stills,clips,music,final,logs}` — or just the folders you need. Name the version for the method, e.g. `v1-drawthings-cli`.
+3. Put the source material in `projects/<id>/v1-<how>/raw/`.
+4. Write `projects/<id>/v1-<how>/spec.json`: `id`, `title`, `date`, **`theme`**, `dt_project`, `status`, `version`, `variant`, plus `still`/`i2v`/`post` blocks and, for a multi-shot film, a `run-spec` whose `dir` is `projects/<id>/<version>`.
 5. Write `projects/<id>/plan/<id>-plan.md` following the standard page format, and add a card for it to `wiki/index.md` under **Plans**.
 6. Run `python3 scripts/build_site.py`, then follow [[idea-to-video-blueprint]].
+
+**Start a new version** when the method changes materially — a different engine, a rebuilt cast, a new look. Copy the sources across, write a fresh spec, and leave the old version untouched as the record of what was tried.
 
 ## What is an intermediate
 
