@@ -2,20 +2,25 @@
 .obsidian/workspace.json
 .claude/settings.local.json
 raw/photos/
-# Per project: keep the recipe, drop the pixels.
-# Tracked: plan/*.md, spec.json, every prompt and lock .txt, raw/ sources.
-# Ignored: images, video, audio and logs wherever they sit.
-projects/**/*.png
-projects/**/*.jpg
-projects/**/*.jpeg
-projects/**/*.webp
-projects/**/*.gif
-projects/**/*.mov
-projects/**/*.mp4
-projects/**/*.mp3
-projects/**/*.wav
-projects/**/*.log
-# film_run up-to-date stamps, not recipe
+# Per project: keep the recipe, drop the generated pixels.
+#   tracked  -> plan/*.md, spec.json, prompt and lock .txt, raw/ source material
+#   ignored  -> every generated image, video and audio file, plus logs
+# (no trailing comments on a pattern line — git reads them as part of the pattern)
+projects/*/seed/**
+projects/*/stills/**
+projects/*/clips/**
+projects/*/final/**
+projects/*/music/**
+projects/*/logs/**
+# ...but the recipe inside those folders stays
+!projects/*/seed/**/
+!projects/*/seed/**/*.txt
+!projects/*/seed/*.txt
+!projects/*/stills/**/
+!projects/*/stills/*.txt
+!projects/*/logs/**/
+!projects/*/logs/*.sh
+# upscale stamps are build cache, not recipe
 projects/*/clips/*_trim.txt
 # large or personal source sets stay out entirely
 projects/dragon_epic/raw/

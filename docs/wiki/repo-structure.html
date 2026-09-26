@@ -124,8 +124,42 @@ projects.json  the registry: one record per project
 <p><code>projects/&lt;id&gt;/spec.json</code> is the <strong>source of truth</strong> for that project: the same record that used to sit in the root <code>projects.json</code> — models, sizes, seeds, per-scene prompts, the run-spec, music, status, file list. <code>scripts/build_projects.py</code> reads every <code>projects/*/spec.json</code> plus <code>projects/_shared.json</code> (defaults, themes, playlist), regenerates the root <code>projects.json</code> as an aggregate, and renders the registry pages from it. <code>film_run.py &lt;id&gt;</code> reads the project's own spec first and falls back to the aggregate.</p>
 <p>So: <strong>edit <code>projects/&lt;id&gt;/spec.json</code></strong>, never the root <code>projects.json</code> — that one is generated and will be overwritten on the next build.</p>
 <h2>Tracked vs generated</h2>
-<p>The rule is <em>keep the recipe, drop the pixels</em>. Tracked: <code>plan/*.md</code>, <code>spec.json</code>, every prompt and lock <code>.txt</code>, the run scripts, and <code>raw/</code> sources. Ignored by extension wherever they sit: <code>.png .jpg .jpeg .webp .gif .mov .mp4 .mp3 .wav .log</code>, plus <code>clips/*_trim.txt</code> (upscale stamps, not recipe) and the two large source sets <code>dragon_epic/raw/</code> and <code>lost_city/raw/</code>.</p>
-<p>A fresh clone therefore carries every plan, spec and prompt — enough to re-run any project from scratch — without a byte of media. Note that <code>.gitignore</code> does not support trailing comments on a pattern line; put the comment on its own line or the pattern silently matches nothing.</p>
+<p><em>Keep the recipe, drop the generated pixels.</em></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>In git</th>
+<th>Ignored</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>plan/*.md</code> — the project's page</td>
+<td>everything under <code>seed/ stills/ clips/ final/ music/ logs/</code> …</td>
+</tr>
+<tr>
+<td><code>spec.json</code> — its full record</td>
+<td>…except the <code>.txt</code> prompts and locks and the <code>.sh</code> run scripts inside them</td>
+</tr>
+<tr>
+<td><code>stills/*.txt</code>, <code>seed/*.txt</code> — prompts and locks</td>
+<td><code>clips/*_trim.txt</code> (upscale stamps: build cache)</td>
+</tr>
+<tr>
+<td><code>logs/*.sh</code> — the scripts a run used</td>
+<td>every generated image, video and audio file</td>
+</tr>
+<tr>
+<td><code>raw/</code> — source photos, comics, references</td>
+<td><code>dragon_epic/raw/</code> (personal faces) and <code>lost_city/raw/</code> (someone else's render)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Source material in <code>raw/</code> <strong>is</strong> tracked — it's an input, not an output, and it's small (12 MB for the largest project). Only the two noted exceptions stay out.</p>
+<p>A fresh clone therefore carries every plan, spec, prompt, lock and source photo — enough to re-run any project from scratch — and not one generated frame.</p>
+<p>Two traps, both hit in practice on 2026-09-25:
+- A <strong>trailing comment on a pattern line</strong> is read as part of the pattern, so <code>foo/*.txt  # stamps</code> silently matches nothing. Comments go on their own line.
+- <strong>Ignoring media by extension repo-wide</strong> also catches <code>raw/</code> inputs, and <code>git rm -r --cached</code> then quietly drops already-tracked sources from HEAD. Scope ignores to the generated folders instead.</p>
 <h2>How the pieces connect</h2>
 <p><strong><code>projects.json</code> → a folder.</strong> Each record's <code>run-spec.dir</code> is <code>projects/&lt;id&gt;</code>, and every path inside the spec — <code>seed/kyle.png</code>, <code>stills/s3.txt</code>, <code>clips/s3_v1.mov</code> — is relative to it. <code>scripts/film_run.py</code> resolves them, which is why the reorganisation needed no changes to any shell script: they all take paths as arguments.</p>
 <p><strong>Plan pages publish with the wiki.</strong> <code>scripts/build_site.py</code> collects <code>wiki/*.md</code> <strong>and</strong> <code>projects/*/plan/*.md</code> into one slug namespace, so <code>&lt;a href="lost-city-plan.html"&gt;lost city plan&lt;/a&gt;</code> resolves from anywhere and the page lands at <code>docs/wiki/lost-city-plan.html</code> like any other. A project folder stays self-contained without splitting the knowledge base in two.</p>

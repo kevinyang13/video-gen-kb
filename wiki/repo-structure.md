@@ -52,9 +52,23 @@ So: **edit `projects/<id>/spec.json`**, never the root `projects.json` — that 
 
 ## Tracked vs generated
 
-The rule is *keep the recipe, drop the pixels*. Tracked: `plan/*.md`, `spec.json`, every prompt and lock `.txt`, the run scripts, and `raw/` sources. Ignored by extension wherever they sit: `.png .jpg .jpeg .webp .gif .mov .mp4 .mp3 .wav .log`, plus `clips/*_trim.txt` (upscale stamps, not recipe) and the two large source sets `dragon_epic/raw/` and `lost_city/raw/`.
+*Keep the recipe, drop the generated pixels.*
 
-A fresh clone therefore carries every plan, spec and prompt — enough to re-run any project from scratch — without a byte of media. Note that `.gitignore` does not support trailing comments on a pattern line; put the comment on its own line or the pattern silently matches nothing.
+| In git | Ignored |
+|---|---|
+| `plan/*.md` — the project's page | everything under `seed/ stills/ clips/ final/ music/ logs/` … |
+| `spec.json` — its full record | …except the `.txt` prompts and locks and the `.sh` run scripts inside them |
+| `stills/*.txt`, `seed/*.txt` — prompts and locks | `clips/*_trim.txt` (upscale stamps: build cache) |
+| `logs/*.sh` — the scripts a run used | every generated image, video and audio file |
+| `raw/` — source photos, comics, references | `dragon_epic/raw/` (personal faces) and `lost_city/raw/` (someone else's render) |
+
+Source material in `raw/` **is** tracked — it's an input, not an output, and it's small (12 MB for the largest project). Only the two noted exceptions stay out.
+
+A fresh clone therefore carries every plan, spec, prompt, lock and source photo — enough to re-run any project from scratch — and not one generated frame.
+
+Two traps, both hit in practice on 2026-09-25:
+- A **trailing comment on a pattern line** is read as part of the pattern, so `foo/*.txt  # stamps` silently matches nothing. Comments go on their own line.
+- **Ignoring media by extension repo-wide** also catches `raw/` inputs, and `git rm -r --cached` then quietly drops already-tracked sources from HEAD. Scope ignores to the generated folders instead.
 
 ## How the pieces connect
 
