@@ -92,7 +92,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
     <span class="spacer"></span>
     <button class="pill" onclick="tt()">◐ Theme</button>
   </nav>
-  <h1>Lost City — Project Plan (hyper-real sci-fantasy rider)</h1><p class="lede">Plan for a hyper-realistic short in the style of the OpenArt reference (<code>raw/lostcity/ref_openart_rider_ruins.webp</code>): a hooded rider on a saddled raptor-dragon walks into an overgrown city of stone spires, god rays, waterfall. Covers what makes the reference look real, the local pipeline, Draw Things settings per stage (FLUX.2 klein stills; Wan 2.2 vs <strong>LTX-2.3</strong> for motion), creature/hero/environment consistency, shot list, experiments, budget. Living document.</p><div class="meta"><span><b>Updated</b> 2026-09-22 (shot 15 rift coda; LTX production settings in §3c; escape ending, shot 14 restaged as a landscape total collapse, creature enlarged after a motion-bleed failure; per-scene prompts in <a href="projects.html">projects</a>)</span><span><b>Sources</b> <code>raw/lostcity/ref_openart_rider_ruins.webp</code> (reference, OpenArt watermark — generator unknown, probably a closed model such as Kling/Veo/Seedance; <em>unverified</em>); Wan 2.2 prompting guides (<a href="https://www.mimicpc.com/learn/how-to-craft-wan22-ai-video-prompts">MimicPC</a>, <a href="https://www.instasd.com/post/wan2-2-whats-new-and-how-to-write-killer-prompts">InstaSD</a>, <a href="https://whatlab.ai/guides/wan2-2-prompting-guide">WhatLab</a>); LTX docs (<a href="https://docs.ltx.io/open-source-model/usage-guides/image-to-video">I2V guide</a>, <a href="https://wiki.drawthings.ai/wiki/LTX-2">Draw Things LTX-2 wiki</a>, <a href="https://huggingface.co/Lightricks/LTX-2.3">HF LTX-2.3</a>); hands-on results from <a href="dragon-epic-plan.html">dragon epic plan</a> §7b (2026-09-21). All as of 2026-09-21.</span></div>
+  <h1>Lost City — Project Plan (hyper-real sci-fantasy rider)</h1><p class="lede">Plan for a hyper-realistic short in the style of the OpenArt reference (<code>raw/lostcity/ref_openart_rider_ruins.webp</code>): a hooded rider on a saddled raptor-dragon walks into an overgrown city of stone spires, god rays, waterfall. Covers what makes the reference look real, the local pipeline, Draw Things settings per stage (FLUX.2 klein stills; Wan 2.2 vs <strong>LTX-2.3</strong> for motion), creature/hero/environment consistency, shot list, experiments, budget. Living document.</p><div class="meta"><span><b>Updated</b> 2026-09-25 (shots renumbered to the cut order; shot 15 rift coda; LTX production settings in §3c; escape ending, shot 14 restaged as a landscape total collapse, creature enlarged after a motion-bleed failure; per-scene prompts in <a href="projects.html">projects</a>)</span><span><b>Sources</b> <code>raw/lostcity/ref_openart_rider_ruins.webp</code> (reference, OpenArt watermark — generator unknown, probably a closed model such as Kling/Veo/Seedance; <em>unverified</em>); Wan 2.2 prompting guides (<a href="https://www.mimicpc.com/learn/how-to-craft-wan22-ai-video-prompts">MimicPC</a>, <a href="https://www.instasd.com/post/wan2-2-whats-new-and-how-to-write-killer-prompts">InstaSD</a>, <a href="https://whatlab.ai/guides/wan2-2-prompting-guide">WhatLab</a>); LTX docs (<a href="https://docs.ltx.io/open-source-model/usage-guides/image-to-video">I2V guide</a>, <a href="https://wiki.drawthings.ai/wiki/LTX-2">Draw Things LTX-2 wiki</a>, <a href="https://huggingface.co/Lightricks/LTX-2.3">HF LTX-2.3</a>); hands-on results from <a href="dragon-epic-plan.html">dragon epic plan</a> §7b (2026-09-21). All as of 2026-09-21.</span></div>
 <hr />
 <h2>1. What the reference does — and what we copy</h2>
 <div class="tw"><table>
@@ -236,7 +236,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 - Camera vocabulary Wan 2.2 obeys: <em>pushes in / pulls back / tilts up / tracking shot / fixed lens / handheld</em>. Speed word every time (<em>slowly</em>). Avoid whip pans and anything that reveals geometry not in the still.
 - Full-frame creature shot (head fills frame): articulation only, no camera move (Dragon Epic rule).</p>
 <h3>3c. Motion B — LTX-2.3 22B [distilled] 1.1 — <strong>the production engine</strong> (validated 2026-09-22)</h3>
-<p>Every Lost City clip since shot 2 is LTX: s2, s3, s7, s8, s9, s10. What you get: native <strong>25 fps</strong>, a <strong>PCM audio track</strong> (footsteps, waterfall, birds), and real locomotion Wan cannot do at 4 steps. What you pay: a coarse latent (32×32 spatial, 8× temporal) that re-synthesizes fine detail and invents geometry, 576p instead of 768p, and <strong>loose camera staging at CFG 1</strong> — LTX obeys the <em>action</em>, picks its own <em>blocking</em>.</p>
+<p>Every Lost City clip since shot 2 is LTX: s2, s4, s5, s8, s6, s3. What you get: native <strong>25 fps</strong>, a <strong>PCM audio track</strong> (footsteps, waterfall, birds), and real locomotion Wan cannot do at 4 steps. What you pay: a coarse latent (32×32 spatial, 8× temporal) that re-synthesizes fine detail and invents geometry, 576p instead of 768p, and <strong>loose camera staging at CFG 1</strong> — LTX obeys the <em>action</em>, picks its own <em>blocking</em>.</p>
 <p><strong>Draw Things settings — all measured on the M4 Max 48 GB</strong></p>
 <div class="tw"><table>
 <thead>
@@ -312,11 +312,11 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <p><strong>Prompt rules (learned the hard way)</strong></p>
 <ul>
 <li>One chronological paragraph, 4–8 sentences, &lt; 200 words: <strong>motion → camera → audio</strong>. Name the sounds explicitly ("heavy footsteps on wet stone, distant waterfall roar, birdsong, no music") — they end up on the track.</li>
-<li><strong>Action, not staging.</strong> "left to right, camera tracks alongside" was ignored on s1; the same wording worked on s2 and s7. Write the action you want, accept the camera you get, or shoot that frame on Wan.</li>
-<li><strong>Close-ups: hold position.</strong> Asking a close-up for locomotion (s3 v1) produced a full walk cycle that left the frame by 2 s <em>and</em> hallucinated a second rider behind. Use "stands still… only shifts its weight" and say the path behind <strong>stays empty</strong>.</li>
-<li><strong>Motion-stability rule</strong>: slow in-place actions (walk, drink, weight shift, breathing) hold the creature design for the full 10 s; fast locomotion (gallop, jump) drifts toward a horse after ~4–5 s → trim on the first soft frame (s9 → 116 f).</li>
+<li><strong>Action, not staging.</strong> "left to right, camera tracks alongside" was ignored on s1; the same wording worked on s2 and s5. Write the action you want, accept the camera you get, or shoot that frame on Wan.</li>
+<li><strong>Close-ups: hold position.</strong> Asking a close-up for locomotion (s4 v1) produced a full walk cycle that left the frame by 2 s <em>and</em> hallucinated a second rider behind. Use "stands still… only shifts its weight" and say the path behind <strong>stays empty</strong>.</li>
+<li><strong>Motion-stability rule</strong>: slow in-place actions (walk, drink, weight shift, breathing) hold the creature design for the full 10 s; fast locomotion (gallop, jump) drifts toward a horse after ~4–5 s → trim on the first soft frame (s6 → 116 f).</li>
 <li><strong>Never write "lightning" for a sky rift.</strong> klein renders a literal lightning bolt and ignores the tear. Torn-sky vocabulary works instead: <em>the sky is torn wide open by a long jagged crack like a sheet of glass broken from edge to edge, white light pouring through the gap, the torn edges glowing, clouds peeling back along them</em> (shot 15a, three seeds).</li>
-<li><strong>Motion bleeds onto small subjects.</strong> In a shot where something else is destroyed, LTX applies those verbs to the subject too: s14 v1 sheared the creature's <em>head</em> off and dropped it like a falling spire. Fixes, in order of effect: make the subject large (≥ a third of the frame — a head that is ~30 px in the 32×32 latent gets re-synthesised as debris), name the subject and its stillness <strong>before</strong> any falling verb, use positive rigidity words (<em>solid, still, intact, head held level and attached, only the ribs move</em>), and add one clause pinning the destruction to the distance. Last resort: render the destruction as a plate with no creature in it.</li>
+<li><strong>Motion bleeds onto small subjects.</strong> In a shot where something else is destroyed, LTX applies those verbs to the subject too: s9 v1 sheared the creature's <em>head</em> off and dropped it like a falling spire. Fixes, in order of effect: make the subject large (≥ a third of the frame — a head that is ~30 px in the 32×32 latent gets re-synthesised as debris), name the subject and its stillness <strong>before</strong> any falling verb, use positive rigidity words (<em>solid, still, intact, head held level and attached, only the ribs move</em>), and add one clause pinning the destruction to the distance. Last resort: render the destruction as a plate with no creature in it.</li>
 <li>Wide shots tolerate invented foreground geometry (s2 gained palm fronds sweeping the lens — more cinematic); hero shots do not.</li>
 </ul>
 <p><strong>Headless alternative (faster)</strong> — since 2026-09-22 the same render runs from the shell with no window, at roughly half the wall clock (9 min 41 s for 249 frames vs ~20 min in the app), because nothing else holds memory:</p>
@@ -343,7 +343,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <p><code>scripts/assemble_film.sh</code> (to write, shared with Dragon Epic): xfade 0.5 s, optional 2.39:1 letterbox (3840×1608 in 3840×2160), music + ambience, title, HEVC 10-bit. Music genre here: <strong>ambient orchestral / ethereal choir</strong>, quieter than Dragon Epic; pick from Pixabay when shot 1 exists.</p>
 <h2>4. Consistency — creature, hero, city</h2>
 <p>Same toolkit as <a href="character-consistency.html">character consistency</a>; three locks.</p>
-<p><strong>Creature lock (text, verbatim in every prompt)</strong>: <em>a large saddled raptor-like reptile mount, a wingless two-legged theropod with a long neck,</em> — <strong>never the word "dragon"</strong>: shot 7 v1 (2026-09-21) grew bat wings from "raptor-like dragon, no wings" when no creature crop was in the Moodboard; klein at CFG 1 weighs the noun over the negation. Old wording for reference: <em>a large quadrupedal raptor-like dragon, no wings, slate-grey ridged hide, long neck with a bony horn crest, small amber eyes, leather saddle with reins and a brown satchel, walking on two heavy hind legs and two smaller forelegs</em>.
+<p><strong>Creature lock (text, verbatim in every prompt)</strong>: <em>a large saddled raptor-like reptile mount, a wingless two-legged theropod with a long neck,</em> — <strong>never the word "dragon"</strong>: shot 5 (numbered 7 at the time) v1 grew bat wings from "raptor-like dragon, no wings" when no creature crop was in the Moodboard; klein at CFG 1 weighs the noun over the negation. Old wording for reference: <em>a large quadrupedal raptor-like dragon, no wings, slate-grey ridged hide, long neck with a bony horn crest, small amber eyes, leather saddle with reins and a brown satchel, walking on two heavy hind legs and two smaller forelegs</em>.
 <strong>Creature sheet (Moodboard)</strong>: first-shot still, <strong>cropped to head+neck</strong> and a second crop of saddle+flank. Never the full frame.</p>
 <p><strong>Hero lock</strong>: <em>a lone rider seen from behind, dark cropped hair, grey-green hooded cloak thrown back, brown leather jerkin, tan trousers, tall boots, hands on the reins</em>. No face by default. If a face shot is added later → Dragon Epic face path (Moodboard ×2 face crops; FaceFusion post).
 <strong>Hero sheet</strong>: crop of the rider from the first still.</p>
@@ -355,7 +355,8 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <code>Cinematic film still, anamorphic 35mm, eye-level side view, muted colours, low contrast, subtle film grain. A lost city of tall eroded sandstone spires and ziggurat towers swallowed by jungle rises in the distance through morning haze, a stone arch bridge and a white waterfall between them, soft volumetric god rays breaking through thin cloud. Mossy stone blocks and palms in the middle distance, ferns and tall grass in the foreground. In the centre, [creature lock] walks left to right on a dirt path. On its back [hero lock]. Layered atmospheric perspective, photorealistic, highly detailed, natural overcast light with warm sun breaks.</code></p>
 <p><strong>Motion prompt 1 (Wan)</strong>: see §3b tracking-shot prompt.
 <strong>Motion prompt 1 (LTX)</strong>: <code>The creature walks slowly from left to right with a heavy four-legged gait, its head bobbing and tail swaying, while the camera tracks alongside at the same pace so the rider stays centred. The rider sways gently in the saddle, the cloak lifting in a light breeze. Behind them the waterfall pours steadily and thin mist drifts through the shafts of light; two birds glide across the distant spires. Heavy footsteps on damp earth, the far roar of the waterfall, faint jungle birdsong, no music.</code></p>
-<h2>6. Shot list (v3 — 10 s clips; 1–3, 7–10 and 14 shot, 15a–c rendering, 13 written)</h2>
+<h2>6. Shot list (the cut, renumbered 2026-09-25)</h2>
+<p>Nine shots plus the rift coda, numbered in the order they play. Old → new: s10→s3, s3→s4, s7→s5, s9→s6, s13→s7, s14→s9; s1, s2, s8 and s15a–c unchanged.</p>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -363,133 +364,84 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <th>Shot</th>
 <th>Camera</th>
 <th>Subject motion</th>
-<th>Consistency need</th>
+<th>State</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1</td>
+<td>s1</td>
 <td><strong>Reference frame</strong>: side, rider + creature walk toward the city</td>
 <td>slow side tracking</td>
 <td>walk, cloak, waterfall, birds</td>
-<td>creature + hero + city</td>
+<td>4K</td>
 </tr>
 <tr>
-<td>2</td>
+<td>s2</td>
 <td>Extreme wide from a ledge: city skyline, tiny rider on the path</td>
 <td>very slow push in</td>
 <td>mist drift, birds, waterfall</td>
-<td>city</td>
+<td>4K, shot twice (Wan and LTX)</td>
 </tr>
 <tr>
-<td>3</td>
+<td>s3</td>
+<td><strong>Drinking</strong> — muzzle in a jungle pool below a waterfall</td>
+<td>fixed</td>
+<td>head lowers and lifts, ripples, rider looks around</td>
+<td>4K + music — the steadiest clip of the project</td>
+</tr>
+<tr>
+<td>s4</td>
 <td>Low angle, creature's feet and forelegs on wet stone, ferns</td>
 <td>fixed lens</td>
 <td>feet plant, dust puffs, grass sway</td>
-<td>creature (legs)</td>
+<td>4K + music</td>
 </tr>
 <tr>
-<td>4</td>
-<td>¾-back medium on the rider's shoulders, spires beyond</td>
-<td>slow push in</td>
-<td>rider's head turns slightly, cloak, hair</td>
-<td>hero</td>
+<td>s5</td>
+<td>Canyon: rider entering the spire canyon, god rays overhead</td>
+<td>side tracking</td>
+<td>walk, dust in the light, birds</td>
+<td>4K + music</td>
 </tr>
 <tr>
-<td>5</td>
-<td>Creature head in profile, amber eye, horn crest, haze behind</td>
-<td>fixed lens</td>
-<td>slow blink, nostril flare, head turn ≤ 10° — <strong>articulation only</strong></td>
-<td>creature (head)</td>
-</tr>
-<tr>
-<td>6</td>
-<td>Through the stone arch: rider crosses the bridge, waterfall to the side</td>
-<td>tracking from behind</td>
-<td>walk, spray, mist</td>
-<td>city + creature</td>
-</tr>
-<tr>
-<td>7</td>
-<td>Reverse wide: rider entering the spire canyon, god rays overhead</td>
-<td>slow tilt up</td>
-<td>dust in the light, birds</td>
-<td>city</td>
-</tr>
-<tr>
-<td>8</td>
-<td>Ending: rider dismounted, silhouette before the tallest tower, hood up</td>
-<td>slow pull back</td>
-<td>cloak, mist</td>
-<td>hero (silhouette)</td>
-</tr>
-<tr>
-<td>9</td>
-<td><strong>Running</strong> — full gallop across a clearing</td>
-<td>tracking alongside</td>
-<td>gallop, dust, cloak streaming</td>
-<td>creature (drifts after ~5 s)</td>
-</tr>
-<tr>
-<td>10</td>
+<td>s6</td>
 <td><strong>Jumping</strong> — leap over a fallen pillar</td>
 <td>tracking alongside</td>
 <td>leap, landing, dust</td>
-<td>creature (drifts after ~5 s)</td>
+<td>clip only, trimmed to 4.6 s — drifts toward a horse after that</td>
 </tr>
 <tr>
-<td>11</td>
-<td><strong>Drinking</strong> — muzzle in a jungle pool below a waterfall</td>
-<td>fixed</td>
-<td>head lowers/lifts, ripples, rider looks around</td>
-<td>creature (stable, full 10 s)</td>
-</tr>
-<tr>
-<td>12</td>
-<td>Dismount / mount up beside the creature</td>
-<td>fixed</td>
-<td>rider steps down / swings up</td>
-<td><strong>blocked</strong> — klein renders two creatures</td>
-</tr>
-<tr>
-<td>13</td>
+<td>s7</td>
 <td><strong>Escape</strong> — gallop down the avenue as a spire shears and falls behind</td>
 <td>tracking alongside at speed</td>
 <td>gallop, tumbling blocks, rolling dust wall</td>
-<td>creature large in frame; trim on first soft frame</td>
+<td><strong>not rendered</strong> — prompt written; keep the creature large, trim on the first soft frame</td>
 </tr>
 <tr>
-<td>14 ✅</td>
-<td><strong>Escape / final shot</strong> — wide landscape from a ridge: every spire falls until the skyline is empty</td>
+<td>s8</td>
+<td><strong>Running</strong> — full gallop across a clearing</td>
+<td>tracking alongside</td>
+<td>gallop, dust, cloak streaming</td>
+<td>4K + music</td>
+</tr>
+<tr>
+<td>s9</td>
+<td><strong>Escape, final shot</strong> — wide landscape from a ridge: every spire falls until the skyline is empty</td>
 <td>fixed, wide</td>
-<td>creature solid and still in the near foreground (left third), rider looks back; the whole city comes down on the horizon, last tower by ~8 s, ends on a dust skyline</td>
-<td>creature <strong>must be large</strong> — at a sixth of the frame its head collapsed with the spires (v1)</td>
+<td>creature solid and still in the near foreground, rider looks back; the city comes down on the horizon, last tower by ~8 s</td>
+<td>4K + music</td>
 </tr>
 <tr>
-<td>15a ✅</td>
-<td><strong>The crack</strong> — a jagged tear splits the sky over the ruined city</td>
-<td>fixed, very slow push in</td>
-<td>the tear widens, clouds peel back, first winged shapes slip out</td>
-<td>city (ruined); no ground creature in frame</td>
-</tr>
-<tr>
-<td>15b ✅</td>
-<td><strong>Exodus</strong> — the flock pours out of the tear</td>
-<td>tilt down with them</td>
-<td>dense stream of winged reptiles fanning apart, shadows over rubble</td>
-<td>chained: first frame = last frame of 15a</td>
-</tr>
-<tr>
-<td>15c ✅</td>
-<td><strong>The circling</strong> — the flock wheels above the dead city</td>
-<td>fixed very wide</td>
-<td>one slow unbroken circle of winged reptiles, crack flaring behind</td>
-<td>flock + city</td>
+<td>s15a–c</td>
+<td><strong>The rift coda</strong> — a crack tears the sky, the flock pours out and circles the dead city</td>
+<td>fixed · tilt down · fixed wide</td>
+<td>see §5</td>
+<td>assembled: 30 s 4K with music</td>
 </tr>
 </tbody>
 </table></div>
-<p>Cheap shots first: 2, 3, 5, 7 have no hero face and simple motion — render them to test the look before the tracking shots.</p>
-<p><strong>Story (v2, 2026-09-22)</strong>: arrival and exploration (1–3, 7), life with the creature (9–11), then the city comes down and the rider escapes (13–14). Shot 14 was the last frame of the film: a distant landscape view where every spire collapses until nothing is left standing. <strong>Coda (v3, 2026-09-22)</strong>: shot 15 goes back to the dead city — a crack tears open in the sky above the ruins and winged reptiles pour out of it and circle the rubble, three chained 10 s clips cut into one 30 s piece. The rider never appears, so nothing has to stay consistent except the city. The collapse gives the film an ending that needs no dialogue and no face.</p>
+<p><strong>Dropped</strong>: the dismount / mount-up beat (old s11, s12) — klein rendered two creatures for every "rider beside the mount" phrasing across three seeds, and the story reads without it. Never rendered from the original design: the ¾-back on the rider's shoulders, the creature head in profile, and the stone-bridge crossing.</p>
+<p><strong>Story order</strong>: arrival and exploration (s1, s2, s4, s5) → life with the creature (s3, s8, s6) → the city falls and the rider escapes (s7, s9) → the coda (s15). <strong>s7 is the only unrendered shot</strong>, and without it the film cuts from the build-up straight to the aftermath.</p>
 <h2>7. Experiments (in order)</h2>
 <div class="tw"><table>
 <thead>
@@ -570,12 +522,12 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <td><strong>30 s from three chained clips, start to finish with no UI.</strong> 15a crack → 15b exodus (first frame = last frame of 15a, pulled with <code>ffmpeg -sseof</code>) → 15c circling; each 257 f, ~9.6 min LTX + ~11.5 min upscale. Assembled with <code>assemble_film.sh</code> (xfade 0.5, flute bed) → 29.76 s 4K, then +6 dB. Two lessons: klein renders "lightning" literally, so a sky rift needs torn-glass wording; and the rising-dust clause produces puffy cumulus blobs in 15a/15b — drop it on a re-shoot. <code>s15_rift_30s_4k_music.mp4</code>.</td>
 </tr>
 <tr>
-<td>s14 v2 (final shot)</td>
+<td>s9 v2 (final shot)</td>
 <td>2026-09-22</td>
-<td><strong>Works, and it was the first headless render.</strong> Still and clip both from <code>draw-things-cli</code> — no window, no clicks. 3 klein seeds at 27–35 s each (seed 2 kept: sheared spire tops, dust columns, creature intact and large), then LTX 249 f in <strong>9 min 41 s</strong>. The enlarged creature plus subject-first rigidity wording fixed the motion bleed: the creature stands solid for the full 10 s while the spires come down behind it, and the last second is an empty dust skyline. Frame 0 of the clip is the still pixel-for-pixel, so <code>--image</code> is true I2V. <code>s14_ltx_v1.mov</code>.</td>
+<td><strong>Works, and it was the first headless render.</strong> Still and clip both from <code>draw-things-cli</code> — no window, no clicks. 3 klein seeds at 27–35 s each (seed 2 kept: sheared spire tops, dust columns, creature intact and large), then LTX 249 f in <strong>9 min 41 s</strong>. The enlarged creature plus subject-first rigidity wording fixed the motion bleed: the creature stands solid for the full 10 s while the spires come down behind it, and the last second is an empty dust skyline. Frame 0 of the clip is the still pixel-for-pixel, so <code>--image</code> is true I2V. <code>s9_ltx_v1.mov</code>.</td>
 </tr>
 <tr>
-<td>s14 v1 (final shot)</td>
+<td>s9 v1 (final shot)</td>
 <td>2026-09-22</td>
 <td><strong>Motion bled onto the subject.</strong> In the extreme-wide staging the creature was about a sixth of the frame; LTX applied the city's collapse verbs to it and its <strong>head sheared off and fell like a spire</strong>. Two causes: at that scale the head is ~30 px in the 32×32 LTX latent (nothing to hold onto), and the falling verbs were in the prompt before the subject. v2 brings the creature into the near foreground at a third of the frame width, leads with the subject and positive rigidity words, and pins the destruction to the horizon in one clause. General rule now in §3c.</td>
 </tr>
@@ -590,9 +542,9 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <td>LTX-2.3 22B distilled 1.1 <strong>loads and runs</strong> in Draw Things on the M4 Max, but is <strong>memory-bound</strong>. <em>Try recommended settings</em> gives steps 8, CFG 1.0, TCD Trailing, Strategic Stochastic Sampling 30%, shift 5, frames 121, and turns on <strong>High Resolution Fix</strong> = the official LTX two-stage pipeline (1st pass at half size 640×384, 2nd pass at full size, strength 70%). At 1280×768 × 121 f: stage 1 (8 steps @ 640×384) took ~3 min — fast — but stage 2 at 1280×768 stalled (swap 27–48 GB, step counter frozen for minutes) → stopped. At 1024×576 × 97 f DT auto-disables hi-res fix (single stage); the compute timer reads ~1 min per 10+ min wall clock — paging the 22B DiT + Gemma text encoder in and out of swap. Overlay says "Text to Image Generation" but the canvas still <strong>is</strong> used as first frame (preview shows creature + rider); the Strength tab reads <em>Text to Video 100%</em> for LTX I2V. Canvas larger than the generation area → centre crop, not scale.</td>
 </tr>
 <tr>
-<td>s10 drinking</td>
+<td>s3 drinking</td>
 <td>2026-09-22</td>
-<td><strong>Best clip of the batch.</strong> Fresh project (not a clone), still loaded from disk, LTX 1024×576 × 257 f. Creature design holds for the whole 10.3 s — head lowers and lifts, water drips, ripples settle, rider looks around. Confirms the rule: <strong>slow, in-place actions are stable; fast locomotion drifts</strong>. <code>s10_ltx_v1_4k_music.mp4</code>.</td>
+<td><strong>Best clip of the batch.</strong> Fresh project (not a clone), still loaded from disk, LTX 1024×576 × 257 f. Creature design holds for the whole 10.3 s — head lowers and lifts, water drips, ripples settle, rider looks around. Confirms the rule: <strong>slow, in-place actions are stable; fast locomotion drifts</strong>. <code>s3_ltx_v1_4k_music.mp4</code>.</td>
 </tr>
 <tr>
 <td>s11 dismount</td>
@@ -602,17 +554,17 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <tr>
 <td>Scenes 8–12 batch</td>
 <td>2026-09-22</td>
-<td>s8 gallop and s9 jump stills first-seed keepers; both clips 10 s. <strong>Two Draw Things crashes</strong> (SIGTRAP): the crash log points at <code>ImageHistoryManager.pushHistory</code> → <code>SQLiteWorkspace</code> — saving a <em>video</em> into a project <strong>cloned</strong> with <code>dt_project.sh clone</code> asserts and kills the app, wiping that project's history. Clone is fine for stills, not for clips: use a fresh project (Projects → +) per clip and load the still from disk via the import icon (⇧⌘G in the Open panel takes a full path; the panel needs full-screen control). Second rule: never upscale while LTX renders — 48 GB can't hold both. s9's clip drifts after ~4.6 s (creature morphs toward a horse under fast motion) → trimmed to 116 frames.</td>
+<td>s8 gallop and s6 jump stills first-seed keepers; both clips 10 s. <strong>Two Draw Things crashes</strong> (SIGTRAP): the crash log points at <code>ImageHistoryManager.pushHistory</code> → <code>SQLiteWorkspace</code> — saving a <em>video</em> into a project <strong>cloned</strong> with <code>dt_project.sh clone</code> asserts and kills the app, wiping that project's history. Clone is fine for stills, not for clips: use a fresh project (Projects → +) per clip and load the still from disk via the import icon (⇧⌘G in the Open panel takes a full path; the panel needs full-screen control). Second rule: never upscale while LTX renders — 48 GB can't hold both. s6's clip drifts after ~4.6 s (creature morphs toward a horse under fast motion) → trimmed to 116 frames.</td>
 </tr>
 <tr>
 <td>Shot 7</td>
 <td>2026-09-22</td>
-<td>Six failed rear-view attempts (wings, three legs, mismatched legs) → the fix was the <strong>camera</strong>, not the prompt: the side-profile framing and verbatim creature wording from shot 1 gave correct anatomy first try. Rules: (1) never say "two-legged" — the creature is a quadruped in every ref; (2) don't put a four-legged animal dead-behind at low angle; klein cannot resolve the legs. Then LTX at the slider max <strong>249 f = 10 s</strong> (1024×576, 8 steps, ~20 min): tracking side view holds the creature centred through the canyon, anatomy stable for the full 10 s. <code>s7_ltx_v1_4k_music.mp4</code>.</td>
+<td>Six failed rear-view attempts (wings, three legs, mismatched legs) → the fix was the <strong>camera</strong>, not the prompt: the side-profile framing and verbatim creature wording from shot 1 gave correct anatomy first try. Rules: (1) never say "two-legged" — the creature is a quadruped in every ref; (2) don't put a four-legged animal dead-behind at low angle; klein cannot resolve the legs. Then LTX at the slider max <strong>249 f = 10 s</strong> (1024×576, 8 steps, ~20 min): tracking side view holds the creature centred through the canyon, anatomy stable for the full 10 s. <code>s5_ltx_v1_4k_music.mp4</code>.</td>
 </tr>
 <tr>
 <td>Shot 3 v2 (LTX)</td>
 <td>2026-09-21</td>
-<td>Hold-position prompt ("stands still… only shifts its weight… the path behind stays empty"): creature stays in frame, weight shift + claw flex + tail sway, ripples, no phantom figures; slight forward drift in the last second. ~20 min. 4K + LTX ambience mixed with the flute bed at 0.5 (<code>s3_ltx_v2_4k_music.mp4</code>). Music mix recipe: <code>[fx]</code> LTX track at 1.0, <code>[m]</code> bed atrim/afade 0.5 in 1 out at 0.5, <code>amix</code> then <code>volume=1.6</code> to recover amix's level drop.</td>
+<td>Hold-position prompt ("stands still… only shifts its weight… the path behind stays empty"): creature stays in frame, weight shift + claw flex + tail sway, ripples, no phantom figures; slight forward drift in the last second. ~20 min. 4K + LTX ambience mixed with the flute bed at 0.5 (<code>s4_ltx_v2_4k_music.mp4</code>). Music mix recipe: <code>[fx]</code> LTX track at 1.0, <code>[m]</code> bed atrim/afade 0.5 in 1 out at 0.5, <code>amix</code> then <code>volume=1.6</code> to recover amix's level drop.</td>
 </tr>
 <tr>
 <td>Shot 3 v1 (LTX)</td>

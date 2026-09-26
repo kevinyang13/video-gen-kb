@@ -15,7 +15,7 @@ Index of every project: [[projects]]. Other themes: [[projects-anime]] · [[proj
 | # | Project | Date | Status | Still | I2V | Music | Final file | YouTube |
 |--:|---|---|---|---|---|---|---|---|
 | 1 | [Dragon Epic — 1-minute photoreal short, family hero face](#dragon_epic) | 2026-09-21 | in progress — scene 1A posted | FLUX.2 [klein] 9B 1280x768 | Wan 2.2 High Noise 47 min | The Dragon's Breath | `—` | [▶ watch](https://youtu.be/Xzu-c5yX8uo) |
-| 2 | [Lost City — hyper-real rider on a raptor-dragon entering jungle ruins](#lost_city) | 2026-09-21 | in progress — clips at 4K+music: s2, s3, s7, s8, s10, s14; s9 trimmed (4.6 s, drift after); s11 stills rejected (klein duplicates the creature); s12 not started; s15 rift coda done (3 clips assembled to 30 s 4K with music) | FLUX.2 [klein] 9B 1280x768 | LTX-2.3 22B [distilled] 1.1 (production engine — see ltx_10s) — Wan 2.2 High Noise I2V (8-bit S) + Low Noise refiner 10% for locked-camera shots at 768p 49 min | Mystical orchestral theme with ancient flute | `—` | [▶ watch](https://youtu.be/68sq_jZqu6c) |
+| 2 | [Lost City — hyper-real rider on a raptor-dragon entering jungle ruins](#lost_city) | 2026-09-21 | in progress — 4K with music: s3, s4, s5, s8, s9 and the s15 rift coda; s1 and s2 at 4K without music; s6 trimmed to 4.6 s and never upscaled; **s7 (escape run) not rendered**; no film assembled yet | FLUX.2 [klein] 9B 1280x768 | LTX-2.3 22B [distilled] 1.1 (production engine — see ltx_10s) — Wan 2.2 High Noise I2V (8-bit S) + Low Noise refiner 10% for locked-camera shots at 768p 49 min | Mystical orchestral theme with ancient flute | `—` | [▶ watch](https://youtu.be/68sq_jZqu6c) |
 
 ## Dragon Epic — 1-minute photoreal short, family hero face {#dragon_epic}
 
@@ -71,18 +71,18 @@ Prompt: `per shot — one camera move + one subject action`
 
 ## Lost City — hyper-real rider on a raptor-dragon entering jungle ruins {#lost_city}
 
-- **Date**: 2026-09-21 · **Status**: in progress — clips at 4K+music: s2, s3, s7, s8, s10, s14; s9 trimmed (4.6 s, drift after); s11 stills rejected (klein duplicates the creature); s12 not started; s15 rift coda done (3 clips assembled to 30 s 4K with music) · **Version**: `v2-drawthings-cli` · **Draw Things project**: `lostcity-s1, s2, s3, s7 (named); s8, s9 (cloned — clone crashes on video save); s10 and s11 in fresh Untitled projects; s14 rendered with draw-things-cli (no project file)`
+- **Date**: 2026-09-21 · **Status**: in progress — 4K with music: s3, s4, s5, s8, s9 and the s15 rift coda; s1 and s2 at 4K without music; s6 trimmed to 4.6 s and never upscaled; **s7 (escape run) not rendered**; no film assembled yet · **Version**: `v2-drawthings-cli` · **Draw Things project**: `lostcity-s1, s2, s3, s7 (named); s8, s9 (cloned — clone crashes on video save); s10 and s11 in fresh Untitled projects; s14 rendered with draw-things-cli (no project file)`
 - **This version**: Rendered headless with draw-things-cli; the shots the app version never finished.
 
 **Versions**
 
 | Version | What it is | Status | YouTube |
 |---|---|---|---|
-| `v1-drawthings-ui` | Rendered by driving the Draw Things app window (accessibility automation). | superseded by v2-drawthings-cli — shots 1-13 were rendered by driving the Draw Things window; see the plan for what each shot cost | [▶ watch](https://youtu.be/68sq_jZqu6c) |
-| `v2-drawthings-cli` | Rendered headless with draw-things-cli; the shots the app version never finished. | in progress — clips at 4K+music: s2, s3, s7, s8, s10, s14; s9 trimmed (4.6 s, drift after); s11 stills rejected (klein duplicates the creature); s12 not started; s15 rift coda done (3 clips assembled to 30 s 4K with music) | [▶ watch](https://youtu.be/68sq_jZqu6c) |
+| `v1-drawthings-ui` | Rendered by driving the Draw Things app window (accessibility automation). | in progress — 4K with music: s3, s4, s5, s8, s9 and the s15 rift coda; s1 and s2 at 4K without music; s6 trimmed to 4.6 s and never upscaled; **s7 (escape run) not rendered**; no film assembled yet | [▶ watch](https://youtu.be/68sq_jZqu6c) |
+| `v2-drawthings-cli` | Rendered headless with draw-things-cli; the shots the app version never finished. | in progress — 4K with music: s3, s4, s5, s8, s9 and the s15 rift coda; s1 and s2 at 4K without music; s6 trimmed to 4.6 s and never upscaled; **s7 (escape run) not rendered**; no film assembled yet | [▶ watch](https://youtu.be/68sq_jZqu6c) |
 
-- **Files** (`projects/lost_city/v2-drawthings-cli/`): `lostcity/ref_openart_rider_ruins.webp (reference, raw/)`, `lostcity/crop_creature_rider.png, crop_spires.png, crop_foreground.png (Moodboard refs, raw/)`, `lostcity/s1_still_v1.png (shot 1 still, klein)`, `lostcity/s1_ltx_v1.mov (LTX-2.3 test, 1024x576x97 @25fps + audio)`, `lostcity/s2_still_v1.png (shot 2 still, klein, refs: our s1 skyline + spires crop, seed 1)`, `lostcity/s7_still_v2.png (shot 7 still, wingless; s7_still_v1_winged.png = rejected v1)`, `lostcity/s2_wan_v1.mov (shot 2 I2V, Wan 2.2, 1280x768x81)`, `lostcity/s2_wan_v1_4k.mp4 (3840x2160 HEVC 10-bit)`, `lostcity/s2_ltx_v1.mov (shot 2 via LTX-2.3, 1024x576x97 @25fps + audio)`, `lostcity/s2_ltx_v1_4k_audio.mp4 (LTX shot 2 at 3840x2160 + audio)`, `lostcity/s3_still_v1.png (shot 3 still, ref = crop of our s1 creature body)`, `music/mystical_flute.mp3`, `lostcity/s3_ltx_v2.mov (shot 3 LTX v2, hold-position prompt)`, `lostcity/s3_ltx_v2_4k_music.mp4 (4K + ambience + music bed)`, `lostcity/s3_ltx_v1_walkout.mov (v1, rejected: walk-out + phantom rider)`, `lostcity/s7_still_v1.png (side profile, anatomy OK)`, `lostcity/s7_ltx_v1.mov (LTX 1024x576x249 @25fps)`, `lostcity/s7_ltx_v1_4k_music.mp4`, `lostcity/s8_still_v1.png (gallop)`, `lostcity/s8_ltx_v1.mov + s8_ltx_v1_4k_music.mp4 (gallop, 10 s)`, `lostcity/s9_still_v1.png, s9_ltx_v1.mov (jump; drifts after ~4.6 s), s9_ltx_v1_trim.mov (clean 116 f)`, `lostcity/s10_still_v1.png, s10_ltx_v1.mov, s10_ltx_v1_4k_music.mp4 (drinking, 10.3 s, holds design)`, `lostcity/s14_still_v1.png (seed 2; s1/s3 variants kept)`, `lostcity/s14_ltx_v1.mov (ProRes 422 HQ, 249 f @ 25 fps + PCM audio)`, `lostcity/s14_ltx_v1_4k_music.mp4`, `lostcity/s15a|b|c_still_v1.png + _ltx_v1.mov + _4k_audio.mp4`, `lostcity/s15_rift_30s_4k_music.mp4 (the 30 s cut: 15a+15b+15c, xfade 0.5, flute bed, +6 dB)`
-- **Notes**: Plan: wiki/lost-city-plan.md. Reference is an OpenArt render (closed model, unknown); we re-generate our own frame. 8 shots × 5 s first. Experiments L0–L6 gate rendering; L1 = first LTX-2.3 test on this Mac.
+- **Files** (`projects/lost_city/v2-drawthings-cli/`): `lostcity/ref_openart_rider_ruins.webp (reference, raw/)`, `lostcity/crop_creature_rider.png, crop_spires.png, crop_foreground.png (Moodboard refs, raw/)`, `lostcity/s1_still_v1.png (shot 1 still, klein)`, `lostcity/s1_ltx_v1.mov (LTX-2.3 test, 1024x576x97 @25fps + audio)`, `lostcity/s2_still_v1.png (shot 2 still, klein, refs: our s1 skyline + spires crop, seed 1)`, `lostcity/s5_still_v2.png (shot 7 still, wingless; s5_still_v1_winged.png = rejected v1)`, `lostcity/s2_wan_v1.mov (shot 2 I2V, Wan 2.2, 1280x768x81)`, `lostcity/s2_wan_v1_4k.mp4 (3840x2160 HEVC 10-bit)`, `lostcity/s2_ltx_v1.mov (shot 2 via LTX-2.3, 1024x576x97 @25fps + audio)`, `lostcity/s2_ltx_v1_4k_audio.mp4 (LTX shot 2 at 3840x2160 + audio)`, `lostcity/s4_still_v1.png (shot 3 still, ref = crop of our s1 creature body)`, `music/mystical_flute.mp3`, `lostcity/s4_ltx_v2.mov (shot 3 LTX v2, hold-position prompt)`, `lostcity/s4_ltx_v2_4k_music.mp4 (4K + ambience + music bed)`, `lostcity/s4_ltx_v1_walkout.mov (v1, rejected: walk-out + phantom rider)`, `lostcity/s5_still_v1.png (side profile, anatomy OK)`, `lostcity/s5_ltx_v1.mov (LTX 1024x576x249 @25fps)`, `lostcity/s5_ltx_v1_4k_music.mp4`, `lostcity/s8_still_v1.png (gallop)`, `lostcity/s8_ltx_v1.mov + s8_ltx_v1_4k_music.mp4 (gallop, 10 s)`, `lostcity/s6_still_v1.png, s6_ltx_v1.mov (jump; drifts after ~4.6 s), s6_ltx_v1_trim.mov (clean 116 f)`, `lostcity/s3_still_v1.png, s3_ltx_v1.mov, s3_ltx_v1_4k_music.mp4 (drinking, 10.3 s, holds design)`, `lostcity/s9_still_v1.png (seed 2; s1/s4 variants kept)`, `lostcity/s9_ltx_v1.mov (ProRes 422 HQ, 249 f @ 25 fps + PCM audio)`, `lostcity/s9_ltx_v1_4k_music.mp4`, `lostcity/s15a|b|c_still_v1.png + _ltx_v1.mov + _4k_audio.mp4`, `lostcity/s15_rift_30s_4k_music.mp4 (the 30 s cut: 15a+15b+15c, xfade 0.5, flute bed, +6 dB)`
+- **Notes**: Plan: wiki/lost-city-plan.md. Reference is an OpenArt render (closed model, unknown); we re-generate our own frame. 8 shots × 5 s first. Experiments L0–L6 gate rendering; L1 = first LTX-2.3 test on this Mac. Shots renumbered 2026-09-25 to the cut order (old→new: s10→s3, s3→s4, s7→s5, s9→s6, s13→s7, s14→s9; s1, s2, s8 and s15a-c unchanged). The dismount/mount-up beat (old s11, s12) was dropped: klein rendered two creatures for every phrasing tried, and the story reads without it.
 
 - **YouTube**: [youtu.be/68sq_jZqu6c](https://youtu.be/68sq_jZqu6c) *(latest cut (replaces 9YlHr5mehaA))*
 
@@ -173,10 +173,25 @@ Prompt: `per scene — see the scenes table`
 > The camera pushes in very slowly and steadily toward the distant city, the mossy columns in the foreground drifting past the edges of the frame. The small rider and creature walk slowly down the dirt path away from the camera toward the city. Mist drifts through the shafts of light, the waterfall pours steadily under the stone arch, ferns and palm fronds sway in a light breeze, and tiny birds glide across the sky above the spires. Wind through jungle leaves, the distant hush of the waterfall, faint birdsong, no music. Photorealistic, cinematic, smooth motion.
 
 
-#### s3 — Low angle, creature's feet on wet flagstones
+#### s3 — Drinking at a jungle pool
+
+- **Engine**: LTX 1024x576 x257 (10.3 s)
+- **Files**: s3_still_v1.png, s3_ltx_v1_4k_music.mp4
+- **Note**: Best of the batch — design holds the full clip.
+
+*Still prompt*
+
+> Cinematic film still, anamorphic 35mm, eye-level side view, muted colours, low contrast, subtle film grain. A still jungle pool below a small waterfall at the edge of the lost city, mossy carved blocks and ferns around the water, eroded sandstone spires in the haze behind, god rays through the canopy. At the water's edge in side profile, a large quadrupedal raptor-like reptile mount, no wings, slate-grey ridged hide, long neck with a bony horn crest, small amber eyes, leather saddle with reins and a brown satchel, walking on two heavy hind legs and two smaller forelegs with its neck lowered and its muzzle touching the water, ripples spreading across the surface, its reflection in the pool. On its back a lone rider, grey-green hooded cloak, brown leather jerkin, tan trousers, tall boots, sitting relaxed in the saddle looking around. Layered atmospheric perspective, photorealistic, highly detailed, natural overcast light with warm sun breaks.
+
+*Video prompt*
+
+> Fixed camera on the pool. The creature stands in place at the water's edge and drinks, lowering its muzzle to the surface and lifting its head slowly with water dripping from its jaw, then lowering it again, its throat working as it swallows, tail swaying gently. The rider sits relaxed in the saddle and turns his head to look around at the ruins. Ripples spread across the pool and settle, the waterfall pours steadily behind, mist drifts, ferns move in a light breeze. Water lapping and dripping, the hush of the waterfall, leather creaking, faint birdsong, no music.
+
+
+#### s4 — Low angle, creature's feet on wet flagstones
 
 - **Engine**: LTX 1024x576 x97
-- **Files**: s3_still_v1.png, s3_ltx_v2_4k_music.mp4
+- **Files**: s4_still_v1.png, s4_ltx_v2_4k_music.mp4
 - **Note**: v1 asked for one step forward — it walked out of frame and hallucinated a second rider. Close-ups need hold-position wording.
 
 *Still prompt*
@@ -188,10 +203,10 @@ Prompt: `per scene — see the scenes table`
 > Fixed camera, low on the wet stone path. The creature stands still in place and does not walk; it only shifts its weight from one foot to the other, the claws flexing on the wet flagstones, small ripples spreading in the pooled water, the thick scaled legs tensing, the tail swaying slowly. The rider's boot rocks gently in the stirrup and the satchel sways. Ferns and grass in the foreground move in a light breeze, mist drifts through the god rays behind. The path behind stays empty. Water dripping, leather creaking, wind in the leaves, faint birdsong, no music. Photorealistic, cinematic, subtle smooth motion.
 
 
-#### s7 — Canyon, side profile walking through the spires
+#### s5 — Canyon, side profile walking through the spires
 
 - **Engine**: LTX 1024x576 x249 (10 s)
-- **Files**: s7_still_v1.png, s7_ltx_v1_4k_music.mp4
+- **Files**: s5_still_v1.png, s5_ltx_v1_4k_music.mp4
 - **Note**: Six rear-view attempts failed on anatomy before switching to this side framing.
 
 *Still prompt*
@@ -201,6 +216,35 @@ Prompt: `per scene — see the scenes table`
 *Video prompt*
 
 > The camera holds a steady low side view as the creature walks slowly from left to right through the canyon with a heavy four-legged gait, its head bobbing gently and tail swaying, staying in the centre of the frame while the carved stone walls drift past behind it. The rider sways in the saddle, cloak lifting in a light breeze, looking up at the towers. Dust and pollen drift through the shafts of light, mist rolls slowly along the ground, ferns sway, tiny birds cross the sky. Heavy footsteps on packed earth, leather creaking, wind in the vines, faint jungle birdsong, no music.
+
+
+#### s6 — Jumping — leap over a fallen pillar
+
+- **Engine**: LTX 1024x576 x249
+- **Files**: s6_still_v1.png, s6_ltx_v1.mov, s6_ltx_v1_trim.mov
+- **Note**: Creature morphs toward a horse after ~frame 115 (4.6 s) — trimmed there.
+
+*Still prompt*
+
+> Cinematic film still, anamorphic 35mm, eye-level side view, muted colours, low contrast, subtle film grain. A jungle path beside the lost city, spires and ziggurat towers in the haze behind, god rays through morning mist. In the centre, caught mid-leap in side profile over a fallen mossy stone pillar lying across the path, a large quadrupedal raptor-like reptile mount, no wings, slate-grey ridged hide, long neck with a bony horn crest, small amber eyes, leather saddle with reins and a brown satchel, walking on two heavy hind legs and two smaller forelegs, its heavy hind legs extended behind from the push-off and its smaller forelegs tucked up, body arched in the air above the pillar. On its back a lone rider crouched low in the saddle gripping the reins, grey-green hooded cloak flaring, brown leather jerkin, tan trousers, tall boots. Ferns and broken carved blocks in the foreground, tiny birds high in the sky. Motion, Layered atmospheric perspective, photorealistic, highly detailed, natural overcast light with warm sun breaks.
+
+*Video prompt*
+
+> The creature completes its leap over the fallen stone pillar, forelegs reaching down and hind legs swinging under it, lands on the far side with a puff of dust and runs on a few strides before slowing to a walk, while the camera tracks alongside at the same pace keeping the creature and rider centred in frame. The rider absorbs the landing, rising and settling in the saddle, cloak snapping. Dust bursts at the landing, ferns shake, birds scatter. A heavy thudding landing, pounding footfalls, leather creaking, distant birdsong, no music.
+
+
+#### s7 — Escape — running as the spires collapse
+
+- **Engine**: LTX 1024x576 x249 — plan for drift: keep the creature large in frame and cut by ~5 s if the design softens
+- **Note**: Fast locomotion, so expect drift after ~4-5 s (see s8/s6). Mitigation: subject fills the lower half, camera locked alongside, and trim on the first soft frame.
+
+*Still prompt*
+
+> Cinematic film still, anamorphic 35mm, eye-level side view, muted colours, low contrast, subtle film grain. A wide dirt avenue between the colossal eroded sandstone spires and ziggurat towers of the lost city, the air thick with dust and falling debris, shafts of hard sunlight cutting through the dust clouds, cracks running up the carved stone walls. In the centre foreground, galloping left to right in side profile and filling the lower half of the frame, a large quadrupedal raptor-like reptile mount, no wings, slate-grey ridged hide, long neck with a bony horn crest, small amber eyes, leather saddle with reins and a brown satchel, all four legs in a running gallop with the heavy hind legs driving and the smaller forelegs reaching forward, dust exploding from its feet. On its back a lone rider leaning low over the neck gripping the reins, grey-green hooded cloak streaming straight back, brown leather jerkin, tan trousers, tall boots, glancing back over his shoulder. Behind and above them a spire is breaking apart mid-collapse, huge carved blocks tumbling through the air and a wall of dust rolling down the avenue. Ferns and rubble in the foreground. Motion, danger, energy, Layered atmospheric perspective, photorealistic, highly detailed, natural overcast light with warm sun breaks.
+
+*Video prompt*
+
+> The creature gallops at full speed from left to right down the avenue with a powerful four-legged running gait, dust bursting from each stride, while the camera tracks alongside at the same speed keeping the creature and rider centred in frame as the collapsing city rushes past behind. The rider stays low over the neck, cloak whipping back, and glances over his shoulder. Behind them a spire shears and falls, carved blocks tumbling and smashing into the avenue, a wall of dust rolling forward and swallowing the towers, smaller stones bouncing across the ground. Deep grinding stone, crashing masonry, pounding footfalls, rushing wind, no music.
 
 
 #### s8 — Running — full gallop across a clearing
@@ -217,77 +261,7 @@ Prompt: `per scene — see the scenes table`
 > The creature gallops at full speed from left to right across the clearing with a powerful four-legged running gait, hind legs driving and forelegs reaching, dust bursting up behind each stride, while the camera tracks alongside at the same speed keeping the creature and rider centred in the frame as the ruins and jungle rush past behind. The rider stays low over the neck, cloak whipping straight back. Grass and ferns blur past in the foreground, birds scatter from the trees. Pounding heavy footfalls, rushing wind, leather creaking, distant birds, no music.
 
 
-#### s9 — Jumping — leap over a fallen pillar
-
-- **Engine**: LTX 1024x576 x249
-- **Files**: s9_still_v1.png, s9_ltx_v1.mov, s9_ltx_v1_trim.mov
-- **Note**: Creature morphs toward a horse after ~frame 115 (4.6 s) — trimmed there.
-
-*Still prompt*
-
-> Cinematic film still, anamorphic 35mm, eye-level side view, muted colours, low contrast, subtle film grain. A jungle path beside the lost city, spires and ziggurat towers in the haze behind, god rays through morning mist. In the centre, caught mid-leap in side profile over a fallen mossy stone pillar lying across the path, a large quadrupedal raptor-like reptile mount, no wings, slate-grey ridged hide, long neck with a bony horn crest, small amber eyes, leather saddle with reins and a brown satchel, walking on two heavy hind legs and two smaller forelegs, its heavy hind legs extended behind from the push-off and its smaller forelegs tucked up, body arched in the air above the pillar. On its back a lone rider crouched low in the saddle gripping the reins, grey-green hooded cloak flaring, brown leather jerkin, tan trousers, tall boots. Ferns and broken carved blocks in the foreground, tiny birds high in the sky. Motion, Layered atmospheric perspective, photorealistic, highly detailed, natural overcast light with warm sun breaks.
-
-*Video prompt*
-
-> The creature completes its leap over the fallen stone pillar, forelegs reaching down and hind legs swinging under it, lands on the far side with a puff of dust and runs on a few strides before slowing to a walk, while the camera tracks alongside at the same pace keeping the creature and rider centred in frame. The rider absorbs the landing, rising and settling in the saddle, cloak snapping. Dust bursts at the landing, ferns shake, birds scatter. A heavy thudding landing, pounding footfalls, leather creaking, distant birdsong, no music.
-
-
-#### s10 — Drinking at a jungle pool
-
-- **Engine**: LTX 1024x576 x257 (10.3 s)
-- **Files**: s10_still_v1.png, s10_ltx_v1_4k_music.mp4
-- **Note**: Best of the batch — design holds the full clip.
-
-*Still prompt*
-
-> Cinematic film still, anamorphic 35mm, eye-level side view, muted colours, low contrast, subtle film grain. A still jungle pool below a small waterfall at the edge of the lost city, mossy carved blocks and ferns around the water, eroded sandstone spires in the haze behind, god rays through the canopy. At the water's edge in side profile, a large quadrupedal raptor-like reptile mount, no wings, slate-grey ridged hide, long neck with a bony horn crest, small amber eyes, leather saddle with reins and a brown satchel, walking on two heavy hind legs and two smaller forelegs with its neck lowered and its muzzle touching the water, ripples spreading across the surface, its reflection in the pool. On its back a lone rider, grey-green hooded cloak, brown leather jerkin, tan trousers, tall boots, sitting relaxed in the saddle looking around. Layered atmospheric perspective, photorealistic, highly detailed, natural overcast light with warm sun breaks.
-
-*Video prompt*
-
-> Fixed camera on the pool. The creature stands in place at the water's edge and drinks, lowering its muzzle to the surface and lifting its head slowly with water dripping from its jaw, then lowering it again, its throat working as it swallows, tail swaying gently. The rider sits relaxed in the saddle and turns his head to look around at the ruins. Ripples spread across the pool and settle, the waterfall pours steadily behind, mist drifts, ferns move in a light breeze. Water lapping and dripping, the hush of the waterfall, leather creaking, faint birdsong, no music.
-
-
-#### s11 — Dismount (blocked)
-
-- **Engine**: not rendered
-
-*Still prompt*
-
-> Three variants tried, all rendered two creatures; see plan §7b. Latest: 'Solo portrait of one animal: a single large quadrupedal raptor-like reptile mount standing still in full side profile ... A man stands on the ground in front of its shoulder with his back to the camera, reaching up to the saddle strap ... No other animals, no second creature, empty path behind.'
-
-*Video prompt*
-
-> planned: The rider swings the leg over and steps down to the ground beside the creature, landing on both feet and patting its flank; the creature stands still, head turning to look at the rider.
-
-
-#### s12 — Mount up (not started)
-
-- **Engine**: not rendered
-
-*Still prompt*
-
-> planned: rider standing beside the creature with one boot in the stirrup and both hands on the saddle, about to swing up.
-
-*Video prompt*
-
-> planned: The rider pushes up from the stirrup, swings the leg over and settles into the saddle, gathering the reins; the creature shifts its weight and raises its head.
-
-
-#### s13 — Escape — running as the spires collapse
-
-- **Engine**: LTX 1024x576 x249 — plan for drift: keep the creature large in frame and cut by ~5 s if the design softens
-- **Note**: Fast locomotion, so expect drift after ~4-5 s (see s8/s9). Mitigation: subject fills the lower half, camera locked alongside, and trim on the first soft frame.
-
-*Still prompt*
-
-> Cinematic film still, anamorphic 35mm, eye-level side view, muted colours, low contrast, subtle film grain. A wide dirt avenue between the colossal eroded sandstone spires and ziggurat towers of the lost city, the air thick with dust and falling debris, shafts of hard sunlight cutting through the dust clouds, cracks running up the carved stone walls. In the centre foreground, galloping left to right in side profile and filling the lower half of the frame, a large quadrupedal raptor-like reptile mount, no wings, slate-grey ridged hide, long neck with a bony horn crest, small amber eyes, leather saddle with reins and a brown satchel, all four legs in a running gallop with the heavy hind legs driving and the smaller forelegs reaching forward, dust exploding from its feet. On its back a lone rider leaning low over the neck gripping the reins, grey-green hooded cloak streaming straight back, brown leather jerkin, tan trousers, tall boots, glancing back over his shoulder. Behind and above them a spire is breaking apart mid-collapse, huge carved blocks tumbling through the air and a wall of dust rolling down the avenue. Ferns and rubble in the foreground. Motion, danger, energy, Layered atmospheric perspective, photorealistic, highly detailed, natural overcast light with warm sun breaks.
-
-*Video prompt*
-
-> The creature gallops at full speed from left to right down the avenue with a powerful four-legged running gait, dust bursting from each stride, while the camera tracks alongside at the same speed keeping the creature and rider centred in frame as the collapsing city rushes past behind. The rider stays low over the neck, cloak whipping back, and glances over his shoulder. Behind them a spire shears and falls, carved blocks tumbling and smashing into the avenue, a wall of dust rolling forward and swallowing the towers, smaller stones bouncing across the ground. Deep grinding stone, crashing masonry, pounding footfalls, rushing wind, no music.
-
-
-#### s14 — Escape — final shot: the whole skyline falls, creature watching from the ridge
+#### s9 — Escape — final shot: the whole skyline falls, creature watching
 
 - **Engine**: LTX 1024x576 x249 (9.96 s) — rendered headless with draw-things-cli, 9 min 41 s
 - **Note**: v1 failed: LTX applied the collapse to the creature — its head sheared off and fell like a spire. Two causes, both fixed here. (1) Scale: the creature was a sixth of the frame, so its head was ~30 px in the 32x32 LTX latent and got re-synthesised as debris; it now fills the left third close to camera. (2) Prompt order and verbs: the falling verbs came before the subject and bled onto it. Subject first with positive rigidity words (solid, still, intact, head held level and attached, only the ribs move), then one sentence that pins the destruction to the horizon ('all of the destruction is far away on the horizon and nowhere near them'). Pace so the last tower falls by ~8 s and the final second is an empty dust skyline — the film's last frame. v2 rendered 2026-09-22 and works: creature solid the whole clip, spires fall through the shot, skyline empty by the last second. Both still and clip came from draw-things-cli with no UI (seed 2 of 3 stills, text-only — no Moodboard refs, which the released CLI cannot do yet); see [[headless-cli-pipeline]].
@@ -304,7 +278,7 @@ Prompt: `per scene — see the scenes table`
 #### s15a — The crack — a rift opens in the sky above the ruined city
 
 - **Engine**: LTX 1024x576 x257 (10.28 s) — draw-things-cli — rendered in 9.7 min
-- **Note**: No creature and no rider in this shot: the ground mount must never share a frame with winged animals or klein grows wings on it. City is already ruined here — this follows s14. Never write 'lightning' — klein renders a literal lightning bolt instead of a rift; say torn sky, broken glass, hard-edged crack. Rendered 2026-09-22: crack holds and widens, winged shapes multiply. Artefact: the rising dust reads as puffy cumulus blobs rather than dust — drop the dust clause if re-shot.
+- **Note**: No creature and no rider in this shot: the ground mount must never share a frame with winged animals or klein grows wings on it. City is already ruined here — this follows s9. Never write 'lightning' — klein renders a literal lightning bolt instead of a rift; say torn sky, broken glass, hard-edged crack. Rendered 2026-09-22: crack holds and widens, winged shapes multiply. Artefact: the rising dust reads as puffy cumulus blobs rather than dust — drop the dust clause if re-shot.
 
 *Still prompt*
 
