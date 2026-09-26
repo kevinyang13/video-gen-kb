@@ -24,9 +24,9 @@ Run-spec (all paths relative to run-spec.dir; every block optional except dir, s
     "deliver": [{"size": [1080, 1920], "bitrate": "12M"}, {"size": [720, 1280], "bitrate": "2.8M"}],
     "shots": [
       {"id": "s2",
-       "still": {"ref": "kyle" | "stills/s1.png" | null, "input": "work/s2_in.png" | null, "prompt": "stills/s2.txt",
+       "still": {"ref": "kyle" | "stills/s1.png" | null, "input": "seed/s2_in.png" | null, "prompt": "<the prompt text>",
                  "seeds": [...], "size": [w, h]},             # ref+input = diptych, input only = edit, neither = text
-       "video_prompt": "stills/s2_v.txt", "clip": {...overrides...},
+       "video_prompt": "<the motion prompt text>", "clip": {...overrides...},
        "qc_ref": "kyle", "take": "clips/s2_v2.mov", "trim": [0, 8]}
     ]}
 music.file is relative to the repo root. Takes/trims are what `finish` cuts; set them after QC.
@@ -123,6 +123,23 @@ def clip_cfg(f, shot):
 
 # ---------- commands ----------
 
+def prompt_path(f, name, value):
+    """Prompts live as text in spec.json; the shell scripts want a file.
+
+    Writes the text to stills/.gen/<name>.txt and returns that path. A value
+    that is still a path to an existing .txt (older specs) is used as-is.
+    """
+    if not isinstance(value, str) or not value.strip():
+        die(f"{name}: no prompt in the spec")
+    if value.endswith(".txt") and "\n" not in value and d(f, value).exists():
+        return d(f, value)
+    out = d(f, ".gen") / f"{name}.txt"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    if not DRY:
+        out.write_text(value.strip() + "\n", encoding="utf-8")
+    return out
+
+
 def cmd_check(f, _):
     errs, warns = [], []
     w, h = f["size"]
@@ -149,16 +166,15 @@ def cmd_check(f, _):
             errs.append(f"duplicate shot id {i}")
         seen.add(i)
         st = s.get("still", {})
-        for k in ("prompt",):
-            if st and k in st and not d(f, st[k]).exists():
-                errs.append(f"{i}: still.{k} missing: {st[k]}")
+        if st and not (isinstance(st.get("prompt"), str) and st["prompt"].strip()):
+            errs.append(f"{i}: still.prompt is empty")
         if st.get("input") and not d(f, st["input"]).exists():
             warns.append(f"{i}: still.input not made yet: {st['input']}")
         ref = st.get("ref")
         if ref and ref not in f.get("masters", {}) and not ref.startswith(("stills/", "masters/", "work/")):
             errs.append(f"{i}: still.ref '{ref}' is neither a master name nor a path")
-        if not s.get("video_prompt") or not d(f, s["video_prompt"]).exists():
-            errs.append(f"{i}: video_prompt missing: {s.get('video_prompt')}")
+        if not (isinstance(s.get("video_prompt"), str) and s["video_prompt"].strip()):
+            errs.append(f"{i}: video_prompt is empty")
         if s.get("trim"):
             a, b = s["trim"]
             if not 0 <= a < b:
@@ -207,7 +223,7 @@ def cmd_stills(f, args):
             out = d(f, f"work/{i}_c{seed}.png")
             if out.exists() and not FORCE:
                 continue
-            rc |= run([S / "dt_diptych.sh", ref or "-", inp or "-", d(f, st["prompt"]), out, seed, *c["size"]], env)
+            rc |= run([S / "dt_diptych.sh", ref or "-", inp or "-", prompt_path(f, i, st["prompt"]), out, seed, *c["size"]], env)
     return rc
 
 
@@ -246,7 +262,7 @@ def cmd_clips(f, args):
         if FORCE:
             env["FORCE"] = 1
         w, h = s.get("size", f["size"])
-        rc |= run([S / "dt_clip.sh", still, d(f, s["video_prompt"]), d(f, f"clips/{i}_v{v}.mov"), seed, w, h], env)
+        rc |= run([S / "dt_clip.sh", still, prompt_path(f, f"{i}_v", s["video_prompt"]), d(f, f"clips/{i}_v{v}.mov"), seed, w, h], env)
     return rc
 
 

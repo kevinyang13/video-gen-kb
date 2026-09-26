@@ -81,9 +81,9 @@
         "still": {
           "ref": "team",
           "input": "seed/s1_in.png",
-          "prompt": "stills/s1.txt"
+          "prompt": "Two images side by side. Left: a 3D animated group portrait of five children. Right: a comic panel. Re-render the right image as a frame from the same high-end 3D animated feature film, with every child looking exactly like the matching child on the left: the boy in the white cap, the boy with spiky black hair, the girl with long straight dark brown hair, the girl with two braids, and the girl with two braids and pink sleeves. They wear black team t-shirts with a small round blue-and-green bug emblem and no lettering. Wide frame: the five children lean over a farm garden bed of big green leaves and orange nasturtium flowers, pointing and peering into the leaves, a greenhouse and trees behind in bright sunlight, a plain wooden farm sign with no words. Exactly five children in the frame, all five fully visible, no other children anywhere. Physically based lighting, soft global illumination, cinematic depth of field, rich natural colour. Remove all text, lettering, logos, speech bubbles, captions and panel borders. Keep the left image unchanged."
         },
-        "video_prompt": "stills/s1_v.txt",
+        "video_prompt": "The five children stay in place leaning over the garden bed; they point gently at the leaves and smile, the leaves and flowers sway in a light breeze. Exactly the same five children stay in the frame the whole time; no one enters or leaves, no other children appear. Every face and hairstyle stays exactly the same. The camera holds completely still, same framing throughout. 3D animated feature film, smooth expressive character animation, soft cinematic lighting, consistent characters, no text.",
         "qc_ref": "team",
         "take": "clips/s1_v1.mov",
         "trim": [
@@ -96,9 +96,9 @@
         "still": {
           "ref": "team",
           "input": "seed/s2_in.png",
-          "prompt": "stills/s2.txt"
+          "prompt": "Two images side by side. Left: a 3D animated group portrait of five children. Right: a comic panel. Re-render the right image as a frame from the same high-end 3D animated feature film, with every child looking exactly like the matching child on the left: the boy in the white cap, the boy with spiky black hair, the girl with long straight dark brown hair, the girl with two braids, and the girl with two braids and pink sleeves. They wear black team t-shirts with a small round blue-and-green bug emblem and no lettering. Close frame: the boy in the white cap holds a big blue magnifying glass over a green leaf, a tiny pale green insect larva magnified in the lens; the boy with spiky black hair beside him stares in amazement. Exactly two children, the boy in the white cap and the boy with spiky black hair, no other children. Physically based lighting, soft global illumination, cinematic depth of field, rich natural colour. Remove all text, lettering, logos, speech bubbles, captions and panel borders. Keep the left image unchanged."
         },
-        "video_prompt": "stills/s2_v.txt",
+        "video_prompt": "The boy in the white cap holds the magnifying glass steady while the tiny larva crawls slowly across the leaf; both boys' eyes widen and they smile. Exactly the same two boys stay in the frame; no one else appears. The camera does not move at all: no zoom, no pull-back, no pan, the exact same framing from the first frame to the last. No one enters from any edge of the frame. 3D animated feature film, smooth expressive character animation, soft cinematic lighting, consistent characters, no text.",
         "qc_ref": "team",
         "take": "clips/s2_v1.mov",
         "trim": [
@@ -111,14 +111,14 @@
         "still": {
           "ref": "team",
           "input": "seed/s3_in.png",
-          "prompt": "stills/s3.txt",
+          "prompt": "Two images side by side. Left: a 3D animated group portrait of five children. Right: a comic panel. Re-render the right image as a frame from the same high-end 3D animated feature film, with every child looking exactly like the matching child on the left: the boy in the white cap, the boy with spiky black hair, the girl with long straight dark brown hair, the girl with two braids, and the girl with two braids and pink sleeves. They wear black team t-shirts with a small round blue-and-green bug emblem and no lettering. Farm garden: the girl with long straight dark brown hair stands at a big poster board and points at hand-drawn pictures of a green lacewing insect, its larva, aphids on a leaf and arrows, with no words; the other four stand in a row in front of her looking up and smiling, from left to right: the boy in the white cap, the boy with spiky black hair, the girl with two long braids, and the girl with two long braids and pink sleeves. Exactly five children in the frame, all five fully visible, no other children anywhere. Physically based lighting, soft global illumination, cinematic depth of field, rich natural colour. Remove all text, lettering, logos, speech bubbles, captions and panel borders. Keep the left image unchanged.",
           "seeds": [
             4,
             5,
             6
           ]
         },
-        "video_prompt": "stills/s3_v.txt",
+        "video_prompt": "The girl standing at the poster stays standing in the same place next to the poster the whole time and keeps pointing at the pictures while she talks; she does not walk. The four children in the front row stay in place, look up at her, nod and smile. Leaves sway gently. Exactly the same five children stay in the frame the whole time; no one enters or leaves, no other children appear. Every face and hairstyle stays exactly the same. The camera holds completely still, same framing throughout. 3D animated feature film, smooth expressive character animation, soft cinematic lighting, consistent characters, no text.",
         "qc_ref": "team",
         "take": "clips/s3_v2.mov",
         "trim": [
@@ -131,9 +131,9 @@
         "still": {
           "ref": "team",
           "input": "seed/s4_in.png",
-          "prompt": "stills/s4.txt"
+          "prompt": "Two images side by side. Left: a 3D animated group portrait of five children. Right: a comic panel. Re-render the right image as a frame from the same high-end 3D animated feature film, with every child looking exactly like the matching child on the left: the boy in the white cap, the boy with spiky black hair, the girl with long straight dark brown hair, the girl with two braids, and the girl with two braids and pink sleeves. They wear black team t-shirts with a small round blue-and-green bug emblem and no lettering. A bright workshop: the five children lean over a workbench covered with pencil sketches, a clear plastic insect habitat jar with a green lid holding a green leaf, and a small clear box with tiny plants; shelves of tools and parts behind. Exactly five children in the frame, all five fully visible, no other children anywhere. Physically based lighting, soft global illumination, cinematic depth of field, rich natural colour. Remove all text, lettering, logos, speech bubbles, captions and panel borders. Keep the left image unchanged."
         },
-        "video_prompt": "stills/s4_v.txt",
+        "video_prompt": "The five children stay in place, lean a little closer to the habitat jar and point at the leaf inside; one pencil taps the sketch. Exactly the same five children stay in the frame the whole time; no one enters or leaves, no other children appear. Every face and hairstyle stays exactly the same. The camera holds completely still, same framing throughout. 3D animated feature film, smooth expressive character animation, soft cinematic lighting, consistent characters, no text.",
         "qc_ref": "team",
         "take": "clips/s4_v1.mov",
         "trim": [
@@ -146,9 +146,9 @@
         "still": {
           "ref": "team",
           "input": "seed/s5_in.png",
-          "prompt": "stills/s5.txt"
+          "prompt": "Two images side by side. Left: a 3D animated group portrait of five children. Right: a comic panel. Re-render the right image as a frame from the same high-end 3D animated feature film, with every child looking exactly like the matching child on the left: the boy in the white cap, the boy with spiky black hair, the girl with long straight dark brown hair, the girl with two braids, and the girl with two braids and pink sleeves. They wear black team t-shirts with a small round blue-and-green bug emblem and no lettering. A workshop: the five children stand behind a table-top robot competition field with a colorful printed map mat, little trees built from green and brown toy bricks and bright green rings; a small wheeled toy-brick robot sits on the mat and an open laptop is in front of the boy in the white cap. Exactly five children in the frame, all five fully visible, no other children anywhere. Physically based lighting, soft global illumination, cinematic depth of field, rich natural colour. Remove all text, lettering, logos, speech bubbles, captions and panel borders. Keep the left image unchanged."
         },
-        "video_prompt": "stills/s5_v.txt",
+        "video_prompt": "The small robot rolls slowly forward across the mat toward a green ring; the five children stay in place behind the table and watch it closely. The camera does not move at all: no zoom, no pull-back, no pan, the exact same tight framing from the first frame to the last. Exactly the same five children stay in the frame the whole time; no one enters or leaves from any edge, no other children appear. Every face and hairstyle stays exactly the same. 3D animated feature film, smooth expressive character animation, soft cinematic lighting, consistent characters, no text.",
         "qc_ref": "team",
         "take": "clips/s5_v1.mov",
         "trim": [
@@ -161,14 +161,14 @@
         "still": {
           "ref": "team",
           "input": "seed/s6_in.png",
-          "prompt": "stills/s6.txt",
+          "prompt": "Two images side by side. Left: a 3D animated group portrait of five children. Right: a comic panel. Re-render the right image as a frame from the same high-end 3D animated feature film, with every child looking exactly like the matching child on the left: the boy in the white cap, the boy with spiky black hair, the girl with long straight dark brown hair, the girl with two braids, and the girl with two braids and pink sleeves. They wear black team t-shirts with a small round blue-and-green bug emblem and no lettering. A small wheeled toy-brick robot tips over on its side on the competition mat next to a bright green ring; behind the table the five children look surprised with open mouths; all five full heads visible with room above them, the boy in the white cap on the left with his whole cap in frame. Exactly five children in the frame, all five fully visible, no other children anywhere. Physically based lighting, soft global illumination, cinematic depth of field, rich natural colour. Remove all text, lettering, logos, speech bubbles, captions and panel borders. Keep the left image unchanged.",
           "seeds": [
             4,
             5,
             6
           ]
         },
-        "video_prompt": "stills/s6_v.txt",
+        "video_prompt": "The robot wobbles and falls onto its side; the five children stay in place behind the table and gasp, hands rising to their mouths. Exactly the same five children stay in the frame the whole time; no one enters or leaves, no other children appear. Every face and hairstyle stays exactly the same. The camera holds completely still, same framing throughout. 3D animated feature film, smooth expressive character animation, soft cinematic lighting, consistent characters, no text.",
         "qc_ref": "team",
         "take": "clips/s6_v1.mov",
         "trim": [
@@ -181,9 +181,9 @@
         "still": {
           "ref": "team",
           "input": "seed/s7_in.png",
-          "prompt": "stills/s7.txt"
+          "prompt": "Two images side by side. Left: a 3D animated group portrait of five children. Right: a comic panel. Re-render the right image as a frame from the same high-end 3D animated feature film, with every child looking exactly like the matching child on the left: the boy in the white cap, the boy with spiky black hair, the girl with long straight dark brown hair, the girl with two braids, and the girl with two braids and pink sleeves. They wear black team t-shirts with a small round blue-and-green bug emblem and no lettering. The girl with two braids and pink sleeves adjusts the toy-brick robot on the table with one hand while the other four lean in to watch; a laptop and a tray of toy bricks nearby. Exactly five children in the frame, all five fully visible, no other children anywhere. Physically based lighting, soft global illumination, cinematic depth of field, rich natural colour. Remove all text, lettering, logos, speech bubbles, captions and panel borders. Keep the left image unchanged."
         },
-        "video_prompt": "stills/s7_v.txt",
+        "video_prompt": "The girl with pink sleeves makes small careful adjustments to the robot with one hand; the other four stay in place and watch closely, nodding. Exactly the same five children stay in the frame the whole time; no one enters or leaves, no other children appear. Every face and hairstyle stays exactly the same. The camera does not move at all: no zoom, no pull-back, no pan, the exact same framing from the first frame to the last. No one enters from any edge of the frame. 3D animated feature film, smooth expressive character animation, soft cinematic lighting, consistent characters, no text.",
         "qc_ref": "team",
         "take": "clips/s7_v1.mov",
         "trim": [
@@ -196,9 +196,9 @@
         "still": {
           "ref": "team",
           "input": "seed/s8_in.png",
-          "prompt": "stills/s8.txt"
+          "prompt": "Two images side by side. Left: a 3D animated group portrait of five children. Right: a comic panel. Re-render the right image as a frame from the same high-end 3D animated feature film, with every child looking exactly like the matching child on the left: the boy in the white cap, the boy with spiky black hair, the girl with long straight dark brown hair, the girl with two braids, and the girl with two braids and pink sleeves. They wear black team t-shirts with a small round blue-and-green bug emblem and no lettering. The entrance of a big bright competition hall with plain green and blue banners with no lettering: the five children stand together side by side, the boy in the white cap raising one fist, the boy with spiky hair holding the toy-brick robot, the girl with long straight hair holding the insect habitat jar, one braided girl holding a science poster, the other a clear box of bricks; green backpacks; adults in the busy hall behind, softly out of focus. Exactly five children in the frame, all five fully visible, no other children anywhere. The background people are all adults. Physically based lighting, soft global illumination, cinematic depth of field, rich natural colour. Remove all text, lettering, logos, speech bubbles, captions and panel borders. Keep the left image unchanged."
         },
-        "video_prompt": "stills/s8_v.txt",
+        "video_prompt": "The five children stay standing in place and cheer, the boy in the white cap pumping his raised fist; the adults in the hall behind move softly out of focus. Exactly the same five children stay in the frame the whole time; no one enters or leaves, no other children appear. Every face and hairstyle stays exactly the same. The camera does not move at all: no zoom, no pull-back, no pan, the exact same framing from the first frame to the last. No one enters from any edge of the frame. 3D animated feature film, smooth expressive character animation, soft cinematic lighting, consistent characters, no text.",
         "qc_ref": "team",
         "take": "clips/s8_v1.mov",
         "trim": [
@@ -211,9 +211,9 @@
         "still": {
           "ref": "team",
           "input": "seed/s9_in.png",
-          "prompt": "stills/s9.txt"
+          "prompt": "Two images side by side. Left: a 3D animated group portrait of five children. Right: a comic panel. Re-render the right image as a frame from the same high-end 3D animated feature film, with every child looking exactly like the matching child on the left: the boy in the white cap, the boy with spiky black hair, the girl with long straight dark brown hair, the girl with two braids, and the girl with two braids and pink sleeves. They wear black team t-shirts with a small round blue-and-green bug emblem and no lettering. A judging table in the competition hall: the girl with long straight dark brown hair points at a science poster with insect drawings, the insect habitat jar and the robot on the table; one adult woman judge with glasses and a tablet smiles at her; the other four children stand beside her. Exactly five children in the frame, all five fully visible, no other children anywhere. One adult. Physically based lighting, soft global illumination, cinematic depth of field, rich natural colour. Remove all text, lettering, logos, speech bubbles, captions and panel borders. Keep the left image unchanged."
         },
-        "video_prompt": "stills/s9_v.txt",
+        "video_prompt": "The girl keeps pointing at the poster and explains; the judge nods and smiles; the other four children stay in place and smile. Exactly the same five children stay in the frame the whole time; no one enters or leaves, no other children appear. Every face and hairstyle stays exactly the same. The camera does not move at all: no zoom, no pull-back, no pan, the exact same framing from the first frame to the last. No one enters from any edge of the frame. 3D animated feature film, smooth expressive character animation, soft cinematic lighting, consistent characters, no text.",
         "qc_ref": "team",
         "take": "clips/s9_v1.mov",
         "trim": [
@@ -226,14 +226,14 @@
         "still": {
           "ref": "team",
           "input": "seed/s10_in.png",
-          "prompt": "stills/s10.txt",
+          "prompt": "Two images side by side. Left: a 3D animated group portrait of five children. Right: a comic panel. Re-render the right image as a frame from the same high-end 3D animated feature film, with every child looking exactly like the matching child on the left: the boy in the white cap, the boy with spiky black hair, the girl with long straight dark brown hair, the girl with two braids, and the girl with two braids and pink sleeves. They wear black team t-shirts with a small round blue-and-green bug emblem and no lettering. The toy-brick robot drops a bright green ring onto a target on the competition mat; behind the table the five children stand in one row and watch with clenched fists and huge smiles, from left to right: the boy in the white cap, the boy with spiky black hair, the girl with long straight dark brown hair, the girl with two braids, the girl with two braids and pink sleeves. The background behind them is an empty, softly lit hall with plain banners, no people. Exactly five children in the frame, all five fully visible, no other children anywhere. Physically based lighting, soft global illumination, cinematic depth of field, rich natural colour. Remove all text, lettering, logos, speech bubbles, captions and panel borders. Keep the left image unchanged.",
           "seeds": [
             4,
             5,
             6
           ]
         },
-        "video_prompt": "stills/s10_v.txt",
+        "video_prompt": "The robot lowers the green ring onto the target; the five children stay in place behind the table, their faces lighting up with joy. Exactly the same five children stay in the frame the whole time; no one enters or leaves, no other children appear. Every face and hairstyle stays exactly the same. The camera does not move at all: no zoom, no pull-back, no pan, the exact same framing from the first frame to the last. No one enters from any edge of the frame. 3D animated feature film, smooth expressive character animation, soft cinematic lighting, consistent characters, no text.",
         "qc_ref": "team",
         "take": "clips/s10_v1.mov",
         "trim": [
@@ -246,14 +246,14 @@
         "still": {
           "ref": "team",
           "input": "seed/s11_in.png",
-          "prompt": "stills/s11.txt",
+          "prompt": "Two images side by side. Left: a 3D animated group portrait of five children. Right: a comic panel. Re-render the right image as a frame from the same high-end 3D animated feature film, with every child looking exactly like the matching child on the left: the boy in the white cap, the boy with spiky black hair, the girl with long straight dark brown hair, the girl with two braids, and the girl with two braids and pink sleeves. They wear black team t-shirts with a small round blue-and-green bug emblem and no lettering. Awards ceremony: the five children stand in one row in the lower half of the frame with their hands on their cheeks in amazement, from left to right: the boy in the white cap, the boy with spiky black hair, the girl with long straight dark brown hair, the girl with two braids, the girl with two braids and pink sleeves; every face fully visible; a big glowing golden trophy with a green leaf stands on a tall pedestal above and to the right of them, not covering anyone; one adult announcer in a dark suit holds a microphone on the left; stage lights and plain green banners. Exactly five children in the frame, all five fully visible, no other children anywhere. One adult. Physically based lighting, soft global illumination, cinematic depth of field, rich natural colour. Remove all text, lettering, logos, speech bubbles, captions and panel borders. Keep the left image unchanged.",
           "seeds": [
             4,
             5,
             6
           ]
         },
-        "video_prompt": "stills/s11_v.txt",
+        "video_prompt": "The five children stay in place with hands on their cheeks, eyes wide with joy; the golden trophy glows brighter and the stage lights pulse; the announcer holds the microphone. Exactly the same five children stay in the frame the whole time; no one enters or leaves, no other children appear. Every face and hairstyle stays exactly the same. The camera holds completely still, same framing throughout. 3D animated feature film, smooth expressive character animation, soft cinematic lighting, consistent characters, no text.",
         "qc_ref": "team",
         "take": "clips/s11_v1.mov",
         "trim": [
@@ -266,9 +266,9 @@
         "still": {
           "ref": "team",
           "input": "seed/s12_in.png",
-          "prompt": "stills/s12.txt"
+          "prompt": "Two images side by side. Left: a 3D animated group portrait of five children. Right: a comic panel. Re-render the right image as a frame from the same high-end 3D animated feature film, with every child looking exactly like the matching child on the left: the boy in the white cap, the boy with spiky black hair, the girl with long straight dark brown hair, the girl with two braids, and the girl with two braids and pink sleeves. They wear black team t-shirts with a small round blue-and-green bug emblem and no lettering. Celebration: the five children hug a big golden trophy with a green leaf together, laughing with their eyes closed, colorful confetti falling, the toy-brick robot beside them on the table, the busy hall softly out of focus behind. Remove the flying insect mascot. Exactly five children in the frame, all five fully visible, no other children anywhere. Physically based lighting, soft global illumination, cinematic depth of field, rich natural colour. Remove all text, lettering, logos, speech bubbles, captions and panel borders. Keep the left image unchanged."
         },
-        "video_prompt": "stills/s12_v.txt",
+        "video_prompt": "The five children stay in place hugging the trophy, laughing and rocking gently together as colorful confetti falls slowly around them. Exactly the same five children stay in the frame the whole time; no one enters or leaves, no other children appear. Every face and hairstyle stays exactly the same. The camera holds completely still, same framing throughout. 3D animated feature film, smooth expressive character animation, soft cinematic lighting, consistent characters, no text.",
         "qc_ref": "team",
         "take": "clips/s12_v1.mov",
         "trim": [

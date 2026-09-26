@@ -97,9 +97,9 @@
         "still": {
           "ref": null,
           "input": "stills/s2.png",
-          "prompt": "stills/s1.txt"
+          "prompt": "Change this frame: the girl is gone. Tall vertical close-up of the same sunlit wooden table: the same bright children's drawing of a yellow cat and a strawberry cake lies in the middle, the cup of colored pencils beside it, and the same fluffy grey tabby cat curled up asleep next to the paper. Same high-end 3D animated feature film look: physically based lighting, soft global illumination, cinematic depth of field. Her drawings stay flat hand-drawn children's crayon and colored-pencil pictures on paper. No text, no lettering."
         },
-        "video_prompt": "stills/s1_v.txt",
+        "video_prompt": "The camera pushes in slowly across the table toward the drawing; warm sunlight flickers through the leaves outside, the sleeping cat breathes softly and flicks the tip of its tail. 3D animated feature film, smooth expressive character animation, soft cinematic lighting, consistent character, no text.",
         "take": "clips/s1_v1.mov",
         "trim": [
           0,
@@ -111,9 +111,9 @@
         "still": {
           "ref": "lindsey",
           "input": "seed/s2_in.png",
-          "prompt": "stills/s2.txt"
+          "prompt": "Two images side by side. Left: a 3D animated character, a girl with long straight dark brown hair. Right: a comic panel. Re-render the right image as a frame from the same high-end 3D animated feature film, with the girl looking exactly like the girl on the left: same face, same long straight dark brown hair with a side part, same warm brown eyes and big smile. Tall vertical frame, medium close-up: one girl in a teal tank top sits at a sunlit wooden table, her head and shoulders in the upper half of the frame, smiling as she colors a bright children's drawing of a yellow cat and a strawberry cake with a pink colored pencil; a fluffy grey tabby cat rests beside her, a cup of colored pencils nearby, a cozy home with plants softly out of focus behind. Physically based lighting, soft global illumination, cinematic depth of field, rich natural colour. Her drawings stay flat hand-drawn children's crayon and colored-pencil pictures on paper. Remove all text, lettering, speech bubbles, sticky notes, captions and panel borders. Keep the left image unchanged."
         },
-        "video_prompt": "stills/s2_v.txt",
+        "video_prompt": "The girl stays in place and keeps coloring the drawing with small strokes of the pencil, then looks up toward the camera and smiles warmly; her face and hair stay exactly the same, her hair stays neat. Exactly one cat: the same fluffy grey tabby stays curled up asleep in the same place beside her the whole time, only breathing softly. The camera holds completely still, same framing throughout. 3D animated feature film, smooth expressive character animation, soft cinematic lighting, consistent character, no text.",
         "qc_ref": "lindsey",
         "take": "clips/s2_v3.mov",
         "trim": [
@@ -126,9 +126,9 @@
         "still": {
           "ref": "stills/s4.png",
           "input": "seed/s3_in.png",
-          "prompt": "stills/s3.txt"
+          "prompt": "Two images side by side. Left: a frame from a 3D animated film, a girl in a pink sweater drawing. Right: a comic panel. Re-render the right image as a frame from the same 3D animated film, tall vertical frame looking straight down at the table: many pencil sketches on paper spread across it — a fish, a panda, a gecko — with markers and sketchbooks around. Exactly one hand is visible: her right hand in the same pink sleeve, entering from the right edge, holding one pencil the normal way and shading the gecko sketch. Her left hand and arm are out of the frame. Anatomically correct hand with five fingers. Physically based lighting, soft global illumination, cinematic depth of field, rich natural colour. Her drawings stay flat hand-drawn children's crayon and colored-pencil pictures on paper. Remove all text, lettering, speech bubbles, sticky notes, captions and panel borders. Keep the left image unchanged."
         },
-        "video_prompt": "stills/s3_v.txt",
+        "video_prompt": "The camera pushes in very slowly over the table of sketches toward the gecko drawing. The yellow pencil stays lying flat on the paper, the paper sheets stay in place, and warm afternoon light drifts slowly across them. No hands, no people. 3D animated feature film, soft cinematic lighting, no text.",
         "take": "clips/s3_v3.mov",
         "trim": [
           0,
@@ -140,9 +140,9 @@
         "still": {
           "ref": "lindsey",
           "input": "seed/s4_in.png",
-          "prompt": "stills/s4.txt"
+          "prompt": "Two images side by side. Left: a 3D animated character, a girl with long straight dark brown hair. Right: a comic panel. Re-render the right image as a frame from the same high-end 3D animated feature film, with the girl looking exactly like the girl on the left: same face, same long straight dark brown hair with a side part, same warm brown eyes and big smile. Tall vertical frame, medium close-up: one girl in a soft pink sweater leans over the table, focused and smiling gently as she sketches a gecko in pencil; pencil sketches of a fish and a panda lie around her, a stack of sketchbooks beside her, warm afternoon light. Physically based lighting, soft global illumination, cinematic depth of field, rich natural colour. Her drawings stay flat hand-drawn children's crayon and colored-pencil pictures on paper. Remove all text, lettering, speech bubbles, sticky notes, captions and panel borders. Keep the left image unchanged."
         },
-        "video_prompt": "stills/s4_v.txt",
+        "video_prompt": "The girl stays in place and keeps sketching with small pencil strokes, pauses, and smiles softly at her drawing; her face and hair stay exactly the same, her hair stays neat. The camera holds still. 3D animated feature film, smooth expressive character animation, soft cinematic lighting, consistent character, no text.",
         "qc_ref": "lindsey",
         "take": "clips/s4_v1.mov",
         "trim": [
@@ -155,9 +155,9 @@
         "still": {
           "ref": "lindsey",
           "input": "seed/s5_in.png",
-          "prompt": "stills/s5.txt"
+          "prompt": "Two images side by side. Left: a 3D animated character, a girl with long straight dark brown hair. Right: a comic panel. Re-render the right image as a frame from the same high-end 3D animated feature film, with the girl looking exactly like the girl on the left: same face, same long straight dark brown hair with a side part, same warm brown eyes and big smile. Tall vertical frame: one girl in a lavender hoodie seen from behind and slightly to the side, only the back of her head and her long dark brown hair visible, painting a sea turtle swimming in blue water on a canvas on a small easel with a thin brush; behind the easel her colorful children's drawings of a cat with a cake, a fish, a panda and a gecko are pinned on the wall, jars of brushes and paints on the desk. Physically based lighting, soft global illumination, cinematic depth of field, rich natural colour. Her drawings stay flat hand-drawn children's crayon and colored-pencil pictures on paper. Remove all text, lettering, speech bubbles, sticky notes, captions and panel borders. Keep the left image unchanged."
         },
-        "video_prompt": "stills/s5_v.txt",
+        "video_prompt": "The girl stays still and paints small careful brush strokes on the sea turtle; the camera pushes in slowly toward the canvas. The drawings on the wall stay in place. 3D animated feature film, smooth expressive character animation, soft cinematic lighting, consistent character, no text.",
         "take": "clips/s5_v1.mov",
         "trim": [
           0,
@@ -169,9 +169,9 @@
         "still": {
           "ref": "stills/s7.png",
           "input": "seed/s6_in.png",
-          "prompt": "stills/s6.txt"
+          "prompt": "Two images side by side. Left: a frame from a 3D animated film, a girl at her art exhibition. Right: a comic panel. Re-render the right image as a frame from the same 3D animated film and the same gallery, tall vertical wide shot: the bright gallery with white walls and warm spotlights, the same framed children's drawings of a cat with a cake, a fish, a panda, a gecko and a sea turtle hanging in a row on the far wall, pots of flowers at the edges. About eight friends and family members, seen from behind, stand and walk on the open floor in the middle of the room, well away from the walls, each person clearly separate. No signboards, no chalkboards, no easels, no stands in the room. The girl is not in this frame. Physically based lighting, soft global illumination, cinematic depth of field, rich natural colour. Her drawings stay flat hand-drawn children's crayon and colored-pencil pictures on paper. Remove all text, lettering, speech bubbles, sticky notes, captions and panel borders. Keep the left image unchanged."
         },
-        "video_prompt": "stills/s6_v.txt",
+        "video_prompt": "The friends and families walk slowly forward across the open floor toward the framed drawings and stop to look at them. Every person stays solid and clearly separate, walks only on the floor, and never passes through another person, the walls, the frames or the flower pots. The framed drawings stay flat on the wall. The camera holds completely still, same framing throughout. 3D animated feature film, smooth expressive character animation, soft cinematic lighting, consistent character, no text.",
         "take": "clips/s6_v2.mov",
         "trim": [
           0,
@@ -183,9 +183,9 @@
         "still": {
           "ref": "lindsey",
           "input": "seed/s7_in.png",
-          "prompt": "stills/s7.txt"
+          "prompt": "Two images side by side. Left: a 3D animated character, a girl with long straight dark brown hair. Right: a comic panel. Re-render the right image as a frame from the same high-end 3D animated feature film, with the girl looking exactly like the girl on the left: same face, same long straight dark brown hair with a side part, same warm brown eyes and big smile. Tall vertical frame: one girl in a navy blue dress with a bow and a small white name tag stands in the middle of a bright art gallery, arms open wide, beaming with joy; behind her framed children's drawings of a cat with a cake, a fish, a panda and a gecko hang on the white walls under warm spotlights; the backs of friends and family fill the bottom of the frame, softly out of focus. Physically based lighting, soft global illumination, cinematic depth of field, rich natural colour. Her drawings stay flat hand-drawn children's crayon and colored-pencil pictures on paper. Remove all text, lettering, speech bubbles, sticky notes, captions and panel borders. Keep the left image unchanged."
         },
-        "video_prompt": "stills/s7_v.txt",
+        "video_prompt": "The girl keeps her arms open wide and laughs with joy, her shoulders rising a little; her face and hair stay exactly the same. The people in front of her stay in place, softly out of focus. The camera holds still. 3D animated feature film, smooth expressive character animation, soft cinematic lighting, consistent character, no text.",
         "qc_ref": "lindsey",
         "take": "clips/s7_v1.mov",
         "trim": [
@@ -198,9 +198,9 @@
         "still": {
           "ref": "lindsey",
           "input": "seed/s8_in.png",
-          "prompt": "stills/s8.txt"
+          "prompt": "Two images side by side. Left: a 3D animated character, a girl with long straight dark brown hair. Right: a comic panel. Re-render the right image as a frame from the same high-end 3D animated feature film, with the girl looking exactly like the girl on the left: same face, same long straight dark brown hair with a side part, same warm brown eyes and big smile. Tall vertical frame at sunrise: one girl with her eyes closed in a big happy smile hugs an armful of soft plush toys — a grey tabby cat, a panda, a green gecko and a blue fish — close to her chest; behind her the sea glitters under a golden sky and distant snowy mountains, soft flowers in the foreground. Remove the wooden signs and the globe. Physically based lighting, soft global illumination, cinematic depth of field, rich natural colour. Her drawings stay flat hand-drawn children's crayon and colored-pencil pictures on paper. Remove all text, lettering, speech bubbles, sticky notes, captions and panel borders. Keep the left image unchanged."
         },
-        "video_prompt": "stills/s8_v.txt",
+        "video_prompt": "The girl stays standing in the same place and hugs the plush toys close, rocking gently from side to side, smiling with her eyes closed; her face and hair stay exactly the same, her head stays at the same height the whole time. The sea glitters and the clouds drift slowly across the golden sunrise sky. The camera holds completely still, same framing throughout. 3D animated feature film, smooth expressive character animation, soft cinematic lighting, consistent character, no text.",
         "qc_ref": "lindsey",
         "take": "clips/s8_v2.mov",
         "trim": [

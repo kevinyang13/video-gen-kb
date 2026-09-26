@@ -143,9 +143,9 @@
         "still": {
           "ref": null,
           "input": "seed/in_s1.png",
-          "prompt": "stills/s1.txt"
+          "prompt": "Re-render this photograph as a frame from a high-end 3D animated feature film — stylised Pixar-style children in a physically real world, soft cinematic lighting, shallow depth of field, warm colour grade. Keep every child's face shape, hairstyle and clothing recognisable. Medium wide at table height: the five children stand around a large LEGO robotics competition table in a bright home garage, a jungle-themed mission map covering the table with small brick-built mission models on it and a tall tree-shaped build in the middle; the boy in the orange shirt leans in over the little robot. Evening light, storage cabinets and shelves behind them. Remove all text, lettering, logos and brand marks from clothing, signs and props. Photoreal materials, no outlines, cinematic 16:9 framing, no extra people beyond those described."
         },
-        "video_prompt": "stills/s1_v.txt",
+        "video_prompt": "The children lean in around the table; the boy in the orange shirt reaches out and adjusts a brick on the little robot, the girl on the right points at the map; everyone stays in place and their faces, hair and clothes stay exactly the same; dust drifts slowly in the lamp light; the camera holds completely still. Quiet garage room tone, plastic bricks clicking, soft chatter, no music. Smooth cinematic motion, 3D animated feature film look.",
         "take": "clips/s1_v1.mov",
         "trim": [
           0,
@@ -155,11 +155,11 @@
       {
         "id": "s11",
         "still": {
-          "ref": "cheryl",
-          "input": "stills/s1.png",
-          "prompt": "stills/s11.txt"
+          "ref": null,
+          "input": "seed/cheryl.png",
+          "prompt": "Keep this exact character — the same child, same face, same hair, same skin tone, same age, same 3D animated feature film style — and place them in a new scene. Medium close-up across a home garage worktable, the girl on the right of frame: she leans over a half-built LEGO robot beside one other girl of the same age with long dark wavy hair, four hands among scattered bricks, one of them fitting a piece onto the chassis, both wearing plain black t-shirts with no printing, no graphics and no letters on them. Warm afternoon light, shelves blurred behind. Exactly two children in the frame and no one else. High-end 3D animated feature film, photoreal materials, soft cinematic lighting, shallow depth of field, cinematic 16:9 framing. No text, no lettering, no logos and no writing anywhere in the frame, including on clothing, boards and signs."
         },
-        "video_prompt": "stills/s11_v.txt",
+        "video_prompt": "The two girls work together over the robot: one presses a brick into place while the other steadies the chassis, then they look at each other and laugh; their faces, hair and clothes stay exactly the same; dust drifts in the warm light; the camera holds completely still. Quiet garage room tone, bricks clicking, two girls laughing softly, no music. Smooth cinematic motion, 3D animated feature film look.",
         "qc_ref": "cheryl",
         "take": "clips/s11_v2.mov",
         "trim": [
@@ -172,9 +172,9 @@
         "still": {
           "ref": null,
           "input": "stills/s1.png",
-          "prompt": "stills/s2.txt"
+          "prompt": "Re-render this photograph as a frame from a high-end 3D animated feature film — stylised Pixar-style children in a physically real world, soft cinematic lighting, shallow depth of field, warm colour grade. Keep every child's face shape, hairstyle and clothing recognisable. The same garage and the same table, now a close macro view of the small LEGO robot alone on the jungle mission map, its wheels, arm and colour sensor sharp in the foreground, mission models blurred behind it. No people visible. Remove all text, lettering, logos and brand marks from clothing, signs and props. Photoreal materials, no outlines, cinematic 16:9 framing, no extra people beyond those described."
         },
-        "video_prompt": "stills/s2_v.txt",
+        "video_prompt": "The little robot rolls slowly forward across the map, wheels turning, its arm swinging down to tip a mission model, then backs away; the shallow focus holds; the camera holds completely still. Small motor whirr, plastic clicks, quiet room tone, no music. Smooth cinematic motion, 3D animated feature film look.",
         "take": "clips/s2_v1.mov",
         "trim": [
           0,
@@ -186,9 +186,9 @@
         "still": {
           "ref": null,
           "input": "seed/in_s5.png",
-          "prompt": "stills/s5.txt"
+          "prompt": "Re-render this photograph as a frame from a high-end 3D animated feature film — stylised Pixar-style children in a physically real world, soft cinematic lighting, shallow depth of field, warm colour grade. Keep every child's face shape, hairstyle and clothing recognisable. Medium shot, all five from head to waist: the children standing close together in a living room, the girl in the middle holding up a white poster board with a small round colourful team emblem on it and no lettering, a fireplace mantel and a wall screen behind them; they are grinning at the camera. Remove all text, lettering, logos and brand marks from clothing, signs and props. Photoreal materials, no outlines, cinematic 16:9 framing, no extra people beyond those described."
         },
-        "video_prompt": "stills/s5_v.txt",
+        "video_prompt": "The five children hold their pose, grinning at the camera; the girl in the middle steadies the poster; only small movements — a blink, a shoulder shift, hair settling; their faces, hair and clothes stay exactly the same; the camera holds completely still. Living-room tone, quiet laughter, no music. Smooth cinematic motion, 3D animated feature film look.",
         "take": "clips/s5_v1.mov",
         "trim": [
           0,
@@ -200,9 +200,9 @@
         "still": {
           "ref": null,
           "input": "seed/in_s3.png",
-          "prompt": "stills/s3.txt"
+          "prompt": "Re-render this photograph as a frame from a high-end 3D animated feature film — stylised Pixar-style children in a physically real world, soft cinematic lighting, shallow depth of field, warm colour grade. Keep every child's face shape, hairstyle and clothing recognisable. The five children walking away from the camera along a dusty farm path toward a wooden welcome sign and a corrugated metal shelter, backs to the camera, hats and backpacks, morning sun through eucalyptus trees, vegetable rows and a white fence beyond. Remove all text, lettering, logos and brand marks from clothing, signs and props. Photoreal materials, no outlines, cinematic 16:9 framing, no extra people beyond those described."
         },
-        "video_prompt": "stills/s3_v.txt",
+        "video_prompt": "The children walk slowly away from the camera along the dirt path, backpacks swaying and hats bobbing; leaves move in the breeze and dust lifts through the sunlight; the camera holds completely still. Footsteps on dry earth, birdsong, light wind, no music. Smooth cinematic motion, 3D animated feature film look.",
         "take": "clips/s3_v1.mov",
         "trim": [
           0,
@@ -214,9 +214,9 @@
         "still": {
           "ref": null,
           "input": "seed/in_s4.png",
-          "prompt": "stills/s4.txt"
+          "prompt": "Re-render this photograph as a frame from a high-end 3D animated feature film — stylised Pixar-style children in a physically real world, soft cinematic lighting, shallow depth of field, warm colour grade. Keep every child's face shape, hairstyle and clothing recognisable. Wide shot, the children small in frame: the five of them sitting in a row along two huge fallen tree logs with a farm worker in a white shirt, listening to him, one girl writing in a small notebook; big blue sky, sycamore leaves overhead, playground shelters and trees behind. Remove all text, lettering, logos and brand marks from clothing, signs and props. Photoreal materials, no outlines, cinematic 16:9 framing, no extra people beyond those described."
         },
-        "video_prompt": "stills/s4_v.txt",
+        "video_prompt": "The children sit still and listen, nodding; the girl on the left writes in her notebook; leaves and a red flag flutter behind them; a light breeze moves their hair; the camera holds completely still. Outdoor ambience, birds, distant children playing, light wind, no music. Smooth cinematic motion, 3D animated feature film look.",
         "take": "clips/s4_v1.mov",
         "trim": [
           0,
@@ -226,11 +226,11 @@
       {
         "id": "s10",
         "still": {
-          "ref": "lindsey",
-          "input": "stills/s6.png",
-          "prompt": "stills/s10.txt"
+          "ref": null,
+          "input": "seed/lindsey.png",
+          "prompt": "Keep this exact character — the same child, same face, same hair, same skin tone, same age, same 3D animated feature film style — and place them in a new scene. Medium shot from the waist up, the girl on the left of frame: she stands beside a large black tri-fold project board on a table in a school gymnasium, one hand raised toward it mid-explanation, looking off to the right at an unseen judge, calm and proud, wearing a plain black t-shirt with no printing, no graphics and no letters on it. The board is covered in bright green and white panels of illustrated leaves, a green lacewing insect and its life cycle drawn in a circle — pictures only, no words or letters. A clear plastic tube with a green lacewing in it stands on the table beside her. Blurred gym and tables behind. Exactly one child in the frame. High-end 3D animated feature film, photoreal materials, soft cinematic lighting, shallow depth of field, cinematic 16:9 framing. No text, no lettering, no logos and no writing anywhere in the frame, including on clothing, boards and signs."
         },
-        "video_prompt": "stills/s10_v.txt",
+        "video_prompt": "The girl gestures once toward the board and keeps talking, her head turning slightly toward the judge and back, a small confident smile; her face, hair and clothes stay exactly the same; the hall moves softly out of focus behind her; the camera holds completely still. Quiet hall ambience, distant voices, no music. Smooth cinematic motion, 3D animated feature film look.",
         "qc_ref": "lindsey",
         "take": "clips/s10_v2.mov",
         "trim": [
@@ -241,11 +241,11 @@
       {
         "id": "s9",
         "still": {
-          "ref": "kyle",
-          "input": "stills/s6.png",
-          "prompt": "stills/s9.txt"
+          "ref": null,
+          "input": "seed/kyle.png",
+          "prompt": "Keep this exact character — the same child, same face, same hair, same skin tone, same age, same 3D animated feature film style — and place them in a new scene. Medium close-up, his head and shoulders filling the left half of the frame: the boy stands at the edge of a robotics competition table in a school gymnasium, leaning forward over a black mission mat with both hands just lifted away from a small LEGO robot he has released, eyes following it, a lanyard around his neck, wearing a plain black t-shirt with no printing, no graphics and no letters on it. Behind him the gym is out of focus: pale timber floor, hanging lights, blurred crowd. Exactly one child in the frame. High-end 3D animated feature film, photoreal materials, soft cinematic lighting, shallow depth of field, cinematic 16:9 framing. No text, no lettering, no logos and no writing anywhere in the frame, including on clothing, boards and signs."
         },
-        "video_prompt": "stills/s9_v.txt",
+        "video_prompt": "The boy leans forward and watches the robot drive away from his hands, his eyes tracking it, then he glances up and breaks into a grin; his face, hair and clothes stay exactly the same; the blurred crowd shifts behind him; the camera holds completely still. Hall ambience, echoing chatter, a small motor whirring away, no music. Smooth cinematic motion, 3D animated feature film look.",
         "qc_ref": "kyle",
         "take": "clips/s9_v2.mov",
         "trim": [
@@ -256,11 +256,11 @@
       {
         "id": "s12",
         "still": {
-          "ref": "kei",
-          "input": "stills/s6.png",
-          "prompt": "stills/s12.txt"
+          "ref": null,
+          "input": "seed/kei.png",
+          "prompt": "Keep this exact character — the same child, same face, same hair, same skin tone, same age, same 3D animated feature film style — and place them in a new scene. Medium close-up, his head and shoulders filling the right half of the frame: the boy stands at the edge of a robotics competition table in a school gymnasium holding a small stopwatch up in one hand, eyes wide and fixed on something out of frame, mouth open mid-count, wearing a plain black t-shirt with no printing, no graphics and no letters on it. Bright gym lights and a blurred crowd behind him. Exactly one child in the frame. High-end 3D animated feature film, photoreal materials, soft cinematic lighting, shallow depth of field, cinematic 16:9 framing. No text, no lettering, no logos and no writing anywhere in the frame, including on clothing, boards and signs."
         },
-        "video_prompt": "stills/s12_v.txt",
+        "video_prompt": "The boy holds the stopwatch up and stares after the robot, counting under his breath, then his eyebrows jump and he shouts once in excitement; his face, hair and clothes stay exactly the same; the crowd blurs behind him; the camera holds completely still. Hall ambience, echoing chatter, a distant buzzer, no music. Smooth cinematic motion, 3D animated feature film look.",
         "qc_ref": "kei",
         "take": "clips/s12_v2.mov",
         "trim": [
@@ -273,9 +273,9 @@
         "still": {
           "ref": null,
           "input": "stills/s5.png",
-          "prompt": "stills/s7.txt"
+          "prompt": "Re-render this photograph as a frame from a high-end 3D animated feature film — stylised Pixar-style children in a physically real world, soft cinematic lighting, shallow depth of field, warm colour grade. Keep every child's face shape, hairstyle and clothing recognisable. The same five children, now standing in a bright tournament hall, jumping with their arms raised in celebration, the tallest boy holding a small gold trophy up high, confetti falling through the light, a blurred crowd and hanging banners behind them. Remove all text, lettering, logos and brand marks from clothing, signs and props. Photoreal materials, no outlines, cinematic 16:9 framing, no extra people beyond those described."
         },
-        "video_prompt": "stills/s7_v.txt",
+        "video_prompt": "The five children jump and throw their arms up, laughing, the trophy lifted high; confetti drifts down through the light; the crowd behind claps in soft focus; their faces, hair and clothes stay exactly the same; the camera holds completely still. Cheering, applause, hall echo, no music. Smooth cinematic motion, 3D animated feature film look.",
         "take": "clips/s7_v1.mov",
         "trim": [
           0,
@@ -287,9 +287,9 @@
         "still": {
           "ref": null,
           "input": "stills/s7.png",
-          "prompt": "stills/s8.txt"
+          "prompt": "Re-render this photograph as a frame from a high-end 3D animated feature film — stylised Pixar-style children in a physically real world, soft cinematic lighting, shallow depth of field, warm colour grade. Keep every child's face shape, hairstyle and clothing recognisable. The same five children, now standing still in a calm row on grass outside in late-afternoon sunlight, both feet flat on the ground, arms relaxed down at their sides, gold medals hanging on ribbons around their necks and the trophy held quietly in front of the tallest boy; warm golden backlight through trees behind them. A quiet closing team portrait, head to knee, nobody jumping and nobody with raised arms. Remove all text, lettering, logos and brand marks from clothing, signs and props. Photoreal materials, no outlines, cinematic 16:9 framing, no extra people beyond those described."
         },
-        "video_prompt": "stills/s8_v.txt",
+        "video_prompt": "The children stand still in the warm light, breathing, small smiles, hair moving in a light breeze; one of them shifts the trophy slightly; nothing else moves; the camera holds completely still. Late-afternoon outdoor ambience, distant voices, soft wind, no music. Smooth cinematic motion, 3D animated feature film look.",
         "take": "clips/s8_v1.mov",
         "trim": [
           0,
@@ -297,6 +297,17 @@
         ]
       }
     ],
-    "order_note": "cut order = list order: s1 → s11 → s2 → s5 → s3 → s4 → s10 → s9 → s12 → s7 → s8 (s6 competition-floor wide dropped: LTX invented a walking robot in v2 and a stray toy robot in v3)"
+    "order_note": "cut order = list order: s1 → s11 → s2 → s5 → s3 → s4 → s10 → s9 → s12 → s7 → s8 (s6 competition-floor wide dropped: LTX invented a walking robot in v2 and a stray toy robot in v3)",
+    "prompts": {
+      "loc_barn": "Re-render this photograph as a location plate from a high-end 3D animated feature film: the same red-brown timber barn with its pale metal roof, blue trim and row of open bays on the rise, the same rows of vegetables, artichoke plants and low hoop covers running down the slope in front of it, palms and trees behind, blue sky with light cloud. No people anywhere. No text, no lettering, no signs with words. Stylised but physically real materials, bright clear daylight, soft shadows, shallow depth of field, cinematic 16:9 framing.",
+      "loc_coop": "Re-render this photograph as a location plate from a high-end 3D animated feature film: the same small brown wooden chicken coop on wheels with its ramp down, inside a netted enclosure of dry straw ground, a dozen brown and white hens pecking and standing around two feeders, a wire gate open on the left, eucalyptus trees and a farm shed behind under an overcast sky. No people anywhere. A plain white van with no text or logo. No lettering anywhere. Stylised but physically real materials, soft diffused daylight, shallow depth of field, cinematic 16:9 framing.",
+      "loc_logs": "Re-render this photograph as a location plate from a high-end 3D animated feature film: the same farm play area with the same huge pale fallen tree logs stacked and crossing each other on wood-chip ground, the same big leafy sycamore shading them from the right, the same wooden fences, shade structures and open farm fields behind under a clear blue sky. No people anywhere. No text, no lettering, no signs with words. Stylised but physically real materials, warm midday sunlight, soft shadows, shallow depth of field, cinematic 16:9 framing.",
+      "loc_venue": "Re-render this photograph as a location plate from a high-end 3D animated feature film: the same school gymnasium set up for a robotics tournament — pale timber floor with painted court lines, high white ceiling with exposed beams and hanging lights, basketball hoops folded up, rows of plain gold and cream championship banners on the walls with no lettering on them, tall windows along the far wall, dark bleachers folded flat. On the floor, black-framed robotics competition tables holding printed jungle mission mats and small brick-built models, low white net barriers around them, a big dark countdown clock on a stand. Background people are distant, out of focus and generic, no recognisable faces, a few adult referees in black and white striped shirts. No text, no lettering, no logos, no numbers anywhere. Stylised but physically real materials, bright even indoor light, shallow depth of field, cinematic 16:9 framing.",
+      "master": "Re-render this photograph of a child as a character in a high-end 3D animated feature film — Pixar-style stylisation with photoreal skin, hair and fabric, soft studio lighting, plain soft grey background. Keep the child recognisable as this specific child: the same ethnicity and skin tone, pure black hair — not brown, not chestnut, no warm highlights — with the same length, cut, parting and hairline, the same dark brown eyes with the same eyelid shape and spacing, the same eyebrow shape, the same nose shape, the same mouth and smile, the same face shape and jawline, and the same age. Stylise the rendering, not the identity: do not westernise the features, do not lighten the hair or eyes, do not make the child look older, do not swap in a generic cartoon face. Head and shoulders, facing the camera, friendly natural expression, plain mid-grey crew-neck t-shirt. No text, no lettering, no logos. One child only.",
+      "s6": "Re-render this photograph as a frame from a high-end 3D animated feature film — stylised Pixar-style children in a physically real world, soft cinematic lighting, shallow depth of field, warm colour grade. Keep every child's face shape, hairstyle and clothing recognisable. The same little LEGO robot, now on a competition table in a large tournament hall: a black and white mission mat covered in brick-built models, bright overhead lights, a blurred crowd of teams and parents behind a barrier, a referee's legs at the edge of frame. Low camera at table height. Remove all text, lettering, logos and brand marks from clothing, signs and props. Photoreal materials, no outlines, cinematic 16:9 framing, no extra people beyond those described.",
+      "s6_v": "The camera holds completely still. On the near competition table, one small wheeled LEGO brick robot the size of a shoebox rolls slowly forward across the black mission mat, turns, and nudges a small brick model upright, then stops. Nothing else in the frame moves except a faint shimmer of light on the floor and the distant blurred figures along the far wall, who stay exactly where they are. No person walks into the frame, no one approaches the tables, and there is no humanoid or walking robot anywhere — only the small wheeled brick robot on the mat. The gym stays empty of new people for the whole shot. Hall ambience, echoing chatter far away, a small motor whirring, no music. Smooth cinematic motion, 3D animated feature film look.",
+      "table_master": "Re-render this photograph as a prop plate from a high-end 3D animated feature film: the same LEGO robotics competition table seen at a low three-quarter angle, the same printed jungle mission mat with its winding blue river, sandy clearings and dense green canopy, the same brick-built mission models in the same positions — the tall brown tree tower in the middle, the lime-green ring structures, the small grey machine buildings and the little wheeled robot. A plain wooden table frame around the mat, an empty clean garage wall softly out of focus behind. No people, no hands, no text, no lettering, no logos anywhere. Photoreal plastic and print materials, soft even daylight, shallow depth of field, cinematic 16:9 framing."
+    },
+    "note": "Character beats (s9-s12) are restaged from the master portrait: master as --image, scene from the prompt. The diptych form (master left, venue plate right) was tried first and failed - with no person in the layout image klein renders the room and leaves the child out."
   }
 }

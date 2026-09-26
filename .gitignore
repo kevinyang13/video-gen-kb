@@ -16,8 +16,9 @@ projects/*/*/logs/**
 !projects/*/*/seed/**/
 !projects/*/*/seed/**/*.txt
 !projects/*/*/seed/*.txt
+# prompts are materialised from spec.json at run time
+projects/*/*/.gen/
 !projects/*/*/stills/**/
-!projects/*/*/stills/*.txt
 !projects/*/*/logs/**/
 !projects/*/*/logs/*.sh
 # upscale stamps are build cache, not recipe

@@ -16,7 +16,8 @@ wiki/  docs/  raw/  scripts/  tools/  projects.json     <- shared across project
 projects/<id>/plan/                       one plan page per project
 projects/<id>/<version>/{spec.json,raw,seed,stills,clips,music,final,logs}
   version = v<n>-<short-description>, e.g. v1-drawthings-ui, v2-drawthings-cli
-  spec.json = that VERSION's record (edit this, not the root projects.json)
+  spec.json = that VERSION's record INCLUDING every prompt (edit this, not the root projects.json)
+  film_run.py writes prompts out to <version>/.gen/*.txt at run time; that folder is generated
   clips/ = everything shot-scoped (exports, trims, per-shot 4K); final/ = the assembled film only
   tracked: plan/*.md, spec.json, prompt and lock .txt, raw/; ignored: all media by extension
 ```

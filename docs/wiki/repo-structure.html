@@ -112,7 +112,7 @@ projects.json  the registry: one record per project
     spec.json    this version's record: settings, prompts, run-spec, music, status
     raw/         its source photos, comics, references
     seed/        masters, crops, candidate renders, prompt inputs
-    stills/      picked first frames + per-shot prompt files
+    stills/      picked first frames
     clips/       shot-scoped output: I2V exports, trims, per-shot 4K
     music/       the track(s) this version is cut to
     final/       the film itself — assembled master and delivery copies
@@ -125,8 +125,17 @@ projects.json  the registry: one record per project
 <p><strong><code>final/</code> is the film, not the shots.</strong> One folder, one question: <em>what do I hand over?</em> Every shot-scoped artefact — the <code>.mov</code> export, the trimmed ProRes, the per-shot <code>_4k.mp4</code> and its stamp — stays in <code>clips/</code> next to the clip it came from. Only the assembled master and its delivery copies (1920×1080, 720p, and so on) belong in <code>final/</code>. <code>film_run.py finish</code> writes to both accordingly. An assembled <em>sequence</em> that isn't the whole film still counts as a deliverable — lost_city's 30-second rift coda sits in <code>final/</code> even though the film around it isn't cut yet.</p>
 <p><strong><code>seed/</code> is the one to understand.</strong> It holds everything a render <em>starts from</em> that isn't a finished still: character and location masters, the face crops they were made from, rejected candidates, and any prepared input images. Masters are the valuable part — they're what makes shot 9 look like shot 2 (see <a href="character-consistency.html">character consistency</a>).</p>
 <h2>A project must be re-runnable from its own folder</h2>
-<p><code>projects/&lt;id&gt;/&lt;version&gt;/spec.json</code> is the <strong>source of truth</strong> for that project: the same record that used to sit in the root <code>projects.json</code> — models, sizes, seeds, per-scene prompts, the run-spec, music, status, file list. <code>scripts/build_projects.py</code> reads every <code>projects/*/*/spec.json</code> plus <code>projects/_shared.json</code> (defaults, themes, playlist), regenerates the root <code>projects.json</code> as an aggregate, and renders the registry pages from it. <code>film_run.py &lt;id&gt;</code> reads the project's own spec first and falls back to the aggregate.</p>
-<p>So: <strong>edit <code>projects/&lt;id&gt;/&lt;version&gt;/spec.json</code></strong>, never the root <code>projects.json</code> — that one is generated and will be overwritten on the next build.</p>
+<p><code>projects/&lt;id&gt;/&lt;version&gt;/spec.json</code> is the <strong>source of truth</strong> — and since 2026-09-25 that includes the prompts. Every shot carries its still prompt and motion prompt as text:</p>
+<pre><code class="language-json">{ &quot;id&quot;: &quot;s9&quot;,
+  &quot;still&quot;: { &quot;ref&quot;: null, &quot;input&quot;: &quot;seed/kyle.png&quot;, &quot;prompt&quot;: &quot;Keep this exact character — …&quot; },
+  &quot;video_prompt&quot;: &quot;The boy leans forward and watches the robot drive away…&quot;,
+  &quot;take&quot;: &quot;clips/s9_v2.mov&quot;, &quot;trim&quot;: [0, 7.0] }
+</code></pre>
+<p>Reusable prompt recipes that no shot owns — the master recipe, location plates, a dropped shot's wording — sit in <code>run-spec.prompts</code> as a name → text map.</p>
+<p>The shell scripts still want a file, so <code>film_run.py</code> writes each prompt to <code>&lt;version&gt;/.gen/&lt;shot&gt;.txt</code> at run time and passes that. <code>.gen/</code> is generated and git-ignored; <strong>never edit it</strong>, the next run overwrites it from the spec.</p>
+<p>So one tracked file per version — <code>spec.json</code> — carries the settings, the shot list, every prompt, the takes and the trims. With <code>raw/</code> beside it that is enough to re-run the film from nothing.</p>
+<p><code>scripts/build_projects.py</code> reads every <code>projects/*/*/spec.json</code> plus <code>projects/_shared.json</code> (defaults, themes, playlist), regenerates the root <code>projects.json</code> as an aggregate, and renders the registry pages. <code>film_run.py &lt;id&gt;</code> reads the newest version's spec; <code>&lt;id&gt;@&lt;version&gt;</code> pins one.</p>
+<p><strong>Edit <code>projects/&lt;id&gt;/&lt;version&gt;/spec.json</code></strong>, never the root <code>projects.json</code> — that one is generated and will be overwritten.</p>
 <h2>Tracked vs generated</h2>
 <p><em>Keep the recipe, drop the generated pixels.</em></p>
 <div class="tw"><table>
@@ -146,8 +155,8 @@ projects.json  the registry: one record per project
 <td>…except the <code>.txt</code> prompts and locks and the <code>.sh</code> run scripts inside them</td>
 </tr>
 <tr>
-<td><code>stills/*.txt</code>, <code>seed/*.txt</code> — prompts and locks</td>
-<td><code>clips/*_trim.txt</code> (upscale stamps: build cache)</td>
+<td><code>seed/*.txt</code> — locks and notes</td>
+<td><code>clips/*_trim.txt</code> (upscale stamps) and <code>.gen/</code> (prompts written from the spec)</td>
 </tr>
 <tr>
 <td><code>logs/*.sh</code> — the scripts a run used</td>
@@ -160,7 +169,7 @@ projects.json  the registry: one record per project
 </tbody>
 </table></div>
 <p>Source material in <code>raw/</code> <strong>is</strong> tracked — it's an input, not an output, and it's small (12 MB for the largest project). Only the two noted exceptions stay out.</p>
-<p>A fresh clone therefore carries every plan, spec, prompt, lock and source photo — enough to re-run any project from scratch — and not one generated frame.</p>
+<p>A fresh clone therefore carries every plan, spec (prompts included), lock and source photo — enough to re-run any project from scratch — and not one generated frame.</p>
 <p>Two traps, both hit in practice on 2026-09-25:
 - A <strong>trailing comment on a pattern line</strong> is read as part of the pattern, so <code>foo/*.txt  # stamps</code> silently matches nothing. Comments go on their own line.
 - <strong>Ignoring media by extension repo-wide</strong> also catches <code>raw/</code> inputs, and <code>git rm -r --cached</code> then quietly drops already-tracked sources from HEAD. Scope ignores to the generated folders instead.</p>

@@ -32,7 +32,7 @@ projects/<id>/
     spec.json    this version's record: settings, prompts, run-spec, music, status
     raw/         its source photos, comics, references
     seed/        masters, crops, candidate renders, prompt inputs
-    stills/      picked first frames + per-shot prompt files
+    stills/      picked first frames
     clips/       shot-scoped output: I2V exports, trims, per-shot 4K
     music/       the track(s) this version is cut to
     final/       the film itself — assembled master and delivery copies
@@ -53,9 +53,24 @@ Not every version uses every folder: the early 9:16 loops ([[living-painting-loo
 
 ## A project must be re-runnable from its own folder
 
-`projects/<id>/<version>/spec.json` is the **source of truth** for that project: the same record that used to sit in the root `projects.json` — models, sizes, seeds, per-scene prompts, the run-spec, music, status, file list. `scripts/build_projects.py` reads every `projects/*/*/spec.json` plus `projects/_shared.json` (defaults, themes, playlist), regenerates the root `projects.json` as an aggregate, and renders the registry pages from it. `film_run.py <id>` reads the project's own spec first and falls back to the aggregate.
+`projects/<id>/<version>/spec.json` is the **source of truth** — and since 2026-09-25 that includes the prompts. Every shot carries its still prompt and motion prompt as text:
 
-So: **edit `projects/<id>/<version>/spec.json`**, never the root `projects.json` — that one is generated and will be overwritten on the next build.
+```json
+{ "id": "s9",
+  "still": { "ref": null, "input": "seed/kyle.png", "prompt": "Keep this exact character — …" },
+  "video_prompt": "The boy leans forward and watches the robot drive away…",
+  "take": "clips/s9_v2.mov", "trim": [0, 7.0] }
+```
+
+Reusable prompt recipes that no shot owns — the master recipe, location plates, a dropped shot's wording — sit in `run-spec.prompts` as a name → text map.
+
+The shell scripts still want a file, so `film_run.py` writes each prompt to `<version>/.gen/<shot>.txt` at run time and passes that. `.gen/` is generated and git-ignored; **never edit it**, the next run overwrites it from the spec.
+
+So one tracked file per version — `spec.json` — carries the settings, the shot list, every prompt, the takes and the trims. With `raw/` beside it that is enough to re-run the film from nothing.
+
+`scripts/build_projects.py` reads every `projects/*/*/spec.json` plus `projects/_shared.json` (defaults, themes, playlist), regenerates the root `projects.json` as an aggregate, and renders the registry pages. `film_run.py <id>` reads the newest version's spec; `<id>@<version>` pins one.
+
+**Edit `projects/<id>/<version>/spec.json`**, never the root `projects.json` — that one is generated and will be overwritten.
 
 ## Tracked vs generated
 
@@ -65,13 +80,13 @@ So: **edit `projects/<id>/<version>/spec.json`**, never the root `projects.json`
 |---|---|
 | `plan/*.md` — the project's page | everything under `seed/ stills/ clips/ final/ music/ logs/` … |
 | `spec.json` — its full record | …except the `.txt` prompts and locks and the `.sh` run scripts inside them |
-| `stills/*.txt`, `seed/*.txt` — prompts and locks | `clips/*_trim.txt` (upscale stamps: build cache) |
+| `seed/*.txt` — locks and notes | `clips/*_trim.txt` (upscale stamps) and `.gen/` (prompts written from the spec) |
 | `logs/*.sh` — the scripts a run used | every generated image, video and audio file |
 | `raw/` — source photos, comics, references | `dragon_epic/*/raw/` (personal faces) and `lost_city/*/raw/` (someone else's render) |
 
 Source material in `raw/` **is** tracked — it's an input, not an output, and it's small (12 MB for the largest project). Only the two noted exceptions stay out.
 
-A fresh clone therefore carries every plan, spec, prompt, lock and source photo — enough to re-run any project from scratch — and not one generated frame.
+A fresh clone therefore carries every plan, spec (prompts included), lock and source photo — enough to re-run any project from scratch — and not one generated frame.
 
 Two traps, both hit in practice on 2026-09-25:
 - A **trailing comment on a pattern line** is read as part of the pattern, so `foo/*.txt  # stamps` silently matches nothing. Comments go on their own line.

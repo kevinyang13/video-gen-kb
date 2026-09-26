@@ -8,6 +8,16 @@
 
 ---
 
+## 2026-09-25 — Prompts moved into spec.json
+
+Prompt text lived in two places depending on a project's age: `stills/*.txt` for the four CLI films, inline in `spec.json` for everything older — and kyle_rescue carried both, 8 scenes inline *and* 18 files, with nothing checking they agreed. Now every prompt is text inside its version's `spec.json`: each shot's `still.prompt` and `video_prompt`, plus a `run-spec.prompts` map for recipes no shot owns (master portraits, location plates, the dropped s6). 100 duplicate `.txt` files removed.
+
+`film_run.py` materialises each prompt to `<version>/.gen/<shot>.txt` before calling the shell scripts, so they keep taking a file path; `.gen/` is generated and ignored. `check` now validates that a prompt is non-empty text rather than that a file exists.
+
+Caught while doing it: the v3-photo-cut spec still described the **diptych** staging for the four character beats, which is the form that *failed* — the delivered film restaged them from the master portrait. A re-run from that spec would have reproduced the bug, not the film. Corrected, with the reason recorded in `run-spec.note`.
+
+One tracked file per version now carries settings, shot list, prompts, takes and trims.
+
 ## 2026-09-25 — Wiki index reorganised around projects
 
 The index had a separate **Plans** section listing project pages away from the registry, and its descriptions had gone stale (FLL farm under anime, the deleted three-minute film, only Kyle under 3D). Plans now sit inside **Projects**, under a line explaining that each project owns its folder and its plan lives in it, with the registry pages first and the six plan pages after, each labelled by project and version.
