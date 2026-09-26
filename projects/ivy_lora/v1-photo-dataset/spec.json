@@ -7,9 +7,9 @@
   "date": "2026-09-26",
   "theme": "realistic",
   "dt_project": "none — draw-things-cli train lora",
-  "status": "scaffolded — waiting on source photographs",
+  "status": "training 2026-09-26 — 22 image/caption pairs, 2000 steps, checkpoints every 400",
   "source": "real photographs of Ivy, curated into raw/ (git-ignored)",
-  "notes": "Ivy is family; consent settled, same standing as Kyle and Lindsey. Real photos are the better dataset: B0 proved klein will not synthesize back views or true camera-height variation from a frontal master, because the reference image overrides the prompt. Photographs have those angles already. raw/ is git-ignored for this project — a public repo is the wrong place for a few dozen photos of a child.",
+  "notes": "Ivy is family, an adult; consent settled, same standing as Kyle and Lindsey. Real photos are the better dataset: B0 proved klein will not synthesize back views or true camera-height variation from a frontal master, because the reference image overrides the prompt. Photographs have those angles already — except that this particular set does not: all 22 frames are frontal or three-quarter. raw/ is git-ignored because consent to train on a face is not consent to publish the source photographs to a public repo.",
   "still": {
     "model": "FLUX.2 [klein] 9B (8-bit S)",
     "size": "aspect-bucketed, 512 base",
@@ -23,15 +23,20 @@
     "subject": "girl",
     "source": "photographs",
     "target_count": "25-50, per the source deep-dive",
-    "split": "40% close-up / 40% medium / 20% wide",
+    "split": "11 close-up, 8 medium, 3 full body",
     "caption_rule": "Isolation Rule — caption only what varies (framing, angle, expression, clothing, background, light). Face, hair and permanent features are omitted so they bind to the trigger token. This is the inverse of how our shot prompts are written.",
     "captioning": "by hand, one photo at a time, after looking at it — a generated caption that names a permanent feature silently un-binds that feature from the trigger",
-    "status": "empty"
+    "status": "built 2026-09-26, captions hand-written after viewing each frame",
+    "count": 22,
+    "composition": "16 supplied photographs + 6 reframes cropped from their own 2048 px originals",
+    "class_word": "woman — the trigger is always followed by a class word",
+    "known_gap": "no profile and no back-of-head frames; the supplied set contains none"
   },
   "training": {
     "command": "draw-things-cli train lora --model flux_2_klein_9b_i8x.ckpt --dataset projects/ivy_lora/v1-photo-dataset/seed/dataset --steps 2000 --rank 32 --learning-rate 1e-4 --seed 1 --use-aspect-ratio --save-every 500 -o ivy_lora --name \"Ivy (ivy_kx)\" --offline",
     "measured_on_nightelf": "0.22 it/s, 2 h 31 m for 2000 steps, 402 MB per checkpoint",
-    "evaluate": "scripts/lora_eval.sh with a no-LoRA control column; the 2000-step checkpoint won on the night elf with no sign of overfitting"
+    "evaluate": "scripts/lora_eval.sh with a no-LoRA control column; the 2000-step checkpoint won on the night elf with no sign of overfitting",
+    "started": "2026-09-26, 2000 steps, rank 32, lr 1e-4, --use-aspect-ratio, --save-every 400"
   },
   "files": [
     "raw/ (source photographs, git-ignored)",

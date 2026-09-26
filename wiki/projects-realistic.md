@@ -17,7 +17,7 @@ Index of every project: [[projects]]. Other themes: [[projects-anime]] · [[proj
 | 1 | [Dragon Epic — 1-minute photoreal short, family hero face](#dragon_epic) | 2026-09-21 | in progress — scene 1A posted | FLUX.2 [klein] 9B 1280x768 | Wan 2.2 High Noise 47 min | The Dragon's Breath | `—` | [▶ watch](https://youtu.be/Xzu-c5yX8uo) |
 | 2 | [Lost City — hyper-real rider on a raptor-dragon entering jungle ruins](#lost_city) | 2026-09-21 | in progress — 4K with music: s3, s4, s5, s8, s9; s1 and s2 at 4K without music; s6 trimmed to 4.6 s and never upscaled; **s7 (escape run) not rendered**; no film assembled yet | FLUX.2 [klein] 9B 1280x768 | LTX-2.3 22B [distilled] 1.1 (production engine — see ltx_10s) — Wan 2.2 High Noise I2V (8-bit S) + Low Noise refiner 10% for locked-camera shots at 768p 49 min | Mystical orchestral theme with ancient flute | `—` | [▶ watch](https://youtu.be/68sq_jZqu6c) |
 | 3 | [Night Elf Hunter — a boy and his bear crossing the grassland](#nightelf_hunter) | 2026-09-26 | research — B0 partial pass 2026-09-26: 30 images, identity 30/30, angles skewed (back 1/3, over-shoulder 0/2); v1 remains the delivered film | FLUX.2 [klein] 9B 512x768 | Wan 2.2 High Noise ? min | none | `—` | — |
-| 4 | [Ivy — character LoRA](#ivy_lora) | 2026-09-26 | scaffolded — waiting on source photographs | FLUX.2 [klein] 9B aspect-bucketed, | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
+| 4 | [Ivy — character LoRA](#ivy_lora) | 2026-09-26 | training 2026-09-26 — 22 image/caption pairs, 2000 steps, checkpoints every 400 | FLUX.2 [klein] 9B aspect-bucketed, | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
 
 ## Dragon Epic — 1-minute photoreal short, family hero face {#dragon_epic}
 
@@ -331,10 +331,10 @@ Prompt: `generated per cell by scripts/seed_sheet.sh --dataset`
 
 ## Ivy — character LoRA {#ivy_lora}
 
-- **Date**: 2026-09-26 · **Status**: scaffolded — waiting on source photographs · **Version**: `v1-photo-dataset` · **Draw Things project**: `none — draw-things-cli train lora`
+- **Date**: 2026-09-26 · **Status**: training 2026-09-26 — 22 image/caption pairs, 2000 steps, checkpoints every 400 · **Version**: `v1-photo-dataset` · **Draw Things project**: `none — draw-things-cli train lora`
 - **This version**: Character LoRA trained on real photographs. The output is a reusable identity asset, not a film: any later project loads it with a trigger token instead of carrying a master into every shot.
 - **Files** (`projects/ivy_lora/v1-photo-dataset/`): `raw/ (source photographs, git-ignored)`, `seed/dataset/NN.png + NN.txt (training pairs; captions tracked)`, `logs/train.log`
-- **Notes**: Ivy is family; consent settled, same standing as Kyle and Lindsey. Real photos are the better dataset: B0 proved klein will not synthesize back views or true camera-height variation from a frontal master, because the reference image overrides the prompt. Photographs have those angles already. raw/ is git-ignored for this project — a public repo is the wrong place for a few dozen photos of a child.
+- **Notes**: Ivy is family, an adult; consent settled, same standing as Kyle and Lindsey. Real photos are the better dataset: B0 proved klein will not synthesize back views or true camera-height variation from a frontal master, because the reference image overrides the prompt. Photographs have those angles already — except that this particular set does not: all 22 frames are frontal or three-quarter. raw/ is git-ignored because consent to train on a face is not consent to publish the source photographs to a public repo.
 
 **Still**
 

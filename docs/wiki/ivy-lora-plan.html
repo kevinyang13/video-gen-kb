@@ -104,11 +104,11 @@ image, and the reference overrides the prompt for anything that needs the camera
 heads, tilted cameras, mixed lighting and real expressions, which is precisely the share the
 synthetic route could not manufacture. So this project starts where the night elf could not.</p>
 <h2>1. Consent</h2>
-<p>Ivy is family and consent is settled, the same standing as <span class="missing" title="page not written yet">kyle is kevins son</span> and Lindsey.
-Two practical rules follow:</p>
+<p>Ivy is family — an adult — and consent is settled, the same standing as <span class="missing" title="page not written yet">kyle is kevins son</span>
+and Lindsey. Two practical rules follow:</p>
 <ul>
-<li><code>projects/ivy_lora/*/raw/</code> is <strong>git-ignored</strong>. A public repository is the wrong home for a
-  few dozen photographs of a child, whatever the consent position is.</li>
+<li><code>projects/ivy_lora/*/raw/</code> is <strong>git-ignored</strong>. Consent to train on a face is not consent to
+  publish the source photographs; this repository is public and they are personal photographs.</li>
 <li>Conversion to PNG drops the EXIF block, so <strong>GPS coordinates do not travel with the dataset</strong>.
   <code>scripts/photo_dataset.sh</code> does this as a side effect of resizing; it is not incidental.</li>
 </ul>
@@ -123,28 +123,36 @@ Two practical rules follow:</p>
 <tbody>
 <tr>
 <td>Count</td>
-<td>25–50 photographs</td>
+<td><strong>22</strong> — 16 supplied photographs plus 6 reframes cropped from their own full-resolution originals</td>
 </tr>
 <tr>
 <td>Split</td>
-<td>~40% close-up, ~40% medium, ~20% wide</td>
+<td>11 close-up, 8 medium, 3 full body</td>
 </tr>
 <tr>
-<td>Variety that matters</td>
-<td>angle, distance, lighting, expression, clothing, background</td>
+<td>Sources</td>
+<td>Hawaii, Tahiti, Paris, Venice, Rome; indoor restaurant, cafe, boat, beach, night canal</td>
 </tr>
 <tr>
-<td>Variety that hurts</td>
-<td>other people in frame, heavy filters, motion blur, sunglasses, near-duplicate frames from a burst</td>
+<td>Lighting</td>
+<td>warm indoor, flat overcast, hard midday, golden hour, open shade, night flash, hazy backlight</td>
 </tr>
 <tr>
 <td>Trigger</td>
-<td><code>ivy_kx</code></td>
+<td><code>ivy_kx</code>, always followed by the class word <code>woman</code></td>
+</tr>
+<tr>
+<td>Known gap</td>
+<td><strong>every frame is frontal or three-quarter.</strong> No profile, no back of head — the supplied set has none, and B0 established klein cannot invent them from a reference</td>
 </tr>
 </tbody>
 </table></div>
-<pre><code>scripts/photo_dataset.sh &lt;source folder&gt; projects/ivy_lora/v1-photo-dataset/seed/dataset 1024 ivy_kx
+<pre><code>scripts/photo_dataset.sh raw projects/ivy_lora/v1-photo-dataset/seed/dataset 1024 ivy_kx
 </code></pre>
+<p>The six reframes were cropped from the 2048 px originals with ffmpeg, not upscaled from the
+1024 px working copies, so they carry real detail rather than interpolated pixels. A crop of a
+photograph is genuine data — a different framing of a real moment — where a klein re-render of
+the same photograph would be a second-hand copy of it.</p>
 <p>Long side capped at 1024, aspect preserved — the trainer's <code>--use-aspect-ratio</code> buckets by
 shape, so cropping to square here would discard the framing variety that justified using photos.</p>
 <h2>3. Captioning — the rule that inverts our practice</h2>
@@ -174,7 +182,8 @@ best at 2,000 with no sign of overfitting:</p>
 a LoRA that does nothing produce the same grid without it. Judge on the out-of-distribution rows
 — an unseen scene and an unseen angle — never on the studio portrait, which always looks fine.</p>
 <h2>6. Status</h2>
-<p>Scaffolded. Waiting on the photographs.</p>
+<p>Dataset built 2026-09-26: 22 image/caption pairs. Training run started the same day — 2,000
+steps, checkpoints every 400.</p>
 
   <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="blueprint-v2-research.html">blueprint v2 research</a> — B0/B1/B8, the experiments this project applies</li><li><a href="nightelf-hunter-plan.html">nightelf hunter plan</a> — §6, the synthetic-dataset version and what it could not do</li><li><a href="identity-conditioning.html">identity conditioning</a> — why trained weights beat reference tokens on unseen angles</li><li><a href="scripts-reference.html">scripts reference</a> — <code>photo_dataset.sh</code>, <code>lora_eval.sh</code>, <code>train lora</code></li></ul></div>
 </div>

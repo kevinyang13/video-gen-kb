@@ -22,11 +22,11 @@ synthetic route could not manufacture. So this project starts where the night el
 
 ## 1. Consent
 
-Ivy is family and consent is settled, the same standing as [[kyle-is-kevins-son]] and Lindsey.
-Two practical rules follow:
+Ivy is family — an adult — and consent is settled, the same standing as [[kyle-is-kevins-son]]
+and Lindsey. Two practical rules follow:
 
-- `projects/ivy_lora/*/raw/` is **git-ignored**. A public repository is the wrong home for a
-  few dozen photographs of a child, whatever the consent position is.
+- `projects/ivy_lora/*/raw/` is **git-ignored**. Consent to train on a face is not consent to
+  publish the source photographs; this repository is public and they are personal photographs.
 - Conversion to PNG drops the EXIF block, so **GPS coordinates do not travel with the dataset**.
   `scripts/photo_dataset.sh` does this as a side effect of resizing; it is not incidental.
 
@@ -34,15 +34,21 @@ Two practical rules follow:
 
 | | |
 |---|---|
-| Count | 25–50 photographs |
-| Split | ~40% close-up, ~40% medium, ~20% wide |
-| Variety that matters | angle, distance, lighting, expression, clothing, background |
-| Variety that hurts | other people in frame, heavy filters, motion blur, sunglasses, near-duplicate frames from a burst |
-| Trigger | `ivy_kx` |
+| Count | **22** — 16 supplied photographs plus 6 reframes cropped from their own full-resolution originals |
+| Split | 11 close-up, 8 medium, 3 full body |
+| Sources | Hawaii, Tahiti, Paris, Venice, Rome; indoor restaurant, cafe, boat, beach, night canal |
+| Lighting | warm indoor, flat overcast, hard midday, golden hour, open shade, night flash, hazy backlight |
+| Trigger | `ivy_kx`, always followed by the class word `woman` |
+| Known gap | **every frame is frontal or three-quarter.** No profile, no back of head — the supplied set has none, and B0 established klein cannot invent them from a reference |
 
 ```
-scripts/photo_dataset.sh <source folder> projects/ivy_lora/v1-photo-dataset/seed/dataset 1024 ivy_kx
+scripts/photo_dataset.sh raw projects/ivy_lora/v1-photo-dataset/seed/dataset 1024 ivy_kx
 ```
+
+The six reframes were cropped from the 2048 px originals with ffmpeg, not upscaled from the
+1024 px working copies, so they carry real detail rather than interpolated pixels. A crop of a
+photograph is genuine data — a different framing of a real moment — where a klein re-render of
+the same photograph would be a second-hand copy of it.
 
 Long side capped at 1024, aspect preserved — the trainer's `--use-aspect-ratio` buckets by
 shape, so cropping to square here would discard the framing variety that justified using photos.
@@ -89,7 +95,8 @@ a LoRA that does nothing produce the same grid without it. Judge on the out-of-d
 
 ## 6. Status
 
-Scaffolded. Waiting on the photographs.
+Dataset built 2026-09-26: 22 image/caption pairs. Training run started the same day — 2,000
+steps, checkpoints every 400.
 
 ## Related pages
 - [[blueprint-v2-research]] — B0/B1/B8, the experiments this project applies
