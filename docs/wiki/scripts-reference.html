@@ -308,6 +308,8 @@ XFADE=0.5 FPS=25 MUSIC=bed.mp3 LETTERBOX=1  scripts/assemble_film.sh ...
 </code></pre>
 <p>A Draw Things project is one SQLite file: <code>~/Library/Containers/com.liuliu.draw-things/Data/Documents/NAME.sqlite3</code> (plus <code>-shm</code>/<code>-wal</code> while open). The project name <strong>is</strong> the filename, so <code>mv</code> renames it and the Projects list updates live — verified 2026-09-21 (<code>Untitled-66452</code> → <code>junk-66452</code> appeared without a restart). Rules: never touch the currently open project (its WAL is live) — switch to another project first; <code>delete</code> moves the three files to <code>~/.Trash</code>. This replaces the in-app Rename dialog, which background automation cannot see.</p>
 <p>New-project flow: <strong>+</strong> in Projects (creates and opens <code>Untitled-NNNNN</code>) → click any other project → <code>scripts/dt_project.sh rename-newest lostcity-s3</code> → click the renamed row.</p>
+<h2>Where files live</h2>
+<p>Since 2026-09-25 every project owns one folder, <code>projects/&lt;id&gt;/</code>, with <code>plan/ raw/ seed/ stills/ clips/ music/ final/ logs/</code>. Scripts take paths as arguments and <code>film_run.py</code> resolves everything relative to <code>run-spec.dir</code> (<code>projects/&lt;id&gt;</code>), so the reorganisation needed no changes to the shell scripts — only <code>build_site.py</code>, which now collects pages from <code>wiki/*.md</code> <strong>and</strong> <code>projects/*/plan/*.md</code> so a project's page is published with the rest of the wiki and <code>&lt;span class="missing" title="page not written yet"&gt;wiki links&lt;/span&gt;</code> resolve from either place.</p>
 <h2>Site and registry scripts</h2>
 <div class="tw"><table>
 <thead>

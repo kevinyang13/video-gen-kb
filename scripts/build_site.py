@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render wiki/*.md into docs/ as a static site.
+"""Render wiki/*.md and projects/*/plan/*.md into docs/ as a static site.
 
 - docs/wiki/<slug>.html   one page per wiki markdown file
 - docs/wiki/assets/       copy of wiki/assets/ (images referenced as assets/<file>)
@@ -20,6 +20,7 @@ import markdown
 
 ROOT = Path(__file__).resolve().parent.parent
 WIKI = ROOT / "wiki"
+PROJECTS = ROOT / "projects"
 DOCS = ROOT / "docs"
 OUT = DOCS / "wiki"
 
@@ -278,8 +279,11 @@ def build():
     (DOCS / ".nojekyll").touch()
     today = date.today().isoformat()
 
-    slugs = {p.stem for p in WIKI.glob("*.md")}
-    for path in sorted(WIKI.glob("*.md")):
+    # pages live in wiki/ and in each project's plan/ folder; slugs are global so
+    # [[wiki-links]] resolve the same way from either place
+    pages = sorted(WIKI.glob("*.md")) + sorted(PROJECTS.glob("*/plan/*.md"))
+    slugs = {p.stem for p in pages}
+    for path in pages:
         slug = path.stem
         raw = path.read_text(encoding="utf-8")
         html = md_to_html(raw, slugs)

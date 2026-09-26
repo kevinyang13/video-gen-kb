@@ -2,9 +2,15 @@
 .obsidian/workspace.json
 .claude/settings.local.json
 raw/photos/
-raw/clips/
-raw/face/
-raw/dragon/
-raw/lostcity/
+# generated per project: everything except plan/ and raw/
+projects/*/seed/
+projects/*/stills/
+projects/*/clips/
+projects/*/final/
+projects/*/music/
+projects/*/logs/
+# large or personal source sets, as before
+projects/dragon_epic/raw/
+projects/lost_city/raw/
 tools/draw-things-community/
 tools/*.log

@@ -253,7 +253,7 @@ Prompt: `per scene — see scenes`
 | Shift | 3 |
 | Sampler | DDIM Trailing |
 
-Prompt: `per shot — raw/clips/fll/stills/sN.txt`
+Prompt: `per shot — projects/fll_champions/stills/sN.txt`
 
 **I2V**
 
@@ -272,7 +272,7 @@ Prompt: `per shot — raw/clips/fll/stills/sN.txt`
 | Strength | 100% |
 | I2V time (min) | 10 |
 
-Prompt: `per shot — raw/clips/fll/stills/sN_v.txt`
+Prompt: `per shot — projects/fll_champions/stills/sN_v.txt`
 
 **Post**
 

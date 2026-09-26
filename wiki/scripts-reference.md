@@ -193,6 +193,10 @@ A Draw Things project is one SQLite file: `~/Library/Containers/com.liuliu.draw-
 
 New-project flow: **+** in Projects (creates and opens `Untitled-NNNNN`) → click any other project → `scripts/dt_project.sh rename-newest lostcity-s3` → click the renamed row.
 
+## Where files live
+
+Since 2026-09-25 every project owns one folder, `projects/<id>/`, with `plan/ raw/ seed/ stills/ clips/ music/ final/ logs/`. Scripts take paths as arguments and `film_run.py` resolves everything relative to `run-spec.dir` (`projects/<id>`), so the reorganisation needed no changes to the shell scripts — only `build_site.py`, which now collects pages from `wiki/*.md` **and** `projects/*/plan/*.md` so a project's page is published with the rest of the wiki and `[[wiki-links]]` resolve from either place.
+
 ## Site and registry scripts
 
 | Script | What it does |

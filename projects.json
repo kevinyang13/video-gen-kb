@@ -260,7 +260,7 @@
         "dragon/scene1a.mov (v1, ghosting)",
         "dragon/scene1a_4k.mp4 (v1)"
       ],
-      "notes": "Plan page: wiki/dragon-epic-plan.md. Experiments E1–E7 must pass before rendering the shot list. Needs face photos in raw/face/. Delivery is 4K UHD. Scene 1A: v1 ghosted (push-in + translation), v2 noise (refiner 50%), v3 clean (10%, articulation-only prompt).",
+      "notes": "Plan page: wiki/dragon-epic-plan.md. Experiments E1–E7 must pass before rendering the shot list. Needs face photos in projects/dragon_epic/raw/face/. Delivery is 4K UHD. Scene 1A: v1 ghosted (push-in + translation), v2 noise (refiner 50%), v3 clean (10%, articulation-only prompt).",
       "youtube": "Xzu-c5yX8uo"
     },
     {
@@ -507,7 +507,7 @@
       "status": "delivered 2026-09-23 01:38 — 60.0 s, 1080x1920 + 2160x3840, rendered unattended overnight (see plan §0)",
       "youtube": "KscAwvCi6iQ",
       "youtube_note": "YouTube Short, 2160x3840 master",
-      "source": "raw/kyle/comic_source.webp",
+      "source": "projects/kyle_rescue/raw/comic_source.webp",
       "still": {
         "model": "FLUX.2 [klein] 9B (8-bit S) via draw-things-cli",
         "size": "576x1024",
@@ -635,7 +635,7 @@
         "ltx_v2": 2
       },
       "run-spec": {
-        "dir": "raw/clips/kyle",
+        "dir": "projects/kyle_rescue",
         "name": "kyle_rescue",
         "size": [
           576,
@@ -672,7 +672,7 @@
           "video_format": "prores422hq"
         },
         "masters": {
-          "kyle": "masters/kyle_front.png"
+          "kyle": "seed/kyle_front.png"
         },
         "upscale": {
           "model": "realesrgan-x4plus",
@@ -690,7 +690,7 @@
           "bitrate": "40M"
         },
         "music": {
-          "file": "raw/clips/music/best_adventure_ever.mp3",
+          "file": "projects/kyle_rescue/music/best_adventure_ever.mp3",
           "start": "tail",
           "vol": 1.0,
           "fade_in": 1.5,
@@ -731,7 +731,7 @@
             "id": "s2",
             "still": {
               "ref": "kyle",
-              "input": "work/s2_in.png",
+              "input": "seed/s2_in.png",
               "prompt": "stills/s2.txt"
             },
             "video_prompt": "stills/s2_v.txt",
@@ -746,7 +746,7 @@
             "id": "s3",
             "still": {
               "ref": "kyle",
-              "input": "work/s3_in.png",
+              "input": "seed/s3_in.png",
               "prompt": "stills/s3.txt"
             },
             "video_prompt": "stills/s3_v.txt",
@@ -760,7 +760,7 @@
             "id": "s4",
             "still": {
               "ref": "stills/s3.png",
-              "input": "work/s4_in.png",
+              "input": "seed/s4_in.png",
               "prompt": "stills/s4.txt"
             },
             "video_prompt": "stills/s4_v.txt",
@@ -774,7 +774,7 @@
             "id": "s5",
             "still": {
               "ref": "kyle",
-              "input": "work/s5_in.png",
+              "input": "seed/s5_in.png",
               "prompt": "stills/s5.txt"
             },
             "video_prompt": "stills/s5_v.txt",
@@ -803,7 +803,7 @@
             "id": "s7",
             "still": {
               "ref": "kyle",
-              "input": "work/s7_in.png",
+              "input": "seed/s7_in.png",
               "prompt": "stills/s7.txt"
             },
             "video_prompt": "stills/s7_v.txt",
@@ -818,7 +818,7 @@
             "id": "s8",
             "still": {
               "ref": "stills/s7.png",
-              "input": "work/s8_in.png",
+              "input": "seed/s8_in.png",
               "prompt": "stills/s8.txt"
             },
             "video_prompt": "stills/s8_v.txt",
@@ -840,11 +840,11 @@
       "status": "delivered 2026-09-23 17:26 — 59.96 s, 1080x1920 + 2160x3840 + 720x1280 (see plan §0)",
       "youtube": "lbU-_73MliI",
       "youtube_note": "YouTube Short, 2160x3840 master",
-      "source": "raw/lindsey/comic_source.jpg",
+      "source": "projects/lindsey_art/raw/comic_source.jpg",
       "music": "Emotional Children Piano — Music_For_Videos, Pixabay (cdn.pixabay.com/download/audio/2023/09/03/audio_2c0ed5a272.mp3), 1:55; first 60 s (build to ~50 s, section ends at 60 s), 2 s fade out",
       "notes": "Lindsey is Kevin's daughter; consent confirmed 2026-09-23. Face from the comic, no photo.",
       "run-spec": {
-        "dir": "raw/clips/lindsey",
+        "dir": "projects/lindsey_art",
         "name": "lindsey_art",
         "size": [
           576,
@@ -881,7 +881,7 @@
           "video_format": "prores422hq"
         },
         "masters": {
-          "lindsey": "masters/lindsey_front.png"
+          "lindsey": "seed/lindsey_front.png"
         },
         "upscale": {
           "model": "realesrgan-x4plus",
@@ -899,7 +899,7 @@
           "bitrate": "40M"
         },
         "music": {
-          "file": "raw/clips/music/emotional_children_piano.mp3",
+          "file": "projects/lindsey_art/music/emotional_children_piano.mp3",
           "start": 0,
           "vol": 1.0,
           "fade_in": 0,
@@ -940,7 +940,7 @@
             "id": "s2",
             "still": {
               "ref": "lindsey",
-              "input": "work/s2_in.png",
+              "input": "seed/s2_in.png",
               "prompt": "stills/s2.txt"
             },
             "video_prompt": "stills/s2_v.txt",
@@ -955,7 +955,7 @@
             "id": "s3",
             "still": {
               "ref": "stills/s4.png",
-              "input": "work/s3_in.png",
+              "input": "seed/s3_in.png",
               "prompt": "stills/s3.txt"
             },
             "video_prompt": "stills/s3_v.txt",
@@ -969,7 +969,7 @@
             "id": "s4",
             "still": {
               "ref": "lindsey",
-              "input": "work/s4_in.png",
+              "input": "seed/s4_in.png",
               "prompt": "stills/s4.txt"
             },
             "video_prompt": "stills/s4_v.txt",
@@ -984,7 +984,7 @@
             "id": "s5",
             "still": {
               "ref": "lindsey",
-              "input": "work/s5_in.png",
+              "input": "seed/s5_in.png",
               "prompt": "stills/s5.txt"
             },
             "video_prompt": "stills/s5_v.txt",
@@ -998,7 +998,7 @@
             "id": "s6",
             "still": {
               "ref": "stills/s7.png",
-              "input": "work/s6_in.png",
+              "input": "seed/s6_in.png",
               "prompt": "stills/s6.txt"
             },
             "video_prompt": "stills/s6_v.txt",
@@ -1012,7 +1012,7 @@
             "id": "s7",
             "still": {
               "ref": "lindsey",
-              "input": "work/s7_in.png",
+              "input": "seed/s7_in.png",
               "prompt": "stills/s7.txt"
             },
             "video_prompt": "stills/s7_v.txt",
@@ -1027,7 +1027,7 @@
             "id": "s8",
             "still": {
               "ref": "lindsey",
-              "input": "work/s8_in.png",
+              "input": "seed/s8_in.png",
               "prompt": "stills/s8.txt"
             },
             "video_prompt": "stills/s8_v.txt",
@@ -1070,7 +1070,7 @@
       "theme": "3d",
       "dt_project": "none — draw-things-cli via scripts/film_run.py",
       "status": "delivered 2026-09-25 03:00 — 59.08 s, 3840x2160 + 1920x1080, 11 shots (competition-floor wide dropped); see wiki/fll-champions-plan.md",
-      "source": "raw/fll_champions/*.jpg (5 photos, 2576x1932, added 2026-09-23)",
+      "source": "projects/fll_champions/raw/*.jpg (5 photos, 2576x1932, added 2026-09-23)",
       "notes": "Kevin is the team's coach; consent for all five children confirmed by him 2026-09-23. 3D-animated look chosen over photoreal precisely because five recurring child faces are the heaviest identity load attempted here — stylised faces hold through LTX motion. No on-screen text. Source photos are real: every shot still is a klein edit of a photo (identity from pixels), and the two invented shots (s6, s7) chain off approved stills. Companion to the comic-derived fll_bot_builders film, which covers the same team from drawn panels. This one differs in approach: every still here is a klein edit of a real photo at --strength 1.0 (the garage build table, the farm gate, the logs, the team portrait), where the comic film works from drawn panels. Two rules came out of it — see the run notes. Known flaw in the delivered cut: it mixes two generations of stills — seven shots rendered 2026-09-23 before the masters existed, four restaged 2026-09-25 from the rebuilt Pixar masters. The same children are drawn by two recipes and it is visible across cuts. Not re-done; recorded as the lesson (wiki/fll-champions-plan.md §3b).",
       "still": {
         "model": "FLUX.2 [klein] 9B (8-bit S)",
@@ -1080,7 +1080,7 @@
         "shift": 3,
         "sampler": "DDIM Trailing",
         "control": "edit mode: --image <photo> --strength 1.0, prompt is the instruction",
-        "prompt": "per shot — raw/clips/fll/stills/sN.txt"
+        "prompt": "per shot — projects/fll_champions/stills/sN.txt"
       },
       "i2v": {
         "model": "LTX-2.3 22B [distilled] 1.1",
@@ -1091,7 +1091,7 @@
         "cfg": 1.0,
         "shift": 5.0,
         "sampler": "TCD Trailing",
-        "prompt": "per shot — raw/clips/fll/stills/sN_v.txt",
+        "prompt": "per shot — projects/fll_champions/stills/sN_v.txt",
         "time_min": 10
       },
       "post": {
@@ -1120,7 +1120,7 @@
         }
       },
       "run-spec": {
-        "dir": "raw/clips/fll",
+        "dir": "projects/fll_champions",
         "name": "fll_champions",
         "size": [
           1024,
@@ -1157,16 +1157,16 @@
           "video_format": "prores422hq"
         },
         "masters": {
-          "kei": "masters/kei.png",
-          "kyle": "masters/kyle.png",
-          "lindsey": "masters/lindsey.png",
-          "lola": "masters/lola.png",
-          "cheryl": "masters/cheryl.png",
-          "table": "masters/table.png",
-          "farm_logs": "masters/farm_logs.png",
-          "farm_barn": "masters/farm_barn.png",
-          "farm_coop": "masters/farm_coop.png",
-          "venue": "masters/venue.png"
+          "kei": "seed/kei.png",
+          "kyle": "seed/kyle.png",
+          "lindsey": "seed/lindsey.png",
+          "lola": "seed/lola.png",
+          "cheryl": "seed/cheryl.png",
+          "table": "seed/table.png",
+          "farm_logs": "seed/farm_logs.png",
+          "farm_barn": "seed/farm_barn.png",
+          "farm_coop": "seed/farm_coop.png",
+          "venue": "seed/venue.png"
         },
         "upscale": {
           "model": "realesrgan-x4plus",
@@ -1184,7 +1184,7 @@
           "bitrate": "40M"
         },
         "music": {
-          "file": "raw/clips/music/light_adventure.mp3",
+          "file": "projects/fll_champions/music/light_adventure.mp3",
           "start": 0,
           "vol": 0.45,
           "fade_in": 0,
@@ -1204,7 +1204,7 @@
             "id": "s1",
             "still": {
               "ref": null,
-              "input": "work/in_s1.png",
+              "input": "seed/in_s1.png",
               "prompt": "stills/s1.txt"
             },
             "video_prompt": "stills/s1_v.txt",
@@ -1247,7 +1247,7 @@
             "id": "s5",
             "still": {
               "ref": null,
-              "input": "work/in_s5.png",
+              "input": "seed/in_s5.png",
               "prompt": "stills/s5.txt"
             },
             "video_prompt": "stills/s5_v.txt",
@@ -1261,7 +1261,7 @@
             "id": "s3",
             "still": {
               "ref": null,
-              "input": "work/in_s3.png",
+              "input": "seed/in_s3.png",
               "prompt": "stills/s3.txt"
             },
             "video_prompt": "stills/s3_v.txt",
@@ -1275,7 +1275,7 @@
             "id": "s4",
             "still": {
               "ref": null,
-              "input": "work/in_s4.png",
+              "input": "seed/in_s4.png",
               "prompt": "stills/s4.txt"
             },
             "video_prompt": "stills/s4_v.txt",
@@ -1368,11 +1368,11 @@
       "date": "2026-09-23",
       "dt_project": "none — draw-things-cli via scripts/film_run.py",
       "status": "delivered 2026-09-24 04:11 — 63.5 s (planned 90; five-kid rule), 1920x1080 + 3840x2160 + 1280x720 (see plan §0)",
-      "source": "raw/fll_bot/comic_page1.jpg, comic_page2.jpg, comic_page3.jpg",
+      "source": "projects/fll_bot_builders/raw/comic_page1.jpg, comic_page2.jpg, comic_page3.jpg",
       "music": "Victory — The_Mountain, Pixabay (cdn.pixabay.com/download/audio/2024/01/15/audio_2a9142d9ae.mp3), 2:19; first 90 s (quiet 45 s, climbs to -10 dB by 90 s), 2 s fade out",
       "notes": "Separate project from fll_farm. Faces OK: Kevin says all five families consent (2026-09-23). Exactly five children in every frame, no extra kids; background people adults only. Kyle and Lindsey masters reused (re-dressed). Logos and lettering removed.",
       "run-spec": {
-        "dir": "raw/clips/fll_bot",
+        "dir": "projects/fll_bot_builders",
         "name": "bot_builders",
         "size": [
           1024,
@@ -1391,12 +1391,12 @@
           "seed": 1
         },
         "masters": {
-          "team": "masters/team.png",
-          "kyle": "masters/kyle.png",
-          "lindsey": "masters/lindsey.png",
-          "boy2": "masters/boy2.png",
-          "girla": "masters/girla.png",
-          "girlb": "masters/girlb.png"
+          "team": "seed/team.png",
+          "kyle": "seed/kyle.png",
+          "lindsey": "seed/lindsey.png",
+          "boy2": "seed/boy2.png",
+          "girla": "seed/girla.png",
+          "girlb": "seed/girlb.png"
         },
         "upscale": {
           "model": "realesrgan-x4plus",
@@ -1414,7 +1414,7 @@
           "bitrate": "40M"
         },
         "music": {
-          "file": "raw/clips/music/victory_the_mountain.mp3",
+          "file": "projects/fll_bot_builders/music/victory_the_mountain.mp3",
           "start": 0,
           "vol": 1.0,
           "fade_in": 0,
@@ -1441,7 +1441,7 @@
             "id": "s1",
             "still": {
               "ref": "team",
-              "input": "work/s1_in.png",
+              "input": "seed/s1_in.png",
               "prompt": "stills/s1.txt"
             },
             "video_prompt": "stills/s1_v.txt",
@@ -1456,7 +1456,7 @@
             "id": "s2",
             "still": {
               "ref": "team",
-              "input": "work/s2_in.png",
+              "input": "seed/s2_in.png",
               "prompt": "stills/s2.txt"
             },
             "video_prompt": "stills/s2_v.txt",
@@ -1471,7 +1471,7 @@
             "id": "s3",
             "still": {
               "ref": "team",
-              "input": "work/s3_in.png",
+              "input": "seed/s3_in.png",
               "prompt": "stills/s3.txt",
               "seeds": [
                 4,
@@ -1491,7 +1491,7 @@
             "id": "s4",
             "still": {
               "ref": "team",
-              "input": "work/s4_in.png",
+              "input": "seed/s4_in.png",
               "prompt": "stills/s4.txt"
             },
             "video_prompt": "stills/s4_v.txt",
@@ -1506,7 +1506,7 @@
             "id": "s5",
             "still": {
               "ref": "team",
-              "input": "work/s5_in.png",
+              "input": "seed/s5_in.png",
               "prompt": "stills/s5.txt"
             },
             "video_prompt": "stills/s5_v.txt",
@@ -1521,7 +1521,7 @@
             "id": "s6",
             "still": {
               "ref": "team",
-              "input": "work/s6_in.png",
+              "input": "seed/s6_in.png",
               "prompt": "stills/s6.txt",
               "seeds": [
                 4,
@@ -1541,7 +1541,7 @@
             "id": "s7",
             "still": {
               "ref": "team",
-              "input": "work/s7_in.png",
+              "input": "seed/s7_in.png",
               "prompt": "stills/s7.txt"
             },
             "video_prompt": "stills/s7_v.txt",
@@ -1556,7 +1556,7 @@
             "id": "s8",
             "still": {
               "ref": "team",
-              "input": "work/s8_in.png",
+              "input": "seed/s8_in.png",
               "prompt": "stills/s8.txt"
             },
             "video_prompt": "stills/s8_v.txt",
@@ -1571,7 +1571,7 @@
             "id": "s9",
             "still": {
               "ref": "team",
-              "input": "work/s9_in.png",
+              "input": "seed/s9_in.png",
               "prompt": "stills/s9.txt"
             },
             "video_prompt": "stills/s9_v.txt",
@@ -1586,7 +1586,7 @@
             "id": "s10",
             "still": {
               "ref": "team",
-              "input": "work/s10_in.png",
+              "input": "seed/s10_in.png",
               "prompt": "stills/s10.txt",
               "seeds": [
                 4,
@@ -1606,7 +1606,7 @@
             "id": "s11",
             "still": {
               "ref": "team",
-              "input": "work/s11_in.png",
+              "input": "seed/s11_in.png",
               "prompt": "stills/s11.txt",
               "seeds": [
                 4,
@@ -1626,7 +1626,7 @@
             "id": "s12",
             "still": {
               "ref": "team",
-              "input": "work/s12_in.png",
+              "input": "seed/s12_in.png",
               "prompt": "stills/s12.txt"
             },
             "video_prompt": "stills/s12_v.txt",
