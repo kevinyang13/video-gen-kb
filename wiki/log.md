@@ -8,6 +8,10 @@
 
 ---
 
+## 2026-09-25 — Structure written up as a page
+
+**Created**: `wiki/repo-structure.md` — the shared-root vs per-project split, what each folder holds (`seed/` being the non-obvious one), tracked vs generated, how `run-spec.dir` ties the registry to a folder, how plan pages publish with the wiki, a checklist for starting a project, and the intermediate-deletion table with the sole-copy guard. `CLAUDE.md` now points at it instead of carrying a second copy of the tree. Indexed under Recipes.
+
 ## 2026-09-25 — Repo reorganised into one folder per project; film3min removed
 
 **Reorganisation**: every project now owns `projects/<id>/` with `plan/ raw/ seed/ stills/ clips/ music/ final/ logs/`; 843 files moved out of the old split (sources in `raw/<project>/`, output in `raw/clips/<project>/` under four different layouts, seven projects loose in `raw/clips/`, music shared, plans in `wiki/`). Shared infrastructure — `wiki/`, `docs/`, `scripts/`, `tools/`, `raw/` for cross-project sources, `projects.json` — unchanged. `build_site.py` now collects pages from `wiki/*.md` **and** `projects/*/plan/*.md`, so project pages publish with the wiki and `[[links]]` resolve from either place. The shell scripts needed no edits because `film_run.py` resolves paths from `run-spec.dir`.

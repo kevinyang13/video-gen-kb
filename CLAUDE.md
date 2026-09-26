@@ -9,49 +9,30 @@ Claude maintains the wiki. The human curates sources, asks questions, and guides
 
 ## Folder structure
 
-Shared across every project:
-```
-wiki/         -- concept, recipe and reference pages maintained by Claude
-wiki/index.md -- table of contents for the entire wiki
-wiki/log.md   -- append-only record of all operations
-docs/         -- generated static site (do not edit by hand)
-raw/          -- cross-project source documents (immutable -- never modify)
-scripts/      -- the pipeline (see wiki/scripts-reference.md)
-tools/        -- realesrgan and other binaries
-projects.json -- registry of every video project; scripts/build_projects.py renders it
-```
+Full detail, including what is tracked vs generated and how to start a project: `wiki/repo-structure.md`.
 
-One folder per project, named for its `projects.json` id:
 ```
-projects/<id>/
-  plan/    -- the project's wiki page(s); rendered into the site alongside wiki/
-  raw/     -- that project's source photos, comics, references (immutable)
-  seed/    -- character and location masters, crops, candidate renders, prompt inputs
-  stills/  -- picked first frames + per-shot prompt files
-  clips/   -- I2V exports (.mov)
-  music/   -- the track(s) that project is cut to
-  final/   -- trimmed, upscaled and assembled deliverables
-  logs/    -- run logs
+wiki/  docs/  raw/  scripts/  tools/  projects.json     <- shared across projects
+projects/<id>/{plan,raw,seed,stills,clips,music,final,logs}
 ```
-Only `plan/` and `raw/` are tracked; the rest is generated and git-ignored (see `.gitignore`;
-`dragon_epic/raw/` and `lost_city/raw/` are ignored too, being large or personal).
-A project's `run-spec.dir` in `projects.json` is `projects/<id>`, and every path inside it is
-relative to that.
+Only `plan/` and `raw/` are tracked per project; the rest is generated and git-ignored.
+A project's `run-spec.dir` in `projects.json` is `projects/<id>`, and paths inside it are relative.
+`scripts/build_site.py` renders `wiki/*.md` **and** `projects/*/plan/*.md` into `docs/`.
 
 Key scripts:
 ```
-scripts/build_site.py   -- wiki/*.md + projects/*/plan/*.md -> docs/
+scripts/build_site.py     -- wiki/ + projects/*/plan/ -> docs/
 scripts/build_projects.py -- projects.json -> wiki/projects*.md (run by build_site.py)
-scripts/film_run.py     -- runs a film from its run-spec: check/status/stills/pick/clips/qc/finish
-scripts/dt_diptych.sh   -- klein still: diptych / single edit / text-to-image
-scripts/dt_clip.sh      -- I2V clip (LTX or Wan presets)
-scripts/qc_sheet.sh     -- contact sheet: reference + N frames
-scripts/upscale_4k.sh   -- clip -> 3840x2160 (W/H configurable) via Real-ESRGAN
-scripts/assemble_film.sh -- N clips -> one film with crossfades (+ music)
-scripts/finish_clip.sh  -- 5 s I2V export -> looped 1080x1920 mp4 (+ music)
-scripts/preflight.sh    -- pre-run checks (--fix quits Draw Things, starts caffeinate)
-scripts/dt_project.sh   -- list/rename/delete Draw Things projects on disk
-serve.sh                -- rebuild + serve docs/ on http://localhost:8788
+scripts/film_run.py       -- run a film from its run-spec: check/status/stills/pick/clips/qc/finish
+scripts/dt_diptych.sh     -- klein still: diptych / single edit / text-to-image
+scripts/dt_clip.sh        -- I2V clip (LTX or Wan presets)
+scripts/qc_sheet.sh       -- contact sheet: reference + N frames
+scripts/upscale_4k.sh     -- clip -> 3840x2160 (W/H configurable) via Real-ESRGAN
+scripts/assemble_film.sh  -- N clips -> one film with crossfades (+ music)
+scripts/finish_clip.sh    -- 5 s I2V export -> looped 1080x1920 mp4 (+ music)
+scripts/preflight.sh      -- pre-run checks (--fix quits Draw Things, starts caffeinate)
+scripts/dt_project.sh     -- list/rename/delete Draw Things projects on disk
+serve.sh                  -- rebuild + serve docs/ on http://localhost:8788
 ```
 
 ## Producing a video

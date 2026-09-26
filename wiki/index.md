@@ -42,6 +42,7 @@
 ## Recipes
 
 - [[idea-to-video-blueprint]] — **start here for a new film**: idea → intake questionnaire → storyboard approval → unattended CLI run (masters, diptych stills, LTX batch, QC/redo, upscale, music, report); rules, rubric, time budget, failure playbook
+- [[repo-structure]] — where everything lives: shared root vs one folder per project, tracked vs generated, how to start a project, what counts as a disposable intermediate
 - [[scripts-reference]] — every pipeline script by production phase, the run-spec that drives them, `film_run.py` (check/stills/pick/clips/qc/finish), options, validation, tests, timings
 - [[runbook-living-painting]] — **start here next time**: click-by-click checklist, settings to verify after every model switch, failure signatures, `scripts/finish_clip.sh`
 - [[living-painting-loop]] — TikTok-style animated painting: Wan 2.2 T2V still → I2V ambient motion → ffmpeg ping-pong loop; exact Draw Things settings and UI gotchas
