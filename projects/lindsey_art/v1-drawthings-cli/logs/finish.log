@@ -1,0 +1,38 @@
+$ ffmpeg -nostdin -v error -y -i /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/clips/s1_v1.mov -vf trim=start=0:end=5.4,setpts=PTS-STARTPTS -af atrim=start=0:end=5.4,asetpts=PTS-STARTPTS -c:v prores_ks -profile:v 3 -c:a pcm_s16le /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/s1_t.mov
+$ W=2160 H=3840 FIT=crop BITRATE=40M KEEP_FRAMES=0 KEEP_AUDIO=0 /Users/kevinyang/dev/video-gen-kb/scripts/upscale_4k.sh /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/s1_t.mov /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/s1 realesrgan-x4plus
+hevc,2160,3840,yuv420p10le,135
+4k: /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/s1_4k.mp4
+$ ffmpeg -nostdin -v error -y -i /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/clips/s2_v3.mov -vf trim=start=0:end=6.5,setpts=PTS-STARTPTS -af atrim=start=0:end=6.5,asetpts=PTS-STARTPTS -c:v prores_ks -profile:v 3 -c:a pcm_s16le /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/s2_t.mov
+$ W=2160 H=3840 FIT=crop BITRATE=40M KEEP_FRAMES=0 KEEP_AUDIO=0 /Users/kevinyang/dev/video-gen-kb/scripts/upscale_4k.sh /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/s2_t.mov /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/s2 realesrgan-x4plus
+hevc,2160,3840,yuv420p10le,163
+4k: /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/s2_4k.mp4
+$ ffmpeg -nostdin -v error -y -i /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/clips/s3_v3.mov -vf trim=start=0:end=9,setpts=PTS-STARTPTS -af atrim=start=0:end=9,asetpts=PTS-STARTPTS -c:v prores_ks -profile:v 3 -c:a pcm_s16le /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/s3_t.mov
+$ W=2160 H=3840 FIT=crop BITRATE=40M KEEP_FRAMES=0 KEEP_AUDIO=0 /Users/kevinyang/dev/video-gen-kb/scripts/upscale_4k.sh /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/s3_t.mov /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/s3 realesrgan-x4plus
+hevc,2160,3840,yuv420p10le,225
+4k: /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/s3_4k.mp4
+$ ffmpeg -nostdin -v error -y -i /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/clips/s4_v1.mov -vf trim=start=0:end=9.96,setpts=PTS-STARTPTS -af atrim=start=0:end=9.96,asetpts=PTS-STARTPTS -c:v prores_ks -profile:v 3 -c:a pcm_s16le /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/s4_t.mov
+$ W=2160 H=3840 FIT=crop BITRATE=40M KEEP_FRAMES=0 KEEP_AUDIO=0 /Users/kevinyang/dev/video-gen-kb/scripts/upscale_4k.sh /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/s4_t.mov /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/s4 realesrgan-x4plus
+hevc,2160,3840,yuv420p10le,249
+4k: /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/s4_4k.mp4
+$ ffmpeg -nostdin -v error -y -i /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/clips/s5_v1.mov -vf trim=start=0:end=9.96,setpts=PTS-STARTPTS -af atrim=start=0:end=9.96,asetpts=PTS-STARTPTS -c:v prores_ks -profile:v 3 -c:a pcm_s16le /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/s5_t.mov
+$ W=2160 H=3840 FIT=crop BITRATE=40M KEEP_FRAMES=0 KEEP_AUDIO=0 /Users/kevinyang/dev/video-gen-kb/scripts/upscale_4k.sh /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/s5_t.mov /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/s5 realesrgan-x4plus
+hevc,2160,3840,yuv420p10le,249
+4k: /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/s5_4k.mp4
+$ ffmpeg -nostdin -v error -y -i /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/clips/s6_v2.mov -vf trim=start=0:end=8.5,setpts=PTS-STARTPTS -af atrim=start=0:end=8.5,asetpts=PTS-STARTPTS -c:v prores_ks -profile:v 3 -c:a pcm_s16le /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/s6_t.mov
+$ W=2160 H=3840 FIT=crop BITRATE=40M KEEP_FRAMES=0 KEEP_AUDIO=0 /Users/kevinyang/dev/video-gen-kb/scripts/upscale_4k.sh /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/s6_t.mov /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/s6 realesrgan-x4plus
+hevc,2160,3840,yuv420p10le,213
+4k: /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/s6_4k.mp4
+$ ffmpeg -nostdin -v error -y -i /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/clips/s7_v1.mov -vf trim=start=0:end=6.5,setpts=PTS-STARTPTS -af atrim=start=0:end=6.5,asetpts=PTS-STARTPTS -c:v prores_ks -profile:v 3 -c:a pcm_s16le /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/s7_t.mov
+$ W=2160 H=3840 FIT=crop BITRATE=40M KEEP_FRAMES=0 KEEP_AUDIO=0 /Users/kevinyang/dev/video-gen-kb/scripts/upscale_4k.sh /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/s7_t.mov /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/s7 realesrgan-x4plus
+hevc,2160,3840,yuv420p10le,163
+4k: /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/s7_4k.mp4
+$ ffmpeg -nostdin -v error -y -i /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/clips/s8_v2.mov -vf trim=start=0:end=9.3,setpts=PTS-STARTPTS -af atrim=start=0:end=9.3,asetpts=PTS-STARTPTS -c:v prores_ks -profile:v 3 -c:a pcm_s16le /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/s8_t.mov
+$ W=2160 H=3840 FIT=crop BITRATE=40M KEEP_FRAMES=0 KEEP_AUDIO=0 /Users/kevinyang/dev/video-gen-kb/scripts/upscale_4k.sh /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/s8_t.mov /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/s8 realesrgan-x4plus
+hevc,2160,3840,yuv420p10le,233
+4k: /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/s8_4k.mp4
+$ W=2160 H=3840 FPS=25 XFADE=0.75 BITRATE=40M CLIP_AUDIO=0 MUSIC=/Users/kevinyang/dev/video-gen-kb/raw/clips/music/emotional_children_piano.mp3 MUSIC_START=0 MUSIC_FADE_IN=0 MUSIC_FADE_OUT=2 MUSIC_VOL=1.0 CLIP_VOL=0 /Users/kevinyang/dev/video-gen-kb/scripts/assemble_film.sh /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/lindsey_art_2160x3840.mp4 /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/s1_4k.mp4 /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/s2_4k.mp4 /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/s3_4k.mp4 /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/s4_4k.mp4 /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/s5_4k.mp4 /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/s6_4k.mp4 /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/s7_4k.mp4 /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/s8_4k.mp4
+film: /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/lindsey_art_2160x3840.mp4 (59.960000s, expected 59.95s, music from 0s)
+$ ffmpeg -nostdin -v error -y -i /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/lindsey_art_2160x3840.mp4 -vf scale=1080:1920:flags=lanczos -c:v hevc_videotoolbox -b:v 12M -tag:v hvc1 -c:a copy -movflags +faststart /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/lindsey_art_1080x1920.mp4
+$ ffmpeg -nostdin -v error -y -i /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/lindsey_art_2160x3840.mp4 -vf scale=720:1280:flags=lanczos -c:v hevc_videotoolbox -b:v 2.8M -tag:v hvc1 -c:a copy -movflags +faststart /Users/kevinyang/dev/video-gen-kb/raw/clips/lindsey/final/lindsey_art_720x1280.mp4
+finished: raw/clips/lindsey/final/lindsey_art_2160x3840.mp4
+FINISH rc=0 17:26

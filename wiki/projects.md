@@ -1,8 +1,8 @@
 # Projects Registry
 
-**Summary**: Index of every video project so far, grouped by theme. The full record for each one — models, settings, prompts, seeds, music, files — lives on its theme page. Generated from `projects.json`; edit that file, not these pages.
+**Summary**: Index of every video project so far, grouped by theme. The full record for each one — models, settings, prompts, seeds, music, files — lives on its theme page. Generated from each version's `spec.json`; edit those, not this page.
 
-**Sources**: projects.json; per-project notes from the session logs.
+**Sources**: projects/*/*/spec.json; per-project notes from the session logs.
 
 **Last updated**: 2026-09-25
 

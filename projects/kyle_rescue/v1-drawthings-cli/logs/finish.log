@@ -1,0 +1,11 @@
+s1 upscale rc=0 438s 00:32
+_ltx_v2 upscale rc=1 0s 00:32
+s2 upscale rc=0 538s 00:41
+s3 upscale rc=0 668s 00:52
+s4 upscale rc=0 668s 01:03
+s5 upscale rc=0 405s 01:10
+s6 upscale rc=0 485s 01:18
+s7 upscale rc=0 537s 01:27
+s8 upscale rc=0 644s 01:38
+film: raw/clips/kyle/final/film_nomusic.mp4 (60.000000s)
+FINISHED D=60.000000 music_ss=93.4 01:38

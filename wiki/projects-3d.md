@@ -1,8 +1,8 @@
 # 3D-animated projects
 
-**Summary**: Pixar-style 3D-animated shorts. Kyle's Antarctic Rescue, Lindsey: A Small Dream. Full record per project: models, settings, prompts, seeds, music and output files. Generated from `projects.json`.
+**Summary**: Pixar-style 3D-animated shorts. Kyle's Antarctic Rescue, Lindsey: A Small Dream. Full record per project: models, settings, prompts, seeds, music and output files. Generated from each version's `spec.json`.
 
-**Sources**: projects.json; per-project notes from the session logs.
+**Sources**: projects/*/*/spec.json; per-project notes from the session logs.
 
 **Last updated**: 2026-09-25
 

@@ -94,6 +94,15 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
   </nav>
   <h1>Log</h1><p class="lede">Append-only record of every operation performed on this wiki.</p><div class="meta"><span><b>Updated</b> 2026-09-22</span><span><b>Sources</b> n/a</span></div>
 <hr />
+<h2>2026-09-25 — Script audit against the new structure</h2>
+<p>Audited all 13 scripts. The nine shell scripts take every path as an argument and needed no changes. The two Python drivers encoded the old layout:</p>
+<ul>
+<li><strong>A real bug in <code>film_run.py</code></strong>: <code>stills</code> wrote seed candidates to <code>work/&lt;id&gt;_c&lt;seed&gt;.png</code> and <code>qc</code> wrote sheets to <code>work/</code>, but <code>work/</code> was folded into <code>seed/</code> during the reorganisation — and because the new <code>.gitignore</code> lists the folders by name, a recreated <code>work/</code> was <strong>not ignored</strong>, so the next run would have committed a few hundred MB of candidate PNGs. Confirmed with <code>git check-ignore</code> before fixing. Candidates and QC sheets now go to <code>seed/</code>; <code>projects/*/*/work/**</code> is ignored as a safety net.</li>
+<li><code>resolve_ref</code> still accepted <code>masters/</code> and <code>work/</code> prefixes for a shot's <code>ref</code>; now <code>seed/</code> and <code>stills/</code>.</li>
+<li>Docstrings in both drivers described <code>raw/clips/&lt;project&gt;</code>, <code>masters/</code>, prompt files and "projects.json is the source of truth". Rewritten for <code>projects/&lt;id&gt;/&lt;version&gt;/spec.json</code>.</li>
+<li><a href="scripts-reference.html">scripts reference</a> had the same stale paths in its run-spec example and its per-script usage lines; updated, including the note that prompts are text in the spec and materialised to <code>.gen/</code>.</li>
+</ul>
+<p>Verified after: all four run-specs <code>check: PASS</code>, and a dry run shows candidates targeting <code>seed/</code> and prompts resolving through <code>.gen/</code>.</p>
 <h2>2026-09-25 — Blueprint brought up to the current structure</h2>
 <p><a href="idea-to-video-blueprint.html">idea to video blueprint</a> still described the pre-reorganisation world: <code>raw/&lt;project&gt;/</code> for sources, <code>raw/clips/&lt;project&gt;/</code> with <code>masters/</code> and <code>work/</code>, prompts as <code>stills/sN.txt</code>, the run-spec inside the root <code>projects.json</code>, QC notes in <code>work/</code>, and hand-written <code>raw/clips/kyle/*.sh</code>. Eight places corrected, and the layout section replaced with the project/version tree plus a six-step <strong>Starting a new project</strong> checklist — now placed <em>before</em> Phase 0, since setting up the folder precedes the intake questions, with a row pointing at it from the phase table.</p>
 <p>It now states that prompts live in <code>spec.json</code> (materialised to <code>.gen/</code> at run time), that a version is named for its method, and that Phase 10 must fix any shot whose staging changed mid-run.</p>

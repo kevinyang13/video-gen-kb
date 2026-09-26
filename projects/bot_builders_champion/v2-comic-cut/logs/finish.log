@@ -1,0 +1,54 @@
+$ ffmpeg -nostdin -v error -y -i /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/clips/s1_v1.mov -vf trim=start=0:end=6.8,setpts=PTS-STARTPTS -af atrim=start=0:end=6.8,asetpts=PTS-STARTPTS -c:v prores_ks -profile:v 3 -c:a pcm_s16le /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s1_t.mov
+$ W=3840 H=2160 FIT=crop BITRATE=40M KEEP_FRAMES=0 KEEP_AUDIO=0 /Users/kevinyang/dev/video-gen-kb/scripts/upscale_4k.sh /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s1_t.mov /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s1 realesrgan-x4plus
+hevc,3840,2160,yuv420p10le,170
+4k: /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s1_4k.mp4
+$ ffmpeg -nostdin -v error -y -i /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/clips/s2_v1.mov -vf trim=start=0:end=5.2,setpts=PTS-STARTPTS -af atrim=start=0:end=5.2,asetpts=PTS-STARTPTS -c:v prores_ks -profile:v 3 -c:a pcm_s16le /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s2_t.mov
+$ W=3840 H=2160 FIT=crop BITRATE=40M KEEP_FRAMES=0 KEEP_AUDIO=0 /Users/kevinyang/dev/video-gen-kb/scripts/upscale_4k.sh /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s2_t.mov /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s2 realesrgan-x4plus
+hevc,3840,2160,yuv420p10le,130
+4k: /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s2_4k.mp4
+$ ffmpeg -nostdin -v error -y -i /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/clips/s3_v2.mov -vf trim=start=0:end=5.2,setpts=PTS-STARTPTS -af atrim=start=0:end=5.2,asetpts=PTS-STARTPTS -c:v prores_ks -profile:v 3 -c:a pcm_s16le /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s3_t.mov
+$ W=3840 H=2160 FIT=crop BITRATE=40M KEEP_FRAMES=0 KEEP_AUDIO=0 /Users/kevinyang/dev/video-gen-kb/scripts/upscale_4k.sh /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s3_t.mov /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s3 realesrgan-x4plus
+hevc,3840,2160,yuv420p10le,130
+4k: /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s3_4k.mp4
+$ ffmpeg -nostdin -v error -y -i /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/clips/s4_v1.mov -vf trim=start=0:end=8,setpts=PTS-STARTPTS -af atrim=start=0:end=8,asetpts=PTS-STARTPTS -c:v prores_ks -profile:v 3 -c:a pcm_s16le /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s4_t.mov
+$ W=3840 H=2160 FIT=crop BITRATE=40M KEEP_FRAMES=0 KEEP_AUDIO=0 /Users/kevinyang/dev/video-gen-kb/scripts/upscale_4k.sh /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s4_t.mov /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s4 realesrgan-x4plus
+hevc,3840,2160,yuv420p10le,200
+4k: /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s4_4k.mp4
+$ ffmpeg -nostdin -v error -y -i /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/clips/s5_v1.mov -vf trim=start=0:end=4.8,setpts=PTS-STARTPTS -af atrim=start=0:end=4.8,asetpts=PTS-STARTPTS -c:v prores_ks -profile:v 3 -c:a pcm_s16le /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s5_t.mov
+$ W=3840 H=2160 FIT=crop BITRATE=40M KEEP_FRAMES=0 KEEP_AUDIO=0 /Users/kevinyang/dev/video-gen-kb/scripts/upscale_4k.sh /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s5_t.mov /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s5 realesrgan-x4plus
+hevc,3840,2160,yuv420p10le,120
+4k: /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s5_4k.mp4
+$ ffmpeg -nostdin -v error -y -i /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/clips/s6_v1.mov -vf trim=start=0:end=7,setpts=PTS-STARTPTS -af atrim=start=0:end=7,asetpts=PTS-STARTPTS -c:v prores_ks -profile:v 3 -c:a pcm_s16le /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s6_t.mov
+$ W=3840 H=2160 FIT=crop BITRATE=40M KEEP_FRAMES=0 KEEP_AUDIO=0 /Users/kevinyang/dev/video-gen-kb/scripts/upscale_4k.sh /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s6_t.mov /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s6 realesrgan-x4plus
+hevc,3840,2160,yuv420p10le,175
+4k: /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s6_4k.mp4
+$ ffmpeg -nostdin -v error -y -i /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/clips/s7_v1.mov -vf trim=start=0:end=3.4,setpts=PTS-STARTPTS -af atrim=start=0:end=3.4,asetpts=PTS-STARTPTS -c:v prores_ks -profile:v 3 -c:a pcm_s16le /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s7_t.mov
+$ W=3840 H=2160 FIT=crop BITRATE=40M KEEP_FRAMES=0 KEEP_AUDIO=0 /Users/kevinyang/dev/video-gen-kb/scripts/upscale_4k.sh /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s7_t.mov /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s7 realesrgan-x4plus
+hevc,3840,2160,yuv420p10le,85
+4k: /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s7_4k.mp4
+$ ffmpeg -nostdin -v error -y -i /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/clips/s8_v1.mov -vf trim=start=0:end=5.2,setpts=PTS-STARTPTS -af atrim=start=0:end=5.2,asetpts=PTS-STARTPTS -c:v prores_ks -profile:v 3 -c:a pcm_s16le /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s8_t.mov
+$ W=3840 H=2160 FIT=crop BITRATE=40M KEEP_FRAMES=0 KEEP_AUDIO=0 /Users/kevinyang/dev/video-gen-kb/scripts/upscale_4k.sh /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s8_t.mov /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s8 realesrgan-x4plus
+hevc,3840,2160,yuv420p10le,130
+4k: /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s8_4k.mp4
+$ ffmpeg -nostdin -v error -y -i /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/clips/s9_v1.mov -vf trim=start=0:end=6.4,setpts=PTS-STARTPTS -af atrim=start=0:end=6.4,asetpts=PTS-STARTPTS -c:v prores_ks -profile:v 3 -c:a pcm_s16le /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s9_t.mov
+$ W=3840 H=2160 FIT=crop BITRATE=40M KEEP_FRAMES=0 KEEP_AUDIO=0 /Users/kevinyang/dev/video-gen-kb/scripts/upscale_4k.sh /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s9_t.mov /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s9 realesrgan-x4plus
+hevc,3840,2160,yuv420p10le,160
+4k: /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s9_4k.mp4
+$ ffmpeg -nostdin -v error -y -i /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/clips/s10_v1.mov -vf trim=start=0:end=4.4,setpts=PTS-STARTPTS -af atrim=start=0:end=4.4,asetpts=PTS-STARTPTS -c:v prores_ks -profile:v 3 -c:a pcm_s16le /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s10_t.mov
+$ W=3840 H=2160 FIT=crop BITRATE=40M KEEP_FRAMES=0 KEEP_AUDIO=0 /Users/kevinyang/dev/video-gen-kb/scripts/upscale_4k.sh /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s10_t.mov /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s10 realesrgan-x4plus
+hevc,3840,2160,yuv420p10le,110
+4k: /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s10_4k.mp4
+$ ffmpeg -nostdin -v error -y -i /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/clips/s11_v1.mov -vf trim=start=0:end=5.4,setpts=PTS-STARTPTS -af atrim=start=0:end=5.4,asetpts=PTS-STARTPTS -c:v prores_ks -profile:v 3 -c:a pcm_s16le /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s11_t.mov
+$ W=3840 H=2160 FIT=crop BITRATE=40M KEEP_FRAMES=0 KEEP_AUDIO=0 /Users/kevinyang/dev/video-gen-kb/scripts/upscale_4k.sh /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s11_t.mov /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s11 realesrgan-x4plus
+hevc,3840,2160,yuv420p10le,135
+4k: /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s11_4k.mp4
+$ ffmpeg -nostdin -v error -y -i /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/clips/s12_v1.mov -vf trim=start=0:end=9.96,setpts=PTS-STARTPTS -af atrim=start=0:end=9.96,asetpts=PTS-STARTPTS -c:v prores_ks -profile:v 3 -c:a pcm_s16le /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s12_t.mov
+$ W=3840 H=2160 FIT=crop BITRATE=40M KEEP_FRAMES=0 KEEP_AUDIO=0 /Users/kevinyang/dev/video-gen-kb/scripts/upscale_4k.sh /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s12_t.mov /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s12 realesrgan-x4plus
+hevc,3840,2160,yuv420p10le,249
+4k: /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s12_4k.mp4
+$ W=3840 H=2160 FPS=25 XFADE=0.75 BITRATE=40M CLIP_AUDIO=0 MUSIC=/Users/kevinyang/dev/video-gen-kb/raw/clips/music/victory_the_mountain.mp3 MUSIC_START=0 MUSIC_FADE_IN=0 MUSIC_FADE_OUT=2 MUSIC_VOL=1.0 CLIP_VOL=0 /Users/kevinyang/dev/video-gen-kb/scripts/assemble_film.sh /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/bot_builders_3840x2160.mp4 /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s1_4k.mp4 /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s2_4k.mp4 /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s3_4k.mp4 /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s4_4k.mp4 /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s5_4k.mp4 /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s6_4k.mp4 /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s7_4k.mp4 /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s8_4k.mp4 /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s9_4k.mp4 /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s10_4k.mp4 /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s11_4k.mp4 /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/s12_4k.mp4
+film: /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/bot_builders_3840x2160.mp4 (63.520000s, expected 63.51s, music from 0s)
+$ ffmpeg -nostdin -v error -y -i /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/bot_builders_3840x2160.mp4 -vf scale=1920:1080:flags=lanczos -c:v hevc_videotoolbox -b:v 12M -tag:v hvc1 -c:a copy -movflags +faststart /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/bot_builders_1920x1080.mp4
+$ ffmpeg -nostdin -v error -y -i /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/bot_builders_3840x2160.mp4 -vf scale=1280:720:flags=lanczos -c:v hevc_videotoolbox -b:v 3M -tag:v hvc1 -c:a copy -movflags +faststart /Users/kevinyang/dev/video-gen-kb/raw/clips/fll_bot/final/bot_builders_1280x720.mp4
+finished: raw/clips/fll_bot/final/bot_builders_3840x2160.mp4
+FINISH rc=0 04:11

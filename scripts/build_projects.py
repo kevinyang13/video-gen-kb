@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
-"""Render projects.json -> wiki/projects.md (hub) + one page per theme.
+"""Render the registry pages from every projects/<id>/<version>/spec.json.
 
-projects.json is the source of truth. Edit it, then run this (build_site.py
-calls it automatically). A project's still/i2v/post dicts only need the keys
+Each version's spec.json is the source of truth; projects/_shared.json holds the
+defaults, themes and playlist. This assembles them, rewrites the root
+projects.json as an aggregate, and renders the hub + one page per theme.
+Edit a spec, then run this (build_site.py calls it automatically). A project's still/i2v/post dicts only need the keys
 that differ from `defaults`; the rest is filled in here. Each project carries a
 `theme` ("anime" / "realistic" / "3d"); the themes themselves — slug, title,
-blurb — are defined in projects.json under `themes`, and each one becomes its
+blurb — are defined in projects/_shared.json under `themes`, and each becomes its
 own wiki page so no single page carries every record.
 """
 
@@ -163,9 +165,9 @@ def main():
     out = [
         "# Projects Registry",
         "",
-        "**Summary**: Index of every video project so far, grouped by theme. The full record for each one — models, settings, prompts, seeds, music, files — lives on its theme page. Generated from `projects.json`; edit that file, not these pages.",
+        "**Summary**: Index of every video project so far, grouped by theme. The full record for each one — models, settings, prompts, seeds, music, files — lives on its theme page. Generated from each version's `spec.json`; edit those, not this page.",
         "",
-        "**Sources**: projects.json; per-project notes from the session logs.",
+        "**Sources**: projects/*/*/spec.json; per-project notes from the session logs.",
         "",
         f"**Last updated**: {today}",
         "",
@@ -210,8 +212,8 @@ def main():
             continue
         others = " · ".join(f"[[{o['slug']}]]" for k, o in themes.items() if k != key)
         page = [f"# {t['title']}", "",
-                f"**Summary**: {t['blurb']} Full record per project: models, settings, prompts, seeds, music and output files. Generated from `projects.json`.",
-                "", "**Sources**: projects.json; per-project notes from the session logs.",
+                f"**Summary**: {t['blurb']} Full record per project: models, settings, prompts, seeds, music and output files. Generated from each version's `spec.json`.",
+                "", "**Sources**: projects/*/*/spec.json; per-project notes from the session logs.",
                 "", f"**Last updated**: {today}", "", "---", "",
                 f"Index of every project: [[projects]]. Other themes: {others}.", "",
                 "## Summary", ""] + HEAD + summary_rows(group, defs) + [""]

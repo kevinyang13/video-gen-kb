@@ -1,0 +1,17 @@
+s2 rc=0 567s 13:57
+s4 rc=0 564s 14:07
+s7 rc=0 560s 14:16
+s8 rc=0 560s 14:25
+s5 rc=0 561s 14:35
+s1 rc=0 562s 14:44
+s3 rc=0 565s 14:54
+s6 rc=0 567s 15:03
+ALL DONE 15:03
+s2v2 rc=0 569s 15:13
+s3v2,s6v2 rc=0 15:41
+s2v3 rc=0 15:53
+REDO DONE
+s8v2 rc=0 16:03
+REDO2 DONE
+s3v3 rc=0 16:12
+REDO3 DONE

@@ -12,6 +12,8 @@ projects/*/*/clips/**
 projects/*/*/final/**
 projects/*/*/music/**
 projects/*/*/logs/**
+# scratch from older runs; film_run writes candidates to seed/ now
+projects/*/*/work/**
 # ...but the recipe inside those folders stays
 !projects/*/*/seed/**/
 !projects/*/*/seed/**/*.txt
@@ -19,7 +21,9 @@ projects/*/*/logs/**
 # prompts are materialised from spec.json at run time
 projects/*/*/.gen/
 !projects/*/*/stills/**/
-!projects/*/*/logs/**/
+!projects/*/*/logs/**
+# scratch from older runs; film_run writes candidates to seed/ now
+projects/*/*/work/**/
 !projects/*/*/logs/*.sh
 # upscale stamps are build cache, not recipe
 projects/*/*/clips/*_trim.txt

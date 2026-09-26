@@ -1,6 +1,6 @@
 # Scripts Reference
 
-**Summary**: What each script in `scripts/` does, which tools and APIs it calls, and the exact processing steps. Since 2026-09-23 the whole [[idea-to-video-blueprint]] runs on these scripts, driven by a **run-spec** (the `run-spec` block in `projects.json`) through `film_run.py`: every size, model, frame count, upscaler, crossfade, music and delivery setting comes from the run-spec, not from the script. Covers the generation scripts (`dt_diptych.sh`, `dt_clip.sh`), QC (`qc_sheet.sh`), post (`upscale_4k.sh`, `assemble_film.sh`, `finish_clip.sh`), `preflight.sh`, the driver, and the site/registry builders.
+**Summary**: What each script in `scripts/` does, which tools and APIs it calls, and the exact processing steps. Since 2026-09-23 the whole [[idea-to-video-blueprint]] runs on these scripts, driven by a **run-spec** (the `run-spec` block in `projects/<id>/<version>/spec.json`) through `film_run.py`: every size, model, frame count, upscaler, crossfade, music and delivery setting comes from the run-spec, not from the script. Covers the generation scripts (`dt_diptych.sh`, `dt_clip.sh`), QC (`qc_sheet.sh`), post (`upscale_4k.sh`, `assemble_film.sh`, `finish_clip.sh`), `preflight.sh`, the driver, and the site/registry builders.
 
 **Sources**: the scripts themselves (`scripts/*.sh`, `scripts/*.py`); hands-on timings in [[log]] 2026-09-20/21; Real-ESRGAN ncnn README (`tools/realesrgan/README_macos.md`).
 
@@ -41,22 +41,22 @@ Every script: `set -euo pipefail`, a clear `die` message, `ffmpeg -nostdin` ever
 
 ### The run-spec
 
-Lives in `projects.json → projects[]["run-spec"]` (Kyle's is the reference). It is the machine-readable half of a project: the plan page says *what and why*, the run-spec says *exactly how*, and it is the only thing a run reads. Paths are relative to `run-spec.dir`, except `music.file` (repo root). Only `dir`, `size`, `shots` are required; everything else has the defaults used so far (klein 9B still, LTX-2.3 249 f clip, x4plus → 3840×2160, 0.5 s crossfades).
+Lives in `projects/<id>/<version>/spec.json → run-spec` (Kyle's is the reference). It is the machine-readable half of a project: the plan page says *what and why*, the run-spec says *exactly how*, and it is the only thing a run reads. Paths are relative to `run-spec.dir`, except `music.file` (repo root). Only `dir`, `size`, `shots` are required; everything else has the defaults used so far (klein 9B still, LTX-2.3 249 f clip, x4plus → 3840×2160, 0.5 s crossfades).
 
 ```json
 "run-spec": {
-  "dir": "raw/clips/kyle", "name": "kyle_rescue", "size": [576, 1024],
+  "dir": "projects/kyle_rescue/v1-drawthings-cli", "name": "kyle_rescue", "size": [576, 1024],
   "still":   {"model": "flux_2_klein_9b_i8x.ckpt", "steps": 4, "cfg": 1, "config": {"shift": 3.0, "sampler": 16}, "seeds": [1,2,3], "strength": 1.0},
   "clip":    {"model": "ltx_2.3_22b_distilled_1.1_q8p.ckpt", "frames": 249, "steps": 8, "cfg": 1,
               "config": {"sampler": 19, "shift": 5.0, "stochasticSamplingGamma": 0.3, "fps": 25, "hiresFix": false}, "seed": 1},
-  "masters": {"kyle": "masters/kyle_front.png"},
+  "masters": {"kyle": "seed/kyle_front.png"},
   "upscale": {"model": "realesrgan-x4plus", "size": [2160, 3840], "fit": "crop", "bitrate": "40M"},
   "assemble":{"fps": 25, "xfade": 0.75, "clip_audio": false, "bitrate": "40M"},
-  "music":   {"file": "raw/clips/music/best_adventure_ever.mp3", "start": "tail", "vol": 1.0, "fade_in": 1.5},
+  "music":   {"file": "projects/kyle_rescue/v1-drawthings-cli/music/best_adventure_ever.mp3", "start": "tail", "vol": 1.0, "fade_in": 1.5},
   "deliver": [{"size": [1080, 1920], "bitrate": "12M"}, {"size": [720, 1280], "bitrate": "2.8M"}],
   "shots": [
-    {"id": "s2", "still": {"ref": "kyle", "input": "work/s2_in.png", "prompt": "stills/s2.txt"},
-     "video_prompt": "stills/s2_v.txt", "qc_ref": "kyle", "take": "clips/s2_ltx_v2.mov", "trim": [0, 8]}
+    {"id": "s2", "still": {"ref": "kyle", "input": "seed/s2_in.png", "prompt": "<the still prompt text>"},
+     "video_prompt": "<the motion prompt text>", "qc_ref": "kyle", "take": "clips/s2_ltx_v2.mov", "trim": [0, 8]}
   ]}
 ```
 
@@ -67,10 +67,10 @@ Still mode per shot: `ref` + `input` = diptych; `input` only = single edit; neit
 ```bash
 scripts/preflight.sh --fix
 scripts/film_run.py kyle_rescue check          # run-spec sanity + planned length
-scripts/film_run.py kyle_rescue stills         # 3 seeds per shot → work/<id>_c<seed>.png   (skips shots with a picked still)
+scripts/film_run.py kyle_rescue stills         # 3 seeds per shot → seed/<id>_c<seed>.png   (skips shots with a picked still)
 scripts/film_run.py kyle_rescue pick s2 4      # → stills/s2.png  (judge picks)
 scripts/film_run.py kyle_rescue clips          # clips/<id>_v1.mov (skips existing);  --v 2 --seed 2 s2 for a redo
-scripts/film_run.py kyle_rescue qc             # work/<id>_v1_qc.png
+scripts/film_run.py kyle_rescue qc             # seed/<id>_v1_qc.png
 #   judge sets take + trim per shot in the run-spec
 scripts/film_run.py kyle_rescue finish         # trim → upscale → assemble + music → delivery copies
 scripts/film_run.py kyle_rescue status         # where every shot is
@@ -97,7 +97,7 @@ Blocking failures (exit 1): CLI, ffmpeg, Real-ESRGAN or a model missing, disk < 
 ## `scripts/finish_clip.sh` — 5 s I2V export → 27 s looping 9:16 post
 
 ```
-scripts/finish_clip.sh raw/clips/NAME.mov [music.mp3] [outname]
+scripts/finish_clip.sh projects/<id>/<version>/clips/NAME.mov [music.mp3] [outname]
 ```
 
 **Purpose**: turn one 81-frame Wan 2.2 clip into a TikTok/Shorts-ready 1080×1920 loop with music (the living-painting projects: coast, Torrey Pines, Golden Gate, Rainier, cyberpunk, FLL farm).
@@ -125,7 +125,7 @@ scripts/finish_clip.sh raw/clips/NAME.mov [music.mp3] [outname]
 **Env (2026-09-23)**: `W`/`H` output size (default 3840×2160; portrait `W=2160 H=3840`), `FIT=crop|pad`, `BITRATE` (40M; 12M for 1080p), `KEEP_AUDIO=1` (copies the input's audio — no `-shortest`, which dropped a frame), `KEEP_FRAMES=0` (delete the PNG folder), `SCALE` (x4plus is always 4×; `realesr-animevideov3` also runs at 2×/3×, or name `-x2`/`-x3` — a 1080p target needs only 2×). Validates the model/scale file and that frames out = frames in; Real-ESRGAN's progress spam goes to a log shown only on failure. `-t 128 -j 1:1:1` are both required on Metal (segfault without). Measured on 576×1024 LTX clips with x4plus: ~20 frames/min.
 
 ```
-scripts/upscale_4k.sh raw/clips/NAME.mov [outname] [model]
+scripts/upscale_4k.sh projects/<id>/<version>/clips/NAME.mov [outname] [model]
 ```
 
 **Purpose**: the step that makes "4K" true. Wan/LTX generate 576p–768p; this adds detail with a learned upscaler instead of a blurry resize. Used for Dragon Epic scene 1A and every Lost City clip.
@@ -195,13 +195,13 @@ New-project flow: **+** in Projects (creates and opens `Untitled-NNNNN`) → cli
 
 ## Where files live
 
-Since 2026-09-25 every project owns one folder, `projects/<id>/`, with `plan/ raw/ seed/ stills/ clips/ music/ final/ logs/`. Scripts take paths as arguments and `film_run.py` resolves everything relative to `run-spec.dir` (`projects/<id>`), so the reorganisation needed no changes to the shell scripts — only `build_site.py`, which now collects pages from `wiki/*.md` **and** `projects/*/plan/*.md` so a project's page is published with the rest of the wiki and `[[wiki-links]]` resolve from either place.
+Since 2026-09-25 every project owns one folder and every attempt a version inside it: `projects/<id>/<version>/` with `raw/ seed/ stills/ clips/ music/ final/ logs/`, and the plan at `projects/<id>/plan/`. Prompts are text inside `spec.json`; `film_run.py` writes them to `<version>/.gen/*.txt` at run time. Candidate renders and QC sheets go to `seed/`, picked frames to `stills/`, everything shot-scoped to `clips/`, the film to `final/`. Scripts take paths as arguments and `film_run.py` resolves everything relative to `run-spec.dir` (`projects/<id>`), so the reorganisation needed no changes to the shell scripts — only `build_site.py`, which now collects pages from `wiki/*.md` **and** `projects/*/plan/*.md` so a project's page is published with the rest of the wiki and `[[wiki-links]]` resolve from either place.
 
 ## Site and registry scripts
 
 | Script | What it does |
 |---|---|
-| `scripts/build_projects.py` | `projects.json` → `wiki/projects.md`. Fills each record from `defaults`, writes the summary table (with ▶ YouTube links) and one section per project, embeds the playlist and per-project YouTube iframes; orientation (16:9 vs 9:16) is inferred from the I2V size. Run by `build_site.py`. |
+| `scripts/build_projects.py` | every `projects/*/*/spec.json` + `projects/_shared.json` → the registry pages, and rewrites the root `projects.json` as an aggregate. Fills each record from `defaults`, writes the summary table (with ▶ YouTube links) and one section per project, embeds the playlist and per-project YouTube iframes; orientation (16:9 vs 9:16) is inferred from the I2V size. Run by `build_site.py`. |
 | `scripts/build_site.py` | `wiki/*.md` → `docs/` static site with the `markdown` package: rewrites `[[wiki-links]]` to `.html`, copies `wiki/assets/`, generates the landing page cards from `wiki/index.md`. Run after any wiki edit; `./serve.sh` builds and serves on :8788. |
 | `scripts/render_infographic.sh NAME` | headless Chrome screenshot of `scripts/infographics/NAME.html` at 2× → `cwebp` → `wiki/assets/NAME-3d.webp`. |
 

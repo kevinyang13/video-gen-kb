@@ -1,8 +1,8 @@
 # Anime projects
 
-**Summary**: Shinkai/Ghibli-styled living paintings: a still from FLUX or Wan T2V, ambient motion from Wan 2.2 I2V, looped 9:16 with music. Coastal wildflowers, Torrey Pines, Golden Gate, Mt. Rainier, a cyberpunk street, the FLL farm. Full record per project: models, settings, prompts, seeds, music and output files. Generated from `projects.json`.
+**Summary**: Shinkai/Ghibli-styled living paintings: a still from FLUX or Wan T2V, ambient motion from Wan 2.2 I2V, looped 9:16 with music. Coastal wildflowers, Torrey Pines, Golden Gate, Mt. Rainier, a cyberpunk street, the FLL farm. Full record per project: models, settings, prompts, seeds, music and output files. Generated from each version's `spec.json`.
 
-**Sources**: projects.json; per-project notes from the session logs.
+**Sources**: projects/*/*/spec.json; per-project notes from the session logs.
 
 **Last updated**: 2026-09-25
 

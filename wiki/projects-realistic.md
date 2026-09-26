@@ -1,8 +1,8 @@
 # Photoreal projects
 
-**Summary**: Cinematic photoreal shorts: FLUX.2 klein stills with Moodboard references, motion from LTX-2.3 or Wan 2.2, Real-ESRGAN to 4K, cut with crossfades. Dragon Epic, Lost City, the three-minute film. Full record per project: models, settings, prompts, seeds, music and output files. Generated from `projects.json`.
+**Summary**: Cinematic photoreal shorts: FLUX.2 klein stills with Moodboard references, motion from LTX-2.3 or Wan 2.2, Real-ESRGAN to 4K, cut with crossfades. Dragon Epic, Lost City, the three-minute film. Full record per project: models, settings, prompts, seeds, music and output files. Generated from each version's `spec.json`.
 
-**Sources**: projects.json; per-project notes from the session logs.
+**Sources**: projects/*/*/spec.json; per-project notes from the session logs.
 
 **Last updated**: 2026-09-25
 

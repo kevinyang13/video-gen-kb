@@ -1,30 +1,32 @@
 #!/usr/bin/env python3
-"""Run a multi-shot film from its run-spec in projects.json (the `run-spec` block of a project).
+"""Run a multi-shot film from its run-spec in projects/<id>/<version>/spec.json.
 
-PROJECT is a projects.json id, or a path to a .json file holding the run-spec (handy for tests).
+PROJECT is "<id>" (newest version), "<id>@<version>", or a path to a .json file
+holding the run-spec (handy for tests).
   PROJECT is "<id>" (newest version) or "<id>@<version>", e.g. lost_city@v1-drawthings-ui
   scripts/film_run.py PROJECT check              validate the run-spec (paths, sizes, frame rules)
   scripts/film_run.py PROJECT status             one line per shot: still / candidates / clips / take / 4K
-  scripts/film_run.py PROJECT stills [ids]       seed candidates for shots with no picked still -> work/<id>_c<seed>.png
+  scripts/film_run.py PROJECT stills [ids]       seed candidates for shots with no picked still -> seed/<id>_c<seed>.png
   scripts/film_run.py PROJECT pick ID SEED       candidate -> stills/<id>.png
   scripts/film_run.py PROJECT clips [ids] [--v N] [--seed S]   clips/<id>_v<N>.mov for shots with a still
-  scripts/film_run.py PROJECT qc [ids] [--v N]   contact sheets work/<id>_v<N>_qc.png (ref = master or still)
+  scripts/film_run.py PROJECT qc [ids] [--v N]   contact sheets seed/<id>_v<N>_qc.png (ref = master or still)
   scripts/film_run.py PROJECT finish [--force]   trim takes -> upscale -> assemble (+music) -> delivery copies
 Global flags: --dry-run (print commands), --force (redo existing outputs).
 
 Run-spec (all paths relative to run-spec.dir; every block optional except dir, size, shots):
   "run-spec": {
-    "dir": "raw/clips/<project>", "name": "<film file stem>", "size": [576, 1024],
+    "dir": "projects/<id>/<version>", "name": "<film file stem>", "size": [576, 1024],
     "still":   {"model": ..., "steps": 4, "cfg": 1, "config": {...}, "seeds": [1, 2, 3], "strength": 1.0},
     "clip":    {"model": ..., "frames": 249, "steps": 8, "cfg": 1, "config": {...}, "seed": 1, "video_format": "prores422hq"},
-    "masters": {"kyle": "masters/kyle_front.png"},          # names usable as a shot's still.ref and qc_ref
+    "masters": {"kyle": "seed/kyle_front.png"},             # names usable as a shot's still.ref and qc_ref
     "upscale": {"model": "realesrgan-x4plus", "size": [2160, 3840], "fit": "crop", "bitrate": "40M"},
     "assemble":{"fps": 25, "xfade": 0.75, "clip_audio": false, "bitrate": "40M"},
-    "music":   {"file": "raw/clips/music/x.mp3", "start": "tail", "vol": 1.0, "fade_in": 1.5, "fade_out": 0},
+    "music":   {"file": "projects/<id>/<version>/music/x.mp3", "start": "tail", "vol": 1.0, "fade_in": 1.5, "fade_out": 0},
     "deliver": [{"size": [1080, 1920], "bitrate": "12M"}, {"size": [720, 1280], "bitrate": "2.8M"}],
     "shots": [
       {"id": "s2",
-       "still": {"ref": "kyle" | "stills/s1.png" | null, "input": "seed/s2_in.png" | null, "prompt": "<the prompt text>",
+       "still": {"ref": "kyle" | "seed/x.png" | "stills/s1.png" | null, "input": "seed/s2_in.png" | null,
+                 "prompt": "<the still prompt text>",
                  "seeds": [...], "size": [w, h]},             # ref+input = diptych, input only = edit, neither = text
        "video_prompt": "<the motion prompt text>", "clip": {...overrides...},
        "qc_ref": "kyle", "take": "clips/s2_v2.mov", "trim": [0, 8]}
@@ -126,7 +128,7 @@ def clip_cfg(f, shot):
 def prompt_path(f, name, value):
     """Prompts live as text in spec.json; the shell scripts want a file.
 
-    Writes the text to stills/.gen/<name>.txt and returns that path. A value
+    Writes the text to .gen/<name>.txt and returns that path. A value
     that is still a path to an existing .txt (older specs) is used as-is.
     """
     if not isinstance(value, str) or not value.strip():
@@ -171,7 +173,7 @@ def cmd_check(f, _):
         if st.get("input") and not d(f, st["input"]).exists():
             warns.append(f"{i}: still.input not made yet: {st['input']}")
         ref = st.get("ref")
-        if ref and ref not in f.get("masters", {}) and not ref.startswith(("stills/", "masters/", "work/")):
+        if ref and ref not in f.get("masters", {}) and not ref.startswith(("stills/", "seed/")):
             errs.append(f"{i}: still.ref '{ref}' is neither a master name nor a path")
         if not (isinstance(s.get("video_prompt"), str) and s["video_prompt"].strip()):
             errs.append(f"{i}: video_prompt is empty")
@@ -220,7 +222,7 @@ def cmd_stills(f, args):
         env = {"MODEL": c["model"], "STEPS": c["steps"], "CFG": c["cfg"], "STRENGTH": c["strength"],
                "CONFIG_JSON": json.dumps(c["config"], separators=(",", ":"))}
         for seed in c["seeds"]:
-            out = d(f, f"work/{i}_c{seed}.png")
+            out = d(f, f"seed/{i}_c{seed}.png")
             if out.exists() and not FORCE:
                 continue
             rc |= run([S / "dt_diptych.sh", ref or "-", inp or "-", prompt_path(f, i, st["prompt"]), out, seed, *c["size"]], env)
@@ -232,7 +234,7 @@ def cmd_pick(f, args):
     if len(pos) != 2:
         die("usage: pick ID SEED")
     i, seed = pos
-    src, dst = d(f, f"work/{i}_c{seed}.png"), d(f, f"stills/{i}.png")
+    src, dst = d(f, f"seed/{i}_c{seed}.png"), d(f, f"stills/{i}.png")
     if not src.exists():
         die(f"no candidate {src}")
     dst.parent.mkdir(parents=True, exist_ok=True)
@@ -275,7 +277,7 @@ def cmd_qc(f, args):
         if not clip.exists():
             continue
         ref = resolve_ref(f, s.get("qc_ref")) or d(f, f"stills/{i}.png")
-        rc |= run([S / "qc_sheet.sh", clip, d(f, f"work/{i}_v{v}_qc.png"), ref if ref.exists() else "-"])
+        rc |= run([S / "qc_sheet.sh", clip, d(f, f"seed/{i}_v{v}_qc.png"), ref if ref.exists() else "-"])
     return rc
 
 

@@ -8,6 +8,17 @@
 
 ---
 
+## 2026-09-25 — Script audit against the new structure
+
+Audited all 13 scripts. The nine shell scripts take every path as an argument and needed no changes. The two Python drivers encoded the old layout:
+
+- **A real bug in `film_run.py`**: `stills` wrote seed candidates to `work/<id>_c<seed>.png` and `qc` wrote sheets to `work/`, but `work/` was folded into `seed/` during the reorganisation — and because the new `.gitignore` lists the folders by name, a recreated `work/` was **not ignored**, so the next run would have committed a few hundred MB of candidate PNGs. Confirmed with `git check-ignore` before fixing. Candidates and QC sheets now go to `seed/`; `projects/*/*/work/**` is ignored as a safety net.
+- `resolve_ref` still accepted `masters/` and `work/` prefixes for a shot's `ref`; now `seed/` and `stills/`.
+- Docstrings in both drivers described `raw/clips/<project>`, `masters/`, prompt files and "projects.json is the source of truth". Rewritten for `projects/<id>/<version>/spec.json`.
+- [[scripts-reference]] had the same stale paths in its run-spec example and its per-script usage lines; updated, including the note that prompts are text in the spec and materialised to `.gen/`.
+
+Verified after: all four run-specs `check: PASS`, and a dry run shows candidates targeting `seed/` and prompts resolving through `.gen/`.
+
 ## 2026-09-25 — Blueprint brought up to the current structure
 
 [[idea-to-video-blueprint]] still described the pre-reorganisation world: `raw/<project>/` for sources, `raw/clips/<project>/` with `masters/` and `work/`, prompts as `stills/sN.txt`, the run-spec inside the root `projects.json`, QC notes in `work/`, and hand-written `raw/clips/kyle/*.sh`. Eight places corrected, and the layout section replaced with the project/version tree plus a six-step **Starting a new project** checklist — now placed *before* Phase 0, since setting up the folder precedes the intake questions, with a row pointing at it from the phase table.
