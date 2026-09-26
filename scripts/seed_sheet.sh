@@ -4,6 +4,10 @@
 # Renders three more views by editing the master (klein strength 1.0), then
 # composes front | three-quarter | profile | back into OUT_PREFIX_sheet.png.
 #
+# A 90-degree turn invites a Janus artifact: klein keeps the frontal face and adds a
+# profile beside it, ear in the middle. The side prompt bans it explicitly; check the
+# output anyway and re-roll the seed if two faces appear.
+#
 # A single frontal reference gives the model nothing to copy for a profile, so
 # it invents one — see wiki/identity-conditioning.md. With a sheet you crop the
 # angle a shot needs and hand that over as the reference instead.
@@ -25,7 +29,7 @@ keep="exactly the same face, hair, colours and clothing, no change to the featur
 case_prompt () {
   case "$1" in
     34)   echo "The same $SUBJ, $keep, $STYLE. Turn to a three-quarter view, rotated about 45 degrees so one side of the face and the jawline are visible, still looking toward the camera." ;;
-    side) echo "The same $SUBJ, $keep, $STYLE. Turn to a full side profile, exactly 90 degrees, so only the side is visible — the line of the nose, lips, chin and ear read as a silhouette against the background." ;;
+    side) echo "The same $SUBJ, $keep, $STYLE. A true side profile seen from exactly 90 degrees: the head is turned so the nose, lips and chin form the outline against the background, only ONE eye is visible, and the far cheek is hidden behind the near one. Exactly one face in the image — do not draw a second face on the other side of the head, do not show both eyes, do not merge two views." ;;
     back) echo "The same $SUBJ, $keep, $STYLE. Seen from directly behind, the back of the head and shoulders filling the frame, the hairline and the back of the haircut clearly visible, the face not visible at all." ;;
     *)    echo "The same $SUBJ, $keep, $STYLE. $1" ;;
   esac
