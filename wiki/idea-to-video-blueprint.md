@@ -4,7 +4,7 @@
 
 **Sources**: [[kyle-antarctic-rescue-plan]] §0 (the unattended run, 2026-09-22/23 — every timing below is from it unless marked); [[lost-city-plan]] §3c prompt rules; [[headless-cli-pipeline]] §1b–1c; [[character-consistency]]; [[identity-conditioning]]; [[scripts-reference]].
 
-**Last updated**: 2026-09-25 (project/version folder layout and setup checklist; prompts live in `spec.json`)
+**Last updated**: 2026-09-25 (Phase 4 rewritten as seeding — characters, locations and props — plus Phase 4b on feeding a seed into a shot)
 
 ---
 
@@ -13,7 +13,7 @@
 ```
  HUMAN (≈15 min, before go)                 MACHINE (hours, no human)
  ┌──────────────────────────┐   ┌──────────────────────────────────────────────────────────────┐
- │ 0 Intake questionnaire   │   │ 4 Masters → 5 Shot stills → 6 Motion prompts → 7 Clip batch  │
+ │ 0 Intake questionnaire   │   │ 4 Seeds → 5 Shot stills → 6 Motion prompts → 7 Clip batch    │
  │ 1 Story + storyboard  ✔  │ → │      ↑ Claude picks each      8 QC + redo queue ←──┘         │
  │ 2 Bible (locks, rules)   │ go│ 9 Trim → upscale → assemble → music → delivery copies        │
  │ 3 Preflight + permissions│   │ 10 Report to plan, spec.json, log → commit/push → notify     │
@@ -34,7 +34,8 @@ The intake answers become a **run-spec** (the `run-spec` block in `projects/<id>
 | — set up the folder | see **Starting a new project** below |
 | 3 Preflight | `scripts/preflight.sh --fix` |
 | 2 → run-spec sanity | `scripts/film_run.py P check` |
-| 4–5 Masters, stills | `film_run.py P stills` → judge → `film_run.py P pick ID SEED` |
+| 4 Seeds (masters) | `dt_diptych.sh` per character / location / prop → pick → `seed/` |
+| 5 Shot stills | `film_run.py P stills` → judge → `film_run.py P pick ID SEED` |
 | 7 Clips | `film_run.py P clips` (redo: `clips ID --v 2 --seed 2`) |
 | 8 QC | `film_run.py P qc` → judge sets `take` + `trim` in the run-spec |
 | 9 Finish | `film_run.py P finish` |
@@ -119,30 +120,60 @@ Ask these once, all together, and record the answers in the plan page's "Decisio
 | All of the above in one go | `scripts/preflight.sh --fix` (quits the app, starts caffeinate, checks models/disk/power) |
 | Session stays open | the desktop app and this session must keep running; the screen may lock (the CLI needs no screen) |
 
-## Phase 4 — Masters (model sheets)
+## Phase 4 — Seeds: a master for everything that must stay the same
 
-One canonical image per recurring character (and per recurring hero prop, e.g. the saucer). Every later check compares against these.
+A diffusion model keeps no memory between generations ([[identity-conditioning]]). Anything that has to look the same in shot 9 as in shot 2 must be **seeded**: rendered once as a canonical image, then fed into every shot that contains it. Seeds live in `<version>/seed/` and are listed in the spec's `run-spec.masters`.
 
-- **From a drawing or photo**: crop the character, then a **klein edit at `--strength 1.0`** with an instruction prompt ("Re-render this boy as a character in a high-end 3D animated feature film: same face, same hairstyle, same parka … plain soft grey studio background, remove all text"). 3 seeds, ~30 s each.
-- **From text only**: klein text-to-image with the lock + "character portrait, plain background".
-- **Don't** use `--strength` 0.7–0.9 to restyle — on the released CLI it barely changes the input ([[headless-cli-pipeline]] §1c).
-- Pick rule: closest to the source on face shape, hair silhouette, signature costume details. Optional human gate here if the character is a real person and the human asked to see it.
+**Seed everything recurring, not just people.** On Bot Builders that meant five children *and* the LEGO mission table, the competition gym, and three Coastal Roots Farm plates. Lost City seeded the creature, the rider and the city. A location you skip is a location the model re-invents every shot — a different gym each time reads as a different tournament.
+
+| What | Source | Recipe |
+|---|---|---|
+| **Character** | photo or drawing, face large in frame | crop head-and-shoulders, klein edit at `--strength 1.0`, plain grey background, neutral wardrobe, 3 seeds |
+| **Location** | a photo of the real place | klein edit 1.0 of a 16:9 crop, **"no people anywhere, no text, no lettering"**, 2 seeds |
+| **Hero prop** | photo, or a crop from an approved shot | same as a location; name the parts that matter (the mat's river, the tree tower, the robot) |
+| **From text only** | nothing to photograph | klein text-to-image with the lock + "character portrait, plain background" |
+
+**The recipe that preserves a real person** (learned across three failed attempts, [[bot-builders-champion-photo-cut-plan]] §2):
+
+- Say **"stylise the rendering, not the identity"** — never "convert this into a 3D character", which makes klein substitute its own default face.
+- **Name what to keep**: ethnicity and skin tone, hair colour, texture, length, cut and hairline, eye colour, eye and eyelid shape, eyebrows, nose, mouth, jawline, age.
+- **Ban the drifts**: do not westernise, do not enlarge or round the eyes, do not lighten hair or eyes, do not make the subject look older, do not idealise.
+- **Force dark hair** — klein warms black toward brown on every pass: "pure black hair, not brown, not chestnut, no warm highlights".
+- **Neutralise the source lighting**, or a sunset photo bakes orange into hair and skin.
+- **Name signature features** (a spiked fringe, a horn crest) or they get combed flat — then take the mildest seed, because naming them also invites overshoot.
+- `--strength` 0.7–0.9 is a near no-op on the released CLI; only 1.0 is edit mode ([[headless-cli-pipeline]] §1c).
+
+**Pick rule**: closest to the source on face shape, hair silhouette and signature details — judged at full size, not from a thumbnail strip. Optional human gate here when the subject is a real person.
+
+## Phase 4b — Feeding a seed into a shot
+
+Three mechanisms, and choosing wrong is the most common way a shot fails:
+
+| Mechanism | Use when | Command |
+|---|---|---|
+| **Diptych** — seed left, layout right, edit the pair, keep the right half | the layout image **already contains a person or object to replace** | `dt_diptych.sh SEED LAYOUT prompt out.png` |
+| **Restaging** — the seed *is* the input, the scene comes from the prompt | there is no layout image, or the layout is an empty place | `dt_diptych.sh - SEED prompt out.png` |
+| **Chaining** — an approved shot becomes the reference for the next | props, places and light carrying between shots | `dt_diptych.sh stills/s3.png LAYOUT prompt out.png` |
+
+**A diptych needs a subject in the layout image.** Pointed at an empty venue plate, klein renders the room and silently leaves the character out — two Bot Builders shots came back with nobody in them. Restaging from the seed portrait fixed all four on the first pass.
+
+Prompt pattern for a diptych: *"Two images side by side. Left: … Right: … Re-render the right image as a frame from the same film, with the boy looking exactly like the boy on the left: same face, same hair, same costume. [framing]. [scene]. [style]. Keep the left image unchanged."*
+
+Prompt pattern for restaging: *"Keep this exact character — same face, same hair, same age, same style — and place them in a new scene. [framing]. [scene]. Exactly one child in the frame."*
+
+**Always state the framing** ("medium close-up: head and shoulders fill the frame") — without it klein zooms out to full body. And an edit **inherits the source pose**: chaining a calm portrait off a celebration still reproduced the jump across three seeds until the new pose was named both positively and negatively.
+
+In the Draw Things app the equivalent channel is the **Moodboard** (up to 3 crops, equal weight); on the CLI the diptych is its substitute, since the released binary takes a single `--image`.
 
 ## Phase 5 — Shot stills (first frames)
 
-Every shot's first frame must carry identity from **pixels**, never text alone. Three tools, all on the released CLI:
+Every shot's first frame must carry identity from **pixels**, never text alone — pick the mechanism from Phase 4b, then:
 
-| Tool | When | How |
-|---|---|---|
-| **Diptych** `scripts/dt_diptych.sh MASTER IN PROMPT OUT seed` | a character must match the master | reference left, layout (panel / rough) right, klein edit 1.0 at 2W×H, crop the right half; ~55–60 s |
-| **Reference chaining** — diptych with an *approved shot* as REF | recurring props, places, animals, light | S3's saucer → S4, S6; S2's ship → S1; S7's look → S8 |
-| **Single edit** `dt_diptych.sh - IN PROMPT OUT` | restyle or re-frame one image | S1 = "the same scene, wide, no boy"; S6 = "the saucer now encased in ice" |
-
-Prompt pattern for a diptych: *"Two images side by side. Left: … Right: … Re-render the right image as a frame from the same film, with the boy looking exactly like the boy on the left: same face, same hair, same costume. [framing sentence]. [scene]. [style]. Remove all text, bubbles and borders. Keep the left image unchanged."* **Always state the framing** ("medium close-up: head and shoulders fill the frame") — without it klein zooms out to full body.
-
-Render **3 seeds per shot** and pick by the rubric below — **at full size** (open each candidate, don't judge a strip of thumbnails). Typical failures to reject: subject dropped from a busy frame, an extra hand or a double gesture, a different face, text left in.
-
-Inputs are fitted to W×H by center-crop, so hand over images already at the target aspect (pad near-square panels with a blurred copy of themselves).
+- Render **3 seeds per shot** (`film_run.py P stills`), judge **at full size** — never from a thumbnail strip — and `pick` the winner into `stills/`.
+- **Count the subjects in every group frame.** klein drops people from crowded shots: only 1 of 3 seeds of the Bot Builders celebration kept all five children, and comic panels with six figures get copied six-figured regardless of the prompt.
+- Typical rejects: subject dropped, an extra hand or doubled gesture, a different face, text left in, the wrong pose inherited from the input.
+- Inputs are fitted to W×H by centre-crop, so hand over images already at the target aspect; pad near-square panels with a blurred copy of themselves.
+- **Wardrobe**: say "plain black t-shirt with no printing, no graphics and no letters" or shirts come back with garbled lettering. "No text anywhere" must name clothing, boards and signs explicitly.
 
 ## Writing it down as you go
 

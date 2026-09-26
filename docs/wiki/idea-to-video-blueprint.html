@@ -92,12 +92,12 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
     <span class="spacer"></span>
     <button class="pill" onclick="tt()">◐ Theme</button>
   </nav>
-  <h1>Idea-to-Video Blueprint — Minimal-Touch Production</h1><p class="lede">The end-to-end process for turning an idea (a sentence, a comic, a photo) into a finished short film on this Mac, arranged so that <strong>all human input happens up front</strong> — one intake questionnaire and one storyboard approval — and everything after "go" (masters, stills, clips, QC, retries, upscale, edit, music, report, push) runs unattended through <code>draw-things-cli</code>, with Claude as the judge. Proven end to end on <a href="kyle-antarctic-rescue-plan.html">kyle antarctic rescue plan</a> (60 s, 3 h 40 min, zero input after go).</p><div class="meta"><span><b>Updated</b> 2026-09-25 (project/version folder layout and setup checklist; prompts live in <code>spec.json</code>)</span><span><b>Sources</b> <a href="kyle-antarctic-rescue-plan.html">kyle antarctic rescue plan</a> §0 (the unattended run, 2026-09-22/23 — every timing below is from it unless marked); <a href="lost-city-plan.html">lost city plan</a> §3c prompt rules; <a href="headless-cli-pipeline.html">headless cli pipeline</a> §1b–1c; <a href="character-consistency.html">character consistency</a>; <a href="identity-conditioning.html">identity conditioning</a>; <a href="scripts-reference.html">scripts reference</a>.</span></div>
+  <h1>Idea-to-Video Blueprint — Minimal-Touch Production</h1><p class="lede">The end-to-end process for turning an idea (a sentence, a comic, a photo) into a finished short film on this Mac, arranged so that <strong>all human input happens up front</strong> — one intake questionnaire and one storyboard approval — and everything after "go" (masters, stills, clips, QC, retries, upscale, edit, music, report, push) runs unattended through <code>draw-things-cli</code>, with Claude as the judge. Proven end to end on <a href="kyle-antarctic-rescue-plan.html">kyle antarctic rescue plan</a> (60 s, 3 h 40 min, zero input after go).</p><div class="meta"><span><b>Updated</b> 2026-09-25 (Phase 4 rewritten as seeding — characters, locations and props — plus Phase 4b on feeding a seed into a shot)</span><span><b>Sources</b> <a href="kyle-antarctic-rescue-plan.html">kyle antarctic rescue plan</a> §0 (the unattended run, 2026-09-22/23 — every timing below is from it unless marked); <a href="lost-city-plan.html">lost city plan</a> §3c prompt rules; <a href="headless-cli-pipeline.html">headless cli pipeline</a> §1b–1c; <a href="character-consistency.html">character consistency</a>; <a href="identity-conditioning.html">identity conditioning</a>; <a href="scripts-reference.html">scripts reference</a>.</span></div>
 <hr />
 <h2>The shape of it</h2>
 <pre><code> HUMAN (≈15 min, before go)                 MACHINE (hours, no human)
  ┌──────────────────────────┐   ┌──────────────────────────────────────────────────────────────┐
- │ 0 Intake questionnaire   │   │ 4 Masters → 5 Shot stills → 6 Motion prompts → 7 Clip batch  │
+ │ 0 Intake questionnaire   │   │ 4 Seeds → 5 Shot stills → 6 Motion prompts → 7 Clip batch    │
  │ 1 Story + storyboard  ✔  │ → │      ↑ Claude picks each      8 QC + redo queue ←──┘         │
  │ 2 Bible (locks, rules)   │ go│ 9 Trim → upscale → assemble → music → delivery copies        │
  │ 3 Preflight + permissions│   │ 10 Report to plan, spec.json, log → commit/push → notify     │
@@ -129,7 +129,11 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <td><code>scripts/film_run.py P check</code></td>
 </tr>
 <tr>
-<td>4–5 Masters, stills</td>
+<td>4 Seeds (masters)</td>
+<td><code>dt_diptych.sh</code> per character / location / prop → pick → <code>seed/</code></td>
+</tr>
+<tr>
+<td>5 Shot stills</td>
 <td><code>film_run.py P stills</code> → judge → <code>film_run.py P pick ID SEED</code></td>
 </tr>
 <tr>
@@ -315,45 +319,93 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </tr>
 </tbody>
 </table></div>
-<h2>Phase 4 — Masters (model sheets)</h2>
-<p>One canonical image per recurring character (and per recurring hero prop, e.g. the saucer). Every later check compares against these.</p>
-<ul>
-<li><strong>From a drawing or photo</strong>: crop the character, then a <strong>klein edit at <code>--strength 1.0</code></strong> with an instruction prompt ("Re-render this boy as a character in a high-end 3D animated feature film: same face, same hairstyle, same parka … plain soft grey studio background, remove all text"). 3 seeds, ~30 s each.</li>
-<li><strong>From text only</strong>: klein text-to-image with the lock + "character portrait, plain background".</li>
-<li><strong>Don't</strong> use <code>--strength</code> 0.7–0.9 to restyle — on the released CLI it barely changes the input (<a href="headless-cli-pipeline.html">headless cli pipeline</a> §1c).</li>
-<li>Pick rule: closest to the source on face shape, hair silhouette, signature costume details. Optional human gate here if the character is a real person and the human asked to see it.</li>
-</ul>
-<h2>Phase 5 — Shot stills (first frames)</h2>
-<p>Every shot's first frame must carry identity from <strong>pixels</strong>, never text alone. Three tools, all on the released CLI:</p>
+<h2>Phase 4 — Seeds: a master for everything that must stay the same</h2>
+<p>A diffusion model keeps no memory between generations (<a href="identity-conditioning.html">identity conditioning</a>). Anything that has to look the same in shot 9 as in shot 2 must be <strong>seeded</strong>: rendered once as a canonical image, then fed into every shot that contains it. Seeds live in <code>&lt;version&gt;/seed/</code> and are listed in the spec's <code>run-spec.masters</code>.</p>
+<p><strong>Seed everything recurring, not just people.</strong> On Bot Builders that meant five children <em>and</em> the LEGO mission table, the competition gym, and three Coastal Roots Farm plates. Lost City seeded the creature, the rider and the city. A location you skip is a location the model re-invents every shot — a different gym each time reads as a different tournament.</p>
 <div class="tw"><table>
 <thead>
 <tr>
-<th>Tool</th>
-<th>When</th>
-<th>How</th>
+<th>What</th>
+<th>Source</th>
+<th>Recipe</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Diptych</strong> <code>scripts/dt_diptych.sh MASTER IN PROMPT OUT seed</code></td>
-<td>a character must match the master</td>
-<td>reference left, layout (panel / rough) right, klein edit 1.0 at 2W×H, crop the right half; ~55–60 s</td>
+<td><strong>Character</strong></td>
+<td>photo or drawing, face large in frame</td>
+<td>crop head-and-shoulders, klein edit at <code>--strength 1.0</code>, plain grey background, neutral wardrobe, 3 seeds</td>
 </tr>
 <tr>
-<td><strong>Reference chaining</strong> — diptych with an <em>approved shot</em> as REF</td>
-<td>recurring props, places, animals, light</td>
-<td>S3's saucer → S4, S6; S2's ship → S1; S7's look → S8</td>
+<td><strong>Location</strong></td>
+<td>a photo of the real place</td>
+<td>klein edit 1.0 of a 16:9 crop, <strong>"no people anywhere, no text, no lettering"</strong>, 2 seeds</td>
 </tr>
 <tr>
-<td><strong>Single edit</strong> <code>dt_diptych.sh - IN PROMPT OUT</code></td>
-<td>restyle or re-frame one image</td>
-<td>S1 = "the same scene, wide, no boy"; S6 = "the saucer now encased in ice"</td>
+<td><strong>Hero prop</strong></td>
+<td>photo, or a crop from an approved shot</td>
+<td>same as a location; name the parts that matter (the mat's river, the tree tower, the robot)</td>
+</tr>
+<tr>
+<td><strong>From text only</strong></td>
+<td>nothing to photograph</td>
+<td>klein text-to-image with the lock + "character portrait, plain background"</td>
 </tr>
 </tbody>
 </table></div>
-<p>Prompt pattern for a diptych: <em>"Two images side by side. Left: … Right: … Re-render the right image as a frame from the same film, with the boy looking exactly like the boy on the left: same face, same hair, same costume. [framing sentence]. [scene]. [style]. Remove all text, bubbles and borders. Keep the left image unchanged."</em> <strong>Always state the framing</strong> ("medium close-up: head and shoulders fill the frame") — without it klein zooms out to full body.</p>
-<p>Render <strong>3 seeds per shot</strong> and pick by the rubric below — <strong>at full size</strong> (open each candidate, don't judge a strip of thumbnails). Typical failures to reject: subject dropped from a busy frame, an extra hand or a double gesture, a different face, text left in.</p>
-<p>Inputs are fitted to W×H by center-crop, so hand over images already at the target aspect (pad near-square panels with a blurred copy of themselves).</p>
+<p><strong>The recipe that preserves a real person</strong> (learned across three failed attempts, <a href="bot-builders-champion-photo-cut-plan.html">bot builders champion photo cut plan</a> §2):</p>
+<ul>
+<li>Say <strong>"stylise the rendering, not the identity"</strong> — never "convert this into a 3D character", which makes klein substitute its own default face.</li>
+<li><strong>Name what to keep</strong>: ethnicity and skin tone, hair colour, texture, length, cut and hairline, eye colour, eye and eyelid shape, eyebrows, nose, mouth, jawline, age.</li>
+<li><strong>Ban the drifts</strong>: do not westernise, do not enlarge or round the eyes, do not lighten hair or eyes, do not make the subject look older, do not idealise.</li>
+<li><strong>Force dark hair</strong> — klein warms black toward brown on every pass: "pure black hair, not brown, not chestnut, no warm highlights".</li>
+<li><strong>Neutralise the source lighting</strong>, or a sunset photo bakes orange into hair and skin.</li>
+<li><strong>Name signature features</strong> (a spiked fringe, a horn crest) or they get combed flat — then take the mildest seed, because naming them also invites overshoot.</li>
+<li><code>--strength</code> 0.7–0.9 is a near no-op on the released CLI; only 1.0 is edit mode (<a href="headless-cli-pipeline.html">headless cli pipeline</a> §1c).</li>
+</ul>
+<p><strong>Pick rule</strong>: closest to the source on face shape, hair silhouette and signature details — judged at full size, not from a thumbnail strip. Optional human gate here when the subject is a real person.</p>
+<h2>Phase 4b — Feeding a seed into a shot</h2>
+<p>Three mechanisms, and choosing wrong is the most common way a shot fails:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Mechanism</th>
+<th>Use when</th>
+<th>Command</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Diptych</strong> — seed left, layout right, edit the pair, keep the right half</td>
+<td>the layout image <strong>already contains a person or object to replace</strong></td>
+<td><code>dt_diptych.sh SEED LAYOUT prompt out.png</code></td>
+</tr>
+<tr>
+<td><strong>Restaging</strong> — the seed <em>is</em> the input, the scene comes from the prompt</td>
+<td>there is no layout image, or the layout is an empty place</td>
+<td><code>dt_diptych.sh - SEED prompt out.png</code></td>
+</tr>
+<tr>
+<td><strong>Chaining</strong> — an approved shot becomes the reference for the next</td>
+<td>props, places and light carrying between shots</td>
+<td><code>dt_diptych.sh stills/s3.png LAYOUT prompt out.png</code></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>A diptych needs a subject in the layout image.</strong> Pointed at an empty venue plate, klein renders the room and silently leaves the character out — two Bot Builders shots came back with nobody in them. Restaging from the seed portrait fixed all four on the first pass.</p>
+<p>Prompt pattern for a diptych: <em>"Two images side by side. Left: … Right: … Re-render the right image as a frame from the same film, with the boy looking exactly like the boy on the left: same face, same hair, same costume. [framing]. [scene]. [style]. Keep the left image unchanged."</em></p>
+<p>Prompt pattern for restaging: <em>"Keep this exact character — same face, same hair, same age, same style — and place them in a new scene. [framing]. [scene]. Exactly one child in the frame."</em></p>
+<p><strong>Always state the framing</strong> ("medium close-up: head and shoulders fill the frame") — without it klein zooms out to full body. And an edit <strong>inherits the source pose</strong>: chaining a calm portrait off a celebration still reproduced the jump across three seeds until the new pose was named both positively and negatively.</p>
+<p>In the Draw Things app the equivalent channel is the <strong>Moodboard</strong> (up to 3 crops, equal weight); on the CLI the diptych is its substitute, since the released binary takes a single <code>--image</code>.</p>
+<h2>Phase 5 — Shot stills (first frames)</h2>
+<p>Every shot's first frame must carry identity from <strong>pixels</strong>, never text alone — pick the mechanism from Phase 4b, then:</p>
+<ul>
+<li>Render <strong>3 seeds per shot</strong> (<code>film_run.py P stills</code>), judge <strong>at full size</strong> — never from a thumbnail strip — and <code>pick</code> the winner into <code>stills/</code>.</li>
+<li><strong>Count the subjects in every group frame.</strong> klein drops people from crowded shots: only 1 of 3 seeds of the Bot Builders celebration kept all five children, and comic panels with six figures get copied six-figured regardless of the prompt.</li>
+<li>Typical rejects: subject dropped, an extra hand or doubled gesture, a different face, text left in, the wrong pose inherited from the input.</li>
+<li>Inputs are fitted to W×H by centre-crop, so hand over images already at the target aspect; pad near-square panels with a blurred copy of themselves.</li>
+<li><strong>Wardrobe</strong>: say "plain black t-shirt with no printing, no graphics and no letters" or shirts come back with garbled lettering. "No text anywhere" must name clothing, boards and signs explicitly.</li>
+</ul>
 <h2>Writing it down as you go</h2>
 <p>Two files, one rule: <strong>if changing it changes the render it goes in <code>spec.json</code>; if it explains why, it goes in the plan</strong> (<a href="repo-structure.html">repo structure</a> has the full table). Settings, prompts, shots, takes and trims are spec; the story, the rejected attempts and the rules they taught are plan. Fix the spec the moment a shot is rescued by a different method, or a re-run will reproduce the failure rather than the film.</p>
 <h2>Phase 5b — One generation per film</h2>

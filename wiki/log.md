@@ -8,6 +8,14 @@
 
 ---
 
+## 2026-09-25 — Blueprint: seeding as its own phase
+
+Phase 4 was "Masters (model sheets)" and covered recurring characters plus the odd hero prop. It now covers **everything that must stay the same** — characters, locations and props alike — under the name it deserves: a diffusion model keeps no memory, so anything recurring has to be rendered once and fed back in. Bot Builders needed five children *and* the mission table, the gym and three farm plates; a location you skip is one the model re-invents every shot.
+
+The phase carries the full identity recipe (name what to keep, ban the drifts, force pure black hair, neutralise the source lighting, name signature features and then take the mildest seed) and a table of what to seed from what.
+
+New **Phase 4b — Feeding a seed into a shot** names the three mechanisms and when each applies: diptych when the layout already contains a subject, restaging when it does not, chaining when a prop or place carries between shots. With the rule that broke two shots: a diptych pointed at an empty room renders the room and leaves the character out. Phase 5 was trimmed to what is actually about stills — three seeds, judge at full size, count the subjects in group frames, plain wardrobe.
+
 ## 2026-09-25 — Lost City: shots renumbered, rift coda cut
 
 **Renumbered** to the order the film plays: old s10 (drinking) → s3, s3 (feet on flagstones) → s4, s7 (canyon) → s5, s9 (jumping) → s6, s13 (escape run) → s7, s14 (final collapse) → s9; s1, s2 and s8 unchanged. 26 files renamed, both specs and the plan rewritten, mapping recorded in each.
