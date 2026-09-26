@@ -92,7 +92,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
     <span class="spacer"></span>
     <button class="pill" onclick="tt()">◐ Theme</button>
   </nav>
-  <h1>Idea-to-Video Blueprint — Minimal-Touch Production</h1><p class="lede">The end-to-end process for turning an idea (a sentence, a comic, a photo) into a finished short film on this Mac, arranged so that <strong>all human input happens up front</strong> — one intake questionnaire and one storyboard approval — and everything after "go" (masters, stills, clips, QC, retries, upscale, edit, music, report, push) runs unattended through <code>draw-things-cli</code>, with Claude as the judge. Proven end to end on <a href="kyle-antarctic-rescue-plan.html">kyle antarctic rescue plan</a> (60 s, 3 h 40 min, zero input after go).</p><div class="meta"><span><b>Updated</b> 2026-09-23 (phases 3–9 now run through <code>scripts/film_run.py</code> from a run-spec — see <a href="scripts-reference.html">scripts reference</a>)</span><span><b>Sources</b> <a href="kyle-antarctic-rescue-plan.html">kyle antarctic rescue plan</a> §0 (the unattended run, 2026-09-22/23 — every timing below is from it unless marked); <a href="lost-city-plan.html">lost city plan</a> §3c prompt rules; <a href="headless-cli-pipeline.html">headless cli pipeline</a> §1b–1c; <a href="character-consistency.html">character consistency</a>; <a href="identity-conditioning.html">identity conditioning</a>; <a href="scripts-reference.html">scripts reference</a>.</span></div>
+  <h1>Idea-to-Video Blueprint — Minimal-Touch Production</h1><p class="lede">The end-to-end process for turning an idea (a sentence, a comic, a photo) into a finished short film on this Mac, arranged so that <strong>all human input happens up front</strong> — one intake questionnaire and one storyboard approval — and everything after "go" (masters, stills, clips, QC, retries, upscale, edit, music, report, push) runs unattended through <code>draw-things-cli</code>, with Claude as the judge. Proven end to end on <a href="kyle-antarctic-rescue-plan.html">kyle antarctic rescue plan</a> (60 s, 3 h 40 min, zero input after go).</p><div class="meta"><span><b>Updated</b> 2026-09-25 (project/version folder layout and setup checklist; prompts live in <code>spec.json</code>)</span><span><b>Sources</b> <a href="kyle-antarctic-rescue-plan.html">kyle antarctic rescue plan</a> §0 (the unattended run, 2026-09-22/23 — every timing below is from it unless marked); <a href="lost-city-plan.html">lost city plan</a> §3c prompt rules; <a href="headless-cli-pipeline.html">headless cli pipeline</a> §1b–1c; <a href="character-consistency.html">character consistency</a>; <a href="identity-conditioning.html">identity conditioning</a>; <a href="scripts-reference.html">scripts reference</a>.</span></div>
 <hr />
 <h2>The shape of it</h2>
 <pre><code> HUMAN (≈15 min, before go)                 MACHINE (hours, no human)
@@ -100,14 +100,14 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
  │ 0 Intake questionnaire   │   │ 4 Masters → 5 Shot stills → 6 Motion prompts → 7 Clip batch  │
  │ 1 Story + storyboard  ✔  │ → │      ↑ Claude picks each      8 QC + redo queue ←──┘         │
  │ 2 Bible (locks, rules)   │ go│ 9 Trim → upscale → assemble → music → delivery copies        │
- │ 3 Preflight + permissions│   │ 10 Report to wiki, projects.json, log → commit/push → notify │
+ │ 3 Preflight + permissions│   │ 10 Report to plan, spec.json, log → commit/push → notify     │
  └──────────────────────────┘   └──────────────────────────────────────────────────────────────┘
         ✔ = the only approval gate                     optional gate: master pick (step 4)
 </code></pre>
 <p>The rule that makes it work: <strong>every decision the machine will face must have a rule written down before go</strong> — which seed wins, what counts as a failed shot, what to do after N failures, what the film does if a shot can't be saved. Anything left open becomes a 2 a.m. stall.</p>
 <hr />
 <h2>One command per phase</h2>
-<p>The intake answers become a <strong>run-spec</strong> (the <code>run-spec</code> block in <code>projects.json</code>) (size, still/clip models, frames, upscaler and output size, crossfade, music, deliveries, and per shot: still recipe, prompts, take, trim). Every script reads its settings from there through the driver — nothing is hardcoded to Kyle's 9:16 LTX setup. The plan page keeps the story, decisions, rules and results; the run-spec keeps the exact settings and is the only thing the run reads. Run-spec schema and per-script options: <a href="scripts-reference.html">scripts reference</a>.</p>
+<p>The intake answers become a <strong>run-spec</strong> (the <code>run-spec</code> block in <code>projects/&lt;id&gt;/&lt;version&gt;/spec.json</code>) (size, still/clip models, frames, upscaler and output size, crossfade, music, deliveries, and per shot: still recipe, prompts, take, trim). Every script reads its settings from there through the driver — nothing is hardcoded to Kyle's 9:16 LTX setup. The plan page keeps the story, decisions, rules and results; the run-spec keeps the exact settings and is the only thing the run reads. Run-spec schema and per-script options: <a href="scripts-reference.html">scripts reference</a>.</p>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -116,6 +116,10 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>— set up the folder</td>
+<td>see <strong>Starting a new project</strong> below</td>
+</tr>
 <tr>
 <td>3 Preflight</td>
 <td><code>scripts/preflight.sh --fix</code></td>
@@ -146,8 +150,33 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </tr>
 </tbody>
 </table></div>
+<h2>Starting a new project</h2>
+<p>A project is one folder; a <strong>version</strong> inside it is one attempt at the film. Name the version for the method — <code>v1-drawthings-cli</code>, <code>v2-master-restage</code> — so the folder says how it was made. Full rules in <a href="repo-structure.html">repo structure</a>.</p>
+<pre><code>projects/&lt;id&gt;/
+  plan/&lt;id&gt;-plan.md        the story, decisions and results (this is §0 onward)
+  &lt;version&gt;/
+    spec.json              SOURCE OF TRUTH: settings, every prompt, shots, takes, trims
+    raw/                   the source comic / photos, immutable
+    seed/                  masters, crops, candidates, locks, qc_notes.txt
+    stills/                sN.png — the picked first frames
+    clips/                 sN_vK.mov, sN_t.mov, sN_4k.mp4, sN_trim.txt
+    music/                 the track this version is cut to
+    final/                 the film and its delivery copies
+    logs/                  run logs and any hand-written run scripts
+    .gen/                  prompts written out of spec.json at run time — generated
+</code></pre>
+<p>Setup, in order:</p>
+<ol>
+<li><code>mkdir -p projects/&lt;id&gt;/plan projects/&lt;id&gt;/v1-&lt;how&gt;/{raw,seed,stills,clips,music,final,logs}</code></li>
+<li>Source material into <code>&lt;version&gt;/raw/</code>.</li>
+<li>Write <code>&lt;version&gt;/spec.json</code>: <code>id</code>, <code>version</code>, <code>variant</code>, <code>title</code>, <code>date</code>, <code>theme</code>, <code>status</code>, then <code>still</code> / <code>i2v</code> / <code>post</code> blocks and a <code>run-spec</code> whose <code>dir</code> is <code>projects/&lt;id&gt;/&lt;version&gt;</code>. Copy the shape from a delivered film — <code>bot_builders_champion/v3-photo-cut</code> for 16:9, <code>kyle_rescue/v1-drawthings-cli</code> for 9:16 — and <strong>delete what you are not reusing</strong> rather than leaving stale settings in place.</li>
+<li>Plan page at <code>projects/&lt;id&gt;/plan/&lt;id&gt;-plan.md</code> in the standard page format, and a card for it in <code>wiki/index.md</code> under <strong>Projects</strong>.</li>
+<li><code>python3 scripts/build_site.py</code> — regenerates the root <code>projects.json</code> aggregate and the registry pages.</li>
+<li><code>scripts/film_run.py &lt;id&gt; check</code> — must pass before Phase 3.</li>
+</ol>
+<p>Prompts go <strong>in the spec</strong>, not in files: each shot's <code>still.prompt</code> and <code>video_prompt</code> as text, plus <code>run-spec.prompts</code> for recipes no shot owns. <code>film_run.py</code> writes them to <code>.gen/</code> when it runs.</p>
 <h2>Phase 0 — Intake (human, ~5 min)</h2>
-<p>Ask these once, all together, and record the answers in the project page's "Decisions" table and in <code>projects.json</code>. Defaults in <strong>bold</strong> are what Kyle used.</p>
+<p>Ask these once, all together, and record the answers in the plan page's "Decisions" table and in the version's <code>spec.json</code>. Defaults in <strong>bold</strong> are what Kyle used.</p>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -249,7 +278,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <li><strong>One lock per entity</strong> (character, creature, vehicle, place), 1–2 sentences, pasted verbatim into every prompt that shows it. Name the count: "one boy".</li>
 <li><strong>Style lock</strong> (head of every still prompt) and <strong>video tail</strong> (end of every LTX prompt).</li>
 <li><strong>Word bans</strong> collected so far: "UFO"/"alien" (invites aliens → write "flying saucer, no aliens visible"), "dragon" for a wingless mount (grows wings), "lightning" for a sky rift (renders a bolt), "wind in his hair" on a face shot (hair restyles over 10 s), negations with klein at CFG 1 (it obeys the noun). Add to this list after every project.</li>
-<li>Store everything in <code>projects.json → scenes.locks</code> and per-shot <code>still</code> / <code>video</code> prompts; <code>wiki/projects.md</code> renders it.</li>
+<li>Store everything in the version's <code>spec.json</code>: <code>scenes.locks</code> for the locks, each shot's <code>still.prompt</code> and <code>video_prompt</code> for the wording; the registry pages render it.</li>
 </ul>
 <h2>Phase 3 — Preflight (Claude, 2 min, just before go)</h2>
 <div class="tw"><table>
@@ -339,11 +368,11 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 - name the subject and its stillness <strong>before</strong> any destruction verb (motion bleeds onto small subjects);
 - music-only films: skip sound sentences.</p>
 <h2>Phase 7 — Clip batch (unattended)</h2>
-<p><code>film_run.py P clips</code> runs this loop from the run-spec (one clip at a time, skipping clips that exist). What it does per shot, equivalent to Kyle's hand-written <code>raw/clips/kyle/render_clips.sh</code>:</p>
+<p><code>film_run.py P clips</code> runs this loop from the run-spec (one clip at a time, skipping clips that exist). What it does per shot, equivalent to Kyle's hand-written <code>logs/render_clips.sh</code>:</p>
 <pre><code class="language-bash">for s in $SHOTS; do
   out=clips/${s}_ltx_v$V.mov; [ -f &quot;$out&quot; ] &amp;&amp; continue
   draw-things-cli generate -m ltx_2.3_22b_distilled_1.1_q8p.ckpt \
-    --prompt-file stills/${s}_v.txt --image stills/$s.png \
+    --prompt-file .gen/${s}_v.txt --image stills/$s.png \
     --width 576 --height 1024 --frames 249 --steps 8 --cfg 1 --seed $SEED \
     --config-json '{&quot;sampler&quot;:19,&quot;shift&quot;:5.0,&quot;stochasticSamplingGamma&quot;:0.3,&quot;fps&quot;:25,&quot;hiresFix&quot;:false}' \
     --offline --disable-preview --video-format prores422hq -o &quot;$out&quot;
@@ -368,9 +397,9 @@ done
 2. clean for less → keep as fallback trim, <strong>queue v2</strong>: fix the prompt cause (drop the wind, add hold/still wording), new seed;
 3. v2 fails → new still seed → v3;
 4. still failing → apply the intake failure rule (restage / best attempt / drop).</p>
-<p>Log every verdict to <code>work/qc_notes.txt</code>; it becomes the report.</p>
+<p>Log every verdict to <code>&lt;version&gt;/seed/qc_notes.txt</code>; it becomes the report.</p>
 <h2>Phase 9 — Finish (unattended)</h2>
-<p><code>film_run.py P finish</code> does this from each shot's <code>take</code> + <code>trim</code> and the run-spec's upscale / assemble / music / deliver blocks, caching each shot's upscale so a changed trim only redoes that shot. The underlying commands (Kyle's hand-written <code>raw/clips/kyle/finish.sh</code> did the same):</p>
+<p><code>film_run.py P finish</code> does this from each shot's <code>take</code> + <code>trim</code> and the run-spec's upscale / assemble / music / deliver blocks, caching each shot's upscale so a changed trim only redoes that shot. The underlying commands (Kyle's hand-written <code>logs/finish.sh</code> did the same):</p>
 <pre><code class="language-bash">ffmpeg -nostdin -i clips/$c.mov -vf &quot;trim=start=$a:end=$b,setpts=PTS-STARTPTS&quot; -an -c:v prores_ks -profile:v 3 final/${s}_t.mov
 W=2160 H=3840 scripts/upscale_4k.sh final/${s}_t.mov final/$s realesrgan-x4plus &lt;/dev/null
 W=2160 H=3840 XFADE=0.75 scripts/assemble_film.sh final/film_nomusic.mp4 final/s*_4k.mp4
@@ -388,7 +417,7 @@ ffmpeg -i out_master.mp4 -vf scale=1080:1920 -c:v hevc_videotoolbox -b:v 12M -ta
 <h2>Phase 10 — Report and file back</h2>
 <ul>
 <li>Project page §0 <strong>Results</strong>: deliverables, what differed from the plan, every pick and rejection with reasons, QC sheets, timings, new rules.</li>
-<li><code>projects.json</code>: status, seeds, trims, files. <code>wiki/log.md</code> entry. New gotchas onto the recipe pages (<a href="headless-cli-pipeline.html">headless cli pipeline</a>, <a href="scripts-reference.html">scripts reference</a>, <a href="lost-city-plan.html">lost city plan</a> rules).</li>
+<li>the version's <code>spec.json</code>: status, seeds, trims, files — and fix any shot whose staging changed mid-run, or a re-run reproduces the failure. <code>wiki/log.md</code> entry. New gotchas onto the recipe pages (<a href="headless-cli-pipeline.html">headless cli pipeline</a>, <a href="scripts-reference.html">scripts reference</a>, <a href="lost-city-plan.html">lost city plan</a> rules).</li>
 <li><code>python3 scripts/build_site.py</code>, commit, push (if the intake said so), notification, send the film (or preview) to the human.</li>
 </ul>
 <hr />
@@ -486,18 +515,6 @@ ffmpeg -i out_master.mp4 -vf scale=1080:1920 -c:v hevc_videotoolbox -b:v 12M -ta
 </tbody>
 </table></div>
 <p>Rule of thumb: <strong>wall clock ≈ 0.6 h + 0.35 h per shot</strong> (stills + LTX + 25% redos + upscale).</p>
-<h2>Project folder layout</h2>
-<pre><code>raw/&lt;project&gt;/source.*                 immutable source (comic, photo) — tracked
-raw/clips/&lt;project&gt;/                   everything generated — git-ignored
-  masters/        master_*.png, cand/, prompts
-  work/           crops, pads, seed candidates, qc sheets, qc_notes.txt
-  stills/         sN.png (picked), sN.txt (still prompt), sN_v.txt (video prompt)
-  clips/          sN_ltx_vK.mov
-  final/          sN_t.mov, sN_4k.mp4, film_nomusic.mp4, &lt;film&gt;_master.mp4, &lt;film&gt;_1080.mp4
-  render_clips.sh, finish.sh, render.log, finish.log
-wiki/&lt;project&gt;-plan.md                 plan + §0 results
-wiki/assets/&lt;project&gt;-*.jpg            QC and contact sheets shown in the report
-</code></pre>
 <h2>Failure playbook</h2>
 <div class="tw"><table>
 <thead>

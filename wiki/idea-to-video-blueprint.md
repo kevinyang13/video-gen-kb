@@ -4,7 +4,7 @@
 
 **Sources**: [[kyle-antarctic-rescue-plan]] §0 (the unattended run, 2026-09-22/23 — every timing below is from it unless marked); [[lost-city-plan]] §3c prompt rules; [[headless-cli-pipeline]] §1b–1c; [[character-consistency]]; [[identity-conditioning]]; [[scripts-reference]].
 
-**Last updated**: 2026-09-23 (phases 3–9 now run through `scripts/film_run.py` from a run-spec — see [[scripts-reference]])
+**Last updated**: 2026-09-25 (project/version folder layout and setup checklist; prompts live in `spec.json`)
 
 ---
 
@@ -16,7 +16,7 @@
  │ 0 Intake questionnaire   │   │ 4 Masters → 5 Shot stills → 6 Motion prompts → 7 Clip batch  │
  │ 1 Story + storyboard  ✔  │ → │      ↑ Claude picks each      8 QC + redo queue ←──┘         │
  │ 2 Bible (locks, rules)   │ go│ 9 Trim → upscale → assemble → music → delivery copies        │
- │ 3 Preflight + permissions│   │ 10 Report to wiki, projects.json, log → commit/push → notify │
+ │ 3 Preflight + permissions│   │ 10 Report to plan, spec.json, log → commit/push → notify     │
  └──────────────────────────┘   └──────────────────────────────────────────────────────────────┘
         ✔ = the only approval gate                     optional gate: master pick (step 4)
 ```
@@ -27,10 +27,11 @@ The rule that makes it work: **every decision the machine will face must have a 
 
 ## One command per phase
 
-The intake answers become a **run-spec** (the `run-spec` block in `projects.json`) (size, still/clip models, frames, upscaler and output size, crossfade, music, deliveries, and per shot: still recipe, prompts, take, trim). Every script reads its settings from there through the driver — nothing is hardcoded to Kyle's 9:16 LTX setup. The plan page keeps the story, decisions, rules and results; the run-spec keeps the exact settings and is the only thing the run reads. Run-spec schema and per-script options: [[scripts-reference]].
+The intake answers become a **run-spec** (the `run-spec` block in `projects/<id>/<version>/spec.json`) (size, still/clip models, frames, upscaler and output size, crossfade, music, deliveries, and per shot: still recipe, prompts, take, trim). Every script reads its settings from there through the driver — nothing is hardcoded to Kyle's 9:16 LTX setup. The plan page keeps the story, decisions, rules and results; the run-spec keeps the exact settings and is the only thing the run reads. Run-spec schema and per-script options: [[scripts-reference]].
 
 | Phase | Command |
 |---|---|
+| — set up the folder | see **Starting a new project** below |
 | 3 Preflight | `scripts/preflight.sh --fix` |
 | 2 → run-spec sanity | `scripts/film_run.py P check` |
 | 4–5 Masters, stills | `film_run.py P stills` → judge → `film_run.py P pick ID SEED` |
@@ -39,9 +40,39 @@ The intake answers become a **run-spec** (the `run-spec` block in `projects.json
 | 9 Finish | `film_run.py P finish` |
 | any time | `film_run.py P status` |
 
+## Starting a new project
+
+A project is one folder; a **version** inside it is one attempt at the film. Name the version for the method — `v1-drawthings-cli`, `v2-master-restage` — so the folder says how it was made. Full rules in [[repo-structure]].
+
+```
+projects/<id>/
+  plan/<id>-plan.md        the story, decisions and results (this is §0 onward)
+  <version>/
+    spec.json              SOURCE OF TRUTH: settings, every prompt, shots, takes, trims
+    raw/                   the source comic / photos, immutable
+    seed/                  masters, crops, candidates, locks, qc_notes.txt
+    stills/                sN.png — the picked first frames
+    clips/                 sN_vK.mov, sN_t.mov, sN_4k.mp4, sN_trim.txt
+    music/                 the track this version is cut to
+    final/                 the film and its delivery copies
+    logs/                  run logs and any hand-written run scripts
+    .gen/                  prompts written out of spec.json at run time — generated
+```
+
+Setup, in order:
+
+1. `mkdir -p projects/<id>/plan projects/<id>/v1-<how>/{raw,seed,stills,clips,music,final,logs}`
+2. Source material into `<version>/raw/`.
+3. Write `<version>/spec.json`: `id`, `version`, `variant`, `title`, `date`, `theme`, `status`, then `still` / `i2v` / `post` blocks and a `run-spec` whose `dir` is `projects/<id>/<version>`. Copy the shape from a delivered film — `bot_builders_champion/v3-photo-cut` for 16:9, `kyle_rescue/v1-drawthings-cli` for 9:16 — and **delete what you are not reusing** rather than leaving stale settings in place.
+4. Plan page at `projects/<id>/plan/<id>-plan.md` in the standard page format, and a card for it in `wiki/index.md` under **Projects**.
+5. `python3 scripts/build_site.py` — regenerates the root `projects.json` aggregate and the registry pages.
+6. `scripts/film_run.py <id> check` — must pass before Phase 3.
+
+Prompts go **in the spec**, not in files: each shot's `still.prompt` and `video_prompt` as text, plus `run-spec.prompts` for recipes no shot owns. `film_run.py` writes them to `.gen/` when it runs.
+
 ## Phase 0 — Intake (human, ~5 min)
 
-Ask these once, all together, and record the answers in the project page's "Decisions" table and in `projects.json`. Defaults in **bold** are what Kyle used.
+Ask these once, all together, and record the answers in the plan page's "Decisions" table and in the version's `spec.json`. Defaults in **bold** are what Kyle used.
 
 | # | Question | Options | Why it matters downstream |
 |---|---|---|---|
@@ -75,7 +106,7 @@ Ask these once, all together, and record the answers in the project page's "Deci
 - **One lock per entity** (character, creature, vehicle, place), 1–2 sentences, pasted verbatim into every prompt that shows it. Name the count: "one boy".
 - **Style lock** (head of every still prompt) and **video tail** (end of every LTX prompt).
 - **Word bans** collected so far: "UFO"/"alien" (invites aliens → write "flying saucer, no aliens visible"), "dragon" for a wingless mount (grows wings), "lightning" for a sky rift (renders a bolt), "wind in his hair" on a face shot (hair restyles over 10 s), negations with klein at CFG 1 (it obeys the noun). Add to this list after every project.
-- Store everything in `projects.json → scenes.locks` and per-shot `still` / `video` prompts; `wiki/projects.md` renders it.
+- Store everything in the version's `spec.json`: `scenes.locks` for the locks, each shot's `still.prompt` and `video_prompt` for the wording; the registry pages render it.
 
 ## Phase 3 — Preflight (Claude, 2 min, just before go)
 
@@ -136,13 +167,13 @@ One paragraph per shot, action first, ending with the video tail. Rules from Kyl
 
 ## Phase 7 — Clip batch (unattended)
 
-`film_run.py P clips` runs this loop from the run-spec (one clip at a time, skipping clips that exist). What it does per shot, equivalent to Kyle's hand-written `raw/clips/kyle/render_clips.sh`:
+`film_run.py P clips` runs this loop from the run-spec (one clip at a time, skipping clips that exist). What it does per shot, equivalent to Kyle's hand-written `logs/render_clips.sh`:
 
 ```bash
 for s in $SHOTS; do
   out=clips/${s}_ltx_v$V.mov; [ -f "$out" ] && continue
   draw-things-cli generate -m ltx_2.3_22b_distilled_1.1_q8p.ckpt \
-    --prompt-file stills/${s}_v.txt --image stills/$s.png \
+    --prompt-file .gen/${s}_v.txt --image stills/$s.png \
     --width 576 --height 1024 --frames 249 --steps 8 --cfg 1 --seed $SEED \
     --config-json '{"sampler":19,"shift":5.0,"stochasticSamplingGamma":0.3,"fps":25,"hiresFix":false}' \
     --offline --disable-preview --video-format prores422hq -o "$out"
@@ -173,11 +204,11 @@ ffmpeg -i master.png -i clip.mov -filter_complex \
 3. v2 fails → new still seed → v3;
 4. still failing → apply the intake failure rule (restage / best attempt / drop).
 
-Log every verdict to `work/qc_notes.txt`; it becomes the report.
+Log every verdict to `<version>/seed/qc_notes.txt`; it becomes the report.
 
 ## Phase 9 — Finish (unattended)
 
-`film_run.py P finish` does this from each shot's `take` + `trim` and the run-spec's upscale / assemble / music / deliver blocks, caching each shot's upscale so a changed trim only redoes that shot. The underlying commands (Kyle's hand-written `raw/clips/kyle/finish.sh` did the same):
+`film_run.py P finish` does this from each shot's `take` + `trim` and the run-spec's upscale / assemble / music / deliver blocks, caching each shot's upscale so a changed trim only redoes that shot. The underlying commands (Kyle's hand-written `logs/finish.sh` did the same):
 
 ```bash
 ffmpeg -nostdin -i clips/$c.mov -vf "trim=start=$a:end=$b,setpts=PTS-STARTPTS" -an -c:v prores_ks -profile:v 3 final/${s}_t.mov
@@ -197,7 +228,7 @@ ffmpeg -i out_master.mp4 -vf scale=1080:1920 -c:v hevc_videotoolbox -b:v 12M -ta
 ## Phase 10 — Report and file back
 
 - Project page §0 **Results**: deliverables, what differed from the plan, every pick and rejection with reasons, QC sheets, timings, new rules.
-- `projects.json`: status, seeds, trims, files. `wiki/log.md` entry. New gotchas onto the recipe pages ([[headless-cli-pipeline]], [[scripts-reference]], [[lost-city-plan]] rules).
+- the version's `spec.json`: status, seeds, trims, files — and fix any shot whose staging changed mid-run, or a re-run reproduces the failure. `wiki/log.md` entry. New gotchas onto the recipe pages ([[headless-cli-pipeline]], [[scripts-reference]], [[lost-city-plan]] rules).
 - `python3 scripts/build_site.py`, commit, push (if the intake said so), notification, send the film (or preview) to the human.
 
 ---
@@ -232,21 +263,6 @@ Among passes, prefer: closest to the master → most readable at phone size → 
 | **60 s film, go → pushed** | | **~3 h 40 min** |
 
 Rule of thumb: **wall clock ≈ 0.6 h + 0.35 h per shot** (stills + LTX + 25% redos + upscale).
-
-## Project folder layout
-
-```
-raw/<project>/source.*                 immutable source (comic, photo) — tracked
-raw/clips/<project>/                   everything generated — git-ignored
-  masters/        master_*.png, cand/, prompts
-  work/           crops, pads, seed candidates, qc sheets, qc_notes.txt
-  stills/         sN.png (picked), sN.txt (still prompt), sN_v.txt (video prompt)
-  clips/          sN_ltx_vK.mov
-  final/          sN_t.mov, sN_4k.mp4, film_nomusic.mp4, <film>_master.mp4, <film>_1080.mp4
-  render_clips.sh, finish.sh, render.log, finish.log
-wiki/<project>-plan.md                 plan + §0 results
-wiki/assets/<project>-*.jpg            QC and contact sheets shown in the report
-```
 
 ## Failure playbook
 

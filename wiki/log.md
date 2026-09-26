@@ -8,6 +8,12 @@
 
 ---
 
+## 2026-09-25 — Blueprint brought up to the current structure
+
+[[idea-to-video-blueprint]] still described the pre-reorganisation world: `raw/<project>/` for sources, `raw/clips/<project>/` with `masters/` and `work/`, prompts as `stills/sN.txt`, the run-spec inside the root `projects.json`, QC notes in `work/`, and hand-written `raw/clips/kyle/*.sh`. Eight places corrected, and the layout section replaced with the project/version tree plus a six-step **Starting a new project** checklist — now placed *before* Phase 0, since setting up the folder precedes the intake questions, with a row pointing at it from the phase table.
+
+It now states that prompts live in `spec.json` (materialised to `.gen/` at run time), that a version is named for its method, and that Phase 10 must fix any shot whose staging changed mid-run.
+
 ## 2026-09-25 — Wrote down what belongs in the plan vs the spec
 
 The split had been implicit and was drifting. Now stated in [[repo-structure]] with a table, and summarised in [[idea-to-video-blueprint]]: *if changing it changes the render it goes in `spec.json`; if it explains why, it goes in the plan.* Settings, prompts, shot list, takes and trims are spec; story, beats, rejected attempts and the rules they taught are plan.
