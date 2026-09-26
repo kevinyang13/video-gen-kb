@@ -15,8 +15,7 @@ Index of every project: [[projects]]. Other themes: [[projects-anime]] · [[proj
 | # | Project | Date | Status | Still | I2V | Music | Final file | YouTube |
 |--:|---|---|---|---|---|---|---|---|
 | 1 | [Dragon Epic — 1-minute photoreal short, family hero face](#dragon_epic) | 2026-09-21 | in progress — scene 1A posted | FLUX.2 [klein] 9B 1280x768 | Wan 2.2 High Noise 47 min | The Dragon's Breath | `—` | [▶ watch](https://youtu.be/Xzu-c5yX8uo) |
-| 2 | [Three-minute film — recurring characters (subject TBD)](#film3min) | 2026-09-21 | planning | FLUX.2 [klein] 9B 1024x576 | Wan 2.2 High Noise 15 min | TBD | `—` | — |
-| 3 | [Lost City — hyper-real rider on a raptor-dragon entering jungle ruins](#lost_city) | 2026-09-21 | in progress — clips at 4K+music: s2, s3, s7, s8, s10, s14; s9 trimmed (4.6 s, drift after); s11 stills rejected (klein duplicates the creature); s12 not started; s15 rift coda done (3 clips assembled to 30 s 4K with music) | FLUX.2 [klein] 9B 1280x768 | LTX-2.3 22B [distilled] 1.1 (production engine — see ltx_10s) — Wan 2.2 High Noise I2V (8-bit S) + Low Noise refiner 10% for locked-camera shots at 768p 49 min | Mystical orchestral theme with ancient flute | `—` | [▶ watch](https://youtu.be/68sq_jZqu6c) |
+| 2 | [Lost City — hyper-real rider on a raptor-dragon entering jungle ruins](#lost_city) | 2026-09-21 | in progress — clips at 4K+music: s2, s3, s7, s8, s10, s14; s9 trimmed (4.6 s, drift after); s11 stills rejected (klein duplicates the creature); s12 not started; s15 rift coda done (3 clips assembled to 30 s 4K with music) | FLUX.2 [klein] 9B 1280x768 | LTX-2.3 22B [distilled] 1.1 (production engine — see ltx_10s) — Wan 2.2 High Noise I2V (8-bit S) + Low Noise refiner 10% for locked-camera shots at 768p 49 min | Mystical orchestral theme with ancient flute | `—` | [▶ watch](https://youtu.be/68sq_jZqu6c) |
 
 ## Dragon Epic — 1-minute photoreal short, family hero face {#dragon_epic}
 
@@ -68,52 +67,6 @@ Prompt: `per shot — one camera move + one subject action`
 | Loop | none — 12 clips xfade-concatenated |
 | Upscale | scripts/upscale_4k.sh — Real-ESRGAN x4plus ncnn, tile 128, → 3840x2160 HEVC 10-bit 40 Mbps (5.6 min/clip) |
 | Music | The Dragon's Breath — ONECinematicStudio, Pixabay (cdn.pixabay.com/audio/2026/05/04/audio_505690c98b.mp3), 2:40; scene 1A preview uses peak section from 135 s, 0.3 s fade in / 1 s fade out, vol 0.9. Final film: full track + SFX (TBD) |
-
-## Three-minute film — recurring characters (subject TBD) {#film3min}
-
-- **Date**: 2026-09-21 · **Status**: planning · **Draw Things project**: `None`
-- **Files** (`raw/clips/`): 
-- **Notes**: Plan: wiki/three-minute-film-plan.md. Consistency stack: wiki/character-consistency.md. Waiting on story/style/characters from Kevin; experiments X1–X7 before rendering.
-
-**Still**
-
-| Setting | Value |
-|---|---|
-| Model | FLUX.2 [klein] 9B (8-bit S) |
-| Size | 1024x576 |
-| Steps | 4 |
-| CFG | 1.0 |
-| Shift | 3.0 |
-| Sampler | DDIM Trailing |
-
-Prompt: `per shot — [camera/light lock] [scene] [character lock verbatim] [action]; see wiki/three-minute-film-plan.md`
-
-**I2V**
-
-| Setting | Value |
-|---|---|
-| Model | Wan 2.2 High Noise Expert I2V A14B (8-bit S) |
-| Refiner | Wan 2.2 Low Noise Expert I2V A14B (8-bit S) @ 10% |
-| LoRA | Wan 2.2 A14B Lightning High-Noise T2V v2.0 @ 100% |
-| Size | 1024x576 |
-| Frames | 81 |
-| FPS | 16 |
-| Steps | 4 |
-| CFG | 1.0 |
-| Shift | 4.95 |
-| Sampler | DDIM Trailing |
-| Strength | 100% |
-| I2V time (min) | 15 |
-
-Prompt: `per shot — one camera move + one subject action`
-
-**Post**
-
-| Setting | Value |
-|---|---|
-| Script | scripts/finish_clip.sh |
-| Upscale | Real-ESRGAN ncnn 4x -> 3840x2160 (scripts/upscale_4k.sh) |
-| Music | TBD |
 
 ## Lost City — hyper-real rider on a raptor-dragon entering jungle ruins {#lost_city}
 

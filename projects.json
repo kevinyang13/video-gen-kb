@@ -264,31 +264,6 @@
       "youtube": "Xzu-c5yX8uo"
     },
     {
-      "id": "film3min",
-      "title": "Three-minute film — recurring characters (subject TBD)",
-      "date": "2026-09-21",
-      "theme": "realistic",
-      "dt_project": null,
-      "status": "planning",
-      "still": {
-        "size": "1024x576",
-        "control": "Moodboard = character sheet images",
-        "prompt": "per shot — [camera/light lock] [scene] [character lock verbatim] [action]; see wiki/three-minute-film-plan.md"
-      },
-      "i2v": {
-        "size": "1024x576",
-        "prompt": "per shot — one camera move + one subject action",
-        "time_min": 15
-      },
-      "post": {
-        "upscale": "Real-ESRGAN ncnn 4x -> 3840x2160 (scripts/upscale_4k.sh)",
-        "loop": null,
-        "music": "TBD"
-      },
-      "files": [],
-      "notes": "Plan: wiki/three-minute-film-plan.md. Consistency stack: wiki/character-consistency.md. Waiting on story/style/characters from Kevin; experiments X1–X7 before rendering."
-    },
-    {
       "id": "lost_city",
       "title": "Lost City — hyper-real rider on a raptor-dragon entering jungle ruins",
       "date": "2026-09-21",

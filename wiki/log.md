@@ -8,6 +8,14 @@
 
 ---
 
+## 2026-09-25 — Repo reorganised into one folder per project; film3min removed
+
+**Reorganisation**: every project now owns `projects/<id>/` with `plan/ raw/ seed/ stills/ clips/ music/ final/ logs/`; 843 files moved out of the old split (sources in `raw/<project>/`, output in `raw/clips/<project>/` under four different layouts, seven projects loose in `raw/clips/`, music shared, plans in `wiki/`). Shared infrastructure — `wiki/`, `docs/`, `scripts/`, `tools/`, `raw/` for cross-project sources, `projects.json` — unchanged. `build_site.py` now collects pages from `wiki/*.md` **and** `projects/*/plan/*.md`, so project pages publish with the wiki and `[[links]]` resolve from either place. The shell scripts needed no edits because `film_run.py` resolves paths from `run-spec.dir`.
+
+**Intermediates cleared** across all projects: 23 GB of `*_4k_frames`, 1.6 GB of trimmed ProRes, 5.8 GB of source clips that already have a 4K counterpart, 104 MB of rejected candidates — **35 GB → 5.5 GB**. Kept the films, the per-shot 4K mp4s (so any project can be re-cut without re-rendering), stills, masters, prompts and music. Three `.mov`s spared as sole copies: lost_city's s9 pair and an old fll_farm drone test.
+
+**Removed**: the `film3min` project — three-minute narrative film, in planning since 2026-09-21, never given a story, characters or a single render. Its plan page, registry record and inbound links are gone; the work it informed lives on in [[character-consistency]] and [[identity-conditioning]]. Registry is now 13 projects.
+
 ## 2026-09-25 — BOT Builders photo cut delivered (59 s, from family photographs)
 
 **Source**: 13 photographs from Kevin in `raw/fll_champions/`; rendered unattended overnight with `film_run.py` after he went to sleep.

@@ -66,7 +66,7 @@ Wan 2.2 I2V (and every I2V model):
 - Temporal self-attention lets later frames attend to frame 0's tokens, so its pixels propagate forward.
 - Identity is perfect at frame 1 and decays as motion reveals pixels that were not in the still (the back of the head on a turn, an open mouth). The model must *invent* those from text + priors, and priors drift toward an average face.
 
-Practical consequences (all observed on this Mac): keep faces still or on a slow push, ≤ 5 s per clip, one action; chain long moves by using the last frame of clip N as the still for clip N+1 so pixels keep carrying ([[wan22-i2v-locked-image-settings]], [[three-minute-film-plan]] §3).
+Practical consequences (all observed on this Mac): keep faces still or on a slow push, ≤ 5 s per clip, one action; chain long moves by using the last frame of clip N as the still for clip N+1 so pixels keep carrying ([[wan22-i2v-locked-image-settings]]).
 
 ## Our stack, in these terms
 
@@ -83,6 +83,5 @@ All open-weight consistency tooling of 2025–26 is (2) or (4); the closed produ
 ## Related pages
 - [[character-consistency]] — which tools implement each mechanism and what runs here
 - [[face-identity-workflows]]
-- [[three-minute-film-plan]]
 - [[wan22-i2v-locked-image-settings]]
 - [[image-to-video-models]]

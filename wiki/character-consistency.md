@@ -78,7 +78,6 @@ FaceFusion swap after I2V, before upscale — re-locks a *real* face; useless fo
 
 ## Related pages
 - [[identity-conditioning]]
-- [[three-minute-film-plan]]
 - [[face-identity-workflows]]
 - [[dragon-epic-plan]]
 - [[wan22-i2v-locked-image-settings]]

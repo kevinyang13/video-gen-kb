@@ -8,7 +8,7 @@
 
 ---
 
-**Project pages**: [[projects-anime|Anime projects]] (7) · [[projects-realistic|Photoreal projects]] (3) · [[projects-3d|3D-animated projects]] (4)
+**Project pages**: [[projects-anime|Anime projects]] (7) · [[projects-realistic|Photoreal projects]] (2) · [[projects-3d|3D-animated projects]] (4)
 
 Each theme page holds the full records — settings, prompts, seeds, files. The tables below link straight to a project's record on its page.
 
@@ -28,17 +28,16 @@ Shinkai/Ghibli-styled living paintings: a still from FLUX or Wan T2V, ambient mo
 
 → full records for all 7: [[projects-anime|Anime projects]]
 
-## [[projects-realistic|Photoreal projects]] (3)
+## [[projects-realistic|Photoreal projects]] (2)
 
 Cinematic photoreal shorts: FLUX.2 klein stills with Moodboard references, motion from LTX-2.3 or Wan 2.2, Real-ESRGAN to 4K, cut with crossfades. Dragon Epic, Lost City, the three-minute film.
 
 | # | Project | Date | Status | Still | I2V | Music | Final file | YouTube |
 |--:|---|---|---|---|---|---|---|---|
 | 1 | [Dragon Epic — 1-minute photoreal short, family hero face](projects-realistic.html#dragon_epic) | 2026-09-21 | in progress — scene 1A posted | FLUX.2 [klein] 9B 1280x768 | Wan 2.2 High Noise 47 min | The Dragon's Breath | `—` | [▶ watch](https://youtu.be/Xzu-c5yX8uo) |
-| 2 | [Three-minute film — recurring characters (subject TBD)](projects-realistic.html#film3min) | 2026-09-21 | planning | FLUX.2 [klein] 9B 1024x576 | Wan 2.2 High Noise 15 min | TBD | `—` | — |
-| 3 | [Lost City — hyper-real rider on a raptor-dragon entering jungle ruins](projects-realistic.html#lost_city) | 2026-09-21 | in progress — clips at 4K+music: s2, s3, s7, s8, s10, s14; s9 trimmed (4.6 s, drift after); s11 stills rejected (klein duplicates the creature); s12 not started; s15 rift coda done (3 clips assembled to 30 s 4K with music) | FLUX.2 [klein] 9B 1280x768 | LTX-2.3 22B [distilled] 1.1 (production engine — see ltx_10s) — Wan 2.2 High Noise I2V (8-bit S) + Low Noise refiner 10% for locked-camera shots at 768p 49 min | Mystical orchestral theme with ancient flute | `—` | [▶ watch](https://youtu.be/68sq_jZqu6c) |
+| 2 | [Lost City — hyper-real rider on a raptor-dragon entering jungle ruins](projects-realistic.html#lost_city) | 2026-09-21 | in progress — clips at 4K+music: s2, s3, s7, s8, s10, s14; s9 trimmed (4.6 s, drift after); s11 stills rejected (klein duplicates the creature); s12 not started; s15 rift coda done (3 clips assembled to 30 s 4K with music) | FLUX.2 [klein] 9B 1280x768 | LTX-2.3 22B [distilled] 1.1 (production engine — see ltx_10s) — Wan 2.2 High Noise I2V (8-bit S) + Low Noise refiner 10% for locked-camera shots at 768p 49 min | Mystical orchestral theme with ancient flute | `—` | [▶ watch](https://youtu.be/68sq_jZqu6c) |
 
-→ full records for all 3: [[projects-realistic|Photoreal projects]]
+→ full records for all 2: [[projects-realistic|Photoreal projects]]
 
 ## [[projects-3d|3D-animated projects]] (4)
 
