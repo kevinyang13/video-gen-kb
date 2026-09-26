@@ -72,6 +72,28 @@ So one tracked file per version — `spec.json` — carries the settings, the sh
 
 **Edit `projects/<id>/<version>/spec.json`**, never the root `projects.json` — that one is generated and will be overwritten.
 
+## Plan or spec: which does a thing go in
+
+The test: **if changing it changes the render, it belongs in `spec.json`. If it explains why, it belongs in the plan.**
+
+| Goes in `spec.json` (machine reads it) | Goes in `plan/*.md` (a person reads it) |
+|---|---|
+| models, sizes, steps, CFG, shift, sampler, seeds | why those settings and not others |
+| every prompt: `still.prompt`, `video_prompt`, `run-spec.prompts` | how the prompts evolved, the wording that failed |
+| the shot list: ids, order, staging inputs, `take`, `trim` | the story, the beats, what each shot is for |
+| masters and locks as paths and text | why the cast looks the way it does, which photo won |
+| music file, start, volume, fades | why that track |
+| `deliver` sizes and bitrates | where the film was published |
+| `status`, `version`, `variant` one-liners | the full account of the run: timings, failures, picks |
+
+Two rules that keep them from rotting:
+
+**The spec must describe what actually shipped.** If a shot was rescued by a different method mid-run, fix the spec before moving on — otherwise a re-run reproduces the bug instead of the film. This is not hypothetical: v3-photo-cut's spec still described the diptych staging for its four character beats, the form that *failed*, for a full day after the film was delivered.
+
+**The plan is the only place a failure survives.** The spec holds one prompt per shot — the one that worked. Everything tried and rejected, and why, lives in the plan; that record is what makes the next project faster, and it is the reason a delivered project's plan keeps growing after delivery.
+
+A rough shape for a plan page: §0 Result (what was delivered, where, how long it took) · §1 What the project was for · §2… the hard parts, one section each, with the rules extracted · a Consent section when real people appear · Related pages. The [[bot-builders-champion-photo-cut-plan]] follows it closely.
+
 ## Tracked vs generated
 
 *Keep the recipe, drop the generated pixels.*

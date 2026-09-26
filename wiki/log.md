@@ -8,6 +8,12 @@
 
 ---
 
+## 2026-09-25 — Wrote down what belongs in the plan vs the spec
+
+The split had been implicit and was drifting. Now stated in [[repo-structure]] with a table, and summarised in [[idea-to-video-blueprint]]: *if changing it changes the render it goes in `spec.json`; if it explains why, it goes in the plan.* Settings, prompts, shot list, takes and trims are spec; story, beats, rejected attempts and the rules they taught are plan.
+
+Two rules attached to it, both learned the hard way this week: the spec must describe **what actually shipped** (v3-photo-cut's spec described the diptych staging that failed, so a re-run would have reproduced the bug), and the plan is **the only place a failure survives** — the spec keeps one prompt per shot, the one that worked, so everything rejected has to be written down elsewhere or it is lost.
+
 ## 2026-09-25 — Prompts moved into spec.json
 
 Prompt text lived in two places depending on a project's age: `stills/*.txt` for the four CLI films, inline in `spec.json` for everything older — and kyle_rescue carried both, 8 scenes inline *and* 18 files, with nothing checking they agreed. Now every prompt is text inside its version's `spec.json`: each shot's `still.prompt` and `video_prompt`, plus a `run-spec.prompts` map for recipes no shot owns (master portraits, location plates, the dropped s6). 100 duplicate `.txt` files removed.

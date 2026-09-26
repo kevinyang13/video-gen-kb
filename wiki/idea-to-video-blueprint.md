@@ -113,6 +113,10 @@ Render **3 seeds per shot** and pick by the rubric below — **at full size** (o
 
 Inputs are fitted to W×H by center-crop, so hand over images already at the target aspect (pad near-square panels with a blurred copy of themselves).
 
+## Writing it down as you go
+
+Two files, one rule: **if changing it changes the render it goes in `spec.json`; if it explains why, it goes in the plan** ([[repo-structure]] has the full table). Settings, prompts, shots, takes and trims are spec; the story, the rejected attempts and the rules they taught are plan. Fix the spec the moment a shot is rescued by a different method, or a re-run will reproduce the failure rather than the film.
+
 ## Phase 5b — One generation per film
 
 Everything a film is cut from must come from the same generation: the same style head, the same masters, the same prompt wording. If any of those change mid-project — a different look, a rebuilt master, a corrected recipe — **every still is stale**, including the ones whose clips already rendered fine. Re-render them all.

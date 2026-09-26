@@ -136,6 +136,50 @@ projects.json  the registry: one record per project
 <p>So one tracked file per version — <code>spec.json</code> — carries the settings, the shot list, every prompt, the takes and the trims. With <code>raw/</code> beside it that is enough to re-run the film from nothing.</p>
 <p><code>scripts/build_projects.py</code> reads every <code>projects/*/*/spec.json</code> plus <code>projects/_shared.json</code> (defaults, themes, playlist), regenerates the root <code>projects.json</code> as an aggregate, and renders the registry pages. <code>film_run.py &lt;id&gt;</code> reads the newest version's spec; <code>&lt;id&gt;@&lt;version&gt;</code> pins one.</p>
 <p><strong>Edit <code>projects/&lt;id&gt;/&lt;version&gt;/spec.json</code></strong>, never the root <code>projects.json</code> — that one is generated and will be overwritten.</p>
+<h2>Plan or spec: which does a thing go in</h2>
+<p>The test: <strong>if changing it changes the render, it belongs in <code>spec.json</code>. If it explains why, it belongs in the plan.</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Goes in <code>spec.json</code> (machine reads it)</th>
+<th>Goes in <code>plan/*.md</code> (a person reads it)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>models, sizes, steps, CFG, shift, sampler, seeds</td>
+<td>why those settings and not others</td>
+</tr>
+<tr>
+<td>every prompt: <code>still.prompt</code>, <code>video_prompt</code>, <code>run-spec.prompts</code></td>
+<td>how the prompts evolved, the wording that failed</td>
+</tr>
+<tr>
+<td>the shot list: ids, order, staging inputs, <code>take</code>, <code>trim</code></td>
+<td>the story, the beats, what each shot is for</td>
+</tr>
+<tr>
+<td>masters and locks as paths and text</td>
+<td>why the cast looks the way it does, which photo won</td>
+</tr>
+<tr>
+<td>music file, start, volume, fades</td>
+<td>why that track</td>
+</tr>
+<tr>
+<td><code>deliver</code> sizes and bitrates</td>
+<td>where the film was published</td>
+</tr>
+<tr>
+<td><code>status</code>, <code>version</code>, <code>variant</code> one-liners</td>
+<td>the full account of the run: timings, failures, picks</td>
+</tr>
+</tbody>
+</table></div>
+<p>Two rules that keep them from rotting:</p>
+<p><strong>The spec must describe what actually shipped.</strong> If a shot was rescued by a different method mid-run, fix the spec before moving on — otherwise a re-run reproduces the bug instead of the film. This is not hypothetical: v3-photo-cut's spec still described the diptych staging for its four character beats, the form that <em>failed</em>, for a full day after the film was delivered.</p>
+<p><strong>The plan is the only place a failure survives.</strong> The spec holds one prompt per shot — the one that worked. Everything tried and rejected, and why, lives in the plan; that record is what makes the next project faster, and it is the reason a delivered project's plan keeps growing after delivery.</p>
+<p>A rough shape for a plan page: §0 Result (what was delivered, where, how long it took) · §1 What the project was for · §2… the hard parts, one section each, with the rules extracted · a Consent section when real people appear · Related pages. The <a href="bot-builders-champion-photo-cut-plan.html">bot builders champion photo cut plan</a> follows it closely.</p>
 <h2>Tracked vs generated</h2>
 <p><em>Keep the recipe, drop the generated pixels.</em></p>
 <div class="tw"><table>
