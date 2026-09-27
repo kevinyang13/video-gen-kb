@@ -36,5 +36,8 @@ projects/kyle_lora/*/raw/
 # draw-things-cli train lora writes a ~400 MB UUID-named scratch file into the CWD and
 # keeps it open for the whole run; do not delete one while a training job is alive
 /[0-9A-F][0-9A-F][0-9A-F][0-9A-F][0-9A-F][0-9A-F][0-9A-F][0-9A-F]-*-*-*-*
+# collage.sh's default output, when run from the repo root
+/collage.png
+/collage_preview.jpg
 tools/draw-things-community/
 tools/*.log
