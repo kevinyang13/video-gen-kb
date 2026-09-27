@@ -139,10 +139,41 @@ file it cannot find**. No error, no warning, and the output is pixel-identical t
 Verified by md5. A typo in the filename therefore looks exactly like a LoRA that did not learn
 anything, which is why `lora_eval.sh` renders a control column.
 
+## 7b. Weight scales with face size — and the LoRA pulls the framing in
+
+Ten editorial shots (`seed/supermodel/`) exposed a second rule. At the recommended 0.5, every
+**full-body** shot came back a stranger: at that distance the face is a handful of latent pixels
+and the LoRA is not strong enough to claim it. Re-rendering the wide shots at **0.85** recovered
+the rooftop, street and staircase frames outright.
+
+The two settings answer different questions and do not conflict:
+
+| Setting | Set by | Use |
+|---|---|---|
+| **0.5** | the ceiling imposed by *unseen angles* — profile and back of head ghost above it | close-ups, medium shots, anything turning away |
+| **0.85** | the floor imposed by *small faces* in wide shots | full-body frontal framings |
+
+Comparing checkpoints **at 0.85** (`seed/eval_ckpt_wide/`, the four wide prompts through 400,
+1200 and 2000) settles the earlier open question: **2000 wins at every framing**, so there is no
+earlier-checkpoint trade to exploit. The earlier note that "checkpoint barely mattered" was
+measured at weight 1.0, where all of them failed the same way.
+
+That grid also shows *why*: as the checkpoint advances, the subject is rendered **progressively
+larger and closer** for an identical prompt and seed. The dataset is 19 close and medium frames
+against 3 full body, so the LoRA has learned framing along with the face and biases composition
+toward the distance it was trained on. A LoRA is not a pure identity token — it carries whatever
+correlates with the trigger, and **framing correlates**.
+
+Two shots still fail at any setting: a true full-length runway walk and a figure tiny against
+dunes. Neither is fixable by weight; they need a tighter render plus a crop, or a face pass after
+an upscale.
+
 ## 8. Next
 
 - Add profile and back-of-head photographs, retrain, and re-run the same grid. That is the only
   open defect.
+- Add full-body frames to the dataset: 3 of 22 is what causes both the small-face failure and the
+  framing bias.
 - The source photographs are Facebook-compressed JPEGs; the LoRA renders slightly soft at high
   weight, and re-exporting from originals may be worth testing.
 - With identity in weights rather than reference tokens, a film of Ivy no longer needs a master

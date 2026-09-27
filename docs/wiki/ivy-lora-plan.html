@@ -247,10 +247,51 @@ not the training length.</p>
 file it cannot find</strong>. No error, no warning, and the output is pixel-identical to no LoRA at all.
 Verified by md5. A typo in the filename therefore looks exactly like a LoRA that did not learn
 anything, which is why <code>lora_eval.sh</code> renders a control column.</p>
+<h2>7b. Weight scales with face size — and the LoRA pulls the framing in</h2>
+<p>Ten editorial shots (<code>seed/supermodel/</code>) exposed a second rule. At the recommended 0.5, every
+<strong>full-body</strong> shot came back a stranger: at that distance the face is a handful of latent pixels
+and the LoRA is not strong enough to claim it. Re-rendering the wide shots at <strong>0.85</strong> recovered
+the rooftop, street and staircase frames outright.</p>
+<p>The two settings answer different questions and do not conflict:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Set by</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>0.5</strong></td>
+<td>the ceiling imposed by <em>unseen angles</em> — profile and back of head ghost above it</td>
+<td>close-ups, medium shots, anything turning away</td>
+</tr>
+<tr>
+<td><strong>0.85</strong></td>
+<td>the floor imposed by <em>small faces</em> in wide shots</td>
+<td>full-body frontal framings</td>
+</tr>
+</tbody>
+</table></div>
+<p>Comparing checkpoints <strong>at 0.85</strong> (<code>seed/eval_ckpt_wide/</code>, the four wide prompts through 400,
+1200 and 2000) settles the earlier open question: <strong>2000 wins at every framing</strong>, so there is no
+earlier-checkpoint trade to exploit. The earlier note that "checkpoint barely mattered" was
+measured at weight 1.0, where all of them failed the same way.</p>
+<p>That grid also shows <em>why</em>: as the checkpoint advances, the subject is rendered <strong>progressively
+larger and closer</strong> for an identical prompt and seed. The dataset is 19 close and medium frames
+against 3 full body, so the LoRA has learned framing along with the face and biases composition
+toward the distance it was trained on. A LoRA is not a pure identity token — it carries whatever
+correlates with the trigger, and <strong>framing correlates</strong>.</p>
+<p>Two shots still fail at any setting: a true full-length runway walk and a figure tiny against
+dunes. Neither is fixable by weight; they need a tighter render plus a crop, or a face pass after
+an upscale.</p>
 <h2>8. Next</h2>
 <ul>
 <li>Add profile and back-of-head photographs, retrain, and re-run the same grid. That is the only
   open defect.</li>
+<li>Add full-body frames to the dataset: 3 of 22 is what causes both the small-face failure and the
+  framing bias.</li>
 <li>The source photographs are Facebook-compressed JPEGs; the LoRA renders slightly soft at high
   weight, and re-exporting from originals may be worth testing.</li>
 <li>With identity in weights rather than reference tokens, a film of Ivy no longer needs a master

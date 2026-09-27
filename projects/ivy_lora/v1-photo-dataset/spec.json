@@ -51,6 +51,8 @@
     "weight": "0.5 is the setting. 0.3 loses identity; 0.7 ghosts a second face onto profiles; 1.0 turns a back view into a shapeless mass",
     "cause": "all 22 frames are frontal or three-quarter, so past ~0.5 the LoRA imposes frontality on a sample asked to turn away",
     "checkpoint": "barely mattered — the failure mode is identical from 400 to 2000 because it comes from the data, not the training length",
-    "gotcha": "draw-things-cli silently ignores a LoRA file it cannot find: no error, and output pixel-identical to no LoRA (verified by md5)"
+    "gotcha": "draw-things-cli silently ignores a LoRA file it cannot find: no error, and output pixel-identical to no LoRA (verified by md5)",
+    "weight_vs_face_size": "0.5 for close and medium, 0.85 for full-body frontal shots: at 0.5 a small face has too few latent pixels for the LoRA to claim and renders a stranger",
+    "checkpoint_at_085": "2000 wins at every framing; the earlier 'checkpoint barely mattered' was measured at weight 1.0 where all failed alike. Later checkpoints also render the subject progressively larger for the same prompt and seed — the dataset is 19 close/medium against 3 full body, so the LoRA learned framing along with the face"
   }
 }
