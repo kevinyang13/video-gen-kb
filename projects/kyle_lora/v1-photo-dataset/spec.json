@@ -1,0 +1,50 @@
+{
+  "order": 22,
+  "id": "kyle_lora",
+  "version": "v1-photo-dataset",
+  "variant": "Character LoRA for Kyle trained on real photographs, following the Ivy route. The output is a reusable identity asset: kyle_rescue, bot_builders_champion and nightelf_hunter all carried his face by reference tokens and a master portrait, which this replaces with a trigger token.",
+  "title": "Kyle — character LoRA",
+  "date": "2026-09-26",
+  "theme": "realistic",
+  "dt_project": "none — draw-things-cli train lora",
+  "status": "scaffolded — 6 source photographs found in the repo, short of the 20+ needed; waiting on more",
+  "source": "real photographs of Kyle already in the repo (nightelf_hunter and bot_builders_champion raw folders), copied into raw/ which is git-ignored",
+  "notes": "Kyle is Kevin's son; consent settled. A child's face changes fast, so every photograph should come from a narrow time window — mixing a seven-year-old and a ten-year-old trains a LoRA on the average of two faces. Generated images are excluded on purpose: kyle_rescue/seed/src_kyle_front.png is a render, and training on model output bakes in model artifacts.",
+  "still": {
+    "model": "FLUX.2 [klein] 9B (8-bit S)",
+    "size": "aspect-bucketed, 512 base",
+    "steps": 4,
+    "cfg": 1.0,
+    "shift": 3,
+    "sampler": "DDIM Trailing"
+  },
+  "dataset": {
+    "trigger": "kyle_kx",
+    "class_word": "boy",
+    "subject": "boy",
+    "source": "photographs",
+    "target_count": "20-40",
+    "have": 6,
+    "status": "staged, not built",
+    "caption_rule": "Isolation Rule — caption only what varies (framing, angle, expression, clothing, background, light). Face, hair and permanent features omitted so they bind to the trigger.",
+    "inventory": [
+      "kyle_ship.jpg — medium, outdoor, overcast, patterned shirt",
+      "kyle_breakfast.jpg — indoor",
+      "05_build_table.jpg — group, Kyle standing centre in a white tee; confirmed by the existing bot_builders crop",
+      "08_kyle_lindsey_parkas.jpg — full body, indoor, red parka (the only full body)",
+      "04_lunch.jpg — group, which boy is Kyle needs confirming",
+      "07_garage_named.jpg — group"
+    ],
+    "gaps": "no profile, no back of head, one full body, all frontal — the same three gaps the Ivy LoRA hit, now known in advance"
+  },
+  "training": {
+    "planned": "draw-things-cli train lora --model flux_2_klein_9b_i8x.ckpt --dataset projects/kyle_lora/v1-photo-dataset/seed/dataset --steps 2000 --rank 32 --learning-rate 1e-4 --seed 1 --use-aspect-ratio --save-every 400 -o kyle_lora --name \"Kyle (kyle_kx)\" --offline",
+    "measured_on_ivy": "0.22 it/s, ~2 h 35 m for 2000 steps, 402 MB per checkpoint",
+    "weights_from_ivy": "1.0 frontal close-up, 0.85 three-quarter and full body, 0.5-0.7 turning, <=0.5 profile or back"
+  },
+  "files": [
+    "raw/ (source photographs, git-ignored)",
+    "seed/dataset/NN.png + NN.txt (training pairs; captions tracked)",
+    "logs/train.log"
+  ]
+}

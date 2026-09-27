@@ -116,6 +116,26 @@ Set `KEEP` per character; the default keep-clause is generic and will drift. `ON
 **Cost**: ~25–40 s per image, ~20 min for 30. Captions are tracked in git; the images are not.
 
 
+## `scripts/collage.sh` — a folder of images → one sheet
+
+```
+scripts/collage.sh SRC_DIR [OUT.png] [COLS]
+PAD=10 MARGIN=10 BG=0x141414 TILE_W= TILE_H= PREVIEW=2400  scripts/collage.sh …
+```
+
+Tiles every png/jpg/webp/heic in a folder. Columns default to the square root of the count;
+the cell defaults to the **first image's size**, so a uniform set is laid out with no resampling
+at all. Mixed sizes and orientations are fitted inside the cell and padded, never cropped — a
+square crop is how a contact sheet loses someone's head.
+
+`PREVIEW=2400` also writes a `_preview.jpg` beside it, which matters because a full-resolution
+sheet of 40-odd renders lands around 20 MB and is awkward to send anywhere.
+
+Two details that cost time if you write this from scratch: the stock macOS bash is 3.2, so no
+`mapfile`; and ffmpeg's `tile` filter silently **drops the last row** unless the input count
+fills the grid exactly, so the script pads it out with blank cells.
+
+
 ## `scripts/photo_dataset.sh` — real photographs → a training set
 
 ```

@@ -155,6 +155,17 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <td><code>—</code></td>
 <td>—</td>
 </tr>
+<tr>
+<td style="text-align: right;">5</td>
+<td><a href="#kyle_lora">Kyle — character LoRA</a></td>
+<td>2026-09-26</td>
+<td>scaffolded — 6 source photographs found in the repo, short of the 20+ needed; waiting on more</td>
+<td>FLUX.2 [klein] 9B aspect-bucketed,</td>
+<td>Wan 2.2 High Noise ? min</td>
+<td>Calm Ambient Dreamscape</td>
+<td><code>—</code></td>
+<td>—</td>
+</tr>
 </tbody>
 </table></div>
 <h2 id="dragon_epic">Dragon Epic — 1-minute photoreal short, family hero face</h2>
@@ -750,6 +761,130 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <li><strong>This version</strong>: Character LoRA trained on real photographs. The output is a reusable identity asset, not a film: any later project loads it with a trigger token instead of carrying a master into every shot.</li>
 <li><strong>Files</strong> (<code>projects/ivy_lora/v1-photo-dataset/</code>): <code>raw/ (source photographs, git-ignored)</code>, <code>seed/dataset/NN.png + NN.txt (training pairs; captions tracked)</code>, <code>logs/train.log</code></li>
 <li><strong>Notes</strong>: Ivy is family, an adult; consent settled, same standing as Kyle and Lindsey. Real photos are the better dataset: B0 proved klein will not synthesize back views or true camera-height variation from a frontal master, because the reference image overrides the prompt. Photographs have those angles already — except that this particular set does not: all 22 frames are frontal or three-quarter. raw/ is git-ignored because consent to train on a face is not consent to publish the source photographs to a public repo.</li>
+</ul>
+<p><strong>Still</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Model</td>
+<td>FLUX.2 [klein] 9B (8-bit S)</td>
+</tr>
+<tr>
+<td>Size</td>
+<td>aspect-bucketed, 512 base</td>
+</tr>
+<tr>
+<td>Steps</td>
+<td>4</td>
+</tr>
+<tr>
+<td>CFG</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Shift</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Sampler</td>
+<td>DDIM Trailing</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>I2V</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Model</td>
+<td>Wan 2.2 High Noise Expert I2V A14B (8-bit S)</td>
+</tr>
+<tr>
+<td>Refiner</td>
+<td>Wan 2.2 Low Noise Expert I2V A14B (8-bit S) @ 10%</td>
+</tr>
+<tr>
+<td>LoRA</td>
+<td>Wan 2.2 A14B Lightning High-Noise T2V v2.0 @ 100%</td>
+</tr>
+<tr>
+<td>Size</td>
+<td>576x1024</td>
+</tr>
+<tr>
+<td>Frames</td>
+<td>81</td>
+</tr>
+<tr>
+<td>FPS</td>
+<td>16</td>
+</tr>
+<tr>
+<td>Steps</td>
+<td>4</td>
+</tr>
+<tr>
+<td>CFG</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Shift</td>
+<td>4.95</td>
+</tr>
+<tr>
+<td>Sampler</td>
+<td>DDIM Trailing</td>
+</tr>
+<tr>
+<td>Strength</td>
+<td>100%</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Post</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Script</td>
+<td>scripts/finish_clip.sh</td>
+</tr>
+<tr>
+<td>Loop</td>
+<td>forward, 8-frame tail-&gt;head crossfade, x6 = 27.4 s</td>
+</tr>
+<tr>
+<td>Upscale</td>
+<td>lanczos 1080x1920</td>
+</tr>
+<tr>
+<td>Music</td>
+<td>Calm Ambient Dreamscape — morgan-ambient, Pixabay, 1 s fade in / 2 s fade out, vol 0.9</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="kyle_lora">Kyle — character LoRA</h2>
+<ul>
+<li><strong>Date</strong>: 2026-09-26 · <strong>Status</strong>: scaffolded — 6 source photographs found in the repo, short of the 20+ needed; waiting on more · <strong>Version</strong>: <code>v1-photo-dataset</code> · <strong>Draw Things project</strong>: <code>none — draw-things-cli train lora</code></li>
+<li><strong>This version</strong>: Character LoRA for Kyle trained on real photographs, following the Ivy route. The output is a reusable identity asset: kyle_rescue, bot_builders_champion and nightelf_hunter all carried his face by reference tokens and a master portrait, which this replaces with a trigger token.</li>
+<li><strong>Files</strong> (<code>projects/kyle_lora/v1-photo-dataset/</code>): <code>raw/ (source photographs, git-ignored)</code>, <code>seed/dataset/NN.png + NN.txt (training pairs; captions tracked)</code>, <code>logs/train.log</code></li>
+<li><strong>Notes</strong>: Kyle is Kevin's son; consent settled. A child's face changes fast, so every photograph should come from a narrow time window — mixing a seven-year-old and a ten-year-old trains a LoRA on the average of two faces. Generated images are excluded on purpose: kyle_rescue/seed/src_kyle_front.png is a render, and training on model output bakes in model artifacts.</li>
 </ul>
 <p><strong>Still</strong></p>
 <div class="tw"><table>
