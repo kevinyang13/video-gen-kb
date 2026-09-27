@@ -146,9 +146,28 @@ Converts every jpg/jpeg/png/heic in `SRC_DIR` to `OUT_DIR/NN.png` and writes a c
 `OUT_DIR/NN.txt`. Existing captions are never overwritten, so it is safe to re-run after adding
 photos.
 
-Uses `sips` rather than ffmpeg for two reasons: it honours EXIF orientation (ffmpeg silently does
-not for still JPEGs, so portraits come out sideways), and writing PNG drops the EXIF block
-**including GPS** — which is the point when the subject is family. Aspect is preserved and only
+Uses `sips` rather than ffmpeg for two reasons: it applies EXIF orientation when the tag exists
+(ffmpeg silently does not for still JPEGs, so portraits come out sideways), and writing PNG drops
+the EXIF block **including GPS** — which is the point when the subject is family.
+
+**Always look at the output.** Some iPhone HEICs carry *no* orientation tag at all — they store
+landscape pixels of a portrait photo and leave the rotation to the viewer — and `sips` cannot
+apply what was never recorded, so every frame lands on its side. The tell is
+`sips -g orientation FILE` printing `<nil>`. `ROTATE=90` (or 180/270) corrects a whole batch.
+This cost two passes on the Kyle set, and it is the kind of error that trains silently: a
+sideways dataset produces a LoRA that has learned a sideways face.
+
+**`sips -r` does not rotate a PNG — it writes a rotation *hint*.** The raster stays exactly as
+it was, so Preview, Finder and `sips -g pixelHeight` all report the corrected orientation while
+anything reading actual pixels still sees the original. The images look fixed and are not.
+`-map_metadata -1` in ffmpeg did not strip it either. `ROTATE=` therefore bakes the rotation
+through PIL, which ignores the hint and writes a clean raster.
+
+**Verify orientation the way the consumer will read it**, not the way Preview shows it:
+
+```
+ffmpeg -v error -y -i NN.png -vf "scale=300:-1" /tmp/check.png   # then look at /tmp/check.png
+``` Aspect is preserved and only
 the long side is capped, because `--use-aspect-ratio` buckets by shape and cropping square here
 would throw away the framing variety that made photographs worth using.
 

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kyle — a Character LoRA from a Turnaround Session — video-gen-kb</title>
+<style>
+:root{--bg:#0B0D12;--panel:#141822;--panel-2:#1B2130;--stroke:#2A3245;--text:#E6E9F0;
+--muted:#8B94A7;--accent:#F5B84B;--accent-2:#4BC9F5;--on-accent:#12131A;
+--rule:rgba(139,148,167,.22);--code:#F5B84B}
+@media(prefers-color-scheme:light){:root:not([data-theme=dark]){--bg:#F4F1EA;--panel:#fff;
+--panel-2:#FAF8F3;--stroke:#D9D3C6;--text:#16181F;--muted:#5D6473;--accent:#B8781A;
+--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}}
+:root[data-theme=light]{--bg:#F4F1EA;--panel:#fff;--panel-2:#FAF8F3;--stroke:#D9D3C6;
+--text:#16181F;--muted:#5D6473;--accent:#B8781A;--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);
+line-height:1.65;padding:0 1rem 4rem}
+.shell{max-width:840px;margin:0 auto}
+a{color:var(--accent);text-decoration:none;font-weight:600}
+a:hover{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--accent-2);outline-offset:3px;border-radius:4px}
+.bar{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;padding:1.1rem 0;margin-bottom:1.5rem;
+border-bottom:1px solid var(--stroke)}
+.crumb{font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.spacer{flex:1}
+.pill{border:1px solid var(--stroke);background:var(--panel);border-radius:999px;padding:.28rem .8rem;
+font-size:.75rem;font-weight:700;color:var(--text);cursor:pointer;font-family:inherit}
+.pill:hover{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+h1{font-size:clamp(1.7rem,5vw,2.5rem);margin:.2rem 0 1rem;line-height:1.1;letter-spacing:-.015em;text-wrap:balance}
+h2{font-size:1.25rem;margin:2.2rem 0 .7rem;padding-bottom:.35rem;border-bottom:1px solid var(--rule);text-wrap:balance}
+h3{font-size:1.02rem;margin:1.5rem 0 .5rem;color:var(--accent)}
+p{margin:.7rem 0}
+ul,ol{margin:.7rem 0 .7rem 1.3rem}
+li{margin:.28rem 0}
+li::marker{color:var(--accent)}
+em{color:var(--muted)}
+hr{border:none;border-top:1px solid var(--stroke);margin:2rem 0}
+blockquote{border-left:3px solid var(--accent);background:var(--panel);border-radius:0 10px 10px 0;
+padding:.8rem 1.1rem;margin:1.1rem 0;color:var(--muted);font-size:.92rem}
+code{background:var(--panel);border:1px solid var(--stroke);border-radius:5px;padding:.1rem .35rem;
+font-size:.85em;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--code)}
+img{max-width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--stroke);margin:1.1rem 0}
+pre{background:var(--panel);border:1px solid var(--stroke);border-radius:12px;padding:1rem;overflow-x:auto;margin:1.1rem 0}
+pre code{background:none;border:none;padding:0;color:var(--text);font-size:.83rem;line-height:1.55}
+.tw{overflow-x:auto;border:1px solid var(--stroke);border-radius:12px;background:var(--panel);margin:1.1rem 0}
+table{width:100%;border-collapse:collapse;font-size:.85rem;min-width:min(100%,460px)}
+th{background:var(--panel-2);color:var(--accent);text-align:left;padding:.55rem .8rem;font-size:.68rem;
+letter-spacing:.09em;text-transform:uppercase;white-space:nowrap;border-bottom:1px solid var(--stroke)}
+td{padding:.5rem .8rem;border-bottom:1px solid var(--rule);color:var(--muted);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td strong{color:var(--text)}
+.meta{display:flex;flex-wrap:wrap;gap:.4rem .9rem;font-size:.78rem;color:var(--muted);margin:-.4rem 0 1.2rem}
+.meta b{color:var(--text);font-weight:600}
+.missing{color:var(--muted);border-bottom:1px dashed var(--muted);cursor:help}
+.related{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--stroke)}
+.related h2{border:none;margin:0 0 .7rem;font-size:.95rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:0}
+.chips li{margin:0}
+.chips a,.chips .missing{display:inline-block;border:1px solid var(--stroke);background:var(--panel);
+border-radius:999px;padding:.28rem .8rem;font-size:.8rem}
+.chips a:hover{background:var(--accent);color:var(--on-accent);text-decoration:none;border-color:var(--accent)}
+footer{max-width:840px;margin:2.5rem auto 0;padding-top:1.2rem;border-top:1px solid var(--stroke);
+font-size:.75rem;color:var(--muted);text-align:center}
+/* landing */
+.hero{padding:2.4rem 0 1.6rem}
+.kicker{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2)}
+.hero h1{font-size:clamp(2rem,6vw,3.2rem);margin:.35rem 0 .5rem}
+.hero p{color:var(--muted);font-size:1.05rem;max-width:56ch}
+.hw{display:inline-flex;gap:.5rem;align-items:center;margin-top:1rem;border:1px solid var(--stroke);
+background:var(--panel);border-radius:999px;padding:.3rem .9rem;font-size:.78rem;color:var(--muted)}
+.hw .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.sec{margin-top:2.2rem}
+.sec h2{border:none;padding:0;margin:0 0 .8rem;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.9rem}
+.card{display:block;border:1px solid var(--stroke);background:var(--panel);border-radius:14px;padding:1rem 1.1rem;
+color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+.card b{display:block;color:var(--accent);font-size:1rem;margin-bottom:.3rem}
+.card span{font-size:.85rem;color:var(--muted);line-height:1.5}
+.stubs{font-size:.82rem;color:var(--muted);margin-top:.6rem}
+.yt{position:relative;width:100%;aspect-ratio:16/9;border:1px solid var(--stroke);border-radius:12px;overflow:hidden;background:#000;margin:1rem 0}
+.yt.yt-v{aspect-ratio:9/16;max-width:360px}
+.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="bar">
+    <span class="crumb"><a href="../">video-gen-kb</a> / <a href="index.html">Wiki</a></span>
+    <span class="spacer"></span>
+    <button class="pill" onclick="tt()">◐ Theme</button>
+  </nav>
+  <h1>Kyle — a Character LoRA from a Turnaround Session</h1><p class="lede">A reusable identity LoRA for Kyle, trained on a purpose-shot turnaround (frontal, both profiles, back of head) plus four photographs from other settings. The output is an asset, not a film: <code>kyle_rescue</code>, <code>bot_builders_champion</code> and <code>nightelf_hunter</code> all carried his face by reference tokens and a master portrait, and this replaces that with a trigger token.</p><div class="meta"><span><b>Updated</b> 2026-09-26</span><span><b>Sources</b> 16 HEIC turnaround frames shot for this purpose, in <code>raw/</code> (git-ignored); 4 photographs from <code>nightelf_hunter</code> and <code>bot_builders_champion</code>. Method from <a href="blueprint-v2-research.html">blueprint v2 research</a> B0/B1/B8 and <a href="ivy-lora-plan.html">ivy lora plan</a>.</span></div>
+<hr />
+<h2>0. What makes this dataset different</h2>
+<p><a href="ivy-lora-plan.html">ivy lora plan</a> ended with a named defect: every frame was frontal or three-quarter, so the
+LoRA <em>damaged</em> profiles and back views above weight 0.5 rather than merely failing at them.</p>
+<p>This set was shot to fix exactly that. Kyle's 16 frames are a deliberate turnaround against one
+wall: frontal, both true 90° profiles, the back of the head, and two back three-quarters, with
+expressions ranging from neutral to open-mouthed to a full smile. That is the coverage the
+synthetic route (B0) could not manufacture and the Ivy photo set happened not to contain.</p>
+<p>The cost of a controlled session is the opposite bias: <strong>one t-shirt, one wall, one light, one
+distance</strong>. Left alone, the trigger would absorb "pale blue tee on a white wall" as part of
+Kyle. Two mitigations:</p>
+<ol>
+<li>Four photographs from other settings — a warship deck, a hotel breakfast, a red parka at full
+   length, a garage with a LEGO model — break the single-context lock and add the only full-body
+   and outdoor frames.</li>
+<li>Every caption names the shirt, the wall and the light <strong>even though they never vary</strong>.
+   Captioning a constant is not the Isolation Rule's usual advice, but the rule's purpose is to
+   decide what binds: naming a feature gives a later prompt a handle to override it. For a
+   one-outfit session that handle is the difference between a character and a uniform.</li>
+</ol>
+<div class="tw"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Count</td>
+<td>20 — 16 turnaround frames + 4 context photographs</td>
+</tr>
+<tr>
+<td>Angles</td>
+<td>9 frontal, 2 true profile, 2 three-quarter, 3 back or back three-quarter, 4 varied</td>
+</tr>
+<tr>
+<td>Framing</td>
+<td>16 close-up, 2 medium, 2 full body</td>
+</tr>
+<tr>
+<td>Trigger</td>
+<td><code>kyle_kx</code>, always followed by the class word <code>boy</code></td>
+</tr>
+<tr>
+<td>Known bias</td>
+<td>close framing dominates; expect the framing pull seen on Ivy</td>
+</tr>
+</tbody>
+</table></div>
+<h2>1. Consent</h2>
+<p>Kyle is Kevin's son and consent is settled (<span class="missing" title="page not written yet">kyle is kevins son</span>). <code>projects/kyle_lora/*/raw/</code>
+is git-ignored: consent to train on a face is not consent to publish the source photographs to a
+public repository. PNG conversion also drops the EXIF block including GPS.</p>
+<h2>2. The rotation trap that cost two passes</h2>
+<p>The iPhone HEICs carry <strong>no orientation tag</strong> — <code>sips -g orientation</code> prints <code>&lt;nil&gt;</code> — and store
+landscape pixels of a portrait photo. Worse, the obvious fix is a lie:</p>
+<blockquote>
+<p><strong><code>sips -r 90</code> does not rotate a PNG. It writes a rotation hint.</strong></p>
+</blockquote>
+<p>The raster is untouched, so Preview, Finder and <code>sips -g pixelHeight</code> all report a corrected
+portrait image while every pixel-level consumer still sees it on its side. <code>ffmpeg -map_metadata -1</code>
+did not strip the hint either. The first training run got 67 steps into a sideways dataset before
+Kevin spotted it in the contact sheet.</p>
+<p><code>scripts/photo_dataset.sh ROTATE=90</code> now bakes the rotation through PIL, which ignores the hint
+and writes a clean raster. <strong>Verify the way the consumer reads it</strong>, never the way Preview shows
+it:</p>
+<pre><code>ffmpeg -v error -y -i NN.png -vf &quot;scale=300:-1&quot; /tmp/check.png
+</code></pre>
+<h2>3. Training</h2>
+<pre><code>draw-things-cli train lora --model flux_2_klein_9b_i8x.ckpt \
+  --dataset projects/kyle_lora/v1-photo-dataset/seed/dataset \
+  --steps 2000 --rank 32 --learning-rate 1e-4 --seed 1 \
+  --use-aspect-ratio --save-every 400 -o kyle_lora --name &quot;Kyle (kyle_kx)&quot; --offline
+</code></pre>
+<p>≈ 2 h 30 m, five checkpoints at 402 MB each, no cloud.</p>
+<h2>4. Evaluation</h2>
+<pre><code>TRIGGER=&quot;kyle_kx boy&quot; scripts/lora_eval.sh &lt;out dir&gt; &quot;kyle_lora_400_lora_f32.ckpt,…,kyle_lora_2000_lora_f32.ckpt,-&quot; 1.0 7
+</code></pre>
+<p>The <code>-</code> column is the no-LoRA control and is not optional. The prompt set must include a <strong>true
+profile and a back view</strong>, because those are the angles this dataset was shot to cover and the
+whole point of the exercise is whether that coverage shows up in the weights.</p>
+<p>Starting weights from <a href="ivy-lora-plan.html">ivy lora plan</a>: 1.0 frontal close-up, 0.85 three-quarter and full body,
+0.5–0.7 turning, ≤ 0.5 profile or back. <strong>The prediction to test is that Kyle's profile and back
+ceiling is much higher than Ivy's 0.5</strong>, because his dataset contains those angles and hers did
+not. If it is not, the dataset explanation for Ivy's ceiling is wrong.</p>
+<h2>5. Status</h2>
+<p>Training started 2026-09-26 22:02 on the corrected dataset.</p>
+
+  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="ivy-lora-plan.html">ivy lora plan</a> — the same route on an adult, and the angle ceiling this set exists to test</li><li><a href="blueprint-v2-research.html">blueprint v2 research</a> — B0/B1/B8</li><li><a href="identity-conditioning.html">identity conditioning</a> · <a href="scripts-reference.html">scripts reference</a></li></ul></div>
+</div>
+<footer>video-gen-kb · built 2026-09-26 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<script>function tt(){var r=document.documentElement,
+d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
+matchMedia('(prefers-color-scheme: dark)').matches);
+r.setAttribute('data-theme',d?'light':'dark');}</script>
+</body>
+</html>

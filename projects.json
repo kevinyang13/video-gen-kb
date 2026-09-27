@@ -1485,9 +1485,9 @@
       "date": "2026-09-26",
       "theme": "realistic",
       "dt_project": "none — draw-things-cli train lora",
-      "status": "scaffolded — 6 source photographs found in the repo, short of the 20+ needed; waiting on more",
-      "source": "real photographs of Kyle already in the repo (nightelf_hunter and bot_builders_champion raw folders), copied into raw/ which is git-ignored",
-      "notes": "Kyle is Kevin's son; consent settled. A child's face changes fast, so every photograph should come from a narrow time window — mixing a seven-year-old and a ten-year-old trains a LoRA on the average of two faces. Generated images are excluded on purpose: kyle_rescue/seed/src_kyle_front.png is a render, and training on model output bakes in model artifacts.",
+      "status": "training 2026-09-26 22:02 — 20 image/caption pairs, 2000 steps, checkpoints every 400",
+      "source": "16 HEIC turnaround frames shot for this project, plus 4 photographs from nightelf_hunter and bot_builders_champion; all in raw/, which is git-ignored",
+      "notes": "Kyle is Kevin's son; consent settled. Shot as a deliberate turnaround to fix the defect the Ivy LoRA ended with: her set was entirely frontal and three-quarter, so the LoRA damaged profiles and back views above weight 0.5. Kyle's set has both profiles, the back of the head and two back three-quarters. The cost is the opposite bias — one shirt, one wall, one light, one distance — mitigated with four photographs from other settings and by naming the shirt, wall and light in every caption even though they never vary, so a later prompt has a handle to override them.",
       "still": {
         "model": "FLUX.2 [klein] 9B (8-bit S)",
         "size": "aspect-bucketed, 512 base",
@@ -1502,8 +1502,8 @@
         "subject": "boy",
         "source": "photographs",
         "target_count": "20-40",
-        "have": 6,
-        "status": "staged, not built",
+        "have": 20,
+        "status": "built 2026-09-26, captions hand-written after viewing each frame",
         "caption_rule": "Isolation Rule — caption only what varies (framing, angle, expression, clothing, background, light). Face, hair and permanent features omitted so they bind to the trigger.",
         "inventory": [
           "kyle_ship.jpg — medium, outdoor, overcast, patterned shirt",
@@ -1513,12 +1513,19 @@
           "04_lunch.jpg — group, which boy is Kyle needs confirming",
           "07_garage_named.jpg — group"
         ],
-        "gaps": "no profile, no back of head, one full body, all frontal — the same three gaps the Ivy LoRA hit, now known in advance"
+        "gaps": "close framing dominates; expect the framing pull toward close-ups seen on Ivy",
+        "count": 20,
+        "composition": "16 turnaround frames + 4 context photographs (warship deck, hotel breakfast, red parka full length, garage with a LEGO model)",
+        "angles": "9 frontal, 2 true profile, 2 three-quarter, 3 back or back three-quarter, 4 varied",
+        "framing": "16 close-up, 2 medium, 2 full body",
+        "gotcha": "the HEICs carry no orientation tag and sips -r only writes a rotation hint, so the first run trained 67 steps on a sideways dataset; ROTATE= now bakes the rotation through PIL"
       },
       "training": {
         "planned": "draw-things-cli train lora --model flux_2_klein_9b_i8x.ckpt --dataset projects/kyle_lora/v1-photo-dataset/seed/dataset --steps 2000 --rank 32 --learning-rate 1e-4 --seed 1 --use-aspect-ratio --save-every 400 -o kyle_lora --name \"Kyle (kyle_kx)\" --offline",
         "measured_on_ivy": "0.22 it/s, ~2 h 35 m for 2000 steps, 402 MB per checkpoint",
-        "weights_from_ivy": "1.0 frontal close-up, 0.85 three-quarter and full body, 0.5-0.7 turning, <=0.5 profile or back"
+        "weights_from_ivy": "1.0 frontal close-up, 0.85 three-quarter and full body, 0.5-0.7 turning, <=0.5 profile or back",
+        "started": "2026-09-26 22:02, 2000 steps, rank 32, lr 1e-4, --use-aspect-ratio, --save-every 400",
+        "prediction": "Kyle's profile and back ceiling should be much higher than Ivy's 0.5, because his dataset contains those angles. If it is not, the dataset explanation for Ivy's ceiling is wrong."
       },
       "files": [
         "raw/ (source photographs, git-ignored)",
