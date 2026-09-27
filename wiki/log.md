@@ -574,3 +574,32 @@ identical to no LoRA. Hence the control column in `lora_eval.sh`.
 New scripts: `photo_dataset.sh` (photographs → training pairs, EXIF and GPS dropped via `sips`,
 which also fixes the orientation ffmpeg gets wrong on still JPEGs) and `lora_eval.sh` (one prompt
 set through N checkpoints or weights → one grid, with a control column).
+
+## 2026-09-26 — Two character LoRAs, and what decides a LoRA's weight ceiling
+
+Trained a second character LoRA, for Kyle ([[kyle-lora-plan]]), on 20 hand-captioned pairs: 16
+frames shot as a deliberate turnaround — frontal, both true 90° profiles, back of head, two back
+three-quarters — plus 4 photographs from other settings for the only full-body, outdoor and
+varied-wardrobe coverage.
+
+It was built to test one claim from the Ivy run: that her LoRA damaged profiles and back views
+above weight 0.5 **because her dataset contained neither**. It did. Kyle's profile and back render
+cleanly at every weight through 1.0. Same model, rank, learning rate, steps and captioning rule;
+the only material difference is the angle coverage. **A LoRA's weight ceiling is set by its
+dataset's angle coverage** — when a LoRA damages an angle, the fix is photographs, not
+hyperparameters.
+
+Two traps recorded on the way, both of which produce silent, plausible-looking failures:
+
+- **`sips -r` does not rotate a PNG.** It writes a rotation hint; the raster is untouched. Preview,
+  Finder and `sips -g pixelHeight` all report the corrected orientation while every pixel-level
+  consumer still sees the original. `ffmpeg -map_metadata -1` does not strip it. The iPhone HEICs
+  here carry no orientation tag at all, so the first Kyle run trained 67 steps on a sideways
+  dataset before Kevin caught it in the contact sheet. `photo_dataset.sh ROTATE=` now bakes the
+  rotation through PIL, and orientation is verified through ffmpeg rather than Preview.
+- **`draw-things-cli` silently ignores a LoRA file it cannot find** — no error, output identical to
+  no LoRA. Hence the control column in every evaluation grid.
+
+Also added `scripts/collage.sh` (a folder of images → one sheet, with the last-row padding ffmpeg's
+`tile` filter requires) and recorded that weight is per shot, not a global setting: 1.0 for a
+frontal close-up costs sharpness and prompt grip on wardrobe, 0.85 is the all-rounder.

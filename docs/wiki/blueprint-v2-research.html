@@ -429,7 +429,44 @@ away, and the two intentions collide. Checkpoint length barely mattered — 400 
 identically, because the limit is in the data.</p>
 <p>So <strong>B2's comparison is now well posed</strong>: reference tokens and a LoRA fail on the <em>same</em> angles
 when both are fed the same frontal material. The interesting experiment is a LoRA trained on a
-dataset that actually contains profiles and backs.</p>
+dataset that actually contains profiles and backs — <strong>which was then run, the next day.</strong></p>
+<p><strong>The Kyle LoRA settles it</strong> (<a href="kyle-lora-plan.html">kyle lora plan</a>, 2026-09-26). Same model, rank, learning rate,
+step count and captioning rule as Ivy's; the only material difference is a dataset shot as a
+deliberate turnaround with two true profiles and three back views. Result: profile and back of
+head render cleanly at <strong>every weight through 1.0</strong>, where Ivy's ghosted a second face at 0.7 and
+collapsed into a shapeless mass at 1.0.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th></th>
+<th>Ivy — no profile/back frames</th>
+<th>Kyle — 2 profiles, 3 back frames</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>true 90° profile at 1.0</td>
+<td>ghosted second face</td>
+<td>clean</td>
+</tr>
+<tr>
+<td>back of head at 1.0</td>
+<td>shapeless mass</td>
+<td>clean</td>
+</tr>
+<tr>
+<td>usable weight</td>
+<td>≤ 0.5</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table></div>
+<p>That is the closest thing to a controlled experiment this project has run, and it names the cause:
+<strong>a LoRA's weight ceiling is set by the angle coverage of its dataset, not by the trainer, the step
+count or the subject.</strong> When a LoRA damages an angle, the fix is photographs, not hyperparameters.</p>
+<p>What it does <em>not</em> fix is scale: at full-body distance the face is a handful of latent pixels and
+identity washes out for both subjects at any weight. That needs a tighter render and a crop, or a
+face pass after upscaling.</p>
 <p>One operational trap found on the way: <code>draw-things-cli</code> <strong>silently ignores a LoRA file it cannot
 find</strong> — no error, and pixel-identical output to no LoRA. A mistyped filename looks exactly like a
 LoRA that learned nothing, which is why every evaluation grid carries a no-LoRA control column.</p>
@@ -488,7 +525,7 @@ brew build when recording results <em>(as of 2026-09-26)</em>.</p>
 
   <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="idea-to-video-blueprint.html">idea to video blueprint</a> — the current pipeline, unchanged</li><li><a href="ai-film-production-pipeline.html">ai film production pipeline</a> — the source route recorded step by step</li><li><a href="scripts-reference.html">scripts reference</a> — <code>film_run.py</code>, the orchestrator we already have</li><li><a href="identity-conditioning.html">identity conditioning</a> — why trained weights and reference tokens differ</li><li><a href="character-consistency.html">character consistency</a> · <a href="image-to-video-models.html">image to video models</a> · <a href="apple-silicon-inference.html">apple silicon inference</a></li></ul></div>
 </div>
-<footer>video-gen-kb · built 2026-09-26 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<footer>video-gen-kb · built 2026-09-27 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
 <script>function tt(){var r=document.documentElement,
 d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
 matchMedia('(prefers-color-scheme: dark)').matches);

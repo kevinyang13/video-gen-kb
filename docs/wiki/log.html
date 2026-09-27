@@ -405,9 +405,34 @@ identical to no LoRA. Hence the control column in <code>lora_eval.sh</code>.</p>
 <p>New scripts: <code>photo_dataset.sh</code> (photographs → training pairs, EXIF and GPS dropped via <code>sips</code>,
 which also fixes the orientation ffmpeg gets wrong on still JPEGs) and <code>lora_eval.sh</code> (one prompt
 set through N checkpoints or weights → one grid, with a control column).</p>
+<h2>2026-09-26 — Two character LoRAs, and what decides a LoRA's weight ceiling</h2>
+<p>Trained a second character LoRA, for Kyle (<a href="kyle-lora-plan.html">kyle lora plan</a>), on 20 hand-captioned pairs: 16
+frames shot as a deliberate turnaround — frontal, both true 90° profiles, back of head, two back
+three-quarters — plus 4 photographs from other settings for the only full-body, outdoor and
+varied-wardrobe coverage.</p>
+<p>It was built to test one claim from the Ivy run: that her LoRA damaged profiles and back views
+above weight 0.5 <strong>because her dataset contained neither</strong>. It did. Kyle's profile and back render
+cleanly at every weight through 1.0. Same model, rank, learning rate, steps and captioning rule;
+the only material difference is the angle coverage. <strong>A LoRA's weight ceiling is set by its
+dataset's angle coverage</strong> — when a LoRA damages an angle, the fix is photographs, not
+hyperparameters.</p>
+<p>Two traps recorded on the way, both of which produce silent, plausible-looking failures:</p>
+<ul>
+<li><strong><code>sips -r</code> does not rotate a PNG.</strong> It writes a rotation hint; the raster is untouched. Preview,
+  Finder and <code>sips -g pixelHeight</code> all report the corrected orientation while every pixel-level
+  consumer still sees the original. <code>ffmpeg -map_metadata -1</code> does not strip it. The iPhone HEICs
+  here carry no orientation tag at all, so the first Kyle run trained 67 steps on a sideways
+  dataset before Kevin caught it in the contact sheet. <code>photo_dataset.sh ROTATE=</code> now bakes the
+  rotation through PIL, and orientation is verified through ffmpeg rather than Preview.</li>
+<li><strong><code>draw-things-cli</code> silently ignores a LoRA file it cannot find</strong> — no error, output identical to
+  no LoRA. Hence the control column in every evaluation grid.</li>
+</ul>
+<p>Also added <code>scripts/collage.sh</code> (a folder of images → one sheet, with the last-row padding ffmpeg's
+<code>tile</code> filter requires) and recorded that weight is per shot, not a global setting: 1.0 for a
+frontal close-up costs sharpness and prompt grip on wardrobe, 0.85 is the all-rounder.</p>
   
 </div>
-<footer>video-gen-kb · built 2026-09-26 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<footer>video-gen-kb · built 2026-09-27 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
 <script>function tt(){var r=document.documentElement,
 d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
 matchMedia('(prefers-color-scheme: dark)').matches);

@@ -7,7 +7,7 @@
   "date": "2026-09-26",
   "theme": "realistic",
   "dt_project": "none — draw-things-cli train lora",
-  "status": "training 2026-09-26 22:02 — 20 image/caption pairs, 2000 steps, checkpoints every 400",
+  "status": "delivered 2026-09-26 — kyle_lora_2000_lora_f32.ckpt, usable at weight 1.0 including true profile and back of head",
   "source": "16 HEIC turnaround frames shot for this project, plus 4 photographs from nightelf_hunter and bot_builders_champion; all in raw/, which is git-ignored",
   "notes": "Kyle is Kevin's son; consent settled. Shot as a deliberate turnaround to fix the defect the Ivy LoRA ended with: her set was entirely frontal and three-quarter, so the LoRA damaged profiles and back views above weight 0.5. Kyle's set has both profiles, the back of the head and two back three-quarters. The cost is the opposite bias — one shirt, one wall, one light, one distance — mitigated with four photographs from other settings and by naming the shirt, wall and light in every caption even though they never vary, so a later prompt has a handle to override them.",
   "still": {
@@ -47,11 +47,21 @@
     "measured_on_ivy": "0.22 it/s, ~2 h 35 m for 2000 steps, 402 MB per checkpoint",
     "weights_from_ivy": "1.0 frontal close-up, 0.85 three-quarter and full body, 0.5-0.7 turning, <=0.5 profile or back",
     "started": "2026-09-26 22:02, 2000 steps, rank 32, lr 1e-4, --use-aspect-ratio, --save-every 400",
-    "prediction": "Kyle's profile and back ceiling should be much higher than Ivy's 0.5, because his dataset contains those angles. If it is not, the dataset explanation for Ivy's ceiling is wrong."
+    "prediction": "Kyle's profile and back ceiling should be much higher than Ivy's 0.5, because his dataset contains those angles. If it is not, the dataset explanation for Ivy's ceiling is wrong.",
+    "completed": "2026-09-26, 8810 s (2 h 27 m)",
+    "checkpoints": "kyle_lora_{400,800,1200,1600,2000}_lora_f32.ckpt, 402 MB each",
+    "recommended": "kyle_lora_2000_lora_f32.ckpt at weight 0.85-1.0"
   },
   "files": [
     "raw/ (source photographs, git-ignored)",
     "seed/dataset/NN.png + NN.txt (training pairs; captions tracked)",
     "logs/train.log"
-  ]
+  ],
+  "result": {
+    "prediction_held": true,
+    "finding": "profile and back of head are clean at every weight through 1.0, where Ivy's equivalent ghosted at 0.7 and collapsed at 1.0. Same model, rank, lr, steps and captioning rule; the only material difference is that Kyle's dataset contains those angles.",
+    "rule": "a LoRA's weight ceiling is set by the angle coverage of its dataset, not by the trainer, step count or subject",
+    "checkpoint": "400 already reads as Kyle; 2000 is sharpest with no downside",
+    "unsolved": "full-body identity: at that distance the face is too few latent pixels, for both subjects, at any weight"
+  }
 }

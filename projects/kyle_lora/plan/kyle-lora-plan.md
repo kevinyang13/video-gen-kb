@@ -90,9 +90,54 @@ Starting weights from [[ivy-lora-plan]]: 1.0 frontal close-up, 0.85 three-quarte
 ceiling is much higher than Ivy's 0.5**, because his dataset contains those angles and hers did
 not. If it is not, the dataset explanation for Ivy's ceiling is wrong.
 
-## 5. Status
+## 5. Result — the prediction held
 
-Training started 2026-09-26 22:02 on the corrected dataset.
+Trained 2026-09-26, 2,000 steps in **2 h 27 m**, five checkpoints. Use
+`kyle_lora_2000_lora_f32.ckpt`.
+
+**There is no weight ceiling.** The prediction in §4 was that Kyle's profile and back views would
+survive far past Ivy's 0.5 because his dataset contains those angles. They survive all the way to
+**1.0**, with no ghosting, no second face and no collapse:
+
+| Prompt | Ivy (no profile/back frames) | Kyle (2 profiles, 3 back frames) |
+|---|---|---|
+| true 90° profile | ghosted second face at 0.7, mush at 1.0 | **clean at every weight through 1.0** |
+| back of head | blurred blob at 0.7, shapeless at 1.0 | **clean at every weight through 1.0** |
+| frontal close-up | good at 1.0 | good at 1.0, strongest likeness |
+| unseen scene (snow) | holds | holds |
+
+This is as close to a controlled experiment as this project has managed: same model, same rank,
+same learning rate, same step count, same captioning rule, two subjects, and the **only** material
+difference is whether the dataset contained the angles being asked for. It did not merely help —
+it moved the usable weight from 0.5 to 1.0 and removed the failure mode entirely.
+
+So the rule from [[ivy-lora-plan]] generalises, and now with its cause named: **a LoRA's weight
+ceiling is set by the angle coverage of its dataset, not by the trainer, the step count or the
+subject.** When a LoRA damages an angle, the fix is photographs, not hyperparameters.
+
+Checkpoint choice barely mattered — 400 already reads as Kyle at the studio prompt — but 2000 is
+sharpest and has no downside here.
+
+**Settings**: weight **0.85–1.0** for everything, 1.0 for the closest likeness. The one caveat
+carried over from Ivy is unchanged and is about size, not angle: at full-body distance the face
+is a handful of latent pixels and identity washes out regardless of weight.
+
+```
+draw-things-cli generate -m flux_2_klein_9b_i8x.ckpt \
+  --prompt "kyle_kx boy, close-up portrait, a true side profile, a red hoodie, a school corridor" \
+  --width 512 --height 768 --steps 4 --cfg 1 \
+  --config-json '{"shift":3.0,"sampler":16,"loras":[{"file":"kyle_lora_2000_lora_f32.ckpt","weight":1.0}]}'
+```
+
+## 6. Next
+
+- The blue-tee lock did not materialise: green t-shirt, red hoodie, yellow raincoat and a winter
+  coat all rendered correctly. Captioning the constant wardrobe appears to have done its job,
+  though that is one observation, not a controlled test.
+- Full-body identity remains unsolved for both subjects. It needs a tighter render plus a crop,
+  or a face pass after upscaling — not a weight change.
+- A film with Kyle no longer needs a master portrait carried into every shot, which is the point
+  of [[blueprint-v2-research]] B2.
 
 ## Related pages
 - [[ivy-lora-plan]] — the same route on an adult, and the angle ceiling this set exists to test

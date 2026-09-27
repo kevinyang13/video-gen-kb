@@ -185,7 +185,27 @@ identically, because the limit is in the data.
 
 So **B2's comparison is now well posed**: reference tokens and a LoRA fail on the *same* angles
 when both are fed the same frontal material. The interesting experiment is a LoRA trained on a
-dataset that actually contains profiles and backs.
+dataset that actually contains profiles and backs — **which was then run, the next day.**
+
+**The Kyle LoRA settles it** ([[kyle-lora-plan]], 2026-09-26). Same model, rank, learning rate,
+step count and captioning rule as Ivy's; the only material difference is a dataset shot as a
+deliberate turnaround with two true profiles and three back views. Result: profile and back of
+head render cleanly at **every weight through 1.0**, where Ivy's ghosted a second face at 0.7 and
+collapsed into a shapeless mass at 1.0.
+
+| | Ivy — no profile/back frames | Kyle — 2 profiles, 3 back frames |
+|---|---|---|
+| true 90° profile at 1.0 | ghosted second face | clean |
+| back of head at 1.0 | shapeless mass | clean |
+| usable weight | ≤ 0.5 | 1.0 |
+
+That is the closest thing to a controlled experiment this project has run, and it names the cause:
+**a LoRA's weight ceiling is set by the angle coverage of its dataset, not by the trainer, the step
+count or the subject.** When a LoRA damages an angle, the fix is photographs, not hyperparameters.
+
+What it does *not* fix is scale: at full-body distance the face is a handful of latent pixels and
+identity washes out for both subjects at any weight. That needs a tighter render and a crop, or a
+face pass after upscaling.
 
 One operational trap found on the way: `draw-things-cli` **silently ignores a LoRA file it cannot
 find** — no error, and pixel-identical output to no LoRA. A mistyped filename looks exactly like a

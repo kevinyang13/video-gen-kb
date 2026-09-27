@@ -179,12 +179,74 @@ whole point of the exercise is whether that coverage shows up in the weights.</p
 0.5–0.7 turning, ≤ 0.5 profile or back. <strong>The prediction to test is that Kyle's profile and back
 ceiling is much higher than Ivy's 0.5</strong>, because his dataset contains those angles and hers did
 not. If it is not, the dataset explanation for Ivy's ceiling is wrong.</p>
-<h2>5. Status</h2>
-<p>Training started 2026-09-26 22:02 on the corrected dataset.</p>
+<h2>5. Result — the prediction held</h2>
+<p>Trained 2026-09-26, 2,000 steps in <strong>2 h 27 m</strong>, five checkpoints. Use
+<code>kyle_lora_2000_lora_f32.ckpt</code>.</p>
+<p><strong>There is no weight ceiling.</strong> The prediction in §4 was that Kyle's profile and back views would
+survive far past Ivy's 0.5 because his dataset contains those angles. They survive all the way to
+<strong>1.0</strong>, with no ghosting, no second face and no collapse:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Prompt</th>
+<th>Ivy (no profile/back frames)</th>
+<th>Kyle (2 profiles, 3 back frames)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>true 90° profile</td>
+<td>ghosted second face at 0.7, mush at 1.0</td>
+<td><strong>clean at every weight through 1.0</strong></td>
+</tr>
+<tr>
+<td>back of head</td>
+<td>blurred blob at 0.7, shapeless at 1.0</td>
+<td><strong>clean at every weight through 1.0</strong></td>
+</tr>
+<tr>
+<td>frontal close-up</td>
+<td>good at 1.0</td>
+<td>good at 1.0, strongest likeness</td>
+</tr>
+<tr>
+<td>unseen scene (snow)</td>
+<td>holds</td>
+<td>holds</td>
+</tr>
+</tbody>
+</table></div>
+<p>This is as close to a controlled experiment as this project has managed: same model, same rank,
+same learning rate, same step count, same captioning rule, two subjects, and the <strong>only</strong> material
+difference is whether the dataset contained the angles being asked for. It did not merely help —
+it moved the usable weight from 0.5 to 1.0 and removed the failure mode entirely.</p>
+<p>So the rule from <a href="ivy-lora-plan.html">ivy lora plan</a> generalises, and now with its cause named: <strong>a LoRA's weight
+ceiling is set by the angle coverage of its dataset, not by the trainer, the step count or the
+subject.</strong> When a LoRA damages an angle, the fix is photographs, not hyperparameters.</p>
+<p>Checkpoint choice barely mattered — 400 already reads as Kyle at the studio prompt — but 2000 is
+sharpest and has no downside here.</p>
+<p><strong>Settings</strong>: weight <strong>0.85–1.0</strong> for everything, 1.0 for the closest likeness. The one caveat
+carried over from Ivy is unchanged and is about size, not angle: at full-body distance the face
+is a handful of latent pixels and identity washes out regardless of weight.</p>
+<pre><code>draw-things-cli generate -m flux_2_klein_9b_i8x.ckpt \
+  --prompt &quot;kyle_kx boy, close-up portrait, a true side profile, a red hoodie, a school corridor&quot; \
+  --width 512 --height 768 --steps 4 --cfg 1 \
+  --config-json '{&quot;shift&quot;:3.0,&quot;sampler&quot;:16,&quot;loras&quot;:[{&quot;file&quot;:&quot;kyle_lora_2000_lora_f32.ckpt&quot;,&quot;weight&quot;:1.0}]}'
+</code></pre>
+<h2>6. Next</h2>
+<ul>
+<li>The blue-tee lock did not materialise: green t-shirt, red hoodie, yellow raincoat and a winter
+  coat all rendered correctly. Captioning the constant wardrobe appears to have done its job,
+  though that is one observation, not a controlled test.</li>
+<li>Full-body identity remains unsolved for both subjects. It needs a tighter render plus a crop,
+  or a face pass after upscaling — not a weight change.</li>
+<li>A film with Kyle no longer needs a master portrait carried into every shot, which is the point
+  of <a href="blueprint-v2-research.html">blueprint v2 research</a> B2.</li>
+</ul>
 
   <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="ivy-lora-plan.html">ivy lora plan</a> — the same route on an adult, and the angle ceiling this set exists to test</li><li><a href="blueprint-v2-research.html">blueprint v2 research</a> — B0/B1/B8</li><li><a href="identity-conditioning.html">identity conditioning</a> · <a href="scripts-reference.html">scripts reference</a></li></ul></div>
 </div>
-<footer>video-gen-kb · built 2026-09-26 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<footer>video-gen-kb · built 2026-09-27 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
 <script>function tt(){var r=document.documentElement,
 d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
 matchMedia('(prefers-color-scheme: dark)').matches);
