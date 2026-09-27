@@ -1459,7 +1459,7 @@
         "started": "2026-09-26, 2000 steps, rank 32, lr 1e-4, --use-aspect-ratio, --save-every 400",
         "completed": "2026-09-26, 9277 s (2 h 35 m), loss 0.83 -> 0.55",
         "checkpoints": "ivy_lora_{400,800,1200,1600,2000}_lora_f32.ckpt in the Draw Things Models dir, 402 MB each",
-        "recommended": "ivy_lora_2000_lora_f32.ckpt at weight 0.5"
+        "recommended": "ivy_lora_2000_lora_f32.ckpt; weight per shot — 1.0 frontal close-up, 0.85 three-quarter and full body, 0.5-0.7 turning, <=0.5 profile or back"
       },
       "files": [
         "raw/ (source photographs, git-ignored)",
@@ -1473,7 +1473,8 @@
         "checkpoint": "barely mattered — the failure mode is identical from 400 to 2000 because it comes from the data, not the training length",
         "gotcha": "draw-things-cli silently ignores a LoRA file it cannot find: no error, and output pixel-identical to no LoRA (verified by md5)",
         "weight_vs_face_size": "0.5 for close and medium, 0.85 for full-body frontal shots: at 0.5 a small face has too few latent pixels for the LoRA to claim and renders a stranger",
-        "checkpoint_at_085": "2000 wins at every framing; the earlier 'checkpoint barely mattered' was measured at weight 1.0 where all failed alike. Later checkpoints also render the subject progressively larger for the same prompt and seed — the dataset is 19 close/medium against 3 full body, so the LoRA learned framing along with the face"
+        "checkpoint_at_085": "2000 wins at every framing; the earlier 'checkpoint barely mattered' was measured at weight 1.0 where all failed alike. Later checkpoints also render the subject progressively larger for the same prompt and seed — the dataset is 19 close/medium against 3 full body, so the LoRA learned framing along with the face",
+        "weight_is_per_shot": "1.0 gives the strongest likeness on a frontal close-up but costs image sharpness and prompt grip on wardrobe; 0.85 is the all-rounder; the 0.5 ceiling applies only to profile and back-of-head framings"
       }
     }
   ]

@@ -129,8 +129,21 @@ draw-things-cli generate -m flux_2_klein_9b_i8x.ckpt \
   --config-json '{"shift":3.0,"sampler":16,"loras":[{"file":"ivy_lora_2000_lora_f32.ckpt","weight":0.5}]}'
 ```
 
-- Trigger `ivy_kx`, always followed by `woman`.
-- **Weight 0.5.** Raise it only for a frontal close-up, and look at the result.
+- Trigger `ivy_kx`, always followed by `woman`. Checkpoint **2000** for everything; 1600 is
+  indistinguishable at close range and every earlier one is worse.
+- **Weight is per shot, not a global setting:**
+
+| Shot | Weight | Why |
+|---|---|---|
+| Frontal close-up, face is the subject | **1.0** | strongest likeness, and nothing in the frame conflicts with it |
+| Three-quarter portrait, chest up | 0.85 | keeps wardrobe and background crisp |
+| Full body, frontal | 0.85 | the floor for a small face — 0.5 renders a stranger |
+| Medium, turning away | 0.5–0.7 | |
+| True profile, back of head | ≤ 0.5 | above this a second face ghosts in |
+
+- **1.0 is not free.** It buys likeness and spends image quality: renders go softer, and the
+  prompt loses grip on wardrobe — a "sharply tailored suit" came back draped and shapeless at 1.0
+  where 0.5 tailored it properly. Use 1.0 when the face is the point, 0.85 when the clothes are.
 - Do not ask for a true profile or a back view yet. Fix that by adding real photographs at those
   angles and retraining — nothing else will.
 

@@ -238,8 +238,50 @@ not the training length.</p>
   --config-json '{&quot;shift&quot;:3.0,&quot;sampler&quot;:16,&quot;loras&quot;:[{&quot;file&quot;:&quot;ivy_lora_2000_lora_f32.ckpt&quot;,&quot;weight&quot;:0.5}]}'
 </code></pre>
 <ul>
-<li>Trigger <code>ivy_kx</code>, always followed by <code>woman</code>.</li>
-<li><strong>Weight 0.5.</strong> Raise it only for a frontal close-up, and look at the result.</li>
+<li>Trigger <code>ivy_kx</code>, always followed by <code>woman</code>. Checkpoint <strong>2000</strong> for everything; 1600 is
+  indistinguishable at close range and every earlier one is worse.</li>
+<li><strong>Weight is per shot, not a global setting:</strong></li>
+</ul>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Shot</th>
+<th>Weight</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Frontal close-up, face is the subject</td>
+<td><strong>1.0</strong></td>
+<td>strongest likeness, and nothing in the frame conflicts with it</td>
+</tr>
+<tr>
+<td>Three-quarter portrait, chest up</td>
+<td>0.85</td>
+<td>keeps wardrobe and background crisp</td>
+</tr>
+<tr>
+<td>Full body, frontal</td>
+<td>0.85</td>
+<td>the floor for a small face — 0.5 renders a stranger</td>
+</tr>
+<tr>
+<td>Medium, turning away</td>
+<td>0.5–0.7</td>
+<td></td>
+</tr>
+<tr>
+<td>True profile, back of head</td>
+<td>≤ 0.5</td>
+<td>above this a second face ghosts in</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>1.0 is not free.</strong> It buys likeness and spends image quality: renders go softer, and the
+  prompt loses grip on wardrobe — a "sharply tailored suit" came back draped and shapeless at 1.0
+  where 0.5 tailored it properly. Use 1.0 when the face is the point, 0.85 when the clothes are.</li>
 <li>Do not ask for a true profile or a back view yet. Fix that by adding real photographs at those
   angles and retraining — nothing else will.</li>
 </ul>
