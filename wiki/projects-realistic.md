@@ -19,6 +19,7 @@ Index of every project: [[projects]]. Other themes: [[projects-anime]] · [[proj
 | 3 | [Night Elf Hunter — a boy and his bear crossing the grassland](#nightelf_hunter) | 2026-09-26 | research — B0 partial pass 2026-09-26: 30 images, identity 30/30, angles skewed (back 1/3, over-shoulder 0/2); v1 remains the delivered film | FLUX.2 [klein] 9B 512x768 | Wan 2.2 High Noise ? min | none | `—` | — |
 | 4 | [Ivy — character LoRA](#ivy_lora) | 2026-09-26 | delivered 2026-09-26 — ivy_lora_2000_lora_f32.ckpt at weight 0.5; identity holds in unseen scenes, profile and back-of-head degrade (dataset has neither) | FLUX.2 [klein] 9B aspect-bucketed, | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
 | 5 | [Kyle — character LoRA](#kyle_lora) | 2026-09-26 | delivered 2026-09-26 — kyle_lora_2000_lora_f32.ckpt, usable at weight 1.0 including true profile and back of head | FLUX.2 [klein] 9B aspect-bucketed, | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
+| 6 | [Lindsey — character LoRA](#lindsey_lora) | 2026-09-27 | training 2026-09-27 11:00 — 32 image/caption pairs, 2000 steps, checkpoints every 400 | FLUX.2 [klein] 9B aspect-bucketed, | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
 
 ## Dragon Epic — 1-minute photoreal short, family hero face {#dragon_epic}
 
@@ -379,6 +380,49 @@ Prompt: `generated per cell by scripts/seed_sheet.sh --dataset`
 - **This version**: Character LoRA for Kyle trained on real photographs, following the Ivy route. The output is a reusable identity asset: kyle_rescue, bot_builders_champion and nightelf_hunter all carried his face by reference tokens and a master portrait, which this replaces with a trigger token.
 - **Files** (`projects/kyle_lora/v1-photo-dataset/`): `raw/ (source photographs, git-ignored)`, `seed/dataset/NN.png + NN.txt (training pairs; captions tracked)`, `logs/train.log`
 - **Notes**: Kyle is Kevin's son; consent settled. Shot as a deliberate turnaround to fix the defect the Ivy LoRA ended with: her set was entirely frontal and three-quarter, so the LoRA damaged profiles and back views above weight 0.5. Kyle's set has both profiles, the back of the head and two back three-quarters. The cost is the opposite bias — one shirt, one wall, one light, one distance — mitigated with four photographs from other settings and by naming the shirt, wall and light in every caption even though they never vary, so a later prompt has a handle to override them.
+
+**Still**
+
+| Setting | Value |
+|---|---|
+| Model | FLUX.2 [klein] 9B (8-bit S) |
+| Size | aspect-bucketed, 512 base |
+| Steps | 4 |
+| CFG | 1.0 |
+| Shift | 3 |
+| Sampler | DDIM Trailing |
+
+**I2V**
+
+| Setting | Value |
+|---|---|
+| Model | Wan 2.2 High Noise Expert I2V A14B (8-bit S) |
+| Refiner | Wan 2.2 Low Noise Expert I2V A14B (8-bit S) @ 10% |
+| LoRA | Wan 2.2 A14B Lightning High-Noise T2V v2.0 @ 100% |
+| Size | 576x1024 |
+| Frames | 81 |
+| FPS | 16 |
+| Steps | 4 |
+| CFG | 1.0 |
+| Shift | 4.95 |
+| Sampler | DDIM Trailing |
+| Strength | 100% |
+
+**Post**
+
+| Setting | Value |
+|---|---|
+| Script | scripts/finish_clip.sh |
+| Loop | forward, 8-frame tail->head crossfade, x6 = 27.4 s |
+| Upscale | lanczos 1080x1920 |
+| Music | Calm Ambient Dreamscape — morgan-ambient, Pixabay, 1 s fade in / 2 s fade out, vol 0.9 |
+
+## Lindsey — character LoRA {#lindsey_lora}
+
+- **Date**: 2026-09-27 · **Status**: training 2026-09-27 11:00 — 32 image/caption pairs, 2000 steps, checkpoints every 400 · **Version**: `v1-photo-dataset` · **Draw Things project**: `none — draw-things-cli train lora`
+- **This version**: Character LoRA for Lindsey from a 32-frame turnaround that covers full body as well as head angles. Third in the series after ivy_lora and kyle_lora, and the one that tests whether full-body identity is a dataset gap or a latent-resolution limit.
+- **Files** (`projects/lindsey_lora/v1-photo-dataset/`): `raw/ (32 source photographs, git-ignored)`, `seed/dataset/NN.png + NN.txt (training pairs; captions tracked)`, `seed/dataset_contact.png`, `logs/train.log`
+- **Notes**: Lindsey is Kevin's daughter; consent settled. The dataset is the most complete of the three: head angles (frontal, both profiles, back, three-quarters) AND thirteen full-body frames from front, both sides and behind, across two rooms. Ivy and Kyle both lost identity at full-body distance regardless of weight, which was read as a latent-resolution limit — too few pixels on the face. This set can distinguish the two explanations, because it contains the framing that was missing.
 
 **Still**
 

@@ -1,0 +1,44 @@
+{
+  "order": 23,
+  "id": "lindsey_lora",
+  "version": "v1-photo-dataset",
+  "variant": "Character LoRA for Lindsey from a 32-frame turnaround that covers full body as well as head angles. Third in the series after ivy_lora and kyle_lora, and the one that tests whether full-body identity is a dataset gap or a latent-resolution limit.",
+  "title": "Lindsey — character LoRA",
+  "date": "2026-09-27",
+  "theme": "realistic",
+  "dt_project": "none — draw-things-cli train lora",
+  "status": "training 2026-09-27 11:00 — 32 image/caption pairs, 2000 steps, checkpoints every 400",
+  "source": "32 photographs shot for this project, in raw/, which is git-ignored",
+  "notes": "Lindsey is Kevin's daughter; consent settled. The dataset is the most complete of the three: head angles (frontal, both profiles, back, three-quarters) AND thirteen full-body frames from front, both sides and behind, across two rooms. Ivy and Kyle both lost identity at full-body distance regardless of weight, which was read as a latent-resolution limit — too few pixels on the face. This set can distinguish the two explanations, because it contains the framing that was missing.",
+  "still": {
+    "model": "FLUX.2 [klein] 9B (8-bit S)",
+    "size": "aspect-bucketed, 512 base",
+    "steps": 4,
+    "cfg": 1.0,
+    "shift": 3,
+    "sampler": "DDIM Trailing"
+  },
+  "dataset": {
+    "trigger": "lindsey_kx",
+    "class_word": "girl",
+    "count": 32,
+    "framing": "19 close-up or chest-up, 13 full body",
+    "angles": "frontal, both true profiles, back of head, back three-quarters, plus full body from front, both sides and behind",
+    "backgrounds": "a white textured wall for the head frames; a room with a wooden floor, framed artwork and a piano for the full-body frames",
+    "wardrobe": "one pink teddy-bear t-shirt throughout, with light blue shorts in the full-body frames",
+    "caption_rule": "Isolation Rule — caption only what varies. Face and hair are omitted so they bind to the trigger. The shirt, wall and light are named in every caption despite never varying, so a later prompt has a handle to override them (the approach that worked on kyle_lora).",
+    "status": "built 2026-09-27, captions hand-written after viewing the frames",
+    "rotation_check": "the JPEGs are natively portrait with no orientation tag; verified upright through ffmpeg, not Preview, per the kyle_lora trap"
+  },
+  "training": {
+    "command": "draw-things-cli train lora --model flux_2_klein_9b_i8x.ckpt --dataset projects/lindsey_lora/v1-photo-dataset/seed/dataset --steps 2000 --rank 32 --learning-rate 1e-4 --seed 1 --use-aspect-ratio --save-every 400 -o lindsey_lora --name \"Lindsey (lindsey_kx)\" --offline",
+    "started": "2026-09-27 11:00",
+    "prediction": "head angles should hold to weight 1.0 as Kyle's did. The open question is full body: if identity now survives at distance, the small-face failure on Ivy and Kyle was a dataset gap; if it still washes out, it is a latent-resolution limit and no dataset fixes it."
+  },
+  "files": [
+    "raw/ (32 source photographs, git-ignored)",
+    "seed/dataset/NN.png + NN.txt (training pairs; captions tracked)",
+    "seed/dataset_contact.png",
+    "logs/train.log"
+  ]
+}

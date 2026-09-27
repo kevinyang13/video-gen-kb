@@ -1,0 +1,39 @@
+Models directory: /Users/kevinyang/Library/Containers/com.liuliu.draw-things/Data/Documents/Models
+Model: flux_2_klein_9b_i8x.ckpt
+Dataset: projects/lindsey_lora/v1-photo-dataset/seed/dataset
+Name: Lindsey (lindsey_kx)
+Training steps: 2000
+Rank: 32, scale: 1.0
+Resolution: 512x512
+Dataset size: 32 sample(s)
+Encoding images: 1/32Encoding images: 2/32Encoding images: 3/32Encoding images: 4/32Encoding images: 5/32Encoding images: 6/32Encoding images: 7/32Encoding images: 8/32Encoding images: 9/32Encoding images: 10/32Encoding images: 11/32Encoding images: 12/32Encoding images: 13/32Encoding images: 14/32Encoding images: 15/32Encoding images: 16/32Encoding images: 17/32Encoding images: 18/32Encoding images: 19/32Encoding images: 20/32Encoding images: 21/32Encoding images: 22/32Encoding images: 23/32Encoding images: 24/32Encoding images: 25/32Encoding images: 26/32Encoding images: 27/32Encoding images: 28/32Encoding images: 29/32Encoding images: 30/32Encoding images: 31/32Encoding images: 32/32Encoding captions: 0/32Encoding captions: 1/32Encoding captions: 2/32Encoding captions: 3/32Encoding captions: 4/32Encoding captions: 5/32Encoding captions: 6/32Encoding captions: 7/32Encoding captions: 8/32Encoding captions: 9/32Encoding captions: 10/32Encoding captions: 11/32Encoding captions: 12/32Encoding captions: 13/32Encoding captions: 14/32Encoding captions: 15/32Encoding captions: 16/32Encoding captions: 17/32Encoding captions: 18/32Encoding captions: 19/32Encoding captions: 20/32Encoding captions: 21/32Encoding captions: 22/32Encoding captions: 23/32Encoding captions: 24/32Encoding captions: 25/32Encoding captions: 26/32Encoding captions: 27/32Encoding captions: 28/32Encoding captions: 29/32Encoding captions: 30/32Encoding captions: 31/32Encoding captions: 32/32
+[LoRA] Compiling computation graph...
+[LoRA] Step 0/2000 | Loss: 0.0000 | 0.00 it/s
+loss 1.15, scale 32768.0, step 0, timestep 0.95865434, image 56x72
+[LoRA] Step 1/2000 | Loss: 1.1504 | 0.04 it/s
+loss 0.9204, scale 32768.0, step 1, timestep 0.7910905, image 56x72
+[LoRA] Step 2/2000 | Loss: 0.9204 | 0.07 it/s
+loss 1.087, scale 32768.0, step 2, timestep 0.62276286, image 56x72
+[LoRA] Step 3/2000 | Loss: 1.0869 | 0.09 it/s
+loss 1.11, scale 32768.0, step 3, timestep 0.40858078, image 56x72
+[LoRA] Step 4/2000 | Loss: 1.1104 | 0.11 it/s
+loss 0.9727, scale 32768.0, step 4, timestep 0.6466343, image 56x72
+[LoRA] Step 5/2000 | Loss: 0.9727 | 0.12 it/s
+loss 1.255, scale 32768.0, step 5, timestep 0.26498678, image 56x72
+[LoRA] Step 6/2000 | Loss: 1.2549 | 0.13 it/s
+loss 1.211, scale 32768.0, step 6, timestep 0.1207723, image 56x72
+[LoRA] Step 7/2000 | Loss: 1.2109 | 0.14 it/s
+loss 1.26, scale 32768.0, step 7, timestep 0.23418875, image 56x72
+[LoRA] Step 8/2000 | Loss: 1.2598 | 0.14 it/s
+loss 1.202, scale 16384.0, step 8, timestep 0.13172145, image 56x72
+[LoRA] Step 9/2000 | Loss: 1.2021 | 0.15 it/s
+loss 1.12, scale 16384.0, step 9, timestep 0.66075903, image 56x72
+[LoRA] Step 10/2000 | Loss: 1.1201 | 0.15 it/s
+loss 1.783, scale 16384.0, step 10, timestep 0.9844947, image 56x72
+[LoRA] Step 11/2000 | Loss: 1.7832 | 0.16 it/s
+loss 1.172, scale 16384.0, step 11, timestep 0.5227454, image 56x72
+[LoRA] Step 12/2000 | Loss: 1.1719 | 0.16 it/s
+loss 1.054, scale 16384.0, step 12, timestep 0.5294584, image 56x72
+[LoRA] Step 13/2000 | Loss: 1.0537 | 0.17 it/s
+loss 0.973, scale 16384.0, step 13, timestep 0.8812558, image 56x72
+[LoRA] Step 14/2000 | Loss: 0.9731 | 0.17 it/s
