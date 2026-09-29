@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lindsey — The Palace Pavilion — video-gen-kb</title>
+<style>
+:root{--bg:#0B0D12;--panel:#141822;--panel-2:#1B2130;--stroke:#2A3245;--text:#E6E9F0;
+--muted:#8B94A7;--accent:#F5B84B;--accent-2:#4BC9F5;--on-accent:#12131A;
+--rule:rgba(139,148,167,.22);--code:#F5B84B}
+@media(prefers-color-scheme:light){:root:not([data-theme=dark]){--bg:#F4F1EA;--panel:#fff;
+--panel-2:#FAF8F3;--stroke:#D9D3C6;--text:#16181F;--muted:#5D6473;--accent:#B8781A;
+--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}}
+:root[data-theme=light]{--bg:#F4F1EA;--panel:#fff;--panel-2:#FAF8F3;--stroke:#D9D3C6;
+--text:#16181F;--muted:#5D6473;--accent:#B8781A;--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);
+line-height:1.65;padding:0 1rem 4rem}
+.shell{max-width:840px;margin:0 auto}
+a{color:var(--accent);text-decoration:none;font-weight:600}
+a:hover{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--accent-2);outline-offset:3px;border-radius:4px}
+.bar{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;padding:1.1rem 0;margin-bottom:1.5rem;
+border-bottom:1px solid var(--stroke)}
+.crumb{font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.spacer{flex:1}
+.pill{border:1px solid var(--stroke);background:var(--panel);border-radius:999px;padding:.28rem .8rem;
+font-size:.75rem;font-weight:700;color:var(--text);cursor:pointer;font-family:inherit}
+.pill:hover{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+h1{font-size:clamp(1.7rem,5vw,2.5rem);margin:.2rem 0 1rem;line-height:1.1;letter-spacing:-.015em;text-wrap:balance}
+h2{font-size:1.25rem;margin:2.2rem 0 .7rem;padding-bottom:.35rem;border-bottom:1px solid var(--rule);text-wrap:balance}
+h3{font-size:1.02rem;margin:1.5rem 0 .5rem;color:var(--accent)}
+p{margin:.7rem 0}
+ul,ol{margin:.7rem 0 .7rem 1.3rem}
+li{margin:.28rem 0}
+li::marker{color:var(--accent)}
+em{color:var(--muted)}
+hr{border:none;border-top:1px solid var(--stroke);margin:2rem 0}
+blockquote{border-left:3px solid var(--accent);background:var(--panel);border-radius:0 10px 10px 0;
+padding:.8rem 1.1rem;margin:1.1rem 0;color:var(--muted);font-size:.92rem}
+code{background:var(--panel);border:1px solid var(--stroke);border-radius:5px;padding:.1rem .35rem;
+font-size:.85em;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--code)}
+img{max-width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--stroke);margin:1.1rem 0}
+pre{background:var(--panel);border:1px solid var(--stroke);border-radius:12px;padding:1rem;overflow-x:auto;margin:1.1rem 0}
+pre code{background:none;border:none;padding:0;color:var(--text);font-size:.83rem;line-height:1.55}
+.tw{overflow-x:auto;border:1px solid var(--stroke);border-radius:12px;background:var(--panel);margin:1.1rem 0}
+table{width:100%;border-collapse:collapse;font-size:.85rem;min-width:min(100%,460px)}
+th{background:var(--panel-2);color:var(--accent);text-align:left;padding:.55rem .8rem;font-size:.68rem;
+letter-spacing:.09em;text-transform:uppercase;white-space:nowrap;border-bottom:1px solid var(--stroke)}
+td{padding:.5rem .8rem;border-bottom:1px solid var(--rule);color:var(--muted);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td strong{color:var(--text)}
+.meta{display:flex;flex-wrap:wrap;gap:.4rem .9rem;font-size:.78rem;color:var(--muted);margin:-.4rem 0 1.2rem}
+.meta b{color:var(--text);font-weight:600}
+.missing{color:var(--muted);border-bottom:1px dashed var(--muted);cursor:help}
+.related{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--stroke)}
+.related h2{border:none;margin:0 0 .7rem;font-size:.95rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:0}
+.chips li{margin:0}
+.chips a,.chips .missing{display:inline-block;border:1px solid var(--stroke);background:var(--panel);
+border-radius:999px;padding:.28rem .8rem;font-size:.8rem}
+.chips a:hover{background:var(--accent);color:var(--on-accent);text-decoration:none;border-color:var(--accent)}
+footer{max-width:840px;margin:2.5rem auto 0;padding-top:1.2rem;border-top:1px solid var(--stroke);
+font-size:.75rem;color:var(--muted);text-align:center}
+/* landing */
+.hero{padding:2.4rem 0 1.6rem}
+.kicker{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2)}
+.hero h1{font-size:clamp(2rem,6vw,3.2rem);margin:.35rem 0 .5rem}
+.hero p{color:var(--muted);font-size:1.05rem;max-width:56ch}
+.hw{display:inline-flex;gap:.5rem;align-items:center;margin-top:1rem;border:1px solid var(--stroke);
+background:var(--panel);border-radius:999px;padding:.3rem .9rem;font-size:.78rem;color:var(--muted)}
+.hw .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.sec{margin-top:2.2rem}
+.sec h2{border:none;padding:0;margin:0 0 .8rem;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.9rem}
+.card{display:block;border:1px solid var(--stroke);background:var(--panel);border-radius:14px;padding:1rem 1.1rem;
+color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+.card b{display:block;color:var(--accent);font-size:1rem;margin-bottom:.3rem}
+.card span{font-size:.85rem;color:var(--muted);line-height:1.5}
+.stubs{font-size:.82rem;color:var(--muted);margin-top:.6rem}
+.yt{position:relative;width:100%;aspect-ratio:16/9;border:1px solid var(--stroke);border-radius:12px;overflow:hidden;background:#000;margin:1rem 0}
+.yt.yt-v{aspect-ratio:9/16;max-width:360px}
+.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="bar">
+    <span class="crumb"><a href="../">video-gen-kb</a> / <a href="index.html">Wiki</a></span>
+    <span class="spacer"></span>
+    <button class="pill" onclick="tt()">◐ Theme</button>
+  </nav>
+  <h1>Lindsey — The Palace Pavilion</h1><p class="lede">A one-minute 16:9 photoreal short: a nine-year-old girl in an emerald silk royal gown alone in a palace pavilion above domes and waterfalls. Seven shots. The first film in this repo where <strong>identity comes from a trained LoRA rather than a reference photograph</strong> — no source image is touched at render time, and the LoRA weight is set per shot rather than globally.</p><div class="meta"><span><b>Updated</b> 2026-09-28</span><span><b>Sources</b> <a href="lindsey-lora-plan.html">lindsey lora plan</a> (the trained identity), <a href="blueprint-v2-research.html">blueprint v2 research</a> §B1/B8 (weight-per-shot), <a href="idea-to-video-blueprint.html">idea to video blueprint</a> Phase 4/4b, <a href="headless-cli-pipeline.html">headless cli pipeline</a>.</span></div>
+<hr />
+<h2>1. The brief</h2>
+<p>One prompt, supplied whole:</p>
+<blockquote>
+<p>a 9-year-old girl in an ornate palace pavilion overlooking domed architecture and waterfalls. She wears a
+high-fashion, Naboo-inspired royal gown in rich emerald green silk with gold lace trim, high structured collar,
+and intricate embroidery along the bodice. Soft ambient sunlight with subtle rim light highlighting natural
+flyaway hair, razor-sharp focus on facial detail and silk texture, Leica S3 quality.</p>
+</blockquote>
+<p>One minute long, using <code>lindsey_lora</code>. No evaluation grid first — by request.</p>
+<h2>2. What is different about this film</h2>
+<p>Every previous photoreal project carried a face by <strong>reference image</strong>: a photo in the left half of a diptych,
+or a seed master re-edited shot to shot. That works, and it is also the thing that limits framing — the face
+only survives where the reference can reach.</p>
+<p>Here the face is in the weights. Consequences, all of which shape the shot list:</p>
+<ul>
+<li><strong>The stills are text-to-image plus an environment reference.</strong> The <code>--image</code> input is the <em>pavilion</em> or the
+  <em>wardrobe master</em>, never a photograph of Lindsey. Identity rides on the token <code>lindsey_kx girl</code>.</li>
+<li><strong>Weight is a per-shot dial</strong>, not a project setting. This is the operative result out of <code>ivy_lora</code> and
+  <code>kyle_lora</code>: at 1.0 a character LoRA holds a face hard and starts taking prompt grip away from wardrobe;
+  below ~0.6 it stops being the same child.</li>
+<li><strong>No LoRA at the video stage.</strong> LTX never sees it. Whatever identity is in the still is all the identity the
+  clip will ever have, which is an argument for spending the still budget on the close shots.</li>
+</ul>
+<h2>3. Shot list and the weight table</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Shot</th>
+<th>Input master</th>
+<th>LoRA weight</th>
+<th>Why that weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>s1</td>
+<td>Extreme wide: she is small at the balustrade, seen from behind</td>
+<td>pavilion</td>
+<td>0.85</td>
+<td>face is a few pixels; the gown and the valley need the prompt</td>
+</tr>
+<tr>
+<td>s2</td>
+<td>Medium three-quarter at the balustrade, looking out</td>
+<td>lindsey</td>
+<td>1.0</td>
+<td>face readable, identity matters</td>
+</tr>
+<tr>
+<td>s3</td>
+<td>Tight close-up portrait, rim light on flyaway hair — the hero shot</td>
+<td>lindsey</td>
+<td>1.0</td>
+<td>maximum identity, wardrobe is only the collar</td>
+</tr>
+<tr>
+<td>s4</td>
+<td>Macro insert: silk, gold lace, embroidery, hands on the stone rail</td>
+<td>lindsey</td>
+<td>0.6</td>
+<td><strong>no face in frame</strong>; all grip goes to fabric</td>
+</tr>
+<tr>
+<td>s5</td>
+<td>True profile, backlit, she turns toward camera</td>
+<td>lindsey</td>
+<td>0.85</td>
+<td>profile is the angle the dataset covers but the one that punished Ivy</td>
+</tr>
+<tr>
+<td>s6</td>
+<td>Wide full body from behind, walking the colonnade</td>
+<td>pavilion</td>
+<td>0.85</td>
+<td>full body at distance — the framing that failed for Ivy and Kyle</td>
+</tr>
+<tr>
+<td>s7</td>
+<td>Close-up frontal, the faint smile, hold</td>
+<td>lindsey</td>
+<td>1.0</td>
+<td>the closing beat</td>
+</tr>
+</tbody>
+</table></div>
+<p>Seven takes trimmed to 9.25 s, six 0.75 s crossfades: <strong>60.25 s</strong>.</p>
+<p>s5 and s6 are the interesting ones. Lindsey's dataset is the only one of the three that carries both true
+profiles and thirteen full-body frames, so the prediction from <a href="lindsey-lora-plan.html">lindsey lora plan</a> is that these hold where
+Ivy's and Kyle's would not. This film tests that in motion instead of in a grid.</p>
+<h2>4. Locks</h2>
+<p>Four strings reused verbatim across all seven prompts, so the shots cannot drift apart:</p>
+<ul>
+<li><strong>subject</strong> — <code>lindsey_kx girl</code>, a nine-year-old girl, this exact face, long dark hair with natural flyaway strands</li>
+<li><strong>gown</strong> — emerald green silk, gold lace trim, high structured collar, intricate gold embroidery on the bodice</li>
+<li><strong>place</strong> — pale carved stone pavilion, tall slender arches, carved balustrade, a valley of golden domes and tall waterfalls in rising mist</li>
+<li><strong>style</strong> — Leica S3 medium format, 120mm, soft ambient sunlight with a subtle rim light, razor-sharp focus, shallow depth of field, fine grain</li>
+</ul>
+<p>The trigger token leads every still prompt. The class word <code>girl</code> follows it immediately, as in training.</p>
+<h2>5. Settings</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Setting</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Still</td>
+<td>FLUX.2 [klein] 9B (8-bit S), 1024×576, 4 steps, CFG 1, shift 3, DDIM Trailing (sampler 16), edit mode strength 1.0</td>
+</tr>
+<tr>
+<td>LoRA</td>
+<td><code>lindsey_lora_2000_lora_f32.ckpt</code> @ 0.6 / 0.85 / 1.0 per the table above</td>
+</tr>
+<tr>
+<td>Clip</td>
+<td>LTX-2.3 22B [distilled] 1.1, 1024×576, 249 frames @ 25 fps, 8 steps, CFG 1, shift 5, TCD Trailing (sampler 19), SSS 0.3 — ~10 min each</td>
+</tr>
+<tr>
+<td>Upscale</td>
+<td>Real-ESRGAN x4plus → 3840×2160, crop fit, 40M</td>
+</tr>
+<tr>
+<td>Assemble</td>
+<td>0.75 s crossfades, clip audio kept, 1920×1080 delivery copy</td>
+</tr>
+</tbody>
+</table></div>
+<h2>6. Log</h2>
+<ul>
+<li><strong>2026-09-28</strong> — spec written; both masters rendered first try (seeds 7 and 11). The wardrobe master came out
+  with the face, the gown and the valley all correct in one pass, which is the LoRA doing the work a diptych
+  used to do. Still candidates rendering.</li>
+</ul>
+
+  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="lindsey-lora-plan.html">lindsey lora plan</a></li><li><a href="blueprint-v2-research.html">blueprint v2 research</a></li><li><a href="idea-to-video-blueprint.html">idea to video blueprint</a></li><li><a href="headless-cli-pipeline.html">headless cli pipeline</a></li><li><a href="nightelf-hunter-plan.html">nightelf hunter plan</a></li></ul></div>
+</div>
+<footer>video-gen-kb · built 2026-09-28 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<script>function tt(){var r=document.documentElement,
+d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
+matchMedia('(prefers-color-scheme: dark)').matches);
+r.setAttribute('data-theme',d?'light':'dark');}</script>
+</body>
+</html>
