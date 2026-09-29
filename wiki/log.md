@@ -33,6 +33,17 @@ first clause ("three-quarter front view", "looking straight down a long colonnad
 environment plate to stay consistent — that is the plate's whole reason for existing, and here it was only
 costing composition.
 
+**The clips then produced the finding, and it is a limit of the whole approach.** LTX never sees the LoRA —
+identity is baked into the still and nothing renews it across 249 frames. So any motion that occludes the face
+and then reveals it lets the video model recast the subject, and it does not choose the trained face. In s5 the
+head turned through the back of the skull and came back as **an adult woman**; re-rendering with an explicit
+"she does not turn her head" changed nothing, because a profile still is itself unstable input — LTX resolves it
+to a frontal face and invents the one it was never given. s2 failed the same way more slowly. The working rule:
+with a LoRA-carried face, write motion with no rotation and no occlusion — breathing, blinking, hair in wind,
+fabric settling, walking *away* are all stable. The corollary shows in the cut, where the only two clips usable
+for their full ten seconds are the two with no face to lose: the walk away down the colonnade, and a shot of the
+valley with no person in it at all.
+
 ## 2026-09-26 — LoRA training deep-dive added to the v2 research
 
 Third pasted source (`raw/2026-09-26-character-lora-training.md`): dataset curation (25–50 images, 40/40/20 close-up / medium / wide, varied lighting), the captioning strategy, and hyperparameters (rank 32–64, alpha 16–32, 1e-4 to 2e-4, bf16, 1,500–3,000 steps — unverified).

@@ -20,7 +20,7 @@ Index of every project: [[projects]]. Other themes: [[projects-anime]] · [[proj
 | 4 | [Ivy — character LoRA](#ivy_lora) | 2026-09-26 | delivered 2026-09-26 — ivy_lora_2000_lora_f32.ckpt at weight 0.5; identity holds in unseen scenes, profile and back-of-head degrade (dataset has neither) | FLUX.2 [klein] 9B aspect-bucketed, | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
 | 5 | [Kyle — character LoRA](#kyle_lora) | 2026-09-26 | delivered 2026-09-26 — kyle_lora_2000_lora_f32.ckpt, usable at weight 1.0 including true profile and back of head | FLUX.2 [klein] 9B aspect-bucketed, | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
 | 6 | [Lindsey — character LoRA](#lindsey_lora) | 2026-09-27 | trained 2026-09-27 — 2000 steps in 2 h 26 m, five checkpoints; evaluation pending | FLUX.2 [klein] 9B aspect-bucketed, | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
-| 7 | [Lindsey — the palace pavilion](#lindsey_palace) | 2026-09-28 | planned 2026-09-28 — spec written, rendering | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 10 min | Emotional Children Piano | `—` | — |
+| 7 | [Lindsey — the palace pavilion](#lindsey_palace) | 2026-09-28 | delivered 2026-09-28 22:07 — 61.08 s, 3840x2160 (293 MB) + 1920x1080 (91 MB), 8 shots, none dropped; mean -21.1 dB, peak -5.4 dB | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 10 min | Emotional Children Piano | `—` | — |
 
 ## Dragon Epic — 1-minute photoreal short, family hero face {#dragon_epic}
 
@@ -463,10 +463,10 @@ Prompt: `generated per cell by scripts/seed_sheet.sh --dataset`
 
 ## Lindsey — the palace pavilion {#lindsey_palace}
 
-- **Date**: 2026-09-28 · **Status**: planned 2026-09-28 — spec written, rendering · **Version**: `v1-lora-cli` · **Draw Things project**: `none — draw-things-cli via scripts/film_run.py`
+- **Date**: 2026-09-28 · **Status**: delivered 2026-09-28 22:07 — 61.08 s, 3840x2160 (293 MB) + 1920x1080 (91 MB), 8 shots, none dropped; mean -21.1 dB, peak -5.4 dB · **Version**: `v1-lora-cli` · **Draw Things project**: `none — draw-things-cli via scripts/film_run.py`
 - **This version**: First film driven by a character LoRA rather than reference photographs: lindsey_lora_2000 carries the face, so every still is text-to-image plus an environment reference, with the LoRA weight set per shot.
 - **Files** (`projects/lindsey_palace/v1-lora-cli/`): `stills/s1.png … s7.png`, `clips/s1_v1.mov … s7_v1.mov`, `final/lindsey_palace_3840x2160.mp4`, `final/lindsey_palace_1920x1080.mp4`, `music/emotional_children_piano.mp3`
-- **Notes**: Lindsey is Kevin's daughter; consent settled. One minute, seven shots trimmed to ~8.5 s each. Weight is set per shot, which is the operative result from ivy_lora and kyle_lora: 1.0 on the close portraits (s3, s7, s2) where identity has to hold and the wardrobe is a small part of frame, 0.85 on the wides and the profile (s1, s5, s6) where 1.0 would start to fight the prompt for the gown, and 0.6 on the macro insert (s4), which has no face and needs all of its prompt grip on silk and embroidery. Lindsey's dataset is the only one of the three with profile, back and full-body coverage, so those framings are expected to hold — s5 and s6 are where that gets tested in a film rather than a grid. No evaluation grid was run first, by request.
+- **Notes**: Lindsey is Kevin's daughter; consent settled. One minute, seven shots trimmed to ~8.5 s each. Weight is set per shot, which is the operative result from ivy_lora and kyle_lora: 1.0 on the close portraits (s3, s7, s2) where identity has to hold and the wardrobe is a small part of frame, 0.85 on the wides and the profile (s1, s5, s6) where 1.0 would start to fight the prompt for the gown, and 0.6 on the macro insert (s4), which has no face and needs all of its prompt grip on silk and embroidery. Lindsey's dataset is the only one of the three with profile, back and full-body coverage, so those framings are expected to hold — s5 and s6 are where that gets tested in a film rather than a grid. No evaluation grid was run first, by request. Cut order is s1 s2 s3 s4 s8 s5 s7 s6 — the walk away from camera closes the film, and the valley insert (s8) sits where the film needs a breath and where nothing can drift.
 
 **Still**
 
@@ -540,7 +540,7 @@ Prompt: `per shot — see scenes`
 
 *Video prompt*
 
-> Slow push in. The breeze lifts loose strands of her hair and moves the silk at her shoulder; she breathes, blinks once and keeps looking out over the valley. Water and wind, no music.
+> Fixed camera, no push in, no zoom. She stays facing the camera three-quarters on the whole time and never turns her head away. The breeze lifts loose strands of her hair across her cheek and moves the silk at her shoulder; she blinks once and breathes. Wind, no music.
 
 
 #### s3 — Tight close-up portrait, rim light on the flyaway hair — the hero shot
@@ -566,7 +566,20 @@ Prompt: `per shot — see scenes`
 
 *Video prompt*
 
-> Locked macro camera. The silk shifts very slightly as she breathes, light creeping across the embroidery, one hand relaxing on the warm stone. Nothing else moves. Faint wind, distant water, no music.
+> Locked macro camera. Only the faintest movement: the silk shifts a few millimetres as she breathes, light creeps slowly across the gold embroidery, her fingers relax on the warm stone. The sleeve stays flat against her arm — nothing lifts, flaps or folds over. Faint wind, distant water, no music.
+
+
+#### s8 — The valley itself — what she is looking at
+
+- **Note**: no LoRA at all; no face in frame, so nothing can drift
+
+*Still prompt*
+
+> Extreme wide landscape, no people in frame, shot from inside the shade of the pavilion looking out between two tall carved stone columns. A valley of great golden domed architecture and tall waterfalls falling into rising mist, morning sun burning through the haze, birds turning far below, terraces of green between the falls. Enormous sense of scale, deep depth of field, layered atmospheric perspective. Cinematic film still, Leica S3 medium format, 120mm lens, photoreal skin and fabric, soft ambient sunlight with a subtle rim light, razor-sharp focus on facial detail and silk texture, shallow depth of field, fine film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.
+
+*Video prompt*
+
+> Fixed camera, no camera movement. The waterfalls fall steadily, mist rolling upward and drifting across the valley, sunlight shifting slowly through the haze, birds turning far below. Falling water, wind, no music.
 
 
 #### s5 — True profile, backlit, she turns toward camera
@@ -579,20 +592,7 @@ Prompt: `per shot — see scenes`
 
 *Video prompt*
 
-> Fixed camera. She turns her head slowly away from the valley toward the camera, ending three-quarters on, her hair swinging and settling, the silk collar turning with her. Wind, no music.
-
-
-#### s6 — Wide full body from behind, walking the colonnade
-
-- **Note**: LoRA weight 0.85; text-to-image, no environment plate
-
-*Still prompt*
-
-> Wide full-body shot from behind at a low angle, looking straight down a long colonnade. lindsey_kx girl, a nine-year-old girl, this exact face, long dark hair with natural flyaway strands catching the light, wearing a high-fashion Naboo-inspired royal gown in rich emerald green silk with gold lace trim, a high structured collar and intricate gold embroidery along the bodice, the long emerald skirt trailing on polished pale stone, walking away from the camera mid-stride down a deep receding row of tall carved stone columns, hard bars of sunlight falling across the floor between the columns, golden domes and tall waterfalls in rising mist glimpsed through the arches to her left. Strong one-point perspective down the colonnade. Cinematic film still, Leica S3 medium format, 120mm lens, photoreal skin and fabric, soft ambient sunlight with a subtle rim light, razor-sharp focus on facial detail and silk texture, shallow depth of field, fine film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.
-
-*Video prompt*
-
-> Fixed camera. She walks slowly away down the colonnade, the silk skirt trailing and swaying behind her, bars of sunlight passing over her as she goes, mist rising beyond the arches. Footsteps on stone, water, no music.
+> Fixed camera. She holds her profile, looking out over the valley, and never turns her head. The wind lifts her hair and stirs the silk collar, she blinks once. Wind, no music.
 
 
 #### s7 — Close-up frontal, the faint smile, hold
@@ -606,6 +606,19 @@ Prompt: `per shot — see scenes`
 *Video prompt*
 
 > Locked camera. She lifts her chin a fraction, the small smile settles, she blinks once and holds her gaze on the light; hair and silk move gently in the breeze. Wind, distant water, no music.
+
+
+#### s6 — Wide full body from behind, walking the colonnade
+
+- **Note**: LoRA weight 0.85; text-to-image, no environment plate
+
+*Still prompt*
+
+> Wide full-body shot from behind at a low angle, looking straight down a long colonnade. lindsey_kx girl, a nine-year-old girl, this exact face, long dark hair with natural flyaway strands catching the light, wearing a high-fashion Naboo-inspired royal gown in rich emerald green silk with gold lace trim, a high structured collar and intricate gold embroidery along the bodice, the long emerald skirt trailing on polished pale stone, walking away from the camera mid-stride down a deep receding row of tall carved stone columns, hard bars of sunlight falling across the floor between the columns, golden domes and tall waterfalls in rising mist glimpsed through the arches to her left. Strong one-point perspective down the colonnade. Cinematic film still, Leica S3 medium format, 120mm lens, photoreal skin and fabric, soft ambient sunlight with a subtle rim light, razor-sharp focus on facial detail and silk texture, shallow depth of field, fine film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.
+
+*Video prompt*
+
+> Fixed camera. She walks slowly away down the colonnade, the silk skirt trailing and swaying behind her, bars of sunlight passing over her as she goes, mist rising beyond the arches. Footsteps on stone, water, no music.
 
 ## Related pages
 - [[projects]]

@@ -1595,9 +1595,9 @@
       "date": "2026-09-28",
       "theme": "realistic",
       "dt_project": "none — draw-things-cli via scripts/film_run.py",
-      "status": "planned 2026-09-28 — spec written, rendering",
+      "status": "delivered 2026-09-28 22:07 — 61.08 s, 3840x2160 (293 MB) + 1920x1080 (91 MB), 8 shots, none dropped; mean -21.1 dB, peak -5.4 dB",
       "source": "text-only; identity comes from projects/lindsey_lora (trigger lindsey_kx, class word girl). No source photographs are used at render time.",
-      "notes": "Lindsey is Kevin's daughter; consent settled. One minute, seven shots trimmed to ~8.5 s each. Weight is set per shot, which is the operative result from ivy_lora and kyle_lora: 1.0 on the close portraits (s3, s7, s2) where identity has to hold and the wardrobe is a small part of frame, 0.85 on the wides and the profile (s1, s5, s6) where 1.0 would start to fight the prompt for the gown, and 0.6 on the macro insert (s4), which has no face and needs all of its prompt grip on silk and embroidery. Lindsey's dataset is the only one of the three with profile, back and full-body coverage, so those framings are expected to hold — s5 and s6 are where that gets tested in a film rather than a grid. No evaluation grid was run first, by request.",
+      "notes": "Lindsey is Kevin's daughter; consent settled. One minute, seven shots trimmed to ~8.5 s each. Weight is set per shot, which is the operative result from ivy_lora and kyle_lora: 1.0 on the close portraits (s3, s7, s2) where identity has to hold and the wardrobe is a small part of frame, 0.85 on the wides and the profile (s1, s5, s6) where 1.0 would start to fight the prompt for the gown, and 0.6 on the macro insert (s4), which has no face and needs all of its prompt grip on silk and embroidery. Lindsey's dataset is the only one of the three with profile, back and full-body coverage, so those framings are expected to hold — s5 and s6 are where that gets tested in a film rather than a grid. No evaluation grid was run first, by request. Cut order is s1 s2 s3 s4 s8 s5 s7 s6 — the walk away from camera closes the film, and the valley insert (s8) sits where the film needs a breath and where nothing can drift.",
       "still": {
         "model": "FLUX.2 [klein] 9B (8-bit S)",
         "size": "1024x576",
@@ -1644,7 +1644,7 @@
           "title": "Three-quarter front at the balustrade, turned toward camera",
           "note": "LoRA weight 1.0; edit-mode input seed/lindsey.png",
           "still": "Medium shot, three-quarter front view. lindsey_kx girl, a nine-year-old girl, this exact face, long dark hair with natural flyaway strands catching the light, wearing a high-fashion Naboo-inspired royal gown in rich emerald green silk with gold lace trim, a high structured collar and intricate gold embroidery along the bodice, turned away from the carved stone balustrade toward the camera, one hand still resting on the stone, her face clearly visible and lit. Standing in an ornate palace pavilion of pale carved stone, tall slender arches and a carved stone balustrade, overlooking a valley of great golden domed architecture and tall waterfalls falling into rising mist. Warm ambient light through the open arches, a bright rim light along her cheek and the flyaway strands of her hair. Cinematic film still, Leica S3 medium format, 120mm lens, photoreal skin and fabric, soft ambient sunlight with a subtle rim light, razor-sharp focus on facial detail and silk texture, shallow depth of field, fine film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
-          "video": "Slow push in. The breeze lifts loose strands of her hair and moves the silk at her shoulder; she breathes, blinks once and keeps looking out over the valley. Water and wind, no music."
+          "video": "Fixed camera, no push in, no zoom. She stays facing the camera three-quarters on the whole time and never turns her head away. The breeze lifts loose strands of her hair across her cheek and moves the silk at her shoulder; she blinks once and breathes. Wind, no music."
         },
         "s3": {
           "title": "Tight close-up portrait, rim light on the flyaway hair — the hero shot",
@@ -1656,25 +1656,31 @@
           "title": "Macro insert — silk, gold lace, embroidery, hands on the stone rail",
           "note": "LoRA weight 0.6; edit-mode input seed/lindsey.png",
           "still": "Extreme close-up detail insert, no face in frame. The bodice and sleeve of a high-fashion Naboo-inspired royal gown in rich emerald green silk with gold lace trim, a high structured collar and intricate gold embroidery along the bodice — rich emerald green silk catching the light, gold lace trim, dense gold embroidery, small hands resting on a weathered carved stone balustrade. Every thread and the weave of the silk visible. Macro clarity, very shallow depth of field. Cinematic film still, Leica S3 medium format, 120mm lens, photoreal skin and fabric, soft ambient sunlight with a subtle rim light, razor-sharp focus on facial detail and silk texture, shallow depth of field, fine film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
-          "video": "Locked macro camera. The silk shifts very slightly as she breathes, light creeping across the embroidery, one hand relaxing on the warm stone. Nothing else moves. Faint wind, distant water, no music."
+          "video": "Locked macro camera. Only the faintest movement: the silk shifts a few millimetres as she breathes, light creeps slowly across the gold embroidery, her fingers relax on the warm stone. The sleeve stays flat against her arm — nothing lifts, flaps or folds over. Faint wind, distant water, no music."
+        },
+        "s8": {
+          "title": "The valley itself — what she is looking at",
+          "note": "no LoRA at all; no face in frame, so nothing can drift",
+          "still": "Extreme wide landscape, no people in frame, shot from inside the shade of the pavilion looking out between two tall carved stone columns. A valley of great golden domed architecture and tall waterfalls falling into rising mist, morning sun burning through the haze, birds turning far below, terraces of green between the falls. Enormous sense of scale, deep depth of field, layered atmospheric perspective. Cinematic film still, Leica S3 medium format, 120mm lens, photoreal skin and fabric, soft ambient sunlight with a subtle rim light, razor-sharp focus on facial detail and silk texture, shallow depth of field, fine film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
+          "video": "Fixed camera, no camera movement. The waterfalls fall steadily, mist rolling upward and drifting across the valley, sunlight shifting slowly through the haze, birds turning far below. Falling water, wind, no music."
         },
         "s5": {
           "title": "True profile, backlit, she turns toward camera",
           "note": "LoRA weight 0.85; edit-mode input seed/lindsey.png",
           "still": "Medium shot, true profile. lindsey_kx girl, a nine-year-old girl, this exact face, long dark hair with natural flyaway strands catching the light, wearing a high-fashion Naboo-inspired royal gown in rich emerald green silk with gold lace trim, a high structured collar and intricate gold embroidery along the bodice, standing in profile against the bright open arch of an ornate palace pavilion of pale carved stone, tall slender arches and a carved stone balustrade, overlooking a valley of great golden domed architecture and tall waterfalls falling into rising mist, backlit so the rim light traces her profile and the flyaway hair around her head, her face still readable in the soft fill light bouncing off the pale stone. Cinematic film still, Leica S3 medium format, 120mm lens, photoreal skin and fabric, soft ambient sunlight with a subtle rim light, razor-sharp focus on facial detail and silk texture, shallow depth of field, fine film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
-          "video": "Fixed camera. She turns her head slowly away from the valley toward the camera, ending three-quarters on, her hair swinging and settling, the silk collar turning with her. Wind, no music."
-        },
-        "s6": {
-          "title": "Wide full body from behind, walking the colonnade",
-          "note": "LoRA weight 0.85; text-to-image, no environment plate",
-          "still": "Wide full-body shot from behind at a low angle, looking straight down a long colonnade. lindsey_kx girl, a nine-year-old girl, this exact face, long dark hair with natural flyaway strands catching the light, wearing a high-fashion Naboo-inspired royal gown in rich emerald green silk with gold lace trim, a high structured collar and intricate gold embroidery along the bodice, the long emerald skirt trailing on polished pale stone, walking away from the camera mid-stride down a deep receding row of tall carved stone columns, hard bars of sunlight falling across the floor between the columns, golden domes and tall waterfalls in rising mist glimpsed through the arches to her left. Strong one-point perspective down the colonnade. Cinematic film still, Leica S3 medium format, 120mm lens, photoreal skin and fabric, soft ambient sunlight with a subtle rim light, razor-sharp focus on facial detail and silk texture, shallow depth of field, fine film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
-          "video": "Fixed camera. She walks slowly away down the colonnade, the silk skirt trailing and swaying behind her, bars of sunlight passing over her as she goes, mist rising beyond the arches. Footsteps on stone, water, no music."
+          "video": "Fixed camera. She holds her profile, looking out over the valley, and never turns her head. The wind lifts her hair and stirs the silk collar, she blinks once. Wind, no music."
         },
         "s7": {
           "title": "Close-up frontal, the faint smile, hold",
           "note": "LoRA weight 1.0; edit-mode input seed/lindsey.png",
           "still": "Close-up portrait, frontal, slightly low angle. lindsey_kx girl, a nine-year-old girl, this exact face, long dark hair with natural flyaway strands catching the light, wearing a high-fashion Naboo-inspired royal gown in rich emerald green silk with gold lace trim, a high structured collar and intricate gold embroidery along the bodice, looking just past the camera toward the light with the faintest beginning of a smile. Golden ambient sunlight, strong rim light along her hair and the high collar, an ornate palace pavilion of pale carved stone, tall slender arches and a carved stone balustrade, overlooking a valley of great golden domed architecture and tall waterfalls falling into rising mist soft and luminous far behind her. Razor-sharp focus on the eyes and skin. Cinematic film still, Leica S3 medium format, 120mm lens, photoreal skin and fabric, soft ambient sunlight with a subtle rim light, razor-sharp focus on facial detail and silk texture, shallow depth of field, fine film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
           "video": "Locked camera. She lifts her chin a fraction, the small smile settles, she blinks once and holds her gaze on the light; hair and silk move gently in the breeze. Wind, distant water, no music."
+        },
+        "s6": {
+          "title": "Wide full body from behind, walking the colonnade",
+          "note": "LoRA weight 0.85; text-to-image, no environment plate",
+          "still": "Wide full-body shot from behind at a low angle, looking straight down a long colonnade. lindsey_kx girl, a nine-year-old girl, this exact face, long dark hair with natural flyaway strands catching the light, wearing a high-fashion Naboo-inspired royal gown in rich emerald green silk with gold lace trim, a high structured collar and intricate gold embroidery along the bodice, the long emerald skirt trailing on polished pale stone, walking away from the camera mid-stride down a deep receding row of tall carved stone columns, hard bars of sunlight falling across the floor between the columns, golden domes and tall waterfalls in rising mist glimpsed through the arches to her left. Strong one-point perspective down the colonnade. Cinematic film still, Leica S3 medium format, 120mm lens, photoreal skin and fabric, soft ambient sunlight with a subtle rim light, razor-sharp focus on facial detail and silk texture, shallow depth of field, fine film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
+          "video": "Fixed camera. She walks slowly away down the colonnade, the silk skirt trailing and swaying behind her, bars of sunlight passing over her as she goes, mist rising beyond the arches. Footsteps on stone, water, no music."
         }
       },
       "run-spec": {
@@ -1768,10 +1774,10 @@
             },
             "video_prompt": "Fixed camera, no camera movement. The waterfalls fall steadily, mist drifting upward and across the valley, the hem of the green silk gown stirring in a slow breeze, a few birds crossing far below. The girl stands still. Distant falling water, wind, no music.",
             "qc_ref": "lindsey",
-            "take": null,
+            "take": "clips/s1_v1.mov",
             "trim": [
               0,
-              9.25
+              9.9
             ]
           },
           {
@@ -1796,12 +1802,12 @@
                 23
               ]
             },
-            "video_prompt": "Slow push in. The breeze lifts loose strands of her hair and moves the silk at her shoulder; she breathes, blinks once and keeps looking out over the valley. Water and wind, no music.",
+            "video_prompt": "Fixed camera, no push in, no zoom. She stays facing the camera three-quarters on the whole time and never turns her head away. The breeze lifts loose strands of her hair across her cheek and moves the silk at her shoulder; she blinks once and breathes. Wind, no music.",
             "qc_ref": "lindsey",
-            "take": null,
+            "take": "clips/s2_v2.mov",
             "trim": [
               0,
-              9.25
+              6.5
             ]
           },
           {
@@ -1823,10 +1829,10 @@
             },
             "video_prompt": "Locked camera, almost no movement. She blinks slowly, her eyes shift a fraction toward the light, loose hairs move in the breeze, the collar of the gown catches the light as she breathes. Faint wind, no music.",
             "qc_ref": "lindsey",
-            "take": null,
+            "take": "clips/s3_v1.mov",
             "trim": [
               0,
-              9.25
+              8.0
             ]
           },
           {
@@ -1846,12 +1852,36 @@
                 ]
               }
             },
-            "video_prompt": "Locked macro camera. The silk shifts very slightly as she breathes, light creeping across the embroidery, one hand relaxing on the warm stone. Nothing else moves. Faint wind, distant water, no music.",
+            "video_prompt": "Locked macro camera. Only the faintest movement: the silk shifts a few millimetres as she breathes, light creeps slowly across the gold embroidery, her fingers relax on the warm stone. The sleeve stays flat against her arm — nothing lifts, flaps or folds over. Faint wind, distant water, no music.",
             "qc_ref": "lindsey",
-            "take": null,
+            "take": "clips/s4_v2.mov",
             "trim": [
               0,
-              9.25
+              8.5
+            ]
+          },
+          {
+            "id": "s8",
+            "still": {
+              "ref": null,
+              "input": "seed/pavilion.png",
+              "prompt": "Extreme wide landscape, no people in frame, shot from inside the shade of the pavilion looking out between two tall carved stone columns. A valley of great golden domed architecture and tall waterfalls falling into rising mist, morning sun burning through the haze, birds turning far below, terraces of green between the falls. Enormous sense of scale, deep depth of field, layered atmospheric perspective. Cinematic film still, Leica S3 medium format, 120mm lens, photoreal skin and fabric, soft ambient sunlight with a subtle rim light, razor-sharp focus on facial detail and silk texture, shallow depth of field, fine film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
+              "config": {
+                "shift": 3.0,
+                "sampler": 16
+              },
+              "seeds": [
+                41,
+                42,
+                43
+              ]
+            },
+            "video_prompt": "Fixed camera, no camera movement. The waterfalls fall steadily, mist rolling upward and drifting across the valley, sunlight shifting slowly through the haze, birds turning far below. Falling water, wind, no music.",
+            "qc_ref": null,
+            "take": "clips/s8_v1.mov",
+            "trim": [
+              0,
+              9.9
             ]
           },
           {
@@ -1871,12 +1901,37 @@
                 ]
               }
             },
-            "video_prompt": "Fixed camera. She turns her head slowly away from the valley toward the camera, ending three-quarters on, her hair swinging and settling, the silk collar turning with her. Wind, no music.",
+            "video_prompt": "Fixed camera. She holds her profile, looking out over the valley, and never turns her head. The wind lifts her hair and stirs the silk collar, she blinks once. Wind, no music.",
             "qc_ref": "lindsey",
-            "take": null,
+            "take": "clips/s5_v2.mov",
             "trim": [
               0,
-              9.25
+              3.6
+            ]
+          },
+          {
+            "id": "s7",
+            "still": {
+              "ref": null,
+              "input": "seed/lindsey.png",
+              "prompt": "Close-up portrait, frontal, slightly low angle. lindsey_kx girl, a nine-year-old girl, this exact face, long dark hair with natural flyaway strands catching the light, wearing a high-fashion Naboo-inspired royal gown in rich emerald green silk with gold lace trim, a high structured collar and intricate gold embroidery along the bodice, looking just past the camera toward the light with the faintest beginning of a smile. Golden ambient sunlight, strong rim light along her hair and the high collar, an ornate palace pavilion of pale carved stone, tall slender arches and a carved stone balustrade, overlooking a valley of great golden domed architecture and tall waterfalls falling into rising mist soft and luminous far behind her. Razor-sharp focus on the eyes and skin. Cinematic film still, Leica S3 medium format, 120mm lens, photoreal skin and fabric, soft ambient sunlight with a subtle rim light, razor-sharp focus on facial detail and silk texture, shallow depth of field, fine film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
+              "config": {
+                "shift": 3.0,
+                "sampler": 16,
+                "loras": [
+                  {
+                    "file": "lindsey_lora_2000_lora_f32.ckpt",
+                    "weight": 1.0
+                  }
+                ]
+              }
+            },
+            "video_prompt": "Locked camera. She lifts her chin a fraction, the small smile settles, she blinks once and holds her gaze on the light; hair and silk move gently in the breeze. Wind, distant water, no music.",
+            "qc_ref": "lindsey",
+            "take": "clips/s7_v1.mov",
+            "trim": [
+              0,
+              9.9
             ]
           },
           {
@@ -1903,35 +1958,10 @@
             },
             "video_prompt": "Fixed camera. She walks slowly away down the colonnade, the silk skirt trailing and swaying behind her, bars of sunlight passing over her as she goes, mist rising beyond the arches. Footsteps on stone, water, no music.",
             "qc_ref": "lindsey",
-            "take": null,
+            "take": "clips/s6_v1.mov",
             "trim": [
               0,
-              9.25
-            ]
-          },
-          {
-            "id": "s7",
-            "still": {
-              "ref": null,
-              "input": "seed/lindsey.png",
-              "prompt": "Close-up portrait, frontal, slightly low angle. lindsey_kx girl, a nine-year-old girl, this exact face, long dark hair with natural flyaway strands catching the light, wearing a high-fashion Naboo-inspired royal gown in rich emerald green silk with gold lace trim, a high structured collar and intricate gold embroidery along the bodice, looking just past the camera toward the light with the faintest beginning of a smile. Golden ambient sunlight, strong rim light along her hair and the high collar, an ornate palace pavilion of pale carved stone, tall slender arches and a carved stone balustrade, overlooking a valley of great golden domed architecture and tall waterfalls falling into rising mist soft and luminous far behind her. Razor-sharp focus on the eyes and skin. Cinematic film still, Leica S3 medium format, 120mm lens, photoreal skin and fabric, soft ambient sunlight with a subtle rim light, razor-sharp focus on facial detail and silk texture, shallow depth of field, fine film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
-              "config": {
-                "shift": 3.0,
-                "sampler": 16,
-                "loras": [
-                  {
-                    "file": "lindsey_lora_2000_lora_f32.ckpt",
-                    "weight": 1.0
-                  }
-                ]
-              }
-            },
-            "video_prompt": "Locked camera. She lifts her chin a fraction, the small smile settles, she blinks once and holds her gaze on the light; hair and silk move gently in the breeze. Wind, distant water, no music.",
-            "qc_ref": "lindsey",
-            "take": null,
-            "trim": [
-              0,
-              9.25
+              9.9
             ]
           }
         ],

@@ -224,7 +224,104 @@ Ivy's and Kyle's would not. This film tests that in motion instead of in a grid.
 </tr>
 </tbody>
 </table></div>
-<h2>6. Log</h2>
+<h2>6. The finding: the LoRA stops at the still</h2>
+<p>The clips exposed something the stills could not, and it is the most useful thing this project produced.</p>
+<p><strong>LTX never sees the LoRA.</strong> Identity is baked into the still and nothing renews it for the next 249 frames. So
+any motion that <em>hides the face and then shows it again</em> hands the video model a free choice, and it does not
+choose Lindsey.</p>
+<ul>
+<li><strong>s5 — true profile, "she turns toward camera."</strong> The head rotated through the back of the skull and the face
+  that came back was <strong>an adult woman</strong>. Re-rendered with an explicit "she does not turn her head": it turned
+  anyway, and recast her again. A profile still appears to be unstable input — LTX wants to resolve it to a
+  frontal face, and it invents the frontal face it was never given.</li>
+<li><strong>s2 — three-quarter, "keeps looking out over the valley."</strong> Same failure, slower: fine for six seconds, then
+  she turns away and the back of an adult's dress fills frame.</li>
+<li><strong>s4 — the macro silk insert.</strong> Not a face problem but the same shape: the sleeve inflated and folded into a
+  wing by the eight-second mark. "The sleeve stays flat against her arm — nothing lifts, flaps or folds over"
+  fixed it.</li>
+</ul>
+<p><strong>The rule this gives us</strong>: with a LoRA-carried face, write video prompts with no occlusion and no rotation.
+Breathing, blinking, hair in wind, fabric settling, walking <em>away</em> — all stable. Turning, looking back over a
+shoulder, anything that passes through profile — not stable, at any LoRA weight, because the weight is not in
+the room by then.</p>
+<p>Corollary in the cut: the shots that hold longest are the ones with no face to lose. s6 (walking away down the
+colonnade) and s8 (the valley, no person at all) are the only two clips usable for their full 9.9 seconds.</p>
+<h2>7. What the cut ended up being</h2>
+<p>Order is <strong>s1 s2 s3 s4 s8 s5 s7 s6</strong> — the valley insert placed where the film needs a breath, the walk away
+from camera moved to the end as the closer.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Shot</th>
+<th>Take</th>
+<th>Kept</th>
+<th>Why trimmed there</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Establishing, she is small at the balustrade</td>
+<td>s1_v1</td>
+<td>9.9 s</td>
+<td>clean throughout; LTX added a slow drift instead of the locked camera, which suits it</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Three-quarter at the balustrade</td>
+<td>s2_v2</td>
+<td>6.5 s</td>
+<td>she turns away after ~6.5 s and is recast</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Close-up portrait — the hero shot</td>
+<td>s3_v1</td>
+<td>8.0 s</td>
+<td>push-in creeps too close after 8 s</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Macro: silk, lace, embroidery</td>
+<td>s4_v2</td>
+<td>8.5 s</td>
+<td>v2 fixed the inflating sleeve; drifts to a hand at the end</td>
+</tr>
+<tr>
+<td>5</td>
+<td>The valley itself, no person</td>
+<td>s8_v1</td>
+<td>9.9 s</td>
+<td>nothing can drift</td>
+</tr>
+<tr>
+<td>6</td>
+<td>True profile, backlit</td>
+<td>s5_v2</td>
+<td>3.6 s</td>
+<td><strong>the head turn recasts her as an adult</strong>; only the hold survives</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Close-up frontal, the faint smile</td>
+<td>s7_v1</td>
+<td>9.9 s</td>
+<td>carries the whole arc, identity holds to the last frame</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Walking away down the colonnade</td>
+<td>s6_v1</td>
+<td>9.9 s</td>
+<td>clean throughout; back of head, nothing to lose</td>
+</tr>
+</tbody>
+</table></div>
+<p>66.20 s kept − 7 × 0.75 s crossfades = <strong>60.95 s</strong>.</p>
+<p>An eighth shot was added part-way through for exactly this reason: once s5 collapsed to 3.6 s the film was
+around 52 s, and the cheapest way back to a minute was a shot with no face in it.</p>
+<h2>8. Log</h2>
 <ul>
 <li><strong>2026-09-28</strong> — spec written; both masters rendered first try (seeds 7 and 11). The wardrobe master came out
   with the face, the gown and the valley all correct in one pass, which is the LoRA doing the work a diptych
