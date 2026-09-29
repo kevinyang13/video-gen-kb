@@ -8,6 +8,31 @@
 
 ---
 
+## 2026-09-28 — First film driven by a LoRA instead of a photograph
+
+Started [[lindsey-palace-plan]]: one minute, seven shots, a nine-year-old in an emerald silk gown in a palace
+pavilion above domes and waterfalls. No reference photograph is touched at render time — identity is the token
+`lindsey_kx girl` and the weights of `lindsey_lora_2000`. No evaluation grid first, by request.
+
+**What the LoRA changed about the method.** The two seed masters came out right on the first attempt, one seed
+each: the wardrobe master had the face, the emerald gown with its gold embroidery, and the domes and waterfalls
+all correct in a single pass. That used to take a diptych and several tries, because klein would substitute its
+own face unless a reference held it. The identity is now free, so the whole prompt budget goes to the world.
+
+**Weight became a per-shot parameter, and the spec now carries a weight table.** Following ivy_lora and
+kyle_lora: 1.0 on the close portraits, 0.85 on the wides and the profile, and **0.6 on the macro insert of the
+silk** — that shot has no face in it, so every point of LoRA weight there is grip taken away from the fabric.
+`film_run.py` already supported a per-shot `still.config`, so this needed no code.
+
+**Two shots had to be reshot, and both failures were the environment reference overpowering the prompt.** s2 was
+specified as a three-quarter with a rim light on the cheek and came back three times as a pure back view, no face
+at all. s6 asked for a colonnade with the girl walking away and came back as the balustrade composition from the
+master — nearly a duplicate of s1. The fix in both cases was the same shape: say the camera relationship in the
+first clause ("three-quarter front view", "looking straight down a long colonnade"), and for s6 **drop the
+`--image` master entirely** and render text-to-image. With the face in the weights, a wide shot no longer needs an
+environment plate to stay consistent — that is the plate's whole reason for existing, and here it was only
+costing composition.
+
 ## 2026-09-26 — LoRA training deep-dive added to the v2 research
 
 Third pasted source (`raw/2026-09-26-character-lora-training.md`): dataset curation (25–50 images, 40/40/20 close-up / medium / wide, varied lighting), the captioning strategy, and hyperparameters (rank 32–64, alpha 16–32, 1e-4 to 2e-4, bf16, 1,500–3,000 steps — unverified).

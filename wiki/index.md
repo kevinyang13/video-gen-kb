@@ -35,6 +35,7 @@ Each project owns a folder — `projects/<id>/<version>/` — and its plan page 
 **Project plans** — the story, decisions and results behind each film:
 
 - [[lindsey-lora-plan]] — Lindsey: the third character LoRA, and the one that tests whether full-body identity is a dataset gap or a resolution limit
+- [[lindsey-palace-plan]] — Lindsey: the palace pavilion, a one-minute photoreal short where the face comes from a trained LoRA instead of a reference photo, with the weight set per shot
 - [[kyle-lora-plan]] — Kyle: a character LoRA from a purpose-shot turnaround, testing whether profile and back coverage in the dataset lifts the weight ceiling
 - [[ivy-lora-plan]] — Ivy: a reusable character LoRA trained on real photographs, so later films load a trigger token instead of a master portrait
 - [[nightelf-hunter-plan]] — Night Elf Hunter: **delivered** (57.6 s), photoreal half-elf with a real face and a bear companion; seeding a cast from one photo, and what happens when a seed and its prompts disagree
