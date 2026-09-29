@@ -2355,6 +2355,388 @@
         "final/kyle_debut_1920x1080.mp4",
         "music/emotional_children_piano.mp3"
       ]
+    },
+    {
+      "id": "lindsey_summit",
+      "version": "v1-lora-cli",
+      "variant": "Third LoRA-driven film and the first built entirely to the shot grammar the previous two produced: face shots locked frontal and cut at ~7 s, the long takes given to backs, macro and landscape.",
+      "title": "Lindsey — above the cloud sea",
+      "date": "2026-09-29",
+      "theme": "realistic",
+      "dt_project": "none — draw-things-cli via scripts/film_run.py",
+      "status": "planned 2026-09-29 — spec written",
+      "source": "text-only; identity from projects/lindsey_lora (trigger lindsey_kx, class word girl). No source photographs at render time.",
+      "notes": "Lindsey is Kevin's daughter; consent settled. Story written for this film: a child walks a pine forest at dawn, reads a compass, finds an old stone stair, climbs it, and comes out on a ruined watchtower above a sea of cloud.\n\nEvery structural decision here is inherited rather than guessed. Face shots (s2, s4, s7) are locked frontal at weight 1.0 and budgeted at 7.0-7.5 s, because on both previous films every frontal face clip drifted at around eight seconds no matter what the video prompt said. The long takes go to the three things that held their full length before: walking away from camera (s1, s6), a macro insert with no face (s3), and pure landscape (s5, s8). s4 is the one shot asking for real movement from a person, and it is hand movement in front of a stationary head — the pattern that survived 9.9 s on kyle_debut s6. Every motion prompt says 'the light stays constant', because LTX reads 'the light shifts' as the lights going down.\n\nPalette deliberately opposite to lindsey_palace: cold blue mist and wool instead of warm gold and silk, outdoors instead of interiors.",
+      "still": {
+        "model": "FLUX.2 [klein] 9B (8-bit S)",
+        "size": "1024x576",
+        "steps": 4,
+        "cfg": 1.0,
+        "shift": 3,
+        "sampler": "DDIM Trailing",
+        "lora": "lindsey_lora_2000_lora_f32.ckpt @ per-shot weight (none / 0.6 / 0.85 / 1.0)",
+        "control": "edit mode: --image environment or wardrobe master --strength 1.0",
+        "prompt": "per shot — see scenes"
+      },
+      "i2v": {
+        "model": "LTX-2.3 22B [distilled] 1.1",
+        "size": "1024x576",
+        "frames": 249,
+        "fps": 25,
+        "steps": 8,
+        "cfg": 1.0,
+        "shift": 5.0,
+        "sampler": "TCD Trailing",
+        "stochasticSamplingGamma": 0.3,
+        "time_min": 11,
+        "note": "no LoRA at the video stage — LTX never sees it."
+      },
+      "post": {
+        "upscale": "scripts/upscale_4k.sh — Real-ESRGAN x4plus -> 3840x2160",
+        "loop": "none — xfade 0.75",
+        "music": "Adventure Journey — The_Mountain, Pixabay (cdn.pixabay.com/download/audio/2025/03/23/audio_51e1fddfd9.mp3), 2:07; first 60 s under the LTX ambience at 0.45, 2 s fade out. Reused from nightelf_hunter for its rising arc — -18.5 dB at the start climbing to -10 dB by 60 s, which is the shape of a climb that ends in a reveal."
+      },
+      "scenes": {
+        "locks": {
+          "subject": "lindsey_kx girl, a nine-year-old girl, this exact face, long dark hair loose with natural flyaway strands",
+          "wardrobe": "a weathered waxed-canvas explorer's jacket in deep forest green over a cream cable-knit wool sweater, a worn leather satchel on a strap across her body and a small brass compass on a cord at her chest",
+          "forest": "an ancient pine forest on a steep mountainside at dawn, tall straight trunks receding into cold blue mist, deep moss and fern over granite boulders, shafts of early light coming through the canopy",
+          "summit": "a ruined stone watchtower on a high clifftop, weathered blocks and a broken arch, standing above an endless sea of cloud with distant blue peaks breaking through it, lit by a low gold sunrise",
+          "style": "Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wool and weathered canvas, natural dawn light, shallow depth of field, subtle film grain, muted natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described."
+        },
+        "s1": {
+          "title": "Establishing — the forest at dawn, she is small on the trail",
+          "note": "LoRA weight 0.85; input seed/forest.png; kept 9.5 s",
+          "still": "Extreme wide establishing shot. an ancient pine forest on a steep mountainside at dawn, tall straight trunks receding into cold blue mist, deep moss and fern over granite boulders, shafts of early light coming through the canopy, cold and silent, mist lying between the trunks. Small in the lower third of frame and seen from behind, lindsey_kx girl, a nine-year-old girl, this exact face, long dark hair loose with natural flyaway strands, wearing a weathered waxed-canvas explorer's jacket in deep forest green over a cream cable-knit wool sweater, a worn leather satchel on a strap across her body and a small brass compass on a cord at her chest, walking away from camera up a narrow root-crossed trail. Enormous sense of scale, deep depth of field, layered atmospheric perspective. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wool and weathered canvas, natural dawn light, shallow depth of field, subtle film grain, muted natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
+          "video": "Fixed camera, no camera movement. The mist drifts slowly between the trunks, ferns stirring in a cold breeze, light shafts holding steady through the canopy. She walks slowly away up the trail and never turns back. Wind in pines, distant birds, no music."
+        },
+        "s2": {
+          "title": "Close-up — her breath in the cold, eyes on the way ahead",
+          "note": "LoRA weight 1.0; input seed/lindsey.png; kept 7.0 s",
+          "still": "Tight close-up portrait, head and shoulders, straight on. lindsey_kx girl, a nine-year-old girl, this exact face, long dark hair loose with natural flyaway strands, wearing a weathered waxed-canvas explorer's jacket in deep forest green over a cream cable-knit wool sweater, a worn leather satchel on a strap across her body and a small brass compass on a cord at her chest with the cream wool collar high at her throat, facing the camera, cheeks and nose flushed with cold, her breath faintly visible in the air. an ancient pine forest on a steep mountainside at dawn, tall straight trunks receding into cold blue mist, deep moss and fern over granite boulders, shafts of early light coming through the canopy thrown far out of focus behind her, cold blue light with a warm rim from a low shaft of sun. Razor-sharp focus on the eyes, skin texture and individual eyelashes. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wool and weathered canvas, natural dawn light, shallow depth of field, subtle film grain, muted natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
+          "video": "Locked camera, no push in. She faces the camera the whole time and does not turn her head. Her breath clouds faintly and fades, loose strands of hair move in the cold air, she blinks once. The light stays constant. Wind in pines, no music."
+        },
+        "s3": {
+          "title": "Macro — a brass compass and a folded map, no face in frame",
+          "note": "LoRA weight 0.6; input seed/lindsey.png; kept 8.0 s",
+          "still": "Extreme close-up detail insert, no face in frame. Two small hands holding an old brass compass open above a folded linen map marked in faded ink, resting on the sleeve of a weathered waxed-canvas explorer's jacket in deep forest green over a cream cable-knit wool sweater, a worn leather satchel on a strap across her body and a small brass compass on a cord at her chest. The compass glass catching the cold dawn light, the needle settling, fine scratches on the brass, the weave of the linen and the wool visible. Macro clarity, very shallow depth of field. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wool and weathered canvas, natural dawn light, shallow depth of field, subtle film grain, muted natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
+          "video": "Locked macro camera. The compass stays resting flat on the map the whole time and never lifts, floats or leaves the frame. Only the needle swings and settles under the glass, the map shifts a few millimetres under her thumb, her fingers relax. The fabric stays flat — nothing lifts, flaps or folds over. The light stays constant. Wind, no music."
+        },
+        "s4": {
+          "title": "Medium — she holds a branch aside and looks up at what she has found",
+          "note": "LoRA weight 1.0; input seed/lindsey.png; kept 7.5 s",
+          "still": "Medium shot, waist up, straight on. lindsey_kx girl, a nine-year-old girl, this exact face, long dark hair loose with natural flyaway strands, wearing a weathered waxed-canvas explorer's jacket in deep forest green over a cream cable-knit wool sweater, a worn leather satchel on a strap across her body and a small brass compass on a cord at her chest, one hand raised holding a pine branch aside in front of her, chin lifted and eyes raised toward something above and past the camera, an expression of dawning recognition. an ancient pine forest on a steep mountainside at dawn, tall straight trunks receding into cold blue mist, deep moss and fern over granite boulders, shafts of early light coming through the canopy close behind her, cold light on her face. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wool and weathered canvas, natural dawn light, shallow depth of field, subtle film grain, muted natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
+          "video": "Locked camera. Her raised hand lowers the branch and comes down; her chin lifts a fraction further and her eyes widen slightly as she looks up. She stays facing the camera throughout and never turns her head. The light stays constant. Wind in pines, no music."
+        },
+        "s5": {
+          "title": "The old stone stair climbing into the mist",
+          "note": "no LoRA — no face in frame; input seed/stair.png; kept 8.0 s",
+          "still": "Wide shot, no people in frame. An ancient stone stair cut into the mountainside, worn treads under deep moss and pine roots, climbing steeply and disappearing into cold blue mist above, an ancient pine forest on a steep mountainside at dawn, tall straight trunks receding into cold blue mist, deep moss and fern over granite boulders, shafts of early light coming through the canopy crowding in on both sides, one shaft of dawn light falling across the lower steps. Strong upward perspective. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wool and weathered canvas, natural dawn light, shallow depth of field, subtle film grain, muted natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
+          "video": "Fixed camera, no camera movement. Mist rolls slowly down over the upper steps, ferns and moss stirring in the draught, the shaft of light holding steady on the stone. The light stays constant. Wind, no music."
+        },
+        "s6": {
+          "title": "She climbs, seen from behind and below",
+          "note": "LoRA weight 0.85; input seed/stair.png; kept 9.5 s",
+          "still": "Wide full-body shot from behind and below, looking up the stair. lindsey_kx girl, a nine-year-old girl, this exact face, long dark hair loose with natural flyaway strands, wearing a weathered waxed-canvas explorer's jacket in deep forest green over a cream cable-knit wool sweater, a worn leather satchel on a strap across her body and a small brass compass on a cord at her chest, seen from behind mid-stride climbing the mossy stone steps away from the camera toward the mist above, the satchel swinging at her hip, one hand on the rock wall. Strong upward perspective. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wool and weathered canvas, natural dawn light, shallow depth of field, subtle film grain, muted natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
+          "video": "Fixed camera. She climbs steadily away from the camera up the steps, the satchel swinging with her stride, mist rolling down past her. She never turns back. The light stays constant. Wind, footfalls on stone, no music."
+        },
+        "s7": {
+          "title": "The top — sunrise on her face",
+          "note": "LoRA weight 1.0; input seed/lindsey.png; kept 7.5 s",
+          "still": "Close-up portrait, frontal, slightly low angle. lindsey_kx girl, a nine-year-old girl, this exact face, long dark hair loose with natural flyaway strands, wearing a weathered waxed-canvas explorer's jacket in deep forest green over a cream cable-knit wool sweater, a worn leather satchel on a strap across her body and a small brass compass on a cord at her chest, facing the camera with a low gold sunrise full on her face, wind lifting her hair, lips slightly parted in astonishment, eyes bright. Behind her a ruined stone watchtower on a high clifftop, weathered blocks and a broken arch, standing above an endless sea of cloud with distant blue peaks breaking through it, lit by a low gold sunrise soft and luminous and far out of focus. Razor-sharp focus on the eyes and skin. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wool and weathered canvas, natural dawn light, shallow depth of field, subtle film grain, muted natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
+          "video": "Locked camera. Her expression settles from astonishment into a slow smile; she blinks once, wind lifting her hair across her face and away again. She faces the camera throughout and never turns her head. The light stays constant. Wind, no music."
+        },
+        "s8": {
+          "title": "What she climbed for — small at the edge above a sea of cloud",
+          "note": "LoRA weight 0.85; input seed/summit.png; kept 8.0 s",
+          "still": "Extreme wide final shot. a ruined stone watchtower on a high clifftop, weathered blocks and a broken arch, standing above an endless sea of cloud with distant blue peaks breaking through it, lit by a low gold sunrise. Very small at the cliff edge beside the broken arch and seen from behind, lindsey_kx girl, a nine-year-old girl, this exact face, long dark hair loose with natural flyaway strands, wearing a weathered waxed-canvas explorer's jacket in deep forest green over a cream cable-knit wool sweater, a worn leather satchel on a strap across her body and a small brass compass on a cord at her chest, standing still and looking out over the cloud sea. Enormous sense of scale, deep depth of field, layered atmospheric perspective, the sun just clearing the far peaks. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wool and weathered canvas, natural dawn light, shallow depth of field, subtle film grain, muted natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
+          "video": "Fixed camera, no camera movement. The cloud sea moves slowly below, pouring over the far ridges, the light climbing steadily as the sun clears the peaks. Her hair and the hem of her jacket move in the wind. She stands still and never turns back. Wind, no music."
+        }
+      },
+      "run-spec": {
+        "dir": "projects/lindsey_summit/v1-lora-cli",
+        "name": "lindsey_summit",
+        "size": [
+          1024,
+          576
+        ],
+        "still": {
+          "model": "flux_2_klein_9b_i8x.ckpt",
+          "steps": 4,
+          "cfg": 1,
+          "config": {
+            "shift": 3.0,
+            "sampler": 16,
+            "loras": [
+              {
+                "file": "lindsey_lora_2000_lora_f32.ckpt",
+                "weight": 1.0
+              }
+            ]
+          },
+          "seeds": [
+            1,
+            2,
+            3
+          ],
+          "strength": 1.0
+        },
+        "clip": {
+          "model": "ltx_2.3_22b_distilled_1.1_q8p.ckpt",
+          "frames": 249,
+          "steps": 8,
+          "cfg": 1,
+          "config": {
+            "sampler": 19,
+            "shift": 5.0,
+            "stochasticSamplingGamma": 0.3,
+            "fps": 25,
+            "hiresFix": false
+          },
+          "seed": 1,
+          "video_format": "prores422hq"
+        },
+        "masters": {
+          "lindsey": "seed/lindsey.png",
+          "forest": "seed/forest.png",
+          "stair": "seed/stair.png",
+          "summit": "seed/summit.png"
+        },
+        "upscale": {
+          "model": "realesrgan-x4plus",
+          "size": [
+            3840,
+            2160
+          ],
+          "fit": "crop",
+          "bitrate": "40M"
+        },
+        "assemble": {
+          "fps": 25,
+          "xfade": 0.75,
+          "clip_audio": true,
+          "bitrate": "40M"
+        },
+        "deliver": [
+          {
+            "size": [
+              1920,
+              1080
+            ],
+            "bitrate": "12M"
+          }
+        ],
+        "shots": [
+          {
+            "id": "s1",
+            "still": {
+              "ref": null,
+              "input": "seed/forest.png",
+              "prompt": "Extreme wide establishing shot. an ancient pine forest on a steep mountainside at dawn, tall straight trunks receding into cold blue mist, deep moss and fern over granite boulders, shafts of early light coming through the canopy, cold and silent, mist lying between the trunks. Small in the lower third of frame and seen from behind, lindsey_kx girl, a nine-year-old girl, this exact face, long dark hair loose with natural flyaway strands, wearing a weathered waxed-canvas explorer's jacket in deep forest green over a cream cable-knit wool sweater, a worn leather satchel on a strap across her body and a small brass compass on a cord at her chest, walking away from camera up a narrow root-crossed trail. Enormous sense of scale, deep depth of field, layered atmospheric perspective. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wool and weathered canvas, natural dawn light, shallow depth of field, subtle film grain, muted natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
+              "config": {
+                "shift": 3.0,
+                "sampler": 16,
+                "loras": [
+                  {
+                    "file": "lindsey_lora_2000_lora_f32.ckpt",
+                    "weight": 0.85
+                  }
+                ]
+              }
+            },
+            "video_prompt": "Fixed camera, no camera movement. The mist drifts slowly between the trunks, ferns stirring in a cold breeze, light shafts holding steady through the canopy. She walks slowly away up the trail and never turns back. Wind in pines, distant birds, no music.",
+            "qc_ref": "lindsey",
+            "take": "clips/s1_v1.mov",
+            "trim": [
+              0,
+              9.5
+            ]
+          },
+          {
+            "id": "s2",
+            "still": {
+              "ref": null,
+              "input": "seed/lindsey.png",
+              "prompt": "Tight close-up portrait, head and shoulders, straight on. lindsey_kx girl, a nine-year-old girl, this exact face, long dark hair loose with natural flyaway strands, wearing a weathered waxed-canvas explorer's jacket in deep forest green over a cream cable-knit wool sweater, a worn leather satchel on a strap across her body and a small brass compass on a cord at her chest with the cream wool collar high at her throat, facing the camera, cheeks and nose flushed with cold, her breath faintly visible in the air. an ancient pine forest on a steep mountainside at dawn, tall straight trunks receding into cold blue mist, deep moss and fern over granite boulders, shafts of early light coming through the canopy thrown far out of focus behind her, cold blue light with a warm rim from a low shaft of sun. Razor-sharp focus on the eyes, skin texture and individual eyelashes. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wool and weathered canvas, natural dawn light, shallow depth of field, subtle film grain, muted natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
+              "config": {
+                "shift": 3.0,
+                "sampler": 16,
+                "loras": [
+                  {
+                    "file": "lindsey_lora_2000_lora_f32.ckpt",
+                    "weight": 1.0
+                  }
+                ]
+              }
+            },
+            "video_prompt": "Locked camera, no push in. She faces the camera the whole time and does not turn her head. Her breath clouds faintly and fades, loose strands of hair move in the cold air, she blinks once. The light stays constant. Wind in pines, no music.",
+            "qc_ref": "lindsey",
+            "take": "clips/s2_v1.mov",
+            "trim": [
+              0,
+              7.0
+            ]
+          },
+          {
+            "id": "s3",
+            "still": {
+              "ref": null,
+              "input": "seed/lindsey.png",
+              "prompt": "Extreme close-up detail insert, no face in frame. Two small hands holding an old brass compass open above a folded linen map marked in faded ink, resting on the sleeve of a weathered waxed-canvas explorer's jacket in deep forest green over a cream cable-knit wool sweater, a worn leather satchel on a strap across her body and a small brass compass on a cord at her chest. The compass glass catching the cold dawn light, the needle settling, fine scratches on the brass, the weave of the linen and the wool visible. Macro clarity, very shallow depth of field. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wool and weathered canvas, natural dawn light, shallow depth of field, subtle film grain, muted natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
+              "config": {
+                "shift": 3.0,
+                "sampler": 16,
+                "loras": [
+                  {
+                    "file": "lindsey_lora_2000_lora_f32.ckpt",
+                    "weight": 0.6
+                  }
+                ]
+              }
+            },
+            "video_prompt": "Locked macro camera. The compass stays resting flat on the map the whole time and never lifts, floats or leaves the frame. Only the needle swings and settles under the glass, the map shifts a few millimetres under her thumb, her fingers relax. The fabric stays flat — nothing lifts, flaps or folds over. The light stays constant. Wind, no music.",
+            "qc_ref": "lindsey",
+            "take": "clips/s3_v2.mov",
+            "trim": [
+              0,
+              4.0
+            ]
+          },
+          {
+            "id": "s4",
+            "still": {
+              "ref": null,
+              "input": "seed/lindsey.png",
+              "prompt": "Medium shot, waist up, straight on. lindsey_kx girl, a nine-year-old girl, this exact face, long dark hair loose with natural flyaway strands, wearing a weathered waxed-canvas explorer's jacket in deep forest green over a cream cable-knit wool sweater, a worn leather satchel on a strap across her body and a small brass compass on a cord at her chest, one hand raised holding a pine branch aside in front of her, chin lifted and eyes raised toward something above and past the camera, an expression of dawning recognition. an ancient pine forest on a steep mountainside at dawn, tall straight trunks receding into cold blue mist, deep moss and fern over granite boulders, shafts of early light coming through the canopy close behind her, cold light on her face. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wool and weathered canvas, natural dawn light, shallow depth of field, subtle film grain, muted natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
+              "config": {
+                "shift": 3.0,
+                "sampler": 16,
+                "loras": [
+                  {
+                    "file": "lindsey_lora_2000_lora_f32.ckpt",
+                    "weight": 1.0
+                  }
+                ]
+              }
+            },
+            "video_prompt": "Locked camera. Her raised hand lowers the branch and comes down; her chin lifts a fraction further and her eyes widen slightly as she looks up. She stays facing the camera throughout and never turns her head. The light stays constant. Wind in pines, no music.",
+            "qc_ref": "lindsey",
+            "take": "clips/s4_v1.mov",
+            "trim": [
+              0,
+              9.5
+            ]
+          },
+          {
+            "id": "s5",
+            "still": {
+              "ref": null,
+              "input": "seed/stair.png",
+              "prompt": "Wide shot, no people in frame. An ancient stone stair cut into the mountainside, worn treads under deep moss and pine roots, climbing steeply and disappearing into cold blue mist above, an ancient pine forest on a steep mountainside at dawn, tall straight trunks receding into cold blue mist, deep moss and fern over granite boulders, shafts of early light coming through the canopy crowding in on both sides, one shaft of dawn light falling across the lower steps. Strong upward perspective. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wool and weathered canvas, natural dawn light, shallow depth of field, subtle film grain, muted natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
+              "config": {
+                "shift": 3.0,
+                "sampler": 16
+              }
+            },
+            "video_prompt": "Fixed camera, no camera movement. Mist rolls slowly down over the upper steps, ferns and moss stirring in the draught, the shaft of light holding steady on the stone. The light stays constant. Wind, no music.",
+            "qc_ref": "lindsey",
+            "take": "clips/s5_v1.mov",
+            "trim": [
+              0,
+              9.5
+            ]
+          },
+          {
+            "id": "s6",
+            "still": {
+              "ref": null,
+              "input": "seed/stair.png",
+              "prompt": "Wide full-body shot from behind and below, looking up the stair. lindsey_kx girl, a nine-year-old girl, this exact face, long dark hair loose with natural flyaway strands, wearing a weathered waxed-canvas explorer's jacket in deep forest green over a cream cable-knit wool sweater, a worn leather satchel on a strap across her body and a small brass compass on a cord at her chest, seen from behind mid-stride climbing the mossy stone steps away from the camera toward the mist above, the satchel swinging at her hip, one hand on the rock wall. Strong upward perspective. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wool and weathered canvas, natural dawn light, shallow depth of field, subtle film grain, muted natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
+              "config": {
+                "shift": 3.0,
+                "sampler": 16,
+                "loras": [
+                  {
+                    "file": "lindsey_lora_2000_lora_f32.ckpt",
+                    "weight": 0.85
+                  }
+                ]
+              }
+            },
+            "video_prompt": "Fixed camera. She climbs steadily away from the camera up the steps, the satchel swinging with her stride, mist rolling down past her. She never turns back. The light stays constant. Wind, footfalls on stone, no music.",
+            "qc_ref": "lindsey",
+            "take": "clips/s6_v1.mov",
+            "trim": [
+              0,
+              9.5
+            ]
+          },
+          {
+            "id": "s7",
+            "still": {
+              "ref": null,
+              "input": "seed/lindsey.png",
+              "prompt": "Close-up portrait, frontal, slightly low angle. lindsey_kx girl, a nine-year-old girl, this exact face, long dark hair loose with natural flyaway strands, wearing a weathered waxed-canvas explorer's jacket in deep forest green over a cream cable-knit wool sweater, a worn leather satchel on a strap across her body and a small brass compass on a cord at her chest, facing the camera with a low gold sunrise full on her face, wind lifting her hair, lips slightly parted in astonishment, eyes bright. Behind her a ruined stone watchtower on a high clifftop, weathered blocks and a broken arch, standing above an endless sea of cloud with distant blue peaks breaking through it, lit by a low gold sunrise soft and luminous and far out of focus. Razor-sharp focus on the eyes and skin. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wool and weathered canvas, natural dawn light, shallow depth of field, subtle film grain, muted natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
+              "config": {
+                "shift": 3.0,
+                "sampler": 16,
+                "loras": [
+                  {
+                    "file": "lindsey_lora_2000_lora_f32.ckpt",
+                    "weight": 1.0
+                  }
+                ]
+              }
+            },
+            "video_prompt": "Locked camera. Her expression settles from astonishment into a slow smile; she blinks once, wind lifting her hair across her face and away again. She faces the camera throughout and never turns her head. The light stays constant. Wind, no music.",
+            "qc_ref": "lindsey",
+            "take": "clips/s7_v1.mov",
+            "trim": [
+              0,
+              7.5
+            ]
+          },
+          {
+            "id": "s8",
+            "still": {
+              "ref": null,
+              "input": "seed/summit.png",
+              "prompt": "Extreme wide final shot. a ruined stone watchtower on a high clifftop, weathered blocks and a broken arch, standing above an endless sea of cloud with distant blue peaks breaking through it, lit by a low gold sunrise. Very small at the cliff edge beside the broken arch and seen from behind, lindsey_kx girl, a nine-year-old girl, this exact face, long dark hair loose with natural flyaway strands, wearing a weathered waxed-canvas explorer's jacket in deep forest green over a cream cable-knit wool sweater, a worn leather satchel on a strap across her body and a small brass compass on a cord at her chest, standing still and looking out over the cloud sea. Enormous sense of scale, deep depth of field, layered atmospheric perspective, the sun just clearing the far peaks. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wool and weathered canvas, natural dawn light, shallow depth of field, subtle film grain, muted natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
+              "config": {
+                "shift": 3.0,
+                "sampler": 16,
+                "loras": [
+                  {
+                    "file": "lindsey_lora_2000_lora_f32.ckpt",
+                    "weight": 0.85
+                  }
+                ]
+              }
+            },
+            "video_prompt": "Fixed camera, no camera movement. The cloud sea moves slowly below, pouring over the far ridges, the light climbing steadily as the sun clears the peaks. Her hair and the hem of her jacket move in the wind. She stands still and never turns back. Wind, no music.",
+            "qc_ref": "lindsey",
+            "take": "clips/s8_v1.mov",
+            "trim": [
+              0,
+              8.5
+            ]
+          }
+        ],
+        "music": {
+          "file": "projects/lindsey_summit/v1-lora-cli/music/adventure_journey.mp3",
+          "start": 0,
+          "vol": 0.45,
+          "fade_in": 0,
+          "fade_out": 2
+        }
+      },
+      "files": [
+        "stills/s1.png … s8.png",
+        "clips/s1_v1.mov … s8_v1.mov (s3 uses v2)",
+        "final/lindsey_summit_3840x2160.mp4",
+        "final/lindsey_summit_1920x1080.mp4",
+        "music/adventure_journey.mp3"
+      ]
     }
   ]
 }

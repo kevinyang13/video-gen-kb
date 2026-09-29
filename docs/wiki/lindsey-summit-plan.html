@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lindsey — Above the Cloud Sea — video-gen-kb</title>
+<style>
+:root{--bg:#0B0D12;--panel:#141822;--panel-2:#1B2130;--stroke:#2A3245;--text:#E6E9F0;
+--muted:#8B94A7;--accent:#F5B84B;--accent-2:#4BC9F5;--on-accent:#12131A;
+--rule:rgba(139,148,167,.22);--code:#F5B84B}
+@media(prefers-color-scheme:light){:root:not([data-theme=dark]){--bg:#F4F1EA;--panel:#fff;
+--panel-2:#FAF8F3;--stroke:#D9D3C6;--text:#16181F;--muted:#5D6473;--accent:#B8781A;
+--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}}
+:root[data-theme=light]{--bg:#F4F1EA;--panel:#fff;--panel-2:#FAF8F3;--stroke:#D9D3C6;
+--text:#16181F;--muted:#5D6473;--accent:#B8781A;--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);
+line-height:1.65;padding:0 1rem 4rem}
+.shell{max-width:840px;margin:0 auto}
+a{color:var(--accent);text-decoration:none;font-weight:600}
+a:hover{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--accent-2);outline-offset:3px;border-radius:4px}
+.bar{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;padding:1.1rem 0;margin-bottom:1.5rem;
+border-bottom:1px solid var(--stroke)}
+.crumb{font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.spacer{flex:1}
+.pill{border:1px solid var(--stroke);background:var(--panel);border-radius:999px;padding:.28rem .8rem;
+font-size:.75rem;font-weight:700;color:var(--text);cursor:pointer;font-family:inherit}
+.pill:hover{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+h1{font-size:clamp(1.7rem,5vw,2.5rem);margin:.2rem 0 1rem;line-height:1.1;letter-spacing:-.015em;text-wrap:balance}
+h2{font-size:1.25rem;margin:2.2rem 0 .7rem;padding-bottom:.35rem;border-bottom:1px solid var(--rule);text-wrap:balance}
+h3{font-size:1.02rem;margin:1.5rem 0 .5rem;color:var(--accent)}
+p{margin:.7rem 0}
+ul,ol{margin:.7rem 0 .7rem 1.3rem}
+li{margin:.28rem 0}
+li::marker{color:var(--accent)}
+em{color:var(--muted)}
+hr{border:none;border-top:1px solid var(--stroke);margin:2rem 0}
+blockquote{border-left:3px solid var(--accent);background:var(--panel);border-radius:0 10px 10px 0;
+padding:.8rem 1.1rem;margin:1.1rem 0;color:var(--muted);font-size:.92rem}
+code{background:var(--panel);border:1px solid var(--stroke);border-radius:5px;padding:.1rem .35rem;
+font-size:.85em;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--code)}
+img{max-width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--stroke);margin:1.1rem 0}
+pre{background:var(--panel);border:1px solid var(--stroke);border-radius:12px;padding:1rem;overflow-x:auto;margin:1.1rem 0}
+pre code{background:none;border:none;padding:0;color:var(--text);font-size:.83rem;line-height:1.55}
+.tw{overflow-x:auto;border:1px solid var(--stroke);border-radius:12px;background:var(--panel);margin:1.1rem 0}
+table{width:100%;border-collapse:collapse;font-size:.85rem;min-width:min(100%,460px)}
+th{background:var(--panel-2);color:var(--accent);text-align:left;padding:.55rem .8rem;font-size:.68rem;
+letter-spacing:.09em;text-transform:uppercase;white-space:nowrap;border-bottom:1px solid var(--stroke)}
+td{padding:.5rem .8rem;border-bottom:1px solid var(--rule);color:var(--muted);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td strong{color:var(--text)}
+.meta{display:flex;flex-wrap:wrap;gap:.4rem .9rem;font-size:.78rem;color:var(--muted);margin:-.4rem 0 1.2rem}
+.meta b{color:var(--text);font-weight:600}
+.missing{color:var(--muted);border-bottom:1px dashed var(--muted);cursor:help}
+.related{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--stroke)}
+.related h2{border:none;margin:0 0 .7rem;font-size:.95rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:0}
+.chips li{margin:0}
+.chips a,.chips .missing{display:inline-block;border:1px solid var(--stroke);background:var(--panel);
+border-radius:999px;padding:.28rem .8rem;font-size:.8rem}
+.chips a:hover{background:var(--accent);color:var(--on-accent);text-decoration:none;border-color:var(--accent)}
+footer{max-width:840px;margin:2.5rem auto 0;padding-top:1.2rem;border-top:1px solid var(--stroke);
+font-size:.75rem;color:var(--muted);text-align:center}
+/* landing */
+.hero{padding:2.4rem 0 1.6rem}
+.kicker{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2)}
+.hero h1{font-size:clamp(2rem,6vw,3.2rem);margin:.35rem 0 .5rem}
+.hero p{color:var(--muted);font-size:1.05rem;max-width:56ch}
+.hw{display:inline-flex;gap:.5rem;align-items:center;margin-top:1rem;border:1px solid var(--stroke);
+background:var(--panel);border-radius:999px;padding:.3rem .9rem;font-size:.78rem;color:var(--muted)}
+.hw .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.sec{margin-top:2.2rem}
+.sec h2{border:none;padding:0;margin:0 0 .8rem;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.9rem}
+.card{display:block;border:1px solid var(--stroke);background:var(--panel);border-radius:14px;padding:1rem 1.1rem;
+color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+.card b{display:block;color:var(--accent);font-size:1rem;margin-bottom:.3rem}
+.card span{font-size:.85rem;color:var(--muted);line-height:1.5}
+.stubs{font-size:.82rem;color:var(--muted);margin-top:.6rem}
+.yt{position:relative;width:100%;aspect-ratio:16/9;border:1px solid var(--stroke);border-radius:12px;overflow:hidden;background:#000;margin:1rem 0}
+.yt.yt-v{aspect-ratio:9/16;max-width:360px}
+.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="bar">
+    <span class="crumb"><a href="../">video-gen-kb</a> / <a href="index.html">Wiki</a></span>
+    <span class="spacer"></span>
+    <button class="pill" onclick="tt()">◐ Theme</button>
+  </nav>
+  <h1>Lindsey — Above the Cloud Sea</h1><p class="lede">A one-minute 16:9 photoreal adventure short: a child walks a pine forest at dawn, reads a compass, finds an old stone stair, climbs it, and comes out on a ruined watchtower above a sea of cloud. The third LoRA-driven film, and the first whose whole shot list was derived from the failures of the previous two rather than discovered during it.</p><div class="meta"><span><b>Updated</b> 2026-09-29</span><span><b>Sources</b> <a href="lindsey-lora-plan.html">lindsey lora plan</a> (the trained identity), <a href="lindsey-palace-plan.html">lindsey palace plan</a> §6, <a href="kyle-debut-plan.html">kyle debut plan</a> §6, <a href="headless-cli-pipeline.html">headless cli pipeline</a>.</span></div>
+<hr />
+<h2>1. The brief</h2>
+<p>One minute, Lindsey's LoRA, an original adventure story, 4K — and every judgement call mine. So the story was
+written to the constraints rather than the other way round, which is the first time that has happened here.</p>
+<h2>2. The grammar this film is built from</h2>
+<p>Two films' worth of findings, applied as rules rather than rediscovered:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Finding</th>
+<th>Where it came from</th>
+<th>What it does to this shot list</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A frontal face clip drifts at ~8 s no matter what the prompt says</td>
+<td><a href="lindsey-palace-plan.html">lindsey palace plan</a> s5, <a href="kyle-debut-plan.html">kyle debut plan</a> s2/s3</td>
+<td>face shots (s2, s4, s7) are <strong>budgeted at 7.0–7.5 s</strong> before anything is rendered</td>
+</tr>
+<tr>
+<td>Head rotation lets LTX recast the subject entirely</td>
+<td>lindsey_palace s5 came back an adult</td>
+<td><strong>no shot turns a head.</strong> The camera never asks for a turn</td>
+</tr>
+<tr>
+<td>Hands moving in front of a stationary head is safe</td>
+<td>kyle_debut s6 held 9.9 s</td>
+<td>s4 is the one shot with real human movement, and it is a hand lowering a branch</td>
+</tr>
+<tr>
+<td>Walking away from camera holds full length</td>
+<td>both films</td>
+<td>the two longest takes (s1, s6) are backs walking away</td>
+</tr>
+<tr>
+<td>No face, no drift</td>
+<td>macro and landscape shots in both films</td>
+<td>s3 (compass macro), s5 (the stair) carry the runtime the face shots cannot</td>
+</tr>
+<tr>
+<td>LTX reads "the light shifts" as <em>the lights go down</em></td>
+<td>kyle_debut s5/s7 dimmed to black</td>
+<td><strong>every</strong> motion prompt here says "the light stays constant"</td>
+</tr>
+</tbody>
+</table></div>
+<p>The story exists to give those shapes something to be. A climb is the ideal structure for it: it is mostly backs
+and landscape by nature, and it earns exactly three face beats — setting out, finding the way, and arriving.</p>
+<h2>3. Shot list</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Shot</th>
+<th>Input master</th>
+<th>LoRA weight</th>
+<th>Budget</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>s1</td>
+<td>Establishing: the forest at dawn, she is small on the trail, from behind</td>
+<td>forest</td>
+<td>0.85</td>
+<td>9.5 s</td>
+</tr>
+<tr>
+<td>s2</td>
+<td>Close-up: her breath in the cold, eyes on the way ahead</td>
+<td>lindsey</td>
+<td>1.0</td>
+<td>7.0 s</td>
+</tr>
+<tr>
+<td>s3</td>
+<td>Macro: a brass compass settling over a linen map — no face</td>
+<td>lindsey</td>
+<td>0.6</td>
+<td>8.0 s</td>
+</tr>
+<tr>
+<td>s4</td>
+<td>Medium: she holds a branch aside and looks up</td>
+<td>lindsey</td>
+<td>1.0</td>
+<td>7.5 s</td>
+</tr>
+<tr>
+<td>s5</td>
+<td>The old stone stair climbing into mist — no person</td>
+<td>stair</td>
+<td><strong>none</strong></td>
+<td>8.0 s</td>
+</tr>
+<tr>
+<td>s6</td>
+<td>She climbs, from behind and below</td>
+<td>stair</td>
+<td>0.85</td>
+<td>9.5 s</td>
+</tr>
+<tr>
+<td>s7</td>
+<td>The top — sunrise full on her face</td>
+<td>lindsey</td>
+<td>1.0</td>
+<td>7.5 s</td>
+</tr>
+<tr>
+<td>s8</td>
+<td>Small at the cliff edge above the cloud sea</td>
+<td>summit</td>
+<td>0.85</td>
+<td>8.0 s</td>
+</tr>
+</tbody>
+</table></div>
+<p>65.0 s kept − 7 × 0.75 s crossfades = <strong>59.75 s</strong>.</p>
+<p>Palette is deliberately the inverse of <a href="lindsey-palace-plan.html">lindsey palace plan</a>: cold blue mist, wool and waxed canvas, outdoors,
+dawn — instead of warm gold, silk and interiors.</p>
+<h2>4. Locks</h2>
+<ul>
+<li><strong>subject</strong> — <code>lindsey_kx girl</code>, a nine-year-old girl, this exact face, long dark hair with natural flyaways</li>
+<li><strong>wardrobe</strong> — weathered deep-green waxed-canvas jacket, cream cable-knit wool sweater, leather satchel across the body, small brass compass on a cord</li>
+<li><strong>forest</strong> — ancient pines on a steep mountainside at dawn, cold blue mist, moss and fern over granite, light shafts through the canopy</li>
+<li><strong>summit</strong> — a ruined stone watchtower on a clifftop above an endless cloud sea, distant peaks breaking through, low gold sunrise</li>
+<li><strong>style</strong> — anamorphic 35mm live-action adventure, photoreal skin and wool, natural dawn light, shallow depth of field, muted colour</li>
+</ul>
+<h2>5. Settings</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Setting</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Still</td>
+<td>FLUX.2 [klein] 9B (8-bit S), 1024×576, 4 steps, CFG 1, shift 3, DDIM Trailing (sampler 16), edit mode strength 1.0</td>
+</tr>
+<tr>
+<td>LoRA</td>
+<td><code>lindsey_lora_2000_lora_f32.ckpt</code> @ none / 0.6 / 0.85 / 1.0 per the table</td>
+</tr>
+<tr>
+<td>Clip</td>
+<td>LTX-2.3 22B [distilled] 1.1, 1024×576, 249 frames @ 25 fps, 8 steps, CFG 1, shift 5, TCD Trailing (sampler 19), SSS 0.3 — ~11 min each</td>
+</tr>
+<tr>
+<td>Upscale</td>
+<td>Real-ESRGAN x4plus → 3840×2160, crop fit, 40M — ~10 min per clip</td>
+</tr>
+<tr>
+<td>Assemble</td>
+<td>0.75 s crossfades, clip audio kept, 1920×1080 delivery copy</td>
+</tr>
+</tbody>
+</table></div>
+<h2>6. Did designing to the constraints work?</h2>
+<p>Mostly yes, and the one failure sharpened the rule rather than contradicting it.</p>
+<p><strong>The face budgets were right before anything was rendered.</strong> s2 and s7 both drifted at roughly eight seconds,
+exactly as predicted, and both were already budgeted at 7.0 and 7.5 s. Nothing was wasted and nothing had to be
+re-rendered for it — the first time that has been true here.</p>
+<p><strong>"The light stays constant" fixed the dimming.</strong> Every motion prompt carried it, and no shot dimmed toward
+black. On <a href="kyle-debut-plan.html">kyle debut plan</a> two shots were lost to that; here, zero.</p>
+<p><strong>Hand movement in front of a stationary head held again.</strong> s4 — her hand lowering a pine branch, her chin
+lifting, eyes coming to the lens — was clean through 9.6 s, matching kyle_debut s6. Two films, two confirmations.
+This is now the reliable way to get real human motion out of a LoRA-carried face.</p>
+<p><strong>The failure, and what it teaches.</strong> s3, the compass macro, was meant to be a full-length anchor. Instead the
+compass lifted off the map and floated out of frame. It was re-rendered with an explicit <em>"the compass stays
+resting flat on the map the whole time and never lifts, floats or leaves the frame"</em> — and it lifted again, the
+same way, only slower.</p>
+<p>That is the second time a <strong>negative instruction</strong> has failed to constrain LTX: the first was "she does not turn
+her head," which turned anyway on two films. The generalisation is now hard to avoid:</p>
+<blockquote>
+<p>Telling LTX what <em>not</em> to do does not work. It only responds to what the shot is <em>of</em>. The only reliable
+controls are the choice of still and the length of the cut.</p>
+</blockquote>
+<p>Which means the earlier rules were right for the wrong reason. "No head rotation" works not because the prompt
+forbids it but because a still shot straight-on with nowhere to turn gives the model less to invent, and because
+the clip gets cut before it invents anyway. s3 is cut to 4.0 s for the same reason.</p>
+<h2>7. The cut</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Shot</th>
+<th>Take</th>
+<th>Kept</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>s1</td>
+<td>Forest at dawn, she is small on the trail</td>
+<td>s1_v1</td>
+<td>9.5 s</td>
+<td>clean throughout</td>
+</tr>
+<tr>
+<td>s2</td>
+<td>Close-up, her breath in the cold</td>
+<td>s2_v1</td>
+<td>7.0 s</td>
+<td>drifts at ~8 s, as budgeted</td>
+</tr>
+<tr>
+<td>s3</td>
+<td>The compass and the map</td>
+<td>s3_v2</td>
+<td>4.0 s</td>
+<td><strong>the compass floats away</strong>; only the opening survives</td>
+</tr>
+<tr>
+<td>s4</td>
+<td>She holds a branch aside and looks up</td>
+<td>s4_v1</td>
+<td>9.5 s</td>
+<td>clean through 9.6 s — hands, stationary head</td>
+</tr>
+<tr>
+<td>s5</td>
+<td>The stone stair into the mist</td>
+<td>s5_v1</td>
+<td>9.5 s</td>
+<td>light held constant; clean</td>
+</tr>
+<tr>
+<td>s6</td>
+<td>The climb, from behind</td>
+<td>s6_v1</td>
+<td>9.5 s</td>
+<td>clean throughout</td>
+</tr>
+<tr>
+<td>s7</td>
+<td>The top — sunrise on her face</td>
+<td>s7_v1</td>
+<td>7.5 s</td>
+<td>astonishment resolves to a smile at ~6.5 s</td>
+</tr>
+<tr>
+<td>s8</td>
+<td>Small at the edge above the cloud sea</td>
+<td>s8_v1</td>
+<td>8.5 s</td>
+<td>clean; trimmed before a hair artifact</td>
+</tr>
+</tbody>
+</table></div>
+<p>65.0 s kept − 7 × 0.75 s crossfades = <strong>59.75 s</strong> — the planned length, unchanged from before the first frame
+was rendered.</p>
+<h2>8. Log</h2>
+<ul>
+<li><strong>2026-09-29</strong> — spec written, story written for the constraints. All four masters right on one seed each
+  (seed 9), now the third film running for which that is true.</li>
+</ul>
+
+  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="lindsey-lora-plan.html">lindsey lora plan</a></li><li><a href="lindsey-palace-plan.html">lindsey palace plan</a></li><li><a href="kyle-debut-plan.html">kyle debut plan</a></li><li><a href="blueprint-v2-research.html">blueprint v2 research</a></li></ul></div>
+</div>
+<footer>video-gen-kb · built 2026-09-29 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<script>function tt(){var r=document.documentElement,
+d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
+matchMedia('(prefers-color-scheme: dark)').matches);
+r.setAttribute('data-theme',d?'light':'dark');}</script>
+</body>
+</html>

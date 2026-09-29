@@ -37,7 +37,7 @@
   "post": {
     "upscale": "scripts/upscale_4k.sh \u2014 Real-ESRGAN x4plus -> 3840x2160",
     "loop": "none \u2014 xfade 0.75",
-    "music": "chosen after QC"
+    "music": "Adventure Journey \u2014 The_Mountain, Pixabay (cdn.pixabay.com/download/audio/2025/03/23/audio_51e1fddfd9.mp3), 2:07; first 60 s under the LTX ambience at 0.45, 2 s fade out. Reused from nightelf_hunter for its rising arc \u2014 -18.5 dB at the start climbing to -10 dB by 60 s, which is the shape of a climb that ends in a reveal."
   },
   "scenes": {
     "locks": {
@@ -63,7 +63,7 @@
       "title": "Macro \u2014 a brass compass and a folded map, no face in frame",
       "note": "LoRA weight 0.6; input seed/lindsey.png; kept 8.0 s",
       "still": "Extreme close-up detail insert, no face in frame. Two small hands holding an old brass compass open above a folded linen map marked in faded ink, resting on the sleeve of a weathered waxed-canvas explorer's jacket in deep forest green over a cream cable-knit wool sweater, a worn leather satchel on a strap across her body and a small brass compass on a cord at her chest. The compass glass catching the cold dawn light, the needle settling, fine scratches on the brass, the weave of the linen and the wool visible. Macro clarity, very shallow depth of field. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wool and weathered canvas, natural dawn light, shallow depth of field, subtle film grain, muted natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
-      "video": "Locked macro camera. The compass needle swings and settles, the map shifts a few millimetres under her thumb, her fingers relax. The fabric stays flat \u2014 nothing lifts, flaps or folds over. The light stays constant. Wind, no music."
+      "video": "Locked macro camera. The compass stays resting flat on the map the whole time and never lifts, floats or leaves the frame. Only the needle swings and settles under the glass, the map shifts a few millimetres under her thumb, her fingers relax. The fabric stays flat \u2014 nothing lifts, flaps or folds over. The light stays constant. Wind, no music."
     },
     "s4": {
       "title": "Medium \u2014 she holds a branch aside and looks up at what she has found",
@@ -189,7 +189,7 @@
         },
         "video_prompt": "Fixed camera, no camera movement. The mist drifts slowly between the trunks, ferns stirring in a cold breeze, light shafts holding steady through the canopy. She walks slowly away up the trail and never turns back. Wind in pines, distant birds, no music.",
         "qc_ref": "lindsey",
-        "take": null,
+        "take": "clips/s1_v1.mov",
         "trim": [
           0,
           9.5
@@ -214,7 +214,7 @@
         },
         "video_prompt": "Locked camera, no push in. She faces the camera the whole time and does not turn her head. Her breath clouds faintly and fades, loose strands of hair move in the cold air, she blinks once. The light stays constant. Wind in pines, no music.",
         "qc_ref": "lindsey",
-        "take": null,
+        "take": "clips/s2_v1.mov",
         "trim": [
           0,
           7.0
@@ -237,12 +237,12 @@
             ]
           }
         },
-        "video_prompt": "Locked macro camera. The compass needle swings and settles, the map shifts a few millimetres under her thumb, her fingers relax. The fabric stays flat \u2014 nothing lifts, flaps or folds over. The light stays constant. Wind, no music.",
+        "video_prompt": "Locked macro camera. The compass stays resting flat on the map the whole time and never lifts, floats or leaves the frame. Only the needle swings and settles under the glass, the map shifts a few millimetres under her thumb, her fingers relax. The fabric stays flat \u2014 nothing lifts, flaps or folds over. The light stays constant. Wind, no music.",
         "qc_ref": "lindsey",
-        "take": null,
+        "take": "clips/s3_v2.mov",
         "trim": [
           0,
-          8.0
+          4.0
         ]
       },
       {
@@ -264,10 +264,10 @@
         },
         "video_prompt": "Locked camera. Her raised hand lowers the branch and comes down; her chin lifts a fraction further and her eyes widen slightly as she looks up. She stays facing the camera throughout and never turns her head. The light stays constant. Wind in pines, no music.",
         "qc_ref": "lindsey",
-        "take": null,
+        "take": "clips/s4_v1.mov",
         "trim": [
           0,
-          7.5
+          9.5
         ]
       },
       {
@@ -283,10 +283,10 @@
         },
         "video_prompt": "Fixed camera, no camera movement. Mist rolls slowly down over the upper steps, ferns and moss stirring in the draught, the shaft of light holding steady on the stone. The light stays constant. Wind, no music.",
         "qc_ref": "lindsey",
-        "take": null,
+        "take": "clips/s5_v1.mov",
         "trim": [
           0,
-          8.0
+          9.5
         ]
       },
       {
@@ -308,7 +308,7 @@
         },
         "video_prompt": "Fixed camera. She climbs steadily away from the camera up the steps, the satchel swinging with her stride, mist rolling down past her. She never turns back. The light stays constant. Wind, footfalls on stone, no music.",
         "qc_ref": "lindsey",
-        "take": null,
+        "take": "clips/s6_v1.mov",
         "trim": [
           0,
           9.5
@@ -333,7 +333,7 @@
         },
         "video_prompt": "Locked camera. Her expression settles from astonishment into a slow smile; she blinks once, wind lifting her hair across her face and away again. She faces the camera throughout and never turns her head. The light stays constant. Wind, no music.",
         "qc_ref": "lindsey",
-        "take": null,
+        "take": "clips/s7_v1.mov",
         "trim": [
           0,
           7.5
@@ -358,12 +358,26 @@
         },
         "video_prompt": "Fixed camera, no camera movement. The cloud sea moves slowly below, pouring over the far ridges, the light climbing steadily as the sun clears the peaks. Her hair and the hem of her jacket move in the wind. She stands still and never turns back. Wind, no music.",
         "qc_ref": "lindsey",
-        "take": null,
+        "take": "clips/s8_v1.mov",
         "trim": [
           0,
-          8.0
+          8.5
         ]
       }
-    ]
-  }
+    ],
+    "music": {
+      "file": "projects/lindsey_summit/v1-lora-cli/music/adventure_journey.mp3",
+      "start": 0,
+      "vol": 0.45,
+      "fade_in": 0,
+      "fade_out": 2
+    }
+  },
+  "files": [
+    "stills/s1.png \u2026 s8.png",
+    "clips/s1_v1.mov \u2026 s8_v1.mov (s3 uses v2)",
+    "final/lindsey_summit_3840x2160.mp4",
+    "final/lindsey_summit_1920x1080.mp4",
+    "music/adventure_journey.mp3"
+  ]
 }

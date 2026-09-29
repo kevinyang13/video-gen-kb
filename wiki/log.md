@@ -8,6 +8,32 @@
 
 ---
 
+## 2026-09-29 — Lindsey above the cloud sea, and the rule behind the rules
+
+Third LoRA-driven film, [[lindsey-summit-plan]]: a forest at dawn, a compass, a stone stair, and a ruined tower
+above a cloud sea. First film whose shot list was derived from the previous films' failures **before** a frame
+was rendered — face shots pre-budgeted at 7.0-7.5 s, no head turns anywhere, long takes reserved for backs,
+macro and landscape, and "the light stays constant" in every motion prompt.
+
+**It worked, and the planned runtime survived contact with the render**: 59.75 s planned, 59.75 s delivered, no
+shot re-rendered for a mistake that had already been made once. The face shots drifted at eight seconds exactly
+as predicted and were already cut short of it. No shot dimmed toward black, which had cost two shots on
+[[kyle-debut-plan]]. And hand movement in front of a stationary head held for a second film running (s4, 9.6 s
+clean), confirming that as the reliable way to get real human motion out of a LoRA-carried face.
+
+**The one failure produced the better rule.** The compass macro was meant to be a full-length anchor; instead
+the compass lifted off the map and floated out of frame. Re-rendered with an explicit "the compass stays resting
+flat on the map and never lifts, floats or leaves the frame" — and it lifted again, identically, just slower.
+That is the second negative instruction to fail, after "she does not turn her head" turned anyway across two
+films. So:
+
+> **Telling LTX what not to do does not work.** It responds only to what the shot is *of*. The reliable controls
+> are the choice of still and the length of the cut.
+
+This reframes the earlier findings rather than replacing them: "no head rotation" works because a straight-on
+still gives the model less to invent and because the clip is cut before it invents, not because the prompt
+forbade it. Every rule we have is really a rule about framing and duration wearing a prompt's clothes.
+
 ## 2026-09-29 — Kyle's debut, and what the occlusion rule is actually worth
 
 Second LoRA-driven film, [[kyle-debut-plan]]: eight shots, the five minutes before a nine-year-old walks out to

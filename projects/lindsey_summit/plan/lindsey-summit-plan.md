@@ -65,7 +65,53 @@ dawn — instead of warm gold, silk and interiors.
 | Upscale | Real-ESRGAN x4plus → 3840×2160, crop fit, 40M — ~10 min per clip |
 | Assemble | 0.75 s crossfades, clip audio kept, 1920×1080 delivery copy |
 
-## 6. Log
+## 6. Did designing to the constraints work?
+
+Mostly yes, and the one failure sharpened the rule rather than contradicting it.
+
+**The face budgets were right before anything was rendered.** s2 and s7 both drifted at roughly eight seconds,
+exactly as predicted, and both were already budgeted at 7.0 and 7.5 s. Nothing was wasted and nothing had to be
+re-rendered for it — the first time that has been true here.
+
+**"The light stays constant" fixed the dimming.** Every motion prompt carried it, and no shot dimmed toward
+black. On [[kyle-debut-plan]] two shots were lost to that; here, zero.
+
+**Hand movement in front of a stationary head held again.** s4 — her hand lowering a pine branch, her chin
+lifting, eyes coming to the lens — was clean through 9.6 s, matching kyle_debut s6. Two films, two confirmations.
+This is now the reliable way to get real human motion out of a LoRA-carried face.
+
+**The failure, and what it teaches.** s3, the compass macro, was meant to be a full-length anchor. Instead the
+compass lifted off the map and floated out of frame. It was re-rendered with an explicit *"the compass stays
+resting flat on the map the whole time and never lifts, floats or leaves the frame"* — and it lifted again, the
+same way, only slower.
+
+That is the second time a **negative instruction** has failed to constrain LTX: the first was "she does not turn
+her head," which turned anyway on two films. The generalisation is now hard to avoid:
+
+> Telling LTX what *not* to do does not work. It only responds to what the shot is *of*. The only reliable
+> controls are the choice of still and the length of the cut.
+
+Which means the earlier rules were right for the wrong reason. "No head rotation" works not because the prompt
+forbids it but because a still shot straight-on with nowhere to turn gives the model less to invent, and because
+the clip gets cut before it invents anyway. s3 is cut to 4.0 s for the same reason.
+
+## 7. The cut
+
+| # | Shot | Take | Kept | Note |
+|---|---|---|---|---|
+| s1 | Forest at dawn, she is small on the trail | s1_v1 | 9.5 s | clean throughout |
+| s2 | Close-up, her breath in the cold | s2_v1 | 7.0 s | drifts at ~8 s, as budgeted |
+| s3 | The compass and the map | s3_v2 | 4.0 s | **the compass floats away**; only the opening survives |
+| s4 | She holds a branch aside and looks up | s4_v1 | 9.5 s | clean through 9.6 s — hands, stationary head |
+| s5 | The stone stair into the mist | s5_v1 | 9.5 s | light held constant; clean |
+| s6 | The climb, from behind | s6_v1 | 9.5 s | clean throughout |
+| s7 | The top — sunrise on her face | s7_v1 | 7.5 s | astonishment resolves to a smile at ~6.5 s |
+| s8 | Small at the edge above the cloud sea | s8_v1 | 8.5 s | clean; trimmed before a hair artifact |
+
+65.0 s kept − 7 × 0.75 s crossfades = **59.75 s** — the planned length, unchanged from before the first frame
+was rendered.
+
+## 8. Log
 
 - **2026-09-29** — spec written, story written for the constraints. All four masters right on one seed each
   (seed 9), now the third film running for which that is true.
