@@ -4,7 +4,7 @@
 
 **Sources**: projects/*/*/spec.json; per-project notes from the session logs.
 
-**Last updated**: 2026-09-27
+**Last updated**: 2026-09-28
 
 ---
 
@@ -37,7 +37,7 @@ Cinematic photoreal shorts: FLUX.2 klein stills with Moodboard references, motio
 | 3 | [Night Elf Hunter — a boy and his bear crossing the grassland](projects-realistic.html#nightelf_hunter) | 2026-09-26 | research — B0 partial pass 2026-09-26: 30 images, identity 30/30, angles skewed (back 1/3, over-shoulder 0/2); v1 remains the delivered film | FLUX.2 [klein] 9B 512x768 | Wan 2.2 High Noise ? min | none | `—` | — |
 | 4 | [Ivy — character LoRA](projects-realistic.html#ivy_lora) | 2026-09-26 | delivered 2026-09-26 — ivy_lora_2000_lora_f32.ckpt at weight 0.5; identity holds in unseen scenes, profile and back-of-head degrade (dataset has neither) | FLUX.2 [klein] 9B aspect-bucketed, | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
 | 5 | [Kyle — character LoRA](projects-realistic.html#kyle_lora) | 2026-09-26 | delivered 2026-09-26 — kyle_lora_2000_lora_f32.ckpt, usable at weight 1.0 including true profile and back of head | FLUX.2 [klein] 9B aspect-bucketed, | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
-| 6 | [Lindsey — character LoRA](projects-realistic.html#lindsey_lora) | 2026-09-27 | training 2026-09-27 11:00 — 32 image/caption pairs, 2000 steps, checkpoints every 400 | FLUX.2 [klein] 9B aspect-bucketed, | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
+| 6 | [Lindsey — character LoRA](projects-realistic.html#lindsey_lora) | 2026-09-27 | trained 2026-09-27 — 2000 steps in 2 h 26 m, five checkpoints; evaluation pending | FLUX.2 [klein] 9B aspect-bucketed, | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
 
 → full records for all 6: [[projects-realistic|Photoreal projects]]
 

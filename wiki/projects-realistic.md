@@ -4,7 +4,7 @@
 
 **Sources**: projects/*/*/spec.json; per-project notes from the session logs.
 
-**Last updated**: 2026-09-27
+**Last updated**: 2026-09-28
 
 ---
 
@@ -19,7 +19,7 @@ Index of every project: [[projects]]. Other themes: [[projects-anime]] · [[proj
 | 3 | [Night Elf Hunter — a boy and his bear crossing the grassland](#nightelf_hunter) | 2026-09-26 | research — B0 partial pass 2026-09-26: 30 images, identity 30/30, angles skewed (back 1/3, over-shoulder 0/2); v1 remains the delivered film | FLUX.2 [klein] 9B 512x768 | Wan 2.2 High Noise ? min | none | `—` | — |
 | 4 | [Ivy — character LoRA](#ivy_lora) | 2026-09-26 | delivered 2026-09-26 — ivy_lora_2000_lora_f32.ckpt at weight 0.5; identity holds in unseen scenes, profile and back-of-head degrade (dataset has neither) | FLUX.2 [klein] 9B aspect-bucketed, | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
 | 5 | [Kyle — character LoRA](#kyle_lora) | 2026-09-26 | delivered 2026-09-26 — kyle_lora_2000_lora_f32.ckpt, usable at weight 1.0 including true profile and back of head | FLUX.2 [klein] 9B aspect-bucketed, | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
-| 6 | [Lindsey — character LoRA](#lindsey_lora) | 2026-09-27 | training 2026-09-27 11:00 — 32 image/caption pairs, 2000 steps, checkpoints every 400 | FLUX.2 [klein] 9B aspect-bucketed, | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
+| 6 | [Lindsey — character LoRA](#lindsey_lora) | 2026-09-27 | trained 2026-09-27 — 2000 steps in 2 h 26 m, five checkpoints; evaluation pending | FLUX.2 [klein] 9B aspect-bucketed, | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
 
 ## Dragon Epic — 1-minute photoreal short, family hero face {#dragon_epic}
 
@@ -419,7 +419,7 @@ Prompt: `generated per cell by scripts/seed_sheet.sh --dataset`
 
 ## Lindsey — character LoRA {#lindsey_lora}
 
-- **Date**: 2026-09-27 · **Status**: training 2026-09-27 11:00 — 32 image/caption pairs, 2000 steps, checkpoints every 400 · **Version**: `v1-photo-dataset` · **Draw Things project**: `none — draw-things-cli train lora`
+- **Date**: 2026-09-27 · **Status**: trained 2026-09-27 — 2000 steps in 2 h 26 m, five checkpoints; evaluation pending · **Version**: `v1-photo-dataset` · **Draw Things project**: `none — draw-things-cli train lora`
 - **This version**: Character LoRA for Lindsey from a 32-frame turnaround that covers full body as well as head angles. Third in the series after ivy_lora and kyle_lora, and the one that tests whether full-body identity is a dataset gap or a latent-resolution limit.
 - **Files** (`projects/lindsey_lora/v1-photo-dataset/`): `raw/ (32 source photographs, git-ignored)`, `seed/dataset/NN.png + NN.txt (training pairs; captions tracked)`, `seed/dataset_contact.png`, `logs/train.log`
 - **Notes**: Lindsey is Kevin's daughter; consent settled. The dataset is the most complete of the three: head angles (frontal, both profiles, back, three-quarters) AND thirteen full-body frames from front, both sides and behind, across two rooms. Ivy and Kyle both lost identity at full-body distance regardless of weight, which was read as a latent-resolution limit — too few pixels on the face. This set can distinguish the two explanations, because it contains the framing that was missing.

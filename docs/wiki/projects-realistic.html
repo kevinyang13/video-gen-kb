@@ -92,7 +92,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
     <span class="spacer"></span>
     <button class="pill" onclick="tt()">◐ Theme</button>
   </nav>
-  <h1>Photoreal projects</h1><p class="lede">Cinematic photoreal shorts: FLUX.2 klein stills with Moodboard references, motion from LTX-2.3 or Wan 2.2, Real-ESRGAN to 4K, cut with crossfades. Dragon Epic, Lost City, the three-minute film. Full record per project: models, settings, prompts, seeds, music and output files. Generated from each version's <code>spec.json</code>.</p><div class="meta"><span><b>Updated</b> 2026-09-27</span><span><b>Sources</b> projects/<em>/</em>/spec.json; per-project notes from the session logs.</span></div>
+  <h1>Photoreal projects</h1><p class="lede">Cinematic photoreal shorts: FLUX.2 klein stills with Moodboard references, motion from LTX-2.3 or Wan 2.2, Real-ESRGAN to 4K, cut with crossfades. Dragon Epic, Lost City, the three-minute film. Full record per project: models, settings, prompts, seeds, music and output files. Generated from each version's <code>spec.json</code>.</p><div class="meta"><span><b>Updated</b> 2026-09-28</span><span><b>Sources</b> projects/<em>/</em>/spec.json; per-project notes from the session logs.</span></div>
 <hr />
 <p>Index of every project: <a href="projects.html">projects</a>. Other themes: <a href="projects-anime.html">projects anime</a> · <a href="projects-3d.html">projects 3d</a>.</p>
 <h2>Summary</h2>
@@ -170,7 +170,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <td style="text-align: right;">6</td>
 <td><a href="#lindsey_lora">Lindsey — character LoRA</a></td>
 <td>2026-09-27</td>
-<td>training 2026-09-27 11:00 — 32 image/caption pairs, 2000 steps, checkpoints every 400</td>
+<td>trained 2026-09-27 — 2000 steps in 2 h 26 m, five checkpoints; evaluation pending</td>
 <td>FLUX.2 [klein] 9B aspect-bucketed,</td>
 <td>Wan 2.2 High Noise ? min</td>
 <td>Calm Ambient Dreamscape</td>
@@ -1016,7 +1016,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </table></div>
 <h2 id="lindsey_lora">Lindsey — character LoRA</h2>
 <ul>
-<li><strong>Date</strong>: 2026-09-27 · <strong>Status</strong>: training 2026-09-27 11:00 — 32 image/caption pairs, 2000 steps, checkpoints every 400 · <strong>Version</strong>: <code>v1-photo-dataset</code> · <strong>Draw Things project</strong>: <code>none — draw-things-cli train lora</code></li>
+<li><strong>Date</strong>: 2026-09-27 · <strong>Status</strong>: trained 2026-09-27 — 2000 steps in 2 h 26 m, five checkpoints; evaluation pending · <strong>Version</strong>: <code>v1-photo-dataset</code> · <strong>Draw Things project</strong>: <code>none — draw-things-cli train lora</code></li>
 <li><strong>This version</strong>: Character LoRA for Lindsey from a 32-frame turnaround that covers full body as well as head angles. Third in the series after ivy_lora and kyle_lora, and the one that tests whether full-body identity is a dataset gap or a latent-resolution limit.</li>
 <li><strong>Files</strong> (<code>projects/lindsey_lora/v1-photo-dataset/</code>): <code>raw/ (32 source photographs, git-ignored)</code>, <code>seed/dataset/NN.png + NN.txt (training pairs; captions tracked)</code>, <code>seed/dataset_contact.png</code>, <code>logs/train.log</code></li>
 <li><strong>Notes</strong>: Lindsey is Kevin's daughter; consent settled. The dataset is the most complete of the three: head angles (frontal, both profiles, back, three-quarters) AND thirteen full-body frames from front, both sides and behind, across two rooms. Ivy and Kyle both lost identity at full-body distance regardless of weight, which was read as a latent-resolution limit — too few pixels on the face. This set can distinguish the two explanations, because it contains the framing that was missing.</li>
@@ -1141,7 +1141,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 
   <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="projects.html">projects</a></li><li><a href="runbook-living-painting.html">runbook living painting</a></li><li><a href="draw-things-setup.html">draw things setup</a></li></ul></div>
 </div>
-<footer>video-gen-kb · built 2026-09-27 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<footer>video-gen-kb · built 2026-09-28 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
 <script>function tt(){var r=document.documentElement,
 d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
 matchMedia('(prefers-color-scheme: dark)').matches);
