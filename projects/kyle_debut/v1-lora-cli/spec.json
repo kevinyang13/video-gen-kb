@@ -1,0 +1,362 @@
+{
+  "order": 25,
+  "id": "kyle_debut",
+  "version": "v1-lora-cli",
+  "variant": "Second LoRA-driven film, and the first written to the rule that came out of lindsey_palace: no shot may rotate or occlude the face, because the video model never sees the LoRA.",
+  "title": "Kyle \u2014 five minutes to showtime",
+  "date": "2026-09-28",
+  "theme": "realistic",
+  "dt_project": "none \u2014 draw-things-cli via scripts/film_run.py",
+  "status": "planned 2026-09-28 \u2014 spec written",
+  "source": "text-only; identity comes from projects/kyle_lora (trigger kyle_kx, class word boy). No source photographs are used at render time.",
+  "notes": "Kyle is Kevin's son; consent settled. One minute, eight shots. The story is the five minutes before a nine-year-old walks out to lead a symphony: composure, the waiting piano, a collar straightened, the doors opening, the walk toward the stage.\n\nWritten around two known limits. First, **the video model never sees the LoRA**, so identity is fixed at the still and any motion that rotates or occludes the face lets LTX recast the subject (lindsey_palace s5 came back as an adult). Every face shot here is therefore locked frontal with motion limited to breathing, blinking and hands; the story's one turn \u2014 'turns smoothly on his heel' \u2014 is rendered as a still already facing away, with motion only continuing the walk. Second, **Kyle's dataset is 16 turnaround frames and only one full-body frame**, so identity is dependable close and at angle but not at full-body distance; the wides (s1, s8) sit at 0.85 and are composed so the face is small or turned away, and the three shots with no person in them (s5, s7) carry no LoRA at all.",
+  "still": {
+    "model": "FLUX.2 [klein] 9B (8-bit S)",
+    "size": "1024x576",
+    "steps": 4,
+    "cfg": 1.0,
+    "shift": 3,
+    "sampler": "DDIM Trailing",
+    "lora": "kyle_lora_2000_lora_f32.ckpt @ per-shot weight (none / 0.6 / 0.85 / 1.0)",
+    "control": "edit mode: --image environment or wardrobe master --strength 1.0",
+    "prompt": "per shot \u2014 see scenes"
+  },
+  "i2v": {
+    "model": "LTX-2.3 22B [distilled] 1.1",
+    "size": "1024x576",
+    "frames": 249,
+    "fps": 25,
+    "steps": 8,
+    "cfg": 1.0,
+    "shift": 5.0,
+    "sampler": "TCD Trailing",
+    "stochasticSamplingGamma": 0.3,
+    "time_min": 11,
+    "note": "no LoRA at the video stage \u2014 LTX never sees it; identity is baked into the still."
+  },
+  "post": {
+    "upscale": "scripts/upscale_4k.sh \u2014 Real-ESRGAN x4plus -> 3840x2160 (~10 min per clip)",
+    "loop": "none \u2014 xfade 0.75",
+    "music": "to pick after QC; wants solo piano that arrives late, matching the doors opening at s7"
+  },
+  "scenes": {
+    "locks": {
+      "subject": "kyle_kx boy, an elegant nine-year-old boy, this exact face, neat dark hair",
+      "wardrobe": "a bespoke navy velvet double-breasted blazer with satin lapels, a fine silk pocket square and a crisp white tailored collar shirt",
+      "place": "a grand neoclassical foyer of the royal conservatory, polished marble columns, a checkerboard marble floor, crystal chandeliers glowing warm overhead, heavy double oak doors at the far end",
+      "style": "High-fashion indoor editorial photograph, Hasselblad medium format, soft diffused architectural chandelier lighting, ultra-realistic skin texture, sharp focus, rich warm wood and marble reflections, shallow depth of field, fine film grain, Vogue Kids indoor catalog style. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described."
+    },
+    "s1": {
+      "title": "Establishing \u2014 the foyer, he stands alone at its centre",
+      "note": "LoRA weight 0.85; edit-mode input seed/foyer.png",
+      "still": "Extreme wide establishing shot. a grand neoclassical foyer of the royal conservatory, polished marble columns, a checkerboard marble floor, crystal chandeliers glowing warm overhead, heavy double oak doors at the far end, empty and hushed, late afternoon light and chandelier glow mixing on the marble, long reflections on the polished floor. Small at the exact centre of frame, kyle_kx boy, an elegant nine-year-old boy, this exact face, neat dark hair, wearing a bespoke navy velvet double-breasted blazer with satin lapels, a fine silk pocket square and a crisp white tailored collar shirt, standing perfectly composed and facing the camera. Enormous sense of scale, deep depth of field, symmetrical composition. High-fashion indoor editorial photograph, Hasselblad medium format, soft diffused architectural chandelier lighting, ultra-realistic skin texture, sharp focus, rich warm wood and marble reflections, shallow depth of field, fine film grain, Vogue Kids indoor catalog style. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
+      "video": "Fixed camera, no camera movement. The chandelier light flickers almost imperceptibly, fine dust drifting through the light shafts, faint reflections shifting on the polished marble. The boy stands perfectly still. Room tone, a distant murmur of a crowd behind the doors, no music."
+    },
+    "s2": {
+      "title": "Medium \u2014 composed, hands at his sides, looking into the lens",
+      "note": "LoRA weight 1.0; edit-mode input seed/kyle.png",
+      "still": "Medium shot, waist up, straight on. kyle_kx boy, an elegant nine-year-old boy, this exact face, neat dark hair, wearing a bespoke navy velvet double-breasted blazer with satin lapels, a fine silk pocket square and a crisp white tailored collar shirt, standing squarely facing the camera with his hands at his sides, a calm composed expression looking directly into the lens. Behind him a grand neoclassical foyer of the royal conservatory, polished marble columns, a checkerboard marble floor, crystal chandeliers glowing warm overhead, heavy double oak doors at the far end falls into soft focus, the chandeliers reduced to warm circles of light. High-fashion indoor editorial photograph, Hasselblad medium format, soft diffused architectural chandelier lighting, ultra-realistic skin texture, sharp focus, rich warm wood and marble reflections, shallow depth of field, fine film grain, Vogue Kids indoor catalog style. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
+      "video": "Locked camera, no push in. He stands still and holds the camera's gaze; he breathes, blinks once, the velvet of the blazer catching the light as his chest rises. He does not turn his head or look away. Room tone, no music."
+    },
+    "s3": {
+      "title": "Hero close-up \u2014 the calm unflinching gaze",
+      "note": "LoRA weight 1.0; edit-mode input seed/kyle.png",
+      "still": "Tight close-up portrait, head and shoulders, straight on. kyle_kx boy, an elegant nine-year-old boy, this exact face, neat dark hair, wearing a bespoke navy velvet double-breasted blazer with satin lapels, a fine silk pocket square and a crisp white tailored collar shirt with the white collar crisp at his throat, looking directly into the lens, calm and unflinching. Soft diffused chandelier light from above and slightly to the left, a warm rim light along his jaw, a grand neoclassical foyer of the royal conservatory, polished marble columns, a checkerboard marble floor, crystal chandeliers glowing warm overhead, heavy double oak doors at the far end thrown far out of focus behind him. Razor-sharp focus on the eyes, skin texture and individual eyelashes. High-fashion indoor editorial photograph, Hasselblad medium format, soft diffused architectural chandelier lighting, ultra-realistic skin texture, sharp focus, rich warm wood and marble reflections, shallow depth of field, fine film grain, Vogue Kids indoor catalog style. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
+      "video": "Locked camera, almost no movement. He holds the camera's gaze, blinks slowly, breathes; the warm light shifts a fraction across his face. He does not turn his head. Room tone, no music."
+    },
+    "s4": {
+      "title": "Detail \u2014 satin lapels, the silk pocket square, the white collar",
+      "note": "LoRA weight 0.6; edit-mode input seed/kyle.png",
+      "still": "Extreme close-up detail insert, no face in frame. The chest and shoulder of a bespoke navy velvet double-breasted blazer with satin lapels, a fine silk pocket square and a crisp white tailored collar shirt \u2014 deep navy velvet with the light raking across the pile, smooth satin lapels, a fine silk pocket square folded at the breast, the crisp white collar edge. Every fibre of the velvet and the weave of the silk visible. Macro clarity, very shallow depth of field, warm marble reflections behind. High-fashion indoor editorial photograph, Hasselblad medium format, soft diffused architectural chandelier lighting, ultra-realistic skin texture, sharp focus, rich warm wood and marble reflections, shallow depth of field, fine film grain, Vogue Kids indoor catalog style. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
+      "video": "Locked macro camera. Only the faintest movement: the velvet shifts a few millimetres as he breathes, warm light creeping slowly across the satin lapel and the silk pocket square. The fabric stays flat \u2014 nothing lifts, flaps or folds over. Room tone, no music."
+    },
+    "s5": {
+      "title": "The piano waiting \u2014 the months of practice, and what comes next",
+      "note": "no LoRA \u2014 no face in frame; edit-mode input seed/piano.png",
+      "still": "Wide interior, no people in frame. A polished black concert grand piano standing alone in a warm side hall of a grand neoclassical foyer of the royal conservatory, polished marble columns, a checkerboard marble floor, crystal chandeliers glowing warm overhead, heavy double oak doors at the far end, its lid raised, the keyboard lid open, chandelier light pooling on the lacquer and reflecting the marble columns. Sheet music open on the stand. Deep depth of field, still and reverent. High-fashion indoor editorial photograph, Hasselblad medium format, soft diffused architectural chandelier lighting, ultra-realistic skin texture, sharp focus, rich warm wood and marble reflections, shallow depth of field, fine film grain, Vogue Kids indoor catalog style. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
+      "video": "Fixed camera, no camera movement. Nothing moves but the light: the chandelier glow shifting slowly across the black lacquer, fine dust drifting through the beam, a faint reflection wavering on the floor. Room tone, a distant murmur, no music."
+    },
+    "s6": {
+      "title": "He adjusts his collar and takes a slow breath",
+      "note": "LoRA weight 1.0; edit-mode input seed/kyle.png",
+      "still": "Medium close-up, chest up, straight on. kyle_kx boy, an elegant nine-year-old boy, this exact face, neat dark hair, wearing a bespoke navy velvet double-breasted blazer with satin lapels, a fine silk pocket square and a crisp white tailored collar shirt, both hands raised to adjust the crisp white collar of his shirt, chin slightly lifted, eyes lowered in concentration. Warm chandelier light from above, a grand neoclassical foyer of the royal conservatory, polished marble columns, a checkerboard marble floor, crystal chandeliers glowing warm overhead, heavy double oak doors at the far end soft behind him. High-fashion indoor editorial photograph, Hasselblad medium format, soft diffused architectural chandelier lighting, ultra-realistic skin texture, sharp focus, rich warm wood and marble reflections, shallow depth of field, fine film grain, Vogue Kids indoor catalog style. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
+      "video": "Locked camera. His hands settle the collar and come back down; his chest rises with a slow deep breath and his eyes come up to the lens. He stays facing the camera throughout and never turns his head. Room tone, no music."
+    },
+    "s7": {
+      "title": "The oak doors open and stage light floods the marble",
+      "note": "no LoRA \u2014 no face in frame; edit-mode input seed/doors.png",
+      "still": "Wide shot, no people in frame, looking straight down a grand neoclassical foyer of the royal conservatory, polished marble columns, a checkerboard marble floor, crystal chandeliers glowing warm overhead, heavy double oak doors at the far end at the heavy double oak doors at the far end, standing open onto brilliant golden stage light that floods across the polished marble floor in a long blazing wedge, the chandeliers pale against it. Strong one-point perspective, dramatic contrast between the cool foyer and the hot golden doorway. High-fashion indoor editorial photograph, Hasselblad medium format, soft diffused architectural chandelier lighting, ultra-realistic skin texture, sharp focus, rich warm wood and marble reflections, shallow depth of field, fine film grain, Vogue Kids indoor catalog style. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
+      "video": "Fixed camera, no camera movement. The golden light from the doorway strengthens and spreads slowly across the marble, dust turning in the beam, the chandeliers steady overhead. Room tone, a swell of distant applause, no music."
+    },
+    "s8": {
+      "title": "He walks toward the stage",
+      "note": "LoRA weight 0.85; edit-mode input seed/foyer.png",
+      "still": "Wide full-body shot from behind and slightly low, strong one-point perspective. kyle_kx boy, an elegant nine-year-old boy, this exact face, neat dark hair, wearing a bespoke navy velvet double-breasted blazer with satin lapels, a fine silk pocket square and a crisp white tailored collar shirt, seen from behind mid-stride walking away from the camera down the length of a grand neoclassical foyer of the royal conservatory, polished marble columns, a checkerboard marble floor, crystal chandeliers glowing warm overhead, heavy double oak doors at the far end toward the open oak doors and the brilliant golden stage light beyond, his silhouette rimmed by it, his long reflection on the polished marble. High-fashion indoor editorial photograph, Hasselblad medium format, soft diffused architectural chandelier lighting, ultra-realistic skin texture, sharp focus, rich warm wood and marble reflections, shallow depth of field, fine film grain, Vogue Kids indoor catalog style. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
+      "video": "Fixed camera. He walks steadily away from the camera toward the golden doorway, his reflection travelling with him on the marble, the light growing as he nears the doors. He never turns back. Room tone, applause rising, no music."
+    }
+  },
+  "run-spec": {
+    "dir": "projects/kyle_debut/v1-lora-cli",
+    "name": "kyle_debut",
+    "size": [
+      1024,
+      576
+    ],
+    "still": {
+      "model": "flux_2_klein_9b_i8x.ckpt",
+      "steps": 4,
+      "cfg": 1,
+      "config": {
+        "shift": 3.0,
+        "sampler": 16,
+        "loras": [
+          {
+            "file": "kyle_lora_2000_lora_f32.ckpt",
+            "weight": 1.0
+          }
+        ]
+      },
+      "seeds": [
+        1,
+        2,
+        3
+      ],
+      "strength": 1.0
+    },
+    "clip": {
+      "model": "ltx_2.3_22b_distilled_1.1_q8p.ckpt",
+      "frames": 249,
+      "steps": 8,
+      "cfg": 1,
+      "config": {
+        "sampler": 19,
+        "shift": 5.0,
+        "stochasticSamplingGamma": 0.3,
+        "fps": 25,
+        "hiresFix": false
+      },
+      "seed": 1,
+      "video_format": "prores422hq"
+    },
+    "masters": {
+      "kyle": "seed/kyle.png",
+      "foyer": "seed/foyer.png",
+      "piano": "seed/piano.png",
+      "doors": "seed/doors.png"
+    },
+    "upscale": {
+      "model": "realesrgan-x4plus",
+      "size": [
+        3840,
+        2160
+      ],
+      "fit": "crop",
+      "bitrate": "40M"
+    },
+    "assemble": {
+      "fps": 25,
+      "xfade": 0.75,
+      "clip_audio": true,
+      "bitrate": "40M"
+    },
+    "deliver": [
+      {
+        "size": [
+          1920,
+          1080
+        ],
+        "bitrate": "12M"
+      }
+    ],
+    "shots": [
+      {
+        "id": "s1",
+        "still": {
+          "ref": null,
+          "input": "seed/foyer.png",
+          "prompt": "Extreme wide establishing shot. a grand neoclassical foyer of the royal conservatory, polished marble columns, a checkerboard marble floor, crystal chandeliers glowing warm overhead, heavy double oak doors at the far end, empty and hushed, late afternoon light and chandelier glow mixing on the marble, long reflections on the polished floor. Small at the exact centre of frame, kyle_kx boy, an elegant nine-year-old boy, this exact face, neat dark hair, wearing a bespoke navy velvet double-breasted blazer with satin lapels, a fine silk pocket square and a crisp white tailored collar shirt, standing perfectly composed and facing the camera. Enormous sense of scale, deep depth of field, symmetrical composition. High-fashion indoor editorial photograph, Hasselblad medium format, soft diffused architectural chandelier lighting, ultra-realistic skin texture, sharp focus, rich warm wood and marble reflections, shallow depth of field, fine film grain, Vogue Kids indoor catalog style. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
+          "config": {
+            "shift": 3.0,
+            "sampler": 16,
+            "loras": [
+              {
+                "file": "kyle_lora_2000_lora_f32.ckpt",
+                "weight": 0.85
+              }
+            ]
+          }
+        },
+        "video_prompt": "Fixed camera, no camera movement. The chandelier light flickers almost imperceptibly, fine dust drifting through the light shafts, faint reflections shifting on the polished marble. The boy stands perfectly still. Room tone, a distant murmur of a crowd behind the doors, no music.",
+        "qc_ref": "kyle",
+        "take": null,
+        "trim": [
+          0,
+          8.3
+        ]
+      },
+      {
+        "id": "s2",
+        "still": {
+          "ref": null,
+          "input": "seed/kyle.png",
+          "prompt": "Medium shot, waist up, straight on. kyle_kx boy, an elegant nine-year-old boy, this exact face, neat dark hair, wearing a bespoke navy velvet double-breasted blazer with satin lapels, a fine silk pocket square and a crisp white tailored collar shirt, standing squarely facing the camera with his hands at his sides, a calm composed expression looking directly into the lens. Behind him a grand neoclassical foyer of the royal conservatory, polished marble columns, a checkerboard marble floor, crystal chandeliers glowing warm overhead, heavy double oak doors at the far end falls into soft focus, the chandeliers reduced to warm circles of light. High-fashion indoor editorial photograph, Hasselblad medium format, soft diffused architectural chandelier lighting, ultra-realistic skin texture, sharp focus, rich warm wood and marble reflections, shallow depth of field, fine film grain, Vogue Kids indoor catalog style. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
+          "config": {
+            "shift": 3.0,
+            "sampler": 16,
+            "loras": [
+              {
+                "file": "kyle_lora_2000_lora_f32.ckpt",
+                "weight": 1.0
+              }
+            ]
+          }
+        },
+        "video_prompt": "Locked camera, no push in. He stands still and holds the camera's gaze; he breathes, blinks once, the velvet of the blazer catching the light as his chest rises. He does not turn his head or look away. Room tone, no music.",
+        "qc_ref": "kyle",
+        "take": null,
+        "trim": [
+          0,
+          8.3
+        ]
+      },
+      {
+        "id": "s3",
+        "still": {
+          "ref": null,
+          "input": "seed/kyle.png",
+          "prompt": "Tight close-up portrait, head and shoulders, straight on. kyle_kx boy, an elegant nine-year-old boy, this exact face, neat dark hair, wearing a bespoke navy velvet double-breasted blazer with satin lapels, a fine silk pocket square and a crisp white tailored collar shirt with the white collar crisp at his throat, looking directly into the lens, calm and unflinching. Soft diffused chandelier light from above and slightly to the left, a warm rim light along his jaw, a grand neoclassical foyer of the royal conservatory, polished marble columns, a checkerboard marble floor, crystal chandeliers glowing warm overhead, heavy double oak doors at the far end thrown far out of focus behind him. Razor-sharp focus on the eyes, skin texture and individual eyelashes. High-fashion indoor editorial photograph, Hasselblad medium format, soft diffused architectural chandelier lighting, ultra-realistic skin texture, sharp focus, rich warm wood and marble reflections, shallow depth of field, fine film grain, Vogue Kids indoor catalog style. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
+          "config": {
+            "shift": 3.0,
+            "sampler": 16,
+            "loras": [
+              {
+                "file": "kyle_lora_2000_lora_f32.ckpt",
+                "weight": 1.0
+              }
+            ]
+          }
+        },
+        "video_prompt": "Locked camera, almost no movement. He holds the camera's gaze, blinks slowly, breathes; the warm light shifts a fraction across his face. He does not turn his head. Room tone, no music.",
+        "qc_ref": "kyle",
+        "take": null,
+        "trim": [
+          0,
+          8.3
+        ]
+      },
+      {
+        "id": "s4",
+        "still": {
+          "ref": null,
+          "input": "seed/kyle.png",
+          "prompt": "Extreme close-up detail insert, no face in frame. The chest and shoulder of a bespoke navy velvet double-breasted blazer with satin lapels, a fine silk pocket square and a crisp white tailored collar shirt \u2014 deep navy velvet with the light raking across the pile, smooth satin lapels, a fine silk pocket square folded at the breast, the crisp white collar edge. Every fibre of the velvet and the weave of the silk visible. Macro clarity, very shallow depth of field, warm marble reflections behind. High-fashion indoor editorial photograph, Hasselblad medium format, soft diffused architectural chandelier lighting, ultra-realistic skin texture, sharp focus, rich warm wood and marble reflections, shallow depth of field, fine film grain, Vogue Kids indoor catalog style. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
+          "config": {
+            "shift": 3.0,
+            "sampler": 16,
+            "loras": [
+              {
+                "file": "kyle_lora_2000_lora_f32.ckpt",
+                "weight": 0.6
+              }
+            ]
+          }
+        },
+        "video_prompt": "Locked macro camera. Only the faintest movement: the velvet shifts a few millimetres as he breathes, warm light creeping slowly across the satin lapel and the silk pocket square. The fabric stays flat \u2014 nothing lifts, flaps or folds over. Room tone, no music.",
+        "qc_ref": "kyle",
+        "take": null,
+        "trim": [
+          0,
+          8.3
+        ]
+      },
+      {
+        "id": "s5",
+        "still": {
+          "ref": null,
+          "input": "seed/piano.png",
+          "prompt": "Wide interior, no people in frame. A polished black concert grand piano standing alone in a warm side hall of a grand neoclassical foyer of the royal conservatory, polished marble columns, a checkerboard marble floor, crystal chandeliers glowing warm overhead, heavy double oak doors at the far end, its lid raised, the keyboard lid open, chandelier light pooling on the lacquer and reflecting the marble columns. Sheet music open on the stand. Deep depth of field, still and reverent. High-fashion indoor editorial photograph, Hasselblad medium format, soft diffused architectural chandelier lighting, ultra-realistic skin texture, sharp focus, rich warm wood and marble reflections, shallow depth of field, fine film grain, Vogue Kids indoor catalog style. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
+          "config": {
+            "shift": 3.0,
+            "sampler": 16
+          }
+        },
+        "video_prompt": "Fixed camera, no camera movement. Nothing moves but the light: the chandelier glow shifting slowly across the black lacquer, fine dust drifting through the beam, a faint reflection wavering on the floor. Room tone, a distant murmur, no music.",
+        "qc_ref": "kyle",
+        "take": null,
+        "trim": [
+          0,
+          8.3
+        ]
+      },
+      {
+        "id": "s6",
+        "still": {
+          "ref": null,
+          "input": "seed/kyle.png",
+          "prompt": "Medium close-up, chest up, straight on. kyle_kx boy, an elegant nine-year-old boy, this exact face, neat dark hair, wearing a bespoke navy velvet double-breasted blazer with satin lapels, a fine silk pocket square and a crisp white tailored collar shirt, both hands raised to adjust the crisp white collar of his shirt, chin slightly lifted, eyes lowered in concentration. Warm chandelier light from above, a grand neoclassical foyer of the royal conservatory, polished marble columns, a checkerboard marble floor, crystal chandeliers glowing warm overhead, heavy double oak doors at the far end soft behind him. High-fashion indoor editorial photograph, Hasselblad medium format, soft diffused architectural chandelier lighting, ultra-realistic skin texture, sharp focus, rich warm wood and marble reflections, shallow depth of field, fine film grain, Vogue Kids indoor catalog style. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
+          "config": {
+            "shift": 3.0,
+            "sampler": 16,
+            "loras": [
+              {
+                "file": "kyle_lora_2000_lora_f32.ckpt",
+                "weight": 1.0
+              }
+            ]
+          }
+        },
+        "video_prompt": "Locked camera. His hands settle the collar and come back down; his chest rises with a slow deep breath and his eyes come up to the lens. He stays facing the camera throughout and never turns his head. Room tone, no music.",
+        "qc_ref": "kyle",
+        "take": null,
+        "trim": [
+          0,
+          8.3
+        ]
+      },
+      {
+        "id": "s7",
+        "still": {
+          "ref": null,
+          "input": "seed/doors.png",
+          "prompt": "Wide shot, no people in frame, looking straight down a grand neoclassical foyer of the royal conservatory, polished marble columns, a checkerboard marble floor, crystal chandeliers glowing warm overhead, heavy double oak doors at the far end at the heavy double oak doors at the far end, standing open onto brilliant golden stage light that floods across the polished marble floor in a long blazing wedge, the chandeliers pale against it. Strong one-point perspective, dramatic contrast between the cool foyer and the hot golden doorway. High-fashion indoor editorial photograph, Hasselblad medium format, soft diffused architectural chandelier lighting, ultra-realistic skin texture, sharp focus, rich warm wood and marble reflections, shallow depth of field, fine film grain, Vogue Kids indoor catalog style. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
+          "config": {
+            "shift": 3.0,
+            "sampler": 16
+          }
+        },
+        "video_prompt": "Fixed camera, no camera movement. The golden light from the doorway strengthens and spreads slowly across the marble, dust turning in the beam, the chandeliers steady overhead. Room tone, a swell of distant applause, no music.",
+        "qc_ref": "kyle",
+        "take": null,
+        "trim": [
+          0,
+          8.3
+        ]
+      },
+      {
+        "id": "s8",
+        "still": {
+          "ref": null,
+          "input": "seed/foyer.png",
+          "prompt": "Wide full-body shot from behind and slightly low, strong one-point perspective. kyle_kx boy, an elegant nine-year-old boy, this exact face, neat dark hair, wearing a bespoke navy velvet double-breasted blazer with satin lapels, a fine silk pocket square and a crisp white tailored collar shirt, seen from behind mid-stride walking away from the camera down the length of a grand neoclassical foyer of the royal conservatory, polished marble columns, a checkerboard marble floor, crystal chandeliers glowing warm overhead, heavy double oak doors at the far end toward the open oak doors and the brilliant golden stage light beyond, his silhouette rimmed by it, his long reflection on the polished marble. High-fashion indoor editorial photograph, Hasselblad medium format, soft diffused architectural chandelier lighting, ultra-realistic skin texture, sharp focus, rich warm wood and marble reflections, shallow depth of field, fine film grain, Vogue Kids indoor catalog style. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
+          "config": {
+            "shift": 3.0,
+            "sampler": 16,
+            "loras": [
+              {
+                "file": "kyle_lora_2000_lora_f32.ckpt",
+                "weight": 0.85
+              }
+            ]
+          }
+        },
+        "video_prompt": "Fixed camera. He walks steadily away from the camera toward the golden doorway, his reflection travelling with him on the marble, the light growing as he nears the doors. He never turns back. Room tone, applause rising, no music.",
+        "qc_ref": "kyle",
+        "take": null,
+        "trim": [
+          0,
+          8.3
+        ]
+      }
+    ]
+  }
+}
