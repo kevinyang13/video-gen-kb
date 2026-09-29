@@ -38,6 +38,7 @@ Each project owns a folder — `projects/<id>/<version>/` — and its plan page 
 - [[lindsey-palace-plan]] — Lindsey: the palace pavilion, a one-minute photoreal short where the face comes from a trained LoRA instead of a reference photo, with the weight set per shot
 - [[kyle-debut-plan]] — Kyle: five minutes to showtime, a one-minute LoRA-driven short written from the start around the rule that motion must not rotate or occlude the face
 - [[lindsey-summit-plan]] — Lindsey: above the cloud sea, an adventure short whose shot list was derived from the previous films' failures before a frame was rendered
+- [[kyle-lighthouse-plan]] — Kyle: the signal fire, a storm-coast short whose subject was chosen so that every long take is carried by motion that animates itself
 - [[kyle-lora-plan]] — Kyle: a character LoRA from a purpose-shot turnaround, testing whether profile and back coverage in the dataset lifts the weight ceiling
 - [[ivy-lora-plan]] — Ivy: a reusable character LoRA trained on real photographs, so later films load a trigger token instead of a master portrait
 - [[nightelf-hunter-plan]] — Night Elf Hunter: **delivered** (57.6 s), photoreal half-elf with a real face and a bear companion; seeding a cast from one photo, and what happens when a seed and its prompts disagree
