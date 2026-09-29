@@ -7,7 +7,7 @@
   "date": "2026-09-29",
   "theme": "realistic",
   "dt_project": "none \u2014 draw-things-cli via scripts/film_run.py",
-  "status": "planned 2026-09-29 \u2014 spec written",
+  "status": "delivered 2026-09-29 10:42 \u2014 59.88 s, 3840x2160 (280 MB) + 1920x1080 (87 MB), 8 shots, none dropped; mean -18.7 dB, peak -5.3 dB. Planned length 59.75 s, delivered 59.88 s.",
   "source": "text-only; identity from projects/lindsey_lora (trigger lindsey_kx, class word girl). No source photographs at render time.",
   "notes": "Lindsey is Kevin's daughter; consent settled. Story written for this film: a child walks a pine forest at dawn, reads a compass, finds an old stone stair, climbs it, and comes out on a ruined watchtower above a sea of cloud.\n\nEvery structural decision here is inherited rather than guessed. Face shots (s2, s4, s7) are locked frontal at weight 1.0 and budgeted at 7.0-7.5 s, because on both previous films every frontal face clip drifted at around eight seconds no matter what the video prompt said. The long takes go to the three things that held their full length before: walking away from camera (s1, s6), a macro insert with no face (s3), and pure landscape (s5, s8). s4 is the one shot asking for real movement from a person, and it is hand movement in front of a stationary head \u2014 the pattern that survived 9.9 s on kyle_debut s6. Every motion prompt says 'the light stays constant', because LTX reads 'the light shifts' as the lights going down.\n\nPalette deliberately opposite to lindsey_palace: cold blue mist and wool instead of warm gold and silk, outdoors instead of interiors.",
   "still": {

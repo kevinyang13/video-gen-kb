@@ -22,7 +22,7 @@ Index of every project: [[projects]]. Other themes: [[projects-anime]] · [[proj
 | 6 | [Lindsey — character LoRA](#lindsey_lora) | 2026-09-27 | trained 2026-09-27 — 2000 steps in 2 h 26 m, five checkpoints; evaluation pending | FLUX.2 [klein] 9B aspect-bucketed, | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
 | 7 | [Lindsey — the palace pavilion](#lindsey_palace) | 2026-09-28 | delivered 2026-09-28 22:07 — 61.08 s, 3840x2160 (293 MB) + 1920x1080 (91 MB), 8 shots, none dropped; mean -21.1 dB, peak -5.4 dB | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 10 min | Emotional Children Piano | `—` | — |
 | 8 | [Kyle — five minutes to showtime](#kyle_debut) | 2026-09-28 | delivered 2026-09-29 01:20 — 60.76 s, 3840x2160 (279 MB) + 1920x1080 (79 MB), 8 shots, none dropped; mean -21.7 dB, peak -5.5 dB | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 11 min | Emotional Children Piano | `—` | — |
-| 9 | [Lindsey — above the cloud sea](#lindsey_summit) | 2026-09-29 | planned 2026-09-29 — spec written | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 11 min | Adventure Journey | `—` | — |
+| 9 | [Lindsey — above the cloud sea](#lindsey_summit) | 2026-09-29 | delivered 2026-09-29 10:42 — 59.88 s, 3840x2160 (280 MB) + 1920x1080 (87 MB), 8 shots, none dropped; mean -18.7 dB, peak -5.3 dB. Planned length 59.75 s, delivered 59.88 s. | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 11 min | Adventure Journey | `—` | — |
 
 ## Dragon Epic — 1-minute photoreal short, family hero face {#dragon_epic}
 
@@ -785,7 +785,7 @@ Prompt: `per shot — see scenes`
 
 ## Lindsey — above the cloud sea {#lindsey_summit}
 
-- **Date**: 2026-09-29 · **Status**: planned 2026-09-29 — spec written · **Version**: `v1-lora-cli` · **Draw Things project**: `none — draw-things-cli via scripts/film_run.py`
+- **Date**: 2026-09-29 · **Status**: delivered 2026-09-29 10:42 — 59.88 s, 3840x2160 (280 MB) + 1920x1080 (87 MB), 8 shots, none dropped; mean -18.7 dB, peak -5.3 dB. Planned length 59.75 s, delivered 59.88 s. · **Version**: `v1-lora-cli` · **Draw Things project**: `none — draw-things-cli via scripts/film_run.py`
 - **This version**: Third LoRA-driven film and the first built entirely to the shot grammar the previous two produced: face shots locked frontal and cut at ~7 s, the long takes given to backs, macro and landscape.
 - **Files** (`projects/lindsey_summit/v1-lora-cli/`): `stills/s1.png … s8.png`, `clips/s1_v1.mov … s8_v1.mov (s3 uses v2)`, `final/lindsey_summit_3840x2160.mp4`, `final/lindsey_summit_1920x1080.mp4`, `music/adventure_journey.mp3`
 - **Notes**: Lindsey is Kevin's daughter; consent settled. Story written for this film: a child walks a pine forest at dawn, reads a compass, finds an old stone stair, climbs it, and comes out on a ruined watchtower above a sea of cloud.
