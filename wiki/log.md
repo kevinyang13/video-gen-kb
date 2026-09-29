@@ -8,6 +8,32 @@
 
 ---
 
+## 2026-09-29 — Kyle's debut, and what the occlusion rule is actually worth
+
+Second LoRA-driven film, [[kyle-debut-plan]]: eight shots, the five minutes before a nine-year-old walks out to
+lead a symphony. Written from the start to the rule from [[lindsey-palace-plan]] — no shot may rotate or occlude
+the face — with the storyline's one turn rendered as a still already facing away so the motion only continues
+the walk.
+
+**The rule survives, with one correction that matters.** Writing "he does not turn his head or look away" into
+the video prompt does *not* prevent the turn: s2 and s3 both drifted away in the final second regardless, as
+lindsey_palace's s5 had. The instruction is not a control surface. What the rule actually buys is knowledge of
+where to cut — **7.0–7.5 s is the ceiling for a frontal face shot**, not the 9.9 s the clip offers.
+
+**The useful positive result is s6.** Both hands up to the collar, settling it, coming down, eyes returning to
+the lens — held the full 9.9 s with no drift, the most movement any face shot has survived across both films.
+So the line is not "motion is dangerous" but specifically **rotation of the head**; articulated motion in front
+of a stationary head is fine, which is a much more workable constraint for a director.
+
+**New gotcha**: LTX reads "the light shifts slowly" as *the lights go down*. Two shots (the waiting piano, the
+opened doors) dimmed steadily toward black, one nearly unusable past five seconds. Here it suited a hall before
+a performance and both were cut where the dimming reads as intent — but a prompt that wants steady light has to
+say the light stays constant.
+
+Also of note, and consistent with lindsey_palace: all four seed masters and every one of the eight shots was
+picked from its second seed or better on the first pass. With identity in the weights, still selection has
+stopped being the expensive part of these films.
+
 ## 2026-09-28 — First film driven by a LoRA instead of a photograph
 
 Started [[lindsey-palace-plan]]: one minute, seven shots, a nine-year-old in an emerald silk gown in a palace

@@ -67,7 +67,50 @@ their full length.
 | Upscale | Real-ESRGAN x4plus → 3840×2160, crop fit, 40M — ~10 min per clip |
 | Assemble | 0.75 s crossfades, clip audio kept, 1920×1080 delivery copy |
 
-## 6. Log
+## 6. What the clips did with the rule
+
+The rule held where it was followed, and the one thing it did **not** buy was immunity from the drift — only a
+shorter useful take.
+
+**Writing "he does not turn his head or look away" does not stop it.** s2 and s3 both turned away in the final
+second anyway, exactly as lindsey_palace s5 did with the same instruction. The instruction is not a control
+surface; the only reliable protection is the cut. Every frontal face shot here goes soft at roughly the
+eight-second mark, so **7.0–7.5 s is the real ceiling for a face shot**, not the 9.9 s the clip length offers.
+
+**Hands and breath are safe; that part worked.** s6 — both hands up to the collar, settling it, coming down,
+eyes up to the lens — held all 9.9 s with no identity drift at all. That is the most movement any face shot in
+either film has survived, and it confirms the distinction: articulated motion in front of a stationary head is
+fine, rotation of the head is not.
+
+**The shots with no face still win.** s4 (macro velvet and pocket square) held its full length, as the equivalent
+shot did last time.
+
+**A new one: LTX reads "the light shifts" as "the lights go down."** s5 (the waiting piano) and s7 (the open
+doors) both dimmed steadily toward black — s5 is nearly unusable past five seconds. It suits the story, since a
+hall does dim before a performance, so both are cut at the point where the dimming reads as intent rather than
+as an error. Worth writing the next light-motion prompt as "the light stays constant" if a constant is what is
+wanted.
+
+## 7. The cut
+
+| # | Shot | Kept | Why trimmed there |
+|---|---|---|---|
+| s1 | Establishing, he stands small at the centre | 9.9 s | clean throughout; LTX added a slow push in, which suits it |
+| s2 | Medium, hands at his sides | 7.0 s | turns away in the last second |
+| s3 | Hero close-up | 7.5 s | a smile arrives at ~5 s, then he turns away |
+| s4 | Detail: lapels, pocket square, collar | 9.9 s | stable throughout — no face to lose |
+| s5 | The piano waiting | 5.2 s | the light dims toward black past ~5 s |
+| s6 | He adjusts his collar and breathes | 9.9 s | **held the full length** — hands and breath, no rotation |
+| s7 | The doors open, light floods the marble | 7.5 s | dims at the end like s5 |
+| s8 | Walking toward the stage | 9.0 s | he walks away and shrinks; last second goes dark |
+
+65.9 s kept − 7 × 0.75 s crossfades = **60.65 s**.
+
+Music is the same Pixabay solo piano used on `lindsey_art` and `lindsey_palace`. Reused deliberately here: solo
+piano is the one instrument this particular story requires, and its first minute builds to ~50 s and resolves
+at 60 s.
+
+## 8. Log
 
 - **2026-09-28** — spec written. All four masters (kyle, foyer, piano, doors) came out right on one seed each,
   same as lindsey_palace: with identity in the weights, the first pass is usable. Still candidates rendering.

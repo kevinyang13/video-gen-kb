@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kyle — Five Minutes to Showtime — video-gen-kb</title>
+<style>
+:root{--bg:#0B0D12;--panel:#141822;--panel-2:#1B2130;--stroke:#2A3245;--text:#E6E9F0;
+--muted:#8B94A7;--accent:#F5B84B;--accent-2:#4BC9F5;--on-accent:#12131A;
+--rule:rgba(139,148,167,.22);--code:#F5B84B}
+@media(prefers-color-scheme:light){:root:not([data-theme=dark]){--bg:#F4F1EA;--panel:#fff;
+--panel-2:#FAF8F3;--stroke:#D9D3C6;--text:#16181F;--muted:#5D6473;--accent:#B8781A;
+--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}}
+:root[data-theme=light]{--bg:#F4F1EA;--panel:#fff;--panel-2:#FAF8F3;--stroke:#D9D3C6;
+--text:#16181F;--muted:#5D6473;--accent:#B8781A;--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);
+line-height:1.65;padding:0 1rem 4rem}
+.shell{max-width:840px;margin:0 auto}
+a{color:var(--accent);text-decoration:none;font-weight:600}
+a:hover{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--accent-2);outline-offset:3px;border-radius:4px}
+.bar{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;padding:1.1rem 0;margin-bottom:1.5rem;
+border-bottom:1px solid var(--stroke)}
+.crumb{font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.spacer{flex:1}
+.pill{border:1px solid var(--stroke);background:var(--panel);border-radius:999px;padding:.28rem .8rem;
+font-size:.75rem;font-weight:700;color:var(--text);cursor:pointer;font-family:inherit}
+.pill:hover{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+h1{font-size:clamp(1.7rem,5vw,2.5rem);margin:.2rem 0 1rem;line-height:1.1;letter-spacing:-.015em;text-wrap:balance}
+h2{font-size:1.25rem;margin:2.2rem 0 .7rem;padding-bottom:.35rem;border-bottom:1px solid var(--rule);text-wrap:balance}
+h3{font-size:1.02rem;margin:1.5rem 0 .5rem;color:var(--accent)}
+p{margin:.7rem 0}
+ul,ol{margin:.7rem 0 .7rem 1.3rem}
+li{margin:.28rem 0}
+li::marker{color:var(--accent)}
+em{color:var(--muted)}
+hr{border:none;border-top:1px solid var(--stroke);margin:2rem 0}
+blockquote{border-left:3px solid var(--accent);background:var(--panel);border-radius:0 10px 10px 0;
+padding:.8rem 1.1rem;margin:1.1rem 0;color:var(--muted);font-size:.92rem}
+code{background:var(--panel);border:1px solid var(--stroke);border-radius:5px;padding:.1rem .35rem;
+font-size:.85em;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--code)}
+img{max-width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--stroke);margin:1.1rem 0}
+pre{background:var(--panel);border:1px solid var(--stroke);border-radius:12px;padding:1rem;overflow-x:auto;margin:1.1rem 0}
+pre code{background:none;border:none;padding:0;color:var(--text);font-size:.83rem;line-height:1.55}
+.tw{overflow-x:auto;border:1px solid var(--stroke);border-radius:12px;background:var(--panel);margin:1.1rem 0}
+table{width:100%;border-collapse:collapse;font-size:.85rem;min-width:min(100%,460px)}
+th{background:var(--panel-2);color:var(--accent);text-align:left;padding:.55rem .8rem;font-size:.68rem;
+letter-spacing:.09em;text-transform:uppercase;white-space:nowrap;border-bottom:1px solid var(--stroke)}
+td{padding:.5rem .8rem;border-bottom:1px solid var(--rule);color:var(--muted);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td strong{color:var(--text)}
+.meta{display:flex;flex-wrap:wrap;gap:.4rem .9rem;font-size:.78rem;color:var(--muted);margin:-.4rem 0 1.2rem}
+.meta b{color:var(--text);font-weight:600}
+.missing{color:var(--muted);border-bottom:1px dashed var(--muted);cursor:help}
+.related{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--stroke)}
+.related h2{border:none;margin:0 0 .7rem;font-size:.95rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:0}
+.chips li{margin:0}
+.chips a,.chips .missing{display:inline-block;border:1px solid var(--stroke);background:var(--panel);
+border-radius:999px;padding:.28rem .8rem;font-size:.8rem}
+.chips a:hover{background:var(--accent);color:var(--on-accent);text-decoration:none;border-color:var(--accent)}
+footer{max-width:840px;margin:2.5rem auto 0;padding-top:1.2rem;border-top:1px solid var(--stroke);
+font-size:.75rem;color:var(--muted);text-align:center}
+/* landing */
+.hero{padding:2.4rem 0 1.6rem}
+.kicker{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2)}
+.hero h1{font-size:clamp(2rem,6vw,3.2rem);margin:.35rem 0 .5rem}
+.hero p{color:var(--muted);font-size:1.05rem;max-width:56ch}
+.hw{display:inline-flex;gap:.5rem;align-items:center;margin-top:1rem;border:1px solid var(--stroke);
+background:var(--panel);border-radius:999px;padding:.3rem .9rem;font-size:.78rem;color:var(--muted)}
+.hw .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.sec{margin-top:2.2rem}
+.sec h2{border:none;padding:0;margin:0 0 .8rem;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.9rem}
+.card{display:block;border:1px solid var(--stroke);background:var(--panel);border-radius:14px;padding:1rem 1.1rem;
+color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+.card b{display:block;color:var(--accent);font-size:1rem;margin-bottom:.3rem}
+.card span{font-size:.85rem;color:var(--muted);line-height:1.5}
+.stubs{font-size:.82rem;color:var(--muted);margin-top:.6rem}
+.yt{position:relative;width:100%;aspect-ratio:16/9;border:1px solid var(--stroke);border-radius:12px;overflow:hidden;background:#000;margin:1rem 0}
+.yt.yt-v{aspect-ratio:9/16;max-width:360px}
+.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="bar">
+    <span class="crumb"><a href="../">video-gen-kb</a> / <a href="index.html">Wiki</a></span>
+    <span class="spacer"></span>
+    <button class="pill" onclick="tt()">◐ Theme</button>
+  </nav>
+  <h1>Kyle — Five Minutes to Showtime</h1><p class="lede">A one-minute 16:9 photoreal short: the five minutes before a nine-year-old walks out to lead a symphony. Eight shots in a neoclassical conservatory foyer — composure, the waiting piano, a collar straightened, the oak doors opening, the walk toward the stage. The second LoRA-driven film, and the first written from the start to the rule that came out of <a href="lindsey-palace-plan.html">lindsey palace plan</a>.</p><div class="meta"><span><b>Updated</b> 2026-09-28</span><span><b>Sources</b> <a href="kyle-lora-plan.html">kyle lora plan</a> (the trained identity), <a href="lindsey-palace-plan.html">lindsey palace plan</a> §6 (the occlusion rule), <a href="blueprint-v2-research.html">blueprint v2 research</a>, <a href="headless-cli-pipeline.html">headless cli pipeline</a>.</span></div>
+<hr />
+<h2>1. The brief</h2>
+<p>A supplied portrait prompt — navy velvet double-breasted blazer with satin lapels, silk pocket square, crisp
+white collar, marble columns and crystal chandeliers, Hasselblad, Vogue Kids catalog style — plus a storyline:
+Leo, the youngest pianist ever to lead the city's symphony, waiting out the last five minutes in the foyer while
+the hall fills behind the doors. A chime. He straightens his collar and breathes. The doors open, golden stage
+light floods the marble, and he walks toward it.</p>
+<h2>2. Two limits this film was written around</h2>
+<p><strong>The video model never sees the LoRA.</strong> Identity is fixed at the still; LTX then has 249 frames in which nothing
+renews it. On <a href="lindsey-palace-plan.html">lindsey palace plan</a> a shot that turned the head through profile came back as a different,
+adult person — twice, including once with an explicit instruction not to turn. So here <strong>every face shot is
+locked frontal</strong>, and motion is restricted to breathing, blinking, and hands. The storyline's one turn — <em>"turns
+smoothly on his heel"</em> — is not animated as a turn at all: s8 is rendered as a still that already faces away,
+and the motion only continues the walk. Walking away from camera was one of the two things that held for a full
+ten seconds last time.</p>
+<p><strong>Kyle's dataset is close-heavy.</strong> Sixteen turnaround frames and exactly one full-body photograph, so identity is
+dependable in close-up and at angle but not at full-body distance — the failure Ivy and Kyle shared. The two
+wides (s1, s8) therefore sit at 0.85 and are composed so the face is either small or turned away, and they carry
+the story rather than the likeness.</p>
+<h2>3. Shot list and the weight table</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Shot</th>
+<th>Input master</th>
+<th>LoRA weight</th>
+<th>Motion allowed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>s1</td>
+<td>Establishing: the empty foyer, he stands small at its centre</td>
+<td>foyer</td>
+<td>0.85</td>
+<td>light and dust only; he is still</td>
+</tr>
+<tr>
+<td>s2</td>
+<td>Medium, hands at his sides, holding the lens</td>
+<td>kyle</td>
+<td>1.0</td>
+<td>breathe, blink</td>
+</tr>
+<tr>
+<td>s3</td>
+<td>Hero close-up: the calm unflinching gaze</td>
+<td>kyle</td>
+<td>1.0</td>
+<td>breathe, blink</td>
+</tr>
+<tr>
+<td>s4</td>
+<td>Detail: satin lapels, silk pocket square, white collar</td>
+<td>kyle</td>
+<td>0.6</td>
+<td>fabric settles; nothing lifts</td>
+</tr>
+<tr>
+<td>s5</td>
+<td>The piano waiting, alone in a side hall</td>
+<td>piano</td>
+<td><strong>none</strong></td>
+<td>light and dust only</td>
+</tr>
+<tr>
+<td>s6</td>
+<td>He adjusts his collar and takes a slow breath</td>
+<td>kyle</td>
+<td>1.0</td>
+<td>hands, breath, eyes up — no head turn</td>
+</tr>
+<tr>
+<td>s7</td>
+<td>The oak doors open, stage light floods the marble</td>
+<td>doors</td>
+<td><strong>none</strong></td>
+<td>light spreads, dust turns</td>
+</tr>
+<tr>
+<td>s8</td>
+<td>From behind, walking toward the stage</td>
+<td>foyer</td>
+<td>0.85</td>
+<td>walking away; he never turns back</td>
+</tr>
+</tbody>
+</table></div>
+<p>Eight takes trimmed to 8.3 s, seven 0.75 s crossfades: <strong>61.15 s</strong>.</p>
+<p>Three of the eight shots have no face in them at all (s4 has no head, s5 and s7 have no person). That is
+deliberate, not filler — those are the shots that cannot drift, and last time they were the only ones usable for
+their full length.</p>
+<h2>4. Locks</h2>
+<ul>
+<li><strong>subject</strong> — <code>kyle_kx boy</code>, an elegant nine-year-old boy, this exact face, neat dark hair</li>
+<li><strong>wardrobe</strong> — bespoke navy velvet double-breasted blazer, satin lapels, fine silk pocket square, crisp white tailored collar shirt</li>
+<li><strong>place</strong> — grand neoclassical conservatory foyer, polished marble columns, checkerboard marble floor, crystal chandeliers, heavy double oak doors at the far end</li>
+<li><strong>style</strong> — Hasselblad medium format, soft diffused chandelier light, ultra-realistic skin texture, sharp focus, warm wood and marble reflections, Vogue Kids catalog</li>
+</ul>
+<h2>5. Settings</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Setting</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Still</td>
+<td>FLUX.2 [klein] 9B (8-bit S), 1024×576, 4 steps, CFG 1, shift 3, DDIM Trailing (sampler 16), edit mode strength 1.0</td>
+</tr>
+<tr>
+<td>LoRA</td>
+<td><code>kyle_lora_2000_lora_f32.ckpt</code> @ none / 0.6 / 0.85 / 1.0 per the table</td>
+</tr>
+<tr>
+<td>Clip</td>
+<td>LTX-2.3 22B [distilled] 1.1, 1024×576, 249 frames @ 25 fps, 8 steps, CFG 1, shift 5, TCD Trailing (sampler 19), SSS 0.3 — ~11 min each</td>
+</tr>
+<tr>
+<td>Upscale</td>
+<td>Real-ESRGAN x4plus → 3840×2160, crop fit, 40M — ~10 min per clip</td>
+</tr>
+<tr>
+<td>Assemble</td>
+<td>0.75 s crossfades, clip audio kept, 1920×1080 delivery copy</td>
+</tr>
+</tbody>
+</table></div>
+<h2>6. What the clips did with the rule</h2>
+<p>The rule held where it was followed, and the one thing it did <strong>not</strong> buy was immunity from the drift — only a
+shorter useful take.</p>
+<p><strong>Writing "he does not turn his head or look away" does not stop it.</strong> s2 and s3 both turned away in the final
+second anyway, exactly as lindsey_palace s5 did with the same instruction. The instruction is not a control
+surface; the only reliable protection is the cut. Every frontal face shot here goes soft at roughly the
+eight-second mark, so <strong>7.0–7.5 s is the real ceiling for a face shot</strong>, not the 9.9 s the clip length offers.</p>
+<p><strong>Hands and breath are safe; that part worked.</strong> s6 — both hands up to the collar, settling it, coming down,
+eyes up to the lens — held all 9.9 s with no identity drift at all. That is the most movement any face shot in
+either film has survived, and it confirms the distinction: articulated motion in front of a stationary head is
+fine, rotation of the head is not.</p>
+<p><strong>The shots with no face still win.</strong> s4 (macro velvet and pocket square) held its full length, as the equivalent
+shot did last time.</p>
+<p><strong>A new one: LTX reads "the light shifts" as "the lights go down."</strong> s5 (the waiting piano) and s7 (the open
+doors) both dimmed steadily toward black — s5 is nearly unusable past five seconds. It suits the story, since a
+hall does dim before a performance, so both are cut at the point where the dimming reads as intent rather than
+as an error. Worth writing the next light-motion prompt as "the light stays constant" if a constant is what is
+wanted.</p>
+<h2>7. The cut</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Shot</th>
+<th>Kept</th>
+<th>Why trimmed there</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>s1</td>
+<td>Establishing, he stands small at the centre</td>
+<td>9.9 s</td>
+<td>clean throughout; LTX added a slow push in, which suits it</td>
+</tr>
+<tr>
+<td>s2</td>
+<td>Medium, hands at his sides</td>
+<td>7.0 s</td>
+<td>turns away in the last second</td>
+</tr>
+<tr>
+<td>s3</td>
+<td>Hero close-up</td>
+<td>7.5 s</td>
+<td>a smile arrives at ~5 s, then he turns away</td>
+</tr>
+<tr>
+<td>s4</td>
+<td>Detail: lapels, pocket square, collar</td>
+<td>9.9 s</td>
+<td>stable throughout — no face to lose</td>
+</tr>
+<tr>
+<td>s5</td>
+<td>The piano waiting</td>
+<td>5.2 s</td>
+<td>the light dims toward black past ~5 s</td>
+</tr>
+<tr>
+<td>s6</td>
+<td>He adjusts his collar and breathes</td>
+<td>9.9 s</td>
+<td><strong>held the full length</strong> — hands and breath, no rotation</td>
+</tr>
+<tr>
+<td>s7</td>
+<td>The doors open, light floods the marble</td>
+<td>7.5 s</td>
+<td>dims at the end like s5</td>
+</tr>
+<tr>
+<td>s8</td>
+<td>Walking toward the stage</td>
+<td>9.0 s</td>
+<td>he walks away and shrinks; last second goes dark</td>
+</tr>
+</tbody>
+</table></div>
+<p>65.9 s kept − 7 × 0.75 s crossfades = <strong>60.65 s</strong>.</p>
+<p>Music is the same Pixabay solo piano used on <code>lindsey_art</code> and <code>lindsey_palace</code>. Reused deliberately here: solo
+piano is the one instrument this particular story requires, and its first minute builds to ~50 s and resolves
+at 60 s.</p>
+<h2>8. Log</h2>
+<ul>
+<li><strong>2026-09-28</strong> — spec written. All four masters (kyle, foyer, piano, doors) came out right on one seed each,
+  same as lindsey_palace: with identity in the weights, the first pass is usable. Still candidates rendering.</li>
+</ul>
+
+  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="kyle-lora-plan.html">kyle lora plan</a></li><li><a href="lindsey-palace-plan.html">lindsey palace plan</a></li><li><a href="blueprint-v2-research.html">blueprint v2 research</a></li><li><a href="nightelf-hunter-plan.html">nightelf hunter plan</a></li></ul></div>
+</div>
+<footer>video-gen-kb · built 2026-09-29 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<script>function tt(){var r=document.documentElement,
+d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
+matchMedia('(prefers-color-scheme: dark)').matches);
+r.setAttribute('data-theme',d?'light':'dark');}</script>
+</body>
+</html>

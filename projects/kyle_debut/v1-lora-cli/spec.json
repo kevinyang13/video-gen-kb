@@ -37,7 +37,7 @@
   "post": {
     "upscale": "scripts/upscale_4k.sh \u2014 Real-ESRGAN x4plus -> 3840x2160 (~10 min per clip)",
     "loop": "none \u2014 xfade 0.75",
-    "music": "to pick after QC; wants solo piano that arrives late, matching the doors opening at s7"
+    "music": "Emotional Children Piano \u2014 Music_For_Videos, Pixabay (cdn.pixabay.com/download/audio/2023/09/03/audio_2c0ed5a272.mp3), 1:55; first 60 s under the LTX room tone at 0.5, 2 s fade out. Solo piano is the one instrument this story requires, and its first minute builds to ~50 s and resolves at 60 s."
   },
   "scenes": {
     "locks": {
@@ -188,10 +188,10 @@
         },
         "video_prompt": "Fixed camera, no camera movement. The chandelier light flickers almost imperceptibly, fine dust drifting through the light shafts, faint reflections shifting on the polished marble. The boy stands perfectly still. Room tone, a distant murmur of a crowd behind the doors, no music.",
         "qc_ref": "kyle",
-        "take": null,
+        "take": "clips/s1_v1.mov",
         "trim": [
           0,
-          8.3
+          9.9
         ]
       },
       {
@@ -213,10 +213,10 @@
         },
         "video_prompt": "Locked camera, no push in. He stands still and holds the camera's gaze; he breathes, blinks once, the velvet of the blazer catching the light as his chest rises. He does not turn his head or look away. Room tone, no music.",
         "qc_ref": "kyle",
-        "take": null,
+        "take": "clips/s2_v1.mov",
         "trim": [
           0,
-          8.3
+          7.0
         ]
       },
       {
@@ -238,10 +238,10 @@
         },
         "video_prompt": "Locked camera, almost no movement. He holds the camera's gaze, blinks slowly, breathes; the warm light shifts a fraction across his face. He does not turn his head. Room tone, no music.",
         "qc_ref": "kyle",
-        "take": null,
+        "take": "clips/s3_v1.mov",
         "trim": [
           0,
-          8.3
+          7.5
         ]
       },
       {
@@ -263,10 +263,10 @@
         },
         "video_prompt": "Locked macro camera. Only the faintest movement: the velvet shifts a few millimetres as he breathes, warm light creeping slowly across the satin lapel and the silk pocket square. The fabric stays flat \u2014 nothing lifts, flaps or folds over. Room tone, no music.",
         "qc_ref": "kyle",
-        "take": null,
+        "take": "clips/s4_v1.mov",
         "trim": [
           0,
-          8.3
+          9.9
         ]
       },
       {
@@ -282,10 +282,10 @@
         },
         "video_prompt": "Fixed camera, no camera movement. Nothing moves but the light: the chandelier glow shifting slowly across the black lacquer, fine dust drifting through the beam, a faint reflection wavering on the floor. Room tone, a distant murmur, no music.",
         "qc_ref": "kyle",
-        "take": null,
+        "take": "clips/s5_v1.mov",
         "trim": [
           0,
-          8.3
+          5.2
         ]
       },
       {
@@ -307,10 +307,10 @@
         },
         "video_prompt": "Locked camera. His hands settle the collar and come back down; his chest rises with a slow deep breath and his eyes come up to the lens. He stays facing the camera throughout and never turns his head. Room tone, no music.",
         "qc_ref": "kyle",
-        "take": null,
+        "take": "clips/s6_v1.mov",
         "trim": [
           0,
-          8.3
+          9.9
         ]
       },
       {
@@ -326,10 +326,10 @@
         },
         "video_prompt": "Fixed camera, no camera movement. The golden light from the doorway strengthens and spreads slowly across the marble, dust turning in the beam, the chandeliers steady overhead. Room tone, a swell of distant applause, no music.",
         "qc_ref": "kyle",
-        "take": null,
+        "take": "clips/s7_v1.mov",
         "trim": [
           0,
-          8.3
+          7.5
         ]
       },
       {
@@ -351,12 +351,26 @@
         },
         "video_prompt": "Fixed camera. He walks steadily away from the camera toward the golden doorway, his reflection travelling with him on the marble, the light growing as he nears the doors. He never turns back. Room tone, applause rising, no music.",
         "qc_ref": "kyle",
-        "take": null,
+        "take": "clips/s8_v1.mov",
         "trim": [
           0,
-          8.3
+          9.0
         ]
       }
-    ]
-  }
+    ],
+    "music": {
+      "file": "projects/kyle_debut/v1-lora-cli/music/emotional_children_piano.mp3",
+      "start": 0,
+      "vol": 0.5,
+      "fade_in": 0,
+      "fade_out": 2
+    }
+  },
+  "files": [
+    "stills/s1.png \u2026 s8.png",
+    "clips/s1_v1.mov \u2026 s8_v1.mov",
+    "final/kyle_debut_3840x2160.mp4",
+    "final/kyle_debut_1920x1080.mp4",
+    "music/emotional_children_piano.mp3"
+  ]
 }

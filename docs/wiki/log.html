@@ -94,6 +94,26 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
   </nav>
   <h1>Log</h1><p class="lede">Append-only record of every operation performed on this wiki.</p><div class="meta"><span><b>Updated</b> 2026-09-22</span><span><b>Sources</b> n/a</span></div>
 <hr />
+<h2>2026-09-29 — Kyle's debut, and what the occlusion rule is actually worth</h2>
+<p>Second LoRA-driven film, <a href="kyle-debut-plan.html">kyle debut plan</a>: eight shots, the five minutes before a nine-year-old walks out to
+lead a symphony. Written from the start to the rule from <a href="lindsey-palace-plan.html">lindsey palace plan</a> — no shot may rotate or occlude
+the face — with the storyline's one turn rendered as a still already facing away so the motion only continues
+the walk.</p>
+<p><strong>The rule survives, with one correction that matters.</strong> Writing "he does not turn his head or look away" into
+the video prompt does <em>not</em> prevent the turn: s2 and s3 both drifted away in the final second regardless, as
+lindsey_palace's s5 had. The instruction is not a control surface. What the rule actually buys is knowledge of
+where to cut — <strong>7.0–7.5 s is the ceiling for a frontal face shot</strong>, not the 9.9 s the clip offers.</p>
+<p><strong>The useful positive result is s6.</strong> Both hands up to the collar, settling it, coming down, eyes returning to
+the lens — held the full 9.9 s with no drift, the most movement any face shot has survived across both films.
+So the line is not "motion is dangerous" but specifically <strong>rotation of the head</strong>; articulated motion in front
+of a stationary head is fine, which is a much more workable constraint for a director.</p>
+<p><strong>New gotcha</strong>: LTX reads "the light shifts slowly" as <em>the lights go down</em>. Two shots (the waiting piano, the
+opened doors) dimmed steadily toward black, one nearly unusable past five seconds. Here it suited a hall before
+a performance and both were cut where the dimming reads as intent — but a prompt that wants steady light has to
+say the light stays constant.</p>
+<p>Also of note, and consistent with lindsey_palace: all four seed masters and every one of the eight shots was
+picked from its second seed or better on the first pass. With identity in the weights, still selection has
+stopped being the expensive part of these films.</p>
 <h2>2026-09-28 — First film driven by a LoRA instead of a photograph</h2>
 <p>Started <a href="lindsey-palace-plan.html">lindsey palace plan</a>: one minute, seven shots, a nine-year-old in an emerald silk gown in a palace
 pavilion above domes and waterfalls. No reference photograph is touched at render time — identity is the token
@@ -462,7 +482,7 @@ hyperparameters.</p>
 frontal close-up costs sharpness and prompt grip on wardrobe, 0.85 is the all-rounder.</p>
   
 </div>
-<footer>video-gen-kb · built 2026-09-28 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<footer>video-gen-kb · built 2026-09-29 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
 <script>function tt(){var r=document.documentElement,
 d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
 matchMedia('(prefers-color-scheme: dark)').matches);
