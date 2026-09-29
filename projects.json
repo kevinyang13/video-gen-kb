@@ -1989,7 +1989,7 @@
       "date": "2026-09-28",
       "theme": "realistic",
       "dt_project": "none — draw-things-cli via scripts/film_run.py",
-      "status": "planned 2026-09-28 — spec written",
+      "status": "delivered 2026-09-29 01:20 — 60.76 s, 3840x2160 (279 MB) + 1920x1080 (79 MB), 8 shots, none dropped; mean -21.7 dB, peak -5.5 dB",
       "source": "text-only; identity comes from projects/kyle_lora (trigger kyle_kx, class word boy). No source photographs are used at render time.",
       "notes": "Kyle is Kevin's son; consent settled. One minute, eight shots. The story is the five minutes before a nine-year-old walks out to lead a symphony: composure, the waiting piano, a collar straightened, the doors opening, the walk toward the stage.\n\nWritten around two known limits. First, **the video model never sees the LoRA**, so identity is fixed at the still and any motion that rotates or occludes the face lets LTX recast the subject (lindsey_palace s5 came back as an adult). Every face shot here is therefore locked frontal with motion limited to breathing, blinking and hands; the story's one turn — 'turns smoothly on his heel' — is rendered as a still already facing away, with motion only continuing the walk. Second, **Kyle's dataset is 16 turnaround frames and only one full-body frame**, so identity is dependable close and at angle but not at full-body distance; the wides (s1, s8) sit at 0.85 and are composed so the face is small or turned away, and the three shots with no person in them (s5, s7) carry no LoRA at all.",
       "still": {
