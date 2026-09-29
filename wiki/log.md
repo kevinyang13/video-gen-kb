@@ -8,6 +8,30 @@
 
 ---
 
+## 2026-09-29 — Kyle's signal fire: choosing the subject to satisfy the constraint
+
+Fourth LoRA-driven film, [[kyle-lighthouse-plan]]: a boy carries a lantern out a storm causeway to a dead
+lighthouse and relights it. The new move is not a new rule but a new *response* to the existing one. If LTX
+cannot be told what not to do, then pick subjects whose natural motion is already the motion wanted — fire,
+surf, spray, a swinging lamp, a sweeping beam.
+
+**The decisive test was s3.** On [[lindsey-summit-plan]] a held compass floated out of frame twice, once after
+being explicitly told not to. Here the equivalent object **hangs from a hook**, so swinging is its correct
+behaviour — and it stayed in frame for the whole take. The composition did what the prompt could not. This is
+the practical form of the rule: *don't forbid the motion, choose a subject for which the motion is right.*
+
+**Self-animating subjects also produced the best footage so far.** s1 was budgeted as a plain establishing wide
+and came back with a wave bursting white across the causeway; s8's beam sweeps through spray for its full
+length. Weather has no correct state to drift from, so the model's invention is free drama rather than damage.
+
+**One correction to the "hands in front of a stationary head" pattern**: it protects identity, not composition.
+s4's match-in-cupped-hands was perfect on the face but LTX pushed the camera in until the hand filled frame, so
+it was trimmed to 8.0 s rather than the 9.5 s the previous two films supported.
+
+**And a prompt gotcha Kevin caught**: "cheeks reddened by cold wind" in a still prompt produces a blotchy red
+face from klein, not weathering. Dropped in favour of "an even natural skin tone", which fixed it. Weather on
+skin is better implied by the environment than requested directly.
+
 ## 2026-09-29 — Lindsey above the cloud sea, and the rule behind the rules
 
 Third LoRA-driven film, [[lindsey-summit-plan]]: a forest at dawn, a compass, a stone stair, and a ruined tower

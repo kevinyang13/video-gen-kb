@@ -67,7 +67,52 @@ Palette is cold desaturated grey with warm firelight — the third distinct look
 | Upscale | Real-ESRGAN x4plus → 3840×2160, crop fit, 40M — ~10 min per clip |
 | Assemble | 0.75 s crossfades, clip audio kept, 1920×1080 delivery copy |
 
-## 6. Log
+## 6. Did choosing the subject work?
+
+Yes, and s3 is the proof.
+
+**The hanging lantern held.** On [[lindsey-summit-plan]] a *held* compass floated out of frame twice, the second
+time after being told in as many words not to. Here the same class of object hangs from a hook, and the model's
+urge to move it produced exactly the shot that was wanted: the lantern swings gently, the flame leans and
+steadies, rain runs down the glass, and it stays in frame for the whole take. Nothing in the prompt forbade
+anything. The composition did the work the prompt could not.
+
+**Self-animating subjects also gave the film its best shot.** s1 was budgeted as an ordinary establishing wide;
+what came back has a wave bursting white across the causeway mid-take. Surf and weather have no correct state
+to drift away from, so the model's invention is free drama instead of a defect. The same is true of s8's
+sweeping beam. These are now the two strongest shots across four films, and neither risked identity at all.
+
+**The face budgets were right again.** s2 and s7 drifted on schedule; both were already cut short of it.
+
+**One correction to the "hands" pattern.** s4 — the match cupped in both hands — held its subject fine, but LTX
+pushed the camera in hard over the last two seconds until the hand filled frame. So the pattern is safe for
+*identity*, but not automatically safe for *composition*; it was trimmed to 8.0 s rather than the 9.5 s the
+previous two films supported. Worth remembering that a shot can fail on framing while the face is still perfect.
+
+**A prompt fix, caught by Kevin.** The first s2 still had "cheeks reddened by cold wind" in it and klein took
+that to blotchy red across the whole face. Re-rendered with the redness language dropped and "an even natural
+skin tone" in its place, which fixed it cleanly. Weather-beaten skin is better implied by the environment than
+asked for directly.
+
+## 7. The cut
+
+Order **s1 s2 s3 s6 s5 s4 s7 s8** — the shot ids were written in story-beat order but the climb has to precede
+the lamp room, so the sequence was corrected before the clips were rendered.
+
+| # | Shot | Take | Kept | Note |
+|---|---|---|---|---|
+| s1 | The causeway, he is small, from behind | s1_v1 | 9.5 s | a wave bursts across the causeway mid-take |
+| s2 | Close-up, spray on his face | s2_v2 | 5.5 s | re-rendered to remove the red face; squints after ~5.5 s |
+| s3 | The lantern swinging on its hook | s3_v1 | 7.0 s | **stayed in frame** — the hook design worked |
+| s6 | The climb, from behind | s6_v1 | 9.0 s | lantern light moving on the curved wall; clean |
+| s5 | The dark lamp room | s5_v1 | 8.0 s | rain on glass, light held constant |
+| s4 | The match cupped in both hands | s4_v1 | 8.0 s | identity clean; trimmed for a hard push-in at the end |
+| s7 | The lamp catches | s7_v1 | 8.5 s | the smile lands at ~5 s and holds |
+| s8 | The beam goes out across the water | s8_v1 | 9.9 s | clean full length |
+
+65.4 s kept − 7 × 0.75 s crossfades = **60.15 s**.
+
+## 8. Log
 
 - **2026-09-29** — spec written. All three masters right on one seed each (seed 3), now the fourth film running
   for which that is true. Still candidates rendering.

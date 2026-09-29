@@ -37,7 +37,7 @@
   "post": {
     "upscale": "scripts/upscale_4k.sh \u2014 Real-ESRGAN x4plus -> 3840x2160",
     "loop": "none \u2014 xfade 0.75",
-    "music": "chosen after QC"
+    "music": "Best Adventure Ever \u2014 geoffharvey, Pixabay (cdn.pixabay.com/download/audio/2022/10/13/audio_f917a5a4fc.mp3), 2:33; tail-aligned so the track's climax lands on the lamp catching and the beam going out. Reused from kyle_rescue."
   },
   "scenes": {
     "locks": {
@@ -56,7 +56,7 @@
     "s2": {
       "title": "Close-up \u2014 salt spray on his face, the lighthouse ahead",
       "note": "LoRA weight 1.0; input seed/kyle.png; kept 7.0 s",
-      "still": "Tight close-up portrait, head and shoulders, straight on. kyle_kx boy, a nine-year-old boy, this exact face, neat dark hair wet with spray, wearing a heavy oiled canvas coat in dark slate over a thick cream fisherman's wool sweater, a coil of rope over one shoulder and a battered brass storm lantern in his hand with the wool collar turned up at his throat, facing the camera, face wet with spray, cheeks reddened by cold wind, jaw set. a storm-battered granite headland at dusk, black wet rock and white surf exploding against it, a narrow stone causeway running out to a ruined lighthouse of weathered pale stone, low iron-grey cloud and spray hanging in the air thrown far out of focus behind him, cold grey light with a faint warm glow from the lantern below frame. Razor-sharp focus on the eyes, wet skin texture and individual eyelashes. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wet wool and oiled canvas, natural storm light at dusk, shallow depth of field, subtle film grain, cold desaturated colour with warm firelight. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
+      "still": "Tight close-up portrait, head and shoulders, straight on. kyle_kx boy, a nine-year-old boy, this exact face, neat dark hair wet with spray, wearing a heavy oiled canvas coat in dark slate over a thick cream fisherman's wool sweater, a coil of rope over one shoulder and a battered brass storm lantern in his hand with the wool collar turned up at his throat, facing the camera, skin damp with fine sea spray, an even natural skin tone, jaw set. a storm-battered granite headland at dusk, black wet rock and white surf exploding against it, a narrow stone causeway running out to a ruined lighthouse of weathered pale stone, low iron-grey cloud and spray hanging in the air thrown far out of focus behind him, cool even grey light with a faint warm glow from the lantern below frame. Razor-sharp focus on the eyes, damp skin texture and individual eyelashes. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wet wool and oiled canvas, natural storm light at dusk, shallow depth of field, subtle film grain, cold desaturated colour with warm firelight. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
       "video": "Locked camera, no push in. He faces the camera, breathing hard, blinking against the spray; wind drags at his wet hair and the collar of his coat. The light stays constant. Surf, wind, no music."
     },
     "s3": {
@@ -188,10 +188,10 @@
         },
         "video_prompt": "Fixed camera, no camera movement. Heavy surf rolls in and bursts white against the causeway, spray blowing across in the wind, low cloud moving over the headland. He walks steadily away along the causeway. The light stays constant. Surf, wind, no music.",
         "qc_ref": "kyle",
-        "take": null,
+        "take": "clips/s1_v1.mov",
         "trim": [
           0,
-          9.0
+          9.5
         ]
       },
       {
@@ -199,7 +199,7 @@
         "still": {
           "ref": null,
           "input": "seed/kyle.png",
-          "prompt": "Tight close-up portrait, head and shoulders, straight on. kyle_kx boy, a nine-year-old boy, this exact face, neat dark hair wet with spray, wearing a heavy oiled canvas coat in dark slate over a thick cream fisherman's wool sweater, a coil of rope over one shoulder and a battered brass storm lantern in his hand with the wool collar turned up at his throat, facing the camera, face wet with spray, cheeks reddened by cold wind, jaw set. a storm-battered granite headland at dusk, black wet rock and white surf exploding against it, a narrow stone causeway running out to a ruined lighthouse of weathered pale stone, low iron-grey cloud and spray hanging in the air thrown far out of focus behind him, cold grey light with a faint warm glow from the lantern below frame. Razor-sharp focus on the eyes, wet skin texture and individual eyelashes. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wet wool and oiled canvas, natural storm light at dusk, shallow depth of field, subtle film grain, cold desaturated colour with warm firelight. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
+          "prompt": "Tight close-up portrait, head and shoulders, straight on. kyle_kx boy, a nine-year-old boy, this exact face, neat dark hair wet with spray, wearing a heavy oiled canvas coat in dark slate over a thick cream fisherman's wool sweater, a coil of rope over one shoulder and a battered brass storm lantern in his hand with the wool collar turned up at his throat, facing the camera, skin damp with fine sea spray, an even natural skin tone, jaw set. a storm-battered granite headland at dusk, black wet rock and white surf exploding against it, a narrow stone causeway running out to a ruined lighthouse of weathered pale stone, low iron-grey cloud and spray hanging in the air thrown far out of focus behind him, cool even grey light with a faint warm glow from the lantern below frame. Razor-sharp focus on the eyes, damp skin texture and individual eyelashes. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wet wool and oiled canvas, natural storm light at dusk, shallow depth of field, subtle film grain, cold desaturated colour with warm firelight. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
           "config": {
             "shift": 3.0,
             "sampler": 16,
@@ -209,14 +209,19 @@
                 "weight": 1.0
               }
             ]
-          }
+          },
+          "seeds": [
+            11,
+            12,
+            13
+          ]
         },
         "video_prompt": "Locked camera, no push in. He faces the camera, breathing hard, blinking against the spray; wind drags at his wet hair and the collar of his coat. The light stays constant. Surf, wind, no music.",
         "qc_ref": "kyle",
-        "take": null,
+        "take": "clips/s2_v2.mov",
         "trim": [
           0,
-          7.0
+          5.5
         ]
       },
       {
@@ -238,7 +243,7 @@
         },
         "video_prompt": "Locked macro camera. The hanging lantern swings slowly on its hook, the flame leaning and steadying inside the glass, rain beading and running down the panes. The light stays constant. Wind, surf, no music.",
         "qc_ref": "kyle",
-        "take": null,
+        "take": "clips/s3_v1.mov",
         "trim": [
           0,
           7.0
@@ -263,10 +268,10 @@
         },
         "video_prompt": "Fixed camera. He climbs steadily away from the camera up the spiral stair, the lantern in his hand swinging and throwing warm moving light around the curve of the wall as he rises. Footfalls on iron, muffled surf, wind, no music.",
         "qc_ref": "kyle",
-        "take": null,
+        "take": "clips/s6_v1.mov",
         "trim": [
           0,
-          9.5
+          9.0
         ]
       },
       {
@@ -282,7 +287,7 @@
         },
         "video_prompt": "Fixed camera, no camera movement. Rain runs down the outside of the salt-clouded panes, the grey sea heaving far below beyond the glass, dust drifting in the still air of the room. The light stays constant. Muffled surf, wind, no music.",
         "qc_ref": "kyle",
-        "take": null,
+        "take": "clips/s5_v1.mov",
         "trim": [
           0,
           8.0
@@ -307,10 +312,10 @@
         },
         "video_prompt": "Locked camera. His cupped hands close a little tighter around the match flame, which leans and steadies and throws moving warm light up across his face; his eyes stay down on it and then lift to the lens. He stays facing the camera throughout. Surf muffled through glass, wind, no music.",
         "qc_ref": "kyle",
-        "take": null,
+        "take": "clips/s4_v1.mov",
         "trim": [
           0,
-          9.5
+          8.0
         ]
       },
       {
@@ -332,10 +337,10 @@
         },
         "video_prompt": "Locked camera. The warm light on his face strengthens and steadies; his eyes widen a fraction and the small smile settles, he blinks once. He faces the camera throughout. Muffled surf, no music.",
         "qc_ref": "kyle",
-        "take": null,
+        "take": "clips/s7_v1.mov",
         "trim": [
           0,
-          7.5
+          8.5
         ]
       },
       {
@@ -351,12 +356,26 @@
         },
         "video_prompt": "Fixed camera, no camera movement. The lighthouse beam sweeps slowly out across the water and through the spray, heavy swell rolling beneath the camera, surf bursting white against the rocks, cloud moving fast overhead. The beam stays bright and constant. Surf, wind, no music.",
         "qc_ref": "kyle",
-        "take": null,
+        "take": "clips/s8_v1.mov",
         "trim": [
           0,
-          8.5
+          9.9
         ]
       }
-    ]
-  }
+    ],
+    "music": {
+      "file": "projects/kyle_lighthouse/v1-lora-cli/music/best_adventure_ever.mp3",
+      "start": "tail",
+      "vol": 0.45,
+      "fade_in": 1.5,
+      "fade_out": 0
+    }
+  },
+  "files": [
+    "stills/s1.png \u2026 s8.png",
+    "clips/s1_v1.mov \u2026 s8_v1.mov (s2 uses v2)",
+    "final/kyle_lighthouse_3840x2160.mp4",
+    "final/kyle_lighthouse_1920x1080.mp4",
+    "music/best_adventure_ever.mp3"
+  ]
 }

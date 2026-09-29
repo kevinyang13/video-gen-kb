@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kyle — The Signal Fire — video-gen-kb</title>
+<style>
+:root{--bg:#0B0D12;--panel:#141822;--panel-2:#1B2130;--stroke:#2A3245;--text:#E6E9F0;
+--muted:#8B94A7;--accent:#F5B84B;--accent-2:#4BC9F5;--on-accent:#12131A;
+--rule:rgba(139,148,167,.22);--code:#F5B84B}
+@media(prefers-color-scheme:light){:root:not([data-theme=dark]){--bg:#F4F1EA;--panel:#fff;
+--panel-2:#FAF8F3;--stroke:#D9D3C6;--text:#16181F;--muted:#5D6473;--accent:#B8781A;
+--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}}
+:root[data-theme=light]{--bg:#F4F1EA;--panel:#fff;--panel-2:#FAF8F3;--stroke:#D9D3C6;
+--text:#16181F;--muted:#5D6473;--accent:#B8781A;--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);
+line-height:1.65;padding:0 1rem 4rem}
+.shell{max-width:840px;margin:0 auto}
+a{color:var(--accent);text-decoration:none;font-weight:600}
+a:hover{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--accent-2);outline-offset:3px;border-radius:4px}
+.bar{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;padding:1.1rem 0;margin-bottom:1.5rem;
+border-bottom:1px solid var(--stroke)}
+.crumb{font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.spacer{flex:1}
+.pill{border:1px solid var(--stroke);background:var(--panel);border-radius:999px;padding:.28rem .8rem;
+font-size:.75rem;font-weight:700;color:var(--text);cursor:pointer;font-family:inherit}
+.pill:hover{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+h1{font-size:clamp(1.7rem,5vw,2.5rem);margin:.2rem 0 1rem;line-height:1.1;letter-spacing:-.015em;text-wrap:balance}
+h2{font-size:1.25rem;margin:2.2rem 0 .7rem;padding-bottom:.35rem;border-bottom:1px solid var(--rule);text-wrap:balance}
+h3{font-size:1.02rem;margin:1.5rem 0 .5rem;color:var(--accent)}
+p{margin:.7rem 0}
+ul,ol{margin:.7rem 0 .7rem 1.3rem}
+li{margin:.28rem 0}
+li::marker{color:var(--accent)}
+em{color:var(--muted)}
+hr{border:none;border-top:1px solid var(--stroke);margin:2rem 0}
+blockquote{border-left:3px solid var(--accent);background:var(--panel);border-radius:0 10px 10px 0;
+padding:.8rem 1.1rem;margin:1.1rem 0;color:var(--muted);font-size:.92rem}
+code{background:var(--panel);border:1px solid var(--stroke);border-radius:5px;padding:.1rem .35rem;
+font-size:.85em;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--code)}
+img{max-width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--stroke);margin:1.1rem 0}
+pre{background:var(--panel);border:1px solid var(--stroke);border-radius:12px;padding:1rem;overflow-x:auto;margin:1.1rem 0}
+pre code{background:none;border:none;padding:0;color:var(--text);font-size:.83rem;line-height:1.55}
+.tw{overflow-x:auto;border:1px solid var(--stroke);border-radius:12px;background:var(--panel);margin:1.1rem 0}
+table{width:100%;border-collapse:collapse;font-size:.85rem;min-width:min(100%,460px)}
+th{background:var(--panel-2);color:var(--accent);text-align:left;padding:.55rem .8rem;font-size:.68rem;
+letter-spacing:.09em;text-transform:uppercase;white-space:nowrap;border-bottom:1px solid var(--stroke)}
+td{padding:.5rem .8rem;border-bottom:1px solid var(--rule);color:var(--muted);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td strong{color:var(--text)}
+.meta{display:flex;flex-wrap:wrap;gap:.4rem .9rem;font-size:.78rem;color:var(--muted);margin:-.4rem 0 1.2rem}
+.meta b{color:var(--text);font-weight:600}
+.missing{color:var(--muted);border-bottom:1px dashed var(--muted);cursor:help}
+.related{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--stroke)}
+.related h2{border:none;margin:0 0 .7rem;font-size:.95rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:0}
+.chips li{margin:0}
+.chips a,.chips .missing{display:inline-block;border:1px solid var(--stroke);background:var(--panel);
+border-radius:999px;padding:.28rem .8rem;font-size:.8rem}
+.chips a:hover{background:var(--accent);color:var(--on-accent);text-decoration:none;border-color:var(--accent)}
+footer{max-width:840px;margin:2.5rem auto 0;padding-top:1.2rem;border-top:1px solid var(--stroke);
+font-size:.75rem;color:var(--muted);text-align:center}
+/* landing */
+.hero{padding:2.4rem 0 1.6rem}
+.kicker{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2)}
+.hero h1{font-size:clamp(2rem,6vw,3.2rem);margin:.35rem 0 .5rem}
+.hero p{color:var(--muted);font-size:1.05rem;max-width:56ch}
+.hw{display:inline-flex;gap:.5rem;align-items:center;margin-top:1rem;border:1px solid var(--stroke);
+background:var(--panel);border-radius:999px;padding:.3rem .9rem;font-size:.78rem;color:var(--muted)}
+.hw .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.sec{margin-top:2.2rem}
+.sec h2{border:none;padding:0;margin:0 0 .8rem;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.9rem}
+.card{display:block;border:1px solid var(--stroke);background:var(--panel);border-radius:14px;padding:1rem 1.1rem;
+color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+.card b{display:block;color:var(--accent);font-size:1rem;margin-bottom:.3rem}
+.card span{font-size:.85rem;color:var(--muted);line-height:1.5}
+.stubs{font-size:.82rem;color:var(--muted);margin-top:.6rem}
+.yt{position:relative;width:100%;aspect-ratio:16/9;border:1px solid var(--stroke);border-radius:12px;overflow:hidden;background:#000;margin:1rem 0}
+.yt.yt-v{aspect-ratio:9/16;max-width:360px}
+.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="bar">
+    <span class="crumb"><a href="../">video-gen-kb</a> / <a href="index.html">Wiki</a></span>
+    <span class="spacer"></span>
+    <button class="pill" onclick="tt()">◐ Theme</button>
+  </nav>
+  <h1>Kyle — The Signal Fire</h1><p class="lede">A one-minute 16:9 photoreal adventure short: a boy carries a lantern out along a storm causeway to a dead lighthouse, climbs the tower, strikes a match and relights the lamp. The fourth LoRA-driven film, and the first whose <strong>subject</strong> was chosen to satisfy the constraint rather than its shot list.</p><div class="meta"><span><b>Updated</b> 2026-09-29</span><span><b>Sources</b> <a href="kyle-lora-plan.html">kyle lora plan</a> (the trained identity), <a href="lindsey-summit-plan.html">lindsey summit plan</a> §6, <a href="kyle-debut-plan.html">kyle debut plan</a> §6, <a href="lindsey-palace-plan.html">lindsey palace plan</a> §6, <a href="headless-cli-pipeline.html">headless cli pipeline</a>.</span></div>
+<hr />
+<h2>1. The idea behind the idea</h2>
+<p>Three films in, the accumulated rule is blunt: <strong>LTX responds to what a shot is <em>of</em>, and not at all to instructions about what not to do.</strong> "She does not turn her head" turned anyway, twice. "The compass never lifts" lifted anyway, twice.</p>
+<p>If prompts cannot forbid motion, the only remaining lever is to pick subjects whose <strong>natural</strong> motion is already the motion wanted. That is the whole reason this film is set in a storm on a dead lighthouse:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Shot needs to hold for</th>
+<th>What is moving in it</th>
+<th>Why it cannot go wrong</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>s1, s8</td>
+<td>surf, spray, cloud, a lighthouse beam</td>
+<td>sea and weather have no correct state to drift away from</td>
+</tr>
+<tr>
+<td>s3</td>
+<td>a lantern <strong>hanging on a hook</strong></td>
+<td>swinging <em>is</em> its natural behaviour — the exact failure from <a href="lindsey-summit-plan.html">lindsey summit plan</a> s3, inverted</td>
+</tr>
+<tr>
+<td>s4</td>
+<td>a match flame in cupped hands</td>
+<td>fire animates itself, and it is hands in front of a stationary head</td>
+</tr>
+<tr>
+<td>s6</td>
+<td>lantern light moving on a curved wall as he climbs</td>
+<td>the light moves because he does, and he is seen from behind</td>
+</tr>
+<tr>
+<td>s5, s7</td>
+<td>rain on glass; light strengthening on a face</td>
+<td>small, bounded, self-evident</td>
+</tr>
+</tbody>
+</table></div>
+<p>s3 is the pointed one. On the last film a held compass floated out of frame twice, including once told explicitly not to. Here the object hangs from a hook, so the model's instinct to move it produces the shot instead of ruining it.</p>
+<h2>2. Inherited rules, applied without rediscovery</h2>
+<ul>
+<li><strong>Face shots budgeted at 7.0–7.5 s</strong> (s2, s7) — every frontal face clip across three films has drifted at ~8 s.</li>
+<li><strong>No shot asks for a head turn.</strong> Stills are straight-on with nowhere to rotate to.</li>
+<li><strong>s4 is the one shot with real human movement</strong>, and it is hands cupped around a match in front of a stationary head — the pattern that held 9.5 s on both <code>kyle_debut</code> s6 and <code>lindsey_summit</code> s4.</li>
+<li><strong>"The light stays constant"</strong> in every motion prompt, which eliminated the dim-to-black failure on the last film.</li>
+<li><strong>Kyle's dataset is close-heavy</strong> (16 turnaround frames, one full body), so the wides sit at 0.85 with the face small or turned away, and the two shots with no person carry no LoRA.</li>
+</ul>
+<h2>3. Shot list</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Shot</th>
+<th>Input master</th>
+<th>LoRA weight</th>
+<th>Budget</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>s1</td>
+<td>Establishing: the causeway and how small he is, from behind</td>
+<td>coast</td>
+<td>0.85</td>
+<td>9.0 s</td>
+</tr>
+<tr>
+<td>s2</td>
+<td>Close-up: salt spray on his face</td>
+<td>kyle</td>
+<td>1.0</td>
+<td>7.0 s</td>
+</tr>
+<tr>
+<td>s3</td>
+<td>Macro: the storm lantern swinging on its hook — no face</td>
+<td>kyle</td>
+<td>0.6</td>
+<td>7.0 s</td>
+</tr>
+<tr>
+<td>s4</td>
+<td>He strikes a match and shields the flame in both hands</td>
+<td>kyle</td>
+<td>1.0</td>
+<td>9.5 s</td>
+</tr>
+<tr>
+<td>s5</td>
+<td>The dark lamp room and the great cracked lens — no person</td>
+<td>lamproom</td>
+<td><strong>none</strong></td>
+<td>8.0 s</td>
+</tr>
+<tr>
+<td>s6</td>
+<td>The climb: the iron spiral stair, from behind and below</td>
+<td>lamproom</td>
+<td>0.85</td>
+<td>9.5 s</td>
+</tr>
+<tr>
+<td>s7</td>
+<td>The lamp catches — warm light floods his face</td>
+<td>kyle</td>
+<td>1.0</td>
+<td>7.5 s</td>
+</tr>
+<tr>
+<td>s8</td>
+<td>The beam goes out across the water — no person</td>
+<td>coast</td>
+<td><strong>none</strong></td>
+<td>8.5 s</td>
+</tr>
+</tbody>
+</table></div>
+<p>66.0 s kept − 7 × 0.75 s crossfades = <strong>60.75 s</strong>.</p>
+<p>Palette is cold desaturated grey with warm firelight — the third distinct look in three films, after the palace's warm gold and the summit's cold blue dawn.</p>
+<h2>4. Locks</h2>
+<ul>
+<li><strong>subject</strong> — <code>kyle_kx boy</code>, a nine-year-old boy, this exact face, neat dark hair wet with spray</li>
+<li><strong>wardrobe</strong> — heavy oiled canvas coat in dark slate, thick cream fisherman's wool sweater, coil of rope over one shoulder, battered brass storm lantern</li>
+<li><strong>coast</strong> — storm-battered granite headland at dusk, black wet rock, white surf, a stone causeway out to a ruined pale-stone lighthouse, iron-grey cloud and spray</li>
+<li><strong>lamproom</strong> — a great cracked fresnel lens on a brass carriage, salt-clouded panes, rusted railings, a spiral stair through the floor</li>
+<li><strong>style</strong> — anamorphic 35mm live-action adventure, photoreal wet wool and oiled canvas, storm light at dusk, cold desaturated colour with warm firelight</li>
+</ul>
+<h2>5. Settings</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Setting</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Still</td>
+<td>FLUX.2 [klein] 9B (8-bit S), 1024×576, 4 steps, CFG 1, shift 3, DDIM Trailing (sampler 16), edit mode strength 1.0</td>
+</tr>
+<tr>
+<td>LoRA</td>
+<td><code>kyle_lora_2000_lora_f32.ckpt</code> @ none / 0.6 / 0.85 / 1.0 per the table</td>
+</tr>
+<tr>
+<td>Clip</td>
+<td>LTX-2.3 22B [distilled] 1.1, 1024×576, 249 frames @ 25 fps, 8 steps, CFG 1, shift 5, TCD Trailing (sampler 19), SSS 0.3 — ~11 min each</td>
+</tr>
+<tr>
+<td>Upscale</td>
+<td>Real-ESRGAN x4plus → 3840×2160, crop fit, 40M — ~10 min per clip</td>
+</tr>
+<tr>
+<td>Assemble</td>
+<td>0.75 s crossfades, clip audio kept, 1920×1080 delivery copy</td>
+</tr>
+</tbody>
+</table></div>
+<h2>6. Did choosing the subject work?</h2>
+<p>Yes, and s3 is the proof.</p>
+<p><strong>The hanging lantern held.</strong> On <a href="lindsey-summit-plan.html">lindsey summit plan</a> a <em>held</em> compass floated out of frame twice, the second
+time after being told in as many words not to. Here the same class of object hangs from a hook, and the model's
+urge to move it produced exactly the shot that was wanted: the lantern swings gently, the flame leans and
+steadies, rain runs down the glass, and it stays in frame for the whole take. Nothing in the prompt forbade
+anything. The composition did the work the prompt could not.</p>
+<p><strong>Self-animating subjects also gave the film its best shot.</strong> s1 was budgeted as an ordinary establishing wide;
+what came back has a wave bursting white across the causeway mid-take. Surf and weather have no correct state
+to drift away from, so the model's invention is free drama instead of a defect. The same is true of s8's
+sweeping beam. These are now the two strongest shots across four films, and neither risked identity at all.</p>
+<p><strong>The face budgets were right again.</strong> s2 and s7 drifted on schedule; both were already cut short of it.</p>
+<p><strong>One correction to the "hands" pattern.</strong> s4 — the match cupped in both hands — held its subject fine, but LTX
+pushed the camera in hard over the last two seconds until the hand filled frame. So the pattern is safe for
+<em>identity</em>, but not automatically safe for <em>composition</em>; it was trimmed to 8.0 s rather than the 9.5 s the
+previous two films supported. Worth remembering that a shot can fail on framing while the face is still perfect.</p>
+<p><strong>A prompt fix, caught by Kevin.</strong> The first s2 still had "cheeks reddened by cold wind" in it and klein took
+that to blotchy red across the whole face. Re-rendered with the redness language dropped and "an even natural
+skin tone" in its place, which fixed it cleanly. Weather-beaten skin is better implied by the environment than
+asked for directly.</p>
+<h2>7. The cut</h2>
+<p>Order <strong>s1 s2 s3 s6 s5 s4 s7 s8</strong> — the shot ids were written in story-beat order but the climb has to precede
+the lamp room, so the sequence was corrected before the clips were rendered.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Shot</th>
+<th>Take</th>
+<th>Kept</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>s1</td>
+<td>The causeway, he is small, from behind</td>
+<td>s1_v1</td>
+<td>9.5 s</td>
+<td>a wave bursts across the causeway mid-take</td>
+</tr>
+<tr>
+<td>s2</td>
+<td>Close-up, spray on his face</td>
+<td>s2_v2</td>
+<td>5.5 s</td>
+<td>re-rendered to remove the red face; squints after ~5.5 s</td>
+</tr>
+<tr>
+<td>s3</td>
+<td>The lantern swinging on its hook</td>
+<td>s3_v1</td>
+<td>7.0 s</td>
+<td><strong>stayed in frame</strong> — the hook design worked</td>
+</tr>
+<tr>
+<td>s6</td>
+<td>The climb, from behind</td>
+<td>s6_v1</td>
+<td>9.0 s</td>
+<td>lantern light moving on the curved wall; clean</td>
+</tr>
+<tr>
+<td>s5</td>
+<td>The dark lamp room</td>
+<td>s5_v1</td>
+<td>8.0 s</td>
+<td>rain on glass, light held constant</td>
+</tr>
+<tr>
+<td>s4</td>
+<td>The match cupped in both hands</td>
+<td>s4_v1</td>
+<td>8.0 s</td>
+<td>identity clean; trimmed for a hard push-in at the end</td>
+</tr>
+<tr>
+<td>s7</td>
+<td>The lamp catches</td>
+<td>s7_v1</td>
+<td>8.5 s</td>
+<td>the smile lands at ~5 s and holds</td>
+</tr>
+<tr>
+<td>s8</td>
+<td>The beam goes out across the water</td>
+<td>s8_v1</td>
+<td>9.9 s</td>
+<td>clean full length</td>
+</tr>
+</tbody>
+</table></div>
+<p>65.4 s kept − 7 × 0.75 s crossfades = <strong>60.15 s</strong>.</p>
+<h2>8. Log</h2>
+<ul>
+<li><strong>2026-09-29</strong> — spec written. All three masters right on one seed each (seed 3), now the fourth film running
+  for which that is true. Still candidates rendering.</li>
+</ul>
+
+  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="kyle-lora-plan.html">kyle lora plan</a></li><li><a href="lindsey-summit-plan.html">lindsey summit plan</a></li><li><a href="kyle-debut-plan.html">kyle debut plan</a></li><li><a href="lindsey-palace-plan.html">lindsey palace plan</a></li></ul></div>
+</div>
+<footer>video-gen-kb · built 2026-09-29 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<script>function tt(){var r=document.documentElement,
+d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
+matchMedia('(prefers-color-scheme: dark)').matches);
+r.setAttribute('data-theme',d?'light':'dark');}</script>
+</body>
+</html>

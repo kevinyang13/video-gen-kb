@@ -210,6 +210,17 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <td><code>—</code></td>
 <td>—</td>
 </tr>
+<tr>
+<td style="text-align: right;">10</td>
+<td><a href="#kyle_lighthouse">Kyle — the signal fire</a></td>
+<td>2026-09-29</td>
+<td>planned 2026-09-29 — spec written</td>
+<td>FLUX.2 [klein] 9B 1024x576</td>
+<td>LTX-2.3 22B [distilled] 1.1 11 min</td>
+<td>Best Adventure Ever</td>
+<td><code>—</code></td>
+<td>—</td>
+</tr>
 </tbody>
 </table></div>
 <h2 id="dragon_epic">Dragon Epic — 1-minute photoreal short, family hero face</h2>
@@ -1885,6 +1896,246 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <p><em>Video prompt</em></p>
 <blockquote>
 <p>Fixed camera, no camera movement. The cloud sea moves slowly below, pouring over the far ridges, the light climbing steadily as the sun clears the peaks. Her hair and the hem of her jacket move in the wind. She stands still and never turns back. Wind, no music.</p>
+</blockquote>
+<h2 id="kyle_lighthouse">Kyle — the signal fire</h2>
+<ul>
+<li><strong>Date</strong>: 2026-09-29 · <strong>Status</strong>: planned 2026-09-29 — spec written · <strong>Version</strong>: <code>v1-lora-cli</code> · <strong>Draw Things project</strong>: <code>none — draw-things-cli via scripts/film_run.py</code></li>
+<li><strong>This version</strong>: Fourth LoRA-driven film, and the first chosen for a subject whose motion animates itself — fire, surf and spray — so the long takes need nothing from the model that it can get wrong.</li>
+<li><strong>Files</strong> (<code>projects/kyle_lighthouse/v1-lora-cli/</code>): <code>stills/s1.png … s8.png</code>, <code>clips/s1_v1.mov … s8_v1.mov (s2 uses v2)</code>, <code>final/kyle_lighthouse_3840x2160.mp4</code>, <code>final/kyle_lighthouse_1920x1080.mp4</code>, <code>music/best_adventure_ever.mp3</code></li>
+<li><strong>Notes</strong>: Kyle is Kevin's son; consent settled. Story written for this film: a boy carries a lantern out along a storm causeway to a dead lighthouse, climbs the tower, strikes a match and relights the lamp.</li>
+</ul>
+<p>Subject chosen for the constraint, which is the new move here. Three films in, the rule is that LTX responds to what a shot is <em>of</em> and not to instructions about what not to do, so this film is built of things whose natural motion is already the motion wanted: a flame, a swinging lantern, surf, spray, a sweeping beam. That fixes the failure from lindsey_summit, where a held compass floated out of frame twice — s3 here hangs its object on a hook, so swinging <em>is</em> the intended behaviour.</p>
+<p>The rest is inherited. Face shots (s2, s7) budgeted at 7.0-7.5 s. No shot asks for a head turn. s4 is the one shot with real human movement and it is hands cupped around a match in front of a stationary head, the pattern that has now held 9.5 s twice. Kyle's dataset is close-heavy with one full-body frame, so the wides (s1, s6) sit at 0.85 with the face small or turned away, and the two shots with no person (s5, s8) carry no LoRA. Cut order is s1 s2 s3 s6 s5 s4 s7 s8: the shot ids were written in story-beat order but the climb has to precede the lamp room, so the sequence was corrected before rendering the clips.</p>
+<p><strong>Still</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Model</td>
+<td>FLUX.2 [klein] 9B (8-bit S)</td>
+</tr>
+<tr>
+<td>Size</td>
+<td>1024x576</td>
+</tr>
+<tr>
+<td>Steps</td>
+<td>4</td>
+</tr>
+<tr>
+<td>CFG</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Shift</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Sampler</td>
+<td>DDIM Trailing</td>
+</tr>
+<tr>
+<td>LoRA</td>
+<td>kyle_lora_2000_lora_f32.ckpt @ per-shot weight (none / 0.6 / 0.85 / 1.0)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Prompt: <code>per shot — see scenes</code></p>
+<p><strong>I2V</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Model</td>
+<td>LTX-2.3 22B [distilled] 1.1</td>
+</tr>
+<tr>
+<td>Refiner</td>
+<td>Wan 2.2 Low Noise Expert I2V A14B (8-bit S) @ 10%</td>
+</tr>
+<tr>
+<td>LoRA</td>
+<td>Wan 2.2 A14B Lightning High-Noise T2V v2.0 @ 100%</td>
+</tr>
+<tr>
+<td>Size</td>
+<td>1024x576</td>
+</tr>
+<tr>
+<td>Frames</td>
+<td>249</td>
+</tr>
+<tr>
+<td>FPS</td>
+<td>25</td>
+</tr>
+<tr>
+<td>Steps</td>
+<td>8</td>
+</tr>
+<tr>
+<td>CFG</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Shift</td>
+<td>5.0</td>
+</tr>
+<tr>
+<td>Sampler</td>
+<td>TCD Trailing</td>
+</tr>
+<tr>
+<td>Strength</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>I2V time (min)</td>
+<td>11</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Post</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Script</td>
+<td>scripts/finish_clip.sh</td>
+</tr>
+<tr>
+<td>Loop</td>
+<td>none — xfade 0.75</td>
+</tr>
+<tr>
+<td>Upscale</td>
+<td>scripts/upscale_4k.sh — Real-ESRGAN x4plus -&gt; 3840x2160</td>
+</tr>
+<tr>
+<td>Music</td>
+<td>Best Adventure Ever — geoffharvey, Pixabay (cdn.pixabay.com/download/audio/2022/10/13/audio_f917a5a4fc.mp3), 2:33; tail-aligned so the track's climax lands on the lamp catching and the beam going out. Reused from kyle_rescue.</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Scene prompts</h3>
+<p><strong>Locks</strong> (paste verbatim into every prompt):</p>
+<ul>
+<li><em>subject</em> — kyle_kx boy, a nine-year-old boy, this exact face, neat dark hair wet with spray</li>
+<li><em>wardrobe</em> — a heavy oiled canvas coat in dark slate over a thick cream fisherman's wool sweater, a coil of rope over one shoulder and a battered brass storm lantern in his hand</li>
+<li><em>coast</em> — a storm-battered granite headland at dusk, black wet rock and white surf exploding against it, a narrow stone causeway running out to a ruined lighthouse of weathered pale stone, low iron-grey cloud and spray hanging in the air</li>
+<li><em>lamproom</em> — the lamp room at the top of a ruined lighthouse, a great cracked fresnel lens on its brass carriage, salt-clouded glass panes, rusted iron railings and a spiral stair coming up through the floor</li>
+<li><em>style</em> — Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wet wool and oiled canvas, natural storm light at dusk, shallow depth of field, subtle film grain, cold desaturated colour with warm firelight. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.</li>
+</ul>
+<h4>s1 — Establishing — the causeway, the lighthouse, and how small he is</h4>
+<ul>
+<li><strong>Note</strong>: LoRA weight 0.85; input seed/coast.png; kept 9.0 s</li>
+</ul>
+<p><em>Still prompt</em></p>
+<blockquote>
+<p>Extreme wide establishing shot. a storm-battered granite headland at dusk, black wet rock and white surf exploding against it, a narrow stone causeway running out to a ruined lighthouse of weathered pale stone, low iron-grey cloud and spray hanging in the air, the sea heaving and breaking white over the rocks. Very small in the lower third of frame and seen from behind, kyle_kx boy, a nine-year-old boy, this exact face, neat dark hair wet with spray, wearing a heavy oiled canvas coat in dark slate over a thick cream fisherman's wool sweater, a coil of rope over one shoulder and a battered brass storm lantern in his hand, walking away from camera out along the stone causeway toward the dark lighthouse. Enormous sense of scale, deep depth of field, layered atmospheric perspective. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wet wool and oiled canvas, natural storm light at dusk, shallow depth of field, subtle film grain, cold desaturated colour with warm firelight. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.</p>
+</blockquote>
+<p><em>Video prompt</em></p>
+<blockquote>
+<p>Fixed camera, no camera movement. Heavy surf rolls in and bursts white against the causeway, spray blowing across in the wind, low cloud moving over the headland. He walks steadily away along the causeway. The light stays constant. Surf, wind, no music.</p>
+</blockquote>
+<h4>s2 — Close-up — salt spray on his face, the lighthouse ahead</h4>
+<ul>
+<li><strong>Note</strong>: LoRA weight 1.0; input seed/kyle.png; kept 7.0 s</li>
+</ul>
+<p><em>Still prompt</em></p>
+<blockquote>
+<p>Tight close-up portrait, head and shoulders, straight on. kyle_kx boy, a nine-year-old boy, this exact face, neat dark hair wet with spray, wearing a heavy oiled canvas coat in dark slate over a thick cream fisherman's wool sweater, a coil of rope over one shoulder and a battered brass storm lantern in his hand with the wool collar turned up at his throat, facing the camera, skin damp with fine sea spray, an even natural skin tone, jaw set. a storm-battered granite headland at dusk, black wet rock and white surf exploding against it, a narrow stone causeway running out to a ruined lighthouse of weathered pale stone, low iron-grey cloud and spray hanging in the air thrown far out of focus behind him, cool even grey light with a faint warm glow from the lantern below frame. Razor-sharp focus on the eyes, damp skin texture and individual eyelashes. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wet wool and oiled canvas, natural storm light at dusk, shallow depth of field, subtle film grain, cold desaturated colour with warm firelight. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.</p>
+</blockquote>
+<p><em>Video prompt</em></p>
+<blockquote>
+<p>Locked camera, no push in. He faces the camera, breathing hard, blinking against the spray; wind drags at his wet hair and the collar of his coat. The light stays constant. Surf, wind, no music.</p>
+</blockquote>
+<h4>s3 — Macro — the storm lantern swinging on its hook</h4>
+<ul>
+<li><strong>Note</strong>: LoRA weight 0.6; input seed/kyle.png; kept 7.0 s</li>
+</ul>
+<p><em>Still prompt</em></p>
+<blockquote>
+<p>Extreme close-up detail insert, no face in frame. A battered brass storm lantern hanging from a rusted iron hook, its small flame burning steadily behind sooted glass, swinging gently, salt crust and old dents on the brass, rain beading and running down the panes, the dark wet wool of a heavy oiled canvas coat in dark slate over a thick cream fisherman's wool sweater, a coil of rope over one shoulder and a battered brass storm lantern in his hand just visible behind it. Macro clarity, very shallow depth of field, warm flame against cold grey. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wet wool and oiled canvas, natural storm light at dusk, shallow depth of field, subtle film grain, cold desaturated colour with warm firelight. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.</p>
+</blockquote>
+<p><em>Video prompt</em></p>
+<blockquote>
+<p>Locked macro camera. The hanging lantern swings slowly on its hook, the flame leaning and steadying inside the glass, rain beading and running down the panes. The light stays constant. Wind, surf, no music.</p>
+</blockquote>
+<h4>s6 — The climb — the iron spiral stair, seen from behind and below</h4>
+<ul>
+<li><strong>Note</strong>: LoRA weight 0.85; input seed/lamproom.png; kept 9.5 s</li>
+</ul>
+<p><em>Still prompt</em></p>
+<blockquote>
+<p>Wide full-body shot from behind and below, looking up a narrow iron spiral stair inside the lighthouse tower. kyle_kx boy, a nine-year-old boy, this exact face, neat dark hair wet with spray, wearing a heavy oiled canvas coat in dark slate over a thick cream fisherman's wool sweater, a coil of rope over one shoulder and a battered brass storm lantern in his hand, seen from behind mid-stride climbing the rusted steps away from the camera, the lantern in his hand throwing warm light up the curving whitewashed wall, the rope coiled on his shoulder. Strong upward perspective. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wet wool and oiled canvas, natural storm light at dusk, shallow depth of field, subtle film grain, cold desaturated colour with warm firelight. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.</p>
+</blockquote>
+<p><em>Video prompt</em></p>
+<blockquote>
+<p>Fixed camera. He climbs steadily away from the camera up the spiral stair, the lantern in his hand swinging and throwing warm moving light around the curve of the wall as he rises. Footfalls on iron, muffled surf, wind, no music.</p>
+</blockquote>
+<h4>s5 — The dark lamp room and the great cracked lens</h4>
+<ul>
+<li><strong>Note</strong>: no LoRA — no face in frame; input seed/lamproom.png; kept 8.0 s</li>
+</ul>
+<p><em>Still prompt</em></p>
+<blockquote>
+<p>Wide interior, no people in frame. the lamp room at the top of a ruined lighthouse, a great cracked fresnel lens on its brass carriage, salt-clouded glass panes, rusted iron railings and a spiral stair coming up through the floor, unlit and cold, the last grey daylight coming through the salt-clouded panes and breaking into rings inside the great fresnel lens, rust and old paint, the dark sea visible beyond the glass. Deep depth of field, still and derelict. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wet wool and oiled canvas, natural storm light at dusk, shallow depth of field, subtle film grain, cold desaturated colour with warm firelight. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.</p>
+</blockquote>
+<p><em>Video prompt</em></p>
+<blockquote>
+<p>Fixed camera, no camera movement. Rain runs down the outside of the salt-clouded panes, the grey sea heaving far below beyond the glass, dust drifting in the still air of the room. The light stays constant. Muffled surf, wind, no music.</p>
+</blockquote>
+<h4>s4 — He strikes a match and shields the flame in both hands</h4>
+<ul>
+<li><strong>Note</strong>: LoRA weight 1.0; input seed/kyle.png; kept 9.5 s</li>
+</ul>
+<p><em>Still prompt</em></p>
+<blockquote>
+<p>Medium close-up, chest up, straight on. kyle_kx boy, a nine-year-old boy, this exact face, neat dark hair wet with spray, wearing a heavy oiled canvas coat in dark slate over a thick cream fisherman's wool sweater, a coil of rope over one shoulder and a battered brass storm lantern in his hand, both hands raised and cupped in front of his chest around a freshly struck match, the small flame lighting his face warm from below, eyes down on the flame in concentration. the lamp room at the top of a ruined lighthouse, a great cracked fresnel lens on its brass carriage, salt-clouded glass panes, rusted iron railings and a spiral stair coming up through the floor dark around him. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wet wool and oiled canvas, natural storm light at dusk, shallow depth of field, subtle film grain, cold desaturated colour with warm firelight. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.</p>
+</blockquote>
+<p><em>Video prompt</em></p>
+<blockquote>
+<p>Locked camera. His cupped hands close a little tighter around the match flame, which leans and steadies and throws moving warm light up across his face; his eyes stay down on it and then lift to the lens. He stays facing the camera throughout. Surf muffled through glass, wind, no music.</p>
+</blockquote>
+<h4>s7 — The lamp catches — warm light floods his face</h4>
+<ul>
+<li><strong>Note</strong>: LoRA weight 1.0; input seed/kyle.png; kept 7.5 s</li>
+</ul>
+<p><em>Still prompt</em></p>
+<blockquote>
+<p>Close-up portrait, frontal, slightly low angle. kyle_kx boy, a nine-year-old boy, this exact face, neat dark hair wet with spray, wearing a heavy oiled canvas coat in dark slate over a thick cream fisherman's wool sweater, a coil of rope over one shoulder and a battered brass storm lantern in his hand, facing the camera with the newly lit lighthouse lamp blazing warm gold from just off frame, the light full on his face, eyes bright and reflecting the flame, the beginning of a smile. the lamp room at the top of a ruined lighthouse, a great cracked fresnel lens on its brass carriage, salt-clouded glass panes, rusted iron railings and a spiral stair coming up through the floor warm and luminous behind him. Razor-sharp focus on the eyes and skin. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wet wool and oiled canvas, natural storm light at dusk, shallow depth of field, subtle film grain, cold desaturated colour with warm firelight. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.</p>
+</blockquote>
+<p><em>Video prompt</em></p>
+<blockquote>
+<p>Locked camera. The warm light on his face strengthens and steadies; his eyes widen a fraction and the small smile settles, he blinks once. He faces the camera throughout. Muffled surf, no music.</p>
+</blockquote>
+<h4>s8 — The beam goes out across the water</h4>
+<ul>
+<li><strong>Note</strong>: no LoRA — no face in frame; input seed/coast.png; kept 8.5 s</li>
+</ul>
+<p><em>Still prompt</em></p>
+<blockquote>
+<p>Extreme wide final shot, no people in frame, from far out on the dark water looking back. a storm-battered granite headland at dusk, black wet rock and white surf exploding against it, a narrow stone causeway running out to a ruined lighthouse of weathered pale stone, low iron-grey cloud and spray hanging in the air at last light, the ruined lighthouse standing black against the storm sky with its lamp lit — a single hot gold beam reaching out across the heaving sea and through the spray, surf still bursting white on the rocks below. Enormous sense of scale, deep depth of field. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wet wool and oiled canvas, natural storm light at dusk, shallow depth of field, subtle film grain, cold desaturated colour with warm firelight. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.</p>
+</blockquote>
+<p><em>Video prompt</em></p>
+<blockquote>
+<p>Fixed camera, no camera movement. The lighthouse beam sweeps slowly out across the water and through the spray, heavy swell rolling beneath the camera, surf bursting white against the rocks, cloud moving fast overhead. The beam stays bright and constant. Surf, wind, no music.</p>
 </blockquote>
 
   <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="projects.html">projects</a></li><li><a href="runbook-living-painting.html">runbook living painting</a></li><li><a href="draw-things-setup.html">draw things setup</a></li></ul></div>

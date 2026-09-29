@@ -8,7 +8,7 @@
 
 ---
 
-**Project pages**: [[projects-anime|Anime projects]] (5) · [[projects-realistic|Photoreal projects]] (9) · [[projects-3d|3D-animated projects]] (3)
+**Project pages**: [[projects-anime|Anime projects]] (5) · [[projects-realistic|Photoreal projects]] (10) · [[projects-3d|3D-animated projects]] (3)
 
 Each theme page holds the full records — settings, prompts, seeds, files. The tables below link straight to a project's record on its page.
 
@@ -26,7 +26,7 @@ Shinkai/Ghibli-styled living paintings: a still from FLUX or Wan T2V, ambient mo
 
 → full records for all 5: [[projects-anime|Anime projects]]
 
-## [[projects-realistic|Photoreal projects]] (9)
+## [[projects-realistic|Photoreal projects]] (10)
 
 Cinematic photoreal shorts: FLUX.2 klein stills with Moodboard references, motion from LTX-2.3 or Wan 2.2, Real-ESRGAN to 4K, cut with crossfades. Dragon Epic, Lost City, the three-minute film.
 
@@ -41,8 +41,9 @@ Cinematic photoreal shorts: FLUX.2 klein stills with Moodboard references, motio
 | 7 | [Lindsey — the palace pavilion](projects-realistic.html#lindsey_palace) | 2026-09-28 | delivered 2026-09-28 22:07 — 61.08 s, 3840x2160 (293 MB) + 1920x1080 (91 MB), 8 shots, none dropped; mean -21.1 dB, peak -5.4 dB | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 10 min | Emotional Children Piano | `—` | — |
 | 8 | [Kyle — five minutes to showtime](projects-realistic.html#kyle_debut) | 2026-09-28 | delivered 2026-09-29 01:20 — 60.76 s, 3840x2160 (279 MB) + 1920x1080 (79 MB), 8 shots, none dropped; mean -21.7 dB, peak -5.5 dB | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 11 min | Emotional Children Piano | `—` | — |
 | 9 | [Lindsey — above the cloud sea](projects-realistic.html#lindsey_summit) | 2026-09-29 | delivered 2026-09-29 10:42 — 59.88 s, 3840x2160 (280 MB) + 1920x1080 (87 MB), 8 shots, none dropped; mean -18.7 dB, peak -5.3 dB. Planned length 59.75 s, delivered 59.88 s. | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 11 min | Adventure Journey | `—` | — |
+| 10 | [Kyle — the signal fire](projects-realistic.html#kyle_lighthouse) | 2026-09-29 | planned 2026-09-29 — spec written | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 11 min | Best Adventure Ever | `—` | — |
 
-→ full records for all 9: [[projects-realistic|Photoreal projects]]
+→ full records for all 10: [[projects-realistic|Photoreal projects]]
 
 ## [[projects-3d|3D-animated projects]] (3)
 
