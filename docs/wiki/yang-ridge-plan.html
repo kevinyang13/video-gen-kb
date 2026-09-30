@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yang Family — Under the Meteor Sky — video-gen-kb</title>
+<style>
+:root{--bg:#0B0D12;--panel:#141822;--panel-2:#1B2130;--stroke:#2A3245;--text:#E6E9F0;
+--muted:#8B94A7;--accent:#F5B84B;--accent-2:#4BC9F5;--on-accent:#12131A;
+--rule:rgba(139,148,167,.22);--code:#F5B84B}
+@media(prefers-color-scheme:light){:root:not([data-theme=dark]){--bg:#F4F1EA;--panel:#fff;
+--panel-2:#FAF8F3;--stroke:#D9D3C6;--text:#16181F;--muted:#5D6473;--accent:#B8781A;
+--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}}
+:root[data-theme=light]{--bg:#F4F1EA;--panel:#fff;--panel-2:#FAF8F3;--stroke:#D9D3C6;
+--text:#16181F;--muted:#5D6473;--accent:#B8781A;--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);
+line-height:1.65;padding:0 1rem 4rem}
+.shell{max-width:840px;margin:0 auto}
+a{color:var(--accent);text-decoration:none;font-weight:600}
+a:hover{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--accent-2);outline-offset:3px;border-radius:4px}
+.bar{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;padding:1.1rem 0;margin-bottom:1.5rem;
+border-bottom:1px solid var(--stroke)}
+.crumb{font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.spacer{flex:1}
+.pill{border:1px solid var(--stroke);background:var(--panel);border-radius:999px;padding:.28rem .8rem;
+font-size:.75rem;font-weight:700;color:var(--text);cursor:pointer;font-family:inherit}
+.pill:hover{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+h1{font-size:clamp(1.7rem,5vw,2.5rem);margin:.2rem 0 1rem;line-height:1.1;letter-spacing:-.015em;text-wrap:balance}
+h2{font-size:1.25rem;margin:2.2rem 0 .7rem;padding-bottom:.35rem;border-bottom:1px solid var(--rule);text-wrap:balance}
+h3{font-size:1.02rem;margin:1.5rem 0 .5rem;color:var(--accent)}
+p{margin:.7rem 0}
+ul,ol{margin:.7rem 0 .7rem 1.3rem}
+li{margin:.28rem 0}
+li::marker{color:var(--accent)}
+em{color:var(--muted)}
+hr{border:none;border-top:1px solid var(--stroke);margin:2rem 0}
+blockquote{border-left:3px solid var(--accent);background:var(--panel);border-radius:0 10px 10px 0;
+padding:.8rem 1.1rem;margin:1.1rem 0;color:var(--muted);font-size:.92rem}
+code{background:var(--panel);border:1px solid var(--stroke);border-radius:5px;padding:.1rem .35rem;
+font-size:.85em;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--code)}
+img{max-width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--stroke);margin:1.1rem 0}
+pre{background:var(--panel);border:1px solid var(--stroke);border-radius:12px;padding:1rem;overflow-x:auto;margin:1.1rem 0}
+pre code{background:none;border:none;padding:0;color:var(--text);font-size:.83rem;line-height:1.55}
+.tw{overflow-x:auto;border:1px solid var(--stroke);border-radius:12px;background:var(--panel);margin:1.1rem 0}
+table{width:100%;border-collapse:collapse;font-size:.85rem;min-width:min(100%,460px)}
+th{background:var(--panel-2);color:var(--accent);text-align:left;padding:.55rem .8rem;font-size:.68rem;
+letter-spacing:.09em;text-transform:uppercase;white-space:nowrap;border-bottom:1px solid var(--stroke)}
+td{padding:.5rem .8rem;border-bottom:1px solid var(--rule);color:var(--muted);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td strong{color:var(--text)}
+.meta{display:flex;flex-wrap:wrap;gap:.4rem .9rem;font-size:.78rem;color:var(--muted);margin:-.4rem 0 1.2rem}
+.meta b{color:var(--text);font-weight:600}
+.missing{color:var(--muted);border-bottom:1px dashed var(--muted);cursor:help}
+.related{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--stroke)}
+.related h2{border:none;margin:0 0 .7rem;font-size:.95rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:0}
+.chips li{margin:0}
+.chips a,.chips .missing{display:inline-block;border:1px solid var(--stroke);background:var(--panel);
+border-radius:999px;padding:.28rem .8rem;font-size:.8rem}
+.chips a:hover{background:var(--accent);color:var(--on-accent);text-decoration:none;border-color:var(--accent)}
+footer{max-width:840px;margin:2.5rem auto 0;padding-top:1.2rem;border-top:1px solid var(--stroke);
+font-size:.75rem;color:var(--muted);text-align:center}
+/* landing */
+.hero{padding:2.4rem 0 1.6rem}
+.kicker{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2)}
+.hero h1{font-size:clamp(2rem,6vw,3.2rem);margin:.35rem 0 .5rem}
+.hero p{color:var(--muted);font-size:1.05rem;max-width:56ch}
+.hw{display:inline-flex;gap:.5rem;align-items:center;margin-top:1rem;border:1px solid var(--stroke);
+background:var(--panel);border-radius:999px;padding:.3rem .9rem;font-size:.78rem;color:var(--muted)}
+.hw .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.sec{margin-top:2.2rem}
+.sec h2{border:none;padding:0;margin:0 0 .8rem;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.9rem}
+.card{display:block;border:1px solid var(--stroke);background:var(--panel);border-radius:14px;padding:1rem 1.1rem;
+color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+.card b{display:block;color:var(--accent);font-size:1rem;margin-bottom:.3rem}
+.card span{font-size:.85rem;color:var(--muted);line-height:1.5}
+.stubs{font-size:.82rem;color:var(--muted);margin-top:.6rem}
+.yt{position:relative;width:100%;aspect-ratio:16/9;border:1px solid var(--stroke);border-radius:12px;overflow:hidden;background:#000;margin:1rem 0}
+.yt.yt-v{aspect-ratio:9/16;max-width:360px}
+.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="bar">
+    <span class="crumb"><a href="../">video-gen-kb</a> / <a href="index.html">Wiki</a></span>
+    <span class="spacer"></span>
+    <button class="pill" onclick="tt()">◐ Theme</button>
+  </nav>
+  <h1>Yang Family — Under the Meteor Sky</h1><p class="lede">A one-minute 16:9 photoreal short: Kyle, Lindsey and Ivy hike a high desert ridge at dusk, build a fire, and watch a meteor shower. The first film from the multi-subject <a href="yang-family-lora-plan.html">yang family lora plan</a>, and the first here with more than one real person in a frame.</p><div class="meta"><span><b>Updated</b> 2026-09-30</span><span><b>Sources</b> <a href="yang-family-lora-plan.html">yang family lora plan</a>, <a href="kyle-lighthouse-plan.html">kyle lighthouse plan</a>, <a href="lindsey-summit-plan.html">lindsey summit plan</a>, <a href="kyle-debut-plan.html">kyle debut plan</a>, <a href="still-geometry-and-review.html">still geometry and review</a>.</span></div>
+<hr />
+<h2>1. The story exists to justify the adapter</h2>
+<p>Three separate character LoRAs can render three people one at a time and cannot render two of them together —
+two character adapters loaded at once fight over the same face. <code>yang_family_lora</code> was trained to fix that, so
+this film has to actually use it:</p>
+<ul>
+<li><strong>s5</strong> is a two-shot of Ivy and Lindsey at the fire. It is the reason the LoRA exists.</li>
+<li><strong>s1</strong> and <strong>s8</strong> put all three in frame, at distance.</li>
+</ul>
+<p>Everything else is the accumulated shot grammar from the four previous films.</p>
+<h2>2. Inherited grammar, applied without rediscovery</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Rule</th>
+<th>Where it came from</th>
+<th>Applied here</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A frontal face clip drifts at ~8 s</td>
+<td>every previous film</td>
+<td>s3, s4, s5, s7 budgeted at <strong>7.0 s</strong></td>
+</tr>
+<tr>
+<td>Head rotation lets the video model recast the subject</td>
+<td><a href="lindsey-palace-plan.html">lindsey palace plan</a></td>
+<td>no shot asks anyone to turn</td>
+</tr>
+<tr>
+<td>Backs walking away hold full length</td>
+<td>all</td>
+<td>s1 — three of them from behind</td>
+</tr>
+<tr>
+<td>No face, no drift</td>
+<td>all</td>
+<td>s2 (macro fire), s6 (night sky)</td>
+</tr>
+<tr>
+<td>Pick subjects whose motion animates itself</td>
+<td><a href="kyle-lighthouse-plan.html">kyle lighthouse plan</a></td>
+<td>fire, sparks, drifting cloud, a meteor carry every long take</td>
+</tr>
+<tr>
+<td>"The light stays constant" — except where light <strong>is</strong> the subject</td>
+<td><a href="kyle-lighthouse-plan.html">kyle lighthouse plan</a></td>
+<td>used on s1; deliberately absent from the fire and meteor shots</td>
+</tr>
+<tr>
+<td>Say the count positively</td>
+<td><a href="still-geometry-and-review.html">still geometry and review</a></td>
+<td>"two people alone in the frame", "three figures alone"</td>
+</tr>
+</tbody>
+</table></div>
+<h2>3. The new risk: identity bleed</h2>
+<p>A multi-subject LoRA can leak one subject's features into another's prompt. Three defences, all at the
+composition level rather than in the prompt wording, since motion prompts cannot forbid anything:</p>
+<ol>
+<li><strong>Separate the faces in space.</strong> s5 specifies "a clear gap of dark air between their heads so the two faces
+   never overlap", and names each subject with its own trigger, class word <strong>and position in frame</strong> — Ivy on
+   the left, Lindsey on the right.</li>
+<li><strong>Keep multi-person shots short.</strong> s5 is cut at 7.0 s like any face shot.</li>
+<li><strong>Hide the faces when there are three.</strong> s1 and s8 are from behind and at distance, so bleed cannot show
+   even if it exists.</li>
+</ol>
+<p>The seven masters are themselves the bleed test: three subjects rendered individually plus the two-shot. If
+Ivy's master comes back with Lindsey's face, that is known before a single shot is rendered.</p>
+<h2>4. Shot list</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Shot</th>
+<th>Master</th>
+<th>Weight</th>
+<th>Budget</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>s1</td>
+<td>Three of them on the ridge trail at dusk, from behind</td>
+<td>ridge</td>
+<td>0.85</td>
+<td>9.5 s</td>
+</tr>
+<tr>
+<td>s2</td>
+<td>Macro: two pairs of hands feeding the new fire</td>
+<td>fire</td>
+<td>0.5</td>
+<td>9.0 s</td>
+</tr>
+<tr>
+<td>s3</td>
+<td>Close-up — Kyle, firelit</td>
+<td>kyle</td>
+<td>1.0</td>
+<td>7.0 s</td>
+</tr>
+<tr>
+<td>s4</td>
+<td>Close-up — Lindsey, firelit</td>
+<td>lindsey</td>
+<td>1.0</td>
+<td>7.0 s</td>
+</tr>
+<tr>
+<td>s5</td>
+<td><strong>Ivy and Lindsey together at the fire</strong></td>
+<td>pair</td>
+<td>1.0</td>
+<td>7.0 s</td>
+</tr>
+<tr>
+<td>s6</td>
+<td>The Milky Way and a meteor over the canyon</td>
+<td>night</td>
+<td><strong>none</strong></td>
+<td>9.5 s</td>
+</tr>
+<tr>
+<td>s7</td>
+<td>Close-up — Ivy, watching the sky</td>
+<td>ivy</td>
+<td>1.0</td>
+<td>7.0 s</td>
+</tr>
+<tr>
+<td>s8</td>
+<td>All three small under the sky, silhouettes</td>
+<td>night</td>
+<td>0.85</td>
+<td>9.5 s</td>
+</tr>
+</tbody>
+</table></div>
+<p>65.5 s kept − 7 × 0.75 s crossfades = <strong>60.25 s</strong>.</p>
+<p>Palette: cold blue night against warm firelight — the fifth distinct look in five films, after the palace's
+gold, the conservatory's marble, the summit's blue dawn and the lighthouse's storm grey.</p>
+<h2>5. Settings</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Setting</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Still</td>
+<td>FLUX.2 [klein] 9B (8-bit S), 1024×576, 4 steps, CFG 1, shift 3, DDIM Trailing, edit mode strength 1.0, <strong>5 seeds</strong></td>
+</tr>
+<tr>
+<td>LoRA</td>
+<td><code>yang_family_lora_4000_lora_f32.ckpt</code> @ none / 0.5 / 0.85 / 1.0</td>
+</tr>
+<tr>
+<td>Clip</td>
+<td>LTX-2.3 22B [distilled] 1.1, 249 frames @ 25 fps, 8 steps, CFG 1, shift 5, TCD Trailing, SSS 0.3</td>
+</tr>
+<tr>
+<td>Upscale</td>
+<td>Real-ESRGAN x4plus → 3840×2160</td>
+</tr>
+<tr>
+<td>Assemble</td>
+<td>0.75 s crossfades, clip audio kept, 1920×1080 delivery copy</td>
+</tr>
+</tbody>
+</table></div>
+<h2>6. Log</h2>
+<ul>
+<li><strong>2026-09-30</strong> — spec and masters written; queued to render automatically when <code>yang_family_lora</code> finishes
+  training.</li>
+</ul>
+
+  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="yang-family-lora-plan.html">yang family lora plan</a></li><li><a href="kyle-lighthouse-plan.html">kyle lighthouse plan</a></li><li><a href="lindsey-summit-plan.html">lindsey summit plan</a></li><li><a href="still-geometry-and-review.html">still geometry and review</a></li></ul></div>
+</div>
+<footer>video-gen-kb · built 2026-09-29 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<script>function tt(){var r=document.documentElement,
+d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
+matchMedia('(prefers-color-scheme: dark)').matches);
+r.setAttribute('data-theme',d?'light':'dark');}</script>
+</body>
+</html>
