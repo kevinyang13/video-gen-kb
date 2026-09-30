@@ -24,6 +24,7 @@ Index of every project: [[projects]]. Other themes: [[projects-anime]] · [[proj
 | 8 | [Lindsey — above the cloud sea](#lindsey_summit) | 2026-09-29 | delivered 2026-09-29 10:42 — 59.88 s, 3840x2160 (280 MB) + 1920x1080 (87 MB), 8 shots, none dropped; mean -18.7 dB, peak -5.3 dB. Planned length 59.75 s, delivered 59.88 s. | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 11 min | Adventure Journey | `—` | — |
 | 9 | [Kyle — the signal fire](#kyle_lighthouse) | 2026-09-29 | stopped 2026-09-29 — abandoned at Kevin's call after s6 could not be made to work. Seven of eight shots are rendered, graded and upscaled to 4K; s6 went through five designs (interior stairwell from below, side-on interior spiral, exterior stair on the tower, and two versions of the entrance door) and none was accepted. No final cut was produced from the current shot set. | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 11 min | Best Adventure Ever | `—` | — |
 | 10 | [Kyle — character LoRA v2](#kyle_lora) | 2026-09-29 | dataset built 2026-09-29 — 55 pairs; training | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
+| 11 | [Yang family — one LoRA, three subjects](#yang_family_lora) | 2026-09-30 | dataset built — training queued behind kyle_lora v2 | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
 
 ## Dragon Epic — 1-minute photoreal short, family hero face {#dragon_epic}
 
@@ -1089,6 +1090,53 @@ Prompt: `per shot — see scenes`
 The cause is visible in v1's own captions. Sixteen of its twenty frames are close-ups, and they are the *same* sixteen that are on a white textured wall in a pale blue t-shirt under flat indoor light. Framing, background, wardrobe and lighting are therefore all correlated with each other and with the trigger, so the model has one dominant mode to fall back on and nothing to generalise from at distance.
 
 v2 keeps all twenty v1 frames — the close-range identity they give is the part that works — and adds frames chosen so that **every new frame differs from that block in at least two of framing, background, lighting and wardrobe**. Breaking the correlation matters as much as adding full-body coverage; adding twenty more full-body frames on the same white wall would just move the problem.
+
+**Still**
+
+| Setting | Value |
+|---|---|
+| Model | FLUX.2 [klein] 9B (8-bit S) |
+| Size | 576x1024 |
+| Steps | 4 |
+| CFG | 1.0 |
+| Shift | 3.0 |
+| Sampler | DDIM Trailing |
+
+**I2V**
+
+| Setting | Value |
+|---|---|
+| Model | Wan 2.2 High Noise Expert I2V A14B (8-bit S) |
+| Refiner | Wan 2.2 Low Noise Expert I2V A14B (8-bit S) @ 10% |
+| LoRA | Wan 2.2 A14B Lightning High-Noise T2V v2.0 @ 100% |
+| Size | 576x1024 |
+| Frames | 81 |
+| FPS | 16 |
+| Steps | 4 |
+| CFG | 1.0 |
+| Shift | 4.95 |
+| Sampler | DDIM Trailing |
+| Strength | 100% |
+
+**Post**
+
+| Setting | Value |
+|---|---|
+| Script | scripts/finish_clip.sh |
+| Loop | forward, 8-frame tail->head crossfade, x6 = 27.4 s |
+| Upscale | lanczos 1080x1920 |
+| Music | Calm Ambient Dreamscape — morgan-ambient, Pixabay, 1 s fade in / 2 s fade out, vol 0.9 |
+
+## Yang family — one LoRA, three subjects {#yang_family_lora}
+
+- **Date**: 2026-09-30 · **Status**: dataset built — training queued behind kyle_lora v2 · **Version**: `v1-multi-subject` · **Draw Things project**: `none — draw-things-cli train lora`
+- **This version**: First multi-subject LoRA: three people in one adapter, each behind its own trigger and class word.
+- **Files** (`projects/yang_family_lora/v1-multi-subject/`): `seed/dataset/NNN.png + NNN.txt (87 pairs)`, `logs/train.log`
+- **Notes**: Kyle, Lindsey and Ivy are Kevin's family; consent settled for all three. The point of a single adapter is that it can put two of them in one frame, which three separate LoRAs cannot do — Draw Things can load more than one LoRA, but two character adapters fight for the same face.
+
+The setup is unusually favourable: all three datasets already lead every caption with a distinct trigger AND a distinct class word — kyle_kx boy, lindsey_kx girl, ivy_kx woman. That gives the model two independent axes to separate the subjects on, which is the main defence against the failure mode here, identity bleed.
+
+Kyle was capped at 33 of his 55 v2 frames so that no subject dominates: 33 / 32 / 22 rather than 55 / 32 / 22. His full-body coverage was kept whole because that is what v2 was built for, the medium band was mostly kept, and the close-ups were thinned, since he had the most and close identity is the easiest thing for a LoRA to learn. kyle_lora v2 stays on disk for Kyle-only work, so nothing is lost by the cap.
 
 **Still**
 

@@ -221,6 +221,17 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <td><code>—</code></td>
 <td>—</td>
 </tr>
+<tr>
+<td style="text-align: right;">11</td>
+<td><a href="#yang_family_lora">Yang family — one LoRA, three subjects</a></td>
+<td>2026-09-30</td>
+<td>dataset built — training queued behind kyle_lora v2</td>
+<td>FLUX.2 [klein] 9B 576x1024</td>
+<td>Wan 2.2 High Noise ? min</td>
+<td>Calm Ambient Dreamscape</td>
+<td><code>—</code></td>
+<td>—</td>
+</tr>
 </tbody>
 </table></div>
 <h2 id="dragon_epic">Dragon Epic — 1-minute photoreal short, family hero face</h2>
@@ -2050,6 +2061,132 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </ul>
 <p>The cause is visible in v1's own captions. Sixteen of its twenty frames are close-ups, and they are the <em>same</em> sixteen that are on a white textured wall in a pale blue t-shirt under flat indoor light. Framing, background, wardrobe and lighting are therefore all correlated with each other and with the trigger, so the model has one dominant mode to fall back on and nothing to generalise from at distance.</p>
 <p>v2 keeps all twenty v1 frames — the close-range identity they give is the part that works — and adds frames chosen so that <strong>every new frame differs from that block in at least two of framing, background, lighting and wardrobe</strong>. Breaking the correlation matters as much as adding full-body coverage; adding twenty more full-body frames on the same white wall would just move the problem.</p>
+<p><strong>Still</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Model</td>
+<td>FLUX.2 [klein] 9B (8-bit S)</td>
+</tr>
+<tr>
+<td>Size</td>
+<td>576x1024</td>
+</tr>
+<tr>
+<td>Steps</td>
+<td>4</td>
+</tr>
+<tr>
+<td>CFG</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Shift</td>
+<td>3.0</td>
+</tr>
+<tr>
+<td>Sampler</td>
+<td>DDIM Trailing</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>I2V</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Model</td>
+<td>Wan 2.2 High Noise Expert I2V A14B (8-bit S)</td>
+</tr>
+<tr>
+<td>Refiner</td>
+<td>Wan 2.2 Low Noise Expert I2V A14B (8-bit S) @ 10%</td>
+</tr>
+<tr>
+<td>LoRA</td>
+<td>Wan 2.2 A14B Lightning High-Noise T2V v2.0 @ 100%</td>
+</tr>
+<tr>
+<td>Size</td>
+<td>576x1024</td>
+</tr>
+<tr>
+<td>Frames</td>
+<td>81</td>
+</tr>
+<tr>
+<td>FPS</td>
+<td>16</td>
+</tr>
+<tr>
+<td>Steps</td>
+<td>4</td>
+</tr>
+<tr>
+<td>CFG</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Shift</td>
+<td>4.95</td>
+</tr>
+<tr>
+<td>Sampler</td>
+<td>DDIM Trailing</td>
+</tr>
+<tr>
+<td>Strength</td>
+<td>100%</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Post</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Script</td>
+<td>scripts/finish_clip.sh</td>
+</tr>
+<tr>
+<td>Loop</td>
+<td>forward, 8-frame tail-&gt;head crossfade, x6 = 27.4 s</td>
+</tr>
+<tr>
+<td>Upscale</td>
+<td>lanczos 1080x1920</td>
+</tr>
+<tr>
+<td>Music</td>
+<td>Calm Ambient Dreamscape — morgan-ambient, Pixabay, 1 s fade in / 2 s fade out, vol 0.9</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="yang_family_lora">Yang family — one LoRA, three subjects</h2>
+<ul>
+<li><strong>Date</strong>: 2026-09-30 · <strong>Status</strong>: dataset built — training queued behind kyle_lora v2 · <strong>Version</strong>: <code>v1-multi-subject</code> · <strong>Draw Things project</strong>: <code>none — draw-things-cli train lora</code></li>
+<li><strong>This version</strong>: First multi-subject LoRA: three people in one adapter, each behind its own trigger and class word.</li>
+<li><strong>Files</strong> (<code>projects/yang_family_lora/v1-multi-subject/</code>): <code>seed/dataset/NNN.png + NNN.txt (87 pairs)</code>, <code>logs/train.log</code></li>
+<li><strong>Notes</strong>: Kyle, Lindsey and Ivy are Kevin's family; consent settled for all three. The point of a single adapter is that it can put two of them in one frame, which three separate LoRAs cannot do — Draw Things can load more than one LoRA, but two character adapters fight for the same face.</li>
+</ul>
+<p>The setup is unusually favourable: all three datasets already lead every caption with a distinct trigger AND a distinct class word — kyle_kx boy, lindsey_kx girl, ivy_kx woman. That gives the model two independent axes to separate the subjects on, which is the main defence against the failure mode here, identity bleed.</p>
+<p>Kyle was capped at 33 of his 55 v2 frames so that no subject dominates: 33 / 32 / 22 rather than 55 / 32 / 22. His full-body coverage was kept whole because that is what v2 was built for, the medium band was mostly kept, and the close-ups were thinned, since he had the most and close identity is the easiest thing for a LoRA to learn. kyle_lora v2 stays on disk for Kyle-only work, so nothing is lost by the cap.</p>
 <p><strong>Still</strong></p>
 <div class="tw"><table>
 <thead>

@@ -8,7 +8,7 @@
 
 ---
 
-**Project pages**: [[projects-anime|Anime projects]] (5) · [[projects-realistic|Photoreal projects]] (10) · [[projects-3d|3D-animated projects]] (3)
+**Project pages**: [[projects-anime|Anime projects]] (5) · [[projects-realistic|Photoreal projects]] (11) · [[projects-3d|3D-animated projects]] (3)
 
 Each theme page holds the full records — settings, prompts, seeds, files. The tables below link straight to a project's record on its page.
 
@@ -26,7 +26,7 @@ Shinkai/Ghibli-styled living paintings: a still from FLUX or Wan T2V, ambient mo
 
 → full records for all 5: [[projects-anime|Anime projects]]
 
-## [[projects-realistic|Photoreal projects]] (10)
+## [[projects-realistic|Photoreal projects]] (11)
 
 Cinematic photoreal shorts: FLUX.2 klein stills with Moodboard references, motion from LTX-2.3 or Wan 2.2, Real-ESRGAN to 4K, cut with crossfades. Dragon Epic, Lost City, the three-minute film.
 
@@ -42,8 +42,9 @@ Cinematic photoreal shorts: FLUX.2 klein stills with Moodboard references, motio
 | 8 | [Lindsey — above the cloud sea](projects-realistic.html#lindsey_summit) | 2026-09-29 | delivered 2026-09-29 10:42 — 59.88 s, 3840x2160 (280 MB) + 1920x1080 (87 MB), 8 shots, none dropped; mean -18.7 dB, peak -5.3 dB. Planned length 59.75 s, delivered 59.88 s. | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 11 min | Adventure Journey | `—` | — |
 | 9 | [Kyle — the signal fire](projects-realistic.html#kyle_lighthouse) | 2026-09-29 | stopped 2026-09-29 — abandoned at Kevin's call after s6 could not be made to work. Seven of eight shots are rendered, graded and upscaled to 4K; s6 went through five designs (interior stairwell from below, side-on interior spiral, exterior stair on the tower, and two versions of the entrance door) and none was accepted. No final cut was produced from the current shot set. | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 11 min | Best Adventure Ever | `—` | — |
 | 10 | [Kyle — character LoRA v2](projects-realistic.html#kyle_lora) | 2026-09-29 | dataset built 2026-09-29 — 55 pairs; training | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
+| 11 | [Yang family — one LoRA, three subjects](projects-realistic.html#yang_family_lora) | 2026-09-30 | dataset built — training queued behind kyle_lora v2 | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
 
-→ full records for all 10: [[projects-realistic|Photoreal projects]]
+→ full records for all 11: [[projects-realistic|Photoreal projects]]
 
 ## [[projects-3d|3D-animated projects]] (3)
 

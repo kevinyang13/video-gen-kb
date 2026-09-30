@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yang Family — One LoRA, Three Subjects — video-gen-kb</title>
+<style>
+:root{--bg:#0B0D12;--panel:#141822;--panel-2:#1B2130;--stroke:#2A3245;--text:#E6E9F0;
+--muted:#8B94A7;--accent:#F5B84B;--accent-2:#4BC9F5;--on-accent:#12131A;
+--rule:rgba(139,148,167,.22);--code:#F5B84B}
+@media(prefers-color-scheme:light){:root:not([data-theme=dark]){--bg:#F4F1EA;--panel:#fff;
+--panel-2:#FAF8F3;--stroke:#D9D3C6;--text:#16181F;--muted:#5D6473;--accent:#B8781A;
+--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}}
+:root[data-theme=light]{--bg:#F4F1EA;--panel:#fff;--panel-2:#FAF8F3;--stroke:#D9D3C6;
+--text:#16181F;--muted:#5D6473;--accent:#B8781A;--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);
+line-height:1.65;padding:0 1rem 4rem}
+.shell{max-width:840px;margin:0 auto}
+a{color:var(--accent);text-decoration:none;font-weight:600}
+a:hover{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--accent-2);outline-offset:3px;border-radius:4px}
+.bar{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;padding:1.1rem 0;margin-bottom:1.5rem;
+border-bottom:1px solid var(--stroke)}
+.crumb{font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.spacer{flex:1}
+.pill{border:1px solid var(--stroke);background:var(--panel);border-radius:999px;padding:.28rem .8rem;
+font-size:.75rem;font-weight:700;color:var(--text);cursor:pointer;font-family:inherit}
+.pill:hover{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+h1{font-size:clamp(1.7rem,5vw,2.5rem);margin:.2rem 0 1rem;line-height:1.1;letter-spacing:-.015em;text-wrap:balance}
+h2{font-size:1.25rem;margin:2.2rem 0 .7rem;padding-bottom:.35rem;border-bottom:1px solid var(--rule);text-wrap:balance}
+h3{font-size:1.02rem;margin:1.5rem 0 .5rem;color:var(--accent)}
+p{margin:.7rem 0}
+ul,ol{margin:.7rem 0 .7rem 1.3rem}
+li{margin:.28rem 0}
+li::marker{color:var(--accent)}
+em{color:var(--muted)}
+hr{border:none;border-top:1px solid var(--stroke);margin:2rem 0}
+blockquote{border-left:3px solid var(--accent);background:var(--panel);border-radius:0 10px 10px 0;
+padding:.8rem 1.1rem;margin:1.1rem 0;color:var(--muted);font-size:.92rem}
+code{background:var(--panel);border:1px solid var(--stroke);border-radius:5px;padding:.1rem .35rem;
+font-size:.85em;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--code)}
+img{max-width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--stroke);margin:1.1rem 0}
+pre{background:var(--panel);border:1px solid var(--stroke);border-radius:12px;padding:1rem;overflow-x:auto;margin:1.1rem 0}
+pre code{background:none;border:none;padding:0;color:var(--text);font-size:.83rem;line-height:1.55}
+.tw{overflow-x:auto;border:1px solid var(--stroke);border-radius:12px;background:var(--panel);margin:1.1rem 0}
+table{width:100%;border-collapse:collapse;font-size:.85rem;min-width:min(100%,460px)}
+th{background:var(--panel-2);color:var(--accent);text-align:left;padding:.55rem .8rem;font-size:.68rem;
+letter-spacing:.09em;text-transform:uppercase;white-space:nowrap;border-bottom:1px solid var(--stroke)}
+td{padding:.5rem .8rem;border-bottom:1px solid var(--rule);color:var(--muted);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td strong{color:var(--text)}
+.meta{display:flex;flex-wrap:wrap;gap:.4rem .9rem;font-size:.78rem;color:var(--muted);margin:-.4rem 0 1.2rem}
+.meta b{color:var(--text);font-weight:600}
+.missing{color:var(--muted);border-bottom:1px dashed var(--muted);cursor:help}
+.related{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--stroke)}
+.related h2{border:none;margin:0 0 .7rem;font-size:.95rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:0}
+.chips li{margin:0}
+.chips a,.chips .missing{display:inline-block;border:1px solid var(--stroke);background:var(--panel);
+border-radius:999px;padding:.28rem .8rem;font-size:.8rem}
+.chips a:hover{background:var(--accent);color:var(--on-accent);text-decoration:none;border-color:var(--accent)}
+footer{max-width:840px;margin:2.5rem auto 0;padding-top:1.2rem;border-top:1px solid var(--stroke);
+font-size:.75rem;color:var(--muted);text-align:center}
+/* landing */
+.hero{padding:2.4rem 0 1.6rem}
+.kicker{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2)}
+.hero h1{font-size:clamp(2rem,6vw,3.2rem);margin:.35rem 0 .5rem}
+.hero p{color:var(--muted);font-size:1.05rem;max-width:56ch}
+.hw{display:inline-flex;gap:.5rem;align-items:center;margin-top:1rem;border:1px solid var(--stroke);
+background:var(--panel);border-radius:999px;padding:.3rem .9rem;font-size:.78rem;color:var(--muted)}
+.hw .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.sec{margin-top:2.2rem}
+.sec h2{border:none;padding:0;margin:0 0 .8rem;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.9rem}
+.card{display:block;border:1px solid var(--stroke);background:var(--panel);border-radius:14px;padding:1rem 1.1rem;
+color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+.card b{display:block;color:var(--accent);font-size:1rem;margin-bottom:.3rem}
+.card span{font-size:.85rem;color:var(--muted);line-height:1.5}
+.stubs{font-size:.82rem;color:var(--muted);margin-top:.6rem}
+.yt{position:relative;width:100%;aspect-ratio:16/9;border:1px solid var(--stroke);border-radius:12px;overflow:hidden;background:#000;margin:1rem 0}
+.yt.yt-v{aspect-ratio:9/16;max-width:360px}
+.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="bar">
+    <span class="crumb"><a href="../">video-gen-kb</a> / <a href="index.html">Wiki</a></span>
+    <span class="spacer"></span>
+    <button class="pill" onclick="tt()">◐ Theme</button>
+  </nav>
+  <h1>Yang Family — One LoRA, Three Subjects</h1><p class="lede">The first multi-subject LoRA here: Kyle, Lindsey and Ivy trained into a single adapter, each behind its own trigger and class word. The thing it can do that three separate LoRAs cannot is put two of them in one frame.</p><div class="meta"><span><b>Updated</b> 2026-09-30</span><span><b>Sources</b> <a href="kyle-lora-plan.html">kyle lora plan</a> (v2 dataset), <a href="lindsey-lora-plan.html">lindsey lora plan</a>, <a href="ivy-lora-plan.html">ivy lora plan</a>, <a href="blueprint-v2-research.html">blueprint v2 research</a>.</span></div>
+<hr />
+<h2>1. Why one adapter instead of three</h2>
+<p>Draw Things will load more than one LoRA at a time, but two <em>character</em> adapters fight over the same face — each
+one is trained to pull any person in frame toward its own subject. So three separate LoRAs can render three
+people one at a time and cannot render two of them together. A single adapter that knows all three can.</p>
+<h2>2. The setup is unusually favourable</h2>
+<p>All three existing datasets already lead every caption with a <strong>distinct trigger and a distinct class word</strong>:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Subject</th>
+<th>Trigger</th>
+<th>Class word</th>
+<th>Frames available</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kyle</td>
+<td><code>kyle_kx</code></td>
+<td>boy</td>
+<td>55 (v2)</td>
+</tr>
+<tr>
+<td>Lindsey</td>
+<td><code>lindsey_kx</code></td>
+<td>girl</td>
+<td>32</td>
+</tr>
+<tr>
+<td>Ivy</td>
+<td><code>ivy_kx</code></td>
+<td>woman</td>
+<td>22</td>
+</tr>
+</tbody>
+</table></div>
+<p>Two independent axes of separation — the token and the class — is the main defence against the failure mode
+here, which is <strong>identity bleed</strong>: one subject's features leaking into another's prompt. The class words being
+genuinely different (a boy, a girl, an adult woman) helps more than three arbitrary tokens would.</p>
+<p>Every caption also already follows the Isolation Rule, so nothing had to be rewritten. The datasets were
+merged as-is.</p>
+<h2>3. The balance decision</h2>
+<p>Kyle was capped at <strong>33 of his 55</strong> frames, giving <strong>33 / 32 / 22</strong> instead of 55 / 32 / 22.</p>
+<p>Imbalance is what makes a multi-subject LoRA bleed: the majority subject becomes the model's default face, and
+the minority subjects get whatever capacity is left. Kyle had 50% of the pool and Ivy 20%, which would have
+made Ivy the weakest of the three for no good reason.</p>
+<p>What was kept, and why:</p>
+<ul>
+<li><strong>all 11 full-body frames</strong> — that coverage is exactly what <code>kyle_lora</code> v2 was built to add, and it is the
+  scarcest thing in the pool</li>
+<li><strong>9 of 14 medium</strong> — the band that was missing before v2</li>
+<li><strong>12 of 25 close-ups</strong> — he had the most, and close identity is the easiest thing for a LoRA to learn</li>
+</ul>
+<p>Nothing is lost by the cap: <code>kyle_lora_v2</code> stays on disk for Kyle-only work.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th></th>
+<th>close-up</th>
+<th>medium</th>
+<th>chest-up</th>
+<th>full body</th>
+<th>total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kyle</td>
+<td>12</td>
+<td>9</td>
+<td>1</td>
+<td>11</td>
+<td><strong>33</strong></td>
+</tr>
+<tr>
+<td>Lindsey</td>
+<td>12</td>
+<td>—</td>
+<td>7</td>
+<td>13</td>
+<td><strong>32</strong></td>
+</tr>
+<tr>
+<td>Ivy</td>
+<td>10</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td><strong>22</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>Ivy is the weak one on framing — only three full-body frames — so if anyone fails at distance it will be her,
+and that is a dataset limit rather than anything about the merge.</p>
+<h2>4. Settings, and what changed from single-subject runs</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Single-subject</th>
+<th>Here</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Rank</td>
+<td>32</td>
+<td><strong>64</strong></td>
+<td>three identities need more capacity than one; rank is the cheapest place to buy it. Checkpoints roughly double, ~800 MB</td>
+</tr>
+<tr>
+<td>Steps</td>
+<td>2000–2500</td>
+<td><strong>4000</strong></td>
+<td>87 frames across three subjects, against 55 of one</td>
+</tr>
+<tr>
+<td>Learning rate</td>
+<td>1e-4</td>
+<td>1e-4</td>
+<td>unchanged</td>
+</tr>
+<tr>
+<td>Bucketing</td>
+<td><code>--use-aspect-ratio</code></td>
+<td>same</td>
+<td>the three sets have different aspect ratios</td>
+</tr>
+<tr>
+<td>Save every</td>
+<td>400–500</td>
+<td><strong>800</strong></td>
+<td>five checkpoints, at ~800 MB each</td>
+</tr>
+</tbody>
+</table></div>
+<p>At roughly 0.2 it/s that is about five hours. It was queued to start automatically when <code>kyle_lora</code> v2
+finished, since the GPU runs one job at a time.</p>
+<h2>5. How it will be judged</h2>
+<ol>
+<li><strong>Each subject alone</strong>, at weight 1.0 and 0.85 — is the face actually right?</li>
+<li><strong>Bleed</strong> — does <code>kyle_kx boy</code> come out with Lindsey's or Ivy's features, and the reverse?</li>
+<li><strong>Two subjects in one frame</strong> — the thing that justifies the whole exercise.</li>
+<li><strong>Family-Kyle against standalone <code>kyle_lora_v2</code></strong> — what does sharing the adapter cost a subject that has
+   its own dedicated LoRA?</li>
+</ol>
+<p>Test 4 is the one that decides whether this replaces the per-person LoRAs or sits alongside them.</p>
+<h2>6. Log</h2>
+<ul>
+<li><strong>2026-09-30</strong> — dataset merged (87 pairs, no new photographs, no caption rewrites) and training queued
+  behind <code>kyle_lora</code> v2.</li>
+</ul>
+
+  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="kyle-lora-plan.html">kyle lora plan</a></li><li><a href="lindsey-lora-plan.html">lindsey lora plan</a></li><li><a href="ivy-lora-plan.html">ivy lora plan</a></li><li><a href="blueprint-v2-research.html">blueprint v2 research</a></li></ul></div>
+</div>
+<footer>video-gen-kb · built 2026-09-29 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<script>function tt(){var r=document.documentElement,
+d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
+matchMedia('(prefers-color-scheme: dark)').matches);
+r.setAttribute('data-theme',d?'light':'dark');}</script>
+</body>
+</html>

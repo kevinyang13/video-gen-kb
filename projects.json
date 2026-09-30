@@ -3128,6 +3128,63 @@
           "youtube": null
         }
       ]
+    },
+    {
+      "id": "yang_family_lora",
+      "version": "v1-multi-subject",
+      "variant": "First multi-subject LoRA: three people in one adapter, each behind its own trigger and class word.",
+      "title": "Yang family — one LoRA, three subjects",
+      "date": "2026-09-30",
+      "theme": "realistic",
+      "dt_project": "none — draw-things-cli train lora",
+      "status": "dataset built — training queued behind kyle_lora v2",
+      "source": "the three existing per-person datasets; no new photographs. Raw source photos stay git-ignored in their own projects.",
+      "notes": "Kyle, Lindsey and Ivy are Kevin's family; consent settled for all three. The point of a single adapter is that it can put two of them in one frame, which three separate LoRAs cannot do — Draw Things can load more than one LoRA, but two character adapters fight for the same face.\n\nThe setup is unusually favourable: all three datasets already lead every caption with a distinct trigger AND a distinct class word — kyle_kx boy, lindsey_kx girl, ivy_kx woman. That gives the model two independent axes to separate the subjects on, which is the main defence against the failure mode here, identity bleed.\n\nKyle was capped at 33 of his 55 v2 frames so that no subject dominates: 33 / 32 / 22 rather than 55 / 32 / 22. His full-body coverage was kept whole because that is what v2 was built for, the medium band was mostly kept, and the close-ups were thinned, since he had the most and close identity is the easiest thing for a LoRA to learn. kyle_lora v2 stays on disk for Kyle-only work, so nothing is lost by the cap.",
+      "dataset": {
+        "triggers": {
+          "kyle": "kyle_kx boy",
+          "lindsey": "lindsey_kx girl",
+          "ivy": "ivy_kx woman"
+        },
+        "count": 87,
+        "per_subject": {
+          "kyle": 33,
+          "lindsey": 32,
+          "ivy": 22
+        },
+        "sources": {
+          "kyle": "kyle_lora/v2-photo-dataset (33 of 55)",
+          "lindsey": "lindsey_lora/v1-photo-dataset (all 32)",
+          "ivy": "ivy_lora/v1-photo-dataset (all 22)"
+        },
+        "framing": {
+          "kyle": "12 close-up, 9 medium, 11 full body, 1 chest-up",
+          "lindsey": "12 close-up, 7 chest-up, 13 full body",
+          "ivy": "10 close-up, 4 chest-up, 5 medium, 3 full body"
+        },
+        "balance_rationale": "Imbalance is what makes a multi-subject LoRA bleed: the majority subject becomes the model's default face. Capping Kyle near Lindsey's count costs him 22 frames he already has a dedicated LoRA for, and buys Ivy and Lindsey a fair share of the adapter's capacity.",
+        "captions": "unchanged from the source datasets — all three already follow the Isolation Rule and lead with trigger + class word",
+        "status": "built 2026-09-30"
+      },
+      "training": {
+        "command": "draw-things-cli train lora --model flux_2_klein_9b_i8x.ckpt --dataset projects/yang_family_lora/v1-multi-subject/seed/dataset --steps 4000 --rank 64 --learning-rate 1e-4 --seed 1 --use-aspect-ratio --save-every 800 -o yang_family_lora --name \"Yang Family (kyle_kx / lindsey_kx / ivy_kx)\" --offline",
+        "rank_rationale": "rank 64 rather than the 32 used for every single-subject LoRA here. Three identities need more capacity than one, and rank is the cheapest place to buy it. Checkpoints will be roughly double the usual 402 MB.",
+        "steps_rationale": "4000 for 87 frames across three subjects, against 2500 for 55 frames of one. At ~0.2 it/s that is about five hours.",
+        "queued_behind": "kyle_lora v2 (2500 steps) — the GPU runs one job at a time"
+      },
+      "evaluation": {
+        "plan": [
+          "each subject alone at weight 1.0 and 0.85 — is the face right?",
+          "bleed: does kyle_kx boy render with Lindsey's or Ivy's features, and vice versa?",
+          "two subjects in one frame — the thing three separate LoRAs cannot do",
+          "family-Kyle against standalone kyle_lora_v2, to measure what sharing the adapter costs"
+        ],
+        "status": "to run after training"
+      },
+      "files": [
+        "seed/dataset/NNN.png + NNN.txt (87 pairs)",
+        "logs/train.log"
+      ]
     }
   ]
 }
