@@ -94,6 +94,29 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
   </nav>
   <h1>Log</h1><p class="lede">Append-only record of every operation performed on this wiki.</p><div class="meta"><span><b>Updated</b> 2026-09-22</span><span><b>Sources</b> n/a</span></div>
 <hr />
+<h2>2026-09-29 — Process change after kyle_lighthouse: geometry, five seeds, a labelled sheet</h2>
+<p><code>kyle_lighthouse</code> was stopped with seven of eight shots finished because one shot failed five times on
+geometry. Three changes, all now in the pipeline rather than only written down — see
+<a href="still-geometry-and-review.html">still geometry and review</a>.</p>
+<p><strong>1. Prompt patterns for geometry and anatomy.</strong> The recurring structural failure is a camera pointed <em>along</em> a
+structure's axis: a spiral stair shot up the stairwell returns a tapering wedge with no treads, and the video
+stage amplifies that into a figure walking up a blank wall. The same stair shot from the side renders fine. The
+rules that follow: put the camera beside a structure, name its members rather than labelling the object, let
+structure leave frame instead of resolving, and state that the foreground is clear. On anatomy: a child at
+full-body distance reverts to adult proportions, so frame closer, say "child proportions", and give a
+known-size referent to compare against. Ask for one figure positively, because the style lock's "no extra
+people" is a negative and twice failed to hold.</p>
+<p><strong>2. Five seeds per shot, not three.</strong> <code>film_run.py</code> now defaults to <code>seeds: [1, 2, 3, 4, 5]</code>. Three was enough
+when a still only had to look good; it is not enough when one of the things being screened for is a structural
+failure that appears in some seeds and not others.</p>
+<p><strong>3. A labelled contact sheet, and a full-size look before picking.</strong> New command <code>film_run.py PROJECT sheet
+[ids]</code> tiles a shot's candidates and captions each with its own <code>c&lt;seed&gt;</code>, so a pick is made by seed number
+instead of by position in a grid — which is how the wrong still got picked. The sheet narrows to a shortlist;
+the decision is made on the full-size images, because both the wedge-shaped stair and two separate cases of an
+extra person were invisible at tile size and obvious at full resolution.</p>
+<p>The checklist gained rows for structure, destination, age and scale, foreground clutter and runaway props, plus
+one forward-looking question: <strong>what is the video model most likely to invent here?</strong> Anything ambiguous in the
+still is what it will elaborate, and motion prompts cannot forbid it.</p>
 <h2>2026-09-29 — Kyle's signal fire: choosing the subject to satisfy the constraint</h2>
 <p>Fourth LoRA-driven film, <a href="kyle-lighthouse-plan.html">kyle lighthouse plan</a>: a boy carries a lantern out a storm causeway to a dead
 lighthouse and relights it. The new move is not a new rule but a new <em>response</em> to the existing one. If LTX

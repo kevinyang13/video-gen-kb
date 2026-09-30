@@ -34,7 +34,7 @@ Draw Things exports are **ProRes 422 `.mov`** (video) — 8-bit 4:2:2, 16 fps fo
 | 9 Upscale | `upscale_4k.sh IN [out] [model]` | `film.upscale` (model, size, fit, bitrate), `assemble.clip_audio` → `KEEP_AUDIO` | model/scale exists, even W/H, frame count out = in |
 | 9 Assemble + music | `assemble_film.sh OUT clip…` | `film.assemble` (fps, xfade, clip_audio, bitrate), `film.music` (file, start / `tail`, vol, fades) | clips/music exist, letterbox landscape-only, music-too-short note, expected vs actual length |
 | 9 Deliver | inside `film_run.py finish` | `film.deliver[]` sizes and bitrates | — |
-| all | **`film_run.py PROJECT check·status·stills·pick·clips·qc·finish`** | the whole run-spec (or a standalone `.json` run-spec file) | run-spec sanity: sizes, frame rules, paths, refs, trims, planned length |
+| all | **`film_run.py PROJECT check·status·stills·sheet·pick·clips·qc·finish`** | the whole run-spec (or a standalone `.json` run-spec file) | run-spec sanity: sizes, frame rules, paths, refs, trims, planned length |
 | loop posts | `finish_clip.sh IN [music] [out]` | env: W, H, LOOPS, SEAM, FPS, MUSIC_VOL | clip long enough for the seam |
 
 Every script: `set -euo pipefail`, a clear `die` message, `ffmpeg -nostdin` everywhere (ffmpeg inside a `while read` loop eats the loop's input — the Kyle overnight bug), and `DRY_RUN=1` on the two CLI wrappers.
@@ -67,7 +67,8 @@ Still mode per shot: `ref` + `input` = diptych; `input` only = single edit; neit
 ```bash
 scripts/preflight.sh --fix
 scripts/film_run.py kyle_rescue check          # run-spec sanity + planned length
-scripts/film_run.py kyle_rescue stills         # 3 seeds per shot → seed/<id>_c<seed>.png   (skips shots with a picked still)
+scripts/film_run.py kyle_rescue stills         # 5 seeds per shot → seed/<id>_c<seed>.png   (skips shots with a picked still)
+scripts/film_run.py kyle_rescue sheet s6       # labelled contact sheet → seed/s6_sheet.png (review before picking)
 scripts/film_run.py kyle_rescue pick s2 4      # → stills/s2.png  (judge picks)
 scripts/film_run.py kyle_rescue clips          # clips/<id>_v1.mov (skips existing);  --v 2 --seed 2 s2 for a redo
 scripts/film_run.py kyle_rescue qc             # seed/<id>_v1_qc.png

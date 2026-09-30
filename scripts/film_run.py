@@ -7,6 +7,7 @@ holding the run-spec (handy for tests).
   scripts/film_run.py PROJECT check              validate the run-spec (paths, sizes, frame rules)
   scripts/film_run.py PROJECT status             one line per shot: still / candidates / clips / take / 4K
   scripts/film_run.py PROJECT stills [ids]       seed candidates for shots with no picked still -> seed/<id>_c<seed>.png
+  scripts/film_run.py PROJECT sheet [ids]        label candidates -> seed/<id>_sheet.png (review before picking)
   scripts/film_run.py PROJECT pick ID SEED       candidate -> stills/<id>.png
   scripts/film_run.py PROJECT clips [ids] [--v N] [--seed S]   clips/<id>_v<N>.mov for shots with a still
   scripts/film_run.py PROJECT qc [ids] [--v N]   contact sheets seed/<id>_v<N>_qc.png (ref = master or still)
@@ -16,7 +17,7 @@ Global flags: --dry-run (print commands), --force (redo existing outputs).
 Run-spec (all paths relative to run-spec.dir; every block optional except dir, size, shots):
   "run-spec": {
     "dir": "projects/<id>/<version>", "name": "<film file stem>", "size": [576, 1024],
-    "still":   {"model": ..., "steps": 4, "cfg": 1, "config": {...}, "seeds": [1, 2, 3], "strength": 1.0},
+    "still":   {"model": ..., "steps": 4, "cfg": 1, "config": {...}, "seeds": [1, 2, 3, 4, 5], "strength": 1.0},
     "clip":    {"model": ..., "frames": 249, "steps": 8, "cfg": 1, "config": {...}, "seed": 1, "video_format": "prores422hq"},
     "masters": {"kyle": "seed/kyle_front.png"},             # names usable as a shot's still.ref and qc_ref
     "upscale": {"model": "realesrgan-x4plus", "size": [2160, 3840], "fit": "crop", "bitrate": "40M"},
@@ -33,13 +34,13 @@ Run-spec (all paths relative to run-spec.dir; every block optional except dir, s
     ]}
 music.file is relative to the repo root. Takes/trims are what `finish` cuts; set them after QC.
 """
-import json, os, shlex, shutil, subprocess, sys
+import json, os, re, shlex, shutil, subprocess, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 S = ROOT / "scripts"
 DEFAULT_STILL = {"model": "flux_2_klein_9b_i8x.ckpt", "steps": 4, "cfg": 1, "config": {"shift": 3.0, "sampler": 16},
-                 "seeds": [1, 2, 3], "strength": 1.0}
+                 "seeds": [1, 2, 3, 4, 5], "strength": 1.0}
 DEFAULT_CLIP = {"model": "ltx_2.3_22b_distilled_1.1_q8p.ckpt", "seed": 1, "video_format": "prores422hq"}
 DRY = "--dry-run" in sys.argv
 FORCE = "--force" in sys.argv
@@ -229,6 +230,52 @@ def cmd_stills(f, args):
     return rc
 
 
+
+def cmd_sheet(f, args):
+    """Tile a shot's candidates into one labelled sheet, so a pick is by seed number, not by position.
+
+    Every candidate is captioned with its own `c<seed>`, because reading a grid by
+    position is how the wrong still gets picked.
+    """
+    try:
+        from PIL import Image, ImageDraw, ImageFont
+    except ImportError:
+        die("sheet needs Pillow (pip3 install Pillow)")
+    cols = int(flag("--cols", 3))
+    tile_w = int(flag("--width", 560))
+    try:
+        font = ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", 28)
+    except OSError:
+        font = ImageFont.load_default()
+    rc = 0
+    for s in ids_arg(f, args):
+        i = s["id"]
+        cands = sorted(d(f, "seed").glob(f"{i}_c*.png"),
+                       key=lambda q: int(re.sub(r"\D", "", q.stem.split("_c")[-1]) or 0))
+        if not cands:
+            print(f"{i}: no candidates")
+            continue
+        ims = []
+        for q in cands:
+            im = Image.open(q).convert("RGB")
+            im = im.resize((tile_w, round(im.height * tile_w / im.width)), Image.LANCZOS)
+            seed = q.stem.split("_c")[-1]
+            dr = ImageDraw.Draw(im)
+            dr.rectangle([0, 0, 108, 40], fill=(0, 0, 0))
+            dr.text((8, 4), f"c{seed}", fill=(255, 255, 255), font=font)
+            ims.append(im)
+        tw, th = ims[0].size
+        rows = (len(ims) + cols - 1) // cols
+        sheet = Image.new("RGB", (cols * tw, rows * th), (16, 16, 16))
+        for n, im in enumerate(ims):
+            sheet.paste(im, ((n % cols) * tw, (n // cols) * th))
+        out = d(f, f"seed/{i}_sheet.png")
+        if not DRY:
+            sheet.save(out)
+        print(f"{i}: {len(ims)} candidates -> {out.relative_to(ROOT)}")
+    return rc
+
+
 def cmd_pick(f, args):
     pos = [a for a in args if not a.startswith("--")]
     if len(pos) != 2:
@@ -336,7 +383,7 @@ def cmd_finish(f, _):
     return 0
 
 
-CMDS = {"check": cmd_check, "status": cmd_status, "stills": cmd_stills, "pick": cmd_pick,
+CMDS = {"check": cmd_check, "status": cmd_status, "stills": cmd_stills, "sheet": cmd_sheet, "pick": cmd_pick,
         "clips": cmd_clips, "qc": cmd_qc, "finish": cmd_finish}
 
 if __name__ == "__main__":

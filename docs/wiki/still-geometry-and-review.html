@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Still Geometry, Anatomy and Candidate Review — video-gen-kb</title>
+<style>
+:root{--bg:#0B0D12;--panel:#141822;--panel-2:#1B2130;--stroke:#2A3245;--text:#E6E9F0;
+--muted:#8B94A7;--accent:#F5B84B;--accent-2:#4BC9F5;--on-accent:#12131A;
+--rule:rgba(139,148,167,.22);--code:#F5B84B}
+@media(prefers-color-scheme:light){:root:not([data-theme=dark]){--bg:#F4F1EA;--panel:#fff;
+--panel-2:#FAF8F3;--stroke:#D9D3C6;--text:#16181F;--muted:#5D6473;--accent:#B8781A;
+--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}}
+:root[data-theme=light]{--bg:#F4F1EA;--panel:#fff;--panel-2:#FAF8F3;--stroke:#D9D3C6;
+--text:#16181F;--muted:#5D6473;--accent:#B8781A;--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);
+line-height:1.65;padding:0 1rem 4rem}
+.shell{max-width:840px;margin:0 auto}
+a{color:var(--accent);text-decoration:none;font-weight:600}
+a:hover{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--accent-2);outline-offset:3px;border-radius:4px}
+.bar{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;padding:1.1rem 0;margin-bottom:1.5rem;
+border-bottom:1px solid var(--stroke)}
+.crumb{font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.spacer{flex:1}
+.pill{border:1px solid var(--stroke);background:var(--panel);border-radius:999px;padding:.28rem .8rem;
+font-size:.75rem;font-weight:700;color:var(--text);cursor:pointer;font-family:inherit}
+.pill:hover{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+h1{font-size:clamp(1.7rem,5vw,2.5rem);margin:.2rem 0 1rem;line-height:1.1;letter-spacing:-.015em;text-wrap:balance}
+h2{font-size:1.25rem;margin:2.2rem 0 .7rem;padding-bottom:.35rem;border-bottom:1px solid var(--rule);text-wrap:balance}
+h3{font-size:1.02rem;margin:1.5rem 0 .5rem;color:var(--accent)}
+p{margin:.7rem 0}
+ul,ol{margin:.7rem 0 .7rem 1.3rem}
+li{margin:.28rem 0}
+li::marker{color:var(--accent)}
+em{color:var(--muted)}
+hr{border:none;border-top:1px solid var(--stroke);margin:2rem 0}
+blockquote{border-left:3px solid var(--accent);background:var(--panel);border-radius:0 10px 10px 0;
+padding:.8rem 1.1rem;margin:1.1rem 0;color:var(--muted);font-size:.92rem}
+code{background:var(--panel);border:1px solid var(--stroke);border-radius:5px;padding:.1rem .35rem;
+font-size:.85em;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--code)}
+img{max-width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--stroke);margin:1.1rem 0}
+pre{background:var(--panel);border:1px solid var(--stroke);border-radius:12px;padding:1rem;overflow-x:auto;margin:1.1rem 0}
+pre code{background:none;border:none;padding:0;color:var(--text);font-size:.83rem;line-height:1.55}
+.tw{overflow-x:auto;border:1px solid var(--stroke);border-radius:12px;background:var(--panel);margin:1.1rem 0}
+table{width:100%;border-collapse:collapse;font-size:.85rem;min-width:min(100%,460px)}
+th{background:var(--panel-2);color:var(--accent);text-align:left;padding:.55rem .8rem;font-size:.68rem;
+letter-spacing:.09em;text-transform:uppercase;white-space:nowrap;border-bottom:1px solid var(--stroke)}
+td{padding:.5rem .8rem;border-bottom:1px solid var(--rule);color:var(--muted);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td strong{color:var(--text)}
+.meta{display:flex;flex-wrap:wrap;gap:.4rem .9rem;font-size:.78rem;color:var(--muted);margin:-.4rem 0 1.2rem}
+.meta b{color:var(--text);font-weight:600}
+.missing{color:var(--muted);border-bottom:1px dashed var(--muted);cursor:help}
+.related{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--stroke)}
+.related h2{border:none;margin:0 0 .7rem;font-size:.95rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:0}
+.chips li{margin:0}
+.chips a,.chips .missing{display:inline-block;border:1px solid var(--stroke);background:var(--panel);
+border-radius:999px;padding:.28rem .8rem;font-size:.8rem}
+.chips a:hover{background:var(--accent);color:var(--on-accent);text-decoration:none;border-color:var(--accent)}
+footer{max-width:840px;margin:2.5rem auto 0;padding-top:1.2rem;border-top:1px solid var(--stroke);
+font-size:.75rem;color:var(--muted);text-align:center}
+/* landing */
+.hero{padding:2.4rem 0 1.6rem}
+.kicker{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2)}
+.hero h1{font-size:clamp(2rem,6vw,3.2rem);margin:.35rem 0 .5rem}
+.hero p{color:var(--muted);font-size:1.05rem;max-width:56ch}
+.hw{display:inline-flex;gap:.5rem;align-items:center;margin-top:1rem;border:1px solid var(--stroke);
+background:var(--panel);border-radius:999px;padding:.3rem .9rem;font-size:.78rem;color:var(--muted)}
+.hw .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.sec{margin-top:2.2rem}
+.sec h2{border:none;padding:0;margin:0 0 .8rem;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.9rem}
+.card{display:block;border:1px solid var(--stroke);background:var(--panel);border-radius:14px;padding:1rem 1.1rem;
+color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+.card b{display:block;color:var(--accent);font-size:1rem;margin-bottom:.3rem}
+.card span{font-size:.85rem;color:var(--muted);line-height:1.5}
+.stubs{font-size:.82rem;color:var(--muted);margin-top:.6rem}
+.yt{position:relative;width:100%;aspect-ratio:16/9;border:1px solid var(--stroke);border-radius:12px;overflow:hidden;background:#000;margin:1rem 0}
+.yt.yt-v{aspect-ratio:9/16;max-width:360px}
+.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="bar">
+    <span class="crumb"><a href="../">video-gen-kb</a> / <a href="index.html">Wiki</a></span>
+    <span class="spacer"></span>
+    <button class="pill" onclick="tt()">◐ Theme</button>
+  </nav>
+  <h1>Still Geometry, Anatomy and Candidate Review</h1><p class="lede">The prompt patterns that stop klein producing broken architecture and wrong-age bodies, and the review gate that stops a broken candidate being picked. Written after <code>kyle_lighthouse</code> was abandoned over a single shot that failed five times on geometry.</p><div class="meta"><span><b>Updated</b> 2026-09-29</span><span><b>Sources</b> <a href="kyle-lighthouse-plan.html">kyle lighthouse plan</a> (the failure), <a href="lindsey-summit-plan.html">lindsey summit plan</a>, <a href="kyle-debut-plan.html">kyle debut plan</a>, <a href="lindsey-palace-plan.html">lindsey palace plan</a>, <a href="idea-to-video-blueprint.html">idea to video blueprint</a> Phase 5 and the pick rubric.</span></div>
+<hr />
+<h2>Why this page exists</h2>
+<p>Four LoRA-driven films went out in two days. The fifth, <code>kyle_lighthouse</code>, was stopped with seven of eight shots
+finished, because one shot — a boy climbing a lighthouse stair — could not be made to work in five attempts.
+Every attempt failed the same way: <strong>the still contained geometry the model had not actually resolved</strong>, and the
+video stage then amplified the ambiguity into something obviously wrong (a figure walking up a blank wall).</p>
+<p>None of that was caught at the still stage, because the candidates were reviewed as small tiles in an unlabelled
+grid. The three fixes below are prompt-side, count-side and review-side.</p>
+<h2>1. Prompt patterns that prevent broken geometry</h2>
+<p><strong>Put the camera beside a structure, not along its axis.</strong> A spiral stair shot <em>up the stairwell</em> gives klein a
+receding helix with no silhouette, and it returns a tapering wedge with no treads. The same stair shot from the
+side, crossing frame as a diagonal, renders correctly. Same for corridors, ladders and towers: an oblique or
+side-on camera gives the model a shape to draw.</p>
+<p><strong>Name the structural members, not the object.</strong> "A spiral staircase" is a label. "A central iron column, open
+cast-iron treads winding around it, a curved handrail, slender balusters, the stringer visible from the side" is
+a description the model can build. Anything load-bearing in the frame should be named as parts.</p>
+<p><strong>Let structure leave the frame instead of resolving.</strong> A stair that runs out of the top of frame is easier than
+one that must terminate somewhere convincing. If it does terminate, the destination has to be <em>in</em> the shot — a
+lit hatch, a landing, a doorway — or the movement reads as going nowhere.</p>
+<p><strong>Say the foreground is clear.</strong> LTX elaborates whatever is nearest the camera. A clear statement — "nothing
+stands between the camera and the tower; the foreground is clear open wet rock" — is cheaper than fixing it
+later.</p>
+<p><strong>Prefer a subject whose motion animates itself</strong> for any shot that must hold: surf, fire, spray, cloud, a lamp
+hanging on a hook. See <a href="kyle-lighthouse-plan.html">kyle lighthouse plan</a> §1; this is the same rule from the other direction.</p>
+<h2>2. Prompt patterns that prevent anatomy and scale errors</h2>
+<p><strong>A child at full-body distance renders as an adult.</strong> Every character LoRA here is close-heavy, and past
+medium distance the body reverts to adult proportions in a long coat. Counters, in order of effect:</p>
+<ol>
+<li>Frame closer. A medium beats an extreme wide whenever the age has to read.</li>
+<li>Say the proportions: "a small nine-year-old boy <strong>with child proportions</strong>".</li>
+<li>Give a scale referent of known size in frame — a full-height door, a stair tread, a column — and say the
+   comparison out loud: "unmistakable scale of a small child against a tall heavy door".</li>
+</ol>
+<p><strong>Ask for one figure positively.</strong> The style lock's "no extra people beyond those described" is a negative and
+does not hold: two separate shots grew a second person. "A single figure alone in the frame" works better.</p>
+<p><strong>Describe skin, don't colour it.</strong> "Cheeks reddened by cold wind" makes klein paint a blotchy red face. Weather
+on skin comes from the environment; say "skin damp with fine sea spray, an even natural skin tone".</p>
+<p><strong>Every prop in the wardrobe lock is a risk.</strong> A coil of rope over the shoulder — invented by me, not asked for —
+was repeatedly elaborated by LTX into a cable slashing across frame. Carry only props the story needs, and drop
+a prop from a shot the moment it starts growing.</p>
+<h2>3. Five seeds, a labelled sheet, and a full-size look</h2>
+<p><strong>Five candidates per shot, not three.</strong> <code>film_run.py</code> now defaults to <code>seeds: [1, 2, 3, 4, 5]</code>. Three was
+enough when a still only had to look nice; it is not enough when one of the things being screened for is a
+structural failure that appears in some seeds and not others.</p>
+<p><strong>Review from a labelled sheet.</strong> <code>film_run.py PROJECT sheet [ids]</code> tiles a shot's candidates and captions each
+one with its own <code>c&lt;seed&gt;</code>:</p>
+<pre><code>scripts/film_run.py kyle_lighthouse sheet s6      # -&gt; seed/s6_sheet.png, every tile labelled
+</code></pre>
+<p>Picking is then by seed number. Reading a grid by position is how the wrong still gets picked, and it happened.</p>
+<p><strong>Look at the shortlist at full size before picking.</strong> The wedge-shaped stair and both extra people were
+invisible at tile size and obvious at full resolution. The sheet is for narrowing to two or three; the decision
+is made on the full-size images.</p>
+<h2>4. The review checklist</h2>
+<p>Run this against each shortlisted candidate, at full size. Any hard fail rejects the candidate — this extends
+the <a href="idea-to-video-blueprint.html">idea to video blueprint</a> pick rubric rather than replacing it.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Hard fail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Structure</strong></td>
+<td>load-bearing geometry that does not resolve: stairs without treads, a surface that is both floor and wall, a rail attached to nothing</td>
+</tr>
+<tr>
+<td><strong>Destination</strong></td>
+<td>the subject is moving, or about to, and there is nowhere in frame for them to go</td>
+</tr>
+<tr>
+<td><strong>Age and scale</strong></td>
+<td>the body reads adult when it should read child; no object of known size to judge scale against</td>
+</tr>
+<tr>
+<td><strong>Count</strong></td>
+<td>a second person; extra or missing limbs; count hands per person</td>
+</tr>
+<tr>
+<td><strong>Foreground</strong></td>
+<td>a cable, rope, pole or branch across frame that the shot does not need</td>
+</tr>
+<tr>
+<td><strong>Props</strong></td>
+<td>a prop from the wardrobe lock that has grown, multiplied or moved somewhere it cannot be</td>
+</tr>
+<tr>
+<td><strong>Skin</strong></td>
+<td>blotching, plastic sheen, or colour that came from a weather adjective</td>
+</tr>
+<tr>
+<td>Identity, costume, physics, framing, cleanliness, style</td>
+<td>as in the blueprint's pick rubric</td>
+</tr>
+</tbody>
+</table></div>
+<p>Then one forward-looking question, which is the one that would have saved <code>kyle_lighthouse</code>:</p>
+<blockquote>
+<p><strong>What is the video model most likely to invent here?</strong> Anything ambiguous in the still is what it will
+elaborate. If the answer is "I am not sure what that structure is", so is the model — reject the candidate
+rather than hoping the motion prompt will hold it together, because <a href="lindsey-summit-plan.html">lindsey summit plan</a> establishes that
+motion prompts cannot forbid anything.</p>
+</blockquote>
+
+  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="idea-to-video-blueprint.html">idea to video blueprint</a></li><li><a href="kyle-lighthouse-plan.html">kyle lighthouse plan</a></li><li><a href="lindsey-summit-plan.html">lindsey summit plan</a></li><li><a href="scripts-reference.html">scripts reference</a></li></ul></div>
+</div>
+<footer>video-gen-kb · built 2026-09-29 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<script>function tt(){var r=document.documentElement,
+d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
+matchMedia('(prefers-color-scheme: dark)').matches);
+r.setAttribute('data-theme',d?'light':'dark');}</script>
+</body>
+</html>

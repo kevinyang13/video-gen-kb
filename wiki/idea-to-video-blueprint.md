@@ -291,7 +291,10 @@ ffmpeg -i out_master.mp4 -vf scale=1080:1920 -c:v hevc_videotoolbox -b:v 12M -ta
 
 ## Pick rubric (stills and masters)
 
-Score each candidate against the reference, reject on any hard fail:
+**Five candidates per shot** (`film_run.py` default), reviewed from a
+labelled sheet (`film_run.py PROJECT sheet`) and decided at full size. Score each candidate against the
+reference and reject on any hard fail. [[still-geometry-and-review]] adds the structure, destination, age and
+scale, foreground and prop checks, and the prompt patterns that stop those failures reaching a candidate at all.
 
 | Check | Hard fail |
 |---|---|

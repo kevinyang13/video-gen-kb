@@ -8,6 +8,35 @@
 
 ---
 
+## 2026-09-29 — Process change after kyle_lighthouse: geometry, five seeds, a labelled sheet
+
+`kyle_lighthouse` was stopped with seven of eight shots finished because one shot failed five times on
+geometry. Three changes, all now in the pipeline rather than only written down — see
+[[still-geometry-and-review]].
+
+**1. Prompt patterns for geometry and anatomy.** The recurring structural failure is a camera pointed *along* a
+structure's axis: a spiral stair shot up the stairwell returns a tapering wedge with no treads, and the video
+stage amplifies that into a figure walking up a blank wall. The same stair shot from the side renders fine. The
+rules that follow: put the camera beside a structure, name its members rather than labelling the object, let
+structure leave frame instead of resolving, and state that the foreground is clear. On anatomy: a child at
+full-body distance reverts to adult proportions, so frame closer, say "child proportions", and give a
+known-size referent to compare against. Ask for one figure positively, because the style lock's "no extra
+people" is a negative and twice failed to hold.
+
+**2. Five seeds per shot, not three.** `film_run.py` now defaults to `seeds: [1, 2, 3, 4, 5]`. Three was enough
+when a still only had to look good; it is not enough when one of the things being screened for is a structural
+failure that appears in some seeds and not others.
+
+**3. A labelled contact sheet, and a full-size look before picking.** New command `film_run.py PROJECT sheet
+[ids]` tiles a shot's candidates and captions each with its own `c<seed>`, so a pick is made by seed number
+instead of by position in a grid — which is how the wrong still got picked. The sheet narrows to a shortlist;
+the decision is made on the full-size images, because both the wedge-shaped stair and two separate cases of an
+extra person were invisible at tile size and obvious at full resolution.
+
+The checklist gained rows for structure, destination, age and scale, foreground clutter and runaway props, plus
+one forward-looking question: **what is the video model most likely to invent here?** Anything ambiguous in the
+still is what it will elaborate, and motion prompts cannot forbid it.
+
 ## 2026-09-29 — Kyle's signal fire: choosing the subject to satisfy the constraint
 
 Fourth LoRA-driven film, [[kyle-lighthouse-plan]]: a boy carries a lantern out a storm causeway to a dead
