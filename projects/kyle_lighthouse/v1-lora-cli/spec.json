@@ -7,7 +7,7 @@
   "date": "2026-09-29",
   "theme": "realistic",
   "dt_project": "none \u2014 draw-things-cli via scripts/film_run.py",
-  "status": "planned 2026-09-29 \u2014 spec written",
+  "status": "delivered 2026-09-29 18:33 \u2014 59.76 s, 3840x2160 (283 MB) + 1920x1080 (91 MB), 8 shots, none dropped; mean -20.7 dB, peak -4.2 dB. s2, s5, s6 and s8 re-rendered after review.",
   "source": "text-only; identity from projects/kyle_lora (trigger kyle_kx, class word boy). No source photographs at render time.",
   "notes": "Kyle is Kevin's son; consent settled. Story written for this film: a boy carries a lantern out along a storm causeway to a dead lighthouse, climbs the tower, strikes a match and relights the lamp.\n\nSubject chosen for the constraint, which is the new move here. Three films in, the rule is that LTX responds to what a shot is *of* and not to instructions about what not to do, so this film is built of things whose natural motion is already the motion wanted: a flame, a swinging lantern, surf, spray, a sweeping beam. That fixes the failure from lindsey_summit, where a held compass floated out of frame twice \u2014 s3 here hangs its object on a hook, so swinging *is* the intended behaviour.\n\nThe rest is inherited. Face shots (s2, s7) budgeted at 7.0-7.5 s. No shot asks for a head turn. s4 is the one shot with real human movement and it is hands cupped around a match in front of a stationary head, the pattern that has now held 9.5 s twice. Kyle's dataset is close-heavy with one full-body frame, so the wides (s1, s6) sit at 0.85 with the face small or turned away, and the two shots with no person (s5, s8) carry no LoRA. Cut order is s1 s2 s3 s6 s5 s4 s7 s8: the shot ids were written in story-beat order but the climb has to precede the lamp room, so the sequence was corrected before rendering the clips.",
   "still": {
@@ -371,7 +371,7 @@
     "music": {
       "file": "projects/kyle_lighthouse/v1-lora-cli/music/best_adventure_ever.mp3",
       "start": "tail",
-      "vol": 0.45,
+      "vol": 0.75,
       "fade_in": 1.5,
       "fade_out": 0
     }

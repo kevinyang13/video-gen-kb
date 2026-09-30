@@ -23,7 +23,7 @@ Index of every project: [[projects]]. Other themes: [[projects-anime]] · [[proj
 | 7 | [Lindsey — the palace pavilion](#lindsey_palace) | 2026-09-28 | delivered 2026-09-28 22:07 — 61.08 s, 3840x2160 (293 MB) + 1920x1080 (91 MB), 8 shots, none dropped; mean -21.1 dB, peak -5.4 dB | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 10 min | Emotional Children Piano | `—` | — |
 | 8 | [Kyle — five minutes to showtime](#kyle_debut) | 2026-09-28 | delivered 2026-09-29 01:20 — 60.76 s, 3840x2160 (279 MB) + 1920x1080 (79 MB), 8 shots, none dropped; mean -21.7 dB, peak -5.5 dB | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 11 min | Emotional Children Piano | `—` | — |
 | 9 | [Lindsey — above the cloud sea](#lindsey_summit) | 2026-09-29 | delivered 2026-09-29 10:42 — 59.88 s, 3840x2160 (280 MB) + 1920x1080 (87 MB), 8 shots, none dropped; mean -18.7 dB, peak -5.3 dB. Planned length 59.75 s, delivered 59.88 s. | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 11 min | Adventure Journey | `—` | — |
-| 10 | [Kyle — the signal fire](#kyle_lighthouse) | 2026-09-29 | planned 2026-09-29 — spec written | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 11 min | Best Adventure Ever | `—` | — |
+| 10 | [Kyle — the signal fire](#kyle_lighthouse) | 2026-09-29 | delivered 2026-09-29 18:33 — 59.76 s, 3840x2160 (283 MB) + 1920x1080 (91 MB), 8 shots, none dropped; mean -20.7 dB, peak -4.2 dB. s2, s5, s6 and s8 re-rendered after review. | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 11 min | Best Adventure Ever | `—` | — |
 
 ## Dragon Epic — 1-minute photoreal short, family hero face {#dragon_epic}
 
@@ -950,7 +950,7 @@ Prompt: `per shot — see scenes`
 
 ## Kyle — the signal fire {#kyle_lighthouse}
 
-- **Date**: 2026-09-29 · **Status**: planned 2026-09-29 — spec written · **Version**: `v1-lora-cli` · **Draw Things project**: `none — draw-things-cli via scripts/film_run.py`
+- **Date**: 2026-09-29 · **Status**: delivered 2026-09-29 18:33 — 59.76 s, 3840x2160 (283 MB) + 1920x1080 (91 MB), 8 shots, none dropped; mean -20.7 dB, peak -4.2 dB. s2, s5, s6 and s8 re-rendered after review. · **Version**: `v1-lora-cli` · **Draw Things project**: `none — draw-things-cli via scripts/film_run.py`
 - **This version**: Fourth LoRA-driven film, and the first chosen for a subject whose motion animates itself — fire, surf and spray — so the long takes need nothing from the model that it can get wrong.
 - **Files** (`projects/kyle_lighthouse/v1-lora-cli/`): `stills/s1.png … s8.png`, `clips/s1_v1.mov … s8_v1.mov (s2 uses v2)`, `final/kyle_lighthouse_3840x2160.mp4`, `final/kyle_lighthouse_1920x1080.mp4`, `music/best_adventure_ever.mp3`
 - **Notes**: Kyle is Kevin's son; consent settled. Story written for this film: a boy carries a lantern out along a storm causeway to a dead lighthouse, climbs the tower, strikes a match and relights the lamp.
