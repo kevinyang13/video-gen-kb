@@ -1,0 +1,56 @@
+{
+  "order": 28,
+  "id": "kyle_lora",
+  "version": "v2-photo-dataset",
+  "variant": "Second Kyle dataset, built to break the close-up/white-wall/blue-t-shirt correlation that caps v1 at close framing.",
+  "title": "Kyle \u2014 character LoRA v2",
+  "date": "2026-09-29",
+  "theme": "realistic",
+  "dt_project": "none \u2014 draw-things-cli train lora",
+  "status": "dataset built 2026-09-29 \u2014 55 pairs; training",
+  "source": "v1's 20 captioned frames plus new photographs in raw/, which is git-ignored",
+  "notes": "Kyle is Kevin's son; consent settled. v1 delivered a LoRA that holds identity at close range and at every head angle including true profile and back, and that is genuinely good. What it cannot do is hold a child's face and proportions at medium or full-body distance \u2014 confirmed on kyle_debut and again on kyle_lighthouse, where wide shots had to be composed with the face small or turned away.\n\nThe cause is visible in v1's own captions. Sixteen of its twenty frames are close-ups, and they are the *same* sixteen that are on a white textured wall in a pale blue t-shirt under flat indoor light. Framing, background, wardrobe and lighting are therefore all correlated with each other and with the trigger, so the model has one dominant mode to fall back on and nothing to generalise from at distance.\n\nv2 keeps all twenty v1 frames \u2014 the close-range identity they give is the part that works \u2014 and adds frames chosen so that **every new frame differs from that block in at least two of framing, background, lighting and wardrobe**. Breaking the correlation matters as much as adding full-body coverage; adding twenty more full-body frames on the same white wall would just move the problem.",
+  "dataset": {
+    "trigger": "kyle_kx",
+    "class_word": "boy",
+    "inherits": "all 20 captioned pairs from v1-photo-dataset/seed/dataset",
+    "v1_composition": "16 close-up (white wall, pale blue t-shirt, flat indoor light) + 2 full body + 1 medium + 1 chest-up",
+    "v1_correlation": "close-up, white wall, blue t-shirt and flat light are the same 16 frames",
+    "target_count": "45-55 total",
+    "target_composition": {
+      "full body": "10-14 \u2014 front, both three-quarters, both true profiles, back, plus walking, sitting and crouching, across at least two locations",
+      "medium (waist-up to knee-up)": "8-10 \u2014 the missing middle between close-up and full body, at several angles",
+      "close-up in new conditions": "6-8 \u2014 outdoor daylight, window light, warm lamp, low evening light; NOT the white wall",
+      "kept from v1": "20"
+    },
+    "rules": [
+      "Every new frame differs from the v1 white-wall block in at least two of: framing, background, lighting, wardrobe.",
+      "At least three distinct wardrobes across the new frames, and at least three distinct locations.",
+      "Full body must cover the same angles the close-ups already do \u2014 front, both three-quarters, both profiles, back \u2014 not just frontal.",
+      "Faces sharp and in focus at every distance; a soft face at full body teaches the model to render a soft face.",
+      "Isolation Rule for captions: name only what varies (framing, angle, expression, wardrobe, background, light). Never describe the face or hair.",
+      "Verify orientation through ffmpeg, not Preview \u2014 see the kyle_lora v1 rotation trap."
+    ],
+    "status": "built 2026-09-29, captions hand-written after viewing every frame",
+    "count": 55,
+    "built": "20 inherited from v1 + 13 new full-body frames + 13 waist-up crops from those same originals + 9 close-up crops from them as well. The crops are cut from 5712x4284 HEICs, so the medium and close frames carry real detail rather than upscaled pixels.",
+    "framing": "25 close-up, 14 medium, 15 full body, 1 chest-up",
+    "decorrelation": "The point of v2. In v1, close-up / white wall / pale blue t-shirt / flat light were the same 16 frames, so framing was entangled with background, wardrobe and lighting. v2 puts close-ups in both settings (16 white wall, 9 living room) and adds a medium band that did not exist. Framing is no longer a proxy for location.",
+    "angles_at_distance": "the new session covers front, back, both true profiles and both three-quarters at full body and again at waist-up \u2014 the coverage v1 had only at close range",
+    "wardrobe": "pale blue t-shirt (16, v1), navy zip tracksuit (14), dark grey hooded sweats (21), 4 v1 context outfits",
+    "remaining_gap": "full body and medium are still almost all one room under one flat evening light (13/15 and 13/14). A second session somewhere else, ideally outdoors or with directional light, would be the next real improvement.",
+    "rotation_check": "the new HEICs came in sideways exactly as v1's did \u2014 the converter reported 1024x768 for standing full-body shots, which was the tell. Baked a 90 degree clockwise rotation through PIL and verified through the ffmpeg path, not Preview."
+  },
+  "training": {
+    "planned": "draw-things-cli train lora --model flux_2_klein_9b_i8x.ckpt --dataset projects/kyle_lora/v2-photo-dataset/seed/dataset --steps 2500 --rank 32 --learning-rate 1e-4 --seed 1 --use-aspect-ratio --save-every 500 -o kyle_lora_v2 --name \"Kyle v2 (kyle_kx)\" --offline",
+    "steps_note": "2500 rather than 2000 because the set is roughly twice the size; ~0.22 it/s means about 3 h 10 m",
+    "measured_v1": "2000 steps in 2 h 27 m, 402 MB per checkpoint",
+    "test": "The v2 question is single and falsifiable: does identity hold at full-body distance at weight 0.85-1.0? v1 does not. If v2 does, framing coverage plus decorrelation is the fix; if it still fails with 10+ full-body frames, the limit is latent resolution at 1024x576 and no dataset will close it \u2014 which is the same question lindsey_lora was built to ask and which has still not been answered with an eval.",
+    "started": "2026-09-29"
+  },
+  "files": [
+    "raw/ (git-ignored)",
+    "seed/dataset/NN.png + NN.txt",
+    "logs/train.log"
+  ]
+}

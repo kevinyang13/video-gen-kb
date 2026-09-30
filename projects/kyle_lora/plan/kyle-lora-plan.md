@@ -143,3 +143,51 @@ draw-things-cli generate -m flux_2_klein_9b_i8x.ckpt \
 - [[ivy-lora-plan]] — the same route on an adult, and the angle ceiling this set exists to test
 - [[blueprint-v2-research]] — B0/B1/B8
 - [[identity-conditioning]] · [[scripts-reference]]
+
+## v2 — breaking the correlation, not just adding photos
+
+**2026-09-29.** v1 holds identity at close range and at every head angle including true profile and back, which
+is genuinely good, and it cannot hold a child's face or proportions at distance. `kyle_debut` and
+`kyle_lighthouse` both had to compose their wide shots with the face small or turned away.
+
+The cause is in v1's own captions. **Sixteen of its twenty frames are close-ups — and they are the same sixteen
+that are on a white textured wall, in a pale blue t-shirt, under flat indoor light.** Framing, background,
+wardrobe and lighting were one correlated block, so the model had a single dominant mode and nothing to
+generalise from at any other distance. Adding more full-body photographs on that same wall would have moved the
+problem, not fixed it.
+
+### What v2 is made of
+
+| | v1 | v2 |
+|---|---|---|
+| close-up | 16 | 25 |
+| medium (waist-up) | 1 | 14 |
+| full body | 2 | 15 |
+| chest-up | 1 | 1 |
+| **total** | **20** | **55** |
+
+Kevin shot 13 new full-body frames in a living room across two outfits, covering front, back, both true
+profiles and both three-quarters — the angle coverage v1 only had in close-up. Because the originals are
+5712×4284, the medium band and nine new close-ups were **cropped from those same frames**, so they carry real
+detail rather than upscaled pixels, and they put close-ups in a second location.
+
+That last part is the point. Close-ups now appear on the white wall (16) *and* in the living room (9), so
+framing is no longer a proxy for background. The v1 block survives intact as the close-range identity source.
+
+### Still missing
+
+Full body and medium are still almost entirely one room under one flat evening light (13/15 and 13/14). A
+second session elsewhere — outdoors, or with directional light — is the next real improvement.
+
+### The rotation trap, again
+
+The new HEICs arrived sideways exactly as v1's did. The tell was the converter reporting **1024×768 for
+standing full-body shots**; portrait subjects should not come out landscape. Baked a 90° clockwise rotation
+through PIL and verified through the ffmpeg path rather than Preview, per the v1 rule.
+
+### The test
+
+Single and falsifiable: **does identity hold at full-body distance at weight 0.85–1.0?** v1 does not. If v2
+does, framing coverage plus decorrelation is the fix. If it still fails with fifteen full-body frames, the
+limit is latent resolution rather than data, and no dataset will close it — which is the same question
+`lindsey_lora` was built to ask and which has still never been answered with an eval.

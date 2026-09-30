@@ -1,0 +1,21 @@
+Models directory: /Users/kevinyang/Library/Containers/com.liuliu.draw-things/Data/Documents/Models
+Model: flux_2_klein_9b_i8x.ckpt
+Dataset: projects/kyle_lora/v2-photo-dataset/seed/dataset
+Name: Kyle v2 (kyle_kx)
+Training steps: 2500
+Rank: 32, scale: 1.0
+Resolution: 512x512
+Dataset size: 55 sample(s)
+Encoding images: 1/55Encoding images: 2/55Encoding images: 3/55Encoding images: 4/55Encoding images: 5/55Encoding images: 6/55Encoding images: 7/55Encoding images: 8/55Encoding images: 9/55Encoding images: 10/55Encoding images: 11/55Encoding images: 12/55Encoding images: 13/55Encoding images: 14/55Encoding images: 15/55Encoding images: 16/55Encoding images: 17/55Encoding images: 18/55Encoding images: 19/55Encoding images: 20/55Encoding images: 21/55Encoding images: 22/55Encoding images: 23/55Encoding images: 24/55Encoding images: 25/55Encoding images: 26/55Encoding images: 27/55Encoding images: 28/55Encoding images: 29/55Encoding images: 30/55Encoding images: 31/55Encoding images: 32/55Encoding images: 33/55Encoding images: 34/55Encoding images: 35/55Encoding images: 36/55Encoding images: 37/55Encoding images: 38/55Encoding images: 39/55Encoding images: 40/55Encoding images: 41/55Encoding images: 42/55Encoding images: 43/55Encoding images: 44/55Encoding images: 45/55Encoding images: 46/55Encoding images: 47/55Encoding images: 48/55Encoding images: 49/55Encoding images: 50/55Encoding images: 51/55Encoding images: 52/55Encoding images: 53/55Encoding images: 54/55Encoding images: 55/55Encoding captions: 0/55Encoding captions: 1/55Encoding captions: 2/55Encoding captions: 3/55Encoding captions: 4/55Encoding captions: 5/55Encoding captions: 6/55Encoding captions: 7/55Encoding captions: 8/55Encoding captions: 9/55Encoding captions: 10/55Encoding captions: 11/55Encoding captions: 12/55Encoding captions: 13/55Encoding captions: 14/55Encoding captions: 15/55Encoding captions: 16/55Encoding captions: 17/55Encoding captions: 18/55Encoding captions: 19/55Encoding captions: 20/55Encoding captions: 21/55Encoding captions: 22/55Encoding captions: 23/55Encoding captions: 24/55Encoding captions: 25/55Encoding captions: 26/55Encoding captions: 27/55Encoding captions: 28/55Encoding captions: 29/55Encoding captions: 30/55Encoding captions: 31/55Encoding captions: 32/55Encoding captions: 33/55Encoding captions: 34/55Encoding captions: 35/55Encoding captions: 36/55Encoding captions: 37/55Encoding captions: 38/55Encoding captions: 39/55Encoding captions: 40/55Encoding captions: 41/55Encoding captions: 42/55Encoding captions: 43/55Encoding captions: 44/55Encoding captions: 45/55Encoding captions: 46/55Encoding captions: 47/55Encoding captions: 48/55Encoding captions: 49/55Encoding captions: 50/55Encoding captions: 51/55Encoding captions: 52/55Encoding captions: 53/55Encoding captions: 54/55Encoding captions: 55/55
+[LoRA] Compiling computation graph...
+[LoRA] Step 0/2500 | Loss: 0.0000 | 0.00 it/s
+loss 1.653, scale 32768.0, step 0, timestep 0.95865434, image 56x72
+[LoRA] Step 1/2500 | Loss: 1.6533 | 0.05 it/s
+loss 0.9966, scale 32768.0, step 1, timestep 0.7910905, image 56x72
+[LoRA] Step 2/2500 | Loss: 0.9966 | 0.08 it/s
+loss 1.034, scale 32768.0, step 2, timestep 0.62276286, image 56x72
+[LoRA] Step 3/2500 | Loss: 1.0342 | 0.10 it/s
+loss 1.2, scale 32768.0, step 3, timestep 0.40858078, image 56x72
+[LoRA] Step 4/2500 | Loss: 1.2002 | 0.12 it/s
+loss 0.8115, scale 32768.0, step 4, timestep 0.6466343, image 72x56
+[LoRA] Step 5/2500 | Loss: 0.8115 | 0.13 it/s

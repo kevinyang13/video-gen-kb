@@ -244,6 +244,70 @@ is a handful of latent pixels and identity washes out regardless of weight.</p>
   of <a href="blueprint-v2-research.html">blueprint v2 research</a> B2.</li>
 </ul>
 
+<h2>v2 — breaking the correlation, not just adding photos</h2>
+<p><strong>2026-09-29.</strong> v1 holds identity at close range and at every head angle including true profile and back, which
+is genuinely good, and it cannot hold a child's face or proportions at distance. <code>kyle_debut</code> and
+<code>kyle_lighthouse</code> both had to compose their wide shots with the face small or turned away.</p>
+<p>The cause is in v1's own captions. <strong>Sixteen of its twenty frames are close-ups — and they are the same sixteen
+that are on a white textured wall, in a pale blue t-shirt, under flat indoor light.</strong> Framing, background,
+wardrobe and lighting were one correlated block, so the model had a single dominant mode and nothing to
+generalise from at any other distance. Adding more full-body photographs on that same wall would have moved the
+problem, not fixed it.</p>
+<h3>What v2 is made of</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th></th>
+<th>v1</th>
+<th>v2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>close-up</td>
+<td>16</td>
+<td>25</td>
+</tr>
+<tr>
+<td>medium (waist-up)</td>
+<td>1</td>
+<td>14</td>
+</tr>
+<tr>
+<td>full body</td>
+<td>2</td>
+<td>15</td>
+</tr>
+<tr>
+<td>chest-up</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td><strong>total</strong></td>
+<td><strong>20</strong></td>
+<td><strong>55</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>Kevin shot 13 new full-body frames in a living room across two outfits, covering front, back, both true
+profiles and both three-quarters — the angle coverage v1 only had in close-up. Because the originals are
+5712×4284, the medium band and nine new close-ups were <strong>cropped from those same frames</strong>, so they carry real
+detail rather than upscaled pixels, and they put close-ups in a second location.</p>
+<p>That last part is the point. Close-ups now appear on the white wall (16) <em>and</em> in the living room (9), so
+framing is no longer a proxy for background. The v1 block survives intact as the close-range identity source.</p>
+<h3>Still missing</h3>
+<p>Full body and medium are still almost entirely one room under one flat evening light (13/15 and 13/14). A
+second session elsewhere — outdoors, or with directional light — is the next real improvement.</p>
+<h3>The rotation trap, again</h3>
+<p>The new HEICs arrived sideways exactly as v1's did. The tell was the converter reporting <strong>1024×768 for
+standing full-body shots</strong>; portrait subjects should not come out landscape. Baked a 90° clockwise rotation
+through PIL and verified through the ffmpeg path rather than Preview, per the v1 rule.</p>
+<h3>The test</h3>
+<p>Single and falsifiable: <strong>does identity hold at full-body distance at weight 0.85–1.0?</strong> v1 does not. If v2
+does, framing coverage plus decorrelation is the fix. If it still fails with fifteen full-body frames, the
+limit is latent resolution rather than data, and no dataset will close it — which is the same question
+<code>lindsey_lora</code> was built to ask and which has still never been answered with an eval.</p>
   <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="ivy-lora-plan.html">ivy lora plan</a> — the same route on an adult, and the angle ceiling this set exists to test</li><li><a href="blueprint-v2-research.html">blueprint v2 research</a> — B0/B1/B8</li><li><a href="identity-conditioning.html">identity conditioning</a> · <a href="scripts-reference.html">scripts reference</a></li></ul></div>
 </div>
 <footer>video-gen-kb · built 2026-09-29 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>

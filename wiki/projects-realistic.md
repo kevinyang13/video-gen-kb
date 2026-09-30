@@ -18,12 +18,12 @@ Index of every project: [[projects]]. Other themes: [[projects-anime]] · [[proj
 | 2 | [Lost City — hyper-real rider on a raptor-dragon entering jungle ruins](#lost_city) | 2026-09-21 | in progress — 4K with music: s3, s4, s5, s8, s9; s1 and s2 at 4K without music; s6 trimmed to 4.6 s and never upscaled; **s7 (escape run) not rendered**; no film assembled yet | FLUX.2 [klein] 9B 1280x768 | LTX-2.3 22B [distilled] 1.1 (production engine — see ltx_10s) — Wan 2.2 High Noise I2V (8-bit S) + Low Noise refiner 10% for locked-camera shots at 768p 49 min | Mystical orchestral theme with ancient flute | `—` | [▶ watch](https://youtu.be/68sq_jZqu6c) |
 | 3 | [Night Elf Hunter — a boy and his bear crossing the grassland](#nightelf_hunter) | 2026-09-26 | research — B0 partial pass 2026-09-26: 30 images, identity 30/30, angles skewed (back 1/3, over-shoulder 0/2); v1 remains the delivered film | FLUX.2 [klein] 9B 512x768 | Wan 2.2 High Noise ? min | none | `—` | — |
 | 4 | [Ivy — character LoRA](#ivy_lora) | 2026-09-26 | delivered 2026-09-26 — ivy_lora_2000_lora_f32.ckpt at weight 0.5; identity holds in unseen scenes, profile and back-of-head degrade (dataset has neither) | FLUX.2 [klein] 9B aspect-bucketed, | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
-| 5 | [Kyle — character LoRA](#kyle_lora) | 2026-09-26 | delivered 2026-09-26 — kyle_lora_2000_lora_f32.ckpt, usable at weight 1.0 including true profile and back of head | FLUX.2 [klein] 9B aspect-bucketed, | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
-| 6 | [Lindsey — character LoRA](#lindsey_lora) | 2026-09-27 | trained 2026-09-27 — 2000 steps in 2 h 26 m, five checkpoints; evaluation pending | FLUX.2 [klein] 9B aspect-bucketed, | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
-| 7 | [Lindsey — the palace pavilion](#lindsey_palace) | 2026-09-28 | delivered 2026-09-28 22:07 — 61.08 s, 3840x2160 (293 MB) + 1920x1080 (91 MB), 8 shots, none dropped; mean -21.1 dB, peak -5.4 dB | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 10 min | Emotional Children Piano | `—` | — |
-| 8 | [Kyle — five minutes to showtime](#kyle_debut) | 2026-09-28 | delivered 2026-09-29 01:20 — 60.76 s, 3840x2160 (279 MB) + 1920x1080 (79 MB), 8 shots, none dropped; mean -21.7 dB, peak -5.5 dB | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 11 min | Emotional Children Piano | `—` | — |
-| 9 | [Lindsey — above the cloud sea](#lindsey_summit) | 2026-09-29 | delivered 2026-09-29 10:42 — 59.88 s, 3840x2160 (280 MB) + 1920x1080 (87 MB), 8 shots, none dropped; mean -18.7 dB, peak -5.3 dB. Planned length 59.75 s, delivered 59.88 s. | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 11 min | Adventure Journey | `—` | — |
-| 10 | [Kyle — the signal fire](#kyle_lighthouse) | 2026-09-29 | stopped 2026-09-29 — abandoned at Kevin's call after s6 could not be made to work. Seven of eight shots are rendered, graded and upscaled to 4K; s6 went through five designs (interior stairwell from below, side-on interior spiral, exterior stair on the tower, and two versions of the entrance door) and none was accepted. No final cut was produced from the current shot set. | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 11 min | Best Adventure Ever | `—` | — |
+| 5 | [Lindsey — character LoRA](#lindsey_lora) | 2026-09-27 | trained 2026-09-27 — 2000 steps in 2 h 26 m, five checkpoints; evaluation pending | FLUX.2 [klein] 9B aspect-bucketed, | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
+| 6 | [Lindsey — the palace pavilion](#lindsey_palace) | 2026-09-28 | delivered 2026-09-28 22:07 — 61.08 s, 3840x2160 (293 MB) + 1920x1080 (91 MB), 8 shots, none dropped; mean -21.1 dB, peak -5.4 dB | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 10 min | Emotional Children Piano | `—` | — |
+| 7 | [Kyle — five minutes to showtime](#kyle_debut) | 2026-09-28 | delivered 2026-09-29 01:20 — 60.76 s, 3840x2160 (279 MB) + 1920x1080 (79 MB), 8 shots, none dropped; mean -21.7 dB, peak -5.5 dB | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 11 min | Emotional Children Piano | `—` | — |
+| 8 | [Lindsey — above the cloud sea](#lindsey_summit) | 2026-09-29 | delivered 2026-09-29 10:42 — 59.88 s, 3840x2160 (280 MB) + 1920x1080 (87 MB), 8 shots, none dropped; mean -18.7 dB, peak -5.3 dB. Planned length 59.75 s, delivered 59.88 s. | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 11 min | Adventure Journey | `—` | — |
+| 9 | [Kyle — the signal fire](#kyle_lighthouse) | 2026-09-29 | stopped 2026-09-29 — abandoned at Kevin's call after s6 could not be made to work. Seven of eight shots are rendered, graded and upscaled to 4K; s6 went through five designs (interior stairwell from below, side-on interior spiral, exterior stair on the tower, and two versions of the entrance door) and none was accepted. No final cut was produced from the current shot set. | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 11 min | Best Adventure Ever | `—` | — |
+| 10 | [Kyle — character LoRA v2](#kyle_lora) | 2026-09-29 | dataset built 2026-09-29 — 55 pairs; training | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
 
 ## Dragon Epic — 1-minute photoreal short, family hero face {#dragon_epic}
 
@@ -341,49 +341,6 @@ Prompt: `generated per cell by scripts/seed_sheet.sh --dataset`
 - **This version**: Character LoRA trained on real photographs. The output is a reusable identity asset, not a film: any later project loads it with a trigger token instead of carrying a master into every shot.
 - **Files** (`projects/ivy_lora/v1-photo-dataset/`): `raw/ (source photographs, git-ignored)`, `seed/dataset/NN.png + NN.txt (training pairs; captions tracked)`, `logs/train.log`
 - **Notes**: Ivy is family, an adult; consent settled, same standing as Kyle and Lindsey. Real photos are the better dataset: B0 proved klein will not synthesize back views or true camera-height variation from a frontal master, because the reference image overrides the prompt. Photographs have those angles already — except that this particular set does not: all 22 frames are frontal or three-quarter. raw/ is git-ignored because consent to train on a face is not consent to publish the source photographs to a public repo.
-
-**Still**
-
-| Setting | Value |
-|---|---|
-| Model | FLUX.2 [klein] 9B (8-bit S) |
-| Size | aspect-bucketed, 512 base |
-| Steps | 4 |
-| CFG | 1.0 |
-| Shift | 3 |
-| Sampler | DDIM Trailing |
-
-**I2V**
-
-| Setting | Value |
-|---|---|
-| Model | Wan 2.2 High Noise Expert I2V A14B (8-bit S) |
-| Refiner | Wan 2.2 Low Noise Expert I2V A14B (8-bit S) @ 10% |
-| LoRA | Wan 2.2 A14B Lightning High-Noise T2V v2.0 @ 100% |
-| Size | 576x1024 |
-| Frames | 81 |
-| FPS | 16 |
-| Steps | 4 |
-| CFG | 1.0 |
-| Shift | 4.95 |
-| Sampler | DDIM Trailing |
-| Strength | 100% |
-
-**Post**
-
-| Setting | Value |
-|---|---|
-| Script | scripts/finish_clip.sh |
-| Loop | forward, 8-frame tail->head crossfade, x6 = 27.4 s |
-| Upscale | lanczos 1080x1920 |
-| Music | Calm Ambient Dreamscape — morgan-ambient, Pixabay, 1 s fade in / 2 s fade out, vol 0.9 |
-
-## Kyle — character LoRA {#kyle_lora}
-
-- **Date**: 2026-09-26 · **Status**: delivered 2026-09-26 — kyle_lora_2000_lora_f32.ckpt, usable at weight 1.0 including true profile and back of head · **Version**: `v1-photo-dataset` · **Draw Things project**: `none — draw-things-cli train lora`
-- **This version**: Character LoRA for Kyle trained on real photographs, following the Ivy route. The output is a reusable identity asset: kyle_rescue, bot_builders_champion and nightelf_hunter all carried his face by reference tokens and a master portrait, which this replaces with a trigger token.
-- **Files** (`projects/kyle_lora/v1-photo-dataset/`): `raw/ (source photographs, git-ignored)`, `seed/dataset/NN.png + NN.txt (training pairs; captions tracked)`, `logs/train.log`
-- **Notes**: Kyle is Kevin's son; consent settled. Shot as a deliberate turnaround to fix the defect the Ivy LoRA ended with: her set was entirely frontal and three-quarter, so the LoRA damaged profiles and back views above weight 0.5. Kyle's set has both profiles, the back of the head and two back three-quarters. The cost is the opposite bias — one shirt, one wall, one light, one distance — mitigated with four photographs from other settings and by naming the shirt, wall and light in every caption even though they never vary, so a later prompt has a handle to override them.
 
 **Still**
 
@@ -1113,6 +1070,61 @@ Prompt: `per shot — see scenes`
 *Video prompt*
 
 > Fixed camera, no camera movement. The lighthouse lamp rotates steadily like a real lighthouse: the shaft of the beam swings around through the spray, passes across the camera, sweeps on out over the water and comes around again, over and over. Beneath the camera a heavy swell rolls and heaves, big waves surging in and bursting white against the black rocks, spray blowing across the causeway, storm cloud moving fast overhead. Surf, wind, no music.
+
+## Kyle — character LoRA v2 {#kyle_lora}
+
+- **Date**: 2026-09-29 · **Status**: dataset built 2026-09-29 — 55 pairs; training · **Version**: `v2-photo-dataset` · **Draw Things project**: `none — draw-things-cli train lora`
+- **This version**: Second Kyle dataset, built to break the close-up/white-wall/blue-t-shirt correlation that caps v1 at close framing.
+
+**Versions**
+
+| Version | What it is | Status | YouTube |
+|---|---|---|---|
+| `v1-photo-dataset` | Character LoRA for Kyle trained on real photographs, following the Ivy route. The output is a reusable identity asset: kyle_rescue, bot_builders_champion and nightelf_hunter all carried his face by reference tokens and a master portrait, which this replaces with a trigger token. | delivered 2026-09-26 — kyle_lora_2000_lora_f32.ckpt, usable at weight 1.0 including true profile and back of head | — |
+| `v2-photo-dataset` | Second Kyle dataset, built to break the close-up/white-wall/blue-t-shirt correlation that caps v1 at close framing. | dataset built 2026-09-29 — 55 pairs; training | — |
+
+- **Files** (`projects/kyle_lora/v2-photo-dataset/`): `raw/ (git-ignored)`, `seed/dataset/NN.png + NN.txt`, `logs/train.log`
+- **Notes**: Kyle is Kevin's son; consent settled. v1 delivered a LoRA that holds identity at close range and at every head angle including true profile and back, and that is genuinely good. What it cannot do is hold a child's face and proportions at medium or full-body distance — confirmed on kyle_debut and again on kyle_lighthouse, where wide shots had to be composed with the face small or turned away.
+
+The cause is visible in v1's own captions. Sixteen of its twenty frames are close-ups, and they are the *same* sixteen that are on a white textured wall in a pale blue t-shirt under flat indoor light. Framing, background, wardrobe and lighting are therefore all correlated with each other and with the trigger, so the model has one dominant mode to fall back on and nothing to generalise from at distance.
+
+v2 keeps all twenty v1 frames — the close-range identity they give is the part that works — and adds frames chosen so that **every new frame differs from that block in at least two of framing, background, lighting and wardrobe**. Breaking the correlation matters as much as adding full-body coverage; adding twenty more full-body frames on the same white wall would just move the problem.
+
+**Still**
+
+| Setting | Value |
+|---|---|
+| Model | FLUX.2 [klein] 9B (8-bit S) |
+| Size | 576x1024 |
+| Steps | 4 |
+| CFG | 1.0 |
+| Shift | 3.0 |
+| Sampler | DDIM Trailing |
+
+**I2V**
+
+| Setting | Value |
+|---|---|
+| Model | Wan 2.2 High Noise Expert I2V A14B (8-bit S) |
+| Refiner | Wan 2.2 Low Noise Expert I2V A14B (8-bit S) @ 10% |
+| LoRA | Wan 2.2 A14B Lightning High-Noise T2V v2.0 @ 100% |
+| Size | 576x1024 |
+| Frames | 81 |
+| FPS | 16 |
+| Steps | 4 |
+| CFG | 1.0 |
+| Shift | 4.95 |
+| Sampler | DDIM Trailing |
+| Strength | 100% |
+
+**Post**
+
+| Setting | Value |
+|---|---|
+| Script | scripts/finish_clip.sh |
+| Loop | forward, 8-frame tail->head crossfade, x6 = 27.4 s |
+| Upscale | lanczos 1080x1920 |
+| Music | Calm Ambient Dreamscape — morgan-ambient, Pixabay, 1 s fade in / 2 s fade out, vol 0.9 |
 
 ## Related pages
 - [[projects]]
