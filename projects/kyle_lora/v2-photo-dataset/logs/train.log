@@ -19,3 +19,1592 @@ loss 1.2, scale 32768.0, step 3, timestep 0.40858078, image 56x72
 [LoRA] Step 4/2500 | Loss: 1.2002 | 0.12 it/s
 loss 0.8115, scale 32768.0, step 4, timestep 0.6466343, image 72x56
 [LoRA] Step 5/2500 | Loss: 0.8115 | 0.13 it/s
+loss 1.195, scale 32768.0, step 5, timestep 0.26498678, image 56x72
+[LoRA] Step 6/2500 | Loss: 1.1953 | 0.14 it/s
+loss 1.205, scale 32768.0, step 6, timestep 0.1207723, image 72x56
+[LoRA] Step 7/2500 | Loss: 1.2051 | 0.14 it/s
+loss 1.252, scale 32768.0, step 7, timestep 0.23418875, image 56x72
+[LoRA] Step 8/2500 | Loss: 1.2520 | 0.15 it/s
+loss 1.196, scale 32768.0, step 8, timestep 0.13172145, image 72x56
+[LoRA] Step 9/2500 | Loss: 1.1963 | 0.16 it/s
+loss 0.9663, scale 32768.0, step 9, timestep 0.66075903, image 64x64
+[LoRA] Step 10/2500 | Loss: 0.9663 | 0.16 it/s
+loss 1.76, scale 32768.0, step 10, timestep 0.9844947, image 64x64
+[LoRA] Step 11/2500 | Loss: 1.7598 | 0.16 it/s
+loss 0.999, scale 32768.0, step 11, timestep 0.5227454, image 64x64
+[LoRA] Step 12/2500 | Loss: 0.9990 | 0.17 it/s
+loss 0.981, scale 32768.0, step 12, timestep 0.5294584, image 64x64
+[LoRA] Step 13/2500 | Loss: 0.9810 | 0.17 it/s
+loss 1.308, scale 32768.0, step 13, timestep 0.8812558, image 40x88
+[LoRA] Step 14/2500 | Loss: 1.3076 | 0.18 it/s
+loss 1.105, scale 32768.0, step 14, timestep 0.05369138, image 56x72
+[LoRA] Step 15/2500 | Loss: 1.1055 | 0.18 it/s
+loss 1.149, scale 32768.0, step 15, timestep 0.076295614, image 64x64
+[LoRA] Step 16/2500 | Loss: 1.1494 | 0.18 it/s
+loss 1.197, scale 32768.0, step 16, timestep 0.25366408, image 56x72
+[LoRA] Step 17/2500 | Loss: 1.1973 | 0.18 it/s
+loss 0.9556, scale 32768.0, step 17, timestep 0.6956167, image 64x64
+[LoRA] Step 18/2500 | Loss: 0.9556 | 0.18 it/s
+loss 1.142, scale 32768.0, step 18, timestep 0.07665461, image 56x72
+[LoRA] Step 19/2500 | Loss: 1.1416 | 0.18 it/s
+loss 0.9873, scale 32768.0, step 19, timestep 0.8710747, image 56x72
+[LoRA] Step 20/2500 | Loss: 0.9873 | 0.19 it/s
+loss 1.239, scale 32768.0, step 20, timestep 0.17312649, image 72x56
+[LoRA] Step 21/2500 | Loss: 1.2393 | 0.19 it/s
+loss 0.913, scale 32768.0, step 21, timestep 0.74807936, image 56x72
+[LoRA] Step 22/2500 | Loss: 0.9131 | 0.19 it/s
+loss 1.042, scale 32768.0, step 22, timestep 0.4491358, image 72x56
+[LoRA] Step 23/2500 | Loss: 1.0420 | 0.19 it/s
+loss 1.118, scale 32768.0, step 23, timestep 0.45670694, image 56x72
+[LoRA] Step 24/2500 | Loss: 1.1182 | 0.19 it/s
+loss 1.185, scale 32768.0, step 24, timestep 0.8771087, image 64x64
+[LoRA] Step 25/2500 | Loss: 1.1846 | 0.19 it/s
+loss 0.8877, scale 32768.0, step 25, timestep 0.60807997, image 72x56
+[LoRA] Step 26/2500 | Loss: 0.8877 | 0.19 it/s
+loss 1.1455, scale 32768.0, step 26, timestep 0.08399722, image 56x72
+[LoRA] Step 27/2500 | Loss: 1.1455 | 0.19 it/s
+loss 0.911, scale 32768.0, step 27, timestep 0.57058877, image 56x72
+[LoRA] Step 28/2500 | Loss: 0.9111 | 0.19 it/s
+loss 1.168, scale 32768.0, step 28, timestep 0.3518242, image 56x72
+[LoRA] Step 29/2500 | Loss: 1.1680 | 0.20 it/s
+loss 1.083, scale 32768.0, step 29, timestep 0.03855194, image 56x72
+[LoRA] Step 30/2500 | Loss: 1.0830 | 0.20 it/s
+loss 0.943, scale 32768.0, step 30, timestep 0.5104054, image 64x64
+[LoRA] Step 31/2500 | Loss: 0.9429 | 0.20 it/s
+loss 0.848, scale 32768.0, step 31, timestep 0.82595766, image 72x56
+[LoRA] Step 32/2500 | Loss: 0.8481 | 0.20 it/s
+loss 0.884, scale 32768.0, step 32, timestep 0.70627755, image 56x72
+[LoRA] Step 33/2500 | Loss: 0.8838 | 0.20 it/s
+loss 1.141, scale 32768.0, step 33, timestep 0.90559536, image 56x72
+[LoRA] Step 34/2500 | Loss: 1.1406 | 0.20 it/s
+loss 1.075, scale 32768.0, step 34, timestep 0.029787479, image 56x72
+[LoRA] Step 35/2500 | Loss: 1.0752 | 0.20 it/s
+loss 0.939, scale 32768.0, step 35, timestep 0.5173152, image 56x72
+[LoRA] Step 36/2500 | Loss: 0.9390 | 0.20 it/s
+loss 1.62, scale 32768.0, step 36, timestep 0.99325556, image 64x64
+[LoRA] Step 37/2500 | Loss: 1.6201 | 0.20 it/s
+loss 0.832, scale 32768.0, step 37, timestep 0.68322575, image 64x64
+[LoRA] Step 38/2500 | Loss: 0.8320 | 0.20 it/s
+loss 0.8203, scale 32768.0, step 38, timestep 0.593866, image 72x56
+[LoRA] Step 39/2500 | Loss: 0.8203 | 0.20 it/s
+loss 1.23, scale 32768.0, step 39, timestep 0.18239188, image 72x56
+[LoRA] Step 40/2500 | Loss: 1.2305 | 0.20 it/s
+loss 1.19, scale 32768.0, step 40, timestep 0.19539897, image 56x72
+[LoRA] Step 41/2500 | Loss: 1.1904 | 0.20 it/s
+loss 1.216, scale 32768.0, step 41, timestep 0.158605, image 32x104
+[LoRA] Step 42/2500 | Loss: 1.2158 | 0.20 it/s
+loss 1.175, scale 32768.0, step 42, timestep 0.23042709, image 56x72
+[LoRA] Step 43/2500 | Loss: 1.1748 | 0.20 it/s
+loss 0.685, scale 32768.0, step 43, timestep 0.7625699, image 72x56
+[LoRA] Step 44/2500 | Loss: 0.6851 | 0.20 it/s
+loss 1.117, scale 32768.0, step 44, timestep 0.36316755, image 72x56
+[LoRA] Step 45/2500 | Loss: 1.1172 | 0.20 it/s
+loss 1.46, scale 32768.0, step 45, timestep 0.9739569, image 64x64
+[LoRA] Step 46/2500 | Loss: 1.4600 | 0.20 it/s
+loss 1.073, scale 32768.0, step 46, timestep 0.3372577, image 56x72
+[LoRA] Step 47/2500 | Loss: 1.0732 | 0.20 it/s
+loss 1.211, scale 32768.0, step 47, timestep 0.1787823, image 64x64
+[LoRA] Step 48/2500 | Loss: 1.2109 | 0.20 it/s
+loss 1.198, scale 32768.0, step 48, timestep 0.12482786, image 56x72
+[LoRA] Step 49/2500 | Loss: 1.1982 | 0.20 it/s
+loss 1.159, scale 32768.0, step 49, timestep 0.096633635, image 64x64
+[LoRA] Step 50/2500 | Loss: 1.1592 | 0.20 it/s
+loss 0.813, scale 32768.0, step 50, timestep 0.5869419, image 56x72
+[LoRA] Step 51/2500 | Loss: 0.8130 | 0.20 it/s
+loss 0.933, scale 32768.0, step 51, timestep 0.54275703, image 56x72
+[LoRA] Step 52/2500 | Loss: 0.9331 | 0.21 it/s
+loss 0.675, scale 32768.0, step 52, timestep 0.74634427, image 56x72
+[LoRA] Step 53/2500 | Loss: 0.6748 | 0.21 it/s
+loss 0.9277, scale 32768.0, step 53, timestep 0.49985465, image 56x72
+[LoRA] Step 54/2500 | Loss: 0.9277 | 0.21 it/s
+loss 1.178, scale 32768.0, step 54, timestep 0.27981642, image 56x72
+[LoRA] Step 55/2500 | Loss: 1.1777 | 0.21 it/s
+loss 0.6636, scale 32768.0, step 55, timestep 0.90173984, image 56x72
+[LoRA] Step 56/2500 | Loss: 0.6636 | 0.21 it/s
+loss 1.084, scale 32768.0, step 56, timestep 0.39162567, image 56x72
+[LoRA] Step 57/2500 | Loss: 1.0840 | 0.21 it/s
+loss 1.198, scale 32768.0, step 57, timestep 0.16071633, image 56x72
+[LoRA] Step 58/2500 | Loss: 1.1982 | 0.21 it/s
+loss 1.074, scale 32768.0, step 58, timestep 0.32849392, image 56x72
+[LoRA] Step 59/2500 | Loss: 1.0742 | 0.21 it/s
+loss 0.6587, scale 32768.0, step 59, timestep 0.8985343, image 56x72
+[LoRA] Step 60/2500 | Loss: 0.6587 | 0.21 it/s
+loss 0.8936, scale 32768.0, step 60, timestep 0.5021726, image 64x64
+[LoRA] Step 61/2500 | Loss: 0.8936 | 0.21 it/s
+loss 1.139, scale 32768.0, step 61, timestep 0.07270012, image 64x64
+[LoRA] Step 62/2500 | Loss: 1.1387 | 0.21 it/s
+loss 0.8345, scale 32768.0, step 62, timestep 0.83234894, image 56x72
+[LoRA] Step 63/2500 | Loss: 0.8345 | 0.21 it/s
+loss 0.763, scale 32768.0, step 63, timestep 0.6380694, image 56x72
+[LoRA] Step 64/2500 | Loss: 0.7632 | 0.21 it/s
+loss 1.088, scale 32768.0, step 64, timestep 0.3830591, image 56x72
+[LoRA] Step 65/2500 | Loss: 1.0879 | 0.21 it/s
+loss 1.111, scale 32768.0, step 65, timestep 0.052690674, image 64x64
+[LoRA] Step 66/2500 | Loss: 1.1113 | 0.21 it/s
+loss 1.19, scale 32768.0, step 66, timestep 0.1475849, image 56x72
+[LoRA] Step 67/2500 | Loss: 1.1904 | 0.21 it/s
+loss 0.9434, scale 32768.0, step 67, timestep 0.5068098, image 56x72
+[LoRA] Step 68/2500 | Loss: 0.9434 | 0.21 it/s
+loss 0.7217, scale 32768.0, step 68, timestep 0.79035413, image 64x64
+[LoRA] Step 69/2500 | Loss: 0.7217 | 0.21 it/s
+loss 0.6885, scale 32768.0, step 69, timestep 0.7125356, image 72x56
+[LoRA] Step 70/2500 | Loss: 0.6885 | 0.21 it/s
+loss 1.079, scale 32768.0, step 70, timestep 0.40712503, image 56x72
+[LoRA] Step 71/2500 | Loss: 1.0791 | 0.21 it/s
+loss 0.777, scale 32768.0, step 71, timestep 0.820891, image 56x72
+[LoRA] Step 72/2500 | Loss: 0.7769 | 0.21 it/s
+loss 0.752, scale 32768.0, step 72, timestep 0.79644585, image 64x64
+[LoRA] Step 73/2500 | Loss: 0.7520 | 0.21 it/s
+loss 0.6855, scale 32768.0, step 73, timestep 0.6673327, image 72x56
+[LoRA] Step 74/2500 | Loss: 0.6855 | 0.21 it/s
+loss 0.8203, scale 32768.0, step 74, timestep 0.8672626, image 56x72
+[LoRA] Step 75/2500 | Loss: 0.8203 | 0.21 it/s
+loss 0.784, scale 32768.0, step 75, timestep 0.82937527, image 56x72
+[LoRA] Step 76/2500 | Loss: 0.7842 | 0.21 it/s
+loss 1.056, scale 32768.0, step 76, timestep 0.37958866, image 64x64
+[LoRA] Step 77/2500 | Loss: 1.0557 | 0.21 it/s
+loss 1.173, scale 32768.0, step 77, timestep 0.28819838, image 72x56
+[LoRA] Step 78/2500 | Loss: 1.1729 | 0.21 it/s
+loss 0.695, scale 32768.0, step 78, timestep 0.7267998, image 72x56
+[LoRA] Step 79/2500 | Loss: 0.6948 | 0.21 it/s
+loss 1.254, scale 32768.0, step 79, timestep 0.9876642, image 72x56
+[LoRA] Step 80/2500 | Loss: 1.2539 | 0.21 it/s
+loss 1.097, scale 32768.0, step 80, timestep 0.039222304, image 56x72
+[LoRA] Step 81/2500 | Loss: 1.0967 | 0.21 it/s
+loss 1.183, scale 32768.0, step 81, timestep 0.97660756, image 72x56
+[LoRA] Step 82/2500 | Loss: 1.1826 | 0.21 it/s
+loss 1.237, scale 32768.0, step 82, timestep 0.9988013, image 56x72
+[LoRA] Step 83/2500 | Loss: 1.2373 | 0.21 it/s
+loss 1.197, scale 32768.0, step 83, timestep 0.13268147, image 32x104
+[LoRA] Step 84/2500 | Loss: 1.1973 | 0.21 it/s
+loss 0.6396, scale 32768.0, step 84, timestep 0.8053663, image 56x72
+[LoRA] Step 85/2500 | Loss: 0.6396 | 0.21 it/s
+loss 0.684, scale 32768.0, step 85, timestep 0.7527205, image 64x64
+[LoRA] Step 86/2500 | Loss: 0.6841 | 0.21 it/s
+loss 1.141, scale 32768.0, step 86, timestep 0.07581704, image 64x64
+[LoRA] Step 87/2500 | Loss: 1.1406 | 0.21 it/s
+loss 0.835, scale 32768.0, step 87, timestep 0.6002118, image 56x72
+[LoRA] Step 88/2500 | Loss: 0.8350 | 0.21 it/s
+loss 1.203, scale 32768.0, step 88, timestep 0.20174025, image 56x72
+[LoRA] Step 89/2500 | Loss: 1.2031 | 0.21 it/s
+loss 0.7764, scale 32768.0, step 89, timestep 0.83230346, image 56x72
+[LoRA] Step 90/2500 | Loss: 0.7764 | 0.21 it/s
+loss 1.038, scale 32768.0, step 90, timestep 0.38697052, image 56x72
+[LoRA] Step 91/2500 | Loss: 1.0381 | 0.21 it/s
+loss 0.9263, scale 32768.0, step 91, timestep 0.48287195, image 64x64
+[LoRA] Step 92/2500 | Loss: 0.9263 | 0.21 it/s
+loss 1.049, scale 32768.0, step 92, timestep 0.44617733, image 56x72
+[LoRA] Step 93/2500 | Loss: 1.0488 | 0.21 it/s
+loss 1.184, scale 32768.0, step 93, timestep 0.14347844, image 72x56
+[LoRA] Step 94/2500 | Loss: 1.1836 | 0.21 it/s
+loss 1.06, scale 32768.0, step 94, timestep 0.37155554, image 64x64
+[LoRA] Step 95/2500 | Loss: 1.0596 | 0.21 it/s
+loss 1.049, scale 32768.0, step 95, timestep 0.38694558, image 64x64
+[LoRA] Step 96/2500 | Loss: 1.0488 | 0.21 it/s
+loss 1.009, scale 32768.0, step 96, timestep 0.47566447, image 56x72
+[LoRA] Step 97/2500 | Loss: 1.0088 | 0.21 it/s
+loss 0.7827, scale 32768.0, step 97, timestep 0.61672074, image 72x56
+[LoRA] Step 98/2500 | Loss: 0.7827 | 0.21 it/s
+loss 1.01, scale 32768.0, step 98, timestep 0.42472315, image 72x56
+[LoRA] Step 99/2500 | Loss: 1.0098 | 0.21 it/s
+loss 0.9316, scale 32768.0, step 99, timestep 0.52704453, image 56x72
+[LoRA] Step 100/2500 | Loss: 0.9316 | 0.21 it/s
+loss 1.147, scale 32768.0, step 100, timestep 0.3075596, image 56x72
+[LoRA] Step 101/2500 | Loss: 1.1475 | 0.21 it/s
+loss 0.9155, scale 32768.0, step 101, timestep 0.49416375, image 72x56
+[LoRA] Step 102/2500 | Loss: 0.9155 | 0.21 it/s
+loss 0.6387, scale 32768.0, step 102, timestep 0.8327307, image 72x56
+[LoRA] Step 103/2500 | Loss: 0.6387 | 0.21 it/s
+loss 1.139, scale 32768.0, step 103, timestep 0.07616012, image 56x72
+[LoRA] Step 104/2500 | Loss: 1.1387 | 0.21 it/s
+loss 0.733, scale 16384.0, step 104, timestep 0.6603522, image 56x72
+[LoRA] Step 105/2500 | Loss: 0.7329 | 0.21 it/s
+loss 1.107, scale 16384.0, step 105, timestep 0.3158053, image 64x64
+[LoRA] Step 106/2500 | Loss: 1.1074 | 0.21 it/s
+loss 0.6377, scale 16384.0, step 106, timestep 0.8627, image 56x72
+[LoRA] Step 107/2500 | Loss: 0.6377 | 0.21 it/s
+loss 0.7363, scale 16384.0, step 107, timestep 0.67422, image 64x64
+[LoRA] Step 108/2500 | Loss: 0.7363 | 0.21 it/s
+loss 1.161, scale 16384.0, step 108, timestep 0.114846274, image 56x72
+[LoRA] Step 109/2500 | Loss: 1.1611 | 0.21 it/s
+loss 1.06, scale 16384.0, step 109, timestep 0.33630708, image 40x88
+[LoRA] Step 110/2500 | Loss: 1.0596 | 0.21 it/s
+loss 1.083, scale 16384.0, step 110, timestep 0.040068317, image 40x88
+[LoRA] Step 111/2500 | Loss: 1.0830 | 0.21 it/s
+loss 1.051, scale 16384.0, step 111, timestep 0.012127897, image 56x72
+[LoRA] Step 112/2500 | Loss: 1.0508 | 0.21 it/s
+loss 0.9546, scale 16384.0, step 112, timestep 0.49946335, image 56x72
+[LoRA] Step 113/2500 | Loss: 0.9546 | 0.21 it/s
+loss 0.6377, scale 16384.0, step 113, timestep 0.9429863, image 56x72
+[LoRA] Step 114/2500 | Loss: 0.6377 | 0.21 it/s
+loss 0.641, scale 16384.0, step 114, timestep 0.8697628, image 56x72
+[LoRA] Step 115/2500 | Loss: 0.6411 | 0.21 it/s
+loss 1.14, scale 16384.0, step 115, timestep 0.32353863, image 72x56
+[LoRA] Step 116/2500 | Loss: 1.1396 | 0.21 it/s
+loss 0.8545, scale 16384.0, step 116, timestep 0.5268378, image 56x72
+[LoRA] Step 117/2500 | Loss: 0.8545 | 0.21 it/s
+loss 0.9995, scale 16384.0, step 117, timestep 0.38147563, image 56x72
+[LoRA] Step 118/2500 | Loss: 0.9995 | 0.21 it/s
+loss 0.704, scale 16384.0, step 118, timestep 0.88153714, image 72x56
+[LoRA] Step 119/2500 | Loss: 0.7041 | 0.21 it/s
+loss 0.8423, scale 16384.0, step 119, timestep 0.53475606, image 64x64
+[LoRA] Step 120/2500 | Loss: 0.8423 | 0.21 it/s
+loss 1.138, scale 16384.0, step 120, timestep 0.2668204, image 56x72
+[LoRA] Step 121/2500 | Loss: 1.1377 | 0.21 it/s
+loss 0.881, scale 16384.0, step 121, timestep 0.49395883, image 64x64
+[LoRA] Step 122/2500 | Loss: 0.8809 | 0.21 it/s
+loss 0.703, scale 16384.0, step 122, timestep 0.9673099, image 56x72
+[LoRA] Step 123/2500 | Loss: 0.7031 | 0.21 it/s
+loss 0.8413, scale 16384.0, step 123, timestep 0.5523667, image 72x56
+[LoRA] Step 124/2500 | Loss: 0.8413 | 0.21 it/s
+loss 1.127, scale 16384.0, step 124, timestep 0.07230337, image 56x72
+[LoRA] Step 125/2500 | Loss: 1.1270 | 0.21 it/s
+loss 0.8027, scale 16384.0, step 125, timestep 0.61876976, image 56x72
+[LoRA] Step 126/2500 | Loss: 0.8027 | 0.21 it/s
+loss 0.799, scale 16384.0, step 126, timestep 0.5748633, image 64x64
+[LoRA] Step 127/2500 | Loss: 0.7988 | 0.21 it/s
+loss 0.926, scale 16384.0, step 127, timestep 0.46189502, image 64x64
+[LoRA] Step 128/2500 | Loss: 0.9258 | 0.21 it/s
+loss 1.095, scale 16384.0, step 128, timestep 0.042894647, image 64x64
+[LoRA] Step 129/2500 | Loss: 1.0947 | 0.21 it/s
+loss 1.053, scale 16384.0, step 129, timestep 0.3846689, image 72x56
+[LoRA] Step 130/2500 | Loss: 1.0527 | 0.21 it/s
+loss 1.179, scale 16384.0, step 130, timestep 0.115465246, image 56x72
+[LoRA] Step 131/2500 | Loss: 1.1787 | 0.21 it/s
+loss 0.786, scale 16384.0, step 131, timestep 0.5633583, image 72x56
+[LoRA] Step 132/2500 | Loss: 0.7861 | 0.21 it/s
+loss 0.6494, scale 16384.0, step 132, timestep 0.74790484, image 56x72
+[LoRA] Step 133/2500 | Loss: 0.6494 | 0.21 it/s
+loss 1.172, scale 16384.0, step 133, timestep 0.24390729, image 64x64
+[LoRA] Step 134/2500 | Loss: 1.1719 | 0.21 it/s
+loss 1.186, scale 16384.0, step 134, timestep 0.27627996, image 72x56
+[LoRA] Step 135/2500 | Loss: 1.1855 | 0.21 it/s
+loss 1.008, scale 16384.0, step 135, timestep 0.39387563, image 56x72
+[LoRA] Step 136/2500 | Loss: 1.0078 | 0.21 it/s
+loss 1.0625, scale 16384.0, step 136, timestep 0.97873455, image 72x56
+[LoRA] Step 137/2500 | Loss: 1.0625 | 0.21 it/s
+loss 1.212, scale 16384.0, step 137, timestep 0.19356146, image 56x72
+[LoRA] Step 138/2500 | Loss: 1.2119 | 0.21 it/s
+loss 0.936, scale 16384.0, step 138, timestep 0.46971422, image 72x56
+[LoRA] Step 139/2500 | Loss: 0.9360 | 0.21 it/s
+loss 0.779, scale 16384.0, step 139, timestep 0.87812036, image 56x72
+[LoRA] Step 140/2500 | Loss: 0.7788 | 0.21 it/s
+loss 1.222, scale 16384.0, step 140, timestep 0.19899763, image 56x72
+[LoRA] Step 141/2500 | Loss: 1.2217 | 0.21 it/s
+loss 0.739, scale 16384.0, step 141, timestep 0.8420734, image 64x64
+[LoRA] Step 142/2500 | Loss: 0.7388 | 0.21 it/s
+loss 1.112, scale 16384.0, step 142, timestep 0.05699152, image 72x56
+[LoRA] Step 143/2500 | Loss: 1.1123 | 0.21 it/s
+loss 1.055, scale 16384.0, step 143, timestep 0.02428824, image 32x104
+[LoRA] Step 144/2500 | Loss: 1.0547 | 0.21 it/s
+loss 0.819, scale 16384.0, step 144, timestep 0.59737724, image 56x72
+[LoRA] Step 145/2500 | Loss: 0.8188 | 0.21 it/s
+loss 1.186, scale 16384.0, step 145, timestep 0.16096047, image 56x72
+[LoRA] Step 146/2500 | Loss: 1.1855 | 0.21 it/s
+loss 0.9175, scale 16384.0, step 146, timestep 0.93052787, image 64x64
+[LoRA] Step 147/2500 | Loss: 0.9175 | 0.21 it/s
+loss 1.168, scale 16384.0, step 147, timestep 0.2728425, image 56x72
+[LoRA] Step 148/2500 | Loss: 1.1680 | 0.21 it/s
+loss 0.8516, scale 16384.0, step 148, timestep 0.52188647, image 56x72
+[LoRA] Step 149/2500 | Loss: 0.8516 | 0.21 it/s
+loss 1.134, scale 16384.0, step 149, timestep 0.073132575, image 64x64
+[LoRA] Step 150/2500 | Loss: 1.1338 | 0.21 it/s
+loss 1.078, scale 16384.0, step 150, timestep 0.040906545, image 64x64
+[LoRA] Step 151/2500 | Loss: 1.0781 | 0.21 it/s
+loss 0.62, scale 16384.0, step 151, timestep 0.8963857, image 56x72
+[LoRA] Step 152/2500 | Loss: 0.6201 | 0.21 it/s
+loss 1.18, scale 16384.0, step 152, timestep 0.14180848, image 56x72
+[LoRA] Step 153/2500 | Loss: 1.1797 | 0.21 it/s
+loss 1.009, scale 16384.0, step 153, timestep 0.36140501, image 72x56
+[LoRA] Step 154/2500 | Loss: 1.0088 | 0.21 it/s
+loss 1.171, scale 16384.0, step 154, timestep 0.109391935, image 64x64
+[LoRA] Step 155/2500 | Loss: 1.1709 | 0.21 it/s
+loss 0.6924, scale 16384.0, step 155, timestep 0.7071564, image 56x72
+[LoRA] Step 156/2500 | Loss: 0.6924 | 0.21 it/s
+loss 0.723, scale 16384.0, step 156, timestep 0.68042, image 56x72
+[LoRA] Step 157/2500 | Loss: 0.7231 | 0.21 it/s
+loss 0.949, scale 16384.0, step 157, timestep 0.42200807, image 56x72
+[LoRA] Step 158/2500 | Loss: 0.9492 | 0.21 it/s
+loss 0.7695, scale 16384.0, step 158, timestep 0.86050814, image 56x72
+[LoRA] Step 159/2500 | Loss: 0.7695 | 0.21 it/s
+loss 1.088, scale 16384.0, step 159, timestep 0.046625268, image 56x72
+[LoRA] Step 160/2500 | Loss: 1.0879 | 0.21 it/s
+loss 0.9194, scale 16384.0, step 160, timestep 0.45578268, image 56x72
+[LoRA] Step 161/2500 | Loss: 0.9194 | 0.21 it/s
+loss 0.734, scale 16384.0, step 161, timestep 0.62815106, image 64x64
+[LoRA] Step 162/2500 | Loss: 0.7339 | 0.21 it/s
+loss 0.8315, scale 16384.0, step 162, timestep 0.5902741, image 56x72
+[LoRA] Step 163/2500 | Loss: 0.8315 | 0.21 it/s
+loss 0.8286, scale 16384.0, step 163, timestep 0.5484482, image 64x64
+[LoRA] Step 164/2500 | Loss: 0.8286 | 0.21 it/s
+loss 1.088, scale 16384.0, step 164, timestep 0.97057384, image 72x56
+[LoRA] Step 165/2500 | Loss: 1.0879 | 0.21 it/s
+loss 1.053, scale 16384.0, step 165, timestep 0.015783383, image 72x56
+[LoRA] Step 166/2500 | Loss: 1.0527 | 0.21 it/s
+loss 1.11, scale 16384.0, step 166, timestep 0.059339575, image 64x64
+[LoRA] Step 167/2500 | Loss: 1.1104 | 0.21 it/s
+loss 0.7305, scale 16384.0, step 167, timestep 0.77893966, image 56x72
+[LoRA] Step 168/2500 | Loss: 0.7305 | 0.21 it/s
+loss 0.684, scale 16384.0, step 168, timestep 0.70359576, image 56x72
+[LoRA] Step 169/2500 | Loss: 0.6841 | 0.21 it/s
+loss 1.071, scale 16384.0, step 169, timestep 0.40612674, image 56x72
+[LoRA] Step 170/2500 | Loss: 1.0713 | 0.21 it/s
+loss 1.08, scale 16384.0, step 170, timestep 0.30539903, image 56x72
+[LoRA] Step 171/2500 | Loss: 1.0801 | 0.21 it/s
+loss 1.122, scale 16384.0, step 171, timestep 0.07064736, image 56x72
+[LoRA] Step 172/2500 | Loss: 1.1221 | 0.21 it/s
+loss 0.7163, scale 16384.0, step 172, timestep 0.9522455, image 56x72
+[LoRA] Step 173/2500 | Loss: 0.7163 | 0.21 it/s
+loss 1.134, scale 16384.0, step 173, timestep 0.35541472, image 56x72
+[LoRA] Step 174/2500 | Loss: 1.1338 | 0.21 it/s
+loss 0.7925, scale 16384.0, step 174, timestep 0.888312, image 64x64
+[LoRA] Step 175/2500 | Loss: 0.7925 | 0.21 it/s
+loss 0.7075, scale 16384.0, step 175, timestep 0.77809244, image 64x64
+[LoRA] Step 176/2500 | Loss: 0.7075 | 0.21 it/s
+loss 0.659, scale 16384.0, step 176, timestep 0.7500492, image 72x56
+[LoRA] Step 177/2500 | Loss: 0.6592 | 0.21 it/s
+loss 0.7324, scale 16384.0, step 177, timestep 0.6541037, image 56x72
+[LoRA] Step 178/2500 | Loss: 0.7324 | 0.21 it/s
+loss 0.7417, scale 16384.0, step 178, timestep 0.627685, image 64x64
+[LoRA] Step 179/2500 | Loss: 0.7417 | 0.21 it/s
+loss 0.7617, scale 16384.0, step 179, timestep 0.6052386, image 32x104
+[LoRA] Step 180/2500 | Loss: 0.7617 | 0.21 it/s
+loss 0.695, scale 16384.0, step 180, timestep 0.71158785, image 64x64
+[LoRA] Step 181/2500 | Loss: 0.6948 | 0.21 it/s
+loss 0.8447, scale 16384.0, step 181, timestep 0.5824577, image 56x72
+[LoRA] Step 182/2500 | Loss: 0.8447 | 0.21 it/s
+loss 1.159, scale 16384.0, step 182, timestep 0.09921411, image 56x72
+[LoRA] Step 183/2500 | Loss: 1.1592 | 0.21 it/s
+loss 0.749, scale 16384.0, step 183, timestep 0.66879874, image 56x72
+[LoRA] Step 184/2500 | Loss: 0.7490 | 0.21 it/s
+loss 0.6567, scale 16384.0, step 184, timestep 0.7250589, image 72x56
+[LoRA] Step 185/2500 | Loss: 0.6567 | 0.21 it/s
+loss 0.582, scale 16384.0, step 185, timestep 0.87601745, image 56x72
+[LoRA] Step 186/2500 | Loss: 0.5820 | 0.21 it/s
+loss 1.197, scale 16384.0, step 186, timestep 0.24607152, image 72x56
+[LoRA] Step 187/2500 | Loss: 1.1973 | 0.21 it/s
+loss 1.195, scale 16384.0, step 187, timestep 0.19855751, image 64x64
+[LoRA] Step 188/2500 | Loss: 1.1953 | 0.21 it/s
+loss 1.148, scale 16384.0, step 188, timestep 0.29504868, image 72x56
+[LoRA] Step 189/2500 | Loss: 1.1484 | 0.21 it/s
+loss 0.6724, scale 16384.0, step 189, timestep 0.6952885, image 56x72
+[LoRA] Step 190/2500 | Loss: 0.6724 | 0.21 it/s
+loss 1.196, scale 16384.0, step 190, timestep 0.20550771, image 56x72
+[LoRA] Step 191/2500 | Loss: 1.1963 | 0.21 it/s
+loss 0.981, scale 16384.0, step 191, timestep 0.4119881, image 56x72
+[LoRA] Step 192/2500 | Loss: 0.9810 | 0.21 it/s
+loss 1.179, scale 16384.0, step 192, timestep 0.25766936, image 64x64
+[LoRA] Step 193/2500 | Loss: 1.1787 | 0.21 it/s
+loss 0.68, scale 16384.0, step 193, timestep 0.752247, image 64x64
+[LoRA] Step 194/2500 | Loss: 0.6802 | 0.21 it/s
+loss 1.039, scale 16384.0, step 194, timestep 0.0068345536, image 56x72
+[LoRA] Step 195/2500 | Loss: 1.0391 | 0.21 it/s
+loss 0.7334, scale 16384.0, step 195, timestep 0.86706823, image 64x64
+[LoRA] Step 196/2500 | Loss: 0.7334 | 0.21 it/s
+loss 0.939, scale 16384.0, step 196, timestep 0.42586106, image 56x72
+[LoRA] Step 197/2500 | Loss: 0.9390 | 0.21 it/s
+loss 0.746, scale 16384.0, step 197, timestep 0.61377704, image 56x72
+[LoRA] Step 198/2500 | Loss: 0.7461 | 0.22 it/s
+loss 0.599, scale 16384.0, step 198, timestep 0.90051085, image 56x72
+[LoRA] Step 199/2500 | Loss: 0.5991 | 0.22 it/s
+loss 0.63, scale 16384.0, step 199, timestep 0.7348578, image 72x56
+[LoRA] Step 200/2500 | Loss: 0.6299 | 0.22 it/s
+loss 0.8335, scale 16384.0, step 200, timestep 0.5267947, image 72x56
+[LoRA] Step 201/2500 | Loss: 0.8335 | 0.22 it/s
+loss 0.856, scale 16384.0, step 201, timestep 0.5032173, image 40x88
+[LoRA] Step 202/2500 | Loss: 0.8560 | 0.22 it/s
+loss 0.706, scale 16384.0, step 202, timestep 0.7204517, image 56x72
+[LoRA] Step 203/2500 | Loss: 0.7061 | 0.22 it/s
+loss 1.177, scale 16384.0, step 203, timestep 0.12148209, image 64x64
+[LoRA] Step 204/2500 | Loss: 1.1768 | 0.22 it/s
+loss 0.967, scale 16384.0, step 204, timestep 0.45530412, image 72x56
+[LoRA] Step 205/2500 | Loss: 0.9668 | 0.22 it/s
+loss 0.6724, scale 16384.0, step 205, timestep 0.9001415, image 72x56
+[LoRA] Step 206/2500 | Loss: 0.6724 | 0.22 it/s
+loss 0.7065, scale 16384.0, step 206, timestep 0.69785064, image 56x72
+[LoRA] Step 207/2500 | Loss: 0.7065 | 0.22 it/s
+loss 0.6387, scale 16384.0, step 207, timestep 0.78145444, image 72x56
+[LoRA] Step 208/2500 | Loss: 0.6387 | 0.22 it/s
+loss 0.6416, scale 16384.0, step 208, timestep 0.78499454, image 56x72
+[LoRA] Step 209/2500 | Loss: 0.6416 | 0.22 it/s
+loss 0.83, scale 16384.0, step 209, timestep 0.5349242, image 64x64
+[LoRA] Step 210/2500 | Loss: 0.8301 | 0.22 it/s
+loss 1.178, scale 16384.0, step 210, timestep 0.14100912, image 56x72
+[LoRA] Step 211/2500 | Loss: 1.1777 | 0.22 it/s
+loss 1.139, scale 16384.0, step 211, timestep 0.31538662, image 72x56
+[LoRA] Step 212/2500 | Loss: 1.1387 | 0.22 it/s
+loss 1.14, scale 16384.0, step 212, timestep 0.08561199, image 64x64
+[LoRA] Step 213/2500 | Loss: 1.1396 | 0.22 it/s
+loss 1.195, scale 16384.0, step 213, timestep 0.19757408, image 56x72
+[LoRA] Step 214/2500 | Loss: 1.1953 | 0.22 it/s
+loss 0.752, scale 16384.0, step 214, timestep 0.62797916, image 56x72
+[LoRA] Step 215/2500 | Loss: 0.7520 | 0.22 it/s
+loss 0.709, scale 16384.0, step 215, timestep 0.69824743, image 56x72
+[LoRA] Step 216/2500 | Loss: 0.7090 | 0.22 it/s
+loss 1.085, scale 16384.0, step 216, timestep 0.99265885, image 64x64
+[LoRA] Step 217/2500 | Loss: 1.0850 | 0.22 it/s
+loss 0.6343, scale 16384.0, step 217, timestep 0.9069321, image 56x72
+[LoRA] Step 218/2500 | Loss: 0.6343 | 0.22 it/s
+loss 0.8916, scale 16384.0, step 218, timestep 0.5454575, image 56x72
+[LoRA] Step 219/2500 | Loss: 0.8916 | 0.22 it/s
+loss 1.062, scale 16384.0, step 219, timestep 0.3235831, image 56x72
+[LoRA] Step 220/2500 | Loss: 1.0615 | 0.22 it/s
+loss 1.101, scale 16384.0, step 220, timestep 0.28461874, image 72x56
+[LoRA] Step 221/2500 | Loss: 1.1006 | 0.22 it/s
+loss 0.839, scale 16384.0, step 221, timestep 0.5360172, image 64x64
+[LoRA] Step 222/2500 | Loss: 0.8389 | 0.22 it/s
+loss 1.197, scale 16384.0, step 222, timestep 0.19174716, image 56x72
+[LoRA] Step 223/2500 | Loss: 1.1973 | 0.22 it/s
+loss 0.836, scale 16384.0, step 223, timestep 0.5289281, image 72x56
+[LoRA] Step 224/2500 | Loss: 0.8359 | 0.22 it/s
+loss 0.9517, scale 16384.0, step 224, timestep 0.4172009, image 56x72
+[LoRA] Step 225/2500 | Loss: 0.9517 | 0.22 it/s
+loss 0.8257, scale 16384.0, step 225, timestep 0.5576021, image 72x56
+[LoRA] Step 226/2500 | Loss: 0.8257 | 0.22 it/s
+loss 0.876, scale 16384.0, step 226, timestep 0.5497306, image 56x72
+[LoRA] Step 227/2500 | Loss: 0.8760 | 0.22 it/s
+loss 0.7554, scale 16384.0, step 227, timestep 0.66869396, image 56x72
+[LoRA] Step 228/2500 | Loss: 0.7554 | 0.22 it/s
+loss 0.814, scale 16384.0, step 228, timestep 0.55639154, image 72x56
+[LoRA] Step 229/2500 | Loss: 0.8140 | 0.22 it/s
+loss 0.719, scale 16384.0, step 229, timestep 0.9663296, image 56x72
+[LoRA] Step 230/2500 | Loss: 0.7192 | 0.22 it/s
+loss 0.627, scale 16384.0, step 230, timestep 0.8359224, image 56x72
+[LoRA] Step 231/2500 | Loss: 0.6270 | 0.22 it/s
+loss 0.7104, scale 16384.0, step 231, timestep 0.6794072, image 56x72
+[LoRA] Step 232/2500 | Loss: 0.7104 | 0.22 it/s
+loss 1.158, scale 16384.0, step 232, timestep 0.10467595, image 64x64
+[LoRA] Step 233/2500 | Loss: 1.1582 | 0.22 it/s
+loss 1.113, scale 16384.0, step 233, timestep 0.2689992, image 56x72
+[LoRA] Step 234/2500 | Loss: 1.1133 | 0.22 it/s
+loss 0.684, scale 16384.0, step 234, timestep 0.7581442, image 32x104
+[LoRA] Step 235/2500 | Loss: 0.6841 | 0.22 it/s
+loss 0.834, scale 16384.0, step 235, timestep 0.53233045, image 56x72
+[LoRA] Step 236/2500 | Loss: 0.8340 | 0.22 it/s
+loss 0.7236, scale 16384.0, step 236, timestep 0.8446532, image 56x72
+[LoRA] Step 237/2500 | Loss: 0.7236 | 0.22 it/s
+loss 1.112, scale 16384.0, step 237, timestep 0.31667793, image 64x64
+[LoRA] Step 238/2500 | Loss: 1.1123 | 0.22 it/s
+loss 0.709, scale 16384.0, step 238, timestep 0.7491675, image 56x72
+[LoRA] Step 239/2500 | Loss: 0.7090 | 0.22 it/s
+loss 1.047, scale 16384.0, step 239, timestep 0.36071092, image 64x64
+[LoRA] Step 240/2500 | Loss: 1.0469 | 0.22 it/s
+loss 1.19, scale 16384.0, step 240, timestep 0.2423554, image 56x72
+[LoRA] Step 241/2500 | Loss: 1.1904 | 0.22 it/s
+loss 1.195, scale 16384.0, step 241, timestep 0.15615465, image 56x72
+[LoRA] Step 242/2500 | Loss: 1.1953 | 0.22 it/s
+loss 1.025, scale 16384.0, step 242, timestep 0.39154768, image 72x56
+[LoRA] Step 243/2500 | Loss: 1.0254 | 0.22 it/s
+loss 1.156, scale 16384.0, step 243, timestep 0.21320583, image 56x72
+[LoRA] Step 244/2500 | Loss: 1.1562 | 0.22 it/s
+loss 1.168, scale 16384.0, step 244, timestep 0.23188552, image 64x64
+[LoRA] Step 245/2500 | Loss: 1.1680 | 0.22 it/s
+loss 1.042, scale 16384.0, step 245, timestep 0.009595771, image 56x72
+[LoRA] Step 246/2500 | Loss: 1.0420 | 0.22 it/s
+loss 1.156, scale 16384.0, step 246, timestep 0.10771853, image 64x64
+[LoRA] Step 247/2500 | Loss: 1.1562 | 0.22 it/s
+loss 0.6865, scale 16384.0, step 247, timestep 0.68022615, image 72x56
+[LoRA] Step 248/2500 | Loss: 0.6865 | 0.22 it/s
+loss 1.083, scale 16384.0, step 248, timestep 0.3351767, image 64x64
+[LoRA] Step 249/2500 | Loss: 1.0830 | 0.22 it/s
+loss 0.843, scale 16384.0, step 249, timestep 0.521927, image 40x88
+[LoRA] Step 250/2500 | Loss: 0.8428 | 0.22 it/s
+loss 1.163, scale 16384.0, step 250, timestep 0.15081602, image 56x72
+[LoRA] Step 251/2500 | Loss: 1.1631 | 0.22 it/s
+loss 0.706, scale 16384.0, step 251, timestep 0.71773887, image 56x72
+[LoRA] Step 252/2500 | Loss: 0.7061 | 0.22 it/s
+loss 1.015, scale 16384.0, step 252, timestep 0.9539618, image 64x64
+[LoRA] Step 253/2500 | Loss: 1.0146 | 0.22 it/s
+loss 0.8247, scale 16384.0, step 253, timestep 0.53449494, image 56x72
+[LoRA] Step 254/2500 | Loss: 0.8247 | 0.22 it/s
+loss 1.014, scale 16384.0, step 254, timestep 0.45084813, image 56x72
+[LoRA] Step 255/2500 | Loss: 1.0137 | 0.22 it/s
+loss 1.052, scale 16384.0, step 255, timestep 0.3995905, image 56x72
+[LoRA] Step 256/2500 | Loss: 1.0518 | 0.22 it/s
+loss 0.741, scale 16384.0, step 256, timestep 0.8736681, image 64x64
+[LoRA] Step 257/2500 | Loss: 0.7412 | 0.22 it/s
+loss 1.086, scale 16384.0, step 257, timestep 0.03301439, image 56x72
+[LoRA] Step 258/2500 | Loss: 1.0859 | 0.22 it/s
+loss 1.214, scale 16384.0, step 258, timestep 0.17822437, image 72x56
+[LoRA] Step 259/2500 | Loss: 1.2139 | 0.22 it/s
+loss 1.146, scale 16384.0, step 259, timestep 0.085278094, image 72x56
+[LoRA] Step 260/2500 | Loss: 1.1465 | 0.22 it/s
+loss 0.8096, scale 16384.0, step 260, timestep 0.9002587, image 56x72
+[LoRA] Step 261/2500 | Loss: 0.8096 | 0.22 it/s
+loss 1.153, scale 16384.0, step 261, timestep 0.09351398, image 72x56
+[LoRA] Step 262/2500 | Loss: 1.1533 | 0.22 it/s
+loss 0.7974, scale 16384.0, step 262, timestep 0.5523167, image 64x64
+[LoRA] Step 263/2500 | Loss: 0.7974 | 0.22 it/s
+loss 1.075, scale 16384.0, step 263, timestep 0.030576687, image 64x64
+[LoRA] Step 264/2500 | Loss: 1.0752 | 0.22 it/s
+loss 1.171, scale 16384.0, step 264, timestep 0.11432563, image 56x72
+[LoRA] Step 265/2500 | Loss: 1.1709 | 0.22 it/s
+loss 0.601, scale 16384.0, step 265, timestep 0.9116946, image 56x72
+[LoRA] Step 266/2500 | Loss: 0.6011 | 0.22 it/s
+loss 0.622, scale 16384.0, step 266, timestep 0.9307463, image 56x72
+[LoRA] Step 267/2500 | Loss: 0.6221 | 0.22 it/s
+loss 1.187, scale 16384.0, step 267, timestep 0.173547, image 64x64
+[LoRA] Step 268/2500 | Loss: 1.1865 | 0.22 it/s
+loss 0.7397, scale 16384.0, step 268, timestep 0.90120703, image 72x56
+[LoRA] Step 269/2500 | Loss: 0.7397 | 0.22 it/s
+loss 1.022, scale 16384.0, step 269, timestep 0.41137898, image 56x72
+[LoRA] Step 270/2500 | Loss: 1.0225 | 0.22 it/s
+loss 0.99, scale 16384.0, step 270, timestep 0.4023373, image 56x72
+[LoRA] Step 271/2500 | Loss: 0.9902 | 0.22 it/s
+loss 1.065, scale 16384.0, step 271, timestep 0.40474093, image 56x72
+[LoRA] Step 272/2500 | Loss: 1.0654 | 0.22 it/s
+loss 0.7812, scale 16384.0, step 272, timestep 0.6065178, image 64x64
+[LoRA] Step 273/2500 | Loss: 0.7812 | 0.22 it/s
+loss 1.1, scale 16384.0, step 273, timestep 0.047879614, image 72x56
+[LoRA] Step 274/2500 | Loss: 1.0996 | 0.22 it/s
+loss 1.072, scale 16384.0, step 274, timestep 0.35606137, image 56x72
+[LoRA] Step 275/2500 | Loss: 1.0723 | 0.22 it/s
+loss 0.8613, scale 16384.0, step 275, timestep 0.4958722, image 64x64
+[LoRA] Step 276/2500 | Loss: 0.8613 | 0.22 it/s
+loss 1.196, scale 16384.0, step 276, timestep 0.1973431, image 56x72
+[LoRA] Step 277/2500 | Loss: 1.1963 | 0.22 it/s
+loss 1.173, scale 16384.0, step 277, timestep 0.13911277, image 32x104
+[LoRA] Step 278/2500 | Loss: 1.1729 | 0.22 it/s
+loss 0.954, scale 16384.0, step 278, timestep 0.9844001, image 72x56
+[LoRA] Step 279/2500 | Loss: 0.9541 | 0.22 it/s
+loss 0.724, scale 16384.0, step 279, timestep 0.8312293, image 56x72
+[LoRA] Step 280/2500 | Loss: 0.7241 | 0.22 it/s
+loss 1.101, scale 16384.0, step 280, timestep 0.05340857, image 56x72
+[LoRA] Step 281/2500 | Loss: 1.1006 | 0.22 it/s
+loss 1.158, scale 16384.0, step 281, timestep 0.23744033, image 64x64
+[LoRA] Step 282/2500 | Loss: 1.1582 | 0.22 it/s
+loss 1.094, scale 16384.0, step 282, timestep 0.28854668, image 56x72
+[LoRA] Step 283/2500 | Loss: 1.0938 | 0.22 it/s
+loss 0.748, scale 16384.0, step 283, timestep 0.81926113, image 72x56
+[LoRA] Step 284/2500 | Loss: 0.7480 | 0.22 it/s
+loss 0.6895, scale 16384.0, step 284, timestep 0.72738516, image 56x72
+[LoRA] Step 285/2500 | Loss: 0.6895 | 0.22 it/s
+loss 1.07, scale 16384.0, step 285, timestep 0.03261745, image 72x56
+[LoRA] Step 286/2500 | Loss: 1.0703 | 0.22 it/s
+loss 0.662, scale 16384.0, step 286, timestep 0.7601035, image 56x72
+[LoRA] Step 287/2500 | Loss: 0.6621 | 0.22 it/s
+loss 0.7334, scale 16384.0, step 287, timestep 0.8494777, image 56x72
+[LoRA] Step 288/2500 | Loss: 0.7334 | 0.22 it/s
+loss 0.789, scale 16384.0, step 288, timestep 0.5667576, image 64x64
+[LoRA] Step 289/2500 | Loss: 0.7891 | 0.22 it/s
+loss 1.0625, scale 16384.0, step 289, timestep 0.39799199, image 56x72
+[LoRA] Step 290/2500 | Loss: 1.0625 | 0.22 it/s
+loss 1.114, scale 16384.0, step 290, timestep 0.06723241, image 56x72
+[LoRA] Step 291/2500 | Loss: 1.1143 | 0.22 it/s
+loss 0.6235, scale 16384.0, step 291, timestep 0.7858942, image 72x56
+[LoRA] Step 292/2500 | Loss: 0.6235 | 0.22 it/s
+loss 0.7056, scale 16384.0, step 292, timestep 0.84100264, image 56x72
+[LoRA] Step 293/2500 | Loss: 0.7056 | 0.22 it/s
+loss 1.07, scale 16384.0, step 293, timestep 0.30823225, image 56x72
+[LoRA] Step 294/2500 | Loss: 1.0703 | 0.22 it/s
+loss 0.834, scale 16384.0, step 294, timestep 0.90474373, image 56x72
+[LoRA] Step 295/2500 | Loss: 0.8340 | 0.22 it/s
+loss 1.208, scale 16384.0, step 295, timestep 0.19695033, image 72x56
+[LoRA] Step 296/2500 | Loss: 1.2080 | 0.22 it/s
+loss 1.065, scale 16384.0, step 296, timestep 0.35077065, image 64x64
+[LoRA] Step 297/2500 | Loss: 1.0654 | 0.22 it/s
+loss 1.187, scale 16384.0, step 297, timestep 0.24737813, image 56x72
+[LoRA] Step 298/2500 | Loss: 1.1865 | 0.22 it/s
+loss 0.948, scale 16384.0, step 298, timestep 0.40816015, image 56x72
+[LoRA] Step 299/2500 | Loss: 0.9482 | 0.22 it/s
+loss 0.7686, scale 16384.0, step 299, timestep 0.8562753, image 40x88
+[LoRA] Step 300/2500 | Loss: 0.7686 | 0.22 it/s
+loss 0.763, scale 16384.0, step 300, timestep 0.65488213, image 56x72
+[LoRA] Step 301/2500 | Loss: 0.7632 | 0.22 it/s
+loss 1.062, scale 16384.0, step 301, timestep 0.025154112, image 72x56
+[LoRA] Step 302/2500 | Loss: 1.0615 | 0.22 it/s
+loss 0.9917, scale 16384.0, step 302, timestep 0.46046865, image 56x72
+[LoRA] Step 303/2500 | Loss: 0.9917 | 0.22 it/s
+loss 0.692, scale 16384.0, step 303, timestep 0.69583386, image 64x64
+[LoRA] Step 304/2500 | Loss: 0.6919 | 0.22 it/s
+loss 0.5986, scale 16384.0, step 304, timestep 0.91766876, image 56x72
+[LoRA] Step 305/2500 | Loss: 0.5986 | 0.22 it/s
+loss 1.127, scale 16384.0, step 305, timestep 0.06799209, image 72x56
+[LoRA] Step 306/2500 | Loss: 1.1270 | 0.22 it/s
+loss 0.782, scale 16384.0, step 306, timestep 0.57082456, image 56x72
+[LoRA] Step 307/2500 | Loss: 0.7822 | 0.22 it/s
+loss 1.182, scale 16384.0, step 307, timestep 0.2079101, image 64x64
+[LoRA] Step 308/2500 | Loss: 1.1816 | 0.22 it/s
+loss 1.114, scale 16384.0, step 308, timestep 0.3185427, image 64x64
+[LoRA] Step 309/2500 | Loss: 1.1143 | 0.22 it/s
+loss 0.9077, scale 16384.0, step 309, timestep 0.46279025, image 56x72
+[LoRA] Step 310/2500 | Loss: 0.9077 | 0.22 it/s
+loss 0.6, scale 16384.0, step 310, timestep 0.9168452, image 56x72
+[LoRA] Step 311/2500 | Loss: 0.6001 | 0.22 it/s
+loss 1.014, scale 16384.0, step 311, timestep 0.39661828, image 64x64
+[LoRA] Step 312/2500 | Loss: 1.0137 | 0.22 it/s
+loss 0.703, scale 16384.0, step 312, timestep 0.8473914, image 64x64
+[LoRA] Step 313/2500 | Loss: 0.7031 | 0.22 it/s
+loss 1.136, scale 16384.0, step 313, timestep 0.07274435, image 56x72
+[LoRA] Step 314/2500 | Loss: 1.1357 | 0.22 it/s
+loss 1.158, scale 16384.0, step 314, timestep 0.25451654, image 64x64
+[LoRA] Step 315/2500 | Loss: 1.1582 | 0.22 it/s
+loss 1.147, scale 16384.0, step 315, timestep 0.08895586, image 72x56
+[LoRA] Step 316/2500 | Loss: 1.1475 | 0.22 it/s
+loss 0.6772, scale 16384.0, step 316, timestep 0.8046897, image 56x72
+[LoRA] Step 317/2500 | Loss: 0.6772 | 0.22 it/s
+loss 1.155, scale 16384.0, step 317, timestep 0.24638924, image 64x64
+[LoRA] Step 318/2500 | Loss: 1.1553 | 0.22 it/s
+loss 1.103, scale 16384.0, step 318, timestep 0.053758077, image 72x56
+[LoRA] Step 319/2500 | Loss: 1.1025 | 0.22 it/s
+loss 0.592, scale 16384.0, step 319, timestep 0.84366757, image 56x72
+[LoRA] Step 320/2500 | Loss: 0.5918 | 0.22 it/s
+loss 0.72, scale 16384.0, step 320, timestep 0.7105506, image 56x72
+[LoRA] Step 321/2500 | Loss: 0.7202 | 0.22 it/s
+loss 1.004, scale 16384.0, step 321, timestep 0.3951341, image 64x64
+[LoRA] Step 322/2500 | Loss: 1.0039 | 0.22 it/s
+loss 1.19, scale 16384.0, step 322, timestep 0.25587142, image 56x72
+[LoRA] Step 323/2500 | Loss: 1.1904 | 0.22 it/s
+loss 1.168, scale 16384.0, step 323, timestep 0.1739723, image 56x72
+[LoRA] Step 324/2500 | Loss: 1.1680 | 0.22 it/s
+loss 0.641, scale 16384.0, step 324, timestep 0.9204384, image 72x56
+[LoRA] Step 325/2500 | Loss: 0.6411 | 0.22 it/s
+loss 0.9316, scale 16384.0, step 325, timestep 0.4414282, image 64x64
+[LoRA] Step 326/2500 | Loss: 0.9316 | 0.22 it/s
+loss 1.192, scale 16384.0, step 326, timestep 0.17724714, image 56x72
+[LoRA] Step 327/2500 | Loss: 1.1924 | 0.22 it/s
+loss 1.105, scale 16384.0, step 327, timestep 0.29582193, image 56x72
+[LoRA] Step 328/2500 | Loss: 1.1055 | 0.22 it/s
+loss 0.592, scale 16384.0, step 328, timestep 0.820583, image 72x56
+[LoRA] Step 329/2500 | Loss: 0.5918 | 0.22 it/s
+loss 1.005, scale 16384.0, step 329, timestep 0.41475773, image 56x72
+[LoRA] Step 330/2500 | Loss: 1.0049 | 0.22 it/s
+loss 0.818, scale 16384.0, step 330, timestep 0.53036135, image 72x56
+[LoRA] Step 331/2500 | Loss: 0.8179 | 0.22 it/s
+loss 0.752, scale 16384.0, step 331, timestep 0.6277002, image 64x64
+[LoRA] Step 332/2500 | Loss: 0.7520 | 0.22 it/s
+loss 1.14, scale 16384.0, step 332, timestep 0.095910236, image 56x72
+[LoRA] Step 333/2500 | Loss: 1.1396 | 0.22 it/s
+loss 0.858, scale 16384.0, step 333, timestep 0.45344108, image 72x56
+[LoRA] Step 334/2500 | Loss: 0.8579 | 0.22 it/s
+loss 0.87, scale 16384.0, step 334, timestep 0.5554217, image 56x72
+[LoRA] Step 335/2500 | Loss: 0.8701 | 0.22 it/s
+loss 1.154, scale 16384.0, step 335, timestep 0.09833843, image 72x56
+[LoRA] Step 336/2500 | Loss: 1.1543 | 0.22 it/s
+loss 0.6226, scale 16384.0, step 336, timestep 0.78262424, image 72x56
+[LoRA] Step 337/2500 | Loss: 0.6226 | 0.22 it/s
+loss 1.13, scale 16384.0, step 337, timestep 0.31078276, image 72x56
+[LoRA] Step 338/2500 | Loss: 1.1299 | 0.22 it/s
+loss 0.93, scale 16384.0, step 338, timestep 0.47651878, image 56x72
+[LoRA] Step 339/2500 | Loss: 0.9302 | 0.22 it/s
+loss 0.844, scale 16384.0, step 339, timestep 0.51928073, image 56x72
+[LoRA] Step 340/2500 | Loss: 0.8442 | 0.22 it/s
+loss 0.768, scale 16384.0, step 340, timestep 0.5999765, image 56x72
+[LoRA] Step 341/2500 | Loss: 0.7681 | 0.22 it/s
+loss 0.657, scale 16384.0, step 341, timestep 0.7889589, image 56x72
+[LoRA] Step 342/2500 | Loss: 0.6572 | 0.22 it/s
+loss 1.08, scale 16384.0, step 342, timestep 0.9826152, image 72x56
+[LoRA] Step 343/2500 | Loss: 1.0801 | 0.22 it/s
+loss 1.107, scale 16384.0, step 343, timestep 0.9855374, image 72x56
+[LoRA] Step 344/2500 | Loss: 1.1074 | 0.22 it/s
+loss 0.6914, scale 16384.0, step 344, timestep 0.77347255, image 64x64
+[LoRA] Step 345/2500 | Loss: 0.6914 | 0.22 it/s
+loss 0.919, scale 16384.0, step 345, timestep 0.9204663, image 56x72
+[LoRA] Step 346/2500 | Loss: 0.9189 | 0.22 it/s
+loss 1.066, scale 16384.0, step 346, timestep 0.02945101, image 56x72
+[LoRA] Step 347/2500 | Loss: 1.0664 | 0.22 it/s
+loss 0.7563, scale 16384.0, step 347, timestep 0.62301326, image 72x56
+[LoRA] Step 348/2500 | Loss: 0.7563 | 0.22 it/s
+loss 0.8657, scale 16384.0, step 348, timestep 0.5145999, image 64x64
+[LoRA] Step 349/2500 | Loss: 0.8657 | 0.22 it/s
+loss 0.982, scale 16384.0, step 349, timestep 0.40102986, image 32x104
+[LoRA] Step 350/2500 | Loss: 0.9819 | 0.22 it/s
+loss 0.6646, scale 16384.0, step 350, timestep 0.73657495, image 56x72
+[LoRA] Step 351/2500 | Loss: 0.6646 | 0.22 it/s
+loss 0.8496, scale 16384.0, step 351, timestep 0.9450172, image 64x64
+[LoRA] Step 352/2500 | Loss: 0.8496 | 0.22 it/s
+loss 1.156, scale 16384.0, step 352, timestep 0.10011172, image 56x72
+[LoRA] Step 353/2500 | Loss: 1.1562 | 0.22 it/s
+loss 1.124, scale 16384.0, step 353, timestep 0.07194196, image 56x72
+[LoRA] Step 354/2500 | Loss: 1.1240 | 0.22 it/s
+loss 0.81, scale 16384.0, step 354, timestep 0.89804184, image 56x72
+[LoRA] Step 355/2500 | Loss: 0.8101 | 0.22 it/s
+loss 0.9463, scale 16384.0, step 355, timestep 0.43595588, image 56x72
+[LoRA] Step 356/2500 | Loss: 0.9463 | 0.22 it/s
+loss 0.9517, scale 16384.0, step 356, timestep 0.4595373, image 72x56
+[LoRA] Step 357/2500 | Loss: 0.9517 | 0.22 it/s
+loss 0.61, scale 16384.0, step 357, timestep 0.8951799, image 56x72
+[LoRA] Step 358/2500 | Loss: 0.6099 | 0.22 it/s
+loss 0.637, scale 16384.0, step 358, timestep 0.7360936, image 72x56
+[LoRA] Step 359/2500 | Loss: 0.6372 | 0.22 it/s
+loss 0.725, scale 16384.0, step 359, timestep 0.8468439, image 56x72
+[LoRA] Step 360/2500 | Loss: 0.7251 | 0.22 it/s
+loss 1.14, scale 16384.0, step 360, timestep 0.27227557, image 64x64
+[LoRA] Step 361/2500 | Loss: 1.1396 | 0.22 it/s
+loss 1.187, scale 16384.0, step 361, timestep 0.18996899, image 64x64
+[LoRA] Step 362/2500 | Loss: 1.1865 | 0.22 it/s
+loss 0.5806, scale 16384.0, step 362, timestep 0.8885787, image 56x72
+[LoRA] Step 363/2500 | Loss: 0.5806 | 0.22 it/s
+loss 0.712, scale 16384.0, step 363, timestep 0.9695685, image 56x72
+[LoRA] Step 364/2500 | Loss: 0.7119 | 0.22 it/s
+loss 1.181, scale 16384.0, step 364, timestep 0.14050914, image 56x72
+[LoRA] Step 365/2500 | Loss: 1.1807 | 0.22 it/s
+loss 0.7603, scale 16384.0, step 365, timestep 0.5868619, image 56x72
+[LoRA] Step 366/2500 | Loss: 0.7603 | 0.22 it/s
+loss 1.014, scale 16384.0, step 366, timestep 0.35918897, image 56x72
+[LoRA] Step 367/2500 | Loss: 1.0137 | 0.22 it/s
+loss 1.121, scale 16384.0, step 367, timestep 0.34848014, image 56x72
+[LoRA] Step 368/2500 | Loss: 1.1211 | 0.22 it/s
+loss 1.137, scale 16384.0, step 368, timestep 0.07313731, image 56x72
+[LoRA] Step 369/2500 | Loss: 1.1367 | 0.22 it/s
+loss 1.192, scale 16384.0, step 369, timestep 0.22569433, image 56x72
+[LoRA] Step 370/2500 | Loss: 1.1924 | 0.22 it/s
+loss 0.9946, scale 16384.0, step 370, timestep 0.3751387, image 40x88
+[LoRA] Step 371/2500 | Loss: 0.9946 | 0.22 it/s
+loss 1.16, scale 16384.0, step 371, timestep 0.09563124, image 72x56
+[LoRA] Step 372/2500 | Loss: 1.1602 | 0.22 it/s
+loss 1.053, scale 16384.0, step 372, timestep 0.34994477, image 64x64
+[LoRA] Step 373/2500 | Loss: 1.0527 | 0.22 it/s
+loss 0.776, scale 16384.0, step 373, timestep 0.6057321, image 56x72
+[LoRA] Step 374/2500 | Loss: 0.7759 | 0.22 it/s
+loss 1.143, scale 16384.0, step 374, timestep 0.26763365, image 64x64
+[LoRA] Step 375/2500 | Loss: 1.1426 | 0.22 it/s
+loss 0.857, scale 16384.0, step 375, timestep 0.5094492, image 64x64
+[LoRA] Step 376/2500 | Loss: 0.8569 | 0.22 it/s
+loss 1.19, scale 16384.0, step 376, timestep 0.18732347, image 56x72
+[LoRA] Step 377/2500 | Loss: 1.1904 | 0.22 it/s
+loss 1.049, scale 16384.0, step 377, timestep 0.396833, image 56x72
+[LoRA] Step 378/2500 | Loss: 1.0488 | 0.22 it/s
+loss 1.127, scale 16384.0, step 378, timestep 0.072340496, image 64x64
+[LoRA] Step 379/2500 | Loss: 1.1270 | 0.22 it/s
+loss 0.806, scale 16384.0, step 379, timestep 0.56829965, image 64x64
+[LoRA] Step 380/2500 | Loss: 0.8062 | 0.22 it/s
+loss 0.727, scale 16384.0, step 380, timestep 0.84197444, image 56x72
+[LoRA] Step 381/2500 | Loss: 0.7271 | 0.22 it/s
+loss 1.048, scale 16384.0, step 381, timestep 0.021178225, image 56x72
+[LoRA] Step 382/2500 | Loss: 1.0479 | 0.22 it/s
+loss 1.104, scale 16384.0, step 382, timestep 0.04911312, image 64x64
+[LoRA] Step 383/2500 | Loss: 1.1035 | 0.22 it/s
+loss 0.6797, scale 16384.0, step 383, timestep 0.7489062, image 64x64
+[LoRA] Step 384/2500 | Loss: 0.6797 | 0.22 it/s
+loss 0.7744, scale 16384.0, step 384, timestep 0.64079857, image 56x72
+[LoRA] Step 385/2500 | Loss: 0.7744 | 0.22 it/s
+loss 1.18, scale 16384.0, step 385, timestep 0.13405341, image 56x72
+[LoRA] Step 386/2500 | Loss: 1.1797 | 0.22 it/s
+loss 0.871, scale 16384.0, step 386, timestep 0.51024145, image 72x56
+[LoRA] Step 387/2500 | Loss: 0.8711 | 0.22 it/s
+loss 0.6226, scale 16384.0, step 387, timestep 0.8618005, image 72x56
+[LoRA] Step 388/2500 | Loss: 0.6226 | 0.22 it/s
+loss 1.092, scale 16384.0, step 388, timestep 0.043473598, image 56x72
+[LoRA] Step 389/2500 | Loss: 1.0918 | 0.22 it/s
+loss 1.172, scale 16384.0, step 389, timestep 0.18604465, image 56x72
+[LoRA] Step 390/2500 | Loss: 1.1719 | 0.22 it/s
+loss 0.723, scale 16384.0, step 390, timestep 0.6435229, image 56x72
+[LoRA] Step 391/2500 | Loss: 0.7231 | 0.22 it/s
+loss 0.72, scale 16384.0, step 391, timestep 0.6920505, image 56x72
+[LoRA] Step 392/2500 | Loss: 0.7202 | 0.22 it/s
+loss 1.072, scale 16384.0, step 392, timestep 0.31820673, image 56x72
+[LoRA] Step 393/2500 | Loss: 1.0723 | 0.22 it/s
+loss 1.202, scale 16384.0, step 393, timestep 0.18637422, image 72x56
+[LoRA] Step 394/2500 | Loss: 1.2021 | 0.22 it/s
+loss 1.16, scale 16384.0, step 394, timestep 0.18349682, image 72x56
+[LoRA] Step 395/2500 | Loss: 1.1602 | 0.22 it/s
+loss 0.6665, scale 16384.0, step 395, timestep 0.77216005, image 64x64
+[LoRA] Step 396/2500 | Loss: 0.6665 | 0.22 it/s
+loss 0.836, scale 16384.0, step 396, timestep 0.58253384, image 56x72
+[LoRA] Step 397/2500 | Loss: 0.8359 | 0.22 it/s
+loss 0.878, scale 16384.0, step 397, timestep 0.91167, image 40x88
+[LoRA] Step 398/2500 | Loss: 0.8779 | 0.22 it/s
+loss 0.8726, scale 16384.0, step 398, timestep 0.51119286, image 64x64
+[LoRA] Step 399/2500 | Loss: 0.8726 | 0.22 it/s
+loss 0.633, scale 16384.0, step 399, timestep 0.7577967, image 72x56
+[LoRA] Step 400/2500 | Loss: 0.6328 | 0.22 it/s
+loss 0.694, scale 16384.0, step 400, timestep 0.8154352, image 56x72
+[LoRA] Step 401/2500 | Loss: 0.6938 | 0.22 it/s
+loss 0.7793, scale 16384.0, step 401, timestep 0.57990026, image 64x64
+[LoRA] Step 402/2500 | Loss: 0.7793 | 0.22 it/s
+loss 0.611, scale 16384.0, step 402, timestep 0.84894353, image 56x72
+[LoRA] Step 403/2500 | Loss: 0.6108 | 0.22 it/s
+loss 0.9575, scale 16384.0, step 403, timestep 0.4170358, image 32x104
+[LoRA] Step 404/2500 | Loss: 0.9575 | 0.22 it/s
+loss 1.08, scale 16384.0, step 404, timestep 0.03499077, image 64x64
+[LoRA] Step 405/2500 | Loss: 1.0801 | 0.22 it/s
+loss 0.624, scale 16384.0, step 405, timestep 0.776062, image 72x56
+[LoRA] Step 406/2500 | Loss: 0.6240 | 0.22 it/s
+loss 0.61, scale 16384.0, step 406, timestep 0.87737805, image 56x72
+[LoRA] Step 407/2500 | Loss: 0.6099 | 0.22 it/s
+loss 0.674, scale 16384.0, step 407, timestep 0.783609, image 64x64
+[LoRA] Step 408/2500 | Loss: 0.6738 | 0.22 it/s
+loss 0.8784, scale 16384.0, step 408, timestep 0.5614588, image 56x72
+[LoRA] Step 409/2500 | Loss: 0.8784 | 0.22 it/s
+loss 0.9316, scale 16384.0, step 409, timestep 0.47713757, image 72x56
+[LoRA] Step 410/2500 | Loss: 0.9316 | 0.22 it/s
+loss 0.6987, scale 16384.0, step 410, timestep 0.84189063, image 56x72
+[LoRA] Step 411/2500 | Loss: 0.6987 | 0.22 it/s
+loss 1.078, scale 16384.0, step 411, timestep 0.32009453, image 64x64
+[LoRA] Step 412/2500 | Loss: 1.0781 | 0.22 it/s
+loss 0.612, scale 16384.0, step 412, timestep 0.7624319, image 72x56
+[LoRA] Step 413/2500 | Loss: 0.6118 | 0.22 it/s
+loss 0.7134, scale 16384.0, step 413, timestep 0.6584667, image 64x64
+[LoRA] Step 414/2500 | Loss: 0.7134 | 0.22 it/s
+loss 0.7173, scale 16384.0, step 414, timestep 0.66658026, image 56x72
+[LoRA] Step 415/2500 | Loss: 0.7173 | 0.22 it/s
+loss 0.624, scale 16384.0, step 415, timestep 0.75224346, image 56x72
+[LoRA] Step 416/2500 | Loss: 0.6240 | 0.22 it/s
+loss 1.059, scale 16384.0, step 416, timestep 0.02296016, image 64x64
+[LoRA] Step 417/2500 | Loss: 1.0586 | 0.22 it/s
+loss 0.9336, scale 16384.0, step 417, timestep 0.42401955, image 56x72
+[LoRA] Step 418/2500 | Loss: 0.9336 | 0.22 it/s
+loss 1.147, scale 16384.0, step 418, timestep 0.22891903, image 72x56
+[LoRA] Step 419/2500 | Loss: 1.1475 | 0.22 it/s
+loss 0.666, scale 16384.0, step 419, timestep 0.72695637, image 56x72
+[LoRA] Step 420/2500 | Loss: 0.6660 | 0.22 it/s
+loss 1.129, scale 16384.0, step 420, timestep 0.07285865, image 56x72
+[LoRA] Step 421/2500 | Loss: 1.1289 | 0.22 it/s
+loss 0.9185, scale 16384.0, step 421, timestep 0.51456136, image 56x72
+[LoRA] Step 422/2500 | Loss: 0.9185 | 0.22 it/s
+loss 0.587, scale 16384.0, step 422, timestep 0.9109772, image 56x72
+[LoRA] Step 423/2500 | Loss: 0.5869 | 0.22 it/s
+loss 1.086, scale 16384.0, step 423, timestep 0.042446863, image 56x72
+[LoRA] Step 424/2500 | Loss: 1.0859 | 0.22 it/s
+loss 0.987, scale 16384.0, step 424, timestep 0.38231108, image 56x72
+[LoRA] Step 425/2500 | Loss: 0.9868 | 0.22 it/s
+loss 0.5947, scale 16384.0, step 425, timestep 0.85887647, image 56x72
+[LoRA] Step 426/2500 | Loss: 0.5947 | 0.22 it/s
+loss 0.681, scale 16384.0, step 426, timestep 0.7552781, image 56x72
+[LoRA] Step 427/2500 | Loss: 0.6812 | 0.22 it/s
+loss 1.097, scale 16384.0, step 427, timestep 0.046392936, image 64x64
+[LoRA] Step 428/2500 | Loss: 1.0967 | 0.22 it/s
+loss 1.04, scale 16384.0, step 428, timestep 0.34522378, image 56x72
+[LoRA] Step 429/2500 | Loss: 1.0400 | 0.22 it/s
+loss 0.872, scale 16384.0, step 429, timestep 0.5611558, image 56x72
+[LoRA] Step 430/2500 | Loss: 0.8721 | 0.22 it/s
+loss 1.156, scale 16384.0, step 430, timestep 0.10469916, image 56x72
+[LoRA] Step 431/2500 | Loss: 1.1562 | 0.22 it/s
+loss 1.131, scale 16384.0, step 431, timestep 0.076101765, image 72x56
+[LoRA] Step 432/2500 | Loss: 1.1309 | 0.22 it/s
+loss 0.7563, scale 16384.0, step 432, timestep 0.87781084, image 56x72
+[LoRA] Step 433/2500 | Loss: 0.7563 | 0.22 it/s
+loss 1.04, scale 16384.0, step 433, timestep 0.4287647, image 56x72
+[LoRA] Step 434/2500 | Loss: 1.0400 | 0.22 it/s
+loss 0.9956, scale 16384.0, step 434, timestep 0.46227098, image 56x72
+[LoRA] Step 435/2500 | Loss: 0.9956 | 0.22 it/s
+loss 1.083, scale 16384.0, step 435, timestep 0.31800085, image 64x64
+[LoRA] Step 436/2500 | Loss: 1.0830 | 0.22 it/s
+loss 1.101, scale 16384.0, step 436, timestep 0.30815887, image 64x64
+[LoRA] Step 437/2500 | Loss: 1.1006 | 0.22 it/s
+loss 0.9634, scale 16384.0, step 437, timestep 0.42072406, image 64x64
+[LoRA] Step 438/2500 | Loss: 0.9634 | 0.22 it/s
+loss 0.876, scale 16384.0, step 438, timestep 0.4898424, image 64x64
+[LoRA] Step 439/2500 | Loss: 0.8760 | 0.22 it/s
+loss 0.649, scale 16384.0, step 439, timestep 0.93025655, image 72x56
+[LoRA] Step 440/2500 | Loss: 0.6489 | 0.22 it/s
+loss 1.176, scale 16384.0, step 440, timestep 0.122916214, image 56x72
+[LoRA] Step 441/2500 | Loss: 1.1758 | 0.22 it/s
+loss 0.626, scale 16384.0, step 441, timestep 0.7659933, image 72x56
+[LoRA] Step 442/2500 | Loss: 0.6260 | 0.22 it/s
+loss 1.174, scale 16384.0, step 442, timestep 0.27337837, image 56x72
+[LoRA] Step 443/2500 | Loss: 1.1738 | 0.22 it/s
+loss 0.673, scale 16384.0, step 443, timestep 0.83386105, image 64x64
+[LoRA] Step 444/2500 | Loss: 0.6729 | 0.22 it/s
+loss 0.996, scale 16384.0, step 444, timestep 0.95403934, image 56x72
+[LoRA] Step 445/2500 | Loss: 0.9961 | 0.22 it/s
+loss 0.577, scale 16384.0, step 445, timestep 0.8650964, image 56x72
+[LoRA] Step 446/2500 | Loss: 0.5771 | 0.22 it/s
+loss 0.965, scale 16384.0, step 446, timestep 0.97534627, image 72x56
+[LoRA] Step 447/2500 | Loss: 0.9648 | 0.22 it/s
+loss 0.775, scale 16384.0, step 447, timestep 0.58526945, image 56x72
+[LoRA] Step 448/2500 | Loss: 0.7749 | 0.22 it/s
+loss 0.831, scale 16384.0, step 448, timestep 0.5377129, image 64x64
+[LoRA] Step 449/2500 | Loss: 0.8311 | 0.22 it/s
+loss 0.714, scale 16384.0, step 449, timestep 0.8464106, image 32x104
+[LoRA] Step 450/2500 | Loss: 0.7139 | 0.22 it/s
+loss 1.186, scale 16384.0, step 450, timestep 0.19865417, image 56x72
+[LoRA] Step 451/2500 | Loss: 1.1855 | 0.22 it/s
+loss 1.144, scale 16384.0, step 451, timestep 0.31542608, image 56x72
+[LoRA] Step 452/2500 | Loss: 1.1436 | 0.22 it/s
+loss 0.808, scale 16384.0, step 452, timestep 0.6050085, image 56x72
+[LoRA] Step 453/2500 | Loss: 0.8081 | 0.22 it/s
+loss 0.827, scale 16384.0, step 453, timestep 0.9120833, image 64x64
+[LoRA] Step 454/2500 | Loss: 0.8271 | 0.22 it/s
+loss 1.159, scale 16384.0, step 454, timestep 0.20052688, image 40x88
+[LoRA] Step 455/2500 | Loss: 1.1592 | 0.22 it/s
+loss 0.7295, scale 16384.0, step 455, timestep 0.8436267, image 56x72
+[LoRA] Step 456/2500 | Loss: 0.7295 | 0.22 it/s
+loss 0.7, scale 16384.0, step 456, timestep 0.7260388, image 56x72
+[LoRA] Step 457/2500 | Loss: 0.7002 | 0.22 it/s
+loss 1.192, scale 16384.0, step 457, timestep 0.19135942, image 56x72
+[LoRA] Step 458/2500 | Loss: 1.1924 | 0.22 it/s
+loss 1.075, scale 16384.0, step 458, timestep 0.034351524, image 56x72
+[LoRA] Step 459/2500 | Loss: 1.0752 | 0.22 it/s
+loss 0.899, scale 16384.0, step 459, timestep 0.55001104, image 56x72
+[LoRA] Step 460/2500 | Loss: 0.8989 | 0.22 it/s
+loss 1.1045, scale 16384.0, step 460, timestep 0.27134964, image 72x56
+[LoRA] Step 461/2500 | Loss: 1.1045 | 0.22 it/s
+loss 1.062, scale 16384.0, step 461, timestep 0.36017212, image 72x56
+[LoRA] Step 462/2500 | Loss: 1.0615 | 0.22 it/s
+loss 1.094, scale 16384.0, step 462, timestep 0.0499446, image 56x72
+[LoRA] Step 463/2500 | Loss: 1.0938 | 0.22 it/s
+loss 1.191, scale 16384.0, step 463, timestep 0.1707799, image 56x72
+[LoRA] Step 464/2500 | Loss: 1.1914 | 0.22 it/s
+loss 0.6763, scale 16384.0, step 464, timestep 0.83625925, image 64x64
+[LoRA] Step 465/2500 | Loss: 0.6763 | 0.22 it/s
+loss 0.7344, scale 16384.0, step 465, timestep 0.6149638, image 64x64
+[LoRA] Step 466/2500 | Loss: 0.7344 | 0.22 it/s
+loss 1.07, scale 16384.0, step 466, timestep 0.3017752, image 56x72
+[LoRA] Step 467/2500 | Loss: 1.0703 | 0.22 it/s
+loss 0.698, scale 16384.0, step 467, timestep 0.6556115, image 64x64
+[LoRA] Step 468/2500 | Loss: 0.6982 | 0.22 it/s
+loss 0.8926, scale 16384.0, step 468, timestep 0.49274632, image 72x56
+[LoRA] Step 469/2500 | Loss: 0.8926 | 0.22 it/s
+loss 0.773, scale 16384.0, step 469, timestep 0.9022187, image 64x64
+[LoRA] Step 470/2500 | Loss: 0.7729 | 0.22 it/s
+loss 1.112, scale 16384.0, step 470, timestep 0.068971895, image 56x72
+[LoRA] Step 471/2500 | Loss: 1.1123 | 0.22 it/s
+loss 0.578, scale 16384.0, step 471, timestep 0.90926254, image 56x72
+[LoRA] Step 472/2500 | Loss: 0.5781 | 0.22 it/s
+loss 1.085, scale 16384.0, step 472, timestep 0.34846425, image 72x56
+[LoRA] Step 473/2500 | Loss: 1.0850 | 0.22 it/s
+loss 0.6826, scale 16384.0, step 473, timestep 0.84081036, image 64x64
+[LoRA] Step 474/2500 | Loss: 0.6826 | 0.22 it/s
+loss 0.6504, scale 16384.0, step 474, timestep 0.7840381, image 72x56
+[LoRA] Step 475/2500 | Loss: 0.6504 | 0.22 it/s
+loss 1.105, scale 16384.0, step 475, timestep 0.312466, image 64x64
+[LoRA] Step 476/2500 | Loss: 1.1055 | 0.22 it/s
+loss 0.6807, scale 16384.0, step 476, timestep 0.8223293, image 64x64
+[LoRA] Step 477/2500 | Loss: 0.6807 | 0.22 it/s
+loss 0.81, scale 16384.0, step 477, timestep 0.552991, image 72x56
+[LoRA] Step 478/2500 | Loss: 0.8101 | 0.22 it/s
+loss 1.059, scale 16384.0, step 478, timestep 0.026689535, image 64x64
+[LoRA] Step 479/2500 | Loss: 1.0586 | 0.22 it/s
+loss 1.152, scale 16384.0, step 479, timestep 0.22869435, image 56x72
+[LoRA] Step 480/2500 | Loss: 1.1523 | 0.22 it/s
+loss 0.686, scale 16384.0, step 480, timestep 0.6418092, image 72x56
+[LoRA] Step 481/2500 | Loss: 0.6860 | 0.22 it/s
+loss 1.136, scale 16384.0, step 481, timestep 0.087451264, image 56x72
+[LoRA] Step 482/2500 | Loss: 1.1357 | 0.22 it/s
+loss 0.8564, scale 16384.0, step 482, timestep 0.56638837, image 56x72
+[LoRA] Step 483/2500 | Loss: 0.8564 | 0.22 it/s
+loss 0.8716, scale 16384.0, step 483, timestep 0.46747354, image 56x72
+[LoRA] Step 484/2500 | Loss: 0.8716 | 0.22 it/s
+loss 1.137, scale 16384.0, step 484, timestep 0.087601274, image 56x72
+[LoRA] Step 485/2500 | Loss: 1.1367 | 0.22 it/s
+loss 0.6914, scale 16384.0, step 485, timestep 0.7791376, image 56x72
+[LoRA] Step 486/2500 | Loss: 0.6914 | 0.22 it/s
+loss 1.108, scale 16384.0, step 486, timestep 0.33268675, image 72x56
+[LoRA] Step 487/2500 | Loss: 1.1084 | 0.22 it/s
+loss 1.0, scale 16384.0, step 487, timestep 0.46375397, image 56x72
+[LoRA] Step 488/2500 | Loss: 1.0000 | 0.22 it/s
+loss 1.032, scale 16384.0, step 488, timestep 0.00840989, image 64x64
+[LoRA] Step 489/2500 | Loss: 1.0322 | 0.22 it/s
+loss 0.582, scale 16384.0, step 489, timestep 0.83147454, image 56x72
+[LoRA] Step 490/2500 | Loss: 0.5820 | 0.22 it/s
+loss 0.6113, scale 16384.0, step 490, timestep 0.78344417, image 72x56
+[LoRA] Step 491/2500 | Loss: 0.6113 | 0.22 it/s
+loss 0.6797, scale 16384.0, step 491, timestep 0.81774515, image 56x72
+[LoRA] Step 492/2500 | Loss: 0.6797 | 0.22 it/s
+loss 0.702, scale 16384.0, step 492, timestep 0.70132583, image 56x72
+[LoRA] Step 493/2500 | Loss: 0.7021 | 0.22 it/s
+loss 1.146, scale 16384.0, step 493, timestep 0.2566895, image 64x64
+[LoRA] Step 494/2500 | Loss: 1.1465 | 0.22 it/s
+loss 0.95, scale 16384.0, step 494, timestep 0.95702124, image 56x72
+[LoRA] Step 495/2500 | Loss: 0.9502 | 0.22 it/s
+loss 0.7617, scale 16384.0, step 495, timestep 0.59980947, image 72x56
+[LoRA] Step 496/2500 | Loss: 0.7617 | 0.22 it/s
+loss 0.8037, scale 16384.0, step 496, timestep 0.92146975, image 64x64
+[LoRA] Step 497/2500 | Loss: 0.8037 | 0.22 it/s
+loss 0.566, scale 16384.0, step 497, timestep 0.8743638, image 56x72
+[LoRA] Step 498/2500 | Loss: 0.5659 | 0.22 it/s
+loss 1.141, scale 16384.0, step 498, timestep 0.09775713, image 56x72
+[LoRA] Step 499/2500 | Loss: 1.1406 | 0.22 it/s
+loss 0.738, scale 16384.0, step 499, timestep 0.62668407, image 56x72
+[LoRA] Step 500/2500 | Loss: 0.7378 | 0.22 it/s
+[LoRA] Saved checkpoint: kyle_lora_v2_500_lora_f32.ckpt
+loss 1.062, scale 16384.0, step 500, timestep 0.4010443, image 56x72
+[LoRA] Step 501/2500 | Loss: 1.0615 | 0.22 it/s
+loss 1.086, scale 16384.0, step 501, timestep 0.34747317, image 56x72
+[LoRA] Step 502/2500 | Loss: 1.0859 | 0.22 it/s
+loss 1.032, scale 16384.0, step 502, timestep 0.010631413, image 56x72
+[LoRA] Step 503/2500 | Loss: 1.0322 | 0.22 it/s
+loss 1.123, scale 16384.0, step 503, timestep 0.31961066, image 72x56
+[LoRA] Step 504/2500 | Loss: 1.1230 | 0.22 it/s
+loss 1.162, scale 16384.0, step 504, timestep 0.19190516, image 56x72
+[LoRA] Step 505/2500 | Loss: 1.1621 | 0.22 it/s
+loss 1.065, scale 16384.0, step 505, timestep 0.03163337, image 56x72
+[LoRA] Step 506/2500 | Loss: 1.0654 | 0.22 it/s
+loss 0.895, scale 16384.0, step 506, timestep 0.4592956, image 56x72
+[LoRA] Step 507/2500 | Loss: 0.8950 | 0.22 it/s
+loss 1.129, scale 16384.0, step 507, timestep 0.09053914, image 40x88
+[LoRA] Step 508/2500 | Loss: 1.1289 | 0.22 it/s
+loss 1.164, scale 16384.0, step 508, timestep 0.24051297, image 64x64
+[LoRA] Step 509/2500 | Loss: 1.1641 | 0.22 it/s
+loss 0.62, scale 16384.0, step 509, timestep 0.7869394, image 56x72
+[LoRA] Step 510/2500 | Loss: 0.6201 | 0.22 it/s
+loss 0.601, scale 16384.0, step 510, timestep 0.81051767, image 56x72
+[LoRA] Step 511/2500 | Loss: 0.6011 | 0.22 it/s
+loss 1.155, scale 16384.0, step 511, timestep 0.2825422, image 72x56
+[LoRA] Step 512/2500 | Loss: 1.1553 | 0.22 it/s
+loss 0.599, scale 16384.0, step 512, timestep 0.8440284, image 56x72
+[LoRA] Step 513/2500 | Loss: 0.5991 | 0.22 it/s
+loss 1.103, scale 16384.0, step 513, timestep 0.29898173, image 64x64
+[LoRA] Step 514/2500 | Loss: 1.1025 | 0.22 it/s
+loss 0.7563, scale 16384.0, step 514, timestep 0.6073788, image 64x64
+[LoRA] Step 515/2500 | Loss: 0.7563 | 0.22 it/s
+loss 0.5513, scale 16384.0, step 515, timestep 0.88446194, image 56x72
+[LoRA] Step 516/2500 | Loss: 0.5513 | 0.22 it/s
+loss 0.7427, scale 16384.0, step 516, timestep 0.64771926, image 72x56
+[LoRA] Step 517/2500 | Loss: 0.7427 | 0.22 it/s
+loss 1.095, scale 16384.0, step 517, timestep 0.04239694, image 64x64
+[LoRA] Step 518/2500 | Loss: 1.0947 | 0.22 it/s
+loss 0.9116, scale 16384.0, step 518, timestep 0.46357217, image 56x72
+[LoRA] Step 519/2500 | Loss: 0.9116 | 0.22 it/s
+loss 1.169, scale 16384.0, step 519, timestep 0.11904682, image 56x72
+[LoRA] Step 520/2500 | Loss: 1.1689 | 0.22 it/s
+loss 0.9956, scale 16384.0, step 520, timestep 0.3557881, image 72x56
+[LoRA] Step 521/2500 | Loss: 0.9956 | 0.22 it/s
+loss 1.003, scale 16384.0, step 521, timestep 0.45428267, image 56x72
+[LoRA] Step 522/2500 | Loss: 1.0029 | 0.22 it/s
+loss 0.7, scale 16384.0, step 522, timestep 0.81905633, image 56x72
+[LoRA] Step 523/2500 | Loss: 0.7002 | 0.22 it/s
+loss 1.073, scale 16384.0, step 523, timestep 0.037145995, image 56x72
+[LoRA] Step 524/2500 | Loss: 1.0732 | 0.22 it/s
+loss 1.117, scale 16384.0, step 524, timestep 0.31806806, image 72x56
+[LoRA] Step 525/2500 | Loss: 1.1172 | 0.22 it/s
+loss 0.6694, scale 16384.0, step 525, timestep 0.69004226, image 64x64
+[LoRA] Step 526/2500 | Loss: 0.6694 | 0.22 it/s
+loss 0.8936, scale 16384.0, step 526, timestep 0.4538669, image 56x72
+[LoRA] Step 527/2500 | Loss: 0.8936 | 0.22 it/s
+loss 0.7305, scale 16384.0, step 527, timestep 0.8594416, image 64x64
+[LoRA] Step 528/2500 | Loss: 0.7305 | 0.22 it/s
+loss 0.8315, scale 16384.0, step 528, timestep 0.5983651, image 56x72
+[LoRA] Step 529/2500 | Loss: 0.8315 | 0.22 it/s
+loss 0.8057, scale 16384.0, step 529, timestep 0.5490051, image 56x72
+[LoRA] Step 530/2500 | Loss: 0.8057 | 0.22 it/s
+loss 1.197, scale 16384.0, step 530, timestep 0.20010857, image 56x72
+[LoRA] Step 531/2500 | Loss: 1.1973 | 0.22 it/s
+loss 1.004, scale 16384.0, step 531, timestep 0.9577486, image 64x64
+[LoRA] Step 532/2500 | Loss: 1.0039 | 0.22 it/s
+loss 0.6533, scale 16384.0, step 532, timestep 0.68220365, image 72x56
+[LoRA] Step 533/2500 | Loss: 0.6533 | 0.22 it/s
+loss 0.8447, scale 16384.0, step 533, timestep 0.51681024, image 56x72
+[LoRA] Step 534/2500 | Loss: 0.8447 | 0.22 it/s
+loss 0.7754, scale 16384.0, step 534, timestep 0.6056028, image 64x64
+[LoRA] Step 535/2500 | Loss: 0.7754 | 0.22 it/s
+loss 0.8833, scale 16384.0, step 535, timestep 0.9689773, image 64x64
+[LoRA] Step 536/2500 | Loss: 0.8833 | 0.22 it/s
+loss 0.6997, scale 16384.0, step 536, timestep 0.6867729, image 64x64
+[LoRA] Step 537/2500 | Loss: 0.6997 | 0.22 it/s
+loss 0.7803, scale 16384.0, step 537, timestep 0.58884925, image 72x56
+[LoRA] Step 538/2500 | Loss: 0.7803 | 0.22 it/s
+loss 1.192, scale 16384.0, step 538, timestep 0.15980443, image 72x56
+[LoRA] Step 539/2500 | Loss: 1.1924 | 0.22 it/s
+loss 0.8906, scale 16384.0, step 539, timestep 0.51086956, image 56x72
+[LoRA] Step 540/2500 | Loss: 0.8906 | 0.22 it/s
+loss 1.149, scale 16384.0, step 540, timestep 0.21097948, image 56x72
+[LoRA] Step 541/2500 | Loss: 1.1494 | 0.22 it/s
+loss 0.721, scale 16384.0, step 541, timestep 0.61230946, image 72x56
+[LoRA] Step 542/2500 | Loss: 0.7212 | 0.22 it/s
+loss 1.04, scale 16384.0, step 542, timestep 0.3726356, image 64x64
+[LoRA] Step 543/2500 | Loss: 1.0400 | 0.22 it/s
+loss 0.6074, scale 16384.0, step 543, timestep 0.8060807, image 72x56
+[LoRA] Step 544/2500 | Loss: 0.6074 | 0.22 it/s
+loss 1.1875, scale 16384.0, step 544, timestep 0.22756058, image 56x72
+[LoRA] Step 545/2500 | Loss: 1.1875 | 0.22 it/s
+loss 0.922, scale 16384.0, step 545, timestep 0.9824122, image 32x104
+[LoRA] Step 546/2500 | Loss: 0.9219 | 0.22 it/s
+loss 1.175, scale 16384.0, step 546, timestep 0.15090398, image 56x72
+[LoRA] Step 547/2500 | Loss: 1.1748 | 0.22 it/s
+loss 0.984, scale 16384.0, step 547, timestep 0.39046466, image 56x72
+[LoRA] Step 548/2500 | Loss: 0.9839 | 0.22 it/s
+loss 1.179, scale 16384.0, step 548, timestep 0.1329072, image 64x64
+[LoRA] Step 549/2500 | Loss: 1.1787 | 0.22 it/s
+loss 0.8555, scale 16384.0, step 549, timestep 0.56468314, image 56x72
+[LoRA] Step 550/2500 | Loss: 0.8555 | 0.22 it/s
+loss 0.6714, scale 16384.0, step 550, timestep 0.7255373, image 64x64
+[LoRA] Step 551/2500 | Loss: 0.6714 | 0.22 it/s
+loss 0.6187, scale 16384.0, step 551, timestep 0.796372, image 56x72
+[LoRA] Step 552/2500 | Loss: 0.6187 | 0.22 it/s
+loss 0.675, scale 16384.0, step 552, timestep 0.73448074, image 72x56
+[LoRA] Step 553/2500 | Loss: 0.6748 | 0.22 it/s
+loss 0.849, scale 16384.0, step 553, timestep 0.57147205, image 56x72
+[LoRA] Step 554/2500 | Loss: 0.8491 | 0.22 it/s
+loss 0.7866, scale 16384.0, step 554, timestep 0.49916464, image 72x56
+[LoRA] Step 555/2500 | Loss: 0.7866 | 0.22 it/s
+loss 0.78, scale 16384.0, step 555, timestep 0.5736699, image 64x64
+[LoRA] Step 556/2500 | Loss: 0.7798 | 0.22 it/s
+loss 0.685, scale 16384.0, step 556, timestep 0.7342391, image 64x64
+[LoRA] Step 557/2500 | Loss: 0.6851 | 0.22 it/s
+loss 0.7744, scale 16384.0, step 557, timestep 0.58182484, image 56x72
+[LoRA] Step 558/2500 | Loss: 0.7744 | 0.22 it/s
+loss 1.161, scale 16384.0, step 558, timestep 0.23120186, image 64x64
+[LoRA] Step 559/2500 | Loss: 1.1611 | 0.22 it/s
+loss 1.17, scale 16384.0, step 559, timestep 0.11440049, image 56x72
+[LoRA] Step 560/2500 | Loss: 1.1699 | 0.22 it/s
+loss 1.206, scale 16384.0, step 560, timestep 0.16815189, image 72x56
+[LoRA] Step 561/2500 | Loss: 1.2061 | 0.22 it/s
+loss 0.706, scale 16384.0, step 561, timestep 0.65391105, image 72x56
+[LoRA] Step 562/2500 | Loss: 0.7061 | 0.22 it/s
+loss 0.83, scale 16384.0, step 562, timestep 0.52571213, image 72x56
+[LoRA] Step 563/2500 | Loss: 0.8301 | 0.22 it/s
+loss 0.6772, scale 16384.0, step 563, timestep 0.8679529, image 64x64
+[LoRA] Step 564/2500 | Loss: 0.6772 | 0.22 it/s
+loss 1.145, scale 16384.0, step 564, timestep 0.23848869, image 32x104
+[LoRA] Step 565/2500 | Loss: 1.1445 | 0.22 it/s
+loss 1.182, scale 16384.0, step 565, timestep 0.12755442, image 56x72
+[LoRA] Step 566/2500 | Loss: 1.1816 | 0.22 it/s
+loss 0.6284, scale 16384.0, step 566, timestep 0.7103682, image 72x56
+[LoRA] Step 567/2500 | Loss: 0.6284 | 0.22 it/s
+loss 0.8022, scale 16384.0, step 567, timestep 0.61835945, image 56x72
+[LoRA] Step 568/2500 | Loss: 0.8022 | 0.22 it/s
+loss 0.602, scale 16384.0, step 568, timestep 0.865353, image 72x56
+[LoRA] Step 569/2500 | Loss: 0.6021 | 0.22 it/s
+loss 0.751, scale 16384.0, step 569, timestep 0.6031648, image 64x64
+[LoRA] Step 570/2500 | Loss: 0.7510 | 0.22 it/s
+loss 0.5923, scale 16384.0, step 570, timestep 0.8068757, image 56x72
+[LoRA] Step 571/2500 | Loss: 0.5923 | 0.22 it/s
+loss 0.9136, scale 16384.0, step 571, timestep 0.45535675, image 56x72
+[LoRA] Step 572/2500 | Loss: 0.9136 | 0.22 it/s
+loss 1.06, scale 16384.0, step 572, timestep 0.027662331, image 72x56
+[LoRA] Step 573/2500 | Loss: 1.0596 | 0.22 it/s
+loss 0.772, scale 16384.0, step 573, timestep 0.57498074, image 72x56
+[LoRA] Step 574/2500 | Loss: 0.7720 | 0.22 it/s
+loss 1.144, scale 16384.0, step 574, timestep 0.21673615, image 56x72
+[LoRA] Step 575/2500 | Loss: 1.1436 | 0.22 it/s
+loss 1.066, scale 16384.0, step 575, timestep 0.39150694, image 56x72
+[LoRA] Step 576/2500 | Loss: 1.0664 | 0.22 it/s
+loss 0.69, scale 16384.0, step 576, timestep 0.7027971, image 56x72
+[LoRA] Step 577/2500 | Loss: 0.6899 | 0.22 it/s
+loss 0.8096, scale 16384.0, step 577, timestep 0.54463047, image 56x72
+[LoRA] Step 578/2500 | Loss: 0.8096 | 0.22 it/s
+loss 0.8057, scale 16384.0, step 578, timestep 0.6149137, image 56x72
+[LoRA] Step 579/2500 | Loss: 0.8057 | 0.22 it/s
+loss 0.7812, scale 16384.0, step 579, timestep 0.921872, image 64x64
+[LoRA] Step 580/2500 | Loss: 0.7812 | 0.22 it/s
+loss 0.68, scale 16384.0, step 580, timestep 0.82450944, image 56x72
+[LoRA] Step 581/2500 | Loss: 0.6802 | 0.22 it/s
+loss 0.8677, scale 16384.0, step 581, timestep 0.4944291, image 40x88
+[LoRA] Step 582/2500 | Loss: 0.8677 | 0.22 it/s
+loss 0.9336, scale 16384.0, step 582, timestep 0.45405152, image 64x64
+[LoRA] Step 583/2500 | Loss: 0.9336 | 0.22 it/s
+loss 0.596, scale 16384.0, step 583, timestep 0.8525637, image 56x72
+[LoRA] Step 584/2500 | Loss: 0.5962 | 0.22 it/s
+loss 0.689, scale 16384.0, step 584, timestep 0.78213435, image 56x72
+[LoRA] Step 585/2500 | Loss: 0.6890 | 0.22 it/s
+loss 0.8125, scale 16384.0, step 585, timestep 0.5530462, image 72x56
+[LoRA] Step 586/2500 | Loss: 0.8125 | 0.22 it/s
+loss 1.139, scale 16384.0, step 586, timestep 0.08384729, image 56x72
+[LoRA] Step 587/2500 | Loss: 1.1387 | 0.22 it/s
+loss 1.153, scale 16384.0, step 587, timestep 0.11327353, image 64x64
+[LoRA] Step 588/2500 | Loss: 1.1533 | 0.22 it/s
+loss 0.5894, scale 16384.0, step 588, timestep 0.86123616, image 56x72
+[LoRA] Step 589/2500 | Loss: 0.5894 | 0.22 it/s
+loss 0.7974, scale 16384.0, step 589, timestep 0.9145011, image 56x72
+[LoRA] Step 590/2500 | Loss: 0.7974 | 0.22 it/s
+loss 0.812, scale 16384.0, step 590, timestep 0.57278407, image 56x72
+[LoRA] Step 591/2500 | Loss: 0.8120 | 0.22 it/s
+loss 1.061, scale 16384.0, step 591, timestep 0.028586326, image 56x72
+[LoRA] Step 592/2500 | Loss: 1.0605 | 0.22 it/s
+loss 0.7046, scale 16384.0, step 592, timestep 0.876254, image 56x72
+[LoRA] Step 593/2500 | Loss: 0.7046 | 0.22 it/s
+loss 1.085, scale 16384.0, step 593, timestep 0.042084318, image 56x72
+[LoRA] Step 594/2500 | Loss: 1.0850 | 0.22 it/s
+loss 1.082, scale 16384.0, step 594, timestep 0.35429847, image 56x72
+[LoRA] Step 595/2500 | Loss: 1.0820 | 0.22 it/s
+loss 0.6997, scale 16384.0, step 595, timestep 0.8389525, image 64x64
+[LoRA] Step 596/2500 | Loss: 0.6997 | 0.22 it/s
+loss 1.035, scale 16384.0, step 596, timestep 0.35836327, image 56x72
+[LoRA] Step 597/2500 | Loss: 1.0352 | 0.22 it/s
+loss 0.784, scale 16384.0, step 597, timestep 0.90966785, image 64x64
+[LoRA] Step 598/2500 | Loss: 0.7842 | 0.22 it/s
+loss 0.578, scale 16384.0, step 598, timestep 0.90597135, image 56x72
+[LoRA] Step 599/2500 | Loss: 0.5781 | 0.22 it/s
+loss 0.6953, scale 16384.0, step 599, timestep 0.72321635, image 64x64
+[LoRA] Step 600/2500 | Loss: 0.6953 | 0.22 it/s
+loss 0.766, scale 16384.0, step 600, timestep 0.9521816, image 72x56
+[LoRA] Step 601/2500 | Loss: 0.7661 | 0.22 it/s
+loss 0.7144, scale 16384.0, step 601, timestep 0.8410538, image 56x72
+[LoRA] Step 602/2500 | Loss: 0.7144 | 0.22 it/s
+loss 0.6494, scale 16384.0, step 602, timestep 0.74512875, image 64x64
+[LoRA] Step 603/2500 | Loss: 0.6494 | 0.22 it/s
+loss 0.91, scale 16384.0, step 603, timestep 0.98574764, image 56x72
+[LoRA] Step 604/2500 | Loss: 0.9102 | 0.22 it/s
+loss 1.182, scale 16384.0, step 604, timestep 0.14760038, image 56x72
+[LoRA] Step 605/2500 | Loss: 1.1816 | 0.22 it/s
+loss 0.6084, scale 16384.0, step 605, timestep 0.7955151, image 56x72
+[LoRA] Step 606/2500 | Loss: 0.6084 | 0.22 it/s
+loss 0.788, scale 16384.0, step 606, timestep 0.8786283, image 72x56
+[LoRA] Step 607/2500 | Loss: 0.7881 | 0.22 it/s
+loss 1.191, scale 16384.0, step 607, timestep 0.23634253, image 72x56
+[LoRA] Step 608/2500 | Loss: 1.1914 | 0.22 it/s
+loss 0.919, scale 16384.0, step 608, timestep 0.98953265, image 56x72
+[LoRA] Step 609/2500 | Loss: 0.9189 | 0.22 it/s
+loss 1.098, scale 16384.0, step 609, timestep 0.3393778, image 72x56
+[LoRA] Step 610/2500 | Loss: 1.0977 | 0.22 it/s
+loss 1.096, scale 16384.0, step 610, timestep 0.054725897, image 56x72
+[LoRA] Step 611/2500 | Loss: 1.0957 | 0.22 it/s
+loss 0.8423, scale 16384.0, step 611, timestep 0.52288914, image 56x72
+[LoRA] Step 612/2500 | Loss: 0.8423 | 0.22 it/s
+loss 1.032, scale 16384.0, step 612, timestep 0.0044736806, image 56x72
+[LoRA] Step 613/2500 | Loss: 1.0322 | 0.22 it/s
+loss 1.16, scale 16384.0, step 613, timestep 0.09877762, image 56x72
+[LoRA] Step 614/2500 | Loss: 1.1602 | 0.22 it/s
+loss 1.048, scale 16384.0, step 614, timestep 0.42233062, image 56x72
+[LoRA] Step 615/2500 | Loss: 1.0479 | 0.22 it/s
+loss 1.18, scale 16384.0, step 615, timestep 0.22070882, image 56x72
+[LoRA] Step 616/2500 | Loss: 1.1797 | 0.22 it/s
+loss 1.172, scale 16384.0, step 616, timestep 0.15560766, image 56x72
+[LoRA] Step 617/2500 | Loss: 1.1719 | 0.22 it/s
+loss 0.7544, scale 16384.0, step 617, timestep 0.64928174, image 56x72
+[LoRA] Step 618/2500 | Loss: 0.7544 | 0.22 it/s
+loss 1.059, scale 16384.0, step 618, timestep 0.029334374, image 72x56
+[LoRA] Step 619/2500 | Loss: 1.0586 | 0.22 it/s
+loss 1.172, scale 16384.0, step 619, timestep 0.123870194, image 64x64
+[LoRA] Step 620/2500 | Loss: 1.1719 | 0.22 it/s
+loss 1.128, scale 16384.0, step 620, timestep 0.28660464, image 64x64
+[LoRA] Step 621/2500 | Loss: 1.1279 | 0.22 it/s
+loss 0.8853, scale 16384.0, step 621, timestep 0.47500542, image 64x64
+[LoRA] Step 622/2500 | Loss: 0.8853 | 0.22 it/s
+loss 1.167, scale 16384.0, step 622, timestep 0.18405606, image 40x88
+[LoRA] Step 623/2500 | Loss: 1.1670 | 0.22 it/s
+loss 1.057, scale 16384.0, step 623, timestep 0.022677766, image 64x64
+[LoRA] Step 624/2500 | Loss: 1.0566 | 0.22 it/s
+loss 0.9697, scale 16384.0, step 624, timestep 0.41813305, image 64x64
+[LoRA] Step 625/2500 | Loss: 0.9697 | 0.22 it/s
+loss 0.6963, scale 16384.0, step 625, timestep 0.65664965, image 72x56
+[LoRA] Step 626/2500 | Loss: 0.6963 | 0.22 it/s
+loss 0.793, scale 16384.0, step 626, timestep 0.5529895, image 56x72
+[LoRA] Step 627/2500 | Loss: 0.7930 | 0.22 it/s
+loss 0.701, scale 16384.0, step 627, timestep 0.7064506, image 56x72
+[LoRA] Step 628/2500 | Loss: 0.7012 | 0.22 it/s
+loss 0.617, scale 16384.0, step 628, timestep 0.7980347, image 72x56
+[LoRA] Step 629/2500 | Loss: 0.6172 | 0.22 it/s
+loss 1.11, scale 16384.0, step 629, timestep 0.3465, image 56x72
+[LoRA] Step 630/2500 | Loss: 1.1104 | 0.22 it/s
+loss 1.124, scale 16384.0, step 630, timestep 0.06985782, image 72x56
+[LoRA] Step 631/2500 | Loss: 1.1240 | 0.22 it/s
+loss 1.131, scale 16384.0, step 631, timestep 0.074905045, image 56x72
+[LoRA] Step 632/2500 | Loss: 1.1309 | 0.22 it/s
+loss 1.045, scale 16384.0, step 632, timestep 0.3211355, image 56x72
+[LoRA] Step 633/2500 | Loss: 1.0449 | 0.22 it/s
+loss 1.15, scale 16384.0, step 633, timestep 0.10064567, image 56x72
+[LoRA] Step 634/2500 | Loss: 1.1504 | 0.22 it/s
+loss 0.6577, scale 16384.0, step 634, timestep 0.75192297, image 64x64
+[LoRA] Step 635/2500 | Loss: 0.6577 | 0.22 it/s
+loss 1.21, scale 16384.0, step 635, timestep 0.2198762, image 72x56
+[LoRA] Step 636/2500 | Loss: 1.2100 | 0.22 it/s
+loss 0.8896, scale 16384.0, step 636, timestep 0.94375813, image 56x72
+[LoRA] Step 637/2500 | Loss: 0.8896 | 0.22 it/s
+loss 0.964, scale 16384.0, step 637, timestep 0.43614054, image 72x56
+[LoRA] Step 638/2500 | Loss: 0.9639 | 0.22 it/s
+loss 0.791, scale 16384.0, step 638, timestep 0.5460881, image 64x64
+[LoRA] Step 639/2500 | Loss: 0.7910 | 0.22 it/s
+loss 0.7656, scale 16384.0, step 639, timestep 0.6082956, image 64x64
+[LoRA] Step 640/2500 | Loss: 0.7656 | 0.22 it/s
+loss 0.7207, scale 16384.0, step 640, timestep 0.6407906, image 56x72
+[LoRA] Step 641/2500 | Loss: 0.7207 | 0.22 it/s
+loss 1.095, scale 16384.0, step 641, timestep 0.050018996, image 56x72
+[LoRA] Step 642/2500 | Loss: 1.0947 | 0.22 it/s
+loss 0.6987, scale 16384.0, step 642, timestep 0.8316789, image 56x72
+[LoRA] Step 643/2500 | Loss: 0.6987 | 0.22 it/s
+loss 1.124, scale 16384.0, step 643, timestep 0.27381015, image 64x64
+[LoRA] Step 644/2500 | Loss: 1.1240 | 0.22 it/s
+loss 0.837, scale 16384.0, step 644, timestep 0.50357956, image 56x72
+[LoRA] Step 645/2500 | Loss: 0.8369 | 0.22 it/s
+loss 1.08, scale 16384.0, step 645, timestep 0.35572916, image 56x72
+[LoRA] Step 646/2500 | Loss: 1.0801 | 0.22 it/s
+loss 1.183, scale 16384.0, step 646, timestep 0.13823436, image 64x64
+[LoRA] Step 647/2500 | Loss: 1.1826 | 0.22 it/s
+loss 1.181, scale 16384.0, step 647, timestep 0.21833684, image 56x72
+[LoRA] Step 648/2500 | Loss: 1.1807 | 0.22 it/s
+loss 0.915, scale 16384.0, step 648, timestep 0.45236742, image 64x64
+[LoRA] Step 649/2500 | Loss: 0.9150 | 0.22 it/s
+loss 1.088, scale 16384.0, step 649, timestep 0.3532748, image 72x56
+[LoRA] Step 650/2500 | Loss: 1.0879 | 0.22 it/s
+loss 0.8057, scale 16384.0, step 650, timestep 0.55759674, image 64x64
+[LoRA] Step 651/2500 | Loss: 0.8057 | 0.22 it/s
+loss 1.123, scale 16384.0, step 651, timestep 0.30207148, image 56x72
+[LoRA] Step 652/2500 | Loss: 1.1230 | 0.22 it/s
+loss 0.752, scale 16384.0, step 652, timestep 0.62845457, image 56x72
+[LoRA] Step 653/2500 | Loss: 0.7520 | 0.22 it/s
+loss 1.028, scale 16384.0, step 653, timestep 0.4295472, image 56x72
+[LoRA] Step 654/2500 | Loss: 1.0283 | 0.22 it/s
+loss 0.7173, scale 16384.0, step 654, timestep 0.8875333, image 64x64
+[LoRA] Step 655/2500 | Loss: 0.7173 | 0.22 it/s
+loss 0.7603, scale 16384.0, step 655, timestep 0.59882194, image 56x72
+[LoRA] Step 656/2500 | Loss: 0.7603 | 0.22 it/s
+loss 0.6016, scale 16384.0, step 656, timestep 0.9430443, image 56x72
+[LoRA] Step 657/2500 | Loss: 0.6016 | 0.22 it/s
+loss 1.071, scale 16384.0, step 657, timestep 0.3160169, image 32x104
+[LoRA] Step 658/2500 | Loss: 1.0713 | 0.22 it/s
+loss 0.652, scale 16384.0, step 658, timestep 0.733363, image 56x72
+[LoRA] Step 659/2500 | Loss: 0.6519 | 0.22 it/s
+loss 0.6514, scale 16384.0, step 659, timestep 0.6522471, image 72x56
+[LoRA] Step 660/2500 | Loss: 0.6514 | 0.22 it/s
+loss 0.942, scale 16384.0, step 660, timestep 0.43636823, image 64x64
+[LoRA] Step 661/2500 | Loss: 0.9419 | 0.22 it/s
+loss 1.113, scale 16384.0, step 661, timestep 0.34931052, image 56x72
+[LoRA] Step 662/2500 | Loss: 1.1133 | 0.22 it/s
+loss 1.124, scale 16384.0, step 662, timestep 0.07426385, image 72x56
+[LoRA] Step 663/2500 | Loss: 1.1240 | 0.22 it/s
+loss 0.771, scale 16384.0, step 663, timestep 0.9380668, image 64x64
+[LoRA] Step 664/2500 | Loss: 0.7710 | 0.22 it/s
+loss 0.835, scale 16384.0, step 664, timestep 0.5073019, image 56x72
+[LoRA] Step 665/2500 | Loss: 0.8350 | 0.22 it/s
+loss 0.59, scale 16384.0, step 665, timestep 0.8078216, image 56x72
+[LoRA] Step 666/2500 | Loss: 0.5898 | 0.22 it/s
+loss 0.662, scale 16384.0, step 666, timestep 0.7706881, image 56x72
+[LoRA] Step 667/2500 | Loss: 0.6621 | 0.22 it/s
+loss 1.003, scale 16384.0, step 667, timestep 0.36534265, image 56x72
+[LoRA] Step 668/2500 | Loss: 1.0029 | 0.22 it/s
+loss 0.6724, scale 16384.0, step 668, timestep 0.8723447, image 64x64
+[LoRA] Step 669/2500 | Loss: 0.6724 | 0.22 it/s
+loss 0.764, scale 16384.0, step 669, timestep 0.5873643, image 72x56
+[LoRA] Step 670/2500 | Loss: 0.7642 | 0.22 it/s
+loss 1.033, scale 16384.0, step 670, timestep 0.0098756235, image 64x64
+[LoRA] Step 671/2500 | Loss: 1.0332 | 0.22 it/s
+loss 0.673, scale 16384.0, step 671, timestep 0.77218056, image 56x72
+[LoRA] Step 672/2500 | Loss: 0.6729 | 0.22 it/s
+loss 0.9214, scale 16384.0, step 672, timestep 0.43332204, image 56x72
+[LoRA] Step 673/2500 | Loss: 0.9214 | 0.22 it/s
+loss 0.6587, scale 16384.0, step 673, timestep 0.6680911, image 72x56
+[LoRA] Step 674/2500 | Loss: 0.6587 | 0.22 it/s
+loss 0.8906, scale 16384.0, step 674, timestep 0.50269157, image 56x72
+[LoRA] Step 675/2500 | Loss: 0.8906 | 0.22 it/s
+loss 1.081, scale 16384.0, step 675, timestep 0.34749445, image 72x56
+[LoRA] Step 676/2500 | Loss: 1.0811 | 0.22 it/s
+loss 1.0625, scale 16384.0, step 676, timestep 0.02588227, image 72x56
+[LoRA] Step 677/2500 | Loss: 1.0625 | 0.22 it/s
+loss 1.087, scale 16384.0, step 677, timestep 0.0428016, image 56x72
+[LoRA] Step 678/2500 | Loss: 1.0869 | 0.22 it/s
+loss 0.9165, scale 16384.0, step 678, timestep 0.43102404, image 56x72
+[LoRA] Step 679/2500 | Loss: 0.9165 | 0.22 it/s
+loss 0.873, scale 16384.0, step 679, timestep 0.55865896, image 56x72
+[LoRA] Step 680/2500 | Loss: 0.8730 | 0.22 it/s
+loss 0.7153, scale 16384.0, step 680, timestep 0.68324935, image 56x72
+[LoRA] Step 681/2500 | Loss: 0.7153 | 0.22 it/s
+loss 1.112, scale 16384.0, step 681, timestep 0.28734022, image 64x64
+[LoRA] Step 682/2500 | Loss: 1.1123 | 0.22 it/s
+loss 0.5864, scale 16384.0, step 682, timestep 0.851741, image 56x72
+[LoRA] Step 683/2500 | Loss: 0.5864 | 0.22 it/s
+loss 0.689, scale 16384.0, step 683, timestep 0.8237258, image 56x72
+[LoRA] Step 684/2500 | Loss: 0.6890 | 0.22 it/s
+loss 1.17, scale 16384.0, step 684, timestep 0.13450298, image 64x64
+[LoRA] Step 685/2500 | Loss: 1.1699 | 0.22 it/s
+loss 1.182, scale 16384.0, step 685, timestep 0.24114099, image 72x56
+[LoRA] Step 686/2500 | Loss: 1.1816 | 0.22 it/s
+loss 0.777, scale 16384.0, step 686, timestep 0.5843548, image 56x72
+[LoRA] Step 687/2500 | Loss: 0.7769 | 0.22 it/s
+loss 0.7886, scale 16384.0, step 687, timestep 0.6148176, image 56x72
+[LoRA] Step 688/2500 | Loss: 0.7886 | 0.22 it/s
+loss 0.698, scale 16384.0, step 688, timestep 0.74124306, image 56x72
+[LoRA] Step 689/2500 | Loss: 0.6982 | 0.22 it/s
+loss 0.7085, scale 16384.0, step 689, timestep 0.696018, image 64x64
+[LoRA] Step 690/2500 | Loss: 0.7085 | 0.22 it/s
+loss 1.078, scale 16384.0, step 690, timestep 0.38373324, image 56x72
+[LoRA] Step 691/2500 | Loss: 1.0781 | 0.22 it/s
+loss 0.5938, scale 16384.0, step 691, timestep 0.8035674, image 72x56
+[LoRA] Step 692/2500 | Loss: 0.5938 | 0.22 it/s
+loss 0.7017, scale 16384.0, step 692, timestep 0.83656037, image 32x104
+[LoRA] Step 693/2500 | Loss: 0.7017 | 0.22 it/s
+loss 0.6226, scale 16384.0, step 693, timestep 0.9263815, image 56x72
+[LoRA] Step 694/2500 | Loss: 0.6226 | 0.22 it/s
+loss 1.19, scale 16384.0, step 694, timestep 0.24156153, image 56x72
+[LoRA] Step 695/2500 | Loss: 1.1904 | 0.22 it/s
+loss 0.8413, scale 16384.0, step 695, timestep 0.51798, image 56x72
+[LoRA] Step 696/2500 | Loss: 0.8413 | 0.22 it/s
+loss 0.9346, scale 16384.0, step 696, timestep 0.4216385, image 72x56
+[LoRA] Step 697/2500 | Loss: 0.9346 | 0.22 it/s
+loss 1.169, scale 16384.0, step 697, timestep 0.2401613, image 64x64
+[LoRA] Step 698/2500 | Loss: 1.1689 | 0.22 it/s
+loss 0.67, scale 16384.0, step 698, timestep 0.8037926, image 64x64
+[LoRA] Step 699/2500 | Loss: 0.6699 | 0.22 it/s
+loss 0.5874, scale 16384.0, step 699, timestep 0.87133294, image 72x56
+[LoRA] Step 700/2500 | Loss: 0.5874 | 0.22 it/s
+loss 1.164, scale 16384.0, step 700, timestep 0.13783918, image 56x72
+[LoRA] Step 701/2500 | Loss: 1.1641 | 0.22 it/s
+loss 1.093, scale 16384.0, step 701, timestep 0.28961387, image 56x72
+[LoRA] Step 702/2500 | Loss: 1.0928 | 0.22 it/s
+loss 0.664, scale 16384.0, step 702, timestep 0.749897, image 64x64
+[LoRA] Step 703/2500 | Loss: 0.6641 | 0.22 it/s
+loss 1.068, scale 16384.0, step 703, timestep 0.40154517, image 56x72
+[LoRA] Step 704/2500 | Loss: 1.0684 | 0.22 it/s
+loss 1.188, scale 16384.0, step 704, timestep 0.17237392, image 56x72
+[LoRA] Step 705/2500 | Loss: 1.1885 | 0.22 it/s
+loss 1.043, scale 16384.0, step 705, timestep 0.009631366, image 72x56
+[LoRA] Step 706/2500 | Loss: 1.0430 | 0.22 it/s
+loss 0.943, scale 16384.0, step 706, timestep 0.42804, image 56x72
+[LoRA] Step 707/2500 | Loss: 0.9429 | 0.22 it/s
+loss 0.831, scale 16384.0, step 707, timestep 0.52423614, image 64x64
+[LoRA] Step 708/2500 | Loss: 0.8311 | 0.22 it/s
+loss 1.163, scale 16384.0, step 708, timestep 0.113434084, image 56x72
+[LoRA] Step 709/2500 | Loss: 1.1631 | 0.22 it/s
+loss 0.8423, scale 16384.0, step 709, timestep 0.49767783, image 56x72
+[LoRA] Step 710/2500 | Loss: 0.8423 | 0.22 it/s
+loss 1.154, scale 16384.0, step 710, timestep 0.2885352, image 72x56
+[LoRA] Step 711/2500 | Loss: 1.1543 | 0.22 it/s
+loss 0.8433, scale 16384.0, step 711, timestep 0.5107355, image 64x64
+[LoRA] Step 712/2500 | Loss: 0.8433 | 0.22 it/s
+loss 0.7383, scale 16384.0, step 712, timestep 0.65945196, image 56x72
+[LoRA] Step 713/2500 | Loss: 0.7383 | 0.22 it/s
+loss 0.803, scale 16384.0, step 713, timestep 0.55255866, image 40x88
+[LoRA] Step 714/2500 | Loss: 0.8032 | 0.22 it/s
+loss 0.726, scale 16384.0, step 714, timestep 0.89547, image 64x64
+[LoRA] Step 715/2500 | Loss: 0.7261 | 0.22 it/s
+loss 0.5874, scale 16384.0, step 715, timestep 0.8379929, image 72x56
+[LoRA] Step 716/2500 | Loss: 0.5874 | 0.22 it/s
+loss 0.7217, scale 16384.0, step 716, timestep 0.65295404, image 32x104
+[LoRA] Step 717/2500 | Loss: 0.7217 | 0.22 it/s
+loss 0.6465, scale 16384.0, step 717, timestep 0.76481795, image 72x56
+[LoRA] Step 718/2500 | Loss: 0.6465 | 0.22 it/s
+loss 0.6733, scale 16384.0, step 718, timestep 0.7595259, image 64x64
+[LoRA] Step 719/2500 | Loss: 0.6733 | 0.22 it/s
+loss 0.716, scale 16384.0, step 719, timestep 0.6801354, image 56x72
+[LoRA] Step 720/2500 | Loss: 0.7158 | 0.22 it/s
+loss 0.7344, scale 16384.0, step 720, timestep 0.61564064, image 56x72
+[LoRA] Step 721/2500 | Loss: 0.7344 | 0.22 it/s
+loss 0.594, scale 16384.0, step 721, timestep 0.78395236, image 56x72
+[LoRA] Step 722/2500 | Loss: 0.5942 | 0.22 it/s
+loss 1.171, scale 16384.0, step 722, timestep 0.2258828, image 64x64
+[LoRA] Step 723/2500 | Loss: 1.1709 | 0.22 it/s
+loss 1.168, scale 16384.0, step 723, timestep 0.18961072, image 56x72
+[LoRA] Step 724/2500 | Loss: 1.1680 | 0.22 it/s
+loss 1.167, scale 16384.0, step 724, timestep 0.11061941, image 72x56
+[LoRA] Step 725/2500 | Loss: 1.1670 | 0.22 it/s
+loss 0.81, scale 16384.0, step 725, timestep 0.9523939, image 56x72
+[LoRA] Step 726/2500 | Loss: 0.8101 | 0.22 it/s
+loss 0.598, scale 16384.0, step 726, timestep 0.80073595, image 72x56
+[LoRA] Step 727/2500 | Loss: 0.5981 | 0.22 it/s
+loss 0.6274, scale 16384.0, step 727, timestep 0.76705563, image 56x72
+[LoRA] Step 728/2500 | Loss: 0.6274 | 0.22 it/s
+loss 1.087, scale 16384.0, step 728, timestep 0.04283757, image 64x64
+[LoRA] Step 729/2500 | Loss: 1.0869 | 0.22 it/s
+loss 1.179, scale 16384.0, step 729, timestep 0.14002949, image 64x64
+[LoRA] Step 730/2500 | Loss: 1.1787 | 0.22 it/s
+loss 1.054, scale 16384.0, step 730, timestep 0.01625833, image 72x56
+[LoRA] Step 731/2500 | Loss: 1.0537 | 0.22 it/s
+loss 1.124, scale 16384.0, step 731, timestep 0.072070494, image 64x64
+[LoRA] Step 732/2500 | Loss: 1.1240 | 0.22 it/s
+loss 0.763, scale 16384.0, step 732, timestep 0.58809364, image 64x64
+[LoRA] Step 733/2500 | Loss: 0.7632 | 0.22 it/s
+loss 0.9023, scale 16384.0, step 733, timestep 0.5157913, image 56x72
+[LoRA] Step 734/2500 | Loss: 0.9023 | 0.22 it/s
+loss 0.7207, scale 16384.0, step 734, timestep 0.68373287, image 56x72
+[LoRA] Step 735/2500 | Loss: 0.7207 | 0.22 it/s
+loss 1.156, scale 16384.0, step 735, timestep 0.2414032, image 64x64
+[LoRA] Step 736/2500 | Loss: 1.1562 | 0.22 it/s
+loss 0.8086, scale 16384.0, step 736, timestep 0.60360533, image 56x72
+[LoRA] Step 737/2500 | Loss: 0.8086 | 0.22 it/s
+loss 0.587, scale 16384.0, step 737, timestep 0.8615428, image 72x56
+[LoRA] Step 738/2500 | Loss: 0.5869 | 0.22 it/s
+loss 0.681, scale 16384.0, step 738, timestep 0.7214044, image 56x72
+[LoRA] Step 739/2500 | Loss: 0.6812 | 0.22 it/s
+loss 1.186, scale 16384.0, step 739, timestep 0.141727, image 72x56
+[LoRA] Step 740/2500 | Loss: 1.1855 | 0.22 it/s
+loss 1.147, scale 16384.0, step 740, timestep 0.30433086, image 56x72
+[LoRA] Step 741/2500 | Loss: 1.1475 | 0.22 it/s
+loss 1.179, scale 16384.0, step 741, timestep 0.24755426, image 56x72
+[LoRA] Step 742/2500 | Loss: 1.1787 | 0.22 it/s
+loss 0.6987, scale 16384.0, step 742, timestep 0.6908239, image 56x72
+[LoRA] Step 743/2500 | Loss: 0.6987 | 0.22 it/s
+loss 0.664, scale 16384.0, step 743, timestep 0.7402812, image 56x72
+[LoRA] Step 744/2500 | Loss: 0.6641 | 0.22 it/s
+loss 0.69, scale 16384.0, step 744, timestep 0.89100504, image 64x64
+[LoRA] Step 745/2500 | Loss: 0.6899 | 0.22 it/s
+loss 0.9204, scale 16384.0, step 745, timestep 0.52474755, image 56x72
+[LoRA] Step 746/2500 | Loss: 0.9204 | 0.22 it/s
+loss 1.123, scale 16384.0, step 746, timestep 0.23755404, image 56x72
+[LoRA] Step 747/2500 | Loss: 1.1230 | 0.22 it/s
+loss 0.575, scale 16384.0, step 747, timestep 0.8829507, image 56x72
+[LoRA] Step 748/2500 | Loss: 0.5752 | 0.22 it/s
+loss 0.9214, scale 16384.0, step 748, timestep 0.51400083, image 56x72
+[LoRA] Step 749/2500 | Loss: 0.9214 | 0.22 it/s
+loss 0.909, scale 16384.0, step 749, timestep 0.49623182, image 56x72
+[LoRA] Step 750/2500 | Loss: 0.9092 | 0.22 it/s
+loss 1.179, scale 16384.0, step 750, timestep 0.123762935, image 72x56
+[LoRA] Step 751/2500 | Loss: 1.1787 | 0.22 it/s
+loss 1.094, scale 16384.0, step 751, timestep 0.04894834, image 72x56
+[LoRA] Step 752/2500 | Loss: 1.0938 | 0.22 it/s
+loss 1.114, scale 16384.0, step 752, timestep 0.24843876, image 56x72
+[LoRA] Step 753/2500 | Loss: 1.1143 | 0.22 it/s
+loss 0.8916, scale 16384.0, step 753, timestep 0.95564085, image 56x72
+[LoRA] Step 754/2500 | Loss: 0.8916 | 0.22 it/s
+loss 0.9053, scale 16384.0, step 754, timestep 0.4802761, image 64x64
+[LoRA] Step 755/2500 | Loss: 0.9053 | 0.22 it/s
+loss 1.104, scale 16384.0, step 755, timestep 0.0612816, image 56x72
+[LoRA] Step 756/2500 | Loss: 1.1035 | 0.22 it/s
+loss 0.8247, scale 16384.0, step 756, timestep 0.47525004, image 72x56
+[LoRA] Step 757/2500 | Loss: 0.8247 | 0.22 it/s
+loss 1.025, scale 16384.0, step 757, timestep 0.3935162, image 56x72
+[LoRA] Step 758/2500 | Loss: 1.0254 | 0.22 it/s
+loss 0.9854, scale 16384.0, step 758, timestep 0.3789206, image 56x72
+[LoRA] Step 759/2500 | Loss: 0.9854 | 0.22 it/s
+loss 0.728, scale 16384.0, step 759, timestep 0.6829131, image 40x88
+[LoRA] Step 760/2500 | Loss: 0.7280 | 0.22 it/s
+loss 1.108, scale 16384.0, step 760, timestep 0.059606496, image 64x64
+[LoRA] Step 761/2500 | Loss: 1.1084 | 0.22 it/s
+loss 0.7983, scale 16384.0, step 761, timestep 0.9196466, image 56x72
+[LoRA] Step 762/2500 | Loss: 0.7983 | 0.22 it/s
+loss 0.868, scale 16384.0, step 762, timestep 0.48071033, image 56x72
+[LoRA] Step 763/2500 | Loss: 0.8682 | 0.22 it/s
+loss 1.164, scale 16384.0, step 763, timestep 0.14025927, image 56x72
+[LoRA] Step 764/2500 | Loss: 1.1641 | 0.22 it/s
+loss 0.7607, scale 16384.0, step 764, timestep 0.59670186, image 64x64
+[LoRA] Step 765/2500 | Loss: 0.7607 | 0.22 it/s
+loss 1.1875, scale 16384.0, step 765, timestep 0.19355915, image 56x72
+[LoRA] Step 766/2500 | Loss: 1.1875 | 0.22 it/s
+loss 0.673, scale 16384.0, step 766, timestep 0.74059814, image 56x72
+[LoRA] Step 767/2500 | Loss: 0.6729 | 0.22 it/s
+loss 0.6963, scale 16384.0, step 767, timestep 0.8290129, image 64x64
+[LoRA] Step 768/2500 | Loss: 0.6963 | 0.22 it/s
+loss 1.157, scale 16384.0, step 768, timestep 0.11849039, image 64x64
+[LoRA] Step 769/2500 | Loss: 1.1572 | 0.22 it/s
+loss 1.052, scale 16384.0, step 769, timestep 0.023455497, image 72x56
+[LoRA] Step 770/2500 | Loss: 1.0518 | 0.22 it/s
+loss 1.028, scale 16384.0, step 770, timestep 0.34483847, image 56x72
+[LoRA] Step 771/2500 | Loss: 1.0283 | 0.22 it/s
+loss 0.552, scale 16384.0, step 771, timestep 0.9074778, image 56x72
+[LoRA] Step 772/2500 | Loss: 0.5518 | 0.22 it/s
+loss 0.694, scale 16384.0, step 772, timestep 0.7059548, image 56x72
+[LoRA] Step 773/2500 | Loss: 0.6938 | 0.22 it/s
+loss 0.6143, scale 16384.0, step 773, timestep 0.7260806, image 72x56
+[LoRA] Step 774/2500 | Loss: 0.6143 | 0.22 it/s
+loss 0.926, scale 16384.0, step 774, timestep 0.4513065, image 64x64
+[LoRA] Step 775/2500 | Loss: 0.9258 | 0.22 it/s
+loss 1.1455, scale 16384.0, step 775, timestep 0.29278046, image 72x56
+[LoRA] Step 776/2500 | Loss: 1.1455 | 0.22 it/s
+loss 0.956, scale 16384.0, step 776, timestep 0.9856499, image 56x72
+[LoRA] Step 777/2500 | Loss: 0.9561 | 0.22 it/s
+loss 0.697, scale 16384.0, step 777, timestep 0.75136966, image 56x72
+[LoRA] Step 778/2500 | Loss: 0.6968 | 0.22 it/s
+loss 1.192, scale 16384.0, step 778, timestep 0.16497502, image 56x72
+[LoRA] Step 779/2500 | Loss: 1.1924 | 0.22 it/s
+loss 1.06, scale 16384.0, step 779, timestep 0.3469218, image 64x64
+[LoRA] Step 780/2500 | Loss: 1.0596 | 0.22 it/s
+loss 0.8604, scale 16384.0, step 780, timestep 0.92591953, image 72x56
+[LoRA] Step 781/2500 | Loss: 0.8604 | 0.22 it/s
+loss 0.7266, scale 16384.0, step 781, timestep 0.9567612, image 72x56
+[LoRA] Step 782/2500 | Loss: 0.7266 | 0.22 it/s
+loss 1.096, scale 16384.0, step 782, timestep 0.05191472, image 64x64
+[LoRA] Step 783/2500 | Loss: 1.0957 | 0.22 it/s
+loss 1.051, scale 16384.0, step 783, timestep 0.40456513, image 56x72
+[LoRA] Step 784/2500 | Loss: 1.0508 | 0.22 it/s
+loss 1.094, scale 16384.0, step 784, timestep 0.04800174, image 64x64
+[LoRA] Step 785/2500 | Loss: 1.0938 | 0.22 it/s
+loss 0.799, scale 16384.0, step 785, timestep 0.54573286, image 56x72
+[LoRA] Step 786/2500 | Loss: 0.7988 | 0.22 it/s
+loss 1.141, scale 16384.0, step 786, timestep 0.09645196, image 56x72
+[LoRA] Step 787/2500 | Loss: 1.1406 | 0.22 it/s
+loss 0.759, scale 16384.0, step 787, timestep 0.60126346, image 64x64
+[LoRA] Step 788/2500 | Loss: 0.7588 | 0.22 it/s
+loss 1.168, scale 16384.0, step 788, timestep 0.11269474, image 56x72
+[LoRA] Step 789/2500 | Loss: 1.1680 | 0.22 it/s
+loss 1.105, scale 16384.0, step 789, timestep 0.34683257, image 72x56
+[LoRA] Step 790/2500 | Loss: 1.1055 | 0.22 it/s
+loss 0.786, scale 16384.0, step 790, timestep 0.55110747, image 64x64
+[LoRA] Step 791/2500 | Loss: 0.7861 | 0.22 it/s
+loss 0.638, scale 16384.0, step 791, timestep 0.74950594, image 72x56
+[LoRA] Step 792/2500 | Loss: 0.6382 | 0.22 it/s
+loss 1.166, scale 16384.0, step 792, timestep 0.12044279, image 56x72
+[LoRA] Step 793/2500 | Loss: 1.1660 | 0.22 it/s
+loss 1.043, scale 16384.0, step 793, timestep 0.3681311, image 64x64
+[LoRA] Step 794/2500 | Loss: 1.0430 | 0.22 it/s
+loss 0.675, scale 16384.0, step 794, timestep 0.8233408, image 56x72
+[LoRA] Step 795/2500 | Loss: 0.6748 | 0.22 it/s
+loss 1.13, scale 16384.0, step 795, timestep 0.23196664, image 56x72
+[LoRA] Step 796/2500 | Loss: 1.1299 | 0.22 it/s
+loss 0.6895, scale 16384.0, step 796, timestep 0.70127916, image 56x72
+[LoRA] Step 797/2500 | Loss: 0.6895 | 0.22 it/s
+loss 0.5903, scale 16384.0, step 797, timestep 0.93637246, image 56x72
+[LoRA] Step 798/2500 | Loss: 0.5903 | 0.22 it/s
+loss 0.7363, scale 16384.0, step 798, timestep 0.63836575, image 32x104
+[LoRA] Step 799/2500 | Loss: 0.7363 | 0.22 it/s
