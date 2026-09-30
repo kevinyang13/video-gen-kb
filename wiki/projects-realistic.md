@@ -1054,11 +1054,11 @@ Prompt: `per shot — see scenes`
 
 *Still prompt*
 
-> Wide full-body shot from behind and below, looking up a narrow iron spiral stair inside the lighthouse tower. kyle_kx boy, a nine-year-old boy, this exact face, neat dark hair wet with spray, wearing a heavy oiled canvas coat in dark slate over a thick cream fisherman's wool sweater, a coil of rope over one shoulder and a battered brass storm lantern in his hand, seen from behind mid-stride climbing the rusted steps away from the camera, the lantern in his hand throwing warm light up the curving whitewashed wall, the rope coiled on his shoulder. Strong upward perspective. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wet wool and oiled canvas, natural storm light at dusk, shallow depth of field, subtle film grain, cold desaturated colour with warm firelight. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.
+> Wide full-body shot from behind and below, looking up a narrow iron spiral stair inside the lighthouse tower. kyle_kx boy, a nine-year-old boy, this exact face, neat dark hair wet with spray, wearing a heavy oiled canvas coat in dark slate over a thick cream fisherman's wool sweater, a coil of rope over one shoulder and a battered brass storm lantern in his hand, seen from behind mid-stride climbing the rusted steps away from the camera toward an open hatch in the ceiling above, cold grey daylight and the brass rail of the lamp room gallery visible through the hatch at the top of the stair, the lantern in his hand throwing warm light up the curving whitewashed wall, the rope coiled on his shoulder. Strong upward perspective with the lit hatch as the vanishing point. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wet wool and oiled canvas, natural storm light at dusk, shallow depth of field, subtle film grain, cold desaturated colour with warm firelight. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.
 
 *Video prompt*
 
-> Fixed camera. He climbs steadily away from the camera up the spiral stair, the lantern in his hand swinging and throwing warm moving light around the curve of the wall as he rises. Footfalls on iron, muffled surf, wind, no music.
+> Fixed camera. He climbs steadily away from the camera up the spiral stair toward the lit hatch above, the lantern in his hand swinging and throwing warm moving light around the curve of the wall as he rises, the grey daylight from the hatch growing on the steps ahead of him. Footfalls on iron, muffled surf, wind, no music.
 
 
 #### s5 — The dark lamp room and the great cracked lens
@@ -1071,7 +1071,7 @@ Prompt: `per shot — see scenes`
 
 *Video prompt*
 
-> Fixed camera, no camera movement. Rain runs down the outside of the salt-clouded panes, the grey sea heaving far below beyond the glass, dust drifting in the still air of the room. The light stays constant. Muffled surf, wind, no music.
+> Fixed camera, no camera movement. The grey sea heaves and rolls far below beyond the clear glass, fine dust drifting slowly through the still air of the room, faint reflections turning inside the cracked lens. The panes are dry. The light stays constant. Muffled surf, wind, no music.
 
 
 #### s4 — He strikes a match and shields the flame in both hands
@@ -1110,7 +1110,7 @@ Prompt: `per shot — see scenes`
 
 *Video prompt*
 
-> Fixed camera, no camera movement. The lighthouse beam sweeps slowly out across the water and through the spray, heavy swell rolling beneath the camera, surf bursting white against the rocks, cloud moving fast overhead. The beam stays bright and constant. Surf, wind, no music.
+> Fixed camera, no camera movement. The lighthouse lamp rotates steadily like a real lighthouse: the shaft of the beam swings around through the spray, passes across the camera, sweeps on out over the water and comes around again, over and over. Beneath the camera a heavy swell rolls and heaves, big waves surging in and bursting white against the black rocks, spray blowing across the causeway, storm cloud moving fast overhead. Surf, wind, no music.
 
 ## Related pages
 - [[projects]]

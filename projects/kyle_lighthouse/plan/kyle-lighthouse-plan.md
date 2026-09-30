@@ -94,6 +94,30 @@ that to blotchy red across the whole face. Re-rendered with the redness language
 skin tone" in its place, which fixed it cleanly. Weather-beaten skin is better implied by the environment than
 asked for directly.
 
+### 6a. Three notes from Kevin's review
+
+All three were caught on the clips, not the stills, and all three are prompt faults rather than model faults.
+
+**"Cheeks reddened by cold wind" makes a blotchy red face.** klein took the phrase literally and applied it as
+colour across the whole face rather than as weathering. Re-rendered with the redness dropped and "an even
+natural skin tone" in its place. *Weather on skin should be implied by the environment, not requested as a
+colour.*
+
+**"The light stays constant" is not free — it suppresses intended light motion too.** That line was added after
+[[kyle-debut-plan]] to stop shots dimming to black, and it worked everywhere it belonged. But it was also in
+s8, whose whole subject is a rotating lighthouse beam, and it duly froze the beam into a static glow. Rewritten
+to describe the rotation positively — the shaft swings around, passes across the camera, sweeps out and comes
+around again — and the beam now turns, with the swell breaking underneath it. **Scope that line to shots where
+light is not the subject.**
+
+**A shot can lead nowhere.** s6's stair climbed toward a blank curve of wall, so the climb had no destination.
+The fix was in the still, not the motion prompt: the shot was re-rendered with an open hatch above, the
+lamp-room gallery rail visible through it, and the lit hatch as the vanishing point. The clip then reads as
+arriving somewhere — and he reaches it. *A moving shot needs its destination inside the frame.*
+
+Also: s5's rain on the glass was far too heavy. Fixed by moving the motion off the window entirely — the sea
+beyond and dust in the room carry it now, and the panes are described as dry.
+
 ## 7. The cut
 
 Order **s1 s2 s3 s6 s5 s4 s7 s8** — the shot ids were written in story-beat order but the climb has to precede
@@ -104,13 +128,13 @@ the lamp room, so the sequence was corrected before the clips were rendered.
 | s1 | The causeway, he is small, from behind | s1_v1 | 9.5 s | a wave bursts across the causeway mid-take |
 | s2 | Close-up, spray on his face | s2_v2 | 5.5 s | re-rendered to remove the red face; squints after ~5.5 s |
 | s3 | The lantern swinging on its hook | s3_v1 | 7.0 s | **stayed in frame** — the hook design worked |
-| s6 | The climb, from behind | s6_v1 | 9.0 s | lantern light moving on the curved wall; clean |
-| s5 | The dark lamp room | s5_v1 | 8.0 s | rain on glass, light held constant |
+| s6 | The climb, from behind | s6_v2 | 7.5 s | re-rendered with a lit hatch above so the stair leads somewhere |
+| s5 | The dark lamp room | s5_v2 | 8.5 s | re-rendered with the rain off the glass; sea and dust carry it |
 | s4 | The match cupped in both hands | s4_v1 | 8.0 s | identity clean; trimmed for a hard push-in at the end |
-| s7 | The lamp catches | s7_v1 | 8.5 s | the smile lands at ~5 s and holds |
-| s8 | The beam goes out across the water | s8_v1 | 9.9 s | clean full length |
+| s7 | The lamp catches | s7_v1 | 9.0 s | the smile lands at ~5 s and holds |
+| s8 | The beam goes out across the water | s8_v2 | 9.9 s | re-rendered so the beam actually rotates |
 
-65.4 s kept − 7 × 0.75 s crossfades = **60.15 s**.
+64.9 s kept − 7 × 0.75 s crossfades = **59.65 s**.
 
 ## 8. Log
 

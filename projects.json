@@ -2807,14 +2807,14 @@
         "s6": {
           "title": "The climb — the iron spiral stair, seen from behind and below",
           "note": "LoRA weight 0.85; input seed/lamproom.png; kept 9.5 s",
-          "still": "Wide full-body shot from behind and below, looking up a narrow iron spiral stair inside the lighthouse tower. kyle_kx boy, a nine-year-old boy, this exact face, neat dark hair wet with spray, wearing a heavy oiled canvas coat in dark slate over a thick cream fisherman's wool sweater, a coil of rope over one shoulder and a battered brass storm lantern in his hand, seen from behind mid-stride climbing the rusted steps away from the camera, the lantern in his hand throwing warm light up the curving whitewashed wall, the rope coiled on his shoulder. Strong upward perspective. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wet wool and oiled canvas, natural storm light at dusk, shallow depth of field, subtle film grain, cold desaturated colour with warm firelight. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
-          "video": "Fixed camera. He climbs steadily away from the camera up the spiral stair, the lantern in his hand swinging and throwing warm moving light around the curve of the wall as he rises. Footfalls on iron, muffled surf, wind, no music."
+          "still": "Wide full-body shot from behind and below, looking up a narrow iron spiral stair inside the lighthouse tower. kyle_kx boy, a nine-year-old boy, this exact face, neat dark hair wet with spray, wearing a heavy oiled canvas coat in dark slate over a thick cream fisherman's wool sweater, a coil of rope over one shoulder and a battered brass storm lantern in his hand, seen from behind mid-stride climbing the rusted steps away from the camera toward an open hatch in the ceiling above, cold grey daylight and the brass rail of the lamp room gallery visible through the hatch at the top of the stair, the lantern in his hand throwing warm light up the curving whitewashed wall, the rope coiled on his shoulder. Strong upward perspective with the lit hatch as the vanishing point. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wet wool and oiled canvas, natural storm light at dusk, shallow depth of field, subtle film grain, cold desaturated colour with warm firelight. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
+          "video": "Fixed camera. He climbs steadily away from the camera up the spiral stair toward the lit hatch above, the lantern in his hand swinging and throwing warm moving light around the curve of the wall as he rises, the grey daylight from the hatch growing on the steps ahead of him. Footfalls on iron, muffled surf, wind, no music."
         },
         "s5": {
           "title": "The dark lamp room and the great cracked lens",
           "note": "no LoRA — no face in frame; input seed/lamproom.png; kept 8.0 s",
           "still": "Wide interior, no people in frame. the lamp room at the top of a ruined lighthouse, a great cracked fresnel lens on its brass carriage, salt-clouded glass panes, rusted iron railings and a spiral stair coming up through the floor, unlit and cold, the last grey daylight coming through the salt-clouded panes and breaking into rings inside the great fresnel lens, rust and old paint, the dark sea visible beyond the glass. Deep depth of field, still and derelict. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wet wool and oiled canvas, natural storm light at dusk, shallow depth of field, subtle film grain, cold desaturated colour with warm firelight. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
-          "video": "Fixed camera, no camera movement. Rain runs down the outside of the salt-clouded panes, the grey sea heaving far below beyond the glass, dust drifting in the still air of the room. The light stays constant. Muffled surf, wind, no music."
+          "video": "Fixed camera, no camera movement. The grey sea heaves and rolls far below beyond the clear glass, fine dust drifting slowly through the still air of the room, faint reflections turning inside the cracked lens. The panes are dry. The light stays constant. Muffled surf, wind, no music."
         },
         "s4": {
           "title": "He strikes a match and shields the flame in both hands",
@@ -2832,7 +2832,7 @@
           "title": "The beam goes out across the water",
           "note": "no LoRA — no face in frame; input seed/coast.png; kept 8.5 s",
           "still": "Extreme wide final shot, no people in frame, from far out on the dark water looking back. a storm-battered granite headland at dusk, black wet rock and white surf exploding against it, a narrow stone causeway running out to a ruined lighthouse of weathered pale stone, low iron-grey cloud and spray hanging in the air at last light, the ruined lighthouse standing black against the storm sky with its lamp lit — a single hot gold beam reaching out across the heaving sea and through the spray, surf still bursting white on the rocks below. Enormous sense of scale, deep depth of field. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wet wool and oiled canvas, natural storm light at dusk, shallow depth of field, subtle film grain, cold desaturated colour with warm firelight. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
-          "video": "Fixed camera, no camera movement. The lighthouse beam sweeps slowly out across the water and through the spray, heavy swell rolling beneath the camera, surf bursting white against the rocks, cloud moving fast overhead. The beam stays bright and constant. Surf, wind, no music."
+          "video": "Fixed camera, no camera movement. The lighthouse lamp rotates steadily like a real lighthouse: the shaft of the beam swings around through the spray, passes across the camera, sweeps on out over the water and comes around again, over and over. Beneath the camera a heavy swell rolls and heaves, big waves surging in and bursting white against the black rocks, spray blowing across the causeway, storm cloud moving fast overhead. Surf, wind, no music."
         }
       },
       "run-spec": {
@@ -2993,7 +2993,7 @@
             "still": {
               "ref": null,
               "input": "seed/lamproom.png",
-              "prompt": "Wide full-body shot from behind and below, looking up a narrow iron spiral stair inside the lighthouse tower. kyle_kx boy, a nine-year-old boy, this exact face, neat dark hair wet with spray, wearing a heavy oiled canvas coat in dark slate over a thick cream fisherman's wool sweater, a coil of rope over one shoulder and a battered brass storm lantern in his hand, seen from behind mid-stride climbing the rusted steps away from the camera, the lantern in his hand throwing warm light up the curving whitewashed wall, the rope coiled on his shoulder. Strong upward perspective. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wet wool and oiled canvas, natural storm light at dusk, shallow depth of field, subtle film grain, cold desaturated colour with warm firelight. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
+              "prompt": "Wide full-body shot from behind and below, looking up a narrow iron spiral stair inside the lighthouse tower. kyle_kx boy, a nine-year-old boy, this exact face, neat dark hair wet with spray, wearing a heavy oiled canvas coat in dark slate over a thick cream fisherman's wool sweater, a coil of rope over one shoulder and a battered brass storm lantern in his hand, seen from behind mid-stride climbing the rusted steps away from the camera toward an open hatch in the ceiling above, cold grey daylight and the brass rail of the lamp room gallery visible through the hatch at the top of the stair, the lantern in his hand throwing warm light up the curving whitewashed wall, the rope coiled on his shoulder. Strong upward perspective with the lit hatch as the vanishing point. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wet wool and oiled canvas, natural storm light at dusk, shallow depth of field, subtle film grain, cold desaturated colour with warm firelight. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.",
               "config": {
                 "shift": 3.0,
                 "sampler": 16,
@@ -3003,14 +3003,19 @@
                     "weight": 0.85
                   }
                 ]
-              }
+              },
+              "seeds": [
+                21,
+                22,
+                23
+              ]
             },
-            "video_prompt": "Fixed camera. He climbs steadily away from the camera up the spiral stair, the lantern in his hand swinging and throwing warm moving light around the curve of the wall as he rises. Footfalls on iron, muffled surf, wind, no music.",
+            "video_prompt": "Fixed camera. He climbs steadily away from the camera up the spiral stair toward the lit hatch above, the lantern in his hand swinging and throwing warm moving light around the curve of the wall as he rises, the grey daylight from the hatch growing on the steps ahead of him. Footfalls on iron, muffled surf, wind, no music.",
             "qc_ref": "kyle",
-            "take": "clips/s6_v1.mov",
+            "take": "clips/s6_v2.mov",
             "trim": [
               0,
-              9.0
+              7.5
             ]
           },
           {
@@ -3024,12 +3029,12 @@
                 "sampler": 16
               }
             },
-            "video_prompt": "Fixed camera, no camera movement. Rain runs down the outside of the salt-clouded panes, the grey sea heaving far below beyond the glass, dust drifting in the still air of the room. The light stays constant. Muffled surf, wind, no music.",
+            "video_prompt": "Fixed camera, no camera movement. The grey sea heaves and rolls far below beyond the clear glass, fine dust drifting slowly through the still air of the room, faint reflections turning inside the cracked lens. The panes are dry. The light stays constant. Muffled surf, wind, no music.",
             "qc_ref": "kyle",
-            "take": "clips/s5_v1.mov",
+            "take": "clips/s5_v2.mov",
             "trim": [
               0,
-              8.0
+              8.5
             ]
           },
           {
@@ -3079,7 +3084,7 @@
             "take": "clips/s7_v1.mov",
             "trim": [
               0,
-              8.5
+              9.0
             ]
           },
           {
@@ -3093,9 +3098,9 @@
                 "sampler": 16
               }
             },
-            "video_prompt": "Fixed camera, no camera movement. The lighthouse beam sweeps slowly out across the water and through the spray, heavy swell rolling beneath the camera, surf bursting white against the rocks, cloud moving fast overhead. The beam stays bright and constant. Surf, wind, no music.",
+            "video_prompt": "Fixed camera, no camera movement. The lighthouse lamp rotates steadily like a real lighthouse: the shaft of the beam swings around through the spray, passes across the camera, sweeps on out over the water and comes around again, over and over. Beneath the camera a heavy swell rolls and heaves, big waves surging in and bursting white against the black rocks, spray blowing across the causeway, storm cloud moving fast overhead. Surf, wind, no music.",
             "qc_ref": "kyle",
-            "take": "clips/s8_v1.mov",
+            "take": "clips/s8_v2.mov",
             "trim": [
               0,
               9.9

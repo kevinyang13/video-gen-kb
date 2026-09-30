@@ -32,6 +32,15 @@ it was trimmed to 8.0 s rather than the 9.5 s the previous two films supported.
 face from klein, not weathering. Dropped in favour of "an even natural skin tone", which fixed it. Weather on
 skin is better implied by the environment than requested directly.
 
+**Three corrections from review, all prompt faults rather than model faults.** (1) "Cheeks reddened by cold
+wind" makes klein paint the whole face blotchy red — weather on skin has to be implied by the environment, not
+requested as a colour. (2) **"The light stays constant" is not free.** That line was introduced to stop shots
+dimming to black and it works, but it was also sitting in the shot whose entire subject is a rotating
+lighthouse beam, and it froze the beam. Rewritten to describe the rotation positively and the beam now turns.
+Scope that line to shots where light is not the subject. (3) A moving shot needs its destination in frame: the
+spiral-stair climb led into a blank curve of wall, and the fix was in the **still** — re-rendered with a lit
+hatch above as the vanishing point — not in the motion prompt.
+
 ## 2026-09-29 — Lindsey above the cloud sea, and the rule behind the rules
 
 Third LoRA-driven film, [[lindsey-summit-plan]]: a forest at dawn, a compass, a stone stair, and a ruined tower
