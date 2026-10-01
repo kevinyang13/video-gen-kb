@@ -3227,7 +3227,7 @@
       "post": {
         "upscale": "scripts/upscale_4k.sh — Real-ESRGAN x4plus -> 3840x2160",
         "loop": "none — xfade 0.75",
-        "music": "chosen after QC"
+        "music": "Calm Ambient Dreamscape — morgan-ambient, Pixabay, 3:42; first 61 s under the LTX fire and wind at 0.5, 2 s fade out. Reused from coast; ambient and unhurried suits a night sky."
       },
       "scenes": {
         "locks": {
@@ -3255,19 +3255,19 @@
         "s3": {
           "title": "Close-up — Kyle, firelit",
           "note": "LoRA weight 1.0; input seed/kyle.png; kept 7.0 s",
-          "still": "Tight close-up portrait, head and shoulders, straight on. kyle_kx boy, this exact face, a nine-year-old boy with child proportions, wearing warm outdoor layers — a quilted down jacket, a knitted beanie and hiking boots with the beanie pushed back, facing the camera, warm firelight on his face from below and cold blue night behind, cheeks lit, eyes bright. the same high desert ridge at night under a blazing Milky Way, the canyon black below, red sandstone lit warm by a small campfire thrown far out of focus behind him. Razor-sharp focus on the eyes and skin texture. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin and fabric, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+          "still": "Tight close-up portrait, head and shoulders, straight on. kyle_kx boy, this exact face, a nine-year-old boy with child proportions, wearing warm outdoor layers — a quilted down jacket, a knitted beanie and hiking boots with the beanie pushed back, facing the camera, a large campfire burning just out of frame close to them, throwing strong warm orange light across the face and lighting it clearly and brightly, deep blue starlit night behind, the face well exposed and clearly visible, eyes bright. the same high desert ridge at night under a blazing Milky Way, the canyon black below, red sandstone lit warm by a small campfire thrown far out of focus behind him. Razor-sharp focus on the eyes and skin texture. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin and fabric, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
           "video": "Locked camera, no push in. He faces the camera the whole time; firelight moves warm across his face, he blinks once and breathes. Fire crackle, wind, no music."
         },
         "s4": {
           "title": "Close-up — Lindsey, firelit",
           "note": "LoRA weight 1.0; input seed/lindsey.png; kept 7.0 s",
-          "still": "Tight close-up portrait, head and shoulders, straight on. lindsey_kx girl, this exact face, a nine-year-old girl with child proportions, wearing warm outdoor layers — a quilted down jacket, a knitted beanie and hiking boots with loose hair under the beanie, facing the camera, warm firelight on her face from below and cold blue night behind, the faint beginning of a smile. the same high desert ridge at night under a blazing Milky Way, the canyon black below, red sandstone lit warm by a small campfire thrown far out of focus behind her. Razor-sharp focus on the eyes and skin texture. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin and fabric, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+          "still": "Tight close-up portrait, head and shoulders, straight on. lindsey_kx girl, this exact face, a nine-year-old girl with child proportions, wearing warm outdoor layers — a quilted down jacket, a knitted beanie and hiking boots with loose hair under the beanie, facing the camera, a large campfire burning just out of frame close to them, throwing strong warm orange light across the face and lighting it clearly and brightly, deep blue starlit night behind, the face well exposed and clearly visible, the faint beginning of a smile. the same high desert ridge at night under a blazing Milky Way, the canyon black below, red sandstone lit warm by a small campfire thrown far out of focus behind her. Razor-sharp focus on the eyes and skin texture. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin and fabric, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
           "video": "Locked camera, no push in. She faces the camera the whole time; firelight moves warm across her face, the small smile settles, she blinks once. Fire crackle, wind, no music."
         },
         "s5": {
           "title": "Two of them together — the shot three separate LoRAs cannot make",
           "note": "LoRA weight 1.0; input seed/pair.png; kept 7.0 s",
-          "still": "Medium two-shot, both subjects seated side by side on a low sandstone ledge at the fire, facing the camera, a clear gap of dark air between their heads so the two faces never overlap. On the left of frame ivy_kx woman, this exact face, an adult woman; on the right of frame lindsey_kx girl, this exact face, a nine-year-old girl with child proportions. Both wearing warm outdoor layers — a quilted down jacket, a knitted beanie and hiking boots. Warm firelight from below on both faces, cold blue night and the same high desert ridge at night under a blazing Milky Way, the canyon black below, red sandstone lit warm by a small campfire far out of focus behind them. Two people alone in the frame. Razor-sharp focus on both faces. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin and fabric, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+          "still": "Medium two-shot, both subjects seated side by side on a low sandstone ledge at the fire, facing the camera, a clear gap of dark air between their heads so the two faces never overlap. On the left of frame ivy_kx woman, this exact face, an adult woman; on the right of frame lindsey_kx girl, this exact face, a nine-year-old girl with child proportions. Both wearing warm outdoor layers — a quilted down jacket, a knitted beanie and hiking boots. a large campfire burning just out of frame close to them, throwing strong warm orange light across both faces and lighting them clearly and brightly, both faces well exposed, large in frame and clearly visible, deep blue starlit night and the same high desert ridge at night under a blazing Milky Way, the canyon black below, red sandstone lit warm by a small campfire far out of focus behind them. Two people alone in the frame. Razor-sharp focus on both faces. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin and fabric, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
           "video": "Locked camera, no push in. Both of them stay facing the camera and neither turns; firelight moves warm across both faces, each breathes, one blinks. Fire crackle, wind, no music."
         },
         "s6": {
@@ -3279,7 +3279,7 @@
         "s7": {
           "title": "Close-up — Ivy, watching the sky",
           "note": "LoRA weight 1.0; input seed/ivy.png; kept 7.0 s",
-          "still": "Close-up portrait, frontal, slightly low angle. ivy_kx woman, this exact face, an adult woman, wearing warm outdoor layers — a quilted down jacket, a knitted beanie and hiking boots, facing the camera with her chin lifted a little and her eyes raised past the camera toward the sky, warm firelight on her face from below, an expression of quiet wonder. the same high desert ridge at night under a blazing Milky Way, the canyon black below, red sandstone lit warm by a small campfire soft and starlit behind her. Razor-sharp focus on the eyes and skin. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin and fabric, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+          "still": "Close-up portrait, frontal, slightly low angle. ivy_kx woman, this exact face, an adult woman, wearing warm outdoor layers — a quilted down jacket, a knitted beanie and hiking boots, facing the camera with her chin lifted a little and her eyes raised past the camera toward the sky, a large campfire burning just out of frame close to them, throwing strong warm orange light across the face and lighting it clearly and brightly, the face well exposed and clearly visible, an expression of quiet wonder. the same high desert ridge at night under a blazing Milky Way, the canyon black below, red sandstone lit warm by a small campfire soft and starlit behind her. Razor-sharp focus on the eyes and skin. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin and fabric, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
           "video": "Locked camera. Her expression settles into a slow smile and her eyes stay up on the sky; firelight moves warm across her face, she blinks once. Fire crackle, wind, no music."
         },
         "s8": {
@@ -3387,7 +3387,7 @@
             },
             "video_prompt": "Fixed camera, no camera movement. The three walk slowly away along the ridge in single file, dry grass bending in the wind, dust lifting off the trail, cloud shadows sliding across the canyon far below. The light stays constant. Wind, distant birds, no music.",
             "qc_ref": null,
-            "take": null,
+            "take": "clips/s1_v1.mov",
             "trim": [
               0,
               9.5
@@ -3412,10 +3412,10 @@
             },
             "video_prompt": "Locked macro camera. The small flame grows and leans, sparks lifting and dying, a hand laying one more twig onto it and withdrawing, warm light pulsing across the stones. Fire crackle, wind, no music.",
             "qc_ref": null,
-            "take": null,
+            "take": "clips/s2_v1.mov",
             "trim": [
               0,
-              9.0
+              8.5
             ]
           },
           {
@@ -3423,7 +3423,7 @@
             "still": {
               "ref": null,
               "input": "seed/kyle.png",
-              "prompt": "Tight close-up portrait, head and shoulders, straight on. kyle_kx boy, this exact face, a nine-year-old boy with child proportions, wearing warm outdoor layers — a quilted down jacket, a knitted beanie and hiking boots with the beanie pushed back, facing the camera, warm firelight on his face from below and cold blue night behind, cheeks lit, eyes bright. the same high desert ridge at night under a blazing Milky Way, the canyon black below, red sandstone lit warm by a small campfire thrown far out of focus behind him. Razor-sharp focus on the eyes and skin texture. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin and fabric, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+              "prompt": "Tight close-up portrait, head and shoulders, straight on. kyle_kx boy, this exact face, a nine-year-old boy with child proportions, wearing warm outdoor layers — a quilted down jacket, a knitted beanie and hiking boots with the beanie pushed back, facing the camera, a large campfire burning just out of frame close to them, throwing strong warm orange light across the face and lighting it clearly and brightly, deep blue starlit night behind, the face well exposed and clearly visible, eyes bright. the same high desert ridge at night under a blazing Milky Way, the canyon black below, red sandstone lit warm by a small campfire thrown far out of focus behind him. Razor-sharp focus on the eyes and skin texture. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin and fabric, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
               "config": {
                 "shift": 3.0,
                 "sampler": 16,
@@ -3433,11 +3433,18 @@
                     "weight": 1.0
                   }
                 ]
-              }
+              },
+              "seeds": [
+                11,
+                12,
+                13,
+                14,
+                15
+              ]
             },
             "video_prompt": "Locked camera, no push in. He faces the camera the whole time; firelight moves warm across his face, he blinks once and breathes. Fire crackle, wind, no music.",
             "qc_ref": null,
-            "take": null,
+            "take": "clips/s3_v1.mov",
             "trim": [
               0,
               7.0
@@ -3448,7 +3455,7 @@
             "still": {
               "ref": null,
               "input": "seed/lindsey.png",
-              "prompt": "Tight close-up portrait, head and shoulders, straight on. lindsey_kx girl, this exact face, a nine-year-old girl with child proportions, wearing warm outdoor layers — a quilted down jacket, a knitted beanie and hiking boots with loose hair under the beanie, facing the camera, warm firelight on her face from below and cold blue night behind, the faint beginning of a smile. the same high desert ridge at night under a blazing Milky Way, the canyon black below, red sandstone lit warm by a small campfire thrown far out of focus behind her. Razor-sharp focus on the eyes and skin texture. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin and fabric, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+              "prompt": "Tight close-up portrait, head and shoulders, straight on. lindsey_kx girl, this exact face, a nine-year-old girl with child proportions, wearing warm outdoor layers — a quilted down jacket, a knitted beanie and hiking boots with loose hair under the beanie, facing the camera, a large campfire burning just out of frame close to them, throwing strong warm orange light across the face and lighting it clearly and brightly, deep blue starlit night behind, the face well exposed and clearly visible, the faint beginning of a smile. the same high desert ridge at night under a blazing Milky Way, the canyon black below, red sandstone lit warm by a small campfire thrown far out of focus behind her. Razor-sharp focus on the eyes and skin texture. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin and fabric, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
               "config": {
                 "shift": 3.0,
                 "sampler": 16,
@@ -3458,11 +3465,18 @@
                     "weight": 1.0
                   }
                 ]
-              }
+              },
+              "seeds": [
+                21,
+                22,
+                23,
+                24,
+                25
+              ]
             },
             "video_prompt": "Locked camera, no push in. She faces the camera the whole time; firelight moves warm across her face, the small smile settles, she blinks once. Fire crackle, wind, no music.",
             "qc_ref": null,
-            "take": null,
+            "take": "clips/s4_v1.mov",
             "trim": [
               0,
               7.0
@@ -3473,7 +3487,7 @@
             "still": {
               "ref": null,
               "input": "seed/pair.png",
-              "prompt": "Medium two-shot, both subjects seated side by side on a low sandstone ledge at the fire, facing the camera, a clear gap of dark air between their heads so the two faces never overlap. On the left of frame ivy_kx woman, this exact face, an adult woman; on the right of frame lindsey_kx girl, this exact face, a nine-year-old girl with child proportions. Both wearing warm outdoor layers — a quilted down jacket, a knitted beanie and hiking boots. Warm firelight from below on both faces, cold blue night and the same high desert ridge at night under a blazing Milky Way, the canyon black below, red sandstone lit warm by a small campfire far out of focus behind them. Two people alone in the frame. Razor-sharp focus on both faces. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin and fabric, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+              "prompt": "Medium two-shot, both subjects seated side by side on a low sandstone ledge at the fire, facing the camera, a clear gap of dark air between their heads so the two faces never overlap. On the left of frame ivy_kx woman, this exact face, an adult woman; on the right of frame lindsey_kx girl, this exact face, a nine-year-old girl with child proportions. Both wearing warm outdoor layers — a quilted down jacket, a knitted beanie and hiking boots. a large campfire burning just out of frame close to them, throwing strong warm orange light across both faces and lighting them clearly and brightly, both faces well exposed, large in frame and clearly visible, deep blue starlit night and the same high desert ridge at night under a blazing Milky Way, the canyon black below, red sandstone lit warm by a small campfire far out of focus behind them. Two people alone in the frame. Razor-sharp focus on both faces. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin and fabric, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
               "config": {
                 "shift": 3.0,
                 "sampler": 16,
@@ -3483,14 +3497,21 @@
                     "weight": 1.0
                   }
                 ]
-              }
+              },
+              "seeds": [
+                31,
+                32,
+                33,
+                34,
+                35
+              ]
             },
             "video_prompt": "Locked camera, no push in. Both of them stay facing the camera and neither turns; firelight moves warm across both faces, each breathes, one blinks. Fire crackle, wind, no music.",
             "qc_ref": null,
-            "take": null,
+            "take": "clips/s5_v1.mov",
             "trim": [
               0,
-              7.0
+              7.5
             ]
           },
           {
@@ -3506,7 +3527,7 @@
             },
             "video_prompt": "Fixed camera, no camera movement. The stars wheel very slowly, thin high cloud drifting across the Milky Way, a meteor streaking down and burning out, then another far off. Warm firelight flickers on the foreground rock. Wind, fire crackle, no music.",
             "qc_ref": null,
-            "take": null,
+            "take": "clips/s6_v1.mov",
             "trim": [
               0,
               9.5
@@ -3517,7 +3538,7 @@
             "still": {
               "ref": null,
               "input": "seed/ivy.png",
-              "prompt": "Close-up portrait, frontal, slightly low angle. ivy_kx woman, this exact face, an adult woman, wearing warm outdoor layers — a quilted down jacket, a knitted beanie and hiking boots, facing the camera with her chin lifted a little and her eyes raised past the camera toward the sky, warm firelight on her face from below, an expression of quiet wonder. the same high desert ridge at night under a blazing Milky Way, the canyon black below, red sandstone lit warm by a small campfire soft and starlit behind her. Razor-sharp focus on the eyes and skin. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin and fabric, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+              "prompt": "Close-up portrait, frontal, slightly low angle. ivy_kx woman, this exact face, an adult woman, wearing warm outdoor layers — a quilted down jacket, a knitted beanie and hiking boots, facing the camera with her chin lifted a little and her eyes raised past the camera toward the sky, a large campfire burning just out of frame close to them, throwing strong warm orange light across the face and lighting it clearly and brightly, the face well exposed and clearly visible, an expression of quiet wonder. the same high desert ridge at night under a blazing Milky Way, the canyon black below, red sandstone lit warm by a small campfire soft and starlit behind her. Razor-sharp focus on the eyes and skin. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin and fabric, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
               "config": {
                 "shift": 3.0,
                 "sampler": 16,
@@ -3527,14 +3548,21 @@
                     "weight": 1.0
                   }
                 ]
-              }
+              },
+              "seeds": [
+                41,
+                42,
+                43,
+                44,
+                45
+              ]
             },
             "video_prompt": "Locked camera. Her expression settles into a slow smile and her eyes stay up on the sky; firelight moves warm across her face, she blinks once. Fire crackle, wind, no music.",
             "qc_ref": null,
-            "take": null,
+            "take": "clips/s7_v1.mov",
             "trim": [
               0,
-              7.0
+              7.5
             ]
           },
           {
@@ -3556,14 +3584,28 @@
             },
             "video_prompt": "Fixed camera, no camera movement. The fire flickers and throws moving warm light on the three seated figures and the rock around them, sparks lifting away into the dark, the stars steady overhead, thin cloud drifting. They sit still. Fire crackle, wind, no music.",
             "qc_ref": null,
-            "take": null,
+            "take": "clips/s8_v1.mov",
             "trim": [
               0,
               9.5
             ]
           }
-        ]
-      }
+        ],
+        "music": {
+          "file": "projects/yang_ridge/v1-lora-cli/music/calm_ambient_dreamscape.mp3",
+          "start": 0,
+          "vol": 0.5,
+          "fade_in": 1.5,
+          "fade_out": 2
+        }
+      },
+      "files": [
+        "stills/s1.png … s8.png",
+        "clips/s1_v1.mov … s8_v1.mov",
+        "final/yang_ridge_3840x2160.mp4",
+        "final/yang_ridge_1920x1080.mp4",
+        "music/calm_ambient_dreamscape.mp3"
+      ]
     }
   ]
 }

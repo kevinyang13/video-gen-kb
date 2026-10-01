@@ -89,7 +89,7 @@ the [[idea-to-video-blueprint]] pick rubric rather than replacing it.
 | **Structure** | load-bearing geometry that does not resolve: stairs without treads, a surface that is both floor and wall, a rail attached to nothing |
 | **Destination** | the subject is moving, or about to, and there is nowhere in frame for them to go |
 | **Age and scale** | the body reads adult when it should read child; no object of known size to judge scale against |
-| **Count** | a second person; extra or missing limbs; count hands per person |
+| **Count** | a second person; extra or missing limbs; count hands per person. For groups, count at full size on a tight crop — group counts read correctly at tile size and are wrong at full size |
 | **Foreground** | a cable, rope, pole or branch across frame that the shot does not need |
 | **Props** | a prop from the wardrobe lock that has grown, multiplied or moved somewhere it cannot be |
 | **Skin** | blotching, plastic sheen, or colour that came from a weather adjective |
