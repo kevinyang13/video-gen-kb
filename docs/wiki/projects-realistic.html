@@ -92,7 +92,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
     <span class="spacer"></span>
     <button class="pill" onclick="tt()">◐ Theme</button>
   </nav>
-  <h1>Photoreal projects</h1><p class="lede">Cinematic photoreal shorts: FLUX.2 klein stills with Moodboard references, motion from LTX-2.3 or Wan 2.2, Real-ESRGAN to 4K, cut with crossfades. Dragon Epic, Lost City, the three-minute film. Full record per project: models, settings, prompts, seeds, music and output files. Generated from each version's <code>spec.json</code>.</p><div class="meta"><span><b>Updated</b> 2026-09-29</span><span><b>Sources</b> projects/<em>/</em>/spec.json; per-project notes from the session logs.</span></div>
+  <h1>Photoreal projects</h1><p class="lede">Cinematic photoreal shorts: FLUX.2 klein stills with Moodboard references, motion from LTX-2.3 or Wan 2.2, Real-ESRGAN to 4K, cut with crossfades. Dragon Epic, Lost City, the three-minute film. Full record per project: models, settings, prompts, seeds, music and output files. Generated from each version's <code>spec.json</code>.</p><div class="meta"><span><b>Updated</b> 2026-09-30</span><span><b>Sources</b> projects/<em>/</em>/spec.json; per-project notes from the session logs.</span></div>
 <hr />
 <p>Index of every project: <a href="projects.html">projects</a>. Other themes: <a href="projects-anime.html">projects anime</a> · <a href="projects-3d.html">projects 3d</a>.</p>
 <h2>Summary</h2>
@@ -225,7 +225,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <td style="text-align: right;">11</td>
 <td><a href="#yang_family_lora">Yang family — one LoRA, three subjects</a></td>
 <td>2026-09-30</td>
-<td>dataset built — training queued behind kyle_lora v2</td>
+<td>delivered 2026-09-30 — yang_family_lora_4000_lora_f32.ckpt, 9 h 22 m, 5 checkpoints at 843 MB each</td>
 <td>FLUX.2 [klein] 9B 576x1024</td>
 <td>Wan 2.2 High Noise ? min</td>
 <td>Calm Ambient Dreamscape</td>
@@ -2191,7 +2191,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </table></div>
 <h2 id="yang_family_lora">Yang family — one LoRA, three subjects</h2>
 <ul>
-<li><strong>Date</strong>: 2026-09-30 · <strong>Status</strong>: dataset built — training queued behind kyle_lora v2 · <strong>Version</strong>: <code>v1-multi-subject</code> · <strong>Draw Things project</strong>: <code>none — draw-things-cli train lora</code></li>
+<li><strong>Date</strong>: 2026-09-30 · <strong>Status</strong>: delivered 2026-09-30 — yang_family_lora_4000_lora_f32.ckpt, 9 h 22 m, 5 checkpoints at 843 MB each · <strong>Version</strong>: <code>v1-multi-subject</code> · <strong>Draw Things project</strong>: <code>none — draw-things-cli train lora</code></li>
 <li><strong>This version</strong>: First multi-subject LoRA: three people in one adapter, each behind its own trigger and class word.</li>
 <li><strong>Files</strong> (<code>projects/yang_family_lora/v1-multi-subject/</code>): <code>seed/dataset/NNN.png + NNN.txt (87 pairs)</code>, <code>logs/train.log</code></li>
 <li><strong>Notes</strong>: Kyle, Lindsey and Ivy are Kevin's family; consent settled for all three. The point of a single adapter is that it can put two of them in one frame, which three separate LoRAs cannot do — Draw Things can load more than one LoRA, but two character adapters fight for the same face.</li>
@@ -2460,6 +2460,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <li><em>ridge</em> — a high desert ridge of red sandstone at dusk, twisted juniper and dry grass, a vast canyon falling away below, distant mesas layered in haze, an immense open sky</li>
 <li><em>night</em> — the same high desert ridge at night under a blazing Milky Way, the canyon black below, red sandstone lit warm by a small campfire</li>
 <li><em>style</em> — Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin and fabric, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.</li>
+<li><em>firelight</em> — a large campfire burning just out of frame close to them, throwing strong warm orange light across the face and lighting it clearly and brightly, deep blue night behind</li>
 </ul>
 <h4>s1 — Establishing — three of them on the ridge trail at dusk</h4>
 <ul>
@@ -2560,7 +2561,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 
   <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="projects.html">projects</a></li><li><a href="runbook-living-painting.html">runbook living painting</a></li><li><a href="draw-things-setup.html">draw things setup</a></li></ul></div>
 </div>
-<footer>video-gen-kb · built 2026-09-29 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<footer>video-gen-kb · built 2026-09-30 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
 <script>function tt(){var r=document.documentElement,
 d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
 matchMedia('(prefers-color-scheme: dark)').matches);

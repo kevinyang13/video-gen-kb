@@ -4,7 +4,7 @@
 
 **Sources**: projects/*/*/spec.json; per-project notes from the session logs.
 
-**Last updated**: 2026-09-29
+**Last updated**: 2026-09-30
 
 ---
 
@@ -24,7 +24,7 @@ Index of every project: [[projects]]. Other themes: [[projects-anime]] · [[proj
 | 8 | [Lindsey — above the cloud sea](#lindsey_summit) | 2026-09-29 | delivered 2026-09-29 10:42 — 59.88 s, 3840x2160 (280 MB) + 1920x1080 (87 MB), 8 shots, none dropped; mean -18.7 dB, peak -5.3 dB. Planned length 59.75 s, delivered 59.88 s. | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 11 min | Adventure Journey | `—` | — |
 | 9 | [Kyle — the signal fire](#kyle_lighthouse) | 2026-09-29 | stopped 2026-09-29 — abandoned at Kevin's call after s6 could not be made to work. Seven of eight shots are rendered, graded and upscaled to 4K; s6 went through five designs (interior stairwell from below, side-on interior spiral, exterior stair on the tower, and two versions of the entrance door) and none was accepted. No final cut was produced from the current shot set. | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 11 min | Best Adventure Ever | `—` | — |
 | 10 | [Kyle — character LoRA v2](#kyle_lora) | 2026-09-29 | dataset built 2026-09-29 — 55 pairs; training | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
-| 11 | [Yang family — one LoRA, three subjects](#yang_family_lora) | 2026-09-30 | dataset built — training queued behind kyle_lora v2 | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
+| 11 | [Yang family — one LoRA, three subjects](#yang_family_lora) | 2026-09-30 | delivered 2026-09-30 — yang_family_lora_4000_lora_f32.ckpt, 9 h 22 m, 5 checkpoints at 843 MB each | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
 | 12 | [Yang family — under the meteor sky](#yang_ridge) | 2026-09-30 | planned — queued behind yang_family_lora training | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 11 min | chosen after QC | `—` | — |
 
 ## Dragon Epic — 1-minute photoreal short, family hero face {#dragon_epic}
@@ -1130,7 +1130,7 @@ v2 keeps all twenty v1 frames — the close-range identity they give is the part
 
 ## Yang family — one LoRA, three subjects {#yang_family_lora}
 
-- **Date**: 2026-09-30 · **Status**: dataset built — training queued behind kyle_lora v2 · **Version**: `v1-multi-subject` · **Draw Things project**: `none — draw-things-cli train lora`
+- **Date**: 2026-09-30 · **Status**: delivered 2026-09-30 — yang_family_lora_4000_lora_f32.ckpt, 9 h 22 m, 5 checkpoints at 843 MB each · **Version**: `v1-multi-subject` · **Draw Things project**: `none — draw-things-cli train lora`
 - **This version**: First multi-subject LoRA: three people in one adapter, each behind its own trigger and class word.
 - **Files** (`projects/yang_family_lora/v1-multi-subject/`): `seed/dataset/NNN.png + NNN.txt (87 pairs)`, `logs/train.log`
 - **Notes**: Kyle, Lindsey and Ivy are Kevin's family; consent settled for all three. The point of a single adapter is that it can put two of them in one frame, which three separate LoRAs cannot do — Draw Things can load more than one LoRA, but two character adapters fight for the same face.
@@ -1237,6 +1237,7 @@ Prompt: `per shot — see scenes`
 - *ridge* — a high desert ridge of red sandstone at dusk, twisted juniper and dry grass, a vast canyon falling away below, distant mesas layered in haze, an immense open sky
 - *night* — the same high desert ridge at night under a blazing Milky Way, the canyon black below, red sandstone lit warm by a small campfire
 - *style* — Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin and fabric, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.
+- *firelight* — a large campfire burning just out of frame close to them, throwing strong warm orange light across the face and lighting it clearly and brightly, deep blue night behind
 
 #### s1 — Establishing — three of them on the ridge trail at dusk
 

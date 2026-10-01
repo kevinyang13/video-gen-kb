@@ -80,10 +80,32 @@ finished, since the GPU runs one job at a time.
 
 Test 4 is the one that decides whether this replaces the per-person LoRAs or sits alongside them.
 
-## 6. Log
+## 6. Result — the bleed test passes
 
-- **2026-09-30** — dataset merged (87 pairs, no new photographs, no caption rewrites) and training queued
-  behind `kyle_lora` v2.
+**2026-09-30.** Trained in 9 h 22 m, five checkpoints at 843 MB each.
+
+Rendered individually at weight 1.0, `kyle_kx boy`, `lindsey_kx girl` and `ivy_kx woman` come back as **three
+distinct people with the right ages and sexes**. Nothing leaks between them. And the two-shot works: asking for
+Ivy on the left of frame and Lindsey on the right returns an adult woman and a child, both faces intact, both
+lit, neither overlapping the other. That is exactly what three separate character LoRAs cannot produce.
+
+Two defences appear to have carried it: the three datasets already used **distinct triggers and distinct class
+words**, and the subject counts were balanced to 33 / 32 / 22 so no one subject became the model's default
+face.
+
+**Still unmeasured**: what sharing the adapter costs Kyle against his own `kyle_lora_v2`, and whether any
+subject holds at full-body distance — Ivy has only three full-body frames, so she is the one to watch.
+
+### Cost note
+
+Rank 64 runs at **0.12 it/s against rank 32's 0.22** on this machine — doubling the rank roughly doubles the
+per-step cost. The 5-hour estimate in §4 was taken from rank-32 timings and was wrong; budget multi-subject
+runs from 0.12.
+
+## 7. Log
+
+- **2026-09-30** — dataset merged (87 pairs, no new photographs, no caption rewrites), trained 9 h 22 m,
+  bleed test passed.
 
 ## Related pages
 - [[kyle-lora-plan]]

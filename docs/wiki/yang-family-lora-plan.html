@@ -242,15 +242,30 @@ finished, since the GPU runs one job at a time.</p>
    its own dedicated LoRA?</li>
 </ol>
 <p>Test 4 is the one that decides whether this replaces the per-person LoRAs or sits alongside them.</p>
-<h2>6. Log</h2>
+<h2>6. Result — the bleed test passes</h2>
+<p><strong>2026-09-30.</strong> Trained in 9 h 22 m, five checkpoints at 843 MB each.</p>
+<p>Rendered individually at weight 1.0, <code>kyle_kx boy</code>, <code>lindsey_kx girl</code> and <code>ivy_kx woman</code> come back as <strong>three
+distinct people with the right ages and sexes</strong>. Nothing leaks between them. And the two-shot works: asking for
+Ivy on the left of frame and Lindsey on the right returns an adult woman and a child, both faces intact, both
+lit, neither overlapping the other. That is exactly what three separate character LoRAs cannot produce.</p>
+<p>Two defences appear to have carried it: the three datasets already used <strong>distinct triggers and distinct class
+words</strong>, and the subject counts were balanced to 33 / 32 / 22 so no one subject became the model's default
+face.</p>
+<p><strong>Still unmeasured</strong>: what sharing the adapter costs Kyle against his own <code>kyle_lora_v2</code>, and whether any
+subject holds at full-body distance — Ivy has only three full-body frames, so she is the one to watch.</p>
+<h3>Cost note</h3>
+<p>Rank 64 runs at <strong>0.12 it/s against rank 32's 0.22</strong> on this machine — doubling the rank roughly doubles the
+per-step cost. The 5-hour estimate in §4 was taken from rank-32 timings and was wrong; budget multi-subject
+runs from 0.12.</p>
+<h2>7. Log</h2>
 <ul>
-<li><strong>2026-09-30</strong> — dataset merged (87 pairs, no new photographs, no caption rewrites) and training queued
-  behind <code>kyle_lora</code> v2.</li>
+<li><strong>2026-09-30</strong> — dataset merged (87 pairs, no new photographs, no caption rewrites), trained 9 h 22 m,
+  bleed test passed.</li>
 </ul>
 
   <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="kyle-lora-plan.html">kyle lora plan</a></li><li><a href="lindsey-lora-plan.html">lindsey lora plan</a></li><li><a href="ivy-lora-plan.html">ivy lora plan</a></li><li><a href="blueprint-v2-research.html">blueprint v2 research</a></li></ul></div>
 </div>
-<footer>video-gen-kb · built 2026-09-29 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<footer>video-gen-kb · built 2026-09-30 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
 <script>function tt(){var r=document.documentElement,
 d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
 matchMedia('(prefers-color-scheme: dark)').matches);

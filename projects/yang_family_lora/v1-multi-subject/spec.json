@@ -7,7 +7,7 @@
   "date": "2026-09-30",
   "theme": "realistic",
   "dt_project": "none \u2014 draw-things-cli train lora",
-  "status": "training \u2014 started 2026-09-30 07:06, 4000 steps at rank 64",
+  "status": "delivered 2026-09-30 \u2014 yang_family_lora_4000_lora_f32.ckpt, 9 h 22 m, 5 checkpoints at 843 MB each",
   "source": "the three existing per-person datasets; no new photographs. Raw source photos stay git-ignored in their own projects.",
   "notes": "Kyle, Lindsey and Ivy are Kevin's family; consent settled for all three. The point of a single adapter is that it can put two of them in one frame, which three separate LoRAs cannot do \u2014 Draw Things can load more than one LoRA, but two character adapters fight for the same face.\n\nThe setup is unusually favourable: all three datasets already lead every caption with a distinct trigger AND a distinct class word \u2014 kyle_kx boy, lindsey_kx girl, ivy_kx woman. That gives the model two independent axes to separate the subjects on, which is the main defence against the failure mode here, identity bleed.\n\nKyle was capped at 33 of his 55 v2 frames so that no subject dominates: 33 / 32 / 22 rather than 55 / 32 / 22. His full-body coverage was kept whole because that is what v2 was built for, the medium band was mostly kept, and the close-ups were thinned, since he had the most and close identity is the easiest thing for a LoRA to learn. kyle_lora v2 stays on disk for Kyle-only work, so nothing is lost by the cap.",
   "dataset": {
@@ -51,7 +51,8 @@
       "two subjects in one frame \u2014 the thing three separate LoRAs cannot do",
       "family-Kyle against standalone kyle_lora_v2, to measure what sharing the adapter costs"
     ],
-    "status": "to run after training"
+    "status": "identity and bleed verified 2026-09-30; cost-of-sharing and distance tests outstanding",
+    "result": "Bleed test PASSES. Rendered individually at weight 1.0, kyle_kx boy, lindsey_kx girl and ivy_kx woman come back as three distinct people with the right ages and sexes \u2014 no features leaking between them. The two-shot works: asking for Ivy on the left and Lindsey on the right returns an adult woman and a child, both faces intact and separated. That is the thing three separate character LoRAs cannot do, and it is why this adapter exists. Not yet measured: family-Kyle against standalone kyle_lora_v2, and any subject at full-body distance."
   },
   "files": [
     "seed/dataset/NNN.png + NNN.txt (87 pairs)",
