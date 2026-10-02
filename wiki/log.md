@@ -753,3 +753,50 @@ Two traps recorded on the way, both of which produce silent, plausible-looking f
 Also added `scripts/collage.sh` (a folder of images → one sheet, with the last-row padding ffmpeg's
 `tile` filter requires) and recorded that weight is per shot, not a global setting: 1.0 for a
 frontal close-up costs sharpness and prompt grip on wardrobe, 0.85 is the all-rounder.
+
+## 2026-10-01 — models moved to an external SSD
+
+The Data volume hit **31 GB free of 926 GB**, which blocked downloading LTX-2.3 for ComfyUI
+(~62 GB for transformer, Gemma encoder and VAE). Both model stores moved to a SanDisk Extreme
+2 TB: Draw Things' 155.8 GB and ComfyUI's 42.0 GB. Internal went 31 GB → 252 GB free. Full detail
+in [[model-storage-locations]].
+
+Measured rather than assumed: **running models off USB costs nothing at sampling time.** Median
+step time was 3.16 s internal against 3.17 s external on the same prompt and seed. The disk is
+only in the loop for the cold load, about +22 s for klein plus its text encoder. Across a whole
+film that is roughly +1 minute against ~88 minutes of rendering.
+
+Four traps, three of which produce a silent or misleading failure:
+
+- **The drive was running at USB 2.0.** First benchmark was 27.8 MB/s on a 10 Gb/s SSD — a
+  charge-only USB-C cable. `system_profiler SPUSBDataType` reports the negotiated link
+  (`Up to 480 Mb/s` vs `Up to 10 Gb/s`). After the cable swap: 805 MB/s, a 29x difference. At the
+  slow speed the 24 GB LTX model would take ~15 minutes to load for every clip.
+- **`rsync --info=progress2` is not supported by macOS's rsync.** It printed usage and copied
+  nothing. Worse, `echo "RSYNC_EXIT=$?"` after a pipeline reports the *last stage's* status, so the
+  failure read as success. Byte totals are the only honest check; also note `du` reported 134 GB
+  for a tree whose files sum to 155,794,425,414 bytes, because of APFS clone accounting.
+- **A models directory without the `custom*.json` manifests is invisible.** Copy the weights alone
+  and `draw-things-cli` reports `DOWNLOADED: no` for every model and refuses to resolve `--model`,
+  while the files sit right there. Copying the four manifests fixed it instantly.
+- **`-tensordata` sidecars must travel with their `.ckpt`.** `umt5_xxl_encoder_q8p.ckpt` is 880 KB;
+  its weights are a separate 6.4 GB file. Also learned here that FLUX.2 klein's text encoder is
+  Qwen 3 8B, not umT5 — the CLI names the missing dependency once the manifests are present.
+
+**The Draw Things GUI cannot follow the models to the SSD.** Symlinking its sandbox container
+folder left the LoRAs undetected, with no sandbox or TCC denial logged, after a quit and relaunch,
+and with every one of the 34 `custom_lora.json` entries resolving from a shell. The symlink was
+removed and the container folder now keeps only the manifests. The CLI pipeline — which is what
+`film_run.py` uses — is unaffected and was verified rendering klein plus `lindsey_lora_2000` off
+the SSD after the internal copies were deleted.
+
+Also recorded: Draw Things' `.ckpt` files are **SQLite databases**, not PyTorch checkpoints, for
+base models and LoRAs alike. That is why no Draw Things model can be pointed at ComfyUI. The base
+models are additionally quantized in Draw Things' own `q8p`/`i8x` schemes, so converting them is
+pointless when upstream safetensors exist. A trained LoRA is the exception worth converting: all
+564 tensors in `lindsey_lora_2000_lora_f32.ckpt` are plain float32, every `dim` product matching
+its byte length exactly, so the only remaining work is mapping Draw Things' `__dit__[t-c_q-0-0]__down__`
+layer names onto whatever ComfyUI's FLUX.2 LoRA loader expects. Untested.
+
+`scripts/comfy_export.py` added: turns any project's `spec.json` into two importable ComfyUI
+workflow graphs plus a shot data file. Generated for `lindsey_summit`.

@@ -1,0 +1,556 @@
+{
+ "last_node_id": 12,
+ "last_link_id": 11,
+ "nodes": [
+  {
+   "id": 1,
+   "type": "UNETLoader",
+   "pos": [
+    40,
+    40
+   ],
+   "size": [
+    340,
+    82
+   ],
+   "flags": {},
+   "order": 0,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "MODEL",
+     "type": "MODEL",
+     "links": [
+      1
+     ],
+     "slot_index": 0
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "UNETLoader"
+   },
+   "widgets_values": [
+    "flux2-klein-9b.safetensors",
+    "default"
+   ],
+   "title": "FLUX.2 [klein] 9B  (dtype: default -- MPS has no fp8)"
+  },
+  {
+   "id": 2,
+   "type": "CLIPLoader",
+   "pos": [
+    40,
+    170
+   ],
+   "size": [
+    340,
+    106
+   ],
+   "flags": {},
+   "order": 1,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "CLIP",
+     "type": "CLIP",
+     "links": [
+      4
+     ],
+     "slot_index": 0
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "CLIPLoader"
+   },
+   "widgets_values": [
+    "mistral3_flux2_text_encoder.safetensors",
+    "flux2",
+    "default"
+   ],
+   "title": "FLUX.2 text encoder"
+  },
+  {
+   "id": 3,
+   "type": "VAELoader",
+   "pos": [
+    40,
+    320
+   ],
+   "size": [
+    340,
+    58
+   ],
+   "flags": {},
+   "order": 2,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "VAE",
+     "type": "VAE",
+     "links": [
+      10
+     ],
+     "slot_index": 0
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "VAELoader"
+   },
+   "widgets_values": [
+    "flux2-vae.safetensors"
+   ],
+   "title": "FLUX.2 VAE"
+  },
+  {
+   "id": 4,
+   "type": "LoraLoaderModelOnly",
+   "pos": [
+    420,
+    40
+   ],
+   "size": [
+    340,
+    82
+   ],
+   "flags": {},
+   "order": 3,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 1
+    }
+   ],
+   "outputs": [
+    {
+     "name": "MODEL",
+     "type": "MODEL",
+     "links": [
+      2
+     ],
+     "slot_index": 0
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "LoraLoaderModelOnly"
+   },
+   "widgets_values": [
+    "lindsey_lora_2000.safetensors",
+    0.85
+   ],
+   "title": "LoRA  (see README -- needs conversion)"
+  },
+  {
+   "id": 5,
+   "type": "ModelSamplingSD3",
+   "pos": [
+    420,
+    170
+   ],
+   "size": [
+    340,
+    58
+   ],
+   "flags": {},
+   "order": 4,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 2
+    }
+   ],
+   "outputs": [
+    {
+     "name": "MODEL",
+     "type": "MODEL",
+     "links": [
+      3
+     ],
+     "slot_index": 0
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "ModelSamplingSD3"
+   },
+   "widgets_values": [
+    3.0
+   ],
+   "title": "shift 3"
+  },
+  {
+   "id": 6,
+   "type": "CLIPTextEncode",
+   "pos": [
+    420,
+    270
+   ],
+   "size": [
+    520,
+    300
+   ],
+   "flags": {},
+   "order": 5,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "clip",
+     "type": "CLIP",
+     "link": 4
+    }
+   ],
+   "outputs": [
+    {
+     "name": "CONDITIONING",
+     "type": "CONDITIONING",
+     "links": [
+      5,
+      6
+     ],
+     "slot_index": 0
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "CLIPTextEncode"
+   },
+   "widgets_values": [
+    "Extreme wide establishing shot. an ancient pine forest on a steep mountainside at dawn, tall straight trunks receding into cold blue mist, deep moss and fern over granite boulders, shafts of early light coming through the canopy, cold and silent, mist lying between the trunks. Small in the lower third of frame and seen from behind, lindsey_kx girl, a nine-year-old girl, this exact face, long dark hair loose with natural flyaway strands, wearing a weathered waxed-canvas explorer's jacket in deep forest green over a cream cable-knit wool sweater, a worn leather satchel on a strap across her body and a small brass compass on a cord at her chest, walking away from camera up a narrow root-crossed trail. Enormous sense of scale, deep depth of field, layered atmospheric perspective. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wool and weathered canvas, natural dawn light, shallow depth of field, subtle film grain, muted natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described."
+   ],
+   "title": "s1 -- still prompt",
+   "color": "#232",
+   "bgcolor": "#353"
+  },
+  {
+   "id": 7,
+   "type": "ConditioningZeroOut",
+   "pos": [
+    420,
+    600
+   ],
+   "size": [
+    340,
+    30
+   ],
+   "flags": {},
+   "order": 6,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "conditioning",
+     "type": "CONDITIONING",
+     "link": 5
+    }
+   ],
+   "outputs": [
+    {
+     "name": "CONDITIONING",
+     "type": "CONDITIONING",
+     "links": [
+      7
+     ],
+     "slot_index": 0
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "ConditioningZeroOut"
+   },
+   "widgets_values": [],
+   "title": "negative (unused at CFG 1)"
+  },
+  {
+   "id": 8,
+   "type": "EmptySD3LatentImage",
+   "pos": [
+    420,
+    680
+   ],
+   "size": [
+    340,
+    106
+   ],
+   "flags": {},
+   "order": 7,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "LATENT",
+     "type": "LATENT",
+     "links": [
+      8
+     ],
+     "slot_index": 0
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "EmptySD3LatentImage"
+   },
+   "widgets_values": [
+    1024,
+    576,
+    1
+   ],
+   "title": "1024x576"
+  },
+  {
+   "id": 9,
+   "type": "KSampler",
+   "pos": [
+    990,
+    270
+   ],
+   "size": [
+    340,
+    262
+   ],
+   "flags": {},
+   "order": 8,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 3
+    },
+    {
+     "name": "positive",
+     "type": "CONDITIONING",
+     "link": 6
+    },
+    {
+     "name": "negative",
+     "type": "CONDITIONING",
+     "link": 7
+    },
+    {
+     "name": "latent_image",
+     "type": "LATENT",
+     "link": 8
+    }
+   ],
+   "outputs": [
+    {
+     "name": "LATENT",
+     "type": "LATENT",
+     "links": [
+      9
+     ],
+     "slot_index": 0
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "KSampler"
+   },
+   "widgets_values": [
+    1,
+    "fixed",
+    4,
+    1.0,
+    "euler",
+    "ddim_uniform",
+    1.0
+   ],
+   "title": "4 steps / CFG 1.0"
+  },
+  {
+   "id": 10,
+   "type": "VAEDecode",
+   "pos": [
+    1370,
+    270
+   ],
+   "size": [
+    210,
+    46
+   ],
+   "flags": {},
+   "order": 9,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "samples",
+     "type": "LATENT",
+     "link": 9
+    },
+    {
+     "name": "vae",
+     "type": "VAE",
+     "link": 10
+    }
+   ],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      11
+     ],
+     "slot_index": 0
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "VAEDecode"
+   },
+   "widgets_values": []
+  },
+  {
+   "id": 11,
+   "type": "SaveImage",
+   "pos": [
+    1370,
+    360
+   ],
+   "size": [
+    420,
+    450
+   ],
+   "flags": {},
+   "order": 10,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "link": 11
+    }
+   ],
+   "outputs": [],
+   "properties": {
+    "Node name for S&R": "SaveImage"
+   },
+   "widgets_values": [
+    "lindsey_summit/s1"
+   ]
+  },
+  {
+   "id": 12,
+   "type": "Note",
+   "pos": [
+    990,
+    620
+   ],
+   "size": [
+    620,
+    760
+   ],
+   "flags": {},
+   "order": 11,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [],
+   "properties": {
+    "Node name for S&R": "Note"
+   },
+   "widgets_values": [
+    "STILL STAGE -- Lindsey \u2014 above the cloud sea\nmodel FLUX.2 [klein] 9B (8-bit S) | 1024x576 | steps 4 | CFG 1.0 | shift 3 | sampler DDIM Trailing\n\nLoRA weight is PER SHOT. Set it on the LoraLoaderModelOnly node each time.\nRender 5 seeds per shot and pick -- one seed in five is often the only correct one.\n\n================================================================\n\n--- s1  (LoRA 0.85) Establishing \u2014 the forest at dawn, she is small on the trail\n\nExtreme wide establishing shot. an ancient pine forest on a steep mountainside at dawn, tall straight trunks receding into cold blue mist, deep moss and fern over granite boulders, shafts of early light coming through the canopy, cold and silent, mist lying between the trunks. Small in the lower third of frame and seen from behind, lindsey_kx girl, a nine-year-old girl, this exact face, long dark hair loose with natural flyaway strands, wearing a weathered waxed-canvas explorer's jacket in deep forest green over a cream cable-knit wool sweater, a worn leather satchel on a strap across her body and a small brass compass on a cord at her chest, walking away from camera up a narrow root-crossed trail. Enormous sense of scale, deep depth of field, layered atmospheric perspective. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wool and weathered canvas, natural dawn light, shallow depth of field, subtle film grain, muted natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.\n\n--- s2  (LoRA 1.0) Close-up \u2014 her breath in the cold, eyes on the way ahead\n\nTight close-up portrait, head and shoulders, straight on. lindsey_kx girl, a nine-year-old girl, this exact face, long dark hair loose with natural flyaway strands, wearing a weathered waxed-canvas explorer's jacket in deep forest green over a cream cable-knit wool sweater, a worn leather satchel on a strap across her body and a small brass compass on a cord at her chest with the cream wool collar high at her throat, facing the camera, cheeks and nose flushed with cold, her breath faintly visible in the air. an ancient pine forest on a steep mountainside at dawn, tall straight trunks receding into cold blue mist, deep moss and fern over granite boulders, shafts of early light coming through the canopy thrown far out of focus behind her, cold blue light with a warm rim from a low shaft of sun. Razor-sharp focus on the eyes, skin texture and individual eyelashes. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wool and weathered canvas, natural dawn light, shallow depth of field, subtle film grain, muted natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.\n\n--- s3  (LoRA 0.6) Macro \u2014 a brass compass and a folded map, no face in frame\n\nExtreme close-up detail insert, no face in frame. Two small hands holding an old brass compass open above a folded linen map marked in faded ink, resting on the sleeve of a weathered waxed-canvas explorer's jacket in deep forest green over a cream cable-knit wool sweater, a worn leather satchel on a strap across her body and a small brass compass on a cord at her chest. The compass glass catching the cold dawn light, the needle settling, fine scratches on the brass, the weave of the linen and the wool visible. Macro clarity, very shallow depth of field. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wool and weathered canvas, natural dawn light, shallow depth of field, subtle film grain, muted natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.\n\n--- s4  (LoRA 1.0) Medium \u2014 she holds a branch aside and looks up at what she has found\n\nMedium shot, waist up, straight on. lindsey_kx girl, a nine-year-old girl, this exact face, long dark hair loose with natural flyaway strands, wearing a weathered waxed-canvas explorer's jacket in deep forest green over a cream cable-knit wool sweater, a worn leather satchel on a strap across her body and a small brass compass on a cord at her chest, one hand raised holding a pine branch aside in front of her, chin lifted and eyes raised toward something above and past the camera, an expression of dawning recognition. an ancient pine forest on a steep mountainside at dawn, tall straight trunks receding into cold blue mist, deep moss and fern over granite boulders, shafts of early light coming through the canopy close behind her, cold light on her face. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wool and weathered canvas, natural dawn light, shallow depth of field, subtle film grain, muted natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.\n\n--- s5  (LoRA 0.0) The old stone stair climbing into the mist\n\nWide shot, no people in frame. An ancient stone stair cut into the mountainside, worn treads under deep moss and pine roots, climbing steeply and disappearing into cold blue mist above, an ancient pine forest on a steep mountainside at dawn, tall straight trunks receding into cold blue mist, deep moss and fern over granite boulders, shafts of early light coming through the canopy crowding in on both sides, one shaft of dawn light falling across the lower steps. Strong upward perspective. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wool and weathered canvas, natural dawn light, shallow depth of field, subtle film grain, muted natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.\n\n--- s6  (LoRA 0.85) She climbs, seen from behind and below\n\nWide full-body shot from behind and below, looking up the stair. lindsey_kx girl, a nine-year-old girl, this exact face, long dark hair loose with natural flyaway strands, wearing a weathered waxed-canvas explorer's jacket in deep forest green over a cream cable-knit wool sweater, a worn leather satchel on a strap across her body and a small brass compass on a cord at her chest, seen from behind mid-stride climbing the mossy stone steps away from the camera toward the mist above, the satchel swinging at her hip, one hand on the rock wall. Strong upward perspective. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wool and weathered canvas, natural dawn light, shallow depth of field, subtle film grain, muted natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.\n\n--- s7  (LoRA 1.0) The top \u2014 sunrise on her face\n\nClose-up portrait, frontal, slightly low angle. lindsey_kx girl, a nine-year-old girl, this exact face, long dark hair loose with natural flyaway strands, wearing a weathered waxed-canvas explorer's jacket in deep forest green over a cream cable-knit wool sweater, a worn leather satchel on a strap across her body and a small brass compass on a cord at her chest, facing the camera with a low gold sunrise full on her face, wind lifting her hair, lips slightly parted in astonishment, eyes bright. Behind her a ruined stone watchtower on a high clifftop, weathered blocks and a broken arch, standing above an endless sea of cloud with distant blue peaks breaking through it, lit by a low gold sunrise soft and luminous and far out of focus. Razor-sharp focus on the eyes and skin. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wool and weathered canvas, natural dawn light, shallow depth of field, subtle film grain, muted natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.\n\n--- s8  (LoRA 0.85) What she climbed for \u2014 small at the edge above a sea of cloud\n\nExtreme wide final shot. a ruined stone watchtower on a high clifftop, weathered blocks and a broken arch, standing above an endless sea of cloud with distant blue peaks breaking through it, lit by a low gold sunrise. Very small at the cliff edge beside the broken arch and seen from behind, lindsey_kx girl, a nine-year-old girl, this exact face, long dark hair loose with natural flyaway strands, wearing a weathered waxed-canvas explorer's jacket in deep forest green over a cream cable-knit wool sweater, a worn leather satchel on a strap across her body and a small brass compass on a cord at her chest, standing still and looking out over the cloud sea. Enormous sense of scale, deep depth of field, layered atmospheric perspective, the sun just clearing the far peaks. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, wool and weathered canvas, natural dawn light, shallow depth of field, subtle film grain, muted natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark, no extra people beyond those described.\n"
+   ],
+   "title": "All 8 shots -- paste into the prompt box",
+   "color": "#432",
+   "bgcolor": "#653"
+  }
+ ],
+ "links": [
+  [
+   1,
+   1,
+   0,
+   4,
+   0,
+   "MODEL"
+  ],
+  [
+   2,
+   4,
+   0,
+   5,
+   0,
+   "MODEL"
+  ],
+  [
+   3,
+   5,
+   0,
+   9,
+   0,
+   "MODEL"
+  ],
+  [
+   4,
+   2,
+   0,
+   6,
+   0,
+   "CLIP"
+  ],
+  [
+   5,
+   6,
+   0,
+   7,
+   0,
+   "CONDITIONING"
+  ],
+  [
+   6,
+   6,
+   0,
+   9,
+   1,
+   "CONDITIONING"
+  ],
+  [
+   7,
+   7,
+   0,
+   9,
+   2,
+   "CONDITIONING"
+  ],
+  [
+   8,
+   8,
+   0,
+   9,
+   3,
+   "LATENT"
+  ],
+  [
+   9,
+   9,
+   0,
+   10,
+   0,
+   "LATENT"
+  ],
+  [
+   10,
+   3,
+   0,
+   10,
+   1,
+   "VAE"
+  ],
+  [
+   11,
+   10,
+   0,
+   11,
+   0,
+   "IMAGE"
+  ]
+ ],
+ "groups": [],
+ "config": {},
+ "extra": {
+  "video_gen_kb": {
+   "project": "lindsey_summit",
+   "stage": "still"
+  }
+ },
+ "version": 0.4
+}

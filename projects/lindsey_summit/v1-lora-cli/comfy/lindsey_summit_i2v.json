@@ -1,0 +1,764 @@
+{
+ "last_node_id": 14,
+ "last_link_id": 18,
+ "nodes": [
+  {
+   "id": 1,
+   "type": "CheckpointLoaderSimple",
+   "pos": [
+    40,
+    40
+   ],
+   "size": [
+    380,
+    98
+   ],
+   "flags": {},
+   "order": 0,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "MODEL",
+     "type": "MODEL",
+     "links": [
+      1
+     ],
+     "slot_index": 0
+    },
+    {
+     "name": "CLIP",
+     "type": "CLIP",
+     "links": [],
+     "slot_index": 1
+    },
+    {
+     "name": "VAE",
+     "type": "VAE",
+     "links": [
+      2,
+      3
+     ],
+     "slot_index": 2
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "CheckpointLoaderSimple"
+   },
+   "widgets_values": [
+    "ltx-2.3-22b-distilled.safetensors"
+   ],
+   "title": "LTX-2.3 22B [distilled]"
+  },
+  {
+   "id": 2,
+   "type": "CLIPLoader",
+   "pos": [
+    40,
+    180
+   ],
+   "size": [
+    380,
+    106
+   ],
+   "flags": {},
+   "order": 1,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "CLIP",
+     "type": "CLIP",
+     "links": [
+      4,
+      5
+     ],
+     "slot_index": 0
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "CLIPLoader"
+   },
+   "widgets_values": [
+    "t5xxl_fp16.safetensors",
+    "ltxv",
+    "default"
+   ],
+   "title": "T5 text encoder"
+  },
+  {
+   "id": 3,
+   "type": "LoadImage",
+   "pos": [
+    40,
+    330
+   ],
+   "size": [
+    380,
+    390
+   ],
+   "flags": {},
+   "order": 2,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      8
+     ],
+     "slot_index": 0
+    },
+    {
+     "name": "MASK",
+     "type": "MASK",
+     "links": [],
+     "slot_index": 1
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "LoadImage"
+   },
+   "widgets_values": [
+    "s1.png",
+    "image"
+   ],
+   "title": "the picked still"
+  },
+  {
+   "id": 4,
+   "type": "CLIPTextEncode",
+   "pos": [
+    460,
+    40
+   ],
+   "size": [
+    500,
+    220
+   ],
+   "flags": {},
+   "order": 3,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "clip",
+     "type": "CLIP",
+     "link": 4
+    }
+   ],
+   "outputs": [
+    {
+     "name": "CONDITIONING",
+     "type": "CONDITIONING",
+     "links": [
+      6
+     ],
+     "slot_index": 0
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "CLIPTextEncode"
+   },
+   "widgets_values": [
+    "Fixed camera, no camera movement. The mist drifts slowly between the trunks, ferns stirring in a cold breeze, light shafts holding steady through the canopy. She walks slowly away up the trail and never turns back. Wind in pines, distant birds, no music."
+   ],
+   "title": "s1 -- motion prompt",
+   "color": "#232",
+   "bgcolor": "#353"
+  },
+  {
+   "id": 5,
+   "type": "CLIPTextEncode",
+   "pos": [
+    460,
+    290
+   ],
+   "size": [
+    500,
+    140
+   ],
+   "flags": {},
+   "order": 4,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "clip",
+     "type": "CLIP",
+     "link": 5
+    }
+   ],
+   "outputs": [
+    {
+     "name": "CONDITIONING",
+     "type": "CONDITIONING",
+     "links": [
+      7
+     ],
+     "slot_index": 0
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "CLIPTextEncode"
+   },
+   "widgets_values": [
+    "worst quality, blurry, jittery, distorted, warping, morphing face"
+   ],
+   "title": "negative",
+   "color": "#322",
+   "bgcolor": "#533"
+  },
+  {
+   "id": 6,
+   "type": "LTXVImgToVideo",
+   "pos": [
+    460,
+    460
+   ],
+   "size": [
+    380,
+    170
+   ],
+   "flags": {},
+   "order": 5,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "positive",
+     "type": "CONDITIONING",
+     "link": 6
+    },
+    {
+     "name": "negative",
+     "type": "CONDITIONING",
+     "link": 7
+    },
+    {
+     "name": "vae",
+     "type": "VAE",
+     "link": 2
+    },
+    {
+     "name": "image",
+     "type": "IMAGE",
+     "link": 8
+    }
+   ],
+   "outputs": [
+    {
+     "name": "positive",
+     "type": "CONDITIONING",
+     "links": [
+      9
+     ],
+     "slot_index": 0
+    },
+    {
+     "name": "negative",
+     "type": "CONDITIONING",
+     "links": [
+      10
+     ],
+     "slot_index": 1
+    },
+    {
+     "name": "latent",
+     "type": "LATENT",
+     "links": [
+      11,
+      12
+     ],
+     "slot_index": 2
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "LTXVImgToVideo"
+   },
+   "widgets_values": [
+    1024,
+    576,
+    249,
+    1,
+    0.15
+   ],
+   "title": "249 frames"
+  },
+  {
+   "id": 7,
+   "type": "LTXVConditioning",
+   "pos": [
+    880,
+    460
+   ],
+   "size": [
+    300,
+    82
+   ],
+   "flags": {},
+   "order": 6,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "positive",
+     "type": "CONDITIONING",
+     "link": 9
+    },
+    {
+     "name": "negative",
+     "type": "CONDITIONING",
+     "link": 10
+    }
+   ],
+   "outputs": [
+    {
+     "name": "positive",
+     "type": "CONDITIONING",
+     "links": [
+      13
+     ],
+     "slot_index": 0
+    },
+    {
+     "name": "negative",
+     "type": "CONDITIONING",
+     "links": [
+      14
+     ],
+     "slot_index": 1
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "LTXVConditioning"
+   },
+   "widgets_values": [
+    25.0
+   ],
+   "title": "25 fps"
+  },
+  {
+   "id": 8,
+   "type": "LTXVScheduler",
+   "pos": [
+    880,
+    580
+   ],
+   "size": [
+    300,
+    154
+   ],
+   "flags": {},
+   "order": 7,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "latent",
+     "type": "LATENT",
+     "link": 11
+    }
+   ],
+   "outputs": [
+    {
+     "name": "SIGMAS",
+     "type": "SIGMAS",
+     "links": [
+      16
+     ],
+     "slot_index": 0
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "LTXVScheduler"
+   },
+   "widgets_values": [
+    8,
+    2.05,
+    0.95,
+    true,
+    5.0
+   ],
+   "title": "8 steps / shift 5.0"
+  },
+  {
+   "id": 9,
+   "type": "KSamplerSelect",
+   "pos": [
+    880,
+    770
+   ],
+   "size": [
+    300,
+    58
+   ],
+   "flags": {},
+   "order": 8,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "SAMPLER",
+     "type": "SAMPLER",
+     "links": [
+      15
+     ],
+     "slot_index": 0
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "KSamplerSelect"
+   },
+   "widgets_values": [
+    "euler"
+   ]
+  },
+  {
+   "id": 10,
+   "type": "LTXVAddGuide",
+   "pos": [
+    1220,
+    40
+   ],
+   "size": [
+    300,
+    58
+   ],
+   "flags": {},
+   "order": 9,
+   "mode": 4,
+   "inputs": [],
+   "outputs": [],
+   "properties": {
+    "Node name for S&R": "LTXVAddGuide"
+   },
+   "widgets_values": [],
+   "title": "(optional) stronger first-frame hold"
+  },
+  {
+   "id": 11,
+   "type": "SamplerCustom",
+   "pos": [
+    1240,
+    300
+   ],
+   "size": [
+    320,
+    230
+   ],
+   "flags": {},
+   "order": 10,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 1
+    },
+    {
+     "name": "positive",
+     "type": "CONDITIONING",
+     "link": 13
+    },
+    {
+     "name": "negative",
+     "type": "CONDITIONING",
+     "link": 14
+    },
+    {
+     "name": "sampler",
+     "type": "SAMPLER",
+     "link": 15
+    },
+    {
+     "name": "sigmas",
+     "type": "SIGMAS",
+     "link": 16
+    },
+    {
+     "name": "latent_image",
+     "type": "LATENT",
+     "link": 12
+    }
+   ],
+   "outputs": [
+    {
+     "name": "output",
+     "type": "LATENT",
+     "links": [
+      17
+     ],
+     "slot_index": 0
+    },
+    {
+     "name": "denoised_output",
+     "type": "LATENT",
+     "links": [],
+     "slot_index": 1
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "SamplerCustom"
+   },
+   "widgets_values": [
+    true,
+    1,
+    "fixed",
+    1.0
+   ],
+   "title": "CFG 1.0"
+  },
+  {
+   "id": 12,
+   "type": "VAEDecode",
+   "pos": [
+    1600,
+    300
+   ],
+   "size": [
+    210,
+    46
+   ],
+   "flags": {},
+   "order": 11,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "samples",
+     "type": "LATENT",
+     "link": 17
+    },
+    {
+     "name": "vae",
+     "type": "VAE",
+     "link": 3
+    }
+   ],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      18
+     ],
+     "slot_index": 0
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "VAEDecode"
+   },
+   "widgets_values": []
+  },
+  {
+   "id": 13,
+   "type": "SaveWEBM",
+   "pos": [
+    1600,
+    390
+   ],
+   "size": [
+    380,
+    160
+   ],
+   "flags": {},
+   "order": 12,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "link": 18
+    }
+   ],
+   "outputs": [],
+   "properties": {
+    "Node name for S&R": "SaveWEBM"
+   },
+   "widgets_values": [
+    "lindsey_summit/s1",
+    "vp9",
+    25.0,
+    10
+   ],
+   "title": "save -- or swap for VHS_VideoCombine"
+  },
+  {
+   "id": 14,
+   "type": "Note",
+   "pos": [
+    1240,
+    580
+   ],
+   "size": [
+    660,
+    780
+   ],
+   "flags": {},
+   "order": 13,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [],
+   "properties": {
+    "Node name for S&R": "Note"
+   },
+   "widgets_values": [
+    "I2V STAGE -- Lindsey \u2014 above the cloud sea\nmodel LTX-2.3 22B [distilled] 1.1 | 1024x576 | 249 frames @ 25 fps | steps 8 | CFG 1.0 | shift 5.0\n\nNO LoRA at this stage. LTX never sees it -- identity is fixed at the still,\nand nothing renews it across the clip. That is why frontal face shots are\ncut at ~7 s: they drift at about eight seconds whatever the prompt says.\n\nNegative instructions do not work. 'She does not turn her head' failed twice.\nOnly the still and the cut length control the result.\n\n================================================================\n\n--- s1  (keep 9.5 s) Establishing \u2014 the forest at dawn, she is small on the trail\n\nFixed camera, no camera movement. The mist drifts slowly between the trunks, ferns stirring in a cold breeze, light shafts holding steady through the canopy. She walks slowly away up the trail and never turns back. Wind in pines, distant birds, no music.\n\n--- s2  (keep 7.0 s) Close-up \u2014 her breath in the cold, eyes on the way ahead\n\nLocked camera, no push in. She faces the camera the whole time and does not turn her head. Her breath clouds faintly and fades, loose strands of hair move in the cold air, she blinks once. The light stays constant. Wind in pines, no music.\n\n--- s3  (keep 8.0 s) Macro \u2014 a brass compass and a folded map, no face in frame\n\nLocked macro camera. The compass stays resting flat on the map the whole time and never lifts, floats or leaves the frame. Only the needle swings and settles under the glass, the map shifts a few millimetres under her thumb, her fingers relax. The fabric stays flat \u2014 nothing lifts, flaps or folds over. The light stays constant. Wind, no music.\n\n--- s4  (keep 7.5 s) Medium \u2014 she holds a branch aside and looks up at what she has found\n\nLocked camera. Her raised hand lowers the branch and comes down; her chin lifts a fraction further and her eyes widen slightly as she looks up. She stays facing the camera throughout and never turns her head. The light stays constant. Wind in pines, no music.\n\n--- s5  (keep 8.0 s) The old stone stair climbing into the mist\n\nFixed camera, no camera movement. Mist rolls slowly down over the upper steps, ferns and moss stirring in the draught, the shaft of light holding steady on the stone. The light stays constant. Wind, no music.\n\n--- s6  (keep 9.5 s) She climbs, seen from behind and below\n\nFixed camera. She climbs steadily away from the camera up the steps, the satchel swinging with her stride, mist rolling down past her. She never turns back. The light stays constant. Wind, footfalls on stone, no music.\n\n--- s7  (keep 7.5 s) The top \u2014 sunrise on her face\n\nLocked camera. Her expression settles from astonishment into a slow smile; she blinks once, wind lifting her hair across her face and away again. She faces the camera throughout and never turns her head. The light stays constant. Wind, no music.\n\n--- s8  (keep 8.0 s) What she climbed for \u2014 small at the edge above a sea of cloud\n\nFixed camera, no camera movement. The cloud sea moves slowly below, pouring over the far ridges, the light climbing steadily as the sun clears the peaks. Her hair and the hem of her jacket move in the wind. She stands still and never turns back. Wind, no music.\n"
+   ],
+   "title": "All 8 motion prompts + trims",
+   "color": "#432",
+   "bgcolor": "#653"
+  }
+ ],
+ "links": [
+  [
+   1,
+   1,
+   0,
+   11,
+   0,
+   "MODEL"
+  ],
+  [
+   2,
+   1,
+   2,
+   6,
+   2,
+   "VAE"
+  ],
+  [
+   3,
+   1,
+   2,
+   12,
+   1,
+   "VAE"
+  ],
+  [
+   4,
+   2,
+   0,
+   4,
+   0,
+   "CLIP"
+  ],
+  [
+   5,
+   2,
+   0,
+   5,
+   0,
+   "CLIP"
+  ],
+  [
+   6,
+   4,
+   0,
+   6,
+   0,
+   "CONDITIONING"
+  ],
+  [
+   7,
+   5,
+   0,
+   6,
+   1,
+   "CONDITIONING"
+  ],
+  [
+   8,
+   3,
+   0,
+   6,
+   3,
+   "IMAGE"
+  ],
+  [
+   9,
+   6,
+   0,
+   7,
+   0,
+   "CONDITIONING"
+  ],
+  [
+   10,
+   6,
+   1,
+   7,
+   1,
+   "CONDITIONING"
+  ],
+  [
+   11,
+   6,
+   2,
+   8,
+   0,
+   "LATENT"
+  ],
+  [
+   12,
+   6,
+   2,
+   11,
+   5,
+   "LATENT"
+  ],
+  [
+   13,
+   7,
+   0,
+   11,
+   1,
+   "CONDITIONING"
+  ],
+  [
+   14,
+   7,
+   1,
+   11,
+   2,
+   "CONDITIONING"
+  ],
+  [
+   15,
+   9,
+   0,
+   11,
+   3,
+   "SAMPLER"
+  ],
+  [
+   16,
+   8,
+   0,
+   11,
+   4,
+   "SIGMAS"
+  ],
+  [
+   17,
+   11,
+   0,
+   12,
+   0,
+   "LATENT"
+  ],
+  [
+   18,
+   12,
+   0,
+   13,
+   0,
+   "IMAGE"
+  ]
+ ],
+ "groups": [],
+ "config": {},
+ "extra": {
+  "video_gen_kb": {
+   "project": "lindsey_summit",
+   "stage": "i2v"
+  }
+ },
+ "version": 0.4
+}

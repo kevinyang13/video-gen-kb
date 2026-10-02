@@ -551,9 +551,50 @@ hyperparameters.</p>
 <p>Also added <code>scripts/collage.sh</code> (a folder of images → one sheet, with the last-row padding ffmpeg's
 <code>tile</code> filter requires) and recorded that weight is per shot, not a global setting: 1.0 for a
 frontal close-up costs sharpness and prompt grip on wardrobe, 0.85 is the all-rounder.</p>
+<h2>2026-10-01 — models moved to an external SSD</h2>
+<p>The Data volume hit <strong>31 GB free of 926 GB</strong>, which blocked downloading LTX-2.3 for ComfyUI
+(~62 GB for transformer, Gemma encoder and VAE). Both model stores moved to a SanDisk Extreme
+2 TB: Draw Things' 155.8 GB and ComfyUI's 42.0 GB. Internal went 31 GB → 252 GB free. Full detail
+in <a href="model-storage-locations.html">model storage locations</a>.</p>
+<p>Measured rather than assumed: <strong>running models off USB costs nothing at sampling time.</strong> Median
+step time was 3.16 s internal against 3.17 s external on the same prompt and seed. The disk is
+only in the loop for the cold load, about +22 s for klein plus its text encoder. Across a whole
+film that is roughly +1 minute against ~88 minutes of rendering.</p>
+<p>Four traps, three of which produce a silent or misleading failure:</p>
+<ul>
+<li><strong>The drive was running at USB 2.0.</strong> First benchmark was 27.8 MB/s on a 10 Gb/s SSD — a
+  charge-only USB-C cable. <code>system_profiler SPUSBDataType</code> reports the negotiated link
+  (<code>Up to 480 Mb/s</code> vs <code>Up to 10 Gb/s</code>). After the cable swap: 805 MB/s, a 29x difference. At the
+  slow speed the 24 GB LTX model would take ~15 minutes to load for every clip.</li>
+<li><strong><code>rsync --info=progress2</code> is not supported by macOS's rsync.</strong> It printed usage and copied
+  nothing. Worse, <code>echo "RSYNC_EXIT=$?"</code> after a pipeline reports the <em>last stage's</em> status, so the
+  failure read as success. Byte totals are the only honest check; also note <code>du</code> reported 134 GB
+  for a tree whose files sum to 155,794,425,414 bytes, because of APFS clone accounting.</li>
+<li><strong>A models directory without the <code>custom*.json</code> manifests is invisible.</strong> Copy the weights alone
+  and <code>draw-things-cli</code> reports <code>DOWNLOADED: no</code> for every model and refuses to resolve <code>--model</code>,
+  while the files sit right there. Copying the four manifests fixed it instantly.</li>
+<li><strong><code>-tensordata</code> sidecars must travel with their <code>.ckpt</code>.</strong> <code>umt5_xxl_encoder_q8p.ckpt</code> is 880 KB;
+  its weights are a separate 6.4 GB file. Also learned here that FLUX.2 klein's text encoder is
+  Qwen 3 8B, not umT5 — the CLI names the missing dependency once the manifests are present.</li>
+</ul>
+<p><strong>The Draw Things GUI cannot follow the models to the SSD.</strong> Symlinking its sandbox container
+folder left the LoRAs undetected, with no sandbox or TCC denial logged, after a quit and relaunch,
+and with every one of the 34 <code>custom_lora.json</code> entries resolving from a shell. The symlink was
+removed and the container folder now keeps only the manifests. The CLI pipeline — which is what
+<code>film_run.py</code> uses — is unaffected and was verified rendering klein plus <code>lindsey_lora_2000</code> off
+the SSD after the internal copies were deleted.</p>
+<p>Also recorded: Draw Things' <code>.ckpt</code> files are <strong>SQLite databases</strong>, not PyTorch checkpoints, for
+base models and LoRAs alike. That is why no Draw Things model can be pointed at ComfyUI. The base
+models are additionally quantized in Draw Things' own <code>q8p</code>/<code>i8x</code> schemes, so converting them is
+pointless when upstream safetensors exist. A trained LoRA is the exception worth converting: all
+564 tensors in <code>lindsey_lora_2000_lora_f32.ckpt</code> are plain float32, every <code>dim</code> product matching
+its byte length exactly, so the only remaining work is mapping Draw Things' <code>__dit__[t-c_q-0-0]__down__</code>
+layer names onto whatever ComfyUI's FLUX.2 LoRA loader expects. Untested.</p>
+<p><code>scripts/comfy_export.py</code> added: turns any project's <code>spec.json</code> into two importable ComfyUI
+workflow graphs plus a shot data file. Generated for <code>lindsey_summit</code>.</p>
   
 </div>
-<footer>video-gen-kb · built 2026-09-30 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<footer>video-gen-kb · built 2026-10-01 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
 <script>function tt(){var r=document.documentElement,
 d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
 matchMedia('(prefers-color-scheme: dark)').matches);
