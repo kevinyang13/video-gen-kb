@@ -592,9 +592,19 @@ its byte length exactly, so the only remaining work is mapping Draw Things' <cod
 layer names onto whatever ComfyUI's FLUX.2 LoRA loader expects. Untested.</p>
 <p><code>scripts/comfy_export.py</code> added: turns any project's <code>spec.json</code> into two importable ComfyUI
 workflow graphs plus a shot data file. Generated for <code>lindsey_summit</code>.</p>
+<h2>2026-10-02 — yang_ridge removed</h2>
+<p>Dropped from <code>projects.json</code> and deleted. The film was never finished: eight shots picked and
+rendered, five of eight clips upscaled to 4K, nothing assembled. Its value was the thing it was
+built to prove, and that is already recorded independently — the <a href="model-storage-locations.html">model storage locations</a> work
+and the family LoRA's bleed test stand on their own, and the two review failures it surfaced
+(a lock fix that did not propagate to shot prompts, and group counts that were wrong but invisible
+at tile size) are written up in <a href="still-geometry-and-review.html">still geometry and review</a>.</p>
+<p>The generated media — stills, clips and the five 4K upscales, 3.2 GB — was git-ignored and is
+gone for good. <code>plan/yang-ridge-plan.md</code> and <code>spec.json</code> remain in git history if the prompts are
+ever wanted again.</p>
   
 </div>
-<footer>video-gen-kb · built 2026-10-01 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<footer>video-gen-kb · built 2026-10-02 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
 <script>function tt(){var r=document.documentElement,
 d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
 matchMedia('(prefers-color-scheme: dark)').matches);

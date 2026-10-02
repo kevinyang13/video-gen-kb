@@ -800,3 +800,16 @@ layer names onto whatever ComfyUI's FLUX.2 LoRA loader expects. Untested.
 
 `scripts/comfy_export.py` added: turns any project's `spec.json` into two importable ComfyUI
 workflow graphs plus a shot data file. Generated for `lindsey_summit`.
+
+## 2026-10-02 — yang_ridge removed
+
+Dropped from `projects.json` and deleted. The film was never finished: eight shots picked and
+rendered, five of eight clips upscaled to 4K, nothing assembled. Its value was the thing it was
+built to prove, and that is already recorded independently — the [[model-storage-locations]] work
+and the family LoRA's bleed test stand on their own, and the two review failures it surfaced
+(a lock fix that did not propagate to shot prompts, and group counts that were wrong but invisible
+at tile size) are written up in [[still-geometry-and-review]].
+
+The generated media — stills, clips and the five 4K upscales, 3.2 GB — was git-ignored and is
+gone for good. `plan/yang-ridge-plan.md` and `spec.json` remain in git history if the prompts are
+ever wanted again.

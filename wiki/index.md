@@ -42,7 +42,6 @@ Each project owns a folder — `projects/<id>/<version>/` — and its plan page 
 - [[kyle-lighthouse-plan]] — Kyle: the signal fire, a storm-coast short whose subject was chosen so that every long take is carried by motion that animates itself
 - [[kyle-lora-plan]] — Kyle: a character LoRA from a purpose-shot turnaround, testing whether profile and back coverage in the dataset lifts the weight ceiling
 - [[yang-family-lora-plan]] — Kyle, Lindsey and Ivy in one adapter: the multi-subject LoRA that can put two of them in the same frame
-- [[yang-ridge-plan]] — Under the Meteor Sky: the first film with more than one real person in a frame, from the multi-subject family LoRA
 - [[ivy-lora-plan]] — Ivy: a reusable character LoRA trained on real photographs, so later films load a trigger token instead of a master portrait
 - [[nightelf-hunter-plan]] — Night Elf Hunter: **delivered** (57.6 s), photoreal half-elf with a real face and a bear companion; seeding a cast from one photo, and what happens when a seed and its prompts disagree
 - [[lost-city-plan]] — Lost City: hyper-real rider entering jungle ruins; klein Moodboard stills, Wan 2.2 vs LTX-2.3 motion settings, creature/hero/city locks, 15-shot list, experiments L0–L6

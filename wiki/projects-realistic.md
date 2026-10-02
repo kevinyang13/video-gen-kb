@@ -4,7 +4,7 @@
 
 **Sources**: projects/*/*/spec.json; per-project notes from the session logs.
 
-**Last updated**: 2026-10-01
+**Last updated**: 2026-10-02
 
 ---
 
@@ -25,7 +25,6 @@ Index of every project: [[projects]]. Other themes: [[projects-anime]] · [[proj
 | 9 | [Kyle — the signal fire](#kyle_lighthouse) | 2026-09-29 | stopped 2026-09-29 — abandoned at Kevin's call after s6 could not be made to work. Seven of eight shots are rendered, graded and upscaled to 4K; s6 went through five designs (interior stairwell from below, side-on interior spiral, exterior stair on the tower, and two versions of the entrance door) and none was accepted. No final cut was produced from the current shot set. | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 11 min | Best Adventure Ever | `—` | — |
 | 10 | [Kyle — character LoRA v2](#kyle_lora) | 2026-09-29 | dataset built 2026-09-29 — 55 pairs; training | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
 | 11 | [Yang family — one LoRA, three subjects](#yang_family_lora) | 2026-09-30 | delivered 2026-09-30 — yang_family_lora_4000_lora_f32.ckpt, 9 h 22 m, 5 checkpoints at 843 MB each | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
-| 12 | [Yang family — under the meteor sky](#yang_ridge) | 2026-09-30 | planned — queued behind yang_family_lora training | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 11 min | Calm Ambient Dreamscape | `—` | — |
 
 ## Dragon Epic — 1-minute photoreal short, family hero face {#dragon_epic}
 
@@ -1174,173 +1173,6 @@ Kyle was capped at 33 of his 55 v2 frames so that no subject dominates: 33 / 32 
 | Loop | forward, 8-frame tail->head crossfade, x6 = 27.4 s |
 | Upscale | lanczos 1080x1920 |
 | Music | Calm Ambient Dreamscape — morgan-ambient, Pixabay, 1 s fade in / 2 s fade out, vol 0.9 |
-
-## Yang family — under the meteor sky {#yang_ridge}
-
-- **Date**: 2026-09-30 · **Status**: planned — queued behind yang_family_lora training · **Version**: `v1-lora-cli` · **Draw Things project**: `none — draw-things-cli via scripts/film_run.py`
-- **This version**: First film from the multi-subject yang_family_lora, built around the one thing three separate character LoRAs cannot do: more than one of them in a frame.
-- **Files** (`projects/yang_ridge/v1-lora-cli/`): `stills/s1.png … s8.png`, `clips/s1_v1.mov … s8_v1.mov`, `final/yang_ridge_3840x2160.mp4`, `final/yang_ridge_1920x1080.mp4`, `music/calm_ambient_dreamscape.mp3`
-- **Notes**: Kyle, Lindsey and Ivy are Kevin's family; consent settled. One minute, eight shots: the three of them hike a high desert ridge at dusk, build a fire, and watch a meteor shower.
-
-The story exists to justify the adapter. s5 is a two-shot of Ivy and Lindsey and is the reason this LoRA was trained at all; s1 and s8 put all three in frame. Everything else is the accumulated shot grammar: face shots locked frontal and budgeted at 7.0 s, no shot asks for a head turn, the long takes go to backs walking away, a macro with no face, and landscape — and the subject was chosen so the long takes are carried by things that animate themselves, which here are fire, sparks, drifting cloud and a meteor.
-
-The new risk is identity bleed between subjects, so the two- and three-person shots are composed with a clear gap of dark air between the faces, name each subject with its own trigger and class word and its position in frame, and are cut short. The three-person shots keep the faces away from camera entirely, so bleed cannot show even if it exists.
-
-**Still**
-
-| Setting | Value |
-|---|---|
-| Model | FLUX.2 [klein] 9B (8-bit S) |
-| Size | 1024x576 |
-| Steps | 4 |
-| CFG | 1.0 |
-| Shift | 3 |
-| Sampler | DDIM Trailing |
-| LoRA | yang_family_lora_4000_lora_f32.ckpt @ per-shot weight (none / 0.5 / 0.85 / 1.0) |
-
-Prompt: `per shot — see scenes`
-
-**I2V**
-
-| Setting | Value |
-|---|---|
-| Model | LTX-2.3 22B [distilled] 1.1 |
-| Refiner | Wan 2.2 Low Noise Expert I2V A14B (8-bit S) @ 10% |
-| LoRA | Wan 2.2 A14B Lightning High-Noise T2V v2.0 @ 100% |
-| Size | 1024x576 |
-| Frames | 249 |
-| FPS | 25 |
-| Steps | 8 |
-| CFG | 1.0 |
-| Shift | 5.0 |
-| Sampler | TCD Trailing |
-| Strength | 100% |
-| I2V time (min) | 11 |
-
-**Post**
-
-| Setting | Value |
-|---|---|
-| Script | scripts/finish_clip.sh |
-| Loop | none — xfade 0.75 |
-| Upscale | scripts/upscale_4k.sh — Real-ESRGAN x4plus -> 3840x2160 |
-| Music | Calm Ambient Dreamscape — morgan-ambient, Pixabay, 3:42; first 61 s under the LTX fire and wind at 0.5, 2 s fade out. Reused from coast; ambient and unhurried suits a night sky. |
-
-### Scene prompts
-
-**Locks** (paste verbatim into every prompt):
-
-- *ivy* — ivy_kx woman, this exact face, an adult woman
-- *kyle* — kyle_kx boy, this exact face, a nine-year-old boy with child proportions
-- *lindsey* — lindsey_kx girl, this exact face, a nine-year-old girl with child proportions
-- *wardrobe* — warm outdoor layers — a quilted down jacket, a knitted beanie and hiking boots
-- *ridge* — a high desert ridge of red sandstone at dusk, twisted juniper and dry grass, a vast canyon falling away below, distant mesas layered in haze, an immense open sky
-- *night* — the same high desert ridge at night under a blazing Milky Way, the canyon black below, red sandstone lit warm by a small campfire
-- *style* — Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin and fabric, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.
-- *firelight* — a large campfire burning just out of frame close to them, throwing strong warm orange light across the face and lighting it clearly and brightly, deep blue night behind
-
-#### s1 — Establishing — three of them on the ridge trail at dusk
-
-- **Note**: LoRA weight 0.85; input seed/ridge.png; kept 9.5 s
-
-*Still prompt*
-
-> Extreme wide establishing shot. a high desert ridge of red sandstone at dusk, twisted juniper and dry grass, a vast canyon falling away below, distant mesas layered in haze, an immense open sky, the last light low and gold across the rock. Small in the lower third of frame and seen from behind, three figures alone walking away from camera in single file along the ridge trail: ivy_kx woman, this exact face, an adult woman leading, then lindsey_kx girl, this exact face, a nine-year-old girl with child proportions, then kyle_kx boy, this exact face, a nine-year-old boy with child proportions, all wearing warm outdoor layers — a quilted down jacket, a knitted beanie and hiking boots, each carrying a small pack. Enormous sense of scale, deep depth of field, layered atmospheric perspective. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin and fabric, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.
-
-*Video prompt*
-
-> Fixed camera, no camera movement. The three walk slowly away along the ridge in single file, dry grass bending in the wind, dust lifting off the trail, cloud shadows sliding across the canyon far below. The light stays constant. Wind, distant birds, no music.
-
-
-#### s2 — Macro — hands feeding the new fire
-
-- **Note**: LoRA weight 0.5; input seed/fire.png; kept 9.0 s
-
-*Still prompt*
-
-> Extreme close-up detail insert, no faces in frame. Two pairs of hands, one adult and one child, feeding dry juniper twigs into a small campfire just catching between ringed stones, sparks lifting, the flame licking up bright against cold blue dusk, the quilted sleeves of warm outdoor layers — a quilted down jacket, a knitted beanie and hiking boots just visible at the edges. Macro clarity, very shallow depth of field, warm fire against cold blue. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin and fabric, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.
-
-*Video prompt*
-
-> Locked macro camera. The small flame grows and leans, sparks lifting and dying, a hand laying one more twig onto it and withdrawing, warm light pulsing across the stones. Fire crackle, wind, no music.
-
-
-#### s3 — Close-up — Kyle, firelit
-
-- **Note**: LoRA weight 1.0; input seed/kyle.png; kept 7.0 s
-
-*Still prompt*
-
-> Tight close-up portrait, head and shoulders, straight on. kyle_kx boy, this exact face, a nine-year-old boy with child proportions, wearing warm outdoor layers — a quilted down jacket, a knitted beanie and hiking boots with the beanie pushed back, facing the camera, a large campfire burning just out of frame close to them, throwing strong warm orange light across the face and lighting it clearly and brightly, deep blue starlit night behind, the face well exposed and clearly visible, eyes bright. the same high desert ridge at night under a blazing Milky Way, the canyon black below, red sandstone lit warm by a small campfire thrown far out of focus behind him. Razor-sharp focus on the eyes and skin texture. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin and fabric, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.
-
-*Video prompt*
-
-> Locked camera, no push in. He faces the camera the whole time; firelight moves warm across his face, he blinks once and breathes. Fire crackle, wind, no music.
-
-
-#### s4 — Close-up — Lindsey, firelit
-
-- **Note**: LoRA weight 1.0; input seed/lindsey.png; kept 7.0 s
-
-*Still prompt*
-
-> Tight close-up portrait, head and shoulders, straight on. lindsey_kx girl, this exact face, a nine-year-old girl with child proportions, wearing warm outdoor layers — a quilted down jacket, a knitted beanie and hiking boots with loose hair under the beanie, facing the camera, a large campfire burning just out of frame close to them, throwing strong warm orange light across the face and lighting it clearly and brightly, deep blue starlit night behind, the face well exposed and clearly visible, the faint beginning of a smile. the same high desert ridge at night under a blazing Milky Way, the canyon black below, red sandstone lit warm by a small campfire thrown far out of focus behind her. Razor-sharp focus on the eyes and skin texture. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin and fabric, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.
-
-*Video prompt*
-
-> Locked camera, no push in. She faces the camera the whole time; firelight moves warm across her face, the small smile settles, she blinks once. Fire crackle, wind, no music.
-
-
-#### s5 — Two of them together — the shot three separate LoRAs cannot make
-
-- **Note**: LoRA weight 1.0; input seed/pair.png; kept 7.0 s
-
-*Still prompt*
-
-> Medium two-shot, both subjects seated side by side on a low sandstone ledge at the fire, facing the camera, a clear gap of dark air between their heads so the two faces never overlap. On the left of frame ivy_kx woman, this exact face, an adult woman; on the right of frame lindsey_kx girl, this exact face, a nine-year-old girl with child proportions. Both wearing warm outdoor layers — a quilted down jacket, a knitted beanie and hiking boots. a large campfire burning just out of frame close to them, throwing strong warm orange light across both faces and lighting them clearly and brightly, both faces well exposed, large in frame and clearly visible, deep blue starlit night and the same high desert ridge at night under a blazing Milky Way, the canyon black below, red sandstone lit warm by a small campfire far out of focus behind them. Two people alone in the frame. Razor-sharp focus on both faces. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin and fabric, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.
-
-*Video prompt*
-
-> Locked camera, no push in. Both of them stay facing the camera and neither turns; firelight moves warm across both faces, each breathes, one blinks. Fire crackle, wind, no music.
-
-
-#### s6 — The sky they came for
-
-- **Note**: no LoRA — no face in frame; input seed/night.png; kept 9.5 s
-
-*Still prompt*
-
-> Extreme wide landscape, no people in frame. the same high desert ridge at night under a blazing Milky Way, the canyon black below, red sandstone lit warm by a small campfire seen from the ridge looking out, an enormous Milky Way arching over the black canyon, thousands of stars, one bright meteor streaking low across the sky, the sandstone in the foreground just touched by warm firelight from off frame. Enormous sense of scale, deep depth of field. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin and fabric, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.
-
-*Video prompt*
-
-> Fixed camera, no camera movement. The stars wheel very slowly, thin high cloud drifting across the Milky Way, a meteor streaking down and burning out, then another far off. Warm firelight flickers on the foreground rock. Wind, fire crackle, no music.
-
-
-#### s7 — Close-up — Ivy, watching the sky
-
-- **Note**: LoRA weight 1.0; input seed/ivy.png; kept 7.0 s
-
-*Still prompt*
-
-> Close-up portrait, frontal, slightly low angle. ivy_kx woman, this exact face, an adult woman, wearing warm outdoor layers — a quilted down jacket, a knitted beanie and hiking boots, facing the camera with her chin lifted a little and her eyes raised past the camera toward the sky, a large campfire burning just out of frame close to them, throwing strong warm orange light across the face and lighting it clearly and brightly, the face well exposed and clearly visible, an expression of quiet wonder. the same high desert ridge at night under a blazing Milky Way, the canyon black below, red sandstone lit warm by a small campfire soft and starlit behind her. Razor-sharp focus on the eyes and skin. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin and fabric, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.
-
-*Video prompt*
-
-> Locked camera. Her expression settles into a slow smile and her eyes stay up on the sky; firelight moves warm across her face, she blinks once. Fire crackle, wind, no music.
-
-
-#### s8 — All three, small under the sky
-
-- **Note**: LoRA weight 0.85; input seed/night.png; kept 9.5 s
-
-*Still prompt*
-
-> Extreme wide final shot from behind and far back. the same high desert ridge at night under a blazing Milky Way, the canyon black below, red sandstone lit warm by a small campfire. Small at the centre of frame and seen from behind as silhouettes against their own firelight, three figures alone sitting together around the campfire on the ridge — ivy_kx woman, this exact face, an adult woman and lindsey_kx girl, this exact face, a nine-year-old girl with child proportions and kyle_kx boy, this exact face, a nine-year-old boy with child proportions, all wearing warm outdoor layers — a quilted down jacket, a knitted beanie and hiking boots — with the enormous Milky Way overhead and the black canyon beyond. Enormous sense of scale, deep depth of field. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin and fabric, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.
-
-*Video prompt*
-
-> Fixed camera, no camera movement. The fire flickers and throws moving warm light on the three seated figures and the rock around them, sparks lifting away into the dark, the stars steady overhead, thin cloud drifting. They sit still. Fire crackle, wind, no music.
 
 ## Related pages
 - [[projects]]
