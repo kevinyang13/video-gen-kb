@@ -602,9 +602,37 @@ at tile size) are written up in <a href="still-geometry-and-review.html">still g
 <p>The generated media — stills, clips and the five 4K upscales, 3.2 GB — was git-ignored and is
 gone for good. <code>plan/yang-ridge-plan.md</code> and <code>spec.json</code> remain in git history if the prompts are
 ever wanted again.</p>
+<h2>2026-10-03 — kyle_steamfield, and what atmosphere does to a face</h2>
+<p>Fourth LoRA-driven film: a boy crosses a steaming volcanic plain at first light. Eight shots, 60.15 s.
+Setting chosen because <strong>steam is continuous natural motion</strong>, so the long takes get their movement from
+the environment rather than the subject — the fourth confirmation of the pattern <a href="lindsey-summit-plan.html">lindsey summit plan</a>
+established. Full plan in <a href="kyle-steamfield-plan.html">kyle steamfield plan</a>.</p>
+<p>Three findings, now sections 5-7 of <a href="still-geometry-and-review.html">still geometry and review</a>:</p>
+<ul>
+<li><strong>Atmosphere placed between camera and subject will cross the face</strong>, four times in this one film. The
+  worst was s4 v1, which asked for a hand "parting a curtain of white steam" <em>and</em> a clearly visible face.
+  A curtain you part is between you and the camera by construction — the prompt asked for the face to be
+  occluded and visible in the same sentence. The fix is positive placement ("steam rises well behind him
+  and out to both sides") plus the phrase <strong>"clean dry air between the camera and his face"</strong>, which
+  rescued the subject master and every shot after it. A background lock written for landscapes carries its
+  atmosphere into every close-up that inherits it.</li>
+<li><strong>When a face shot keeps failing, change what the shot is.</strong> s4 took three versions; the first two
+  reworded, the third made it a full-body side-on walking shot and came back clean immediately, holding all
+  249 frames. A film needs identity carried somewhere, not everywhere — this one keeps it in two close-ups.</li>
+<li><strong>The video model still invents cords.</strong> s3, a macro of two hands holding obsidian, grew a dark cord at
+  the top of frame from about frame 160, despite a wardrobe lock written with no strap or cord precisely
+  because <code>kyle_lighthouse</code> was stopped over one. Trimmed to 6.0 s. A macro of hands has a short safe
+  window and needs frame-by-frame QC near the cut.</li>
+</ul>
+<p>The review gate earned its cost here: every one of these was caught before the 4K pass rather than after.</p>
+<p>Also recorded, operationally: <strong>long renders launched from the agent's shell do not survive.</strong> The stills
+run died at 36 of 40 candidates and the clips run died after one clip, both silently, despite <code>nohup</code> and
+<code>disown</code> — the process group is reaped when the tool call ends. The same command run from Kevin's own
+terminal completed seven clips without interruption. Harness-tracked background tasks cap at 30 minutes,
+so for multi-hour GPU work the terminal is the only reliable option.</p>
   
 </div>
-<footer>video-gen-kb · built 2026-10-02 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<footer>video-gen-kb · built 2026-10-03 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
 <script>function tt(){var r=document.documentElement,
 d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
 matchMedia('(prefers-color-scheme: dark)').matches);

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Video Upscaling to 4K (Open Source) — video-gen-kb</title>
+<title>Yang Family LoRA for ComfyUI — video-gen-kb</title>
 <style>
 :root{--bg:#0B0D12;--panel:#141822;--panel-2:#1B2130;--stroke:#2A3245;--text:#E6E9F0;
 --muted:#8B94A7;--accent:#F5B84B;--accent-2:#4BC9F5;--on-accent:#12131A;
@@ -92,25 +92,102 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
     <span class="spacer"></span>
     <button class="pill" onclick="tt()">◐ Theme</button>
   </nav>
-  <h1>Video Upscaling to 4K (Open Source)</h1><p class="lede">Open-source tools that take 720p/1080p generated clips to 3840×2160, split into temporal restorers (SeedVR2, FlashVSR) and per-frame upscalers (Real-ESRGAN), with Apple Silicon notes.</p><div class="meta"><span><b>Updated</b> 2026-09-19</span><span><b>Sources</b> 2026-09-19-local-4k-video-research.md</span></div>
+  <h1>Yang Family LoRA for ComfyUI</h1><p class="lede">Get the three-subject family LoRA working in ComfyUI. Training it there is blocked on Apple Silicon, so the plan converts the existing Draw Things adapter to safetensors instead.</p><div class="meta"><span><b>Updated</b> 2026-10-02</span><span><b>Sources</b> measured on this machine 2026-10-02; upstream issue trackers cited inline.</span></div>
 <hr />
-<h2>Two families</h2>
-<p><strong>Temporal / video-native</strong> — look at neighboring frames, so textures do not flicker.
-- <strong>SeedVR2</strong> (ByteDance) — strongest restoration quality in 2026 community tests. ComfyUI node <code>ComfyUI-SeedVR2_VideoUpscaler</code> (numz) has <strong>full MPS support</strong>. Weights auto-download on first run (multi-GB). Memory at 4K output on 48 GB unknown — may need tiling.
-- <strong>FlashVSR</strong> — newer, faster than SeedVR2, slightly lower quality. Mac support unverified.</p>
-<p><strong>Per-frame / image upscalers</strong> — fast, simple, can shimmer on motion.
-- <strong>Real-ESRGAN</strong> (ncnn-vulkan build) — runs on Apple Silicon via Metal/Vulkan; arm64 builds beat universal2. Good for slideshow-style motion, worse for AI-generated texture.
-- <strong>REAL Video Enhancer</strong> — macOS GUI bundling Real-ESRGAN + RIFE with ncnn backend. Easiest all-in-one.</p>
-<h2>Tricks from practice</h2>
-<ul>
-<li><strong>Downscale-first restore</strong>: if the generator output is muddy, downscale slightly, then let SeedVR2 restore + upscale — cleaner than upscaling mush directly.</li>
-<li>Upscale <strong>before</strong> frame interpolation (<span class="missing" title="page not written yet">frame interpolation</span>) so RIFE sees clean edges.</li>
-<li>720p → 4K is 3×; 1080p → 4K is 2×. Generating at 1080p when the model allows gives the upscaler less to invent.</li>
-</ul>
-<h2>Encode target</h2>
-<p>3840×2160, HEVC or H.264, <code>hevc_videotoolbox</code> on Mac for hardware encode. See <span class="missing" title="page not written yet">ffmpeg pipeline</span>.</p>
+<h2>The goal</h2>
+<p><code>kyle_kx boy</code>, <code>lindsey_kx girl</code> and <code>ivy_kx woman</code> rendering in ComfyUI from a single adapter,
+the same way they already do in Draw Things. See <a href="model-storage-locations.html">model storage locations</a> for where the weights
+live.</p>
+<h2>Why this is not simply "train it again"</h2>
+<p>The obvious plan — point a ComfyUI-native trainer at the 87-pair dataset and get safetensors out —
+does not work on this machine. Checked 2026-10-02:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>trainer</th>
+<th>FLUX.2 klein 9B</th>
+<th>Apple Silicon</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/shootthesound/Fizgig">Fizgig</a></td>
+<td>supported, LoRA from 10 GB VRAM</td>
+<td><strong>Windows/Linux, NVIDIA or AMD only</strong></td>
+</tr>
+<tr>
+<td><a href="https://github.com/ostris/ai-toolkit/issues/871">ai-toolkit</a></td>
+<td>supported</td>
+<td><strong>MPS issue closed "not planned"</strong></td>
+</tr>
+<tr>
+<td><a href="https://github.com/kohya-ss/musubi-tuner/issues/860">musubi-tuner</a></td>
+<td>open klein 9B error</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></div>
+<p>The ai-toolkit report is the most thorough: six configurations, none converging. NaN loss with
+cached text embeddings, OOM on fp16 even with gradient checkpointing, and loss oscillating in a
+0.45–0.56 band rather than descending. Suspected cause is MPS gradient precision plus torchao
+kernels with no Triton on Metal. No maintainer response; closed as not planned.</p>
+<p>This is consistent with what is already recorded in <a href="apple-silicon-inference.html">apple silicon inference</a>: Metal is a
+second-class training target, and FP8 — the thing that makes klein training cheap elsewhere —
+does not exist here at all.</p>
+<h2>So: convert, don't retrain</h2>
+<p>The adapter already exists and took 9 h 22 m to train. Converting it is local, free, costs no
+privacy, and reuses that work. Three facts make it viable, all verified rather than assumed:</p>
+<p><strong>1. The weights are plain float32.</strong> Draw Things <code>.ckpt</code> files are SQLite databases, not PyTorch
+checkpoints — but unlike the quantized base models, a trained LoRA is not quantized:</p>
+<pre><code>564 tensors, single datatype, every dim product x 4 == byte length (564 match, 0 mismatch)
+__dit__[t-c_q-0-0]__down__   dim=[32, 4096]
+__dit__[t-c_q-0-0]__up__     dim=[4096, 32]
+</code></pre>
+<p><strong>2. The layer naming parses completely.</strong> All 564 names fit one pattern, and the architecture
+falls straight out of it:</p>
+<pre><code>8 double blocks  (0..7)    c_q c_k c_v c_o + c_gate_proj c_up_proj c_down_proj   text stream
+                           x_q x_k x_v x_o + x_gate_proj x_up_proj x_down_proj   image stream
+24 single blocks (8..31)   x_q x_k x_v x_o + x_w1 x_w2 x_w3                      SwiGLU MLP
+x_embedder, linear                                                               in / out
+</code></pre>
+<p><strong>3. ComfyUI takes <code>diffusion_model.</code>-prefixed keys</strong> mapped directly onto the model's own state
+dict, so there is a concrete target rather than a guess at some trainer's convention.</p>
+<h2>The one real problem: fused qkv</h2>
+<p>Draw Things stores <code>x_q</code>, <code>x_k</code>, <code>x_v</code> separately. klein fuses them:</p>
+<pre><code>Draw Things   __dit__[t-x_q-0-0]__{down,up}__      three rank-32 pairs
+klein         double_blocks.0.img_attn.qkv.weight  one fused matrix
+</code></pre>
+<p>This is solvable <strong>exactly</strong>, with no SVD and no loss. The three deltas occupy disjoint row ranges
+of the fused matrix, so:</p>
+<pre><code>down_fused = [ Dq ; Dk ; Dv ]                 (96 x in)
+up_fused   = [ Uq  0   0  ;
+               0   Uk  0  ;
+               0   0   Uv ]                   (3*out x 96)
+</code></pre>
+<p>reproduces the stacked delta identically at rank 96. Single blocks fuse further — klein's
+<code>linear1</code> carries qkv <em>and</em> the MLP input — so the same construction extends with more blocks on
+the diagonal.</p>
+<h2>Steps</h2>
+<ol>
+<li><strong>Extract</strong> — read the 564 tensors out of SQLite with <code>numpy.frombuffer</code>, honouring the <code>dim</code>
+   blob for shape. Already proven to work.</li>
+<li><strong>Map</strong> — Draw Things layer name to klein state-dict key, per block type.</li>
+<li><strong>Fuse</strong> — build the block-diagonal qkv (and <code>linear1</code>) pairs as above.</li>
+<li><strong>Emit</strong> — one safetensors file of <code>diffusion_model.*.lora_{down,up}.weight</code> keys.</li>
+<li><strong>Verify</strong> — load in ComfyUI against <code>flux-2-klein-9b.safetensors</code> and render <code>lindsey_kx girl</code>
+   at weight 1.0. The test is whether Lindsey's face comes back, against a no-LoRA control.</li>
+</ol>
+<p>Step 5 is the only one that can fail quietly: a LoRA whose keys do not match is <strong>silently
+ignored</strong> by ComfyUI, which looks identical to a LoRA that changed nothing. The control column is
+not optional — the same trap is already recorded for <code>draw-things-cli</code> in <a href="log.html">log</a>.</p>
+<h2>If conversion fails</h2>
+<p>Renting a GPU is the fallback, and it carries a cost the local path does not: the dataset is 87
+images of Kevin's children. Those raw photographs are deliberately git-ignored in a public repo on
+the principle that consent to train on a face is not consent to publish the face. Uploading them
+to a rented machine is the same decision in a different form, and it is Kevin's to make, not a
+default to fall into.</p>
 
-  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="local-open-source-4k-video-pipeline.html">local open source 4k video pipeline</a></li><li><span class="missing" title="page not written yet">frame interpolation</span></li><li><a href="image-to-video-models.html">image to video models</a></li></ul></div>
+  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="model-storage-locations.html">model storage locations</a></li><li><a href="apple-silicon-inference.html">apple silicon inference</a></li><li><a href="character-consistency.html">character consistency</a></li><li><a href="headless-cli-pipeline.html">headless cli pipeline</a></li></ul></div>
 </div>
 <footer>video-gen-kb · built 2026-10-03 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
 <script>function tt(){var r=document.documentElement,

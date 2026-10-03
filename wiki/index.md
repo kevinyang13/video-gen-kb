@@ -39,9 +39,11 @@ Each project owns a folder — `projects/<id>/<version>/` — and its plan page 
 - [[lindsey-palace-plan]] — Lindsey: the palace pavilion, a one-minute photoreal short where the face comes from a trained LoRA instead of a reference photo, with the weight set per shot
 - [[kyle-debut-plan]] — Kyle: five minutes to showtime, a one-minute LoRA-driven short written from the start around the rule that motion must not rotate or occlude the face
 - [[lindsey-summit-plan]] — Lindsey: above the cloud sea, an adventure short whose shot list was derived from the previous films' failures before a frame was rendered
+- [[kyle-steamfield-plan]] — Where the Ground Breathes: steam as natural motion, and the three failures that produced sections 5-7 of the review page
 - [[kyle-lighthouse-plan]] — Kyle: the signal fire, a storm-coast short whose subject was chosen so that every long take is carried by motion that animates itself
 - [[kyle-lora-plan]] — Kyle: a character LoRA from a purpose-shot turnaround, testing whether profile and back coverage in the dataset lifts the weight ceiling
 - [[yang-family-lora-plan]] — Kyle, Lindsey and Ivy in one adapter: the multi-subject LoRA that can put two of them in the same frame
+- [[yang-family-lora-comfy-plan]] — getting the family LoRA into ComfyUI: why klein training fails on Apple Silicon, and the exact rank-96 fusion that converts the Draw Things adapter instead
 - [[ivy-lora-plan]] — Ivy: a reusable character LoRA trained on real photographs, so later films load a trigger token instead of a master portrait
 - [[nightelf-hunter-plan]] — Night Elf Hunter: **delivered** (57.6 s), photoreal half-elf with a real face and a bear companion; seeding a cast from one photo, and what happens when a seed and its prompts disagree
 - [[lost-city-plan]] — Lost City: hyper-real rider entering jungle ruins; klein Moodboard stills, Wan 2.2 vs LTX-2.3 motion settings, creature/hero/city locks, 15-shot list, experiments L0–L6

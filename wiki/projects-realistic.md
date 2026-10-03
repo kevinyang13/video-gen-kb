@@ -4,7 +4,7 @@
 
 **Sources**: projects/*/*/spec.json; per-project notes from the session logs.
 
-**Last updated**: 2026-10-02
+**Last updated**: 2026-10-03
 
 ---
 
@@ -25,6 +25,8 @@ Index of every project: [[projects]]. Other themes: [[projects-anime]] · [[proj
 | 9 | [Kyle — the signal fire](#kyle_lighthouse) | 2026-09-29 | stopped 2026-09-29 — abandoned at Kevin's call after s6 could not be made to work. Seven of eight shots are rendered, graded and upscaled to 4K; s6 went through five designs (interior stairwell from below, side-on interior spiral, exterior stair on the tower, and two versions of the entrance door) and none was accepted. No final cut was produced from the current shot set. | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 11 min | Best Adventure Ever | `—` | — |
 | 10 | [Kyle — character LoRA v2](#kyle_lora) | 2026-09-29 | dataset built 2026-09-29 — 55 pairs; training | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
 | 11 | [Yang family — one LoRA, three subjects](#yang_family_lora) | 2026-09-30 | delivered 2026-09-30 — yang_family_lora_4000_lora_f32.ckpt, 9 h 22 m, 5 checkpoints at 843 MB each | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
+| 12 | [Yang family LoRA — made to work in ComfyUI](#yang_family_lora_comfy) | 2026-10-02 | in progress — source analysed and the mapping derived; converter not yet written | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
+| 13 | [Kyle — where the ground breathes](#kyle_steamfield) | 2026-10-03 | clips QC’d 2026-10-03 — 60.41 s planned, finishing | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 11 min | to be chosen at the finish pass | `—` | — |
 
 ## Dragon Epic — 1-minute photoreal short, family hero face {#dragon_epic}
 
@@ -1173,6 +1175,218 @@ Kyle was capped at 33 of his 55 v2 frames so that no subject dominates: 33 / 32 
 | Loop | forward, 8-frame tail->head crossfade, x6 = 27.4 s |
 | Upscale | lanczos 1080x1920 |
 | Music | Calm Ambient Dreamscape — morgan-ambient, Pixabay, 1 s fade in / 2 s fade out, vol 0.9 |
+
+## Yang family LoRA — made to work in ComfyUI {#yang_family_lora_comfy}
+
+- **Date**: 2026-10-02 · **Status**: in progress — source analysed and the mapping derived; converter not yet written · **Version**: `v1-ckpt-convert` · **Draw Things project**: `none — offline conversion`
+- **This version**: Convert the trained Draw Things family LoRA to safetensors rather than retrain it, because FLUX.2 klein LoRA training does not work on Apple Silicon.
+- **Files** (`projects/yang_family_lora_comfy/v1-ckpt-convert/`): `seed/yang_family_lora_4000.safetensors (output, git-ignored)`, `logs/convert.log`
+- **Notes**: Kyle, Lindsey and Ivy are Kevin's family; consent settled. No raw photographs are involved at any point here — the input is the trained adapter, not the dataset, which is one more reason to prefer conversion over retraining on a rented machine.
+
+Training the equivalent LoRA natively for ComfyUI is blocked, checked 2026-10-02: Fizgig supports klein 9B but is Windows/Linux with NVIDIA or AMD only; ai-toolkit's Apple Silicon issue is closed as not planned after six non-converging configurations (NaN loss with cached text embeddings, OOM on fp16 despite gradient checkpointing, loss oscillating 0.45-0.56); musubi-tuner has an open klein 9B error. Converting the existing adapter reuses the 9 h 22 m already spent and runs entirely locally.
+
+**Still**
+
+| Setting | Value |
+|---|---|
+| Model | FLUX.2 [klein] 9B (8-bit S) |
+| Size | 576x1024 |
+| Steps | 4 |
+| CFG | 1.0 |
+| Shift | 3.0 |
+| Sampler | DDIM Trailing |
+
+**I2V**
+
+| Setting | Value |
+|---|---|
+| Model | Wan 2.2 High Noise Expert I2V A14B (8-bit S) |
+| Refiner | Wan 2.2 Low Noise Expert I2V A14B (8-bit S) @ 10% |
+| LoRA | Wan 2.2 A14B Lightning High-Noise T2V v2.0 @ 100% |
+| Size | 576x1024 |
+| Frames | 81 |
+| FPS | 16 |
+| Steps | 4 |
+| CFG | 1.0 |
+| Shift | 4.95 |
+| Sampler | DDIM Trailing |
+| Strength | 100% |
+
+**Post**
+
+| Setting | Value |
+|---|---|
+| Script | scripts/finish_clip.sh |
+| Loop | forward, 8-frame tail->head crossfade, x6 = 27.4 s |
+| Upscale | lanczos 1080x1920 |
+| Music | Calm Ambient Dreamscape — morgan-ambient, Pixabay, 1 s fade in / 2 s fade out, vol 0.9 |
+
+## Kyle — where the ground breathes {#kyle_steamfield}
+
+- **Date**: 2026-10-03 · **Status**: clips QC’d 2026-10-03 — 60.41 s planned, finishing · **Version**: `v1-lora-cli` · **Draw Things project**: `none — draw-things-cli via scripts/film_run.py`
+- **This version**: Fourth LoRA-driven film, built to the same shot grammar as lindsey_summit but on the standalone kyle_lora v2.
+- **Files** (`projects/kyle_steamfield/v1-lora-cli/`): `seed/*.png (masters)`, `stills/<id>.png`, `clips/<id>.mp4`, `final/`
+- **Notes**: Kyle is Kevin's son; consent settled. Story written for this film: a boy crosses a black volcanic plain at first light, finds a hot spring in the lava, climbs a ridge of broken basalt and comes out above a whole valley full of steam at sunrise.
+
+Every structural choice is inherited from the three films before it rather than guessed. Face shots (s2, s4, s7) are locked frontal at weight 1.0 and budgeted at 7.0-7.5 s, because frontal face clips drift at about eight seconds whatever the motion prompt says. The long takes go to the three things that have held their full length every time: walking away from camera (s1, s6), a macro insert with no face (s3), and pure landscape (s5). s4 is the one shot asking a person for real movement, and it is hand movement in front of a stationary head — the pattern that survived 9.9 s on kyle_debut.
+
+The setting is chosen for the same reason: steam is natural, continuous motion, so the long takes get their movement from the environment rather than from the subject. Palette is deliberately opposite to lindsey_summit — black basalt, white steam and sulfur yellow instead of blue pine and gold.
+
+The wardrobe carries no strap, cord or satchel on purpose. On kyle_lighthouse a shoulder rope invented in the wardrobe lock was elaborated by LTX into a cable across the frame, and the project was stopped over it.
+
+**Still**
+
+| Setting | Value |
+|---|---|
+| Model | FLUX.2 [klein] 9B (8-bit S) |
+| Size | 1024x576 |
+| Steps | 4 |
+| CFG | 1.0 |
+| Shift | 3 |
+| Sampler | DDIM Trailing |
+| LoRA | kyle_lora_v2_2500_lora_f32.ckpt @ per-shot weight (none / 0.6 / 0.85 / 1.0) |
+
+Prompt: `per shot — see scenes`
+
+**I2V**
+
+| Setting | Value |
+|---|---|
+| Model | LTX-2.3 22B [distilled] 1.1 |
+| Refiner | Wan 2.2 Low Noise Expert I2V A14B (8-bit S) @ 10% |
+| LoRA | Wan 2.2 A14B Lightning High-Noise T2V v2.0 @ 100% |
+| Size | 1024x576 |
+| Frames | 249 |
+| FPS | 25 |
+| Steps | 8 |
+| CFG | 1.0 |
+| Shift | 5.0 |
+| Sampler | TCD Trailing |
+| Strength | 100% |
+| I2V time (min) | 11 |
+
+**Post**
+
+| Setting | Value |
+|---|---|
+| Script | scripts/finish_clip.sh |
+| Loop | none — xfade 0.75 |
+| Upscale | scripts/upscale_4k.sh — Real-ESRGAN x4plus -> 3840x2160 |
+| Music | to be chosen at the finish pass |
+
+### Scene prompts
+
+**Locks** (paste verbatim into every prompt):
+
+- *subject* — kyle_kx boy, a nine-year-old boy with child proportions, this exact face, short dark hair
+- *wardrobe* — a weathered burnt-orange hooded shell jacket over a charcoal fleece, dark trousers and scuffed hiking boots
+- *plain* — a vast black volcanic plain at first light, broken basalt and old lava flows under a thin dusting of frost, columns of white steam rising from fissures in the ground, distant snow ridges on the horizon, a huge pale sky going from deep blue to cold gold
+- *spring* — a hot spring pool of impossibly clear blue-green water set in black lava rock, its rim crusted in bright sulfur yellow and rust orange, heavy white steam pouring off the surface
+- *valley* — a vast steaming valley seen from a high black ridge, dozens of steam columns rising from the floor and leaning together in the wind, a river of meltwater threading between them, low gold sunrise breaking across the whole basin
+- *style* — Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, technical fabric and wet volcanic rock, natural dawn light, shallow depth of field, subtle film grain, cool natural colour with warm sunrise accents. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.
+
+#### s1 — Establishing — the steaming plain at first light, he is small on it
+
+- **Note**: LoRA weight 0.85; input seed/plain.png; kept 9.5 s
+
+*Still prompt*
+
+> Extreme wide establishing shot. a vast black volcanic plain at first light, broken basalt and old lava flows under a thin dusting of frost, columns of white steam rising from fissures in the ground, distant snow ridges on the horizon, a huge pale sky going from deep blue to cold gold. Small in the lower third of frame and seen from behind, one person alone in the frame: kyle_kx boy, a nine-year-old boy with child proportions, this exact face, short dark hair, wearing a weathered burnt-orange hooded shell jacket over a charcoal fleece, dark trousers and scuffed hiking boots, walking away from camera along a faint track between the steam columns. Enormous sense of scale, deep depth of field, layered atmospheric perspective. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, technical fabric and wet volcanic rock, natural dawn light, shallow depth of field, subtle film grain, cool natural colour with warm sunrise accents. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.
+
+*Video prompt*
+
+> Fixed camera, no camera movement. The steam columns drift and lean slowly in the wind, thin ground mist moving across the basalt. He walks steadily away and never turns back. The light stays constant. Wind over open ground, no music.
+
+
+#### s2 — Close-up — cold morning air, eyes on the way ahead
+
+- **Note**: LoRA weight 1.0; input seed/kyle.png; kept 7.0 s
+
+*Still prompt*
+
+> Tight close-up portrait, head and shoulders, straight on, one person alone in the frame. kyle_kx boy, a nine-year-old boy with child proportions, this exact face, short dark hair, wearing a weathered burnt-orange hooded shell jacket over a charcoal fleece, dark trousers and scuffed hiking boots with the hood down and the fleece collar high at his throat, facing the camera, an even natural skin tone, his breath faintly visible in the cold air. a vast black volcanic plain at first light, broken basalt and old lava flows under a thin dusting of frost, columns of white steam rising from fissures in the ground, distant snow ridges on the horizon, a huge pale sky going from deep blue to cold gold thrown far out of focus behind him, cold blue light with a warm rim from the low sun. The face is well exposed and clearly visible. Razor-sharp focus on the eyes and skin texture. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, technical fabric and wet volcanic rock, natural dawn light, shallow depth of field, subtle film grain, cool natural colour with warm sunrise accents. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.
+
+*Video prompt*
+
+> Locked camera, no push in. He faces the camera the whole time and his head stays still. His breath clouds faintly and fades, a few strands of hair move in the cold air, he blinks once. The light stays constant. Wind, no music.
+
+
+#### s3 — Macro — a piece of obsidian turned in two hands, no face in frame
+
+- **Note**: LoRA weight 0.6; input seed/kyle.png; kept 8.0 s
+
+*Still prompt*
+
+> Extreme close-up detail insert, no face in frame. Two small child's hands holding a shard of black volcanic glass up against the cold morning light, its edges catching the sun, resting over the cuff of a weathered burnt-orange hooded shell jacket over a charcoal fleece, dark trousers and scuffed hiking boots. Fine dust on the skin, the conchoidal ripples in the glass, a wisp of steam crossing behind. Macro clarity, very shallow depth of field. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, technical fabric and wet volcanic rock, natural dawn light, shallow depth of field, subtle film grain, cool natural colour with warm sunrise accents. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.
+
+*Video prompt*
+
+> Locked macro camera. The shard stays held in his hands the whole time and never lifts, floats or leaves the frame. His thumb turns it a few degrees and settles, the fingers relax. A thin wisp of steam drifts across behind. The light stays constant. Wind, no music.
+
+
+#### s4 — Travelling — full body in profile, walking the plain
+
+- **Note**: LoRA weight 0.85; input seed/plain.png; kept 7.5 s
+
+*Still prompt*
+
+> Full-body shot from the side, one person alone in the frame, filling about half the frame height. kyle_kx boy, a nine-year-old boy with child proportions, this exact face, short dark hair, wearing a weathered burnt-orange hooded shell jacket over a charcoal fleece, dark trousers and scuffed hiking boots, seen in profile walking steadily from left to right across the frame, mid-stride with one boot lifted, arms swinging naturally at his sides, looking ahead along his path. He walks across bare black basalt and the ground in front of him is clear and open. Tall columns of white steam rise well behind him and out to both sides, bright against the sky. a vast black volcanic plain at first light, broken basalt and old lava flows under a thin dusting of frost, columns of white steam rising from fissures in the ground, distant snow ridges on the horizon, a huge pale sky going from deep blue to cold gold behind him, distant snow ridges on the horizon. Clean dry air between the camera and the boy. Strong side-on composition, the whole body visible from boots to head. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, technical fabric and wet volcanic rock, natural dawn light, shallow depth of field, subtle film grain, cool natural colour with warm sunrise accents. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.
+
+*Video prompt*
+
+> Fixed camera, no camera movement. He walks steadily in profile from left to right across the frame at a constant pace, boots landing on the black rock, arms swinging, looking ahead the whole time. The steam columns behind him rise and lean slowly in the wind. The air between the camera and the boy stays clear. The light stays constant. Wind over open ground, boots on stone, no music.
+
+
+#### s5 — The hot spring — blue-green water in a sulfur rim, no people in frame
+
+- **Note**: no LoRA — no face in frame; input seed/spring.png; kept 8.0 s
+
+*Still prompt*
+
+> Wide shot, no people in frame. a hot spring pool of impossibly clear blue-green water set in black lava rock, its rim crusted in bright sulfur yellow and rust orange, heavy white steam pouring off the surface, the black rock wet and shining around it, a few frost-rimed tufts of moss at the edge, the pool so clear the ledges are visible far down into it. Strong colour contrast between the yellow rim, the blue water and the black rock. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, technical fabric and wet volcanic rock, natural dawn light, shallow depth of field, subtle film grain, cool natural colour with warm sunrise accents. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.
+
+*Video prompt*
+
+> Fixed camera, no camera movement. Heavy steam pours continuously off the surface of the pool and rolls away low across the rock, the water turning slowly with faint convection rings. The light stays constant. Water and wind, no music.
+
+
+#### s6 — He climbs the black ridge, seen from behind and below
+
+- **Note**: LoRA weight 0.85; input seed/plain.png; kept 9.5 s
+
+*Still prompt*
+
+> Wide full-body shot from behind and below, looking up a slope of broken black lava rock. One person alone in the frame: kyle_kx boy, a nine-year-old boy with child proportions, this exact face, short dark hair, wearing a weathered burnt-orange hooded shell jacket over a charcoal fleece, dark trousers and scuffed hiking boots, seen from behind mid-stride climbing the loose dark boulders away from the camera toward a bank of steam above, one hand down on the rock for balance. The foreground rock is clear and unobstructed. Strong upward perspective. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, technical fabric and wet volcanic rock, natural dawn light, shallow depth of field, subtle film grain, cool natural colour with warm sunrise accents. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.
+
+*Video prompt*
+
+> Fixed camera. He climbs steadily away from the camera over the rock, steam rolling down past him from above. He never turns back. The light stays constant. Wind, boots on loose stone, no music.
+
+
+#### s7 — The top — sunrise full on his face
+
+- **Note**: LoRA weight 1.0; input seed/kyle.png; kept 7.5 s
+
+*Still prompt*
+
+> Close-up portrait, frontal, slightly low angle, one person alone in the frame. kyle_kx boy, a nine-year-old boy with child proportions, this exact face, short dark hair, wearing a weathered burnt-orange hooded shell jacket over a charcoal fleece, dark trousers and scuffed hiking boots, facing the camera with a low gold sunrise full on his face lighting it clearly and brightly, wind lifting his hair, lips slightly parted in astonishment, eyes bright. Behind him a vast steaming valley seen from a high black ridge, dozens of steam columns rising from the floor and leaning together in the wind, a river of meltwater threading between them, low gold sunrise breaking across the whole basin, soft and luminous and far out of focus. The face is well exposed and clearly visible. Razor-sharp focus on the eyes and skin texture. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, technical fabric and wet volcanic rock, natural dawn light, shallow depth of field, subtle film grain, cool natural colour with warm sunrise accents. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.
+
+*Video prompt*
+
+> Locked camera. His expression settles from astonishment into a slow smile; he blinks once, wind lifting his hair across his face and away again. He faces the camera throughout and his head stays still. Steam drifts far behind him. The light stays constant. Wind, no music.
+
+
+#### s8 — What he climbed for — small on the ridge above a valley full of steam
+
+- **Note**: LoRA weight 0.85; input seed/valley.png; kept 8.0 s
+
+*Still prompt*
+
+> Extreme wide final shot. a vast steaming valley seen from a high black ridge, dozens of steam columns rising from the floor and leaning together in the wind, a river of meltwater threading between them, low gold sunrise breaking across the whole basin. Very small at the ridge edge and seen from behind, one person alone in the frame: kyle_kx boy, a nine-year-old boy with child proportions, this exact face, short dark hair, wearing a weathered burnt-orange hooded shell jacket over a charcoal fleece, dark trousers and scuffed hiking boots, standing still and looking out over the steaming basin. Enormous sense of scale, deep depth of field, layered atmospheric perspective. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, technical fabric and wet volcanic rock, natural dawn light, shallow depth of field, subtle film grain, cool natural colour with warm sunrise accents. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.
+
+*Video prompt*
+
+> Fixed camera, no camera movement. The steam columns rise and lean steadily across the whole valley, the meltwater river catching the light, the sunrise climbing visibly brighter as the sun clears the far ridge. His hair and the hem of his jacket move in the wind. He stands still and never turns back. Wind, no music.
 
 ## Related pages
 - [[projects]]

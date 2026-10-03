@@ -813,3 +813,35 @@ at tile size) are written up in [[still-geometry-and-review]].
 The generated media — stills, clips and the five 4K upscales, 3.2 GB — was git-ignored and is
 gone for good. `plan/yang-ridge-plan.md` and `spec.json` remain in git history if the prompts are
 ever wanted again.
+
+## 2026-10-03 — kyle_steamfield, and what atmosphere does to a face
+
+Fourth LoRA-driven film: a boy crosses a steaming volcanic plain at first light. Eight shots, 60.15 s.
+Setting chosen because **steam is continuous natural motion**, so the long takes get their movement from
+the environment rather than the subject — the fourth confirmation of the pattern [[lindsey-summit-plan]]
+established. Full plan in [[kyle-steamfield-plan]].
+
+Three findings, now sections 5-7 of [[still-geometry-and-review]]:
+
+- **Atmosphere placed between camera and subject will cross the face**, four times in this one film. The
+  worst was s4 v1, which asked for a hand "parting a curtain of white steam" *and* a clearly visible face.
+  A curtain you part is between you and the camera by construction — the prompt asked for the face to be
+  occluded and visible in the same sentence. The fix is positive placement ("steam rises well behind him
+  and out to both sides") plus the phrase **"clean dry air between the camera and his face"**, which
+  rescued the subject master and every shot after it. A background lock written for landscapes carries its
+  atmosphere into every close-up that inherits it.
+- **When a face shot keeps failing, change what the shot is.** s4 took three versions; the first two
+  reworded, the third made it a full-body side-on walking shot and came back clean immediately, holding all
+  249 frames. A film needs identity carried somewhere, not everywhere — this one keeps it in two close-ups.
+- **The video model still invents cords.** s3, a macro of two hands holding obsidian, grew a dark cord at
+  the top of frame from about frame 160, despite a wardrobe lock written with no strap or cord precisely
+  because `kyle_lighthouse` was stopped over one. Trimmed to 6.0 s. A macro of hands has a short safe
+  window and needs frame-by-frame QC near the cut.
+
+The review gate earned its cost here: every one of these was caught before the 4K pass rather than after.
+
+Also recorded, operationally: **long renders launched from the agent's shell do not survive.** The stills
+run died at 36 of 40 candidates and the clips run died after one clip, both silently, despite `nohup` and
+`disown` — the process group is reaped when the tool call ends. The same command run from Kevin's own
+terminal completed seven clips without interruption. Harness-tracked background tasks cap at 30 minutes,
+so for multi-hour GPU work the terminal is the only reliable option.

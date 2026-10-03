@@ -4,7 +4,7 @@
 
 **Sources**: [[kyle-lighthouse-plan]] (the failure), [[lindsey-summit-plan]], [[kyle-debut-plan]], [[lindsey-palace-plan]], [[idea-to-video-blueprint]] Phase 5 and the pick rubric.
 
-**Last updated**: 2026-09-29
+**Last updated**: 2026-10-03
 
 ---
 
@@ -93,6 +93,7 @@ the [[idea-to-video-blueprint]] pick rubric rather than replacing it.
 | **Foreground** | a cable, rope, pole or branch across frame that the shot does not need |
 | **Props** | a prop from the wardrobe lock that has grown, multiplied or moved somewhere it cannot be |
 | **Skin** | blotching, plastic sheen, or colour that came from a weather adjective |
+| **Atmosphere** | steam, mist, spray or smoke crossing the face, or any part of the subject the shot depends on |
 | Identity, costume, physics, framing, cleanliness, style | as in the blueprint's pick rubric |
 
 Then one forward-looking question, which is the one that would have saved `kyle_lighthouse`:
@@ -102,8 +103,72 @@ Then one forward-looking question, which is the one that would have saved `kyle_
 > rather than hoping the motion prompt will hold it together, because [[lindsey-summit-plan]] establishes that
 > motion prompts cannot forbid anything.
 
+## 5. Atmosphere placed between the camera and the subject will cross the face
+
+Weather and atmosphere — steam, mist, spray, smoke, falling snow, rain — are the most useful things to put in
+a shot, because they are continuous natural motion and the video model does not have to invent it. They are
+also the fastest way to destroy a face, and the failure is in the still, not the clip.
+
+`kyle_steamfield` hit this four times in one film:
+
+| where | prompt said | what came back |
+|---|---|---|
+| Kyle master | background lock contained "columns of white steam rising from fissures" | the face smeared, eyes melted — steam rendered *across* it |
+| s2 candidates | the same background behind a close-up | 4 of 5 had steam over the mouth or were lost in it |
+| s4 v1 | "one hand raised ... **parting a curtain of white steam**" | 4 of 5 with the face buried; the clip only cleared around frame 170 |
+| s4 v2 | steam moved "behind him and out to both sides" | better, but the shot was abandoned for an unrelated reason |
+
+The v1 phrasing could not have worked. **A curtain you part is between you and the camera by construction** —
+the prompt asked for the face to be occluded and for the face to be clearly visible in the same sentence, and
+the model is not able to prefer the second.
+
+Two fixes, both positive statements rather than prohibitions:
+
+- **Say where the atmosphere is.** "Tall columns of white steam rise well behind him and out to both sides of
+  frame" places it. "Steam everywhere" or an unplaced background lock does not, and unplaced atmosphere lands
+  on the subject because that is where the composition's attention is.
+- **Say the intervening air is clear.** The exact phrase that fixed the master and every shot after it:
+
+  > **clean dry air between the camera and his face**
+
+  Not "no steam over the face" — that is a negative and negatives do not bind, as [[lindsey-summit-plan]]
+  establishes.
+
+A background lock written for landscapes will contain atmosphere, and it will follow the subject into every
+close-up that inherits it. Either strip the atmosphere out of the lock for face shots, or place it explicitly.
+
+## 6. When a face shot keeps failing, stop making it a face shot
+
+`kyle_steamfield` s4 went through three versions. v1 and v2 both tried to hold a readable face inside a scene
+whose whole point was steam. v3 abandoned the premise: full body, side-on, walking across frame. It came back
+clean on the first attempt and held all 249 frames without drifting.
+
+That is not a consolation prize. It is the better shot for a reason already established three films running:
+**a frontal face drifts at around eight seconds and nothing in the motion prompt prevents it, while walking
+across or away from camera holds full length every time.** A film needs its identity carried somewhere, but
+it does not need every shot to carry it. `kyle_steamfield` keeps identity in two close-ups, s2 and s7, and
+gives everything else to backs, profiles, macro and landscape.
+
+The rule of thumb: if two attempts at a face shot have failed for composition reasons, the third attempt
+should change what the shot *is*, not reword it.
+
+## 7. The video model still invents cords
+
+`kyle_lighthouse` was stopped over a shoulder rope that LTX elaborated into a cable across frame. The wardrobe
+lock in `kyle_steamfield` was written with **no strap, cord or satchel** specifically to avoid that, and the
+film still grew one: s3, a macro insert of two hands holding obsidian, sprouts a dark cord at the top of frame
+from about frame 160 (6.4 s), and the right hand's fingers merge shortly after.
+
+Nothing in the prompt or the still suggested a cord. The shot was trimmed to 6.0 s, which is clean.
+
+The lesson is not "write better wardrobe locks" — that was already done. It is that **a macro shot of hands has
+a short safe window**, and it should be QC'd frame by frame near the intended cut rather than trusted because
+the still was good. The cost of finding this at QC is a 2-second trim; the cost of finding it after the 4K pass
+is an hour.
+
 ## Related pages
 - [[idea-to-video-blueprint]]
 - [[kyle-lighthouse-plan]]
 - [[lindsey-summit-plan]]
+- [[kyle-steamfield-plan]]
 - [[scripts-reference]]

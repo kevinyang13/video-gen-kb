@@ -1,0 +1,398 @@
+{
+ "order": 31,
+ "id": "kyle_steamfield",
+ "version": "v1-lora-cli",
+ "variant": "Fourth LoRA-driven film, built to the same shot grammar as lindsey_summit but on the standalone kyle_lora v2.",
+ "title": "Kyle — where the ground breathes",
+ "date": "2026-10-03",
+ "theme": "realistic",
+ "dt_project": "none — draw-things-cli via scripts/film_run.py",
+ "status": "clips QC’d 2026-10-03 — 60.41 s planned, finishing",
+ "source": "text-only; identity from projects/kyle_lora v2 (trigger kyle_kx, class word boy). No source photographs at render time.",
+ "notes": "Kyle is Kevin's son; consent settled. Story written for this film: a boy crosses a black volcanic plain at first light, finds a hot spring in the lava, climbs a ridge of broken basalt and comes out above a whole valley full of steam at sunrise.\n\nEvery structural choice is inherited from the three films before it rather than guessed. Face shots (s2, s4, s7) are locked frontal at weight 1.0 and budgeted at 7.0-7.5 s, because frontal face clips drift at about eight seconds whatever the motion prompt says. The long takes go to the three things that have held their full length every time: walking away from camera (s1, s6), a macro insert with no face (s3), and pure landscape (s5). s4 is the one shot asking a person for real movement, and it is hand movement in front of a stationary head — the pattern that survived 9.9 s on kyle_debut.\n\nThe setting is chosen for the same reason: steam is natural, continuous motion, so the long takes get their movement from the environment rather than from the subject. Palette is deliberately opposite to lindsey_summit — black basalt, white steam and sulfur yellow instead of blue pine and gold.\n\nThe wardrobe carries no strap, cord or satchel on purpose. On kyle_lighthouse a shoulder rope invented in the wardrobe lock was elaborated by LTX into a cable across the frame, and the project was stopped over it.",
+ "still": {
+  "model": "FLUX.2 [klein] 9B (8-bit S)",
+  "size": "1024x576",
+  "steps": 4,
+  "cfg": 1.0,
+  "shift": 3,
+  "sampler": "DDIM Trailing",
+  "lora": "kyle_lora_v2_2500_lora_f32.ckpt @ per-shot weight (none / 0.6 / 0.85 / 1.0)",
+  "seeds": 5,
+  "control": "edit mode: --image environment or wardrobe master --strength 1.0",
+  "prompt": "per shot — see scenes"
+ },
+ "i2v": {
+  "model": "LTX-2.3 22B [distilled] 1.1",
+  "size": "1024x576",
+  "frames": 249,
+  "fps": 25,
+  "steps": 8,
+  "cfg": 1.0,
+  "shift": 5.0,
+  "sampler": "TCD Trailing",
+  "stochasticSamplingGamma": 0.3,
+  "time_min": 11,
+  "note": "no LoRA at the video stage — LTX never sees it."
+ },
+ "post": {
+  "upscale": "scripts/upscale_4k.sh — Real-ESRGAN x4plus -> 3840x2160",
+  "loop": "none — xfade 0.75",
+  "music": "to be chosen at the finish pass"
+ },
+ "scenes": {
+  "locks": {
+   "subject": "kyle_kx boy, a nine-year-old boy with child proportions, this exact face, short dark hair",
+   "wardrobe": "a weathered burnt-orange hooded shell jacket over a charcoal fleece, dark trousers and scuffed hiking boots",
+   "plain": "a vast black volcanic plain at first light, broken basalt and old lava flows under a thin dusting of frost, columns of white steam rising from fissures in the ground, distant snow ridges on the horizon, a huge pale sky going from deep blue to cold gold",
+   "spring": "a hot spring pool of impossibly clear blue-green water set in black lava rock, its rim crusted in bright sulfur yellow and rust orange, heavy white steam pouring off the surface",
+   "valley": "a vast steaming valley seen from a high black ridge, dozens of steam columns rising from the floor and leaning together in the wind, a river of meltwater threading between them, low gold sunrise breaking across the whole basin",
+   "style": "Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, technical fabric and wet volcanic rock, natural dawn light, shallow depth of field, subtle film grain, cool natural colour with warm sunrise accents. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark."
+  },
+  "s1": {
+   "title": "Establishing — the steaming plain at first light, he is small on it",
+   "note": "LoRA weight 0.85; input seed/plain.png; kept 9.5 s",
+   "still": "Extreme wide establishing shot. a vast black volcanic plain at first light, broken basalt and old lava flows under a thin dusting of frost, columns of white steam rising from fissures in the ground, distant snow ridges on the horizon, a huge pale sky going from deep blue to cold gold. Small in the lower third of frame and seen from behind, one person alone in the frame: kyle_kx boy, a nine-year-old boy with child proportions, this exact face, short dark hair, wearing a weathered burnt-orange hooded shell jacket over a charcoal fleece, dark trousers and scuffed hiking boots, walking away from camera along a faint track between the steam columns. Enormous sense of scale, deep depth of field, layered atmospheric perspective. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, technical fabric and wet volcanic rock, natural dawn light, shallow depth of field, subtle film grain, cool natural colour with warm sunrise accents. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+   "video": "Fixed camera, no camera movement. The steam columns drift and lean slowly in the wind, thin ground mist moving across the basalt. He walks steadily away and never turns back. The light stays constant. Wind over open ground, no music.",
+   "picked": "seed 5"
+  },
+  "s2": {
+   "title": "Close-up — cold morning air, eyes on the way ahead",
+   "note": "LoRA weight 1.0; input seed/kyle.png; kept 7.0 s",
+   "still": "Tight close-up portrait, head and shoulders, straight on, one person alone in the frame. kyle_kx boy, a nine-year-old boy with child proportions, this exact face, short dark hair, wearing a weathered burnt-orange hooded shell jacket over a charcoal fleece, dark trousers and scuffed hiking boots with the hood down and the fleece collar high at his throat, facing the camera, an even natural skin tone, his breath faintly visible in the cold air. a vast black volcanic plain at first light, broken basalt and old lava flows under a thin dusting of frost, columns of white steam rising from fissures in the ground, distant snow ridges on the horizon, a huge pale sky going from deep blue to cold gold thrown far out of focus behind him, cold blue light with a warm rim from the low sun. The face is well exposed and clearly visible. Razor-sharp focus on the eyes and skin texture. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, technical fabric and wet volcanic rock, natural dawn light, shallow depth of field, subtle film grain, cool natural colour with warm sunrise accents. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+   "video": "Locked camera, no push in. He faces the camera the whole time and his head stays still. His breath clouds faintly and fades, a few strands of hair move in the cold air, he blinks once. The light stays constant. Wind, no music.",
+   "picked": "seed 1",
+   "qc_note": "Identity holds throughout, but the head drops twice despite 'his head stays still'. Kept at 7.0 s."
+  },
+  "s3": {
+   "title": "Macro — a piece of obsidian turned in two hands, no face in frame",
+   "note": "LoRA weight 0.6; input seed/kyle.png; kept 8.0 s",
+   "still": "Extreme close-up detail insert, no face in frame. Two small child's hands holding a shard of black volcanic glass up against the cold morning light, its edges catching the sun, resting over the cuff of a weathered burnt-orange hooded shell jacket over a charcoal fleece, dark trousers and scuffed hiking boots. Fine dust on the skin, the conchoidal ripples in the glass, a wisp of steam crossing behind. Macro clarity, very shallow depth of field. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, technical fabric and wet volcanic rock, natural dawn light, shallow depth of field, subtle film grain, cool natural colour with warm sunrise accents. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+   "video": "Locked macro camera. The shard stays held in his hands the whole time and never lifts, floats or leaves the frame. His thumb turns it a few degrees and settles, the fingers relax. A thin wisp of steam drifts across behind. The light stays constant. Wind, no music.",
+   "picked": "seed 2",
+   "qc_note": "A dark cord appears from about frame 160 (6.4 s) and the right hand's fingers merge after it. Nothing in the wardrobe has a cord — LTX invented it, exactly as it did on kyle_lighthouse. Trimmed to 6.0 s, which is clean."
+  },
+  "s4": {
+   "title": "Travelling — full body in profile, walking the plain",
+   "note": "LoRA weight 0.85; input seed/plain.png; kept 7.5 s",
+   "still": "Full-body shot from the side, one person alone in the frame, filling about half the frame height. kyle_kx boy, a nine-year-old boy with child proportions, this exact face, short dark hair, wearing a weathered burnt-orange hooded shell jacket over a charcoal fleece, dark trousers and scuffed hiking boots, seen in profile walking steadily from left to right across the frame, mid-stride with one boot lifted, arms swinging naturally at his sides, looking ahead along his path. He walks across bare black basalt and the ground in front of him is clear and open. Tall columns of white steam rise well behind him and out to both sides, bright against the sky. a vast black volcanic plain at first light, broken basalt and old lava flows under a thin dusting of frost, columns of white steam rising from fissures in the ground, distant snow ridges on the horizon, a huge pale sky going from deep blue to cold gold behind him, distant snow ridges on the horizon. Clean dry air between the camera and the boy. Strong side-on composition, the whole body visible from boots to head. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, technical fabric and wet volcanic rock, natural dawn light, shallow depth of field, subtle film grain, cool natural colour with warm sunrise accents. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+   "video": "Fixed camera, no camera movement. He walks steadily in profile from left to right across the frame at a constant pace, boots landing on the black rock, arms swinging, looking ahead the whole time. The steam columns behind him rise and lean slowly in the wind. The air between the camera and the boy stays clear. The light stays constant. Wind over open ground, boots on stone, no music.",
+   "picked": "seed 3",
+   "review_note": "Only 1 of 5 candidates was usable. The prompt asked for a hand parting a curtain of steam AND a clearly visible face, which contradict — klein put the steam over the face in four of five. c3 was taken as-is: wider than the waist-up specified and looking up rather than straight on, but the face is lit and clear. Same class of failure as the Kyle master, where background steam bled onto the subject.",
+   "qc_note": "Inverted: the steam sits over his face at the start and clears by about frame 170, staying clean to the end with no drift at 9.6 s because the head is still and the hand carries the motion. The clip is used from 4.0 s so the steam clearing becomes the reveal.",
+   "fix_note": "v3 of this shot. v1 framed it waist-up with a raised hand 'parting a curtain of white steam', which puts steam between the camera and the face by construction — four of five candidates came back with the face buried. Rather than keep fighting that, the shot was re-conceived as a full-body side-on travelling shot: no frontal face to lose, walking is natural motion that has held full length on every film so far, and the steam problem disappears because the face is no longer what the shot is about. Identity is carried by s2 and s7, which are clean frontal close-ups."
+  },
+  "s5": {
+   "title": "The hot spring — blue-green water in a sulfur rim, no people in frame",
+   "note": "no LoRA — no face in frame; input seed/spring.png; kept 8.0 s",
+   "still": "Wide shot, no people in frame. a hot spring pool of impossibly clear blue-green water set in black lava rock, its rim crusted in bright sulfur yellow and rust orange, heavy white steam pouring off the surface, the black rock wet and shining around it, a few frost-rimed tufts of moss at the edge, the pool so clear the ledges are visible far down into it. Strong colour contrast between the yellow rim, the blue water and the black rock. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, technical fabric and wet volcanic rock, natural dawn light, shallow depth of field, subtle film grain, cool natural colour with warm sunrise accents. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+   "video": "Fixed camera, no camera movement. Heavy steam pours continuously off the surface of the pool and rolls away low across the rock, the water turning slowly with faint convection rings. The light stays constant. Water and wind, no music.",
+   "picked": "seed 1"
+  },
+  "s6": {
+   "title": "He climbs the black ridge, seen from behind and below",
+   "note": "LoRA weight 0.85; input seed/plain.png; kept 9.5 s",
+   "still": "Wide full-body shot from behind and below, looking up a slope of broken black lava rock. One person alone in the frame: kyle_kx boy, a nine-year-old boy with child proportions, this exact face, short dark hair, wearing a weathered burnt-orange hooded shell jacket over a charcoal fleece, dark trousers and scuffed hiking boots, seen from behind mid-stride climbing the loose dark boulders away from the camera toward a bank of steam above, one hand down on the rock for balance. The foreground rock is clear and unobstructed. Strong upward perspective. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, technical fabric and wet volcanic rock, natural dawn light, shallow depth of field, subtle film grain, cool natural colour with warm sunrise accents. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+   "video": "Fixed camera. He climbs steadily away from the camera over the rock, steam rolling down past him from above. He never turns back. The light stays constant. Wind, boots on loose stone, no music.",
+   "picked": "seed 5"
+  },
+  "s7": {
+   "title": "The top — sunrise full on his face",
+   "note": "LoRA weight 1.0; input seed/kyle.png; kept 7.5 s",
+   "still": "Close-up portrait, frontal, slightly low angle, one person alone in the frame. kyle_kx boy, a nine-year-old boy with child proportions, this exact face, short dark hair, wearing a weathered burnt-orange hooded shell jacket over a charcoal fleece, dark trousers and scuffed hiking boots, facing the camera with a low gold sunrise full on his face lighting it clearly and brightly, wind lifting his hair, lips slightly parted in astonishment, eyes bright. Behind him a vast steaming valley seen from a high black ridge, dozens of steam columns rising from the floor and leaning together in the wind, a river of meltwater threading between them, low gold sunrise breaking across the whole basin, soft and luminous and far out of focus. The face is well exposed and clearly visible. Razor-sharp focus on the eyes and skin texture. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, technical fabric and wet volcanic rock, natural dawn light, shallow depth of field, subtle film grain, cool natural colour with warm sunrise accents. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+   "video": "Locked camera. His expression settles from astonishment into a slow smile; he blinks once, wind lifting his hair across his face and away again. He faces the camera throughout and his head stays still. Steam drifts far behind him. The light stays constant. Wind, no music.",
+   "picked": "seed 1"
+  },
+  "s8": {
+   "title": "What he climbed for — small on the ridge above a valley full of steam",
+   "note": "LoRA weight 0.85; input seed/valley.png; kept 8.0 s",
+   "still": "Extreme wide final shot. a vast steaming valley seen from a high black ridge, dozens of steam columns rising from the floor and leaning together in the wind, a river of meltwater threading between them, low gold sunrise breaking across the whole basin. Very small at the ridge edge and seen from behind, one person alone in the frame: kyle_kx boy, a nine-year-old boy with child proportions, this exact face, short dark hair, wearing a weathered burnt-orange hooded shell jacket over a charcoal fleece, dark trousers and scuffed hiking boots, standing still and looking out over the steaming basin. Enormous sense of scale, deep depth of field, layered atmospheric perspective. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, technical fabric and wet volcanic rock, natural dawn light, shallow depth of field, subtle film grain, cool natural colour with warm sunrise accents. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+   "video": "Fixed camera, no camera movement. The steam columns rise and lean steadily across the whole valley, the meltwater river catching the light, the sunrise climbing visibly brighter as the sun clears the far ridge. His hair and the hem of his jacket move in the wind. He stands still and never turns back. Wind, no music.",
+   "picked": "seed 1"
+  }
+ },
+ "run-spec": {
+  "dir": "projects/kyle_steamfield/v1-lora-cli",
+  "name": "kyle_steamfield",
+  "size": [
+   1024,
+   576
+  ],
+  "still": {
+   "model": "flux_2_klein_9b_i8x.ckpt",
+   "steps": 4,
+   "cfg": 1,
+   "config": {
+    "shift": 3.0,
+    "sampler": 16,
+    "loras": [
+     {
+      "file": "kyle_lora_v2_2500_lora_f32.ckpt",
+      "weight": 1.0
+     }
+    ]
+   },
+   "seeds": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "strength": 1.0
+  },
+  "clip": {
+   "model": "ltx_2.3_22b_distilled_1.1_q8p.ckpt",
+   "frames": 249,
+   "steps": 8,
+   "cfg": 1,
+   "config": {
+    "sampler": 19,
+    "shift": 5.0,
+    "stochasticSamplingGamma": 0.3,
+    "fps": 25,
+    "hiresFix": false
+   },
+   "seed": 1,
+   "video_format": "prores422hq"
+  },
+  "masters": {
+   "kyle": "seed/kyle.png",
+   "plain": "seed/plain.png",
+   "spring": "seed/spring.png",
+   "valley": "seed/valley.png"
+  },
+  "upscale": {
+   "model": "realesrgan-x4plus",
+   "size": [
+    3840,
+    2160
+   ],
+   "fit": "crop",
+   "bitrate": "40M"
+  },
+  "assemble": {
+   "fps": 25,
+   "xfade": 0.75,
+   "clip_audio": true,
+   "bitrate": "40M",
+   "music": {
+    "file": "music/light_adventure.mp3",
+    "vol": 0.45,
+    "fade_in": 1.5,
+    "fade_out": 2.0
+   }
+  },
+  "deliver": [
+   {
+    "size": [
+     1920,
+     1080
+    ],
+    "bitrate": "12M"
+   }
+  ],
+  "shots": [
+   {
+    "id": "s1",
+    "still": {
+     "ref": null,
+     "input": "seed/plain.png",
+     "prompt": "Extreme wide establishing shot. a vast black volcanic plain at first light, broken basalt and old lava flows under a thin dusting of frost, columns of white steam rising from fissures in the ground, distant snow ridges on the horizon, a huge pale sky going from deep blue to cold gold. Small in the lower third of frame and seen from behind, one person alone in the frame: kyle_kx boy, a nine-year-old boy with child proportions, this exact face, short dark hair, wearing a weathered burnt-orange hooded shell jacket over a charcoal fleece, dark trousers and scuffed hiking boots, walking away from camera along a faint track between the steam columns. Enormous sense of scale, deep depth of field, layered atmospheric perspective. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, technical fabric and wet volcanic rock, natural dawn light, shallow depth of field, subtle film grain, cool natural colour with warm sunrise accents. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+     "config": {
+      "shift": 3.0,
+      "sampler": 16,
+      "loras": [
+       {
+        "file": "kyle_lora_v2_2500_lora_f32.ckpt",
+        "weight": 0.85
+       }
+      ]
+     }
+    },
+    "video_prompt": "Fixed camera, no camera movement. The steam columns drift and lean slowly in the wind, thin ground mist moving across the basalt. He walks steadily away and never turns back. The light stays constant. Wind over open ground, no music.",
+    "qc_ref": "plain",
+    "take": "clips/s1_v1.mov",
+    "trim": [
+     0,
+     9.9
+    ]
+   },
+   {
+    "id": "s2",
+    "still": {
+     "ref": null,
+     "input": "seed/kyle.png",
+     "prompt": "Tight close-up portrait, head and shoulders, straight on, one person alone in the frame. kyle_kx boy, a nine-year-old boy with child proportions, this exact face, short dark hair, wearing a weathered burnt-orange hooded shell jacket over a charcoal fleece, dark trousers and scuffed hiking boots with the hood down and the fleece collar high at his throat, facing the camera, an even natural skin tone, his breath faintly visible in the cold air. a vast black volcanic plain at first light, broken basalt and old lava flows under a thin dusting of frost, columns of white steam rising from fissures in the ground, distant snow ridges on the horizon, a huge pale sky going from deep blue to cold gold thrown far out of focus behind him, cold blue light with a warm rim from the low sun. The face is well exposed and clearly visible. Razor-sharp focus on the eyes and skin texture. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, technical fabric and wet volcanic rock, natural dawn light, shallow depth of field, subtle film grain, cool natural colour with warm sunrise accents. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+     "config": {
+      "shift": 3.0,
+      "sampler": 16,
+      "loras": [
+       {
+        "file": "kyle_lora_v2_2500_lora_f32.ckpt",
+        "weight": 1.0
+       }
+      ]
+     }
+    },
+    "video_prompt": "Locked camera, no push in. He faces the camera the whole time and his head stays still. His breath clouds faintly and fades, a few strands of hair move in the cold air, he blinks once. The light stays constant. Wind, no music.",
+    "qc_ref": "kyle",
+    "take": "clips/s2_v1.mov",
+    "trim": [
+     0,
+     7.0
+    ]
+   },
+   {
+    "id": "s3",
+    "still": {
+     "ref": null,
+     "input": "seed/kyle.png",
+     "prompt": "Extreme close-up detail insert, no face in frame. Two small child's hands holding a shard of black volcanic glass up against the cold morning light, its edges catching the sun, resting over the cuff of a weathered burnt-orange hooded shell jacket over a charcoal fleece, dark trousers and scuffed hiking boots. Fine dust on the skin, the conchoidal ripples in the glass, a wisp of steam crossing behind. Macro clarity, very shallow depth of field. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, technical fabric and wet volcanic rock, natural dawn light, shallow depth of field, subtle film grain, cool natural colour with warm sunrise accents. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+     "config": {
+      "shift": 3.0,
+      "sampler": 16,
+      "loras": [
+       {
+        "file": "kyle_lora_v2_2500_lora_f32.ckpt",
+        "weight": 0.6
+       }
+      ]
+     }
+    },
+    "video_prompt": "Locked macro camera. The shard stays held in his hands the whole time and never lifts, floats or leaves the frame. His thumb turns it a few degrees and settles, the fingers relax. A thin wisp of steam drifts across behind. The light stays constant. Wind, no music.",
+    "qc_ref": "kyle",
+    "take": "clips/s3_v1.mov",
+    "trim": [
+     0,
+     6.0
+    ]
+   },
+   {
+    "id": "s4",
+    "still": {
+     "ref": null,
+     "input": "seed/plain.png",
+     "prompt": "Full-body shot from the side, one person alone in the frame, filling about half the frame height. kyle_kx boy, a nine-year-old boy with child proportions, this exact face, short dark hair, wearing a weathered burnt-orange hooded shell jacket over a charcoal fleece, dark trousers and scuffed hiking boots, seen in profile walking steadily from left to right across the frame, mid-stride with one boot lifted, arms swinging naturally at his sides, looking ahead along his path. He walks across bare black basalt and the ground in front of him is clear and open. Tall columns of white steam rise well behind him and out to both sides, bright against the sky. a vast black volcanic plain at first light, broken basalt and old lava flows under a thin dusting of frost, columns of white steam rising from fissures in the ground, distant snow ridges on the horizon, a huge pale sky going from deep blue to cold gold behind him, distant snow ridges on the horizon. Clean dry air between the camera and the boy. Strong side-on composition, the whole body visible from boots to head. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, technical fabric and wet volcanic rock, natural dawn light, shallow depth of field, subtle film grain, cool natural colour with warm sunrise accents. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+     "config": {
+      "shift": 3.0,
+      "sampler": 16,
+      "loras": [
+       {
+        "file": "kyle_lora_v2_2500_lora_f32.ckpt",
+        "weight": 0.85
+       }
+      ]
+     }
+    },
+    "video_prompt": "Fixed camera, no camera movement. He walks steadily in profile from left to right across the frame at a constant pace, boots landing on the black rock, arms swinging, looking ahead the whole time. The steam columns behind him rise and lean slowly in the wind. The air between the camera and the boy stays clear. The light stays constant. Wind over open ground, boots on stone, no music.",
+    "qc_ref": "plain",
+    "take": "clips/s4_v1.mov",
+    "trim": [
+     0,
+     7.5
+    ]
+   },
+   {
+    "id": "s5",
+    "still": {
+     "ref": null,
+     "input": "seed/spring.png",
+     "prompt": "Wide shot, no people in frame. a hot spring pool of impossibly clear blue-green water set in black lava rock, its rim crusted in bright sulfur yellow and rust orange, heavy white steam pouring off the surface, the black rock wet and shining around it, a few frost-rimed tufts of moss at the edge, the pool so clear the ledges are visible far down into it. Strong colour contrast between the yellow rim, the blue water and the black rock. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, technical fabric and wet volcanic rock, natural dawn light, shallow depth of field, subtle film grain, cool natural colour with warm sunrise accents. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+     "config": {
+      "shift": 3.0,
+      "sampler": 16
+     }
+    },
+    "video_prompt": "Fixed camera, no camera movement. Heavy steam pours continuously off the surface of the pool and rolls away low across the rock, the water turning slowly with faint convection rings. The light stays constant. Water and wind, no music.",
+    "qc_ref": "spring",
+    "take": "clips/s5_v1.mov",
+    "trim": [
+     0,
+     9.0
+    ]
+   },
+   {
+    "id": "s6",
+    "still": {
+     "ref": null,
+     "input": "seed/plain.png",
+     "prompt": "Wide full-body shot from behind and below, looking up a slope of broken black lava rock. One person alone in the frame: kyle_kx boy, a nine-year-old boy with child proportions, this exact face, short dark hair, wearing a weathered burnt-orange hooded shell jacket over a charcoal fleece, dark trousers and scuffed hiking boots, seen from behind mid-stride climbing the loose dark boulders away from the camera toward a bank of steam above, one hand down on the rock for balance. The foreground rock is clear and unobstructed. Strong upward perspective. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, technical fabric and wet volcanic rock, natural dawn light, shallow depth of field, subtle film grain, cool natural colour with warm sunrise accents. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+     "config": {
+      "shift": 3.0,
+      "sampler": 16,
+      "loras": [
+       {
+        "file": "kyle_lora_v2_2500_lora_f32.ckpt",
+        "weight": 0.85
+       }
+      ]
+     }
+    },
+    "video_prompt": "Fixed camera. He climbs steadily away from the camera over the rock, steam rolling down past him from above. He never turns back. The light stays constant. Wind, boots on loose stone, no music.",
+    "qc_ref": "plain",
+    "take": "clips/s6_v1.mov",
+    "trim": [
+     0,
+     9.5
+    ]
+   },
+   {
+    "id": "s7",
+    "still": {
+     "ref": null,
+     "input": "seed/kyle.png",
+     "prompt": "Close-up portrait, frontal, slightly low angle, one person alone in the frame. kyle_kx boy, a nine-year-old boy with child proportions, this exact face, short dark hair, wearing a weathered burnt-orange hooded shell jacket over a charcoal fleece, dark trousers and scuffed hiking boots, facing the camera with a low gold sunrise full on his face lighting it clearly and brightly, wind lifting his hair, lips slightly parted in astonishment, eyes bright. Behind him a vast steaming valley seen from a high black ridge, dozens of steam columns rising from the floor and leaning together in the wind, a river of meltwater threading between them, low gold sunrise breaking across the whole basin, soft and luminous and far out of focus. The face is well exposed and clearly visible. Razor-sharp focus on the eyes and skin texture. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, technical fabric and wet volcanic rock, natural dawn light, shallow depth of field, subtle film grain, cool natural colour with warm sunrise accents. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+     "config": {
+      "shift": 3.0,
+      "sampler": 16,
+      "loras": [
+       {
+        "file": "kyle_lora_v2_2500_lora_f32.ckpt",
+        "weight": 1.0
+       }
+      ]
+     }
+    },
+    "video_prompt": "Locked camera. His expression settles from astonishment into a slow smile; he blinks once, wind lifting his hair across his face and away again. He faces the camera throughout and his head stays still. Steam drifts far behind him. The light stays constant. Wind, no music.",
+    "qc_ref": "kyle",
+    "take": "clips/s7_v1.mov",
+    "trim": [
+     0,
+     7.5
+    ]
+   },
+   {
+    "id": "s8",
+    "still": {
+     "ref": null,
+     "input": "seed/valley.png",
+     "prompt": "Extreme wide final shot. a vast steaming valley seen from a high black ridge, dozens of steam columns rising from the floor and leaning together in the wind, a river of meltwater threading between them, low gold sunrise breaking across the whole basin. Very small at the ridge edge and seen from behind, one person alone in the frame: kyle_kx boy, a nine-year-old boy with child proportions, this exact face, short dark hair, wearing a weathered burnt-orange hooded shell jacket over a charcoal fleece, dark trousers and scuffed hiking boots, standing still and looking out over the steaming basin. Enormous sense of scale, deep depth of field, layered atmospheric perspective. Cinematic film still from a live-action adventure film, anamorphic 35mm, photoreal skin, technical fabric and wet volcanic rock, natural dawn light, shallow depth of field, subtle film grain, cool natural colour with warm sunrise accents. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+     "config": {
+      "shift": 3.0,
+      "sampler": 16,
+      "loras": [
+       {
+        "file": "kyle_lora_v2_2500_lora_f32.ckpt",
+        "weight": 0.85
+       }
+      ]
+     }
+    },
+    "video_prompt": "Fixed camera, no camera movement. The steam columns rise and lean steadily across the whole valley, the meltwater river catching the light, the sunrise climbing visibly brighter as the sun clears the far ridge. His hair and the hem of his jacket move in the wind. He stands still and never turns back. Wind, no music.",
+    "qc_ref": "valley",
+    "take": "clips/s8_v1.mov",
+    "trim": [
+     0,
+     9.0
+    ]
+   }
+  ]
+ },
+ "files": [
+  "seed/*.png (masters)",
+  "stills/<id>.png",
+  "clips/<id>.mp4",
+  "final/"
+ ]
+}

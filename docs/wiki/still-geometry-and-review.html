@@ -92,7 +92,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
     <span class="spacer"></span>
     <button class="pill" onclick="tt()">◐ Theme</button>
   </nav>
-  <h1>Still Geometry, Anatomy and Candidate Review</h1><p class="lede">The prompt patterns that stop klein producing broken architecture and wrong-age bodies, and the review gate that stops a broken candidate being picked. Written after <code>kyle_lighthouse</code> was abandoned over a single shot that failed five times on geometry.</p><div class="meta"><span><b>Updated</b> 2026-09-29</span><span><b>Sources</b> <a href="kyle-lighthouse-plan.html">kyle lighthouse plan</a> (the failure), <a href="lindsey-summit-plan.html">lindsey summit plan</a>, <a href="kyle-debut-plan.html">kyle debut plan</a>, <a href="lindsey-palace-plan.html">lindsey palace plan</a>, <a href="idea-to-video-blueprint.html">idea to video blueprint</a> Phase 5 and the pick rubric.</span></div>
+  <h1>Still Geometry, Anatomy and Candidate Review</h1><p class="lede">The prompt patterns that stop klein producing broken architecture and wrong-age bodies, and the review gate that stops a broken candidate being picked. Written after <code>kyle_lighthouse</code> was abandoned over a single shot that failed five times on geometry.</p><div class="meta"><span><b>Updated</b> 2026-10-03</span><span><b>Sources</b> <a href="kyle-lighthouse-plan.html">kyle lighthouse plan</a> (the failure), <a href="lindsey-summit-plan.html">lindsey summit plan</a>, <a href="kyle-debut-plan.html">kyle debut plan</a>, <a href="lindsey-palace-plan.html">lindsey palace plan</a>, <a href="idea-to-video-blueprint.html">idea to video blueprint</a> Phase 5 and the pick rubric.</span></div>
 <hr />
 <h2>Why this page exists</h2>
 <p>Four LoRA-driven films went out in two days. The fifth, <code>kyle_lighthouse</code>, was stopped with seven of eight shots
@@ -185,6 +185,10 @@ the <a href="idea-to-video-blueprint.html">idea to video blueprint</a> pick rubr
 <td>blotching, plastic sheen, or colour that came from a weather adjective</td>
 </tr>
 <tr>
+<td><strong>Atmosphere</strong></td>
+<td>steam, mist, spray or smoke crossing the face, or any part of the subject the shot depends on</td>
+</tr>
+<tr>
 <td>Identity, costume, physics, framing, cleanliness, style</td>
 <td>as in the blueprint's pick rubric</td>
 </tr>
@@ -197,10 +201,84 @@ elaborate. If the answer is "I am not sure what that structure is", so is the mo
 rather than hoping the motion prompt will hold it together, because <a href="lindsey-summit-plan.html">lindsey summit plan</a> establishes that
 motion prompts cannot forbid anything.</p>
 </blockquote>
+<h2>5. Atmosphere placed between the camera and the subject will cross the face</h2>
+<p>Weather and atmosphere — steam, mist, spray, smoke, falling snow, rain — are the most useful things to put in
+a shot, because they are continuous natural motion and the video model does not have to invent it. They are
+also the fastest way to destroy a face, and the failure is in the still, not the clip.</p>
+<p><code>kyle_steamfield</code> hit this four times in one film:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>where</th>
+<th>prompt said</th>
+<th>what came back</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kyle master</td>
+<td>background lock contained "columns of white steam rising from fissures"</td>
+<td>the face smeared, eyes melted — steam rendered <em>across</em> it</td>
+</tr>
+<tr>
+<td>s2 candidates</td>
+<td>the same background behind a close-up</td>
+<td>4 of 5 had steam over the mouth or were lost in it</td>
+</tr>
+<tr>
+<td>s4 v1</td>
+<td>"one hand raised ... <strong>parting a curtain of white steam</strong>"</td>
+<td>4 of 5 with the face buried; the clip only cleared around frame 170</td>
+</tr>
+<tr>
+<td>s4 v2</td>
+<td>steam moved "behind him and out to both sides"</td>
+<td>better, but the shot was abandoned for an unrelated reason</td>
+</tr>
+</tbody>
+</table></div>
+<p>The v1 phrasing could not have worked. <strong>A curtain you part is between you and the camera by construction</strong> —
+the prompt asked for the face to be occluded and for the face to be clearly visible in the same sentence, and
+the model is not able to prefer the second.</p>
+<p>Two fixes, both positive statements rather than prohibitions:</p>
+<ul>
+<li><strong>Say where the atmosphere is.</strong> "Tall columns of white steam rise well behind him and out to both sides of
+  frame" places it. "Steam everywhere" or an unplaced background lock does not, and unplaced atmosphere lands
+  on the subject because that is where the composition's attention is.</li>
+<li><strong>Say the intervening air is clear.</strong> The exact phrase that fixed the master and every shot after it:</li>
+</ul>
+<blockquote>
+<p><strong>clean dry air between the camera and his face</strong></p>
+</blockquote>
+<p>Not "no steam over the face" — that is a negative and negatives do not bind, as <a href="lindsey-summit-plan.html">lindsey summit plan</a>
+  establishes.</p>
+<p>A background lock written for landscapes will contain atmosphere, and it will follow the subject into every
+close-up that inherits it. Either strip the atmosphere out of the lock for face shots, or place it explicitly.</p>
+<h2>6. When a face shot keeps failing, stop making it a face shot</h2>
+<p><code>kyle_steamfield</code> s4 went through three versions. v1 and v2 both tried to hold a readable face inside a scene
+whose whole point was steam. v3 abandoned the premise: full body, side-on, walking across frame. It came back
+clean on the first attempt and held all 249 frames without drifting.</p>
+<p>That is not a consolation prize. It is the better shot for a reason already established three films running:
+<strong>a frontal face drifts at around eight seconds and nothing in the motion prompt prevents it, while walking
+across or away from camera holds full length every time.</strong> A film needs its identity carried somewhere, but
+it does not need every shot to carry it. <code>kyle_steamfield</code> keeps identity in two close-ups, s2 and s7, and
+gives everything else to backs, profiles, macro and landscape.</p>
+<p>The rule of thumb: if two attempts at a face shot have failed for composition reasons, the third attempt
+should change what the shot <em>is</em>, not reword it.</p>
+<h2>7. The video model still invents cords</h2>
+<p><code>kyle_lighthouse</code> was stopped over a shoulder rope that LTX elaborated into a cable across frame. The wardrobe
+lock in <code>kyle_steamfield</code> was written with <strong>no strap, cord or satchel</strong> specifically to avoid that, and the
+film still grew one: s3, a macro insert of two hands holding obsidian, sprouts a dark cord at the top of frame
+from about frame 160 (6.4 s), and the right hand's fingers merge shortly after.</p>
+<p>Nothing in the prompt or the still suggested a cord. The shot was trimmed to 6.0 s, which is clean.</p>
+<p>The lesson is not "write better wardrobe locks" — that was already done. It is that <strong>a macro shot of hands has
+a short safe window</strong>, and it should be QC'd frame by frame near the intended cut rather than trusted because
+the still was good. The cost of finding this at QC is a 2-second trim; the cost of finding it after the 4K pass
+is an hour.</p>
 
-  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="idea-to-video-blueprint.html">idea to video blueprint</a></li><li><a href="kyle-lighthouse-plan.html">kyle lighthouse plan</a></li><li><a href="lindsey-summit-plan.html">lindsey summit plan</a></li><li><a href="scripts-reference.html">scripts reference</a></li></ul></div>
+  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="idea-to-video-blueprint.html">idea to video blueprint</a></li><li><a href="kyle-lighthouse-plan.html">kyle lighthouse plan</a></li><li><a href="lindsey-summit-plan.html">lindsey summit plan</a></li><li><a href="kyle-steamfield-plan.html">kyle steamfield plan</a></li><li><a href="scripts-reference.html">scripts reference</a></li></ul></div>
 </div>
-<footer>video-gen-kb · built 2026-10-02 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<footer>video-gen-kb · built 2026-10-03 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
 <script>function tt(){var r=document.documentElement,
 d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
 matchMedia('(prefers-color-scheme: dark)').matches);

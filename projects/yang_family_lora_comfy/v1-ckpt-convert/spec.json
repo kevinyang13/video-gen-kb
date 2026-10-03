@@ -1,0 +1,45 @@
+{
+  "order": 30,
+  "id": "yang_family_lora_comfy",
+  "version": "v1-ckpt-convert",
+  "variant": "Convert the trained Draw Things family LoRA to safetensors rather than retrain it, because FLUX.2 klein LoRA training does not work on Apple Silicon.",
+  "title": "Yang family LoRA — made to work in ComfyUI",
+  "date": "2026-10-02",
+  "theme": "realistic",
+  "dt_project": "none — offline conversion",
+  "status": "in progress — source analysed and the mapping derived; converter not yet written",
+  "source": "projects/yang_family_lora/v1-multi-subject (yang_family_lora_4000_lora_f32.ckpt). No new training data.",
+  "notes": "Kyle, Lindsey and Ivy are Kevin's family; consent settled. No raw photographs are involved at any point here — the input is the trained adapter, not the dataset, which is one more reason to prefer conversion over retraining on a rented machine.\n\nTraining the equivalent LoRA natively for ComfyUI is blocked, checked 2026-10-02: Fizgig supports klein 9B but is Windows/Linux with NVIDIA or AMD only; ai-toolkit's Apple Silicon issue is closed as not planned after six non-converging configurations (NaN loss with cached text embeddings, OOM on fp16 despite gradient checkpointing, loss oscillating 0.45-0.56); musubi-tuner has an open klein 9B error. Converting the existing adapter reuses the 9 h 22 m already spent and runs entirely locally.",
+  "source_analysis": {
+    "format": "SQLite database, table tensors(name, type, format, datatype, dim BLOB, data BLOB)",
+    "tensors": 564,
+    "quantization": "none — single datatype, all plain float32; every dim product x 4 equals the byte length (564 match, 0 mismatch)",
+    "rank": 32,
+    "architecture_recovered": {
+      "double_blocks": "0..7 — c_q c_k c_v c_o, c_gate_proj c_up_proj c_down_proj (text); x_* equivalents (image)",
+      "single_blocks": "8..31 — x_q x_k x_v x_o, x_w1 x_w2 x_w3 (SwiGLU)",
+      "other": "x_embedder, linear"
+    },
+    "note": "All 564 names parse against one pattern, so the mapping is mechanical rather than guesswork."
+  },
+  "target": {
+    "model": "flux-2-klein-9b.safetensors (bf16, 18,157,185,168 bytes)",
+    "key_prefix": "diffusion_model.",
+    "fused_layers": "klein fuses q/k/v into double_blocks.N.{img,txt}_attn.qkv.weight, and single_blocks.N.linear1 carries qkv plus the MLP input",
+    "fusion_method": "exact, no SVD: the separate deltas occupy disjoint row ranges of the fused matrix, so stacking the down matrices and block-diagonalising the up matrices reproduces the stacked delta at rank 96 (3 x 32)"
+  },
+  "evaluation": {
+    "plan": [
+      "render lindsey_kx girl at weight 1.0 against a no-LoRA control — does the face come back?",
+      "each of the three subjects alone, for bleed, as the Draw Things adapter already passes",
+      "the Ivy + Lindsey two-shot, the thing separate adapters cannot do",
+      "compare against the same prompt and seed rendered in Draw Things"
+    ],
+    "status": "not started",
+    "trap": "ComfyUI silently ignores a LoRA whose keys do not match the model, which is indistinguishable from a LoRA that does nothing. Every claim here needs the no-LoRA control column."
+  },
+  "files": [
+    "seed/yang_family_lora_4000.safetensors (output, git-ignored)",
+    "logs/convert.log"
+  ]
+}
