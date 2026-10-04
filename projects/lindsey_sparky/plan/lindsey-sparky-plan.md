@@ -36,7 +36,7 @@ that, and the first pass showed exactly what fills the gap. Four of eight shots 
 
 | shot | allotted | usable | what it invented |
 |---|---|---|---|
-| s1 | 9.0 s | 3.0 s | she stands up, walks out of frame, reads as a teenager |
+| s1 | 9.0 s | 3.0 s | she stands up, turns, and becomes a different adult woman |
 | s5 | 8.0 s | 3.2 s | a blue wristwatch; the hand turns adult |
 | s6 | 9.0 s | 3.1 s | a kitten and a red bottle on the desk; Sparky's arms vanish |
 | s7 | 7.5 s | 1.3 s | the laugh ages her into a young woman |
@@ -59,6 +59,13 @@ remaining 6.5 s into the condition s4 already proved.
 instead that Sparky's visor brightens and dims throughout, it held all 249 frames with a bare desk.
 Interiors have no weather, but they have practicals, and a lamp or an LED is as good a motion source
 as surf.
+
+**A back view plus motion that might turn asks the model to invent a person.** s1's still was taken
+from behind, which §6 recommends because backs hold. The motion prompt let her stand, she turned, and the
+front the model produced was a woman in her twenties in cat-eye glasses and a blazer — not a drifted
+Lindsey but a stranger, with none of the wardrobe lock. The LoRA could not help: it was applied to the
+still, and the still had no face. Now §11 of [[still-geometry-and-review]]: if the clip could ever reveal
+the face, the face must be in the still; otherwise the back has to be guaranteed to stay a back.
 
 **A placement lock removes the named prop and the model substitutes another.** s5 v1 grew a
 wristwatch. v2 said "her wrist is bare and the hoodie sleeve stays pushed up above it" — no watch,

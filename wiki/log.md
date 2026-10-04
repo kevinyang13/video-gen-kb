@@ -858,7 +858,7 @@ something**: a girl who stands up and walks out of frame, a wristwatch, a kitten
 laugh that ages an eight-year-old into a young woman. The safe takes summed to 42.6 s against a 60 s
 target, so the film could not be cut from that material.
 
-Three findings, now §8–10 of [[still-geometry-and-review]]:
+Four findings, now §8–11 of [[still-geometry-and-review]]:
 
 **A held expression survives; a changing one does not.** s4 and s7 are a controlled pair — same LoRA,
 same frontal close-up, same lamp, rendered minutes apart. s4's near-static face holds past 7.9 s. s7's
@@ -866,6 +866,13 @@ laugh produced a different, older person by frame 40, about 1.6 s. The rule had 
 faces drift at around eight seconds"; the eight seconds belongs to a *static* face. The fix is an earlier
 peak, not a smaller one: the smile arrives in the first second and then holds, which puts the remaining
 6.5 s into the condition s4 already proved. s7 v2 holds at frames 25, 60, 100, 140 and 187.
+
+**If the clip can show the face, the still must contain the face.** s1's still was a back view, which
+§6 recommends because backs hold full length. The motion prompt let her stand and turn, and the front the
+model invented was a woman in her twenties in cat-eye glasses, a blazer, a necklace and jeans — a
+stranger, not a drifted Lindsey, and with none of the wardrobe lock. The LoRA was applied to the still and
+the still had no face, so nothing identity-bearing reached the I2V stage at all. This is the limit on §6:
+replacing a failing face shot with a back view only helps if the back is guaranteed to stay a back.
 
 **An interior has no weather, but it has practicals.** s6 grew a kitten by frame 85 when nothing in frame
 moved. Told instead that Sparky's visor brightens and dims throughout, it held all 249 frames on a bare

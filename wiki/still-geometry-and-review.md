@@ -152,6 +152,9 @@ gives everything else to backs, profiles, macro and landscape.
 The rule of thumb: if two attempts at a face shot have failed for composition reasons, the third attempt
 should change what the shot *is*, not reword it.
 
+See §11 for the limit on this: the replacement shot must not be one whose motion could reveal a face the
+still never contained.
+
 ## 7. The video model still invents cords
 
 `kyle_lighthouse` was stopped over a shoulder rope that LTX elaborated into a cable across frame. The wardrobe
@@ -221,6 +224,42 @@ watch was gone. A grey knit cuff appeared instead, at frame 90, and the hand tur
 Naming an absence leaves the space undescribed, and the model fills undescribed space near a subject.
 The lock has to say what the area positively **is** — "bare forearm to the elbow, skin all the way up" —
 not merely what is missing from it. s5 was not made to hold in three attempts and was cut to 3.4 s.
+
+## 11. If the clip can show the face, the still must contain the face
+
+`lindsey_sparky` s1 is a wide establishing shot taken from behind: she sits at the desk with her back to
+camera, which is the composition §6 recommends because backs hold full length every time. The motion
+prompt then said she "shifts her weight in the chair and reaches forward". She stood up, turned, and the
+video model had to produce a front that the still had never shown it.
+
+What it produced was **a different person entirely** — a woman in her twenties in cat-eye glasses, a
+mustard *blazer* over a black top, a necklace and blue jeans. Not a drifted Lindsey. A stranger, with
+none of the wardrobe lock: no hoodie, no white t-shirt, no safety goggles.
+
+The LoRA did not prevent this, and could not. It was applied at weight 0.85 **to the still**, and the
+still was a back view. The I2V stage propagates what is in frame 0; if the face is not there, there is
+nothing to propagate, and anything the motion reveals is invented from the prompt text alone. The control
+image was `room.png`, which has no face either, so no identity reached that shot from any direction.
+
+The rule, stated at the stage where it is cheap:
+
+> **Decide before rendering the still whether the clip could ever reveal the face. If it could, the face
+> has to be in the still.**
+
+Two ways to satisfy it, and they are both decisions about the *shot*, not the prompt:
+
+- **Put the face in the still.** Frame it over the shoulder, in a mirror, in three-quarter profile —
+  anything that gives frame 0 the geometry the motion will land on.
+- **Guarantee the back stays a back.** "She stays seated in the chair the whole time, her back against
+  the chair back" — the positive lock that fixed s1 — means nothing is ever revealed, so nothing has to
+  be invented. A back view that stays a back view remains the safest long take there is.
+
+What does not work is a back view plus motion that might turn: that is asking the model to invent a
+person, and it will.
+
+This is the limit on §6. "When a face shot keeps failing, stop making it a face shot" is still right, but
+the replacement shot has to be one whose motion cannot expose what the still never established. Turning a
+failing close-up into a walking back view only helps if the walk stays away from camera.
 
 ## Related pages
 - [[idea-to-video-blueprint]]
