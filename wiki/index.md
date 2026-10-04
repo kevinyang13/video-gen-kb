@@ -22,6 +22,7 @@
 - [[draw-things-setup]] — downloading Wan 2.1/2.2, LTX-2.3, Hunyuan, SkyReels inside Draw Things; LightX2V 4-step settings; I2V step-by-step; disk budget
 - [[apple-silicon-inference]] — FP8 trap, MPS slowness, Draw Things and MLX runtimes, 48 GB memory planning
 - [[headless-cli-pipeline]] — running the whole pipeline without a UI: `draw-things-cli` (klein strength 1.0 = edit mode, diptych as Moodboard substitute, `--frames` video, config JSON), gRPCServerCLI, and why ComfyUI/MLX can't replace it on a Mac
+- [[running-a-film-yourself]] — the seven commands from spec.json to a 4K master with no LLM in the loop, and the four traps that fail silently
 - [[model-storage-locations]] — where Draw Things and ComfyUI keep weights after the move to the external SSD; DRAWTHINGS_MODELS_DIR, the ComfyUI symlink, why the Draw Things GUI cannot use it
 
 ## Projects

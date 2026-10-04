@@ -355,6 +355,7 @@ film                     N × NAME_4k.mp4 ─► assemble_film.sh (XFADE, MUSIC)
 Every run should end with an `ffprobe` check (size, frame count, fps, audio) and a line in [[log]] with the timing.
 
 ## Related pages
+- [[running-a-film-yourself]]
 - [[runbook-living-painting]] — the Draw Things side, click by click
 - [[video-upscaling]] — why Real-ESRGAN, what else exists
 - [[lost-city-plan]] · [[dragon-epic-plan]] — where these scripts are used

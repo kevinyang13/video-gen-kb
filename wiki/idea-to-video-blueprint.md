@@ -371,6 +371,7 @@ Rule of thumb: **wall clock ≈ 0.6 h + 0.35 h per shot** (stills + LTX + 25% re
 - Chaining clips longer than 10 s (last frame → next first frame) — planned in [[character-consistency]] §6, not needed yet.
 
 ## Related pages
+- [[running-a-film-yourself]]
 - [[kyle-antarctic-rescue-plan]] — the run this blueprint is distilled from
 - [[headless-cli-pipeline]] — the CLI, strength-1.0 edit mode, the diptych
 - [[lost-city-plan]] — LTX prompt and staging rules

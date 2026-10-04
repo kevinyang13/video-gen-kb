@@ -189,6 +189,7 @@ The pattern is consistent with [[apple-silicon-inference]]: the models are porta
 4. Do not migrate to ComfyUI for motion on this Mac. Revisit only if an NVIDIA box enters the picture, where it becomes the better harness.
 
 ## Related pages
+- [[running-a-film-yourself]]
 - [[scripts-reference]] — the CLI half of the pipeline that already exists
 - [[draw-things-setup]] · [[runbook-living-painting]] — the UI workflow this would replace
 - [[apple-silicon-inference]] — why Metal, FP8 and MPS decide all of this

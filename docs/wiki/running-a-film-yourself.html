@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Running a Film Yourself — video-gen-kb</title>
+<style>
+:root{--bg:#0B0D12;--panel:#141822;--panel-2:#1B2130;--stroke:#2A3245;--text:#E6E9F0;
+--muted:#8B94A7;--accent:#F5B84B;--accent-2:#4BC9F5;--on-accent:#12131A;
+--rule:rgba(139,148,167,.22);--code:#F5B84B}
+@media(prefers-color-scheme:light){:root:not([data-theme=dark]){--bg:#F4F1EA;--panel:#fff;
+--panel-2:#FAF8F3;--stroke:#D9D3C6;--text:#16181F;--muted:#5D6473;--accent:#B8781A;
+--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}}
+:root[data-theme=light]{--bg:#F4F1EA;--panel:#fff;--panel-2:#FAF8F3;--stroke:#D9D3C6;
+--text:#16181F;--muted:#5D6473;--accent:#B8781A;--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);
+line-height:1.65;padding:0 1rem 4rem}
+.shell{max-width:840px;margin:0 auto}
+a{color:var(--accent);text-decoration:none;font-weight:600}
+a:hover{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--accent-2);outline-offset:3px;border-radius:4px}
+.bar{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;padding:1.1rem 0;margin-bottom:1.5rem;
+border-bottom:1px solid var(--stroke)}
+.crumb{font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.spacer{flex:1}
+.pill{border:1px solid var(--stroke);background:var(--panel);border-radius:999px;padding:.28rem .8rem;
+font-size:.75rem;font-weight:700;color:var(--text);cursor:pointer;font-family:inherit}
+.pill:hover{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+h1{font-size:clamp(1.7rem,5vw,2.5rem);margin:.2rem 0 1rem;line-height:1.1;letter-spacing:-.015em;text-wrap:balance}
+h2{font-size:1.25rem;margin:2.2rem 0 .7rem;padding-bottom:.35rem;border-bottom:1px solid var(--rule);text-wrap:balance}
+h3{font-size:1.02rem;margin:1.5rem 0 .5rem;color:var(--accent)}
+p{margin:.7rem 0}
+ul,ol{margin:.7rem 0 .7rem 1.3rem}
+li{margin:.28rem 0}
+li::marker{color:var(--accent)}
+em{color:var(--muted)}
+hr{border:none;border-top:1px solid var(--stroke);margin:2rem 0}
+blockquote{border-left:3px solid var(--accent);background:var(--panel);border-radius:0 10px 10px 0;
+padding:.8rem 1.1rem;margin:1.1rem 0;color:var(--muted);font-size:.92rem}
+code{background:var(--panel);border:1px solid var(--stroke);border-radius:5px;padding:.1rem .35rem;
+font-size:.85em;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--code)}
+img{max-width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--stroke);margin:1.1rem 0}
+pre{background:var(--panel);border:1px solid var(--stroke);border-radius:12px;padding:1rem;overflow-x:auto;margin:1.1rem 0}
+pre code{background:none;border:none;padding:0;color:var(--text);font-size:.83rem;line-height:1.55}
+.tw{overflow-x:auto;border:1px solid var(--stroke);border-radius:12px;background:var(--panel);margin:1.1rem 0}
+table{width:100%;border-collapse:collapse;font-size:.85rem;min-width:min(100%,460px)}
+th{background:var(--panel-2);color:var(--accent);text-align:left;padding:.55rem .8rem;font-size:.68rem;
+letter-spacing:.09em;text-transform:uppercase;white-space:nowrap;border-bottom:1px solid var(--stroke)}
+td{padding:.5rem .8rem;border-bottom:1px solid var(--rule);color:var(--muted);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td strong{color:var(--text)}
+.meta{display:flex;flex-wrap:wrap;gap:.4rem .9rem;font-size:.78rem;color:var(--muted);margin:-.4rem 0 1.2rem}
+.meta b{color:var(--text);font-weight:600}
+.missing{color:var(--muted);border-bottom:1px dashed var(--muted);cursor:help}
+.related{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--stroke)}
+.related h2{border:none;margin:0 0 .7rem;font-size:.95rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:0}
+.chips li{margin:0}
+.chips a,.chips .missing{display:inline-block;border:1px solid var(--stroke);background:var(--panel);
+border-radius:999px;padding:.28rem .8rem;font-size:.8rem}
+.chips a:hover{background:var(--accent);color:var(--on-accent);text-decoration:none;border-color:var(--accent)}
+footer{max-width:840px;margin:2.5rem auto 0;padding-top:1.2rem;border-top:1px solid var(--stroke);
+font-size:.75rem;color:var(--muted);text-align:center}
+/* landing */
+.hero{padding:2.4rem 0 1.6rem}
+.kicker{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2)}
+.hero h1{font-size:clamp(2rem,6vw,3.2rem);margin:.35rem 0 .5rem}
+.hero p{color:var(--muted);font-size:1.05rem;max-width:56ch}
+.hw{display:inline-flex;gap:.5rem;align-items:center;margin-top:1rem;border:1px solid var(--stroke);
+background:var(--panel);border-radius:999px;padding:.3rem .9rem;font-size:.78rem;color:var(--muted)}
+.hw .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.sec{margin-top:2.2rem}
+.sec h2{border:none;padding:0;margin:0 0 .8rem;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.9rem}
+.card{display:block;border:1px solid var(--stroke);background:var(--panel);border-radius:14px;padding:1rem 1.1rem;
+color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+.card b{display:block;color:var(--accent);font-size:1rem;margin-bottom:.3rem}
+.card span{font-size:.85rem;color:var(--muted);line-height:1.5}
+.stubs{font-size:.82rem;color:var(--muted);margin-top:.6rem}
+.yt{position:relative;width:100%;aspect-ratio:16/9;border:1px solid var(--stroke);border-radius:12px;overflow:hidden;background:#000;margin:1rem 0}
+.yt.yt-v{aspect-ratio:9/16;max-width:360px}
+.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="bar">
+    <span class="crumb"><a href="../">video-gen-kb</a> / <a href="index.html">Wiki</a></span>
+    <span class="spacer"></span>
+    <button class="pill" onclick="tt()">◐ Theme</button>
+  </nav>
+  <h1>Running a Film Yourself</h1><p class="lede">The seven commands that take a film from <code>spec.json</code> to a 4K master with no LLM in the loop, what you have to judge between them, and the four traps that fail silently.</p><div class="meta"><span><b>Updated</b> 2026-10-04</span><span><b>Sources</b> measured on this machine across <code>lindsey_summit</code>, <code>kyle_steamfield</code> and <code>lindsey_sparky</code>, 2026-10-01 to 2026-10-04.</span></div>
+<hr />
+<h2>What actually needs a human, and what does not</h2>
+<p>Nothing in the render path needs an LLM. <code>scripts/film_run.py</code> reads a project's <code>spec.json</code> and shells
+out to <code>draw-things-cli</code>, Real-ESRGAN and ffmpeg. Three things need judgement:</p>
+<ol>
+<li><strong>Writing the prompts</strong> in <code>spec.json</code>.</li>
+<li><strong>Picking one still per shot</strong> from five candidates.</li>
+<li><strong>Deciding where each clip stops</strong> being usable.</li>
+</ol>
+<p>Everything else is <code>film_run.py PROJECT &lt;phase&gt;</code>, and every phase is resumable — it skips outputs that
+already exist, so an interrupted run is restarted by running the same command again. <code>--force</code> redoes
+work, <code>--dry-run</code> prints the commands without running them.</p>
+<h2>Before anything</h2>
+<pre><code class="language-bash">cd ~/dev/video-gen-kb &amp;&amp; ls &quot;/Volumes/KExtreme SSD/DrawThingsModels&quot; &gt;/dev/null &amp;&amp; scripts/preflight.sh --fix
+</code></pre>
+<p>The external drive must be mounted; see <a href="model-storage-locations.html">model storage locations</a>. <code>--fix</code> quits the Draw Things app,
+which holds GPU memory and roughly halves CLI speed, and starts <code>caffeinate</code> for 14 h.</p>
+<h2>The seven commands</h2>
+<pre><code class="language-bash">python3 scripts/film_run.py PROJECT check     # paths, sizes, frame rules, planned length
+python3 scripts/film_run.py PROJECT stills    # 5 candidates per shot -&gt; seed/&lt;id&gt;_c&lt;seed&gt;.png
+python3 scripts/film_run.py PROJECT sheet     # labelled contact sheet -&gt; seed/&lt;id&gt;_sheet.png
+python3 scripts/film_run.py PROJECT pick s1 4 # candidate -&gt; stills/s1.png   (once per shot)
+python3 scripts/film_run.py PROJECT clips     # 249-frame takes -&gt; clips/&lt;id&gt;_v1.mov
+python3 scripts/film_run.py PROJECT qc        # reference + 6 frames -&gt; seed/&lt;id&gt;_v1_qc.png
+python3 scripts/film_run.py PROJECT finish    # trim -&gt; 4K upscale -&gt; crossfade + music -&gt; final/
+</code></pre>
+<p><code>PROJECT</code> is the folder name under <code>projects/</code>, or <code>&lt;id&gt;@&lt;version&gt;</code> to target an older version.
+<code>status</code> prints one line per shot at any time.</p>
+<p>Put <code>caffeinate -dimsu</code> in front of <code>stills</code>, <code>clips</code> and <code>finish</code>, and run them from a terminal you
+leave open. A render launched from an agent's shell does not survive; see <a href="log.html">log</a> 2026-10-03.</p>
+<h2>The three judgement calls</h2>
+<p><strong>Prompts.</strong> <code>projects/&lt;id&gt;/&lt;version&gt;/spec.json</code>. Copy a delivered film's spec and replace the text —
+<code>projects/lindsey_sparky</code> is the most current. <code>scenes.locks</code> holds the subject, wardrobe, room and style
+paragraphs that get pasted into every shot, so each is written once. Read
+<a href="still-geometry-and-review.html">still geometry and review</a> before writing shot prompts; it is the accumulated list of what breaks.</p>
+<p><strong>Picking stills.</strong> <code>seed/&lt;id&gt;_sheet.png</code> tiles five candidates and captions each with its seed number,
+so you pick by number rather than position. <strong>Open the shortlist at full size before deciding</strong> — the
+failures that matter (a sixth finger, a second person, structure that does not resolve) are invisible at
+tile size. Then <code>pick &lt;id&gt; &lt;seed&gt;</code>.</p>
+<p><strong>Trimming clips.</strong> <code>seed/&lt;id&gt;_v1_qc.png</code> shows the reference plus six frames across the take. Find where
+it stops being usable and write <code>trim</code> into the shot. Faces drift, props appear, people stand up. Then
+run <code>finish</code>.</p>
+<h2>Measured timings</h2>
+<p>M4 Max 48 GB, 8 shots, 1024×576 stills and 249-frame clips, models on the external SSD:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>phase</th>
+<th>what</th>
+<th>time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>masters</td>
+<td>4 reference images</td>
+<td>2 min</td>
+</tr>
+<tr>
+<td><code>stills</code></td>
+<td>40 candidates</td>
+<td><strong>21 min</strong></td>
+</tr>
+<tr>
+<td><code>clips</code></td>
+<td>8 × 249 frames</td>
+<td><strong>80 min</strong> (~10 min each)</td>
+</tr>
+<tr>
+<td><code>finish</code></td>
+<td>trim, 4K upscale, assemble, 1080p copy</td>
+<td><strong>75 min</strong></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>~3 h</strong> plus review</td>
+</tr>
+</tbody>
+</table></div>
+<p>Add 10 minutes per clip you re-render. <code>lindsey_sparky</code> needed four second takes and one third take,
+which is normal rather than unlucky — budget for it.</p>
+<h2>The four traps that fail silently</h2>
+<ul>
+<li><strong>An unmounted drive.</strong> No error. Models simply do not resolve, or ComfyUI shows empty dropdowns.
+  <code>preflight.sh</code> catches it; nothing downstream does.</li>
+<li><strong>Music under the wrong key.</strong> It belongs at <code>run-spec.music</code>, not <code>run-spec.assemble.music</code>. The wrong
+  key produces a finished film with no music, no warning, and a passing <code>check</code>. This happened to
+  <code>kyle_steamfield</code> and cost a full re-assembly.</li>
+<li><strong>Real-ESRGAN running while LTX renders.</strong> 48 GB will not hold both. Never overlap <code>finish</code> with
+  <code>clips</code>.</li>
+<li><strong>A sleeping Mac.</strong> Without <code>caffeinate</code> a long run dies partway with no message.</li>
+</ul>
+<h2>When something fails</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>symptom</th>
+<th>cause</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>every model <code>DOWNLOADED: no</code></td>
+<td>drive unmounted, or the four <code>custom*.json</code> manifests missing — <a href="model-storage-locations.html">model storage locations</a></td>
+</tr>
+<tr>
+<td>face becomes someone else mid-clip</td>
+<td>expression changed, or the still had no face — <a href="still-geometry-and-review.html">still geometry and review</a> §8, §11</td>
+</tr>
+<tr>
+<td>a cord, watch or animal appears</td>
+<td>nothing in frame was moving — §9, §10</td>
+</tr>
+<tr>
+<td>hands merge into an object</td>
+<td>the still asked for hand and object to overlap — §6</td>
+</tr>
+<tr>
+<td>clip ends darker than it starts</td>
+<td>LTX's end-of-clip fade; <code>qc_sheet.sh</code> prints where it begins, trim before it</td>
+</tr>
+</tbody>
+</table></div>
+
+  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="idea-to-video-blueprint.html">idea to video blueprint</a></li><li><a href="still-geometry-and-review.html">still geometry and review</a></li><li><a href="scripts-reference.html">scripts reference</a></li><li><a href="model-storage-locations.html">model storage locations</a></li><li><a href="headless-cli-pipeline.html">headless cli pipeline</a></li></ul></div>
+</div>
+<footer>video-gen-kb · built 2026-10-04 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<script>function tt(){var r=document.documentElement,
+d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
+matchMedia('(prefers-color-scheme: dark)').matches);
+r.setAttribute('data-theme',d?'light':'dark');}</script>
+</body>
+</html>

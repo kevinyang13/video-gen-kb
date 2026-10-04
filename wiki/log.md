@@ -892,3 +892,15 @@ attempt — and incidentally stopped the model reinventing the robot every seed.
 Also worth keeping: a prompt rewrite can silently drop an inherited lock. Rewriting s6 to fix the hands
 dropped the room lock with it, and the bare-wall result would have cut as a different location. Diff a
 rewritten prompt against the one it replaces.
+
+## 2026-10-04 — a runbook for driving the pipeline without an LLM
+
+Kevin asked how to run a film himself. Nothing in the render path needs an LLM — `film_run.py` shells out
+to `draw-things-cli`, Real-ESRGAN and ffmpeg — so the gap was documentation, not capability. New page
+[[running-a-film-yourself]]: the seven commands, the three things that genuinely need judgement (writing
+prompts, picking one still of five, deciding where each clip stops), and the four traps that fail
+silently.
+
+Timings were re-measured rather than reused from memory, and one estimate was wrong: `stills` takes
+**21 minutes** for 40 candidates, not the ~40 I had been quoting. Clips 80 min, finish 75 min, about 3 h
+for an eight-shot film plus review.
