@@ -257,6 +257,20 @@ Two ways to satisfy it, and they are both decisions about the *shot*, not the pr
 What does not work is a back view plus motion that might turn: that is asking the model to invent a
 person, and it will.
 
+**Write the clause into the motion prompt, every time.** A faceless still is only safe if its own motion
+prompt says it stays faceless. Phrase it as what stays, not as what must not happen:
+
+| the still shows | the clause |
+|---|---|
+| her back | "She stays turned away from the camera, her back to us for the whole shot, and does not turn around." |
+| a person seated, from behind | "She stays seated in the chair the whole time, her back against the chair back." |
+| hands only | "The shot stays on her hands and the desk the whole time; the camera does not tilt up and no face comes into frame." |
+| a prop or an empty room | "No person enters the frame at any point." |
+
+`film_run.py PROJECT check` now warns when a still describes a person whose face is not visible and the
+motion prompt carries none of these. It is a warning, not an error — a back that genuinely never turns is
+fine — but it should be answered rather than ignored, because the cost of being wrong is a whole take.
+
 This is the limit on §6. "When a face shot keeps failing, stop making it a face shot" is still right, but
 the replacement shot has to be one whose motion cannot expose what the still never established. Turning a
 failing close-up into a walking back view only helps if the walk stays away from camera.

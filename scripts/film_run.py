@@ -143,6 +143,30 @@ def prompt_path(f, name, value):
     return out
 
 
+# A still that contains a PERSON whose face is not visible gives the I2V stage nothing to propagate:
+# whatever the motion reveals is invented from the prompt text, and what it invents is a stranger in
+# different clothes rather than a drifted version of the subject. lindsey_sparky s1 turned an
+# eight-year-old into an adult woman in a blazer this way. See wiki/still-geometry-and-review.md §11.
+# Shots with no person at all are deliberately not flagged -- the risk there is a person wandering in,
+# which is real but has never actually happened here.
+FACELESS = ("from behind", "back to us", "back to the camera", "her back", "his back",
+            "seen from behind", "no face in frame", "over her shoulder", "over his shoulder")
+# Phrasings that keep it that way for the whole take. Negatives do not bind on their own, so these are
+# the positive forms; "does not turn" is accepted because it only ever appears beside a positive clause.
+CONTAINED = ("stays turned away", "stays facing away", "back stays to", "back to us for the whole",
+             "back against the chair", "stays seated", "stays on her hands", "stays on his hands",
+             "no face comes into frame", "no person enters the frame", "does not turn around",
+             "does not tilt up")
+
+
+def faceless_without_containment(shot):
+    """True when a person is in the still but their face is not, and the motion prompt never says so."""
+    still = (shot.get("still", {}).get("prompt") or "").lower()
+    if not any(k in still for k in FACELESS):
+        return False
+    return not any(k in (shot.get("video_prompt") or "").lower() for k in CONTAINED)
+
+
 def cmd_check(f, _):
     errs, warns = [], []
     w, h = f["size"]
@@ -184,6 +208,9 @@ def cmd_check(f, _):
                 errs.append(f"{i}: bad trim {s['trim']}")
         if s.get("take") and not d(f, s["take"]).exists():
             warns.append(f"{i}: take not rendered yet: {s['take']}")
+        if faceless_without_containment(s):
+            warns.append(f"{i}: still has no face and video_prompt never says it stays that way "
+                         f"-- anything the motion reveals will be invented (see still-geometry §11)")
     total = sum(s["trim"][1] - s["trim"][0] for s in f["shots"] if s.get("trim"))
     if total:
         xf = f.get("assemble", {}).get("xfade", 0.5)

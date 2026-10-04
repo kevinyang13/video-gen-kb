@@ -432,7 +432,38 @@ VIEWS=&quot;seen from directly above, wings folded|a close-up of the head in pro
 - <strong>hold wording</strong> on face shots: "keeps holding his thumbs up the whole time", "his face and hair stay exactly the same", "hair stays neat";
 - multi-subject shots: "all stay in place in the foreground … the camera holds completely still, same framing throughout";
 - name the subject and its stillness <strong>before</strong> any destruction verb (motion bleeds onto small subjects);
+- <strong>a shot whose still has no face needs a clause keeping it that way</strong> — see below;
 - music-only films: skip sound sentences.</p>
+<h3>Faceless stills need a containment clause</h3>
+<p>Any shot whose still does not show the face — a back view, a macro of hands, a prop insert, an empty
+room — must say in its motion prompt that the face stays out of frame. The I2V stage propagates frame 0;
+if the face is not there, anything the motion reveals is invented, and what it invents is a stranger in
+different clothes, not a drifted version of your subject. <code>lindsey_sparky</code> s1 is the worked example in
+<a href="still-geometry-and-review.html">still geometry and review</a> §11.</p>
+<p>Phrase it as what <em>stays</em>, not as what must not happen — negatives do not bind:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>still shows</th>
+<th>clause</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>her back</td>
+<td>"She stays turned away from the camera, her back to us for the whole shot, and does not turn around."</td>
+</tr>
+<tr>
+<td>hands only</td>
+<td>"The shot stays on her hands and the desk for the whole time; the camera does not tilt up and no face comes into frame."</td>
+</tr>
+<tr>
+<td>a prop or empty room</td>
+<td>"No person enters the frame at any point."</td>
+</tr>
+</tbody>
+</table></div>
+<p><code>film_run.py PROJECT check</code> warns when a shot looks faceless and its motion prompt has no such clause.</p>
 <h2>Phase 7 — Clip batch (unattended)</h2>
 <p><code>film_run.py P clips</code> runs this loop from the run-spec (one clip at a time, skipping clips that exist). What it does per shot, equivalent to Kyle's hand-written <code>logs/render_clips.sh</code>:</p>
 <pre><code class="language-bash">for s in $SHOTS; do

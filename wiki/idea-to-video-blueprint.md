@@ -219,7 +219,26 @@ One paragraph per shot, action first, ending with the video tail. Rules from Kyl
 - **hold wording** on face shots: "keeps holding his thumbs up the whole time", "his face and hair stay exactly the same", "hair stays neat";
 - multi-subject shots: "all stay in place in the foreground … the camera holds completely still, same framing throughout";
 - name the subject and its stillness **before** any destruction verb (motion bleeds onto small subjects);
+- **a shot whose still has no face needs a clause keeping it that way** — see below;
 - music-only films: skip sound sentences.
+
+### Faceless stills need a containment clause
+
+Any shot whose still does not show the face — a back view, a macro of hands, a prop insert, an empty
+room — must say in its motion prompt that the face stays out of frame. The I2V stage propagates frame 0;
+if the face is not there, anything the motion reveals is invented, and what it invents is a stranger in
+different clothes, not a drifted version of your subject. `lindsey_sparky` s1 is the worked example in
+[[still-geometry-and-review]] §11.
+
+Phrase it as what *stays*, not as what must not happen — negatives do not bind:
+
+| still shows | clause |
+|---|---|
+| her back | "She stays turned away from the camera, her back to us for the whole shot, and does not turn around." |
+| hands only | "The shot stays on her hands and the desk for the whole time; the camera does not tilt up and no face comes into frame." |
+| a prop or empty room | "No person enters the frame at any point." |
+
+`film_run.py PROJECT check` warns when a shot looks faceless and its motion prompt has no such clause.
 
 ## Phase 7 — Clip batch (unattended)
 
