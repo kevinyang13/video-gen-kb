@@ -845,3 +845,43 @@ run died at 36 of 40 candidates and the clips run died after one clip, both sile
 `disown` — the process group is reaped when the tool call ends. The same command run from Kevin's own
 terminal completed seven clips without interruption. Harness-tracked background tasks cap at 30 minutes,
 so for multi-hour GPU work the terminal is the only reliable option.
+
+## 2026-10-03 — lindsey_sparky: the first interior
+
+Fifth LoRA-driven film, 60.45 s at 3840×2160, and the first one set indoors. Kevin's brief added two
+constraints: **no slow motion**, and approval on every still before any clip.
+
+The interior is the whole story. The previous four films gave their long takes to steam, surf, mist and
+firelight — continuous motion the video model does not have to invent. A bedroom at night has none, and
+the first clip pass showed what fills the gap. **Four of eight shots failed, every one by inventing
+something**: a girl who stands up and walks out of frame, a wristwatch, a kitten and a red bottle, and a
+laugh that ages an eight-year-old into a young woman. The safe takes summed to 42.6 s against a 60 s
+target, so the film could not be cut from that material.
+
+Three findings, now §8–10 of [[still-geometry-and-review]]:
+
+**A held expression survives; a changing one does not.** s4 and s7 are a controlled pair — same LoRA,
+same frontal close-up, same lamp, rendered minutes apart. s4's near-static face holds past 7.9 s. s7's
+laugh produced a different, older person by frame 40, about 1.6 s. The rule had been written as "frontal
+faces drift at around eight seconds"; the eight seconds belongs to a *static* face. The fix is an earlier
+peak, not a smaller one: the smile arrives in the first second and then holds, which puts the remaining
+6.5 s into the condition s4 already proved. s7 v2 holds at frames 25, 60, 100, 140 and 187.
+
+**An interior has no weather, but it has practicals.** s6 grew a kitten by frame 85 when nothing in frame
+moved. Told instead that Sparky's visor brightens and dims throughout, it held all 249 frames on a bare
+desk. A lamp or an LED is as good a motion source as surf.
+
+**A placement lock removes the named prop and the model substitutes another.** s5 v1 grew a wristwatch.
+v2 said "her wrist is bare and the hoodie sleeve stays pushed up above it" — no watch, and a grey knit
+cuff instead, at frame 90. Naming an absence leaves the space undescribed, and undescribed space near a
+subject gets filled. s5 never held and was cut to 3.4 s; the shots that hold all 249 frames absorbed the
+difference.
+
+One still-stage finding, consistent with §6: s6's still failed **all five seeds** because the prompt put
+a screwdriver *into* a shoulder joint. Fingers and metal in the same pixels is exactly where the hand
+count is lost. Holding the tool in open air, with Sparky lower and clear of it, fixed it on the next
+attempt — and incidentally stopped the model reinventing the robot every seed.
+
+Also worth keeping: a prompt rewrite can silently drop an inherited lock. Rewriting s6 to fix the hands
+dropped the room lock with it, and the bare-wall result would have cut as a different location. Diff a
+rewritten prompt against the one it replaces.

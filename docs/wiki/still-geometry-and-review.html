@@ -92,7 +92,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
     <span class="spacer"></span>
     <button class="pill" onclick="tt()">◐ Theme</button>
   </nav>
-  <h1>Still Geometry, Anatomy and Candidate Review</h1><p class="lede">The prompt patterns that stop klein producing broken architecture and wrong-age bodies, and the review gate that stops a broken candidate being picked. Written after <code>kyle_lighthouse</code> was abandoned over a single shot that failed five times on geometry.</p><div class="meta"><span><b>Updated</b> 2026-10-03</span><span><b>Sources</b> <a href="kyle-lighthouse-plan.html">kyle lighthouse plan</a> (the failure), <a href="lindsey-summit-plan.html">lindsey summit plan</a>, <a href="kyle-debut-plan.html">kyle debut plan</a>, <a href="lindsey-palace-plan.html">lindsey palace plan</a>, <a href="idea-to-video-blueprint.html">idea to video blueprint</a> Phase 5 and the pick rubric.</span></div>
+  <h1>Still Geometry, Anatomy and Candidate Review</h1><p class="lede">The prompt patterns that stop klein producing broken architecture and wrong-age bodies, and the review gate that stops a broken candidate being picked. Written after <code>kyle_lighthouse</code> was abandoned over a single shot that failed five times on geometry.</p><div class="meta"><span><b>Updated</b> 2026-10-03</span><span><b>Sources</b> <a href="kyle-lighthouse-plan.html">kyle lighthouse plan</a> (the failure), <a href="lindsey-summit-plan.html">lindsey summit plan</a>, <a href="kyle-debut-plan.html">kyle debut plan</a>, <a href="lindsey-palace-plan.html">lindsey palace plan</a>, <a href="lindsey-sparky-plan.html">lindsey sparky plan</a>, <a href="idea-to-video-blueprint.html">idea to video blueprint</a> Phase 5 and the pick rubric.</span></div>
 <hr />
 <h2>Why this page exists</h2>
 <p>Four LoRA-driven films went out in two days. The fifth, <code>kyle_lighthouse</code>, was stopped with seven of eight shots
@@ -275,10 +275,69 @@ from about frame 160 (6.4 s), and the right hand's fingers merge shortly after.<
 a short safe window</strong>, and it should be QC'd frame by frame near the intended cut rather than trusted because
 the still was good. The cost of finding this at QC is a 2-second trim; the cost of finding it after the 4K pass
 is an hour.</p>
+<h2>8. A held expression survives; a changing one does not</h2>
+<p>The rule in §6 was written as "a frontal face drifts at around eight seconds". <code>lindsey_sparky</code> shows the
+eight seconds belongs to a <strong>static</strong> face, and that a large expression change costs most of it.</p>
+<p>s4 and s7 of that film are a controlled pair: same LoRA at weight 1.0, same frontal close-up, same lamp,
+same room behind, rendered minutes apart.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th></th>
+<th>expression</th>
+<th>result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>s4</td>
+<td>"chin low and her mouth set" — near static</td>
+<td>identity holds past frame 198 (7.9 s)</td>
+</tr>
+<tr>
+<td>s7 v1</td>
+<td>"her mouth beginning to open in delight", then laughing</td>
+<td>a different, older person by frame 40 (<strong>1.6 s</strong>)</td>
+</tr>
+</tbody>
+</table></div>
+<p>The laugh is what breaks it. A big deformation of the mouth and cheeks walks the face off the LoRA's
+manifold, and once it is off it does not come back — it ages and stays aged.</p>
+<p>The fix is not a smaller emotion. It is an <strong>earlier</strong> one:</p>
+<blockquote>
+<p>"Her eyes widen and her mouth opens into a small smile over the first second, and then the smile
+<strong>settles and holds steady for the rest of the shot without growing</strong>. Her head stays level and still
+and her chin does not lift."</p>
+</blockquote>
+<p>That reaches the same peak and then puts the remaining 6.5 s into the static condition s4 already proved
+survives. s7 v2 holds Lindsey at frames 25, 60, 100, 140 and 187.</p>
+<p>Practical consequence: <strong>put the emotional peak in the first second of a face shot</strong>, not the middle, and
+say explicitly that it then holds.</p>
+<h2>9. An interior has no weather, but it has practicals</h2>
+<p><a href="lindsey-summit-plan.html">lindsey summit plan</a> established that long takes should go to subjects whose motion animates itself —
+surf, fire, spray, mist, steam. <code>lindsey_sparky</code> is the first interior here, and a bedroom at night has
+none of those. Four of its eight shots failed on the first pass, every one by <strong>inventing</strong> something to
+fill the time: a girl standing up and walking out of frame, a wristwatch, a kitten, a red bottle.</p>
+<p>The fix that worked is the same principle applied to what an interior actually contains. s6 was given
+Sparky's own LED visor as its motion source —</p>
+<blockquote>
+<p>"Sparky stands still and the blue light of his visor brightens and dims slowly and steadily throughout."</p>
+</blockquote>
+<p>— and held all 249 frames on a bare desk, where the previous version had grown a kitten by frame 85. A
+lamp, a screen, an LED or a fire is as good a motion source as surf, and an interior shot that must hold
+nine seconds needs one named.</p>
+<h2>10. A placement lock removes the named prop and the model substitutes another</h2>
+<p>§2 says every prop in the wardrobe lock is a risk. <code>lindsey_sparky</code> s5 shows the risk survives the lock.</p>
+<p>v1, a macro of a child's hand on a notebook, grew a blue wristwatch at frame 85. v2 added what looked
+like the right fix — <strong>"her wrist is bare and the hoodie sleeve stays pushed up above it"</strong> — and the
+watch was gone. A grey knit cuff appeared instead, at frame 90, and the hand turned adult behind it.</p>
+<p>Naming an absence leaves the space undescribed, and the model fills undescribed space near a subject.
+The lock has to say what the area positively <strong>is</strong> — "bare forearm to the elbow, skin all the way up" —
+not merely what is missing from it. s5 was not made to hold in three attempts and was cut to 3.4 s.</p>
 
-  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="idea-to-video-blueprint.html">idea to video blueprint</a></li><li><a href="kyle-lighthouse-plan.html">kyle lighthouse plan</a></li><li><a href="lindsey-summit-plan.html">lindsey summit plan</a></li><li><a href="kyle-steamfield-plan.html">kyle steamfield plan</a></li><li><a href="scripts-reference.html">scripts reference</a></li></ul></div>
+  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="idea-to-video-blueprint.html">idea to video blueprint</a></li><li><a href="kyle-lighthouse-plan.html">kyle lighthouse plan</a></li><li><a href="lindsey-summit-plan.html">lindsey summit plan</a></li><li><a href="kyle-steamfield-plan.html">kyle steamfield plan</a></li><li><a href="lindsey-sparky-plan.html">lindsey sparky plan</a></li><li><a href="scripts-reference.html">scripts reference</a></li></ul></div>
 </div>
-<footer>video-gen-kb · built 2026-10-03 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<footer>video-gen-kb · built 2026-10-04 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
 <script>function tt(){var r=document.documentElement,
 d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
 matchMedia('(prefers-color-scheme: dark)').matches);

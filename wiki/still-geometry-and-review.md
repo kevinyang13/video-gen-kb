@@ -2,7 +2,7 @@
 
 **Summary**: The prompt patterns that stop klein producing broken architecture and wrong-age bodies, and the review gate that stops a broken candidate being picked. Written after `kyle_lighthouse` was abandoned over a single shot that failed five times on geometry.
 
-**Sources**: [[kyle-lighthouse-plan]] (the failure), [[lindsey-summit-plan]], [[kyle-debut-plan]], [[lindsey-palace-plan]], [[idea-to-video-blueprint]] Phase 5 and the pick rubric.
+**Sources**: [[kyle-lighthouse-plan]] (the failure), [[lindsey-summit-plan]], [[kyle-debut-plan]], [[lindsey-palace-plan]], [[lindsey-sparky-plan]], [[idea-to-video-blueprint]] Phase 5 and the pick rubric.
 
 **Last updated**: 2026-10-03
 
@@ -166,9 +166,66 @@ a short safe window**, and it should be QC'd frame by frame near the intended cu
 the still was good. The cost of finding this at QC is a 2-second trim; the cost of finding it after the 4K pass
 is an hour.
 
+## 8. A held expression survives; a changing one does not
+
+The rule in §6 was written as "a frontal face drifts at around eight seconds". `lindsey_sparky` shows the
+eight seconds belongs to a **static** face, and that a large expression change costs most of it.
+
+s4 and s7 of that film are a controlled pair: same LoRA at weight 1.0, same frontal close-up, same lamp,
+same room behind, rendered minutes apart.
+
+| | expression | result |
+|---|---|---|
+| s4 | "chin low and her mouth set" — near static | identity holds past frame 198 (7.9 s) |
+| s7 v1 | "her mouth beginning to open in delight", then laughing | a different, older person by frame 40 (**1.6 s**) |
+
+The laugh is what breaks it. A big deformation of the mouth and cheeks walks the face off the LoRA's
+manifold, and once it is off it does not come back — it ages and stays aged.
+
+The fix is not a smaller emotion. It is an **earlier** one:
+
+> "Her eyes widen and her mouth opens into a small smile over the first second, and then the smile
+> **settles and holds steady for the rest of the shot without growing**. Her head stays level and still
+> and her chin does not lift."
+
+That reaches the same peak and then puts the remaining 6.5 s into the static condition s4 already proved
+survives. s7 v2 holds Lindsey at frames 25, 60, 100, 140 and 187.
+
+Practical consequence: **put the emotional peak in the first second of a face shot**, not the middle, and
+say explicitly that it then holds.
+
+## 9. An interior has no weather, but it has practicals
+
+[[lindsey-summit-plan]] established that long takes should go to subjects whose motion animates itself —
+surf, fire, spray, mist, steam. `lindsey_sparky` is the first interior here, and a bedroom at night has
+none of those. Four of its eight shots failed on the first pass, every one by **inventing** something to
+fill the time: a girl standing up and walking out of frame, a wristwatch, a kitten, a red bottle.
+
+The fix that worked is the same principle applied to what an interior actually contains. s6 was given
+Sparky's own LED visor as its motion source —
+
+> "Sparky stands still and the blue light of his visor brightens and dims slowly and steadily throughout."
+
+— and held all 249 frames on a bare desk, where the previous version had grown a kitten by frame 85. A
+lamp, a screen, an LED or a fire is as good a motion source as surf, and an interior shot that must hold
+nine seconds needs one named.
+
+## 10. A placement lock removes the named prop and the model substitutes another
+
+§2 says every prop in the wardrobe lock is a risk. `lindsey_sparky` s5 shows the risk survives the lock.
+
+v1, a macro of a child's hand on a notebook, grew a blue wristwatch at frame 85. v2 added what looked
+like the right fix — **"her wrist is bare and the hoodie sleeve stays pushed up above it"** — and the
+watch was gone. A grey knit cuff appeared instead, at frame 90, and the hand turned adult behind it.
+
+Naming an absence leaves the space undescribed, and the model fills undescribed space near a subject.
+The lock has to say what the area positively **is** — "bare forearm to the elbow, skin all the way up" —
+not merely what is missing from it. s5 was not made to hold in three attempts and was cut to 3.4 s.
+
 ## Related pages
 - [[idea-to-video-blueprint]]
 - [[kyle-lighthouse-plan]]
 - [[lindsey-summit-plan]]
 - [[kyle-steamfield-plan]]
+- [[lindsey-sparky-plan]]
 - [[scripts-reference]]

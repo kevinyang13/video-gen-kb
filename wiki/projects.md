@@ -4,11 +4,11 @@
 
 **Sources**: projects/*/*/spec.json; per-project notes from the session logs.
 
-**Last updated**: 2026-10-03
+**Last updated**: 2026-10-04
 
 ---
 
-**Project pages**: [[projects-anime|Anime projects]] (5) · [[projects-realistic|Photoreal projects]] (13) · [[projects-3d|3D-animated projects]] (3)
+**Project pages**: [[projects-anime|Anime projects]] (5) · [[projects-realistic|Photoreal projects]] (14) · [[projects-3d|3D-animated projects]] (3)
 
 Each theme page holds the full records — settings, prompts, seeds, files. The tables below link straight to a project's record on its page.
 
@@ -26,7 +26,7 @@ Shinkai/Ghibli-styled living paintings: a still from FLUX or Wan T2V, ambient mo
 
 → full records for all 5: [[projects-anime|Anime projects]]
 
-## [[projects-realistic|Photoreal projects]] (13)
+## [[projects-realistic|Photoreal projects]] (14)
 
 Cinematic photoreal shorts: FLUX.2 klein stills with Moodboard references, motion from LTX-2.3 or Wan 2.2, Real-ESRGAN to 4K, cut with crossfades. Dragon Epic, Lost City, the three-minute film.
 
@@ -44,9 +44,10 @@ Cinematic photoreal shorts: FLUX.2 klein stills with Moodboard references, motio
 | 10 | [Kyle — character LoRA v2](projects-realistic.html#kyle_lora) | 2026-09-29 | dataset built 2026-09-29 — 55 pairs; training | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
 | 11 | [Yang family — one LoRA, three subjects](projects-realistic.html#yang_family_lora) | 2026-09-30 | delivered 2026-09-30 — yang_family_lora_4000_lora_f32.ckpt, 9 h 22 m, 5 checkpoints at 843 MB each | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
 | 12 | [Yang family LoRA — made to work in ComfyUI](projects-realistic.html#yang_family_lora_comfy) | 2026-10-02 | in progress — source analysed and the mapping derived; converter not yet written | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
-| 13 | [Kyle — where the ground breathes](projects-realistic.html#kyle_steamfield) | 2026-10-03 | clips QC’d 2026-10-03 — 60.41 s planned, finishing | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 11 min | to be chosen at the finish pass | `—` | — |
+| 13 | [Kyle — where the ground breathes](projects-realistic.html#kyle_steamfield) | 2026-10-03 | clips QC’d 2026-10-03 — 60.41 s planned, finishing | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 11 min | light_adventure.mp3 under the LTX ambience at 0.45, 1.5 s in, 2 s out. NOTE: music belongs at run-spec.music, NOT run-spec.assemble.music | `—` | — |
+| 14 | [Lindsey — the eighth try](projects-realistic.html#lindsey_sparky) | 2026-10-03 | delivered | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 11 min | emotional_children_piano.mp3 at 0.45 under the clip audio. NOTE: music belongs at run-spec.music, NOT run-spec.assemble.music | `—` | — |
 
-→ full records for all 13: [[projects-realistic|Photoreal projects]]
+→ full records for all 14: [[projects-realistic|Photoreal projects]]
 
 ## [[projects-3d|3D-animated projects]] (3)
 

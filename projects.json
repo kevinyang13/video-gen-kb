@@ -3272,7 +3272,7 @@
       "post": {
         "upscale": "scripts/upscale_4k.sh — Real-ESRGAN x4plus -> 3840x2160",
         "loop": "none — xfade 0.75",
-        "music": "to be chosen at the finish pass"
+        "music": "light_adventure.mp3 under the LTX ambience at 0.45, 1.5 s in, 2 s out. NOTE: music belongs at run-spec.music, NOT run-spec.assemble.music — film_run.py reads the top-level key and silently ignores a nested one, producing a film with clip audio only and no error."
       },
       "scenes": {
         "locks": {
@@ -3409,13 +3409,7 @@
           "fps": 25,
           "xfade": 0.75,
           "clip_audio": true,
-          "bitrate": "40M",
-          "music": {
-            "file": "music/light_adventure.mp3",
-            "vol": 0.45,
-            "fade_in": 1.5,
-            "fade_out": 2.0
-          }
+          "bitrate": "40M"
         },
         "deliver": [
           {
@@ -3621,13 +3615,393 @@
               9.0
             ]
           }
-        ]
+        ],
+        "music": {
+          "file": "projects/kyle_steamfield/v1-lora-cli/music/light_adventure.mp3",
+          "start": 0,
+          "vol": 0.45,
+          "fade_in": 1.5,
+          "fade_out": 2.0
+        }
       },
       "files": [
         "seed/*.png (masters)",
         "stills/<id>.png",
         "clips/<id>.mp4",
         "final/"
+      ]
+    },
+    {
+      "id": "lindsey_sparky",
+      "version": "v1-lora-cli",
+      "variant": "First interior film, and the first written against a supplied story. Also the first where every motion prompt forbids slow motion explicitly.",
+      "title": "Lindsey — the eighth try",
+      "date": "2026-10-03",
+      "theme": "realistic",
+      "dt_project": "none — draw-things-cli via scripts/film_run.py",
+      "status": "delivered",
+      "source": "story supplied by Kevin; identity from projects/lindsey_lora (trigger lindsey_kx, class word girl). No source photographs at render time.",
+      "notes": "Lindsey is Kevin's daughter; consent settled. Story supplied: an eight-year-old inventor's homemade robot fails for the seventh time, she finds a reversed connection in her own wiring diagram, and the eighth attempt works.\n\nThis is the first interior, which removes the thing the last four films leaned on. Pine mist, surf, firelight and steam all gave the long takes continuous natural motion for free. A bedroom gives none, so the motion has to come from the subject and the robot. Three shots are built around things that move on their own anyway — smoke from the failed shoulder joint (s3), the robot's own mechanism (s2, s8) — and the long takes are given to those rather than to the face.\n\nFace shots (s4, s7) are locked frontal at 7.0-7.5 s as always. s6 is the hands-in-front-of-a-stationary-head pattern that has held 9 s or more on every film it has been used in.\n\nEvery motion prompt ends with an explicit real-time instruction, because 'slowly' appeared four times in kyle_steamfield's motion prompts and the result read as slow motion. The word does not appear anywhere in this spec. Delivered 60.56 s (planned 60.45). Mean −21.9 dB, peak −4.9 dB, music continuous across the minute. Four of eight clips needed a second take; s5 never held and was cut to 3.4 s, with the seconds taken from the five shots that hold all 249 frames. Kept as-is: Sparky's visor cycles blue–green during s6, which reads as a display flickering while the joint is worked on.",
+      "still": {
+        "model": "FLUX.2 [klein] 9B (8-bit S)",
+        "size": "1024x576",
+        "steps": 4,
+        "cfg": 1.0,
+        "shift": 3,
+        "sampler": "DDIM Trailing",
+        "lora": "lindsey_lora_2000_lora_f32.ckpt @ per-shot weight (none / 0.6 / 0.85 / 1.0)",
+        "seeds": 5,
+        "control": "edit mode: --image environment master --strength 1.0",
+        "prompt": "per shot — see scenes"
+      },
+      "i2v": {
+        "model": "LTX-2.3 22B [distilled] 1.1",
+        "size": "1024x576",
+        "frames": 249,
+        "fps": 25,
+        "steps": 8,
+        "cfg": 1.0,
+        "shift": 5.0,
+        "sampler": "TCD Trailing",
+        "stochasticSamplingGamma": 0.3,
+        "time_min": 11,
+        "note": "no LoRA at the video stage — LTX never sees it."
+      },
+      "post": {
+        "upscale": "scripts/upscale_4k.sh — Real-ESRGAN x4plus -> 3840x2160",
+        "loop": "none — xfade 0.75",
+        "music": "emotional_children_piano.mp3 at 0.45 under the clip audio. NOTE: music belongs at run-spec.music, NOT run-spec.assemble.music — film_run.py reads the top-level key and silently ignores a nested one."
+      },
+      "scenes": {
+        "locks": {
+          "subject": "lindsey_kx girl, an eight-year-old girl with child proportions, this exact face, long dark hair loose with natural flyaway strands",
+          "wardrobe": "a mustard-yellow hoodie over a white t-shirt, sleeves pushed up to the elbows, and a pair of clear safety goggles pushed up on top of her head",
+          "room": "a child inventor's bedroom at night, hand-drawn blueprints taped across the walls, loose wires and brass gears over a scarred wooden desk, jars of screws and bolts, a bright articulated desk lamp throwing a warm pool of light across the desk and leaving the rest of the room in soft blue shadow",
+          "robot": "Sparky, a foot-tall homemade robot built from recycled aluminium cans and salvaged toy motors, visible rivets and mismatched panels, a wide LED visor across its face, two simple jointed arms and small rubber treads",
+          "style": "Cinematic film still from a live-action family film, anamorphic 35mm, photoreal skin, cotton and scuffed metal, practical warm lamp light against cool blue shadow, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+          "pace": "Everything moves at natural real-time speed, the normal pace of someone working, with no slow motion and no speed ramping."
+        },
+        "s1": {
+          "title": "Establishing — the workshop bedroom, her back to us at the desk",
+          "note": "LoRA weight 0.85; input seed/room.png; kept 9.0 s. picked c4.",
+          "still": "Wide establishing shot. a child inventor's bedroom at night, hand-drawn blueprints taped across the walls, loose wires and brass gears over a scarred wooden desk, jars of screws and bolts, a bright articulated desk lamp throwing a warm pool of light across the desk and leaving the rest of the room in soft blue shadow. Seen from behind and slightly above, one person alone in the frame: lindsey_kx girl, an eight-year-old girl with child proportions, this exact face, long dark hair loose with natural flyaway strands, wearing a mustard-yellow hoodie over a white t-shirt, sleeves pushed up to the elbows, and a pair of clear safety goggles pushed up on top of her head, sitting at the desk on a wooden chair with her shoulders hunched over her work. On the desk in front of her stands Sparky, a foot-tall homemade robot built from recycled aluminium cans and salvaged toy motors, visible rivets and mismatched panels, a wide LED visor across its face, two simple jointed arms and small rubber treads. The foreground is clear. Cinematic film still from a live-action family film, anamorphic 35mm, photoreal skin, cotton and scuffed metal, practical warm lamp light against cool blue shadow, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+          "video": "Fixed camera, no camera movement. She stays seated in the chair the whole time, her back against the chair back and her weight settled. Only her right hand moves: it reaches a few inches across the desk, turns a small brass part over, and comes to rest again. Her head stays level and her shoulders stay where they are. The lamp light stays constant and the room behind her is still. Everything moves at natural real-time speed, the normal pace of someone working, with no slow motion and no speed ramping. Room tone, no music."
+        },
+        "s2": {
+          "title": "Macro — Sparky's visor comes up, no people in frame",
+          "note": "no LoRA — no face in frame; input seed/bot.png; kept 7.0 s. picked c1.",
+          "still": "Extreme close-up detail insert, no people in frame. Sparky, a foot-tall homemade robot built from recycled aluminium cans and salvaged toy motors, visible rivets and mismatched panels, a wide LED visor across its face, two simple jointed arms and small rubber treads, framed tight on its head and shoulders, the LED visor lit a hard bright blue, a small fan spinning behind a grille in its chest, brass gears and exposed wiring at the shoulder joint. Warm lamp light raking across the scratched aluminium. Macro clarity, very shallow depth of field. Cinematic film still from a live-action family film, anamorphic 35mm, photoreal skin, cotton and scuffed metal, practical warm lamp light against cool blue shadow, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+          "video": "Locked macro camera. The visor brightens to a steady blue and the small chest fan spins up to full speed, the shoulder gears turning a quarter turn and stopping. The robot stays where it is on the desk the whole time. Everything moves at natural real-time speed, the normal pace of someone working, with no slow motion and no speed ramping. A motor whirring, no music."
+        },
+        "s3": {
+          "title": "The seventh failure — smoke and scattered bolts, no people in frame",
+          "note": "no LoRA — no face in frame; input seed/bot.png; kept 9.0 s. picked c5.",
+          "still": "Medium close shot of the desktop, no people in frame. Sparky, a foot-tall homemade robot built from recycled aluminium cans and salvaged toy motors, visible rivets and mismatched panels, a wide LED visor across its face, two simple jointed arms and small rubber treads slumped forward onto the scarred wooden desk with one arm folded under it, a thin plume of grey smoke rising from its left shoulder joint, bolts and a small spring scattered across the wood around it. The desk lamp throws a hard warm pool of light over the wreck. Cinematic film still from a live-action family film, anamorphic 35mm, photoreal skin, cotton and scuffed metal, practical warm lamp light against cool blue shadow, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+          "video": "Fixed camera, no camera movement. The plume of smoke rises from the shoulder joint and curls away through the lamp light, thinning as it goes. One loose bolt rocks to a stop on the desk. The robot stays slumped where it is. The lamp light stays constant. Everything moves at natural real-time speed, the normal pace of someone working, with no slow motion and no speed ramping. A faint hiss, no music."
+        },
+        "s4": {
+          "title": "Close-up — the seventh failure on her face",
+          "note": "LoRA weight 1.0; input seed/lindsey.png; kept 7.0 s. picked c5.",
+          "still": "Tight close-up portrait, head and shoulders, straight on, one person alone in the frame. lindsey_kx girl, an eight-year-old girl with child proportions, this exact face, long dark hair loose with natural flyaway strands, wearing a mustard-yellow hoodie over a white t-shirt, sleeves pushed up to the elbows, and a pair of clear safety goggles pushed up on top of her head, facing the camera with her chin low and her mouth set, an even natural skin tone, warm lamp light from one side and cool blue shadow on the other. a child inventor's bedroom at night, hand-drawn blueprints taped across the walls, loose wires and brass gears over a scarred wooden desk, jars of screws and bolts, a bright articulated desk lamp throwing a warm pool of light across the desk and leaving the rest of the room in soft blue shadow thrown far out of focus behind her. Clean clear air between the camera and her face. The face is well exposed and clearly visible. Razor-sharp focus on the eyes and skin texture. Cinematic film still from a live-action family film, anamorphic 35mm, photoreal skin, cotton and scuffed metal, practical warm lamp light against cool blue shadow, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+          "video": "Locked camera, no push in. She faces the camera the whole time and her head stays still. She breathes out hard, blinks twice, and her jaw tightens. A few strands of hair settle. The light stays constant. Everything moves at natural real-time speed, the normal pace of someone working, with no slow motion and no speed ramping. Room tone, no music."
+        },
+        "s5": {
+          "title": "Macro — her finger traces the wiring diagram and finds the mistake, no face in frame",
+          "note": "LoRA weight 0.6; input seed/desk.png; kept 8.0 s. picked c4.",
+          "still": "Extreme close-up detail insert, no face in frame. One small child's hand with a pencil held loosely, the index finger resting on a hand-drawn wiring diagram in an open spiral notebook, the paper covered in pencil lines and crossings-out. Beside the notebook on the desk corner is a strip of masking tape. Warm lamp light across the paper, the grain of the wood beyond. Macro clarity, very shallow depth of field. Cinematic film still from a live-action family film, anamorphic 35mm, photoreal skin, cotton and scuffed metal, practical warm lamp light against cool blue shadow, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+          "video": "Fixed camera, no camera movement. Her wrist is bare and the hoodie sleeve stays pushed up above it. The pencil tip moves slowly along one drawn line on the page and stops. The hand stays a small child's hand, resting on the paper, and does not leave the frame. The paper and the desk stay still. Everything moves at natural real-time speed, the normal pace of someone working, with no slow motion and no speed ramping. Pencil on paper, no music."
+        },
+        "s6": {
+          "title": "Medium — hands working, the repair",
+          "note": "LoRA weight 1.0; input seed/lindsey.png; kept 9.0 s. v2: v1 failed all five seeds -- hands merged into the robot because the prompt required the screwdriver to go INTO the shoulder joint. v2 holds the tool in open air and puts Sparky lower and clear of the hand. picked c3.",
+          "still": "Medium shot, chest up, straight on, one person alone in the frame. lindsey_kx girl, an eight-year-old girl with child proportions, this exact face, long dark hair loose with natural flyaway strands, wearing a mustard-yellow hoodie over a white t-shirt, sleeves pushed up to the elbows, and a pair of clear safety goggles pushed up on top of her head, leaning in over the desk. Her head is level and steady, her chin slightly down, her eyes lowered to the desk in front of her. She holds a small screwdriver in her right hand, raised just above the desk, the tool held in open air with clear space all around it. Her fingers are fully visible, closed around the handle, and do not touch or overlap anything else. Her left forearm rests flat along the near edge of the desk. Standing on the desk in the lower right of frame, well below her hand and separate from it, is Sparky, a foot-tall homemade robot built from recycled aluminium cans, a plain upright can-shaped silver body, a single wide LED visor lit blue across the front of his head, two simple jointed arms down at his sides and small rubber treads below. Sparky is whole and undamaged, his panels flat and unbent, his silhouette clean and unbroken against the desk. Nothing overlaps him. Behind her, a child inventor's bedroom at night, hand-drawn blueprints taped across the wall, jars of screws and bolts and loose brass gears along the far side of the desk, a bright articulated desk lamp off to one side throwing a warm pool of light, the rest of the room in soft blue shadow, all thrown well out of focus. The desk immediately in front of her is clear bare wood. Warm lamp light full on her face and her raised hand. Clean clear air between the camera and her. The face is well exposed and clearly visible. Razor-sharp focus on the eyes and skin texture. Cinematic film still from a live-action family film, anamorphic 35mm, photoreal skin, cotton and scuffed metal, practical warm lamp light against cool blue shadow, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+          "video": "Fixed camera, no camera movement. The desk beside Sparky stays bare wood with nothing else on it. Sparky stands still and the blue light of his visor brightens and dims slowly and steadily throughout. She holds the screwdriver up in her right hand and turns it a few times in place, her left forearm flat on the desk. Her head stays level and her eyes stay down on the work. Everything moves at natural real-time speed, the normal pace of someone working, with no slow motion and no speed ramping. A screwdriver on metal, no music."
+        },
+        "s7": {
+          "title": "Close-up — it works, and it lands on her face",
+          "note": "LoRA weight 1.0; input seed/lindsey.png; kept 7.5 s. picked c4. v2: v1's open laugh aged her into a young woman by frame 40 (1.6 s); the expression now peaks in the first second and then holds.",
+          "still": "Close-up portrait, frontal, slightly low angle, one person alone in the frame. lindsey_kx girl, an eight-year-old girl with child proportions, this exact face, long dark hair loose with natural flyaway strands, wearing a mustard-yellow hoodie over a white t-shirt, sleeves pushed up to the elbows, and a pair of clear safety goggles pushed up on top of her head with the goggles pushed up on her head, facing the camera with her eyes wide and her mouth beginning to open in delight, a hard blue LED glow from below and in front lighting her face brightly along with the warm lamp. a child inventor's bedroom at night, hand-drawn blueprints taped across the walls, loose wires and brass gears over a scarred wooden desk, jars of screws and bolts, a bright articulated desk lamp throwing a warm pool of light across the desk and leaving the rest of the room in soft blue shadow soft and far out of focus behind her. Clean clear air between the camera and her face. The face is well exposed and clearly visible. Razor-sharp focus on the eyes and skin texture. Cinematic film still from a live-action family film, anamorphic 35mm, photoreal skin, cotton and scuffed metal, practical warm lamp light against cool blue shadow, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+          "video": "Fixed camera, no camera movement. Her eyes widen and her mouth opens into a small smile over the first second, and then the smile settles and holds steady for the rest of the shot without growing. Her head stays level and still and her chin does not lift. Her face stays the same face throughout. The blue glow on her face and the warm lamp both stay constant. Everything moves at natural real-time speed, the normal pace of someone working, with no slow motion and no speed ramping. Room tone, no music."
+        },
+        "s8": {
+          "title": "Sparky works — rolling forward and picking up the washer, no people in frame",
+          "note": "no LoRA — no face in frame; input seed/bot.png; kept 9.0 s. picked c3.",
+          "still": "Medium close shot along the desktop at desk height, no people in frame. Sparky, a foot-tall homemade robot built from recycled aluminium cans and salvaged toy motors, visible rivets and mismatched panels, a wide LED visor across its face, two simple jointed arms and small rubber treads upright and square on the wood with its visor lit a solid bright blue, one jointed arm extended forward and down toward a small steel washer lying on the desk a few inches in front of it. The desk surface ahead of the robot is clear and open. Warm lamp light along the wood, the room soft and blue behind. Cinematic film still from a live-action family film, anamorphic 35mm, photoreal skin, cotton and scuffed metal, practical warm lamp light against cool blue shadow, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+          "video": "Fixed camera, no camera movement. The robot's treads turn and it rolls forward a few inches across the desk, stops square, and its extended arm lowers and closes on the steel washer, lifting it clear of the wood. The visor stays lit a steady blue. Everything moves at natural real-time speed, the normal pace of someone working, with no slow motion and no speed ramping. Small motors, no music."
+        }
+      },
+      "run-spec": {
+        "dir": "projects/lindsey_sparky/v1-lora-cli",
+        "name": "lindsey_sparky",
+        "size": [
+          1024,
+          576
+        ],
+        "still": {
+          "model": "flux_2_klein_9b_i8x.ckpt",
+          "steps": 4,
+          "cfg": 1,
+          "config": {
+            "shift": 3.0,
+            "sampler": 16,
+            "loras": [
+              {
+                "file": "lindsey_lora_2000_lora_f32.ckpt",
+                "weight": 1.0
+              }
+            ]
+          },
+          "seeds": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "strength": 1.0
+        },
+        "clip": {
+          "model": "ltx_2.3_22b_distilled_1.1_q8p.ckpt",
+          "frames": 249,
+          "steps": 8,
+          "cfg": 1,
+          "config": {
+            "sampler": 19,
+            "shift": 5.0,
+            "stochasticSamplingGamma": 0.3,
+            "fps": 25,
+            "hiresFix": false
+          },
+          "seed": 1,
+          "video_format": "prores422hq"
+        },
+        "masters": {
+          "lindsey": "seed/lindsey.png",
+          "room": "seed/room.png",
+          "bot": "seed/bot.png",
+          "desk": "seed/desk.png"
+        },
+        "upscale": {
+          "model": "realesrgan-x4plus",
+          "size": [
+            3840,
+            2160
+          ],
+          "fit": "crop",
+          "bitrate": "40M"
+        },
+        "assemble": {
+          "fps": 25,
+          "xfade": 0.75,
+          "clip_audio": true,
+          "bitrate": "40M"
+        },
+        "music": {
+          "file": "projects/lindsey_sparky/v1-lora-cli/music/emotional_children_piano.mp3",
+          "start": 0,
+          "vol": 0.45,
+          "fade_in": 1.5,
+          "fade_out": 2.0
+        },
+        "deliver": [
+          {
+            "size": [
+              1920,
+              1080
+            ],
+            "bitrate": "12M"
+          }
+        ],
+        "shots": [
+          {
+            "id": "s1",
+            "still": {
+              "ref": null,
+              "input": "seed/room.png",
+              "prompt": "Wide establishing shot. a child inventor's bedroom at night, hand-drawn blueprints taped across the walls, loose wires and brass gears over a scarred wooden desk, jars of screws and bolts, a bright articulated desk lamp throwing a warm pool of light across the desk and leaving the rest of the room in soft blue shadow. Seen from behind and slightly above, one person alone in the frame: lindsey_kx girl, an eight-year-old girl with child proportions, this exact face, long dark hair loose with natural flyaway strands, wearing a mustard-yellow hoodie over a white t-shirt, sleeves pushed up to the elbows, and a pair of clear safety goggles pushed up on top of her head, sitting at the desk on a wooden chair with her shoulders hunched over her work. On the desk in front of her stands Sparky, a foot-tall homemade robot built from recycled aluminium cans and salvaged toy motors, visible rivets and mismatched panels, a wide LED visor across its face, two simple jointed arms and small rubber treads. The foreground is clear. Cinematic film still from a live-action family film, anamorphic 35mm, photoreal skin, cotton and scuffed metal, practical warm lamp light against cool blue shadow, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+              "config": {
+                "shift": 3.0,
+                "sampler": 16,
+                "loras": [
+                  {
+                    "file": "lindsey_lora_2000_lora_f32.ckpt",
+                    "weight": 0.85
+                  }
+                ]
+              }
+            },
+            "video_prompt": "Fixed camera, no camera movement. She stays seated in the chair the whole time, her back against the chair back and her weight settled. Only her right hand moves: it reaches a few inches across the desk, turns a small brass part over, and comes to rest again. Her head stays level and her shoulders stay where they are. The lamp light stays constant and the room behind her is still. Everything moves at natural real-time speed, the normal pace of someone working, with no slow motion and no speed ramping. Room tone, no music.",
+            "qc_ref": "room",
+            "take": "clips/s1_v1.mov",
+            "trim": [
+              0,
+              9.9
+            ]
+          },
+          {
+            "id": "s2",
+            "still": {
+              "ref": null,
+              "input": "seed/bot.png",
+              "prompt": "Extreme close-up detail insert, no people in frame. Sparky, a foot-tall homemade robot built from recycled aluminium cans and salvaged toy motors, visible rivets and mismatched panels, a wide LED visor across its face, two simple jointed arms and small rubber treads, framed tight on its head and shoulders, the LED visor lit a hard bright blue, a small fan spinning behind a grille in its chest, brass gears and exposed wiring at the shoulder joint. Warm lamp light raking across the scratched aluminium. Macro clarity, very shallow depth of field. Cinematic film still from a live-action family film, anamorphic 35mm, photoreal skin, cotton and scuffed metal, practical warm lamp light against cool blue shadow, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+              "config": {
+                "shift": 3.0,
+                "sampler": 16
+              }
+            },
+            "video_prompt": "Locked macro camera. The visor brightens to a steady blue and the small chest fan spins up to full speed, the shoulder gears turning a quarter turn and stopping. The robot stays where it is on the desk the whole time. Everything moves at natural real-time speed, the normal pace of someone working, with no slow motion and no speed ramping. A motor whirring, no music.",
+            "qc_ref": "bot",
+            "take": "clips/s2_v1.mov",
+            "trim": [
+              0,
+              9.0
+            ]
+          },
+          {
+            "id": "s3",
+            "still": {
+              "ref": null,
+              "input": "seed/bot.png",
+              "prompt": "Medium close shot of the desktop, no people in frame. Sparky, a foot-tall homemade robot built from recycled aluminium cans and salvaged toy motors, visible rivets and mismatched panels, a wide LED visor across its face, two simple jointed arms and small rubber treads slumped forward onto the scarred wooden desk with one arm folded under it, a thin plume of grey smoke rising from its left shoulder joint, bolts and a small spring scattered across the wood around it. The desk lamp throws a hard warm pool of light over the wreck. Cinematic film still from a live-action family film, anamorphic 35mm, photoreal skin, cotton and scuffed metal, practical warm lamp light against cool blue shadow, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+              "config": {
+                "shift": 3.0,
+                "sampler": 16
+              }
+            },
+            "video_prompt": "Fixed camera, no camera movement. The plume of smoke rises from the shoulder joint and curls away through the lamp light, thinning as it goes. One loose bolt rocks to a stop on the desk. The robot stays slumped where it is. The lamp light stays constant. Everything moves at natural real-time speed, the normal pace of someone working, with no slow motion and no speed ramping. A faint hiss, no music.",
+            "qc_ref": "bot",
+            "take": "clips/s3_v1.mov",
+            "trim": [
+              0,
+              9.5
+            ]
+          },
+          {
+            "id": "s4",
+            "still": {
+              "ref": null,
+              "input": "seed/lindsey.png",
+              "prompt": "Tight close-up portrait, head and shoulders, straight on, one person alone in the frame. lindsey_kx girl, an eight-year-old girl with child proportions, this exact face, long dark hair loose with natural flyaway strands, wearing a mustard-yellow hoodie over a white t-shirt, sleeves pushed up to the elbows, and a pair of clear safety goggles pushed up on top of her head, facing the camera with her chin low and her mouth set, an even natural skin tone, warm lamp light from one side and cool blue shadow on the other. a child inventor's bedroom at night, hand-drawn blueprints taped across the walls, loose wires and brass gears over a scarred wooden desk, jars of screws and bolts, a bright articulated desk lamp throwing a warm pool of light across the desk and leaving the rest of the room in soft blue shadow thrown far out of focus behind her. Clean clear air between the camera and her face. The face is well exposed and clearly visible. Razor-sharp focus on the eyes and skin texture. Cinematic film still from a live-action family film, anamorphic 35mm, photoreal skin, cotton and scuffed metal, practical warm lamp light against cool blue shadow, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+              "config": {
+                "shift": 3.0,
+                "sampler": 16,
+                "loras": [
+                  {
+                    "file": "lindsey_lora_2000_lora_f32.ckpt",
+                    "weight": 1.0
+                  }
+                ]
+              }
+            },
+            "video_prompt": "Locked camera, no push in. She faces the camera the whole time and her head stays still. She breathes out hard, blinks twice, and her jaw tightens. A few strands of hair settle. The light stays constant. Everything moves at natural real-time speed, the normal pace of someone working, with no slow motion and no speed ramping. Room tone, no music.",
+            "qc_ref": "lindsey",
+            "take": "clips/s4_v1.mov",
+            "trim": [
+              0,
+              7.0
+            ]
+          },
+          {
+            "id": "s5",
+            "still": {
+              "ref": null,
+              "input": "seed/desk.png",
+              "prompt": "Extreme close-up detail insert, no face in frame. One small child's hand with a pencil held loosely, the index finger resting on a hand-drawn wiring diagram in an open spiral notebook, the paper covered in pencil lines and crossings-out. Beside the notebook on the desk corner is a strip of masking tape. Warm lamp light across the paper, the grain of the wood beyond. Macro clarity, very shallow depth of field. Cinematic film still from a live-action family film, anamorphic 35mm, photoreal skin, cotton and scuffed metal, practical warm lamp light against cool blue shadow, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+              "config": {
+                "shift": 3.0,
+                "sampler": 16,
+                "loras": [
+                  {
+                    "file": "lindsey_lora_2000_lora_f32.ckpt",
+                    "weight": 0.6
+                  }
+                ]
+              }
+            },
+            "video_prompt": "Fixed camera, no camera movement. Her wrist is bare and the hoodie sleeve stays pushed up above it. The pencil tip moves slowly along one drawn line on the page and stops. The hand stays a small child's hand, resting on the paper, and does not leave the frame. The paper and the desk stay still. Everything moves at natural real-time speed, the normal pace of someone working, with no slow motion and no speed ramping. Pencil on paper, no music.",
+            "qc_ref": "desk",
+            "take": "clips/s5_v1.mov",
+            "trim": [
+              0,
+              3.4
+            ]
+          },
+          {
+            "id": "s6",
+            "still": {
+              "ref": null,
+              "input": "seed/lindsey.png",
+              "prompt": "Medium shot, chest up, straight on, one person alone in the frame. lindsey_kx girl, an eight-year-old girl with child proportions, this exact face, long dark hair loose with natural flyaway strands, wearing a mustard-yellow hoodie over a white t-shirt, sleeves pushed up to the elbows, and a pair of clear safety goggles pushed up on top of her head, leaning in over the desk. Her head is level and steady, her chin slightly down, her eyes lowered to the desk in front of her. She holds a small screwdriver in her right hand, raised just above the desk, the tool held in open air with clear space all around it. Her fingers are fully visible, closed around the handle, and do not touch or overlap anything else. Her left forearm rests flat along the near edge of the desk. Standing on the desk in the lower right of frame, well below her hand and separate from it, is Sparky, a foot-tall homemade robot built from recycled aluminium cans, a plain upright can-shaped silver body, a single wide LED visor lit blue across the front of his head, two simple jointed arms down at his sides and small rubber treads below. Sparky is whole and undamaged, his panels flat and unbent, his silhouette clean and unbroken against the desk. Nothing overlaps him. Behind her, a child inventor's bedroom at night, hand-drawn blueprints taped across the wall, jars of screws and bolts and loose brass gears along the far side of the desk, a bright articulated desk lamp off to one side throwing a warm pool of light, the rest of the room in soft blue shadow, all thrown well out of focus. The desk immediately in front of her is clear bare wood. Warm lamp light full on her face and her raised hand. Clean clear air between the camera and her. The face is well exposed and clearly visible. Razor-sharp focus on the eyes and skin texture. Cinematic film still from a live-action family film, anamorphic 35mm, photoreal skin, cotton and scuffed metal, practical warm lamp light against cool blue shadow, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+              "config": {
+                "shift": 3.0,
+                "sampler": 16,
+                "loras": [
+                  {
+                    "file": "lindsey_lora_2000_lora_f32.ckpt",
+                    "weight": 1.0
+                  }
+                ]
+              }
+            },
+            "video_prompt": "Fixed camera, no camera movement. The desk beside Sparky stays bare wood with nothing else on it. Sparky stands still and the blue light of his visor brightens and dims slowly and steadily throughout. She holds the screwdriver up in her right hand and turns it a few times in place, her left forearm flat on the desk. Her head stays level and her eyes stay down on the work. Everything moves at natural real-time speed, the normal pace of someone working, with no slow motion and no speed ramping. A screwdriver on metal, no music.",
+            "qc_ref": "lindsey",
+            "take": "clips/s6_v1.mov",
+            "trim": [
+              0,
+              9.5
+            ]
+          },
+          {
+            "id": "s7",
+            "still": {
+              "ref": null,
+              "input": "seed/lindsey.png",
+              "prompt": "Close-up portrait, frontal, slightly low angle, one person alone in the frame. lindsey_kx girl, an eight-year-old girl with child proportions, this exact face, long dark hair loose with natural flyaway strands, wearing a mustard-yellow hoodie over a white t-shirt, sleeves pushed up to the elbows, and a pair of clear safety goggles pushed up on top of her head with the goggles pushed up on her head, facing the camera with her eyes wide and her mouth beginning to open in delight, a hard blue LED glow from below and in front lighting her face brightly along with the warm lamp. a child inventor's bedroom at night, hand-drawn blueprints taped across the walls, loose wires and brass gears over a scarred wooden desk, jars of screws and bolts, a bright articulated desk lamp throwing a warm pool of light across the desk and leaving the rest of the room in soft blue shadow soft and far out of focus behind her. Clean clear air between the camera and her face. The face is well exposed and clearly visible. Razor-sharp focus on the eyes and skin texture. Cinematic film still from a live-action family film, anamorphic 35mm, photoreal skin, cotton and scuffed metal, practical warm lamp light against cool blue shadow, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+              "config": {
+                "shift": 3.0,
+                "sampler": 16,
+                "loras": [
+                  {
+                    "file": "lindsey_lora_2000_lora_f32.ckpt",
+                    "weight": 1.0
+                  }
+                ]
+              }
+            },
+            "video_prompt": "Fixed camera, no camera movement. Her eyes widen and her mouth opens into a small smile over the first second, and then the smile settles and holds steady for the rest of the shot without growing. Her head stays level and still and her chin does not lift. Her face stays the same face throughout. The blue glow on her face and the warm lamp both stay constant. Everything moves at natural real-time speed, the normal pace of someone working, with no slow motion and no speed ramping. Room tone, no music.",
+            "qc_ref": "lindsey",
+            "take": "clips/s7_v1.mov",
+            "trim": [
+              0,
+              7.5
+            ]
+          },
+          {
+            "id": "s8",
+            "still": {
+              "ref": null,
+              "input": "seed/bot.png",
+              "prompt": "Medium close shot along the desktop at desk height, no people in frame. Sparky, a foot-tall homemade robot built from recycled aluminium cans and salvaged toy motors, visible rivets and mismatched panels, a wide LED visor across its face, two simple jointed arms and small rubber treads upright and square on the wood with its visor lit a solid bright blue, one jointed arm extended forward and down toward a small steel washer lying on the desk a few inches in front of it. The desk surface ahead of the robot is clear and open. Warm lamp light along the wood, the room soft and blue behind. Cinematic film still from a live-action family film, anamorphic 35mm, photoreal skin, cotton and scuffed metal, practical warm lamp light against cool blue shadow, shallow depth of field, subtle film grain, natural colour. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+              "config": {
+                "shift": 3.0,
+                "sampler": 16
+              }
+            },
+            "video_prompt": "Fixed camera, no camera movement. The robot's treads turn and it rolls forward a few inches across the desk, stops square, and its extended arm lowers and closes on the steel washer, lifting it clear of the wood. The visor stays lit a steady blue. Everything moves at natural real-time speed, the normal pace of someone working, with no slow motion and no speed ramping. Small motors, no music.",
+            "qc_ref": "bot",
+            "take": "clips/s8_v1.mov",
+            "trim": [
+              0,
+              9.9
+            ]
+          }
+        ]
+      },
+      "files": [
+        "final/lindsey_sparky_3840x2160.mp4",
+        "final/lindsey_sparky_1920x1080.mp4",
+        "spec.json",
+        "../plan/lindsey-sparky-plan.md"
       ]
     }
   ]

@@ -38,7 +38,7 @@
  "post": {
   "upscale": "scripts/upscale_4k.sh — Real-ESRGAN x4plus -> 3840x2160",
   "loop": "none — xfade 0.75",
-  "music": "to be chosen at the finish pass"
+  "music": "light_adventure.mp3 under the LTX ambience at 0.45, 1.5 s in, 2 s out. NOTE: music belongs at run-spec.music, NOT run-spec.assemble.music — film_run.py reads the top-level key and silently ignores a nested one, producing a film with clip audio only and no error."
  },
  "scenes": {
   "locks": {
@@ -175,13 +175,7 @@
    "fps": 25,
    "xfade": 0.75,
    "clip_audio": true,
-   "bitrate": "40M",
-   "music": {
-    "file": "music/light_adventure.mp3",
-    "vol": 0.45,
-    "fade_in": 1.5,
-    "fade_out": 2.0
-   }
+   "bitrate": "40M"
   },
   "deliver": [
    {
@@ -387,7 +381,14 @@
      9.0
     ]
    }
-  ]
+  ],
+  "music": {
+   "file": "projects/kyle_steamfield/v1-lora-cli/music/light_adventure.mp3",
+   "start": 0,
+   "vol": 0.45,
+   "fade_in": 1.5,
+   "fade_out": 2.0
+  }
  },
  "files": [
   "seed/*.png (masters)",

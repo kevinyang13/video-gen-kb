@@ -40,6 +40,7 @@ Each project owns a folder — `projects/<id>/<version>/` — and its plan page 
 - [[kyle-debut-plan]] — Kyle: five minutes to showtime, a one-minute LoRA-driven short written from the start around the rule that motion must not rotate or occlude the face
 - [[lindsey-summit-plan]] — Lindsey: above the cloud sea, an adventure short whose shot list was derived from the previous films' failures before a frame was rendered
 - [[kyle-steamfield-plan]] — Where the Ground Breathes: steam as natural motion, and the three failures that produced sections 5-7 of the review page
+- [[lindsey-sparky-plan]] — Sparky: the first interior, where a static room made the video model invent a kitten, a wristwatch and a teenager
 - [[kyle-lighthouse-plan]] — Kyle: the signal fire, a storm-coast short whose subject was chosen so that every long take is carried by motion that animates itself
 - [[kyle-lora-plan]] — Kyle: a character LoRA from a purpose-shot turnaround, testing whether profile and back coverage in the dataset lifts the weight ceiling
 - [[yang-family-lora-plan]] — Kyle, Lindsey and Ivy in one adapter: the multi-subject LoRA that can put two of them in the same frame

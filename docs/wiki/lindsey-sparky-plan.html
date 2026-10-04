@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yang Family LoRA for ComfyUI — video-gen-kb</title>
+<title>Lindsey — Sparky — video-gen-kb</title>
 <style>
 :root{--bg:#0B0D12;--panel:#141822;--panel-2:#1B2130;--stroke:#2A3245;--text:#E6E9F0;
 --muted:#8B94A7;--accent:#F5B84B;--accent-2:#4BC9F5;--on-accent:#12131A;
@@ -92,102 +92,146 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
     <span class="spacer"></span>
     <button class="pill" onclick="tt()">◐ Theme</button>
   </nav>
-  <h1>Yang Family LoRA for ComfyUI</h1><p class="lede">Get the three-subject family LoRA working in ComfyUI. Training it there is blocked on Apple Silicon, so the plan converts the existing Draw Things adapter to safetensors instead.</p><div class="meta"><span><b>Updated</b> 2026-10-02</span><span><b>Sources</b> measured on this machine 2026-10-02; upstream issue trackers cited inline.</span></div>
+  <h1>Lindsey — Sparky</h1><p class="lede">Fifth LoRA-driven film and the first set indoors, which removed the ambient motion the previous four leaned on and produced two new findings about what a video model does with a static room.</p><div class="meta"><span><b>Updated</b> 2026-10-03</span><span><b>Sources</b> no external source; story supplied by Kevin. Identity from <code>projects/lindsey_lora</code> v2.</span></div>
 <hr />
-<h2>The goal</h2>
-<p><code>kyle_kx boy</code>, <code>lindsey_kx girl</code> and <code>ivy_kx woman</code> rendering in ComfyUI from a single adapter,
-the same way they already do in Draw Things. See <a href="model-storage-locations.html">model storage locations</a> for where the weights
-live.</p>
-<h2>Why this is not simply "train it again"</h2>
-<p>The obvious plan — point a ComfyUI-native trainer at the 87-pair dataset and get safetensors out —
-does not work on this machine. Checked 2026-10-02:</p>
+<h2>The film</h2>
+<p>An eight-year-old inventor fails to fix her homemade robot for the seventh time, finds the mistake in
+her own wiring diagram, repairs it, and watches it work.</p>
+<p>Eight shots, 60.45 s delivered at 3840×2160.</p>
 <div class="tw"><table>
 <thead>
 <tr>
-<th>trainer</th>
-<th>FLUX.2 klein 9B</th>
-<th>Apple Silicon</th>
+<th>shot</th>
+<th>s</th>
+<th>LoRA</th>
+<th>what</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><a href="https://github.com/shootthesound/Fizgig">Fizgig</a></td>
-<td>supported, LoRA from 10 GB VRAM</td>
-<td><strong>Windows/Linux, NVIDIA or AMD only</strong></td>
+<td>s1</td>
+<td>9.9</td>
+<td>0.85</td>
+<td>wide establishing, her back to us at the desk</td>
 </tr>
 <tr>
-<td><a href="https://github.com/ostris/ai-toolkit/issues/871">ai-toolkit</a></td>
-<td>supported</td>
-<td><strong>MPS issue closed "not planned"</strong></td>
-</tr>
-<tr>
-<td><a href="https://github.com/kohya-ss/musubi-tuner/issues/860">musubi-tuner</a></td>
-<td>open klein 9B error</td>
+<td>s2</td>
+<td>9.0</td>
 <td>—</td>
+<td>macro, Sparky's visor and chest fan, no people</td>
+</tr>
+<tr>
+<td>s3</td>
+<td>9.5</td>
+<td>—</td>
+<td>the seventh failure, smoke from the shoulder joint</td>
+</tr>
+<tr>
+<td>s4</td>
+<td>7.0</td>
+<td>1.0</td>
+<td>close-up, the failure on her face</td>
+</tr>
+<tr>
+<td>s5</td>
+<td>3.4</td>
+<td>0.6</td>
+<td>macro, her hand and the wiring diagram</td>
+</tr>
+<tr>
+<td>s6</td>
+<td>9.5</td>
+<td>1.0</td>
+<td>medium, the repair</td>
+</tr>
+<tr>
+<td>s7</td>
+<td>7.5</td>
+<td>1.0</td>
+<td>close-up, it works</td>
+</tr>
+<tr>
+<td>s8</td>
+<td>9.9</td>
+<td>—</td>
+<td>Sparky rolling forward for the washer</td>
 </tr>
 </tbody>
 </table></div>
-<p>The ai-toolkit report is the most thorough: six configurations, none converging. NaN loss with
-cached text embeddings, OOM on fp16 even with gradient checkpointing, and loss oscillating in a
-0.45–0.56 band rather than descending. Suspected cause is MPS gradient precision plus torchao
-kernels with no Triton on Metal. No maintainer response; closed as not planned.</p>
-<p>This is consistent with what is already recorded in <a href="apple-silicon-inference.html">apple silicon inference</a>: Metal is a
-second-class training target, and FP8 — the thing that makes klein training cheap elsewhere —
-does not exist here at all.</p>
-<h2>So: convert, don't retrain</h2>
-<p>The adapter already exists and took 9 h 22 m to train. Converting it is local, free, costs no
-privacy, and reuses that work. Three facts make it viable, all verified rather than assumed:</p>
-<p><strong>1. The weights are plain float32.</strong> Draw Things <code>.ckpt</code> files are SQLite databases, not PyTorch
-checkpoints — but unlike the quantized base models, a trained LoRA is not quantized:</p>
-<pre><code>564 tensors, single datatype, every dim product x 4 == byte length (564 match, 0 mismatch)
-__dit__[t-c_q-0-0]__down__   dim=[32, 4096]
-__dit__[t-c_q-0-0]__up__     dim=[4096, 32]
-</code></pre>
-<p><strong>2. The layer naming parses completely.</strong> All 564 names fit one pattern, and the architecture
-falls straight out of it:</p>
-<pre><code>8 double blocks  (0..7)    c_q c_k c_v c_o + c_gate_proj c_up_proj c_down_proj   text stream
-                           x_q x_k x_v x_o + x_gate_proj x_up_proj x_down_proj   image stream
-24 single blocks (8..31)   x_q x_k x_v x_o + x_w1 x_w2 x_w3                      SwiGLU MLP
-x_embedder, linear                                                               in / out
-</code></pre>
-<p><strong>3. ComfyUI takes <code>diffusion_model.</code>-prefixed keys</strong> mapped directly onto the model's own state
-dict, so there is a concrete target rather than a guess at some trainer's convention.</p>
-<h2>The one real problem: fused qkv</h2>
-<p>Draw Things stores <code>x_q</code>, <code>x_k</code>, <code>x_v</code> separately. klein fuses them:</p>
-<pre><code>Draw Things   __dit__[t-x_q-0-0]__{down,up}__      three rank-32 pairs
-klein         double_blocks.0.img_attn.qkv.weight  one fused matrix
-</code></pre>
-<p>This is solvable <strong>exactly</strong>, with no SVD and no loss. The three deltas occupy disjoint row ranges
-of the fused matrix, so:</p>
-<pre><code>down_fused = [ Dq ; Dk ; Dv ]                 (96 x in)
-up_fused   = [ Uq  0   0  ;
-               0   Uk  0  ;
-               0   0   Uv ]                   (3*out x 96)
-</code></pre>
-<p>reproduces the stacked delta identically at rank 96. Single blocks fuse further — klein's
-<code>linear1</code> carries qkv <em>and</em> the MLP input — so the same construction extends with more blocks on
-the diagonal.</p>
-<h2>Steps</h2>
-<ol>
-<li><strong>Extract</strong> — read the 564 tensors out of SQLite with <code>numpy.frombuffer</code>, honouring the <code>dim</code>
-   blob for shape. Already proven to work.</li>
-<li><strong>Map</strong> — Draw Things layer name to klein state-dict key, per block type.</li>
-<li><strong>Fuse</strong> — build the block-diagonal qkv (and <code>linear1</code>) pairs as above.</li>
-<li><strong>Emit</strong> — one safetensors file of <code>diffusion_model.*.lora_{down,up}.weight</code> keys.</li>
-<li><strong>Verify</strong> — load in ComfyUI against <code>flux-2-klein-9b.safetensors</code> and render <code>lindsey_kx girl</code>
-   at weight 1.0. The test is whether Lindsey's face comes back, against a no-LoRA control.</li>
-</ol>
-<p>Step 5 is the only one that can fail quietly: a LoRA whose keys do not match is <strong>silently
-ignored</strong> by ComfyUI, which looks identical to a LoRA that changed nothing. The control column is
-not optional — the same trap is already recorded for <code>draw-things-cli</code> in <a href="log.html">log</a>.</p>
-<h2>If conversion fails</h2>
-<p>Renting a GPU is the fallback, and it carries a cost the local path does not: the dataset is 87
-images of Kevin's children. Those raw photographs are deliberately git-ignored in a public repo on
-the principle that consent to train on a face is not consent to publish the face. Uploading them
-to a rented machine is the same decision in a different form, and it is Kevin's to make, not a
-default to fall into.</p>
+<p>Two constraints came from Kevin: <strong>no slow motion</strong>, and <strong>approval on every still before any clip</strong>.</p>
+<h2>The first interior, and what it cost</h2>
+<p>The four previous films were outdoors and gave their long takes to steam, surf, mist and firelight —
+continuous natural motion the video model does not have to invent. A bedroom at night has none of
+that, and the first pass showed exactly what fills the gap. Four of eight shots failed:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>shot</th>
+<th>allotted</th>
+<th>usable</th>
+<th>what it invented</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>s1</td>
+<td>9.0 s</td>
+<td>3.0 s</td>
+<td>she stands up, walks out of frame, reads as a teenager</td>
+</tr>
+<tr>
+<td>s5</td>
+<td>8.0 s</td>
+<td>3.2 s</td>
+<td>a blue wristwatch; the hand turns adult</td>
+</tr>
+<tr>
+<td>s6</td>
+<td>9.0 s</td>
+<td>3.1 s</td>
+<td>a kitten and a red bottle on the desk; Sparky's arms vanish</td>
+</tr>
+<tr>
+<td>s7</td>
+<td>7.5 s</td>
+<td>1.3 s</td>
+<td>the laugh ages her into a young woman</td>
+</tr>
+</tbody>
+</table></div>
+<p>The safe takes summed to 42.6 s against a 60 s target, so the film could not be cut from that material.</p>
+<h2>What this film added</h2>
+<p>Three findings, all now in <a href="still-geometry-and-review.html">still geometry and review</a>.</p>
+<p><strong>A held expression survives; a changing one does not.</strong> s4 and s7 are a controlled pair — same LoRA,
+same frontal framing, same lamp, same seed count. s4 holds 7 s with a near-static face. s7 v1 asked
+for a laugh and was a different, older person by frame 40, about 1.6 s. The rule was previously
+written as "frontal faces drift at around eight seconds"; this film shows the eight seconds belongs
+to a <em>static</em> face, and a large expression change costs most of it. The fix is not a smaller emotion
+but an earlier one: the smile reaches its peak in the first second and then holds, which puts the
+remaining 6.5 s into the condition s4 already proved.</p>
+<p><strong>Give an interior its own light source.</strong> s6 invented a kitten when nothing in frame moved. Told
+instead that Sparky's visor brightens and dims throughout, it held all 249 frames with a bare desk.
+Interiors have no weather, but they have practicals, and a lamp or an LED is as good a motion source
+as surf.</p>
+<p><strong>A placement lock removes the named prop and the model substitutes another.</strong> s5 v1 grew a
+wristwatch. v2 said "her wrist is bare and the hoodie sleeve stays pushed up above it" — no watch,
+and a grey knit cuff instead, at frame 90. Naming the absence is not enough; the lock has to say what
+the space positively <em>is</em>.</p>
+<h2>Prompt-side fixes that worked</h2>
+<ul>
+<li><strong>"She stays seated in the chair the whole time, her back against the chair back."</strong> s1 v1 said
+  "shifts her weight in the chair and reaches forward", which is a standing-up instruction read
+  literally, and LTX read it literally.</li>
+<li><strong>Hands clear of metal.</strong> s6's still failed all five seeds because the prompt put a screwdriver
+  <em>into</em> a joint; fingers and metal in the same pixels is where the count is lost. Holding the tool
+  in open air fixed it on the next attempt.</li>
+</ul>
+<h2>Where the seconds came from</h2>
+<p>s5 could not be made to hold and was not re-rendered a third time. s1, s2, s3, s6 and s8 all hold
+their full 249 frames, so they absorbed the difference: 65.70 s raw against 60.45 s delivered. A
+3.4 s macro insert is an ordinary cut length — it was only ever long because the budget said so.</p>
 
-  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="model-storage-locations.html">model storage locations</a></li><li><a href="apple-silicon-inference.html">apple silicon inference</a></li><li><a href="character-consistency.html">character consistency</a></li><li><a href="headless-cli-pipeline.html">headless cli pipeline</a></li></ul></div>
+  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="still-geometry-and-review.html">still geometry and review</a></li><li><a href="kyle-steamfield-plan.html">kyle steamfield plan</a></li><li><a href="lindsey-summit-plan.html">lindsey summit plan</a></li><li><a href="lindsey-lora-plan.html">lindsey lora plan</a></li><li><a href="idea-to-video-blueprint.html">idea to video blueprint</a></li></ul></div>
 </div>
 <footer>video-gen-kb · built 2026-10-04 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
 <script>function tt(){var r=document.documentElement,
