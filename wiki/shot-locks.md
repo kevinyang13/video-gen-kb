@@ -230,3 +230,40 @@ and warns on:
 - [[idea-to-video-blueprint]]
 - [[running-a-film-yourself]]
 - [[character-consistency]]
+
+## A diptych prompt is an edit instruction, or the subject is thrown away
+
+`dt_diptych.sh` in diptych mode hstacks REF and IN into one canvas twice the output width, renders it,
+and keeps the **right half**. The model only knows that canvas is two images if the prompt says so.
+Given a plain scene description it lays the scene across the whole canvas, the subject lands wherever
+the composition puts it, and the crop discards whatever fell in the left half.
+
+Measured on `kyle_firstflight` v2 s4 — same seed, same scene-description prompt, only the reference
+swapped:
+
+| Run | Palette distance | Subject present? |
+|---|---|---|
+| REF = `skiff_90` (the right master) vs REF = `droid_front` (a deliberately wrong object) | **0.061** | neither |
+| REF = `skiff_90` vs REF = none (single-image edit) | **0.333** | edit only |
+
+Two readings, both bad. Swapping the reference for an unrelated object changed the result by less than
+the drift *within* one master's own turnaround (droid: 0.026–0.076), so no identity was crossing over.
+And neither diptych contained the thruster nacelle the prompt described, while the single-image edit
+did — the nacelle had been composed into the half that gets cropped off.
+
+So a reference is not "weakly used" in this mode. It is close to inert, and the mode actively costs you
+the subject. This is the mechanism behind "the size, the shape, the identity of the aircraft doesn't look
+the same at all across all the shots".
+
+**Choose the mode by what the shot needs:**
+
+- **One locked subject, no new environment** → single-image edit. Set `still.input` to the master and
+  leave `still.ref` unset. The master *is* the image being re-rendered, so it cannot be cropped away.
+- **A locked subject placed into a different environment** → diptych, `ref` = the subject, `input` =
+  the environment plate, and the prompt written as an edit instruction naming both halves.
+
+Setting `ref` and `input` to the same subject is always wrong: it spends half the canvas carrying in an
+identity the input already has.
+
+`film_run.py check` fails on a diptych whose prompt has no edit-instruction marker, and warns on a
+self-diptych. See also [[still-geometry-and-review]] §12.

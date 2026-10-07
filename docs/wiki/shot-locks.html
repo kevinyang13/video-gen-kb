@@ -322,6 +322,52 @@ visible subject, and on motion with no anchor in the still.</p>
 <li>a LoRA applied to a faceless shot with no trigger token — wasted sampling time.</li>
 </ul>
 
+<h2>A diptych prompt is an edit instruction, or the subject is thrown away</h2>
+<p><code>dt_diptych.sh</code> in diptych mode hstacks REF and IN into one canvas twice the output width, renders it,
+and keeps the <strong>right half</strong>. The model only knows that canvas is two images if the prompt says so.
+Given a plain scene description it lays the scene across the whole canvas, the subject lands wherever
+the composition puts it, and the crop discards whatever fell in the left half.</p>
+<p>Measured on <code>kyle_firstflight</code> v2 s4 — same seed, same scene-description prompt, only the reference
+swapped:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Run</th>
+<th>Palette distance</th>
+<th>Subject present?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>REF = <code>skiff_90</code> (the right master) vs REF = <code>droid_front</code> (a deliberately wrong object)</td>
+<td><strong>0.061</strong></td>
+<td>neither</td>
+</tr>
+<tr>
+<td>REF = <code>skiff_90</code> vs REF = none (single-image edit)</td>
+<td><strong>0.333</strong></td>
+<td>edit only</td>
+</tr>
+</tbody>
+</table></div>
+<p>Two readings, both bad. Swapping the reference for an unrelated object changed the result by less than
+the drift <em>within</em> one master's own turnaround (droid: 0.026–0.076), so no identity was crossing over.
+And neither diptych contained the thruster nacelle the prompt described, while the single-image edit
+did — the nacelle had been composed into the half that gets cropped off.</p>
+<p>So a reference is not "weakly used" in this mode. It is close to inert, and the mode actively costs you
+the subject. This is the mechanism behind "the size, the shape, the identity of the aircraft doesn't look
+the same at all across all the shots".</p>
+<p><strong>Choose the mode by what the shot needs:</strong></p>
+<ul>
+<li><strong>One locked subject, no new environment</strong> → single-image edit. Set <code>still.input</code> to the master and
+  leave <code>still.ref</code> unset. The master <em>is</em> the image being re-rendered, so it cannot be cropped away.</li>
+<li><strong>A locked subject placed into a different environment</strong> → diptych, <code>ref</code> = the subject, <code>input</code> =
+  the environment plate, and the prompt written as an edit instruction naming both halves.</li>
+</ul>
+<p>Setting <code>ref</code> and <code>input</code> to the same subject is always wrong: it spends half the canvas carrying in an
+identity the input already has.</p>
+<p><code>film_run.py check</code> fails on a diptych whose prompt has no edit-instruction marker, and warns on a
+self-diptych. See also <a href="still-geometry-and-review.html">still geometry and review</a> §12.</p>
   <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="still-geometry-and-review.html">still geometry and review</a></li><li><a href="idea-to-video-blueprint.html">idea to video blueprint</a></li><li><a href="running-a-film-yourself.html">running a film yourself</a></li><li><a href="character-consistency.html">character consistency</a></li></ul></div>
 </div>
 <footer>video-gen-kb · built 2026-10-06 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>

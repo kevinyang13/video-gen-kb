@@ -261,6 +261,42 @@ def combo_parts(f, name, seen=None):
     return parts
 
 
+DIPTYCH_MARKERS = ("side by side", "left image", "right image", "image on the left")
+
+
+def diptych_problems(shot):
+    """A diptych whose prompt is a scene description throws the subject away.
+
+    dt_diptych.sh hstacks REF and IN into one canvas twice the output width, renders it, and keeps the
+    RIGHT half. The model only knows that canvas is two images if the prompt says so. Given a plain scene
+    description it lays the scene across the whole canvas, the subject lands wherever the composition
+    puts it, and the crop discards whatever fell in the left half.
+
+    Measured on kyle_firstflight v2 s4, same seed, same prompt, only the reference swapped:
+      REF = skiff_90 (right master)     vs  REF = droid_front (wrong subject)   palette distance 0.061
+      REF = skiff_90                    vs  REF = none (single-image edit)      palette distance 0.333
+    Swapping the reference for an unrelated object changed almost nothing, so no identity was crossing
+    over; and neither diptych contained the thruster nacelle the prompt described, while the single-image
+    edit did. See wiki/shot-locks.md.
+    """
+    st = shot.get("still") or {}
+    ref, inp, p = st.get("ref"), st.get("input"), (st.get("prompt") or "").lower()
+    out = []
+    if ref and inp and not any(k in p for k in DIPTYCH_MARKERS):
+        out.append(("ERR", "sets both still.ref and still.input, so it renders as a diptych, but the "
+                           "prompt is a scene description -- it must be an edit instruction naming the "
+                           "halves ('keep the left image unchanged, re-render the right image so that "
+                           "...'), or drop still.ref to run a single-image edit"))
+    if ref and inp:
+        base = ref.split("_")[0]
+        tail = inp.rsplit("/", 1)[-1].rsplit(".", 1)[0]
+        if base and (base == tail or base == inp):
+            out.append(("WARN", f"still.ref and still.input are both '{base}' -- a diptych of one subject "
+                                f"against itself spends half the canvas and carries nothing in; use a "
+                                f"single-image edit instead"))
+    return out
+
+
 def object_without_reference(shot, locks, masters, f=None):
     """Objects the shot describes in full but was given no picture of."""
     p = (shot.get("still", {}).get("prompt") or "")
@@ -369,6 +405,7 @@ def cmd_lint(f, args):
             continue
         rows = lint_shot(s, style)
         rows += [(lvl, msg, "see wiki/shot-locks.md") for lvl, msg in person_problems(s, trig, wants_child)]
+        rows += [(lvl, msg, "see wiki/shot-locks.md") for lvl, msg in diptych_problems(s)]
         for name in object_without_reference(s, locks, f.get("masters"), f):
             rows.append(("WARN", f"describes '{name}' but was given no picture of it",
                          f"set still.ref to '{name}'"))
@@ -414,7 +451,9 @@ def cmd_check(f, _):
         st = s.get("still", {})
         if st and not (isinstance(st.get("prompt"), str) and st["prompt"].strip()):
             errs.append(f"{i}: still.prompt is empty")
-        if st.get("input") and not d(f, st["input"]).exists():
+        for sev, msg in diptych_problems(s):
+            (errs if sev == "ERR" else warns).append(f"{i}: {msg}")
+        if st.get("input") and not resolve_ref(f, st["input"]).exists():
             warns.append(f"{i}: still.input not made yet: {st['input']}")
         ref = st.get("ref")
         if ref:
@@ -476,7 +515,7 @@ def cmd_stills(f, args):
         st = s.get("still") or die(f"{i}: no still recipe")
         c = still_cfg(f, s)
         ref = resolve_ref(f, st.get("ref"))
-        inp = d(f, st["input"]) if st.get("input") else None
+        inp = resolve_ref(f, st["input"]) if st.get("input") else None
         env = {"MODEL": c["model"], "STEPS": c["steps"], "CFG": c["cfg"], "STRENGTH": c["strength"],
                "CONFIG_JSON": json.dumps(c["config"], separators=(",", ":"))}
         for seed in c["seeds"]:
@@ -730,10 +769,14 @@ def cmd_eval(f, args):
     for s in f["shots"]:
         still = d(f, f"stills/{s['id']}.png")
         ref = s.get("still", {}).get("ref") or s.get("qc_ref")
-        if not still.exists() or ref not in masters:
+        # Score against whatever the shot actually referenced -- a model-sheet view or a combo, not
+        # only a plain master. Looking the ref up in the masters dict scored 1 shot in 8 on
+        # kyle_firstflight v2 and silently skipped every view and combo, which are the references
+        # that carry identity in the first place.
+        if not still.exists() or not ref:
             continue
-        rp = d(f, masters[ref])
-        if not rp.exists():
+        rp = resolve_ref(f, ref)
+        if not rp or not rp.exists():
             continue
         rows.append((palette_distance(image_palette(rp), image_palette(still)), s["id"], ref))
     for dist, sid, ref in sorted(rows, reverse=True):

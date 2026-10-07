@@ -1061,3 +1061,11 @@ The general rule: **a default that silently selects the wrong template is worse 
 rolling more seeds; `lint` and `check` now catch them in the prompt text before rendering. Updated
 [[idea-to-video-blueprint]], [[running-a-film-yourself]], [[shot-locks]], [[scripts-reference]], `CLAUDE.md`,
 and `projects/kyle_firstflight/v2-sheets/spec.json`.
+
+## 2026-10-06 — masters were not reaching the shots
+Audited how masters are used as input across every project. Diptych mode with a scene-description
+prompt makes the reference near-inert and crops the subject away; measured with a reference-swap test
+on kyle_firstflight v2 s4. `check` now fails that combination. `eval` scored 1 shot in 8 because it
+looked refs up in the masters dict, missing every model-sheet view and combo; it now resolves refs the
+same way the renderer does, scoring 8/8. `still.input` can now name a master instead of a path.
+Recorded in [[shot-locks]].

@@ -803,6 +803,13 @@ unacceptable as a silent default. It now appears only as a suggestion inside the
 rolling more seeds; <code>lint</code> and <code>check</code> now catch them in the prompt text before rendering. Updated
 <a href="idea-to-video-blueprint.html">idea to video blueprint</a>, <a href="running-a-film-yourself.html">running a film yourself</a>, <a href="shot-locks.html">shot locks</a>, <a href="scripts-reference.html">scripts reference</a>, <code>CLAUDE.md</code>,
 and <code>projects/kyle_firstflight/v2-sheets/spec.json</code>.</p>
+<h2>2026-10-06 — masters were not reaching the shots</h2>
+<p>Audited how masters are used as input across every project. Diptych mode with a scene-description
+prompt makes the reference near-inert and crops the subject away; measured with a reference-swap test
+on kyle_firstflight v2 s4. <code>check</code> now fails that combination. <code>eval</code> scored 1 shot in 8 because it
+looked refs up in the masters dict, missing every model-sheet view and combo; it now resolves refs the
+same way the renderer does, scoring 8/8. <code>still.input</code> can now name a master instead of a path.
+Recorded in <a href="shot-locks.html">shot locks</a>.</p>
   
 </div>
 <footer>video-gen-kb · built 2026-10-06 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
