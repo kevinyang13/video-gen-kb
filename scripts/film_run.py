@@ -821,14 +821,15 @@ def cmd_eval(f, args):
     rows = []
     for s in f["shots"]:
         still = d(f, f"stills/{s['id']}.png")
-        ref = s.get("still", {}).get("ref") or s.get("qc_ref")
-        # Score against whatever the shot actually referenced -- a model-sheet view or a combo, not
-        # only a plain master. Looking the ref up in the masters dict scored 1 shot in 8 on
-        # kyle_firstflight v2 and silently skipped every view and combo, which are the references
-        # that carry identity in the first place.
+        # Score against whatever the shot was actually built from, resolved exactly as the renderer and
+        # `align` resolve it: ref if there is one, else input. Reading `ref or qc_ref` scored every
+        # edit-mode shot against the wrong picture -- s3 was built on kyle_fixing_skiff and reported
+        # against the bare skiff master.
+        st = s.get("still") or {}
+        ref = st.get("ref") or st.get("input") or s.get("qc_ref")
         if not still.exists() or not ref:
             continue
-        rp = resolve_ref(f, ref)
+        rp = still_reference(f, s) or resolve_ref(f, ref)
         if not rp or not rp.exists():
             continue
         rows.append((palette_distance(image_palette(rp), image_palette(still)), s["id"], ref))
