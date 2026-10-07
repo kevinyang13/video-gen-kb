@@ -1035,8 +1035,12 @@ def cmd_align(f, args):
             best = live[best_seed][0]
             print(f"{i}: round {r + 1} seeds {seeds} -> best {best:.4f} (seed {best_seed}) "
                   f"vs {rp.name}", flush=True)
+            # best is recomputed over the whole pool each round under the sharpness filter, so a new
+            # round can shift the winner and leave `best` slightly worse. Either way the round bought
+            # nothing, which is the condition to stop on.
             if prev is not None and prev - best < gain:
-                print(f"{i}: converged -- round {r + 1} improved by {prev - best:.4f}, under {gain}",
+                moved = "improved by" if best <= prev else "moved by"
+                print(f"{i}: converged -- round {r + 1} {moved} {abs(prev - best):.4f}, under {gain}",
                       flush=True)
                 break
             prev = best
