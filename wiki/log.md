@@ -1069,3 +1069,10 @@ on kyle_firstflight v2 s4. `check` now fails that combination. `eval` scored 1 s
 looked refs up in the masters dict, missing every model-sheet view and combo; it now resolves refs the
 same way the renderer does, scoring 8/8. `still.input` can now name a master instead of a path.
 Recorded in [[shot-locks]].
+
+## 2026-10-07 — kyle_firstflight v2-sheets delivered
+60.04 s, 3840x2160 HEVC 25 fps, -19.2 LUFS, 267 MB (1080p companion 88 MB). The rebuild that answered
+"the identity of the aircraft doesn't look the same at all across all the shots": the craft, the droid
+and Kyle are now the same in every shot they appear in. Built on model-sheet masters with four combos,
+stills picked by the new `align` loop, and one clip re-rendered after its camera move destroyed the
+hull. Findings in [[shot-locks]].
