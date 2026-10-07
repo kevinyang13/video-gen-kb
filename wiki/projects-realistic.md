@@ -23,7 +23,7 @@ Index of every project: [[projects]]. Other themes: [[projects-anime]] · [[proj
 | 7 | [Kyle — five minutes to showtime](#kyle_debut) | 2026-09-28 | delivered 2026-09-29 01:20 — 60.76 s, 3840x2160 (279 MB) + 1920x1080 (79 MB), 8 shots, none dropped; mean -21.7 dB, peak -5.5 dB | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 11 min | Emotional Children Piano | `—` | — |
 | 8 | [Kyle — The Boonta Flats](#kyle_saltflats) | 2026-10-04 | clips QC'd 2026-10-04 — 59.85 s planned | none — supplied 1024x576 | ltx_2.3_22b_distilled_1.1_q8p.ckpt 10 min | best_adventure_ever.mp3 | `—` | — |
 | 9 | [Lindsey — above the cloud sea](#lindsey_summit) | 2026-09-29 | delivered 2026-09-29 10:42 — 59.88 s, 3840x2160 (280 MB) + 1920x1080 (87 MB), 8 shots, none dropped; mean -18.7 dB, peak -5.3 dB. Planned length 59.75 s, delivered 59.88 s. | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 11 min | Adventure Journey | `—` | — |
-| 10 | [Kyle — First Flight](#kyle_firstflight) | 2026-10-05 | masters | flux_2_klein_9b_i8x.ckpt 1024x576 | ltx_2.3_22b_distilled_1.1_q8p.ckpt 10 min | best_adventure_ever.mp3 | `—` | — |
+| 10 | [Kyle — First Flight](#kyle_firstflight) | 2026-10-07 | delivered | flux_2_klein_9b_i8x.ckpt 1024x576 | ltx_2.3_22b_distilled_1.1_q8p.ckpt 10 min | best_adventure_ever.mp3 | `—` | — |
 | 11 | [Kyle — the signal fire](#kyle_lighthouse) | 2026-09-29 | stopped 2026-09-29 — abandoned at Kevin's call after s6 could not be made to work. Seven of eight shots are rendered, graded and upscaled to 4K; s6 went through five designs (interior stairwell from below, side-on interior spiral, exterior stair on the tower, and two versions of the entrance door) and none was accepted. No final cut was produced from the current shot set. | FLUX.2 [klein] 9B 1024x576 | LTX-2.3 22B [distilled] 1.1 11 min | Best Adventure Ever | `—` | — |
 | 12 | [Kyle — character LoRA v2](#kyle_lora) | 2026-09-29 | dataset built 2026-09-29 — 55 pairs; training | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
 | 13 | [Yang family — one LoRA, three subjects](#yang_family_lora) | 2026-09-30 | delivered 2026-09-30 — yang_family_lora_4000_lora_f32.ckpt, 9 h 22 m, 5 checkpoints at 843 MB each | FLUX.2 [klein] 9B 576x1024 | Wan 2.2 High Noise ? min | Calm Ambient Dreamscape | `—` | — |
@@ -1075,7 +1075,7 @@ Prompt: `per shot — see scenes`
 
 ## Kyle — First Flight {#kyle_firstflight}
 
-- **Date**: 2026-10-05 · **Status**: masters · **Version**: `v2-sheets` · **Draw Things project**: `kyle-firstflight`
+- **Date**: 2026-10-07 · **Status**: delivered · **Version**: `v2-sheets` · **Draw Things project**: `kyle-firstflight`
 - **This version**: lora-cli
 
 **Versions**
@@ -1083,10 +1083,10 @@ Prompt: `per shot — see scenes`
 | Version | What it is | Status | YouTube |
 |---|---|---|---|
 | `v1-lora-cli` | lora-cli | clips QC'd 2026-10-05 — 59.95 s planned | — |
-| `v2-sheets` | lora-cli | masters | — |
+| `v2-sheets` | lora-cli | delivered | — |
 
-- **Files** (`projects/kyle_firstflight/v2-sheets/`): 
-- **Notes**: Second version, built on the model-sheet pipeline. Every shot references the view that matches its framing rather than a frontal master; the two shots that carry a pilot use the full pilot lock (trigger token, stated age, the cockpit as scale referent) that v1 replaced with 'a small figure'; the craft and the boy together are a combined master rather than re-described per shot.
+- **Files** (`projects/kyle_firstflight/v2-sheets/`): `final/kyle_firstflight_v2_3840x2160.mp4`, `final/kyle_firstflight_v2_1920x1080.mp4`
+- **Notes**: Rebuilt on the model-sheet pipeline after v1 shipped with an aircraft that changed shape and size between shots and an adult in the cockpit. 60.04 s, 3840x2160 HEVC 25 fps, -19.2 LUFS. Masters: kyle (person, 8 views + 3 expressions), skiff and droid (object, 8 views each), yard and dunes as single plates. Combos: kyle_with_droid, kyle_in_skiff, flight_crew (chained), kyle_fixing_skiff. The decisive change was mode per shot: a shot built on a combo runs as a single-image EDIT with the combo as input, never as a diptych -- as diptychs s3, s6 and s7 failed every candidate. Stills were picked by `align`, which ranks a shot's own candidates by sharpness first (proof the subject is drawn) then palette distance to the master (identity). s7's clip had to be re-rendered: its video prompt moved the camera below a side-on still and the hull turned into a wheeled machine over 249 frames.
 
 **Still**
 

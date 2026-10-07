@@ -4,12 +4,12 @@
   "version": "v2-sheets",
   "variant": "lora-cli",
   "title": "Kyle \u2014 First Flight",
-  "date": "2026-10-05",
+  "date": "2026-10-07",
   "theme": "realistic",
   "dt_project": "kyle-firstflight",
-  "status": "masters",
+  "status": "delivered",
   "source": "original film in the desert science-fiction tradition; no external source",
-  "notes": "Second version, built on the model-sheet pipeline. Every shot references the view that matches its framing rather than a frontal master; the two shots that carry a pilot use the full pilot lock (trigger token, stated age, the cockpit as scale referent) that v1 replaced with 'a small figure'; the craft and the boy together are a combined master rather than re-described per shot.",
+  "notes": "Rebuilt on the model-sheet pipeline after v1 shipped with an aircraft that changed shape and size between shots and an adult in the cockpit. 60.04 s, 3840x2160 HEVC 25 fps, -19.2 LUFS. Masters: kyle (person, 8 views + 3 expressions), skiff and droid (object, 8 views each), yard and dunes as single plates. Combos: kyle_with_droid, kyle_in_skiff, flight_crew (chained), kyle_fixing_skiff. The decisive change was mode per shot: a shot built on a combo runs as a single-image EDIT with the combo as input, never as a diptych -- as diptychs s3, s6 and s7 failed every candidate. Stills were picked by `align`, which ranks a shot's own candidates by sharpness first (proof the subject is drawn) then palette distance to the master (identity). s7's clip had to be re-rendered: its video prompt moved the camera below a side-on still and the hull turned into a wheeled machine over 249 frames.",
   "still": {
     "model": "flux_2_klein_9b_i8x.ckpt",
     "size": "1024x576",
@@ -408,5 +408,8 @@
       }
     }
   },
-  "files": []
+  "files": [
+    "final/kyle_firstflight_v2_3840x2160.mp4",
+    "final/kyle_firstflight_v2_1920x1080.mp4"
+  ]
 }

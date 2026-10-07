@@ -213,8 +213,8 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <tr>
 <td style="text-align: right;">10</td>
 <td><a href="#kyle_firstflight">Kyle — First Flight</a></td>
-<td>2026-10-05</td>
-<td>masters</td>
+<td>2026-10-07</td>
+<td>delivered</td>
 <td>flux_2_klein_9b_i8x.ckpt 1024x576</td>
 <td>ltx_2.3_22b_distilled_1.1_q8p.ckpt 10 min</td>
 <td>best_adventure_ever.mp3</td>
@@ -2103,7 +2103,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </blockquote>
 <h2 id="kyle_firstflight">Kyle — First Flight</h2>
 <ul>
-<li><strong>Date</strong>: 2026-10-05 · <strong>Status</strong>: masters · <strong>Version</strong>: <code>v2-sheets</code> · <strong>Draw Things project</strong>: <code>kyle-firstflight</code></li>
+<li><strong>Date</strong>: 2026-10-07 · <strong>Status</strong>: delivered · <strong>Version</strong>: <code>v2-sheets</code> · <strong>Draw Things project</strong>: <code>kyle-firstflight</code></li>
 <li><strong>This version</strong>: lora-cli</li>
 </ul>
 <p><strong>Versions</strong></p>
@@ -2126,14 +2126,14 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <tr>
 <td><code>v2-sheets</code></td>
 <td>lora-cli</td>
-<td>masters</td>
+<td>delivered</td>
 <td>—</td>
 </tr>
 </tbody>
 </table></div>
 <ul>
-<li><strong>Files</strong> (<code>projects/kyle_firstflight/v2-sheets/</code>): </li>
-<li><strong>Notes</strong>: Second version, built on the model-sheet pipeline. Every shot references the view that matches its framing rather than a frontal master; the two shots that carry a pilot use the full pilot lock (trigger token, stated age, the cockpit as scale referent) that v1 replaced with 'a small figure'; the craft and the boy together are a combined master rather than re-described per shot.</li>
+<li><strong>Files</strong> (<code>projects/kyle_firstflight/v2-sheets/</code>): <code>final/kyle_firstflight_v2_3840x2160.mp4</code>, <code>final/kyle_firstflight_v2_1920x1080.mp4</code></li>
+<li><strong>Notes</strong>: Rebuilt on the model-sheet pipeline after v1 shipped with an aircraft that changed shape and size between shots and an adult in the cockpit. 60.04 s, 3840x2160 HEVC 25 fps, -19.2 LUFS. Masters: kyle (person, 8 views + 3 expressions), skiff and droid (object, 8 views each), yard and dunes as single plates. Combos: kyle_with_droid, kyle_in_skiff, flight_crew (chained), kyle_fixing_skiff. The decisive change was mode per shot: a shot built on a combo runs as a single-image EDIT with the combo as input, never as a diptych -- as diptychs s3, s6 and s7 failed every candidate. Stills were picked by <code>align</code>, which ranks a shot's own candidates by sharpness first (proof the subject is drawn) then palette distance to the master (identity). s7's clip had to be re-rendered: its video prompt moved the camera below a side-on still and the hull turned into a wheeled machine over 249 frames.</li>
 </ul>
 <p><strong>Still</strong></p>
 <div class="tw"><table>
