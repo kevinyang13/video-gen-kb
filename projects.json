@@ -2892,7 +2892,19 @@
               8.5
             ]
           }
-        ]
+        ],
+        "combos": {
+          "kyle_in_skiff": {
+            "ref": "kyle",
+            "input": "skiff",
+            "prompt": "kyle_kx boy, a small nine-year-old boy with child proportions, this exact face, sitting in the open cockpit of the same home-built desert skiff, exactly the same craft and exactly the same boy, no change to either. He is unmistakably a small child in a machine built for someone far bigger: his head and shoulders barely clear the cowling. A full view of boy and craft together against a plain pale grey studio backdrop, soft even studio lighting."
+          },
+          "kyle_with_droid": {
+            "ref": "kyle",
+            "input": "droid",
+            "prompt": "kyle_kx boy, a small nine-year-old boy with child proportions, this exact face, kneeling beside the same small battered repair droid, exactly the same boy and exactly the same droid, no change to either, the droid about knee height beside him. Both fully in frame against a plain pale grey studio backdrop, soft even studio lighting."
+          }
+        }
       },
       "files": []
     },

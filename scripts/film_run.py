@@ -9,6 +9,8 @@ holding the run-spec (handy for tests).
   scripts/film_run.py PROJECT lint [ids]        prompt defects readable without rendering
   scripts/film_run.py PROJECT masters [names]    seed candidates for each master -> seed/<name>_c<seed>.png
   scripts/film_run.py PROJECT views [names]      picked master -> turnaround + expressions model sheet
+  scripts/film_run.py PROJECT combos [names]     combined masters (character + vehicle / weapon / mount)
+  scripts/film_run.py PROJECT eval [names]       consistency: views vs hero, stills vs their ref
   scripts/film_run.py PROJECT stills [ids]       seed candidates for shots with no picked still -> seed/<id>_c<seed>.png
   scripts/film_run.py PROJECT sheet [ids]        label candidates -> seed/<id>_sheet.png (review before picking)
   scripts/film_run.py PROJECT pick ID SEED       candidate -> stills/<id>.png
@@ -536,6 +538,132 @@ def cmd_views(f, args):
     return rc
 
 
+
+def image_palette(path, bins=4):
+    """A normalised 3-D RGB histogram: the subject's materials and colours, independent of pose.
+
+    A turnaround legitimately changes silhouette between views, so shape cannot be compared across them.
+    Palette can: the droid's rust, its blue and its white are the same from every angle, and a view that
+    drifted off-design shows up as a palette that no longer matches the hero view.
+    """
+    try:
+        import numpy as np
+        from PIL import Image
+    except ImportError:
+        return None
+    a = np.asarray(Image.open(path).convert("RGB").resize((160, 160)), dtype=float) / 255.0
+    idx = np.clip((a * bins).astype(int), 0, bins - 1)
+    flat = idx[..., 0] * bins * bins + idx[..., 1] * bins + idx[..., 2]
+    h = np.bincount(flat.ravel(), minlength=bins ** 3).astype(float)
+    return h / max(h.sum(), 1.0)
+
+
+def palette_distance(p, q):
+    """Chi-square distance between two palettes; 0 is identical, ~1 is unrelated."""
+    import numpy as np
+    p, q = np.asarray(p), np.asarray(q)
+    d = ((p - q) ** 2 / (p + q + 1e-9)).sum()
+    return float(min(d, 2.0) / 2.0)
+
+
+def cmd_eval(f, args):
+    """Score consistency: each master's views against its hero, and each picked still against its ref.
+
+    Catches the failure that produced a different craft in every shot -- a view or a still whose palette
+    has drifted away from the master it is supposed to match.
+    """
+    try:
+        import numpy as np  # noqa: F401
+    except ImportError:
+        die("eval needs numpy (pip3 install numpy)")
+    masters = f.get("masters", {})
+    names = [a for a in args if not a.startswith("--")]
+    # Calibrated on the kyle_firstflight droid: a consistent turnaround sits at 0.006-0.010, a different
+    # object on the same backdrop at 0.216, an unrelated image at 0.753. 0.06 is well clear of noise.
+    thresh = float(flag("--thresh", 0.06))
+    worst = 0.0
+
+    print("masters — views compared pairwise (outlier = the view that wandered):")
+    for name, rel in masters.items():
+        if names and name not in names:
+            continue
+        hero = d(f, rel)
+        if not hero.exists():
+            continue
+        views = sorted(d(f, "seed").glob(f"{name}_*.png"))
+        views = [v for v in views if not re.search(r"_(c\d+|sheet|model)$", v.stem)]
+        if len(views) < 2:
+            print(f"  {name}: no views yet -- run `views {name}`")
+            continue
+        # Views are compared against EACH OTHER, not against the hero: the hero is often rendered in a
+        # location while the views share a studio backdrop, and that background difference swamps any
+        # real design drift. Pairwise among views holds the backdrop constant, so what is left is the
+        # subject. The outlier is the view that wandered.
+        pal = {v: image_palette(v) for v in views}
+        means = {v: sum(palette_distance(pal[v], pal[w]) for w in views if w is not v) / (len(views) - 1)
+                 for v in views}
+        for v in views:
+            worst = max(worst, means[v])
+            mark = "  OUTLIER" if means[v] > thresh else ""
+            print(f"  {name:10} {v.stem.replace(name + '_', ''):16} {means[v]:.3f}{mark}")
+
+    # A still is a scene and its master is a studio plate, so part of any distance here is background
+    # rather than drift. Treat it as a ranking, not a verdict: the shot furthest from its own reference
+    # is the one to look at first.
+    print("stills — each picked still against the master it references (ranking, not a verdict):")
+    rows = []
+    for s in f["shots"]:
+        still = d(f, f"stills/{s['id']}.png")
+        ref = s.get("still", {}).get("ref") or s.get("qc_ref")
+        if not still.exists() or ref not in masters:
+            continue
+        rp = d(f, masters[ref])
+        if not rp.exists():
+            continue
+        rows.append((palette_distance(image_palette(rp), image_palette(still)), s["id"], ref))
+    for dist, sid, ref in sorted(rows, reverse=True):
+        print(f"  {sid:10} vs {ref:12} {dist:.3f}")
+    if rows:
+        print(f"  (worst first. A scene is not a studio plate, so part of every number here is "
+              f"background -- use it to choose what to look at, not to fail a shot.)")
+    return 0
+
+
+def cmd_combos(f, args):
+    """Render combined masters: the character in the vehicle, holding the weapon, on the mount.
+
+    A shot showing two locked things together has to keep both, and neither single master shows the
+    pair. The diptych carries one reference on the left and the scene on the right, so a combo is
+    rendered with the character as REF and the object as IN, then becomes a reference in its own right.
+
+    Spec block:  "combos": {"kyle_in_skiff": {"ref": "kyle", "input": "skiff", "prompt": "..."}}
+    """
+    combos = f.get("combos") or {}
+    if not combos:
+        print("no run-spec.combos block")
+        return 0
+    names = [a for a in args if not a.startswith("--")] or list(combos)
+    c = still_cfg(f, {})
+    trig = trigger_of(f)
+    rc = 0
+    for name in names:
+        spec = combos.get(name) or die(f"no combo '{name}'")
+        ref = resolve_ref(f, spec.get("ref"))
+        inp = resolve_ref(f, spec.get("input")) if spec.get("input") else None
+        cfg = dict(c["config"])
+        if trig and trig not in (spec.get("prompt") or "").lower():
+            cfg.pop("loras", None)
+        env = {"MODEL": c["model"], "STEPS": c["steps"], "CFG": c["cfg"], "STRENGTH": c["strength"],
+               "CONFIG_JSON": json.dumps(cfg, separators=(",", ":"))}
+        pf = prompt_path(f, f"combo_{name}", spec["prompt"])
+        for seed in c["seeds"]:
+            out = d(f, f"seed/{name}_c{seed}.png")
+            if out.exists() and not FORCE:
+                continue
+            rc |= run([S / "dt_diptych.sh", ref or "-", inp or "-", pf, out, seed, *c["size"]], env)
+    return rc
+
+
 def cmd_sheet(f, args):
     """Tile a shot's candidates into one labelled sheet, so a pick is by seed number, not by position.
 
@@ -700,7 +828,7 @@ def cmd_finish(f, _):
     return 0
 
 
-CMDS = {"check": cmd_check, "status": cmd_status, "lint": cmd_lint, "masters": cmd_masters, "views": cmd_views, "stills": cmd_stills, "sheet": cmd_sheet, "pick": cmd_pick,
+CMDS = {"check": cmd_check, "status": cmd_status, "lint": cmd_lint, "masters": cmd_masters, "views": cmd_views, "combos": cmd_combos, "eval": cmd_eval, "stills": cmd_stills, "sheet": cmd_sheet, "pick": cmd_pick,
         "clips": cmd_clips, "qc": cmd_qc, "finish": cmd_finish}
 
 if __name__ == "__main__":

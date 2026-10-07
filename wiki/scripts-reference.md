@@ -34,7 +34,7 @@ Draw Things exports are **ProRes 422 `.mov`** (video) — 8-bit 4:2:2, 16 fps fo
 | 9 Upscale | `upscale_4k.sh IN [out] [model]` | `film.upscale` (model, size, fit, bitrate), `assemble.clip_audio` → `KEEP_AUDIO` | model/scale exists, even W/H, frame count out = in |
 | 9 Assemble + music | `assemble_film.sh OUT clip…` | `film.assemble` (fps, xfade, clip_audio, bitrate), `film.music` (file, start / `tail`, vol, fades) | clips/music exist, letterbox landscape-only, music-too-short note, expected vs actual length |
 | 9 Deliver | inside `film_run.py finish` | `film.deliver[]` sizes and bitrates | — |
-| all | **`film_run.py PROJECT check·lint·status·masters·views·stills·sheet·pick·clips·qc·finish`** | the whole run-spec (or a standalone `.json` run-spec file) | run-spec sanity: sizes, frame rules, paths, refs, trims, planned length, faceless shots with no containment clause, missing LoRA trigger, missing age cue, objects with no reference image |
+| all | **`film_run.py PROJECT check·lint·status·masters·views·combos·eval·stills·sheet·pick·clips·qc·finish`** | the whole run-spec (or a standalone `.json` run-spec file) | run-spec sanity: sizes, frame rules, paths, refs, trims, planned length, faceless shots with no containment clause, missing LoRA trigger, missing age cue, objects with no reference image |
 | loop posts | `finish_clip.sh IN [music] [out]` | env: W, H, LOOPS, SEAM, FPS, MUSIC_VOL | clip long enough for the seam |
 
 Every script: `set -euo pipefail`, a clear `die` message, `ffmpeg -nostdin` everywhere (ffmpeg inside a `while read` loop eats the loop's input — the Kyle overnight bug), and `DRY_RUN=1` on the two CLI wrappers.

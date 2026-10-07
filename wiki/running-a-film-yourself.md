@@ -49,6 +49,57 @@ python3 scripts/film_run.py PROJECT finish    # trim -> 4K upscale -> crossfade 
 Put `caffeinate -dimsu` in front of `stills`, `clips` and `finish`, and run them from a terminal you
 leave open. A render launched from an agent's shell does not survive; see [[log]] 2026-10-03.
 
+## The full sequence
+
+```bash
+scripts/film_run.py P check      # run-spec sanity + identity rules; FAILS on a missing trigger or age
+scripts/film_run.py P lint       # prompt defects, before a GPU-second is spent
+scripts/film_run.py P masters    # 5 candidates per master
+scripts/film_run.py P pick kyle 3        # hero view for each master
+scripts/film_run.py P views      # turnaround + expression heads -> seed/<name>_model.png
+scripts/film_run.py P combos     # character + vehicle / weapon / mount, as their own references
+scripts/film_run.py P eval       # consistency: views pairwise, stills ranked against their reference
+scripts/film_run.py P stills     # 5 candidates per shot
+scripts/film_run.py P sheet      # labelled sheet with sharpness and background numbers
+scripts/film_run.py P pick s1 4          # one still per shot
+scripts/film_run.py P clips      # 249-frame takes
+scripts/film_run.py P qc         # reference + 6 frames per clip, flags end fades
+scripts/film_run.py P finish     # trim -> 4K -> crossfade + music -> delivery copies
+```
+
+Gates worth not skipping: `lint` before `masters`, `eval` after `views`, `sheet` before `pick`, `qc`
+before `finish`.
+
+## Consistency eval
+
+```
+masters — views compared pairwise (outlier = the view that wandered)
+  droid   34     0.006
+  droid   back   0.008
+  droid   side   0.007
+```
+
+Views are compared against **each other**, not against the hero: the hero is usually rendered in a
+location while the views share a studio backdrop, and that background difference swamps real drift.
+Calibrated on the `kyle_firstflight` droid — a consistent turnaround sits at 0.006–0.010, a different
+object on the same backdrop at 0.216, an unrelated image at 0.753. The default threshold is 0.06.
+
+The stills section is a **ranking, not a verdict**. A scene is not a studio plate, so part of every
+number there is background. Use it to decide what to look at first.
+
+## Combined masters
+
+A shot showing two locked things together — the boy in the craft, the hand on the weapon — has to keep
+both, and neither single master shows the pair. `combos` renders them with the character as the diptych
+reference and the object as the input, and the result becomes a reference in its own right:
+
+```json
+"combos": {
+  "kyle_in_skiff": {"ref": "kyle", "input": "skiff",
+                    "prompt": "... exactly the same craft and exactly the same boy, no change to either ..."}
+}
+```
+
 ## The three judgement calls
 
 **Prompts.** `projects/<id>/<version>/spec.json`. Copy a delivered film's spec and replace the text —

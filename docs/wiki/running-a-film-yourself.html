@@ -124,6 +124,44 @@ python3 scripts/film_run.py PROJECT finish    # trim -&gt; 4K upscale -&gt; cros
 <code>status</code> prints one line per shot at any time.</p>
 <p>Put <code>caffeinate -dimsu</code> in front of <code>stills</code>, <code>clips</code> and <code>finish</code>, and run them from a terminal you
 leave open. A render launched from an agent's shell does not survive; see <a href="log.html">log</a> 2026-10-03.</p>
+<h2>The full sequence</h2>
+<pre><code class="language-bash">scripts/film_run.py P check      # run-spec sanity + identity rules; FAILS on a missing trigger or age
+scripts/film_run.py P lint       # prompt defects, before a GPU-second is spent
+scripts/film_run.py P masters    # 5 candidates per master
+scripts/film_run.py P pick kyle 3        # hero view for each master
+scripts/film_run.py P views      # turnaround + expression heads -&gt; seed/&lt;name&gt;_model.png
+scripts/film_run.py P combos     # character + vehicle / weapon / mount, as their own references
+scripts/film_run.py P eval       # consistency: views pairwise, stills ranked against their reference
+scripts/film_run.py P stills     # 5 candidates per shot
+scripts/film_run.py P sheet      # labelled sheet with sharpness and background numbers
+scripts/film_run.py P pick s1 4          # one still per shot
+scripts/film_run.py P clips      # 249-frame takes
+scripts/film_run.py P qc         # reference + 6 frames per clip, flags end fades
+scripts/film_run.py P finish     # trim -&gt; 4K -&gt; crossfade + music -&gt; delivery copies
+</code></pre>
+<p>Gates worth not skipping: <code>lint</code> before <code>masters</code>, <code>eval</code> after <code>views</code>, <code>sheet</code> before <code>pick</code>, <code>qc</code>
+before <code>finish</code>.</p>
+<h2>Consistency eval</h2>
+<pre><code>masters — views compared pairwise (outlier = the view that wandered)
+  droid   34     0.006
+  droid   back   0.008
+  droid   side   0.007
+</code></pre>
+<p>Views are compared against <strong>each other</strong>, not against the hero: the hero is usually rendered in a
+location while the views share a studio backdrop, and that background difference swamps real drift.
+Calibrated on the <code>kyle_firstflight</code> droid — a consistent turnaround sits at 0.006–0.010, a different
+object on the same backdrop at 0.216, an unrelated image at 0.753. The default threshold is 0.06.</p>
+<p>The stills section is a <strong>ranking, not a verdict</strong>. A scene is not a studio plate, so part of every
+number there is background. Use it to decide what to look at first.</p>
+<h2>Combined masters</h2>
+<p>A shot showing two locked things together — the boy in the craft, the hand on the weapon — has to keep
+both, and neither single master shows the pair. <code>combos</code> renders them with the character as the diptych
+reference and the object as the input, and the result becomes a reference in its own right:</p>
+<pre><code class="language-json">&quot;combos&quot;: {
+  &quot;kyle_in_skiff&quot;: {&quot;ref&quot;: &quot;kyle&quot;, &quot;input&quot;: &quot;skiff&quot;,
+                    &quot;prompt&quot;: &quot;... exactly the same craft and exactly the same boy, no change to either ...&quot;}
+}
+</code></pre>
 <h2>The three judgement calls</h2>
 <p><strong>Prompts.</strong> <code>projects/&lt;id&gt;/&lt;version&gt;/spec.json</code>. Copy a delivered film's spec and replace the text —
 <code>projects/lindsey_sparky</code> is the most current. <code>scenes.locks</code> holds the subject, wardrobe, room and style
