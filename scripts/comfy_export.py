@@ -189,7 +189,7 @@ def still_note(spec, shots):
         f"CFG {st.get('cfg')} | shift {st.get('shift')} | sampler {st.get('sampler')}",
         "",
         "LoRA weight is PER SHOT. Set it on the LoraLoaderModelOnly node each time.",
-        "Render 5 seeds per shot and pick -- one seed in five is often the only correct one.",
+        "Render 3 seeds per shot and pick -- the prompt lint catches the defects that used to need five.",
         "", "=" * 64, "",
     ]
     for s in shots:

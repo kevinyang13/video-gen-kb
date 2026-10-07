@@ -30,7 +30,7 @@ Key scripts:
 scripts/build_site.py     -- wiki/ + projects/*/plan/ -> docs/
 scripts/build_projects.py -- projects.json -> wiki/projects*.md (run by build_site.py)
 scripts/film_run.py       -- run a film from its run-spec; PROJECT is <id> (newest version) or <id>@<version>
-                             stills = 5 seeds/shot; sheet = labelled candidate sheet to review before picking
+                             stills = 3 seeds/shot; sheet = labelled candidate sheet to review before picking
 scripts/dt_diptych.sh     -- klein still: diptych / single edit / text-to-image
 scripts/seed_sheet.sh     -- one master -> turnaround sheet (front/34/profile/back, or custom views)
                              --dataset MASTER OUT_DIR: 30 captioned LoRA training images

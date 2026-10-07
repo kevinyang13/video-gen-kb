@@ -113,7 +113,7 @@ nothing to copy for a profile or a back, so it invents one — which is why the 
 `kyle_firstflight` is a different craft in every shot that was not handed `skiff.png`.
 
 ```bash
-scripts/film_run.py PROJECT masters        # 5 candidates per master
+scripts/film_run.py PROJECT masters        # 3 candidates per master
 scripts/film_run.py PROJECT pick kyle 3    # choose the hero view
 scripts/film_run.py PROJECT views          # -> turnaround + expressions model sheet
 ```

@@ -797,6 +797,12 @@ because the lock says "dune <em>faces</em>", and a character described under <co
 master name reads as neither. A heuristic wrong a fifth of the time is useful in an error message and
 unacceptable as a silent default. It now appears only as a suggestion inside the failure text.</p>
 <p>The general rule: <strong>a default that silently selects the wrong template is worse than no default.</strong></p>
+<h2>2026-10-06 — candidates per shot: 5 -&gt; 3</h2>
+<p><code>film_run.py</code> <code>DEFAULT_STILL["seeds"]</code> is now <code>[1, 2, 3]</code>, down from <code>[1, 2, 3, 4, 5]</code>. Reverses the
+"five, not three" finding in <a href="still-geometry-and-review.html">still geometry and review</a> §3, which assumed defects could only be found by
+rolling more seeds; <code>lint</code> and <code>check</code> now catch them in the prompt text before rendering. Updated
+<a href="idea-to-video-blueprint.html">idea to video blueprint</a>, <a href="running-a-film-yourself.html">running a film yourself</a>, <a href="shot-locks.html">shot locks</a>, <a href="scripts-reference.html">scripts reference</a>, <code>CLAUDE.md</code>,
+and <code>projects/kyle_firstflight/v2-sheets/spec.json</code>.</p>
   
 </div>
 <footer>video-gen-kb · built 2026-10-06 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>

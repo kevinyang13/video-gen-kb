@@ -3,7 +3,7 @@
   "id": "kyle_firstflight",
   "version": "v2-sheets",
   "variant": "lora-cli",
-  "title": "Kyle — First Flight",
+  "title": "Kyle \u2014 First Flight",
   "date": "2026-10-05",
   "theme": "realistic",
   "dt_project": "kyle-firstflight",
@@ -21,9 +21,7 @@
     "seeds": [
       1,
       2,
-      3,
-      4,
-      5
+      3
     ],
     "control": "one master per shot",
     "prompt": "see scenes"
@@ -130,9 +128,7 @@
       "seeds": [
         1,
         2,
-        3,
-        4,
-        5
+        3
       ],
       "strength": 1.0
     },
@@ -371,12 +367,14 @@
       "kyle_in_skiff": {
         "ref": "kyle",
         "input": "skiff",
-        "prompt": "kyle_kx boy, a small nine-year-old boy with child proportions, this exact face, sitting in the open cockpit of the same home-built desert skiff, exactly the same craft and exactly the same boy, no change to either. His head and shoulders barely clear the cowling and the cockpit looks half empty around him. The whole craft and the boy together inside the frame. standing against a plain pale grey studio backdrop, soft even studio lighting from the front, no scenery and no props beyond those described. Cinematic film still from a live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scuffed painted metal, warm low sun, slight haze, shallow depth of field, visible film grain, sand and rust palette against a huge pale sky. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark."
+        "strength": 1.0,
+        "prompt": "Two images side by side. Keep the left image completely unchanged. Re-render the right image so that the boy from the left image is now sitting down inside the open cockpit of the craft, piloting it, with his hands on the controls and only his head, shoulders and arms showing above the cowling. He has exactly the same face, the same hair and the same clothing as the boy on the left. The craft itself stays exactly the same machine with the same hull, the same patched panels, the same fins and the same nacelles, unchanged except for the boy now seated in it. He is a small nine-year-old boy with child proportions and the cockpit is clearly built for someone far bigger than him."
       },
       "kyle_with_droid": {
         "ref": "kyle",
         "input": "droid",
-        "prompt": "kyle_kx boy, a small nine-year-old boy with child proportions, this exact face, kneeling beside the same small battered repair droid, exactly the same boy and exactly the same droid, the droid about knee height beside him, both fully inside the frame. standing against a plain pale grey studio backdrop, soft even studio lighting from the front, no scenery and no props beyond those described. Cinematic film still from a live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scuffed painted metal, warm low sun, slight haze, shallow depth of field, visible film grain, sand and rust palette against a huge pale sky. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark."
+        "strength": 1.0,
+        "prompt": "Two images side by side. Keep the left image completely unchanged. Re-render the right image so that the boy from the left image is kneeling on the ground beside the droid with one hand resting on it, both of them fully in frame. He has exactly the same face, the same hair and the same clothing as the boy on the left. The droid stays exactly the same machine with the same dome, the same amber lens, the same blue and white panels and the same tracked feet, unchanged except for the boy now kneeling beside it. He is a small nine-year-old boy with child proportions and the droid comes up to about his knee."
       },
       "flight_crew": {
         "ref": "kyle_in_skiff",

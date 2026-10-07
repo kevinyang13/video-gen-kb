@@ -1054,3 +1054,10 @@ master name reads as neither. A heuristic wrong a fifth of the time is useful in
 unacceptable as a silent default. It now appears only as a suggestion inside the failure text.
 
 The general rule: **a default that silently selects the wrong template is worse than no default.**
+
+## 2026-10-06 — candidates per shot: 5 -> 3
+`film_run.py` `DEFAULT_STILL["seeds"]` is now `[1, 2, 3]`, down from `[1, 2, 3, 4, 5]`. Reverses the
+"five, not three" finding in [[still-geometry-and-review]] §3, which assumed defects could only be found by
+rolling more seeds; `lint` and `check` now catch them in the prompt text before rendering. Updated
+[[idea-to-video-blueprint]], [[running-a-film-yourself]], [[shot-locks]], [[scripts-reference]], `CLAUDE.md`,
+and `projects/kyle_firstflight/v2-sheets/spec.json`.

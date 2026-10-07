@@ -300,7 +300,7 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 <p>Reads every prompt and reports what will fail without spending a GPU-second: contradictions, authored
 negations, unplaced atmosphere in a shot that needs a visible subject, motion with nothing in the still
 to attach to, and motion acting on more subjects than the still contains. Fix these before Phase 4 —
-five candidates and a contact sheet improve <em>picking</em>, and picking is not prompting.</p>
+candidates and a contact sheet improve <em>picking</em>, and picking is not prompting.</p>
 <h2>Phase 3 — Preflight (Claude, 2 min, just before go)</h2>
 <div class="tw"><table>
 <thead>
@@ -337,12 +337,12 @@ five candidates and a contact sheet improve <em>picking</em>, and picking is not
 </tbody>
 </table></div>
 <h2>Phase 4 — Seeds: a master for everything that must stay the same</h2>
-<p><strong>Masters are model sheets, not single images.</strong> <code>masters</code> renders five candidates, <code>pick</code> chooses the
+<p><strong>Masters are model sheets, not single images.</strong> <code>masters</code> renders three candidates, <code>pick</code> chooses the
 hero view, and <code>views</code> turns it into a turnaround with expression heads on a plain backdrop. Each shot
 then references the view matching its framing. A frontal master referenced by a profile shot gives the
 model nothing to copy, so it invents one — see <a href="shot-locks.html">shot locks</a>.</p>
 <p><strong>Masters get candidates too: <code>film_run.py PROJECT masters</code>.</strong> A master is the most load-bearing image in
-a film — every shot that references it inherits whatever that one render produced — so it gets five seeds
+a film — every shot that references it inherits whatever that one render produced — so it gets three seeds
 and a labelled sheet exactly like a shot does, then <code>pick &lt;name&gt; &lt;seed&gt;</code>. Making masters one seed at a
 time by hand is how <code>kyle_saltflats</code> needed four attempts at its racer and <code>kyle_firstflight</code> shipped a
 squinting Kyle.</p>
@@ -547,7 +547,7 @@ ffmpeg -i out_master.mp4 -vf scale=1080:1920 -c:v hevc_videotoolbox -b:v 12M -ta
 </ul>
 <hr />
 <h2>Pick rubric (stills and masters)</h2>
-<p><strong>Five candidates per shot</strong> (<code>film_run.py</code> default), reviewed from a
+<p><strong>Three candidates per shot</strong> (<code>film_run.py</code> default), reviewed from a
 labelled sheet (<code>film_run.py PROJECT sheet</code>) and decided at full size. Score each candidate against the
 reference and reject on any hard fail. <a href="still-geometry-and-review.html">still geometry and review</a> adds the structure, destination, age and
 scale, foreground and prop checks, and the prompt patterns that stop those failures reaching a candidate at all.</p>

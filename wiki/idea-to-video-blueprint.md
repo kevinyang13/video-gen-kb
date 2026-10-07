@@ -128,7 +128,7 @@ scripts/film_run.py PROJECT lint
 Reads every prompt and reports what will fail without spending a GPU-second: contradictions, authored
 negations, unplaced atmosphere in a shot that needs a visible subject, motion with nothing in the still
 to attach to, and motion acting on more subjects than the still contains. Fix these before Phase 4 —
-five candidates and a contact sheet improve *picking*, and picking is not prompting.
+candidates and a contact sheet improve *picking*, and picking is not prompting.
 
 ## Phase 3 — Preflight (Claude, 2 min, just before go)
 
@@ -143,13 +143,13 @@ five candidates and a contact sheet improve *picking*, and picking is not prompt
 
 ## Phase 4 — Seeds: a master for everything that must stay the same
 
-**Masters are model sheets, not single images.** `masters` renders five candidates, `pick` chooses the
+**Masters are model sheets, not single images.** `masters` renders three candidates, `pick` chooses the
 hero view, and `views` turns it into a turnaround with expression heads on a plain backdrop. Each shot
 then references the view matching its framing. A frontal master referenced by a profile shot gives the
 model nothing to copy, so it invents one — see [[shot-locks]].
 
 **Masters get candidates too: `film_run.py PROJECT masters`.** A master is the most load-bearing image in
-a film — every shot that references it inherits whatever that one render produced — so it gets five seeds
+a film — every shot that references it inherits whatever that one render produced — so it gets three seeds
 and a labelled sheet exactly like a shot does, then `pick <name> <seed>`. Making masters one seed at a
 time by hand is how `kyle_saltflats` needed four attempts at its racer and `kyle_firstflight` shipped a
 squinting Kyle.
@@ -345,7 +345,7 @@ ffmpeg -i out_master.mp4 -vf scale=1080:1920 -c:v hevc_videotoolbox -b:v 12M -ta
 
 ## Pick rubric (stills and masters)
 
-**Five candidates per shot** (`film_run.py` default), reviewed from a
+**Three candidates per shot** (`film_run.py` default), reviewed from a
 labelled sheet (`film_run.py PROJECT sheet`) and decided at full size. Score each candidate against the
 reference and reject on any hard fail. [[still-geometry-and-review]] adds the structure, destination, age and
 scale, foreground and prop checks, and the prompt patterns that stop those failures reaching a candidate at all.

@@ -67,7 +67,7 @@ Still mode per shot: `ref` + `input` = diptych; `input` only = single edit; neit
 ```bash
 scripts/preflight.sh --fix
 scripts/film_run.py kyle_rescue check          # run-spec sanity + planned length
-scripts/film_run.py kyle_rescue stills         # 5 seeds per shot → seed/<id>_c<seed>.png   (skips shots with a picked still)
+scripts/film_run.py kyle_rescue stills         # 3 seeds per shot → seed/<id>_c<seed>.png   (skips shots with a picked still)
 scripts/film_run.py kyle_rescue sheet s6       # labelled contact sheet → seed/s6_sheet.png (review before picking)
 scripts/film_run.py kyle_rescue pick s2 4      # → stills/s2.png  (judge picks)
 scripts/film_run.py kyle_rescue clips          # clips/<id>_v1.mov (skips existing);  --v 2 --seed 2 s2 for a redo

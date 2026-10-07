@@ -22,7 +22,7 @@ Global flags: --dry-run (print commands), --force (redo existing outputs).
 Run-spec (all paths relative to run-spec.dir; every block optional except dir, size, shots):
   "run-spec": {
     "dir": "projects/<id>/<version>", "name": "<film file stem>", "size": [576, 1024],
-    "still":   {"model": ..., "steps": 4, "cfg": 1, "config": {...}, "seeds": [1, 2, 3, 4, 5], "strength": 1.0},
+    "still":   {"model": ..., "steps": 4, "cfg": 1, "config": {...}, "seeds": [1, 2, 3], "strength": 1.0},
     "clip":    {"model": ..., "frames": 249, "steps": 8, "cfg": 1, "config": {...}, "seed": 1, "video_format": "prores422hq"},
     "masters": {"kyle": "seed/kyle_front.png"},             # names usable as a shot's still.ref and qc_ref
     "upscale": {"model": "realesrgan-x4plus", "size": [2160, 3840], "fit": "crop", "bitrate": "40M"},
@@ -46,7 +46,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 S = ROOT / "scripts"
 DEFAULT_STILL = {"model": "flux_2_klein_9b_i8x.ckpt", "steps": 4, "cfg": 1, "config": {"shift": 3.0, "sampler": 16},
-                 "seeds": [1, 2, 3, 4, 5], "strength": 1.0}
+                 "seeds": [1, 2, 3], "strength": 1.0}
 DEFAULT_CLIP = {"model": "ltx_2.3_22b_distilled_1.1_q8p.ckpt", "seed": 1, "video_format": "prores422hq"}
 DRY = "--dry-run" in sys.argv
 FORCE = "--force" in sys.argv
@@ -255,7 +255,7 @@ def object_without_reference(shot, locks, masters):
 
 
 # ---- prompt lint -------------------------------------------------------------------------------
-# Five candidates and a contact sheet improve picking, not prompting. Every failure this repo has
+# Candidates and a contact sheet improve picking, not prompting. Every failure this repo has
 # recorded was visible in the prompt text before a GPU-second was spent: a negation that does not bind,
 # a contradiction the model cannot resolve, a motion instruction with nothing in frame to attach to, or
 # atmosphere with no stated position. See wiki/still-geometry-and-review.md and wiki/shot-locks.md.
@@ -734,12 +734,27 @@ def cmd_combos(f, args):
     rc = 0
     for name in names:
         spec = combos.get(name) or die(f"no combo '{name}'")
+        a = resolve_ref(f, spec.get("ref"))
+        b = resolve_ref(f, spec.get("input")) if spec.get("input") else None
+        # Use dt_diptych's diptych mode as designed: REF on the left carries identity, IN on the right is
+        # the thing being edited, and the right half is kept. The earlier attempt to compose the pair by
+        # hand and run a single-image edit bypassed that and produced two subjects standing side by side.
+        #
+        # The prompt has to be an EDIT INSTRUCTION that names the halves, not a scene description. A
+        # description asks the model to invent a composition from nothing; an instruction tells it what to
+        # do with the pixels it already has. wiki/headless-cli-pipeline.md records the working form:
+        # "Two images side by side ... re-render the right image ... keep the left image unchanged".
         ref = resolve_ref(f, spec.get("ref"))
         inp = resolve_ref(f, spec.get("input")) if spec.get("input") else None
         cfg = dict(c["config"])
         if trig and trig not in (spec.get("prompt") or "").lower():
             cfg.pop("loras", None)
-        env = {"MODEL": c["model"], "STEPS": c["steps"], "CFG": c["cfg"], "STRENGTH": c["strength"],
+        # Strength is the lever for a combo. At 1.0 klein regenerates both subjects from the text and
+        # only the one with a LoRA survives -- the droid came back as a different machine every seed.
+        # Below 1.0 the edit stays closer to the composed reference, so the subject with no adapter
+        # keeps its design. Per-combo so a character-only combo can still run hot.
+        env = {"MODEL": c["model"], "STEPS": c["steps"], "CFG": c["cfg"],
+               "STRENGTH": spec.get("strength", c["strength"]),
                "CONFIG_JSON": json.dumps(cfg, separators=(",", ":"))}
         pf = prompt_path(f, f"combo_{name}", spec["prompt"])
         for seed in c["seeds"]:

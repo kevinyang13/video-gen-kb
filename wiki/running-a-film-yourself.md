@@ -14,7 +14,7 @@ Nothing in the render path needs an LLM. `scripts/film_run.py` reads a project's
 out to `draw-things-cli`, Real-ESRGAN and ffmpeg. Three things need judgement:
 
 1. **Writing the prompts** in `spec.json`.
-2. **Picking one still per shot** from five candidates.
+2. **Picking one still per shot** from three candidates.
 3. **Deciding where each clip stops** being usable.
 
 Everything else is `film_run.py PROJECT <phase>`, and every phase is resumable — it skips outputs that
@@ -34,8 +34,8 @@ which holds GPU memory and roughly halves CLI speed, and starts `caffeinate` for
 
 ```bash
 python3 scripts/film_run.py PROJECT check     # paths, sizes, frame rules, identity, planned length
-python3 scripts/film_run.py PROJECT masters   # 5 candidates per master -> seed/<name>_c<seed>.png
-python3 scripts/film_run.py PROJECT stills    # 5 candidates per shot -> seed/<id>_c<seed>.png
+python3 scripts/film_run.py PROJECT masters   # 3 candidates per master -> seed/<name>_c<seed>.png
+python3 scripts/film_run.py PROJECT stills    # 3 candidates per shot -> seed/<id>_c<seed>.png
 python3 scripts/film_run.py PROJECT sheet     # labelled contact sheet -> seed/<id>_sheet.png
 python3 scripts/film_run.py PROJECT pick s1 4 # candidate -> stills/s1.png   (once per shot)
 python3 scripts/film_run.py PROJECT clips     # 249-frame takes -> clips/<id>_v1.mov
@@ -54,12 +54,12 @@ leave open. A render launched from an agent's shell does not survive; see [[log]
 ```bash
 scripts/film_run.py P check      # run-spec sanity + identity rules; FAILS on a missing trigger or age
 scripts/film_run.py P lint       # prompt defects, before a GPU-second is spent
-scripts/film_run.py P masters    # 5 candidates per master
+scripts/film_run.py P masters    # 3 candidates per master
 scripts/film_run.py P pick kyle 3        # hero view for each master
 scripts/film_run.py P views      # turnaround + expression heads -> seed/<name>_model.png
 scripts/film_run.py P combos     # character + vehicle / weapon / mount, as their own references
 scripts/film_run.py P eval       # consistency: views pairwise, stills ranked against their reference
-scripts/film_run.py P stills     # 5 candidates per shot
+scripts/film_run.py P stills     # 3 candidates per shot
 scripts/film_run.py P sheet      # labelled sheet with sharpness and background numbers
 scripts/film_run.py P pick s1 4          # one still per shot
 scripts/film_run.py P clips      # 249-frame takes
@@ -107,7 +107,7 @@ reference and the object as the input, and the result becomes a reference in its
 paragraphs that get pasted into every shot, so each is written once. Read
 [[still-geometry-and-review]] before writing shot prompts; it is the accumulated list of what breaks.
 
-**Picking stills.** `seed/<id>_sheet.png` tiles five candidates and captions each with its seed number,
+**Picking stills.** `seed/<id>_sheet.png` tiles the candidates and captions each with its seed number,
 so you pick by number rather than position. Each caption also carries **`sharp <n>`**, the variance of a
 Laplacian over the centre crop, with `*` on the sharpest — and **`bg <n>`** when the background is bright
 enough to risk bloom. Both numbers come from real failures: `kyle_firstflight` s5 lost its face to a

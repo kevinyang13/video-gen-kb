@@ -60,11 +60,21 @@ on skin comes from the environment; say "skin damp with fine sea spray, an even 
 was repeatedly elaborated by LTX into a cable slashing across frame. Carry only props the story needs, and drop
 a prop from a shot the moment it starts growing.
 
-## 3. Five seeds, a labelled sheet, and a full-size look
+## 3. Three seeds, a labelled sheet, and a full-size look
 
-**Five candidates per shot, not three.** `film_run.py` now defaults to `seeds: [1, 2, 3, 4, 5]`. Three was
-enough when a still only had to look nice; it is not enough when one of the things being screened for is a
-structural failure that appears in some seeds and not others.
+**Three candidates per shot.** `film_run.py` defaults to `seeds: [1, 2, 3]` (changed 2026-10-06).
+
+This reverses the earlier finding on this page, and the reason it reverses is worth keeping. Five was right
+when the only screen for a structural failure was "roll more dice and hope one seed comes back clean": a
+defect that appeared in some seeds and not others needed enough seeds to find the exception. That is no
+longer how those defects are caught. `film_run.py PROJECT lint` reads the prompt text and fails on the
+contradiction, the unbound negation and the unattached motion instruction *before* a GPU-second is spent, and
+`check` fails hard on a missing master or an undeclared `kind`. Extra seeds were paying for a fix the lint
+now performs, at roughly 40% of the stills-stage render time.
+
+Three still beats one, because a seed can place a hand badly or blow out a background without the prompt
+being wrong. Raise `seeds` per shot in the spec when a shot is genuinely hard — a hand near metal, a face at
+distance — rather than paying for five everywhere.
 
 **Review from a labelled sheet.** `film_run.py PROJECT sheet [ids]` tiles a shot's candidates and captions each
 one with its own `c<seed>`:

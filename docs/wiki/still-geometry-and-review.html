@@ -133,10 +133,18 @@ on skin comes from the environment; say "skin damp with fine sea spray, an even 
 <p><strong>Every prop in the wardrobe lock is a risk.</strong> A coil of rope over the shoulder — invented by me, not asked for —
 was repeatedly elaborated by LTX into a cable slashing across frame. Carry only props the story needs, and drop
 a prop from a shot the moment it starts growing.</p>
-<h2>3. Five seeds, a labelled sheet, and a full-size look</h2>
-<p><strong>Five candidates per shot, not three.</strong> <code>film_run.py</code> now defaults to <code>seeds: [1, 2, 3, 4, 5]</code>. Three was
-enough when a still only had to look nice; it is not enough when one of the things being screened for is a
-structural failure that appears in some seeds and not others.</p>
+<h2>3. Three seeds, a labelled sheet, and a full-size look</h2>
+<p><strong>Three candidates per shot.</strong> <code>film_run.py</code> defaults to <code>seeds: [1, 2, 3]</code> (changed 2026-10-06).</p>
+<p>This reverses the earlier finding on this page, and the reason it reverses is worth keeping. Five was right
+when the only screen for a structural failure was "roll more dice and hope one seed comes back clean": a
+defect that appeared in some seeds and not others needed enough seeds to find the exception. That is no
+longer how those defects are caught. <code>film_run.py PROJECT lint</code> reads the prompt text and fails on the
+contradiction, the unbound negation and the unattached motion instruction <em>before</em> a GPU-second is spent, and
+<code>check</code> fails hard on a missing master or an undeclared <code>kind</code>. Extra seeds were paying for a fix the lint
+now performs, at roughly 40% of the stills-stage render time.</p>
+<p>Three still beats one, because a seed can place a hand badly or blow out a background without the prompt
+being wrong. Raise <code>seeds</code> per shot in the spec when a shot is genuinely hard — a hand near metal, a face at
+distance — rather than paying for five everywhere.</p>
 <p><strong>Review from a labelled sheet.</strong> <code>film_run.py PROJECT sheet [ids]</code> tiles a shot's candidates and captions each
 one with its own <code>c&lt;seed&gt;</code>:</p>
 <pre><code>scripts/film_run.py kyle_lighthouse sheet s6      # -&gt; seed/s6_sheet.png, every tile labelled
