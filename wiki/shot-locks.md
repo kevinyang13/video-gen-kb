@@ -267,3 +267,56 @@ identity the input already has.
 
 `film_run.py check` fails on a diptych whose prompt has no edit-instruction marker, and warns on a
 self-diptych. See also [[still-geometry-and-review]] §12.
+
+## A reference holding two subjects will merge them
+
+`flight_crew` holds a boy and a droid. Used as a diptych reference with no boundary stated, the model
+blended them three different ways across one evening:
+
+- the droid's dome and amber lens rendered **on the boy's head** as a helmet (s6, 1 seed in 3)
+- the boy **replaced by a pilot-sized droid** (s7, 2 seeds in 3)
+- the boy rendered as **a second droid** sitting beside the first (s7, after the craft was fixed)
+
+Naming both subjects is not enough — the prompt that produced the second failure named them both. The
+prompt has to say where one stops and the other starts, and say it as something present rather than
+absent: *the boy is a living human child, his own short dark hair on his head and nothing worn over it,
+his own face and bare skin; the droid is a small machine that keeps its own metal body*.
+
+`film_run.py check` warns when a diptych reference resolves to more than one subject and the prompt
+carries no separation clause.
+
+### A negation finds the nearest literal reading
+
+The first version of that clause said **"a bare uncovered head"**. It rendered a shaved scalp. The
+clause meant "nothing on his head"; the model heard "no hair". This is the negation rule from §2 biting
+in a new place: *say what occupies the space, not what is absent from it* — "his own short dark hair on
+his head and nothing worn over it" locks the same thing and cannot be read as baldness.
+
+### The reference carries the big subject, the LoRA carries the small one
+
+A diptych reference carries a large distinctive subject well: the skiff's hull, panels and nacelles
+survived into every wide shot. It does **not** carry a child who is a few dozen pixels tall. Dropping
+the LoRA from the wide shots — on the reasoning that identity comes from the left half — is what let the
+boy collapse into the nearest strong token in the reference, which was the droid.
+
+So the two mechanisms are not interchangeable, and the rule is about scale:
+
+| Subject in frame | Identity comes from |
+|---|---|
+| Large and distinctive (a vehicle, a building) | the diptych reference |
+| Small (a person at distance) | the trigger token and the LoRA, **plus** the reference |
+
+A close-up portrait is the easy case — it runs as a single-image edit off the expression view with the
+trigger present, and needs no diptych at all.
+
+## Compose on a plain backdrop first, then place the group
+
+s3 wanted the boy kneeling at an open engine panel beside the craft, in the salvage yard: three locked
+things and one reference slot. Carrying the boy and droid as the reference left the craft to be invented
+from text, and it came back a flat delta-wing twice — before and after the separation clause, so
+separation was not the cause. Asking the model to preserve a hull *and* build a whole yard around it is
+two jobs, and the hull loses.
+
+Splitting it into two renders fixes it, and is why s6 keeps its hull: build a combo master of the group
+on a plain studio backdrop, where nothing else is being invented, then use that combo as the reference
+for the shot that places it in a location. [[still-geometry-and-review]]

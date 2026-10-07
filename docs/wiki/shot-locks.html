@@ -368,9 +368,63 @@ the same at all across all the shots".</p>
 identity the input already has.</p>
 <p><code>film_run.py check</code> fails on a diptych whose prompt has no edit-instruction marker, and warns on a
 self-diptych. See also <a href="still-geometry-and-review.html">still geometry and review</a> §12.</p>
+<h2>A reference holding two subjects will merge them</h2>
+<p><code>flight_crew</code> holds a boy and a droid. Used as a diptych reference with no boundary stated, the model
+blended them three different ways across one evening:</p>
+<ul>
+<li>the droid's dome and amber lens rendered <strong>on the boy's head</strong> as a helmet (s6, 1 seed in 3)</li>
+<li>the boy <strong>replaced by a pilot-sized droid</strong> (s7, 2 seeds in 3)</li>
+<li>the boy rendered as <strong>a second droid</strong> sitting beside the first (s7, after the craft was fixed)</li>
+</ul>
+<p>Naming both subjects is not enough — the prompt that produced the second failure named them both. The
+prompt has to say where one stops and the other starts, and say it as something present rather than
+absent: <em>the boy is a living human child, his own short dark hair on his head and nothing worn over it,
+his own face and bare skin; the droid is a small machine that keeps its own metal body</em>.</p>
+<p><code>film_run.py check</code> warns when a diptych reference resolves to more than one subject and the prompt
+carries no separation clause.</p>
+<h3>A negation finds the nearest literal reading</h3>
+<p>The first version of that clause said <strong>"a bare uncovered head"</strong>. It rendered a shaved scalp. The
+clause meant "nothing on his head"; the model heard "no hair". This is the negation rule from §2 biting
+in a new place: <em>say what occupies the space, not what is absent from it</em> — "his own short dark hair on
+his head and nothing worn over it" locks the same thing and cannot be read as baldness.</p>
+<h3>The reference carries the big subject, the LoRA carries the small one</h3>
+<p>A diptych reference carries a large distinctive subject well: the skiff's hull, panels and nacelles
+survived into every wide shot. It does <strong>not</strong> carry a child who is a few dozen pixels tall. Dropping
+the LoRA from the wide shots — on the reasoning that identity comes from the left half — is what let the
+boy collapse into the nearest strong token in the reference, which was the droid.</p>
+<p>So the two mechanisms are not interchangeable, and the rule is about scale:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Subject in frame</th>
+<th>Identity comes from</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Large and distinctive (a vehicle, a building)</td>
+<td>the diptych reference</td>
+</tr>
+<tr>
+<td>Small (a person at distance)</td>
+<td>the trigger token and the LoRA, <strong>plus</strong> the reference</td>
+</tr>
+</tbody>
+</table></div>
+<p>A close-up portrait is the easy case — it runs as a single-image edit off the expression view with the
+trigger present, and needs no diptych at all.</p>
+<h2>Compose on a plain backdrop first, then place the group</h2>
+<p>s3 wanted the boy kneeling at an open engine panel beside the craft, in the salvage yard: three locked
+things and one reference slot. Carrying the boy and droid as the reference left the craft to be invented
+from text, and it came back a flat delta-wing twice — before and after the separation clause, so
+separation was not the cause. Asking the model to preserve a hull <em>and</em> build a whole yard around it is
+two jobs, and the hull loses.</p>
+<p>Splitting it into two renders fixes it, and is why s6 keeps its hull: build a combo master of the group
+on a plain studio backdrop, where nothing else is being invented, then use that combo as the reference
+for the shot that places it in a location. <a href="still-geometry-and-review.html">still geometry and review</a></p>
   <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="still-geometry-and-review.html">still geometry and review</a></li><li><a href="idea-to-video-blueprint.html">idea to video blueprint</a></li><li><a href="running-a-film-yourself.html">running a film yourself</a></li><li><a href="character-consistency.html">character consistency</a></li></ul></div>
 </div>
-<footer>video-gen-kb · built 2026-10-06 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<footer>video-gen-kb · built 2026-10-07 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
 <script>function tt(){var r=document.documentElement,
 d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
 matchMedia('(prefers-color-scheme: dark)').matches);
