@@ -3237,7 +3237,7 @@
                 ]
               }
             },
-            "video_prompt": "The camera holds below the falling craft as it drops steadily toward the dune, nose slewing, grey smoke tearing continuously off the dead housing and loose sand streaming up past the hull. The droid's domed head stays turned to the engine panel with its lens blazing and its red lights flashing throughout. Both nacelles stay completely dark with no flame on them at any point. The pilot stays low in the cockpit and his face never turns toward the camera; nobody else enters the frame. Everything moves at natural real-time speed, with no slow motion and no speed ramping. Wind and a dead engine turning over, no music.",
+            "video_prompt": "The camera stays exactly where it is, locked off at the side, and does not move, orbit or change angle at any point. The craft stays side-on to the camera for the whole shot, sinking steadily downward toward the dune below with its nose dipping slightly. Grey smoke tears continuously off the one dead housing and loose sand streams past the hull. Both nacelles stay completely dark with no flame on them at any point. The boy stays sitting low in the cockpit with his hands on the controls and his face away from the camera, and the droid stays exactly where it is in the hull behind his seat; nobody else enters the frame. Everything moves at natural real-time speed, with no slow motion and no speed ramping. Wind and a dead engine turning over, no music.",
             "qc_ref": "dunes",
             "take": "clips/s7_v1.mov",
             "trim": [

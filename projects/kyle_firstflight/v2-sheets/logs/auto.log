@@ -335,3 +335,84 @@ $ MODEL=ltx_2.3_22b_distilled_1.1_q8p.ckpt VIDEO_FORMAT=prores422hq STEPS=8 CFG=
 dt_clip: /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s1_v1.mov  1024x576  249 frames  599s
 /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s1_v1.mov
 $ MODEL=ltx_2.3_22b_distilled_1.1_q8p.ckpt VIDEO_FORMAT=prores422hq STEPS=8 CFG=1 FRAMES=249 CONFIG_JSON='{"sampler":19,"shift":5.0,"stochasticSamplingGamma":0.3,"fps":25,"hiresFix":false}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_clip.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/stills/s2.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/s2_v.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s2_v1.mov 1 1024 576
+dt_clip: /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s2_v1.mov  1024x576  249 frames  600s
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s2_v1.mov
+$ MODEL=ltx_2.3_22b_distilled_1.1_q8p.ckpt VIDEO_FORMAT=prores422hq STEPS=8 CFG=1 FRAMES=249 CONFIG_JSON='{"sampler":19,"shift":5.0,"stochasticSamplingGamma":0.3,"fps":25,"hiresFix":false}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_clip.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/stills/s3.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/s3_v.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s3_v1.mov 1 1024 576
+dt_clip: /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s3_v1.mov  1024x576  249 frames  597s
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s3_v1.mov
+$ MODEL=ltx_2.3_22b_distilled_1.1_q8p.ckpt VIDEO_FORMAT=prores422hq STEPS=8 CFG=1 FRAMES=249 CONFIG_JSON='{"sampler":19,"shift":5.0,"stochasticSamplingGamma":0.3,"fps":25,"hiresFix":false}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_clip.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/stills/s4.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/s4_v.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s4_v1.mov 1 1024 576
+dt_clip: /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s4_v1.mov  1024x576  249 frames  596s
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s4_v1.mov
+$ MODEL=ltx_2.3_22b_distilled_1.1_q8p.ckpt VIDEO_FORMAT=prores422hq STEPS=8 CFG=1 FRAMES=249 CONFIG_JSON='{"sampler":19,"shift":5.0,"stochasticSamplingGamma":0.3,"fps":25,"hiresFix":false}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_clip.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/stills/s5.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/s5_v.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s5_v1.mov 1 1024 576
+dt_clip: /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s5_v1.mov  1024x576  249 frames  596s
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s5_v1.mov
+$ MODEL=ltx_2.3_22b_distilled_1.1_q8p.ckpt VIDEO_FORMAT=prores422hq STEPS=8 CFG=1 FRAMES=249 CONFIG_JSON='{"sampler":19,"shift":5.0,"stochasticSamplingGamma":0.3,"fps":25,"hiresFix":false}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_clip.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/stills/s6.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/s6_v.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s6_v1.mov 1 1024 576
+dt_clip: /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s6_v1.mov  1024x576  249 frames  590s
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s6_v1.mov
+$ MODEL=ltx_2.3_22b_distilled_1.1_q8p.ckpt VIDEO_FORMAT=prores422hq STEPS=8 CFG=1 FRAMES=249 CONFIG_JSON='{"sampler":19,"shift":5.0,"stochasticSamplingGamma":0.3,"fps":25,"hiresFix":false}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_clip.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/stills/s7.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/s7_v.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s7_v1.mov 1 1024 576
+dt_clip: /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s7_v1.mov  1024x576  249 frames  602s
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s7_v1.mov
+$ MODEL=ltx_2.3_22b_distilled_1.1_q8p.ckpt VIDEO_FORMAT=prores422hq STEPS=8 CFG=1 FRAMES=249 CONFIG_JSON='{"sampler":19,"shift":5.0,"stochasticSamplingGamma":0.3,"fps":25,"hiresFix":false}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_clip.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/stills/s8.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/s8_v.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s8_v1.mov 1 1024 576
+dt_clip: /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s8_v1.mov  1024x576  249 frames  595s
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s8_v1.mov
+
+=== auto: qc ===
+$ /Users/kevinyang/dev/video-gen-kb/scripts/qc_sheet.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s1_v1.mov /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/s1_v1_qc.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/yard.png
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/s1_v1_qc.png  (frames: 0 62 124 186 248 of 249; no end fade)
+$ /Users/kevinyang/dev/video-gen-kb/scripts/qc_sheet.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s2_v1.mov /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/s2_v1_qc.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/droid.png
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/s2_v1_qc.png  (frames: 0 62 124 186 248 of 249; no end fade)
+$ /Users/kevinyang/dev/video-gen-kb/scripts/qc_sheet.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s3_v1.mov /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/s3_v1_qc.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/skiff.png
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/s3_v1_qc.png  (frames: 0 62 124 186 248 of 249; no end fade)
+$ /Users/kevinyang/dev/video-gen-kb/scripts/qc_sheet.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s4_v1.mov /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/s4_v1_qc.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/skiff.png
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/s4_v1_qc.png  (frames: 0 62 124 186 248 of 249; no end fade)
+$ /Users/kevinyang/dev/video-gen-kb/scripts/qc_sheet.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s5_v1.mov /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/s5_v1_qc.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle.png
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/s5_v1_qc.png  (frames: 0 62 124 186 248 of 249; no end fade)
+$ /Users/kevinyang/dev/video-gen-kb/scripts/qc_sheet.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s6_v1.mov /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/s6_v1_qc.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/yard.png
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/s6_v1_qc.png  (frames: 0 62 124 186 248 of 249; no end fade)
+$ /Users/kevinyang/dev/video-gen-kb/scripts/qc_sheet.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s7_v1.mov /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/s7_v1_qc.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/dunes.png
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/s7_v1_qc.png  (frames: 0 62 124 186 248 of 249; no end fade)
+$ /Users/kevinyang/dev/video-gen-kb/scripts/qc_sheet.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s8_v1.mov /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/s8_v1_qc.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/dunes.png
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/s8_v1_qc.png  (frames: 0 62 124 186 248 of 249; no end fade)
+
+=== auto: finish ===
+$ ffmpeg -nostdin -v error -y -i /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s1_v1.mov -vf trim=start=0:end=9.9,setpts=PTS-STARTPTS -af atrim=start=0:end=9.9,asetpts=PTS-STARTPTS -c:v prores_ks -profile:v 3 -c:a pcm_s16le /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s1_t.mov
+$ W=3840 H=2160 FIT=crop BITRATE=40M KEEP_FRAMES=0 KEEP_AUDIO=1 /Users/kevinyang/dev/video-gen-kb/scripts/upscale_4k.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s1_t.mov /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s1 realesrgan-x4plus
+
+=== auto: check ===
+planned length: 65.20 s kept − 7×0.75 fades = 59.95 s
+  WARN  s7: take not rendered yet: clips/s7_v1.mov
+check: PASS
+
+=== auto: masters ===
+
+=== auto: combos ===
+
+=== auto: pick-combos ===
+
+=== auto: align ===
+
+=== auto: check ===
+planned length: 65.20 s kept − 7×0.75 fades = 59.95 s
+  WARN  s7: take not rendered yet: clips/s7_v1.mov
+check: PASS
+
+=== auto: clips ===
+$ MODEL=ltx_2.3_22b_distilled_1.1_q8p.ckpt VIDEO_FORMAT=prores422hq STEPS=8 CFG=1 FRAMES=249 CONFIG_JSON='{"sampler":19,"shift":5.0,"stochasticSamplingGamma":0.3,"fps":25,"hiresFix":false}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_clip.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/stills/s1.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/s1_v.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s1_v1.mov 1 1024 576
+dt_clip: exists, skipping: /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s1_v1.mov
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s1_v1.mov
+$ MODEL=ltx_2.3_22b_distilled_1.1_q8p.ckpt VIDEO_FORMAT=prores422hq STEPS=8 CFG=1 FRAMES=249 CONFIG_JSON='{"sampler":19,"shift":5.0,"stochasticSamplingGamma":0.3,"fps":25,"hiresFix":false}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_clip.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/stills/s2.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/s2_v.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s2_v1.mov 1 1024 576
+dt_clip: exists, skipping: /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s2_v1.mov
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s2_v1.mov
+$ MODEL=ltx_2.3_22b_distilled_1.1_q8p.ckpt VIDEO_FORMAT=prores422hq STEPS=8 CFG=1 FRAMES=249 CONFIG_JSON='{"sampler":19,"shift":5.0,"stochasticSamplingGamma":0.3,"fps":25,"hiresFix":false}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_clip.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/stills/s3.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/s3_v.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s3_v1.mov 1 1024 576
+dt_clip: exists, skipping: /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s3_v1.mov
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s3_v1.mov
+$ MODEL=ltx_2.3_22b_distilled_1.1_q8p.ckpt VIDEO_FORMAT=prores422hq STEPS=8 CFG=1 FRAMES=249 CONFIG_JSON='{"sampler":19,"shift":5.0,"stochasticSamplingGamma":0.3,"fps":25,"hiresFix":false}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_clip.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/stills/s4.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/s4_v.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s4_v1.mov 1 1024 576
+dt_clip: exists, skipping: /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s4_v1.mov
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s4_v1.mov
+$ MODEL=ltx_2.3_22b_distilled_1.1_q8p.ckpt VIDEO_FORMAT=prores422hq STEPS=8 CFG=1 FRAMES=249 CONFIG_JSON='{"sampler":19,"shift":5.0,"stochasticSamplingGamma":0.3,"fps":25,"hiresFix":false}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_clip.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/stills/s5.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/s5_v.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s5_v1.mov 1 1024 576
+dt_clip: exists, skipping: /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s5_v1.mov
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s5_v1.mov
+$ MODEL=ltx_2.3_22b_distilled_1.1_q8p.ckpt VIDEO_FORMAT=prores422hq STEPS=8 CFG=1 FRAMES=249 CONFIG_JSON='{"sampler":19,"shift":5.0,"stochasticSamplingGamma":0.3,"fps":25,"hiresFix":false}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_clip.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/stills/s6.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/s6_v.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s6_v1.mov 1 1024 576
+dt_clip: exists, skipping: /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s6_v1.mov
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s6_v1.mov
+$ MODEL=ltx_2.3_22b_distilled_1.1_q8p.ckpt VIDEO_FORMAT=prores422hq STEPS=8 CFG=1 FRAMES=249 CONFIG_JSON='{"sampler":19,"shift":5.0,"stochasticSamplingGamma":0.3,"fps":25,"hiresFix":false}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_clip.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/stills/s7.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/s7_v.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/clips/s7_v1.mov 1 1024 576

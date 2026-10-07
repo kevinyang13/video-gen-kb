@@ -358,3 +358,24 @@ evidence that something is actually drawn, and only then lets palette distance r
 **This still cannot see content.** Sharpness proves detail, not correctness: it happily kept a detailed
 yellow junk sculpture. No automatic metric here distinguishes "the right craft" from "a crisp wrong
 one", so a human still looks at the picked stills before the clip stage spends an hour on them.
+
+## An i2v prompt must not move the camera somewhere the still never shows
+
+The still is the only thing the clip model has. A video prompt that asks for a viewpoint the still does
+not contain forces the model to invent the unseen side, and identity collapses exactly the way it does
+when a still prompt asks for recomposition.
+
+s7's still is a locked side view of the craft. Its video prompt opened *"The camera holds below the
+falling craft"*. The clip starts correct, then swings behind and underneath, and over 249 frames the
+hull becomes a circular wheeled machine with two large lenses — the boy gone entirely. s8, whose prompt
+only moves the subject ("climbs steadily away, shrinking into the light") and never relocates the
+camera, holds perfectly to the last frame.
+
+So the rule for a video prompt is the same as for a combo: **say what moves inside the frame, not where
+the camera goes.** When a camera move is unavoidable, it must stay on the side the still already shows —
+a push in, a slow rise, a drift along the same axis. Anything that reveals a face of the subject the
+still never saw is asking for invention.
+
+Stating the lock positively works here too: *"The camera stays exactly where it is, locked off at the
+side, and does not move, orbit or change angle at any point. The craft stays side-on for the whole
+shot."*
