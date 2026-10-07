@@ -185,7 +185,11 @@ def faceless_without_containment(shot):
 # prompt is inert -- it costs sampling time and binds to nothing. kyle_firstflight shipped with "a small
 # figure low in the open cockpit" in s6, no figure at all in s7, and the LoRA applied at 0.6 to both.
 # See wiki/still-geometry-and-review.md section 12.
-PERSON = ("figure", "pilot", "boy", "girl", "child", "person", "rider", "driver", "kid")
+# A pronoun names a person as surely as a noun does, and it is how the defect slipped through: s8 of
+# kyle_firstflight read "He is seen small at this distance" and the age check never fired, so the final
+# shot of the film had an adult in the cockpit. Matched with spaces so "the" and "there" do not trip it.
+PERSON = ("figure", "pilot", "boy", "girl", "child", "person", "rider", "driver", "kid",
+          " he ", " he's", " his ", " him ", " she ", " her ", " hers ")
 AGE_CUES = ("child proportions", "nine-year-old", "eight-year-old", "year-old boy", "year-old girl",
             "small child's", "child's hand", "a small child")
 
@@ -234,20 +238,45 @@ def person_problems(shot, trig, wants_child):
     return out
 
 
-def object_without_reference(shot, locks, masters):
+def combo_parts(f, name, seen=None):
+    """Every master a combo contains, following chains.
+
+    `flight_crew` is built from `droid` and `kyle_in_skiff`, and that second one is itself built from
+    `kyle` and `skiff` -- so a shot referencing flight_crew has been shown all three. Matching master
+    names against the ref STRING missed this, because "flight_crew" spells out none of its ingredients.
+    """
+    seen = seen if seen is not None else set()
+    combos = f.get("combos") or {}
+    spec = combos.get(name)
+    if not spec or name in seen:
+        return set()
+    seen.add(name)
+    parts = set()
+    for role in ("ref", "input"):
+        src = spec.get(role)
+        if not src:
+            continue
+        parts.add(src)
+        parts |= combo_parts(f, src, seen)
+    return parts
+
+
+def object_without_reference(shot, locks, masters, f=None):
     """Objects the shot describes in full but was given no picture of."""
     p = (shot.get("still", {}).get("prompt") or "")
     ref = shot.get("still", {}).get("ref")
     inp = (shot.get("still", {}).get("input") or "")
+    parts = combo_parts(f, ref) if (f and ref) else set()
     missing = []
     for name, text in (locks or {}).items():
         if name in ("subject", "wardrobe", "style", "pace", "pilot") or name not in (masters or {}):
             continue
         probe = text[:48]
         # a model-sheet view (skiff_side) or a combo (kyle_in_skiff) shows the object just as its master
-        # does, so either satisfies the requirement
+        # does, so either satisfies the requirement; a combo also shows whatever it was built from, and
+        # a combo built on another combo shows that one's ingredients too (flight_crew -> kyle, skiff, droid)
         shown = (ref == name or (ref or "").startswith(f"{name}_") or f"_{name}" in (ref or "")
-                 or f"{name}_" in (ref or "") or inp.endswith(f"{name}.png"))
+                 or f"{name}_" in (ref or "") or inp.endswith(f"{name}.png") or name in parts)
         if probe and probe in p and not shown:
             missing.append(name)
     return missing
@@ -340,7 +369,7 @@ def cmd_lint(f, args):
             continue
         rows = lint_shot(s, style)
         rows += [(lvl, msg, "see wiki/shot-locks.md") for lvl, msg in person_problems(s, trig, wants_child)]
-        for name in object_without_reference(s, locks, f.get("masters")):
+        for name in object_without_reference(s, locks, f.get("masters"), f):
             rows.append(("WARN", f"describes '{name}' but was given no picture of it",
                          f"set still.ref to '{name}'"))
         for lvl, msg, fix in rows:
@@ -409,7 +438,7 @@ def cmd_check(f, _):
                          f"-- anything the motion reveals will be invented (see still-geometry §11)")
         for level, msg in person_problems(s, trig, wants_child):
             (errs if level == "ERR" else warns).append(f"{i}: {msg} (see still-geometry §12)")
-        for name in object_without_reference(s, locks, f.get("masters")):
+        for name in object_without_reference(s, locks, f.get("masters"), f):
             warns.append(f"{i}: describes '{name}' in full but was given no picture of it "
                          f"-- set still.ref to '{name}' or use its master as still.input (§12)")
     total = sum(s["trim"][1] - s["trim"][0] for s in f["shots"] if s.get("trim"))
@@ -756,6 +785,16 @@ def cmd_combos(f, args):
         env = {"MODEL": c["model"], "STEPS": c["steps"], "CFG": c["cfg"],
                "STRENGTH": spec.get("strength", c["strength"]),
                "CONFIG_JSON": json.dumps(cfg, separators=(",", ":"))}
+        # A combo may chain off another combo (the crew shot edits the boy-in-skiff, not the bare skiff).
+        # The parent has to be PICKED, not merely rendered, because resolve_ref points at seed/<name>.png
+        # and only `pick` writes that file. Failing here names the missing step; rendering against a
+        # non-existent reference silently produces a text-to-image guess instead.
+        for role, path in (("ref", ref), ("input", inp)):
+            src_name = spec.get(role)
+            if path and not path.exists():
+                hint = (f"run `pick {src_name} <seed>` first" if src_name in (f.get("combos") or {})
+                        else f"render it first")
+                die(f"combo '{name}': {role} '{src_name}' missing at {path.relative_to(ROOT)} -- {hint}")
         pf = prompt_path(f, f"combo_{name}", spec["prompt"])
         for seed in c["seeds"]:
             out = d(f, f"seed/{name}_c{seed}.png")
@@ -835,7 +874,15 @@ def cmd_pick(f, args):
     i, seed = pos
     src = d(f, f"seed/{i}_c{seed}.png")
     masters = f.get("masters", {})
-    dst = d(f, masters[i]) if i in masters else d(f, f"stills/{i}.png")
+    # A combo is a master in every way that matters -- it is referenced by shots and by other combos --
+    # but it lives at seed/<name>.png, which is where resolve_ref looks for it. Picking one into
+    # stills/ put it somewhere nothing reads, and a chained combo then rendered against a missing parent.
+    if i in masters:
+        dst = d(f, masters[i])
+    elif i in (f.get("combos") or {}):
+        dst = d(f, f"seed/{i}.png")
+    else:
+        dst = d(f, f"stills/{i}.png")
     if not src.exists():
         die(f"no candidate {src}")
     dst.parent.mkdir(parents=True, exist_ok=True)
