@@ -106,7 +106,56 @@ and never touches down.
 Everything moves at natural real-time speed, with no slow motion and no speed ramping.
 ```
 
+## Turning a negation into something that binds
+
+Across 114 shot prompts in this repo there is about **one authored negation each**, and the most common
+ones are a list of this project's documented failures:
+
+| written | what came back |
+|---|---|
+| "no tow cables and no trailing lines" | a cable across frame |
+| "no wheels, no tyres, no axles, no landing legs" | wheels and landing legs |
+| "no flame at the front" | flame out of the forward intakes |
+| "no extra people beyond those described" | a second person, twice |
+| "nothing flying through the frame at any point" | an insect swarm, then birds |
+
+A negation names a thing and leaves the space it occupied undescribed, and undescribed space next to a
+subject gets filled. The fix is always the same shape — **say what is there**:
+
+| instead of | write |
+|---|---|
+| no wheels | "a clean unbroken band of open air beneath it from end to end, a blue repulsor glow washing down onto the ground, its hard shadow directly below" |
+| no flame at the front | "the forward intakes are wide dark open throats with a cone hub at the centre, drawing air in" |
+| no steam over his face | "clean dry air between the camera and his face" |
+| no extra people | "a single figure alone in the frame" |
+| nothing flying through the frame | "the sky behind it stays completely empty and clear" *(this one still failed — prefer putting the motion on the subject instead)* |
+| no cords or straps | carry no prop the story does not need; a prop that is not in the wardrobe cannot grow |
+
+The last row is the general case. The cheapest negation is the one you never have to write, because the
+thing was never introduced.
+
+## Three defects that are readable before rendering
+
+`film_run.py PROJECT lint` reads every prompt and reports these without spending a GPU-second.
+
+**A contradiction the model cannot resolve.** `kyle_steamfield` s4 asked for a hand "parting a curtain of
+white steam" *and* a face "well exposed and clearly visible". A curtain you part is between you and the
+camera by construction. Three versions were rendered before the prompt was read properly. `lint` fails on
+an occluder and a visibility demand in one prompt.
+
+**Motion with nothing in frame to attach to.** `kyle_firstflight` s2 said "fine dust drifts past" over a
+droid against an empty sky. There was no dust in the still, so the video stage manufactured something to
+carry the motion — insects, and on the retake, birds. `lint` warns when the motion prompt moves a noun
+the still never mentions.
+
+**A motion acting on more subjects than the still contains.** `kyle_saltflats` s7 described an overtake
+between two machines over a still holding one. `lint` fails on this.
+
 ## What `check` enforces
+
+`film_run.py PROJECT lint` fails on a contradiction, and on a motion acting on more subjects than the
+still contains; it warns on every authored negation, on unplaced atmosphere in a shot that needs a
+visible subject, and on motion with no anchor in the still.
 
 `film_run.py PROJECT check` fails the run on:
 

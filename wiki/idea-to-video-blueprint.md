@@ -119,6 +119,17 @@ Ask these once, all together, and record the answers in the plan page's "Decisio
   trigger in the prompt is inert, and a generic "figure" renders as an adult at any distance.
 - Store everything in the version's `spec.json`: `scenes.locks` for the locks, each shot's `still.prompt` and `video_prompt` for the wording; the registry pages render it.
 
+## Phase 2b — Lint the prompts before rendering anything
+
+```bash
+scripts/film_run.py PROJECT lint
+```
+
+Reads every prompt and reports what will fail without spending a GPU-second: contradictions, authored
+negations, unplaced atmosphere in a shot that needs a visible subject, motion with nothing in the still
+to attach to, and motion acting on more subjects than the still contains. Fix these before Phase 4 —
+five candidates and a contact sheet improve *picking*, and picking is not prompting.
+
 ## Phase 3 — Preflight (Claude, 2 min, just before go)
 
 | Check | Command / action |

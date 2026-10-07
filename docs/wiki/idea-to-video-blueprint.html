@@ -294,6 +294,13 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
   trigger in the prompt is inert, and a generic "figure" renders as an adult at any distance.</li>
 <li>Store everything in the version's <code>spec.json</code>: <code>scenes.locks</code> for the locks, each shot's <code>still.prompt</code> and <code>video_prompt</code> for the wording; the registry pages render it.</li>
 </ul>
+<h2>Phase 2b — Lint the prompts before rendering anything</h2>
+<pre><code class="language-bash">scripts/film_run.py PROJECT lint
+</code></pre>
+<p>Reads every prompt and reports what will fail without spending a GPU-second: contradictions, authored
+negations, unplaced atmosphere in a shot that needs a visible subject, motion with nothing in the still
+to attach to, and motion acting on more subjects than the still contains. Fix these before Phase 4 —
+five candidates and a contact sheet improve <em>picking</em>, and picking is not prompting.</p>
 <h2>Phase 3 — Preflight (Claude, 2 min, just before go)</h2>
 <div class="tw"><table>
 <thead>

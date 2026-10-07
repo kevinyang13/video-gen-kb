@@ -970,3 +970,29 @@ The background metric turns out to predict more than bloom. s2 — the droid aga
 that grew an insect swarm, then birds — flags on all five candidates, while the fixed s5 set is clean.
 An empty bright background hazes a face *and* invites the video stage to invent something to fill it, so
 one number catches both.
+
+## 2026-10-06 — lint the prompt instead of rolling the dice
+
+Kevin's point: generating five candidates and picking the best improves *picking*, not prompting. Every
+failure this repo has recorded was readable in the prompt text before a GPU-second was spent.
+
+Measured across 114 shot prompts, excluding the boilerplate style tail: **about one authored negation
+per prompt**, and the most common ones are a list of the project's own failures — `no tow cables`,
+`no wheels`, `no tyres`, `no flame at the front`, `no extra people`, `nothing flying through the frame`.
+Every one of those things appeared anyway.
+
+New `film_run.py PROJECT lint` reads prompts and reports four defect classes, with the fix for each:
+
+- **a contradiction** — an occluder between camera and subject plus a demand that the subject be clearly
+  visible. Fails. This is `kyle_steamfield` s4, which took three rendered versions before the prompt was
+  read properly.
+- **a count mismatch** — a motion acting on more subjects than the still contains. Fails. This is
+  `kyle_saltflats` s7's overtake over a still holding one machine.
+- **unanchored motion** — the motion prompt moves a noun the still never mentions, so the video stage
+  manufactures something to carry it. Warns. This is `kyle_firstflight` s2's "fine dust drifts past" over
+  an empty sky, which produced an insect swarm and then birds.
+- **authored negations and unplaced atmosphere.** Warns, with the positive rewrite.
+
+Replayed against the originals, lint catches all three historical failures above from the prompt text
+alone. [[shot-locks]] gained a translation table from each negation that failed to the positive form that
+worked, and the blueprint gained a Phase 2b that runs lint before any rendering.

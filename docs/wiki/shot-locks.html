@@ -182,7 +182,93 @@ and never touches down.
 <h2>Pacing</h2>
 <pre><code>Everything moves at natural real-time speed, with no slow motion and no speed ramping.
 </code></pre>
+<h2>Turning a negation into something that binds</h2>
+<p>Across 114 shot prompts in this repo there is about <strong>one authored negation each</strong>, and the most common
+ones are a list of this project's documented failures:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>written</th>
+<th>what came back</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"no tow cables and no trailing lines"</td>
+<td>a cable across frame</td>
+</tr>
+<tr>
+<td>"no wheels, no tyres, no axles, no landing legs"</td>
+<td>wheels and landing legs</td>
+</tr>
+<tr>
+<td>"no flame at the front"</td>
+<td>flame out of the forward intakes</td>
+</tr>
+<tr>
+<td>"no extra people beyond those described"</td>
+<td>a second person, twice</td>
+</tr>
+<tr>
+<td>"nothing flying through the frame at any point"</td>
+<td>an insect swarm, then birds</td>
+</tr>
+</tbody>
+</table></div>
+<p>A negation names a thing and leaves the space it occupied undescribed, and undescribed space next to a
+subject gets filled. The fix is always the same shape — <strong>say what is there</strong>:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>instead of</th>
+<th>write</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>no wheels</td>
+<td>"a clean unbroken band of open air beneath it from end to end, a blue repulsor glow washing down onto the ground, its hard shadow directly below"</td>
+</tr>
+<tr>
+<td>no flame at the front</td>
+<td>"the forward intakes are wide dark open throats with a cone hub at the centre, drawing air in"</td>
+</tr>
+<tr>
+<td>no steam over his face</td>
+<td>"clean dry air between the camera and his face"</td>
+</tr>
+<tr>
+<td>no extra people</td>
+<td>"a single figure alone in the frame"</td>
+</tr>
+<tr>
+<td>nothing flying through the frame</td>
+<td>"the sky behind it stays completely empty and clear" <em>(this one still failed — prefer putting the motion on the subject instead)</em></td>
+</tr>
+<tr>
+<td>no cords or straps</td>
+<td>carry no prop the story does not need; a prop that is not in the wardrobe cannot grow</td>
+</tr>
+</tbody>
+</table></div>
+<p>The last row is the general case. The cheapest negation is the one you never have to write, because the
+thing was never introduced.</p>
+<h2>Three defects that are readable before rendering</h2>
+<p><code>film_run.py PROJECT lint</code> reads every prompt and reports these without spending a GPU-second.</p>
+<p><strong>A contradiction the model cannot resolve.</strong> <code>kyle_steamfield</code> s4 asked for a hand "parting a curtain of
+white steam" <em>and</em> a face "well exposed and clearly visible". A curtain you part is between you and the
+camera by construction. Three versions were rendered before the prompt was read properly. <code>lint</code> fails on
+an occluder and a visibility demand in one prompt.</p>
+<p><strong>Motion with nothing in frame to attach to.</strong> <code>kyle_firstflight</code> s2 said "fine dust drifts past" over a
+droid against an empty sky. There was no dust in the still, so the video stage manufactured something to
+carry the motion — insects, and on the retake, birds. <code>lint</code> warns when the motion prompt moves a noun
+the still never mentions.</p>
+<p><strong>A motion acting on more subjects than the still contains.</strong> <code>kyle_saltflats</code> s7 described an overtake
+between two machines over a still holding one. <code>lint</code> fails on this.</p>
 <h2>What <code>check</code> enforces</h2>
+<p><code>film_run.py PROJECT lint</code> fails on a contradiction, and on a motion acting on more subjects than the
+still contains; it warns on every authored negation, on unplaced atmosphere in a shot that needs a
+visible subject, and on motion with no anchor in the still.</p>
 <p><code>film_run.py PROJECT check</code> fails the run on:</p>
 <ul>
 <li>a shot describing a person with no trigger token while a LoRA is applied and the face is in frame;</li>

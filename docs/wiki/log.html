@@ -727,6 +727,28 @@ v3 dark bg   sharp c1=460   bg  15-98
 that grew an insect swarm, then birds — flags on all five candidates, while the fixed s5 set is clean.
 An empty bright background hazes a face <em>and</em> invites the video stage to invent something to fill it, so
 one number catches both.</p>
+<h2>2026-10-06 — lint the prompt instead of rolling the dice</h2>
+<p>Kevin's point: generating five candidates and picking the best improves <em>picking</em>, not prompting. Every
+failure this repo has recorded was readable in the prompt text before a GPU-second was spent.</p>
+<p>Measured across 114 shot prompts, excluding the boilerplate style tail: <strong>about one authored negation
+per prompt</strong>, and the most common ones are a list of the project's own failures — <code>no tow cables</code>,
+<code>no wheels</code>, <code>no tyres</code>, <code>no flame at the front</code>, <code>no extra people</code>, <code>nothing flying through the frame</code>.
+Every one of those things appeared anyway.</p>
+<p>New <code>film_run.py PROJECT lint</code> reads prompts and reports four defect classes, with the fix for each:</p>
+<ul>
+<li><strong>a contradiction</strong> — an occluder between camera and subject plus a demand that the subject be clearly
+  visible. Fails. This is <code>kyle_steamfield</code> s4, which took three rendered versions before the prompt was
+  read properly.</li>
+<li><strong>a count mismatch</strong> — a motion acting on more subjects than the still contains. Fails. This is
+  <code>kyle_saltflats</code> s7's overtake over a still holding one machine.</li>
+<li><strong>unanchored motion</strong> — the motion prompt moves a noun the still never mentions, so the video stage
+  manufactures something to carry it. Warns. This is <code>kyle_firstflight</code> s2's "fine dust drifts past" over
+  an empty sky, which produced an insect swarm and then birds.</li>
+<li><strong>authored negations and unplaced atmosphere.</strong> Warns, with the positive rewrite.</li>
+</ul>
+<p>Replayed against the originals, lint catches all three historical failures above from the prompt text
+alone. <a href="shot-locks.html">shot locks</a> gained a translation table from each negation that failed to the positive form that
+worked, and the blueprint gained a Phase 2b that runs lint before any rendering.</p>
   
 </div>
 <footer>video-gen-kb · built 2026-10-06 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>

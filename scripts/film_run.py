@@ -6,6 +6,7 @@ holding the run-spec (handy for tests).
   PROJECT is "<id>" (newest version) or "<id>@<version>", e.g. lost_city@v1-drawthings-ui
   scripts/film_run.py PROJECT check              validate the run-spec (paths, sizes, frame rules)
   scripts/film_run.py PROJECT status             one line per shot: still / candidates / clips / take / 4K
+  scripts/film_run.py PROJECT lint [ids]        prompt defects readable without rendering
   scripts/film_run.py PROJECT masters [names]    seed candidates for each master -> seed/<name>_c<seed>.png
   scripts/film_run.py PROJECT stills [ids]       seed candidates for shots with no picked still -> seed/<id>_c<seed>.png
   scripts/film_run.py PROJECT sheet [ids]        label candidates -> seed/<id>_sheet.png (review before picking)
@@ -237,6 +238,89 @@ def object_without_reference(shot, locks, masters):
         if probe and probe in p and ref != name and not inp.endswith(f"{name}.png"):
             missing.append(name)
     return missing
+
+
+
+# ---- prompt lint -------------------------------------------------------------------------------
+# Five candidates and a contact sheet improve picking, not prompting. Every failure this repo has
+# recorded was visible in the prompt text before a GPU-second was spent: a negation that does not bind,
+# a contradiction the model cannot resolve, a motion instruction with nothing in frame to attach to, or
+# atmosphere with no stated position. See wiki/still-geometry-and-review.md and wiki/shot-locks.md.
+
+NEG_RE = re.compile(r"\b(?:no|without|never|not)\s+([a-z]+(?:\s+[a-z]+)?)")
+# phrases every style lock carries; they are conventions the model does honour, not authored negations
+NEG_SKIP = ("cartoon", "text", "lettering", "logos", "logo", "watermark", "illustration")
+OCCLUDE = ("curtain of", "across his face", "across her face", "in front of his face",
+           "in front of her face", "obscuring", "veiling", "parting a")
+VISIBLE = ("clearly visible", "well exposed", "razor-sharp focus", "face is well exposed")
+ATMOS = ("steam", "mist", "smoke", "haze", "spray", "fog", "dust", "glow")
+PLACED = ("behind", "to one side", "out of frame", "beyond", "far side", "in the background",
+          "well behind", "either side", "under the hull", "beneath")
+MOVERS = ("dust", "steam", "smoke", "sand", "crowd", "banner", "banners", "cable", "cables", "flame",
+          "water", "surf", "snow", "rain", "leaves", "birds", "grass", "curtain", "needle", "needles")
+
+
+def lint_shot(shot, style=""):
+    """Prompt defects that are readable without rendering. Returns (level, message, suggestion)."""
+    out = []
+    still_raw = shot.get("still", {}).get("prompt") or ""
+    still = still_raw.lower()
+    if style:
+        still = still.replace(style.lower(), "")
+    video = (shot.get("video_prompt") or "").lower()
+
+    negs = [m for m in NEG_RE.findall(still) if not any(s in m for s in NEG_SKIP)]
+    for n in dict.fromkeys(negs):
+        out.append(("WARN", f"negation 'no {n}' -- negatives do not bind",
+                    f"say what occupies that space instead of what is absent from it"))
+
+    if any(o in still for o in OCCLUDE) and any(v in still for v in VISIBLE):
+        out.append(("ERR", "asks for the subject to be occluded and clearly visible in one prompt",
+                    "move the occluder behind or beside the subject, or drop the visibility demand"))
+
+    if any(v in still for v in VISIBLE):
+        for a in ATMOS:
+            if re.search(r"\b" + a + r"\b", still) and not any(pl in still for pl in PLACED):
+                out.append(("WARN", f"'{a}' in a shot that demands a visible subject, with no position",
+                            "place it: 'well behind him and out to both sides', plus 'clean clear air "
+                            "between the camera and his face'"))
+                break
+
+    # A motion prompt that moves more subjects than the still contains: the video stage must invent the
+    # extra one. kyle_saltflats s7 described an overtake between two machines over a still holding one.
+    if re.search(r"\b(a single|one)\b", still) and re.search(r"\b(both|all four|two of them|each other)\b", video):
+        out.append(("ERR", "motion prompt acts on more subjects than the still contains",
+                    "match the count: either put the second subject in the still or rewrite the motion "
+                    "for one"))
+
+    for mv in MOVERS:
+        if re.search(r"\b" + mv + r"\b", video) and not re.search(r"\b" + mv + r"\b", still):
+            out.append(("WARN", f"motion prompt moves '{mv}' but the still never mentions it",
+                        "the video stage has nothing in frame to attach that motion to and will "
+                        "invent something -- put it in the still or drop it from the motion"))
+    return out
+
+
+def cmd_lint(f, args):
+    """Read every prompt and report what will fail before anything renders."""
+    style = ((f.get("_scenes") or {}).get("locks") or {}).get("style", "")
+    locks = (f.get("_scenes") or {}).get("locks") or {}
+    trig, bad = trigger_of(f), 0
+    wants_child = bool(re.search(r"\b(year-old|child proportions)\b", locks.get("subject", "")))
+    ids = {s["id"] for s in ids_arg(f, args)}
+    for s in f["shots"]:
+        if s["id"] not in ids:
+            continue
+        rows = lint_shot(s, style)
+        rows += [(lvl, msg, "see wiki/shot-locks.md") for lvl, msg in person_problems(s, trig, wants_child)]
+        for name in object_without_reference(s, locks, f.get("masters")):
+            rows.append(("WARN", f"describes '{name}' but was given no picture of it",
+                         f"set still.ref to '{name}'"))
+        for lvl, msg, fix in rows:
+            bad += lvl == "ERR"
+            print(f"  {lvl:4}  {s['id']}: {msg}\n        -> {fix}")
+    print(f"lint: {'FAIL' if bad else 'PASS'}")
+    return 1 if bad else 0
 
 
 def cmd_check(f, _):
@@ -580,7 +664,7 @@ def cmd_finish(f, _):
     return 0
 
 
-CMDS = {"check": cmd_check, "status": cmd_status, "masters": cmd_masters, "stills": cmd_stills, "sheet": cmd_sheet, "pick": cmd_pick,
+CMDS = {"check": cmd_check, "status": cmd_status, "lint": cmd_lint, "masters": cmd_masters, "stills": cmd_stills, "sheet": cmd_sheet, "pick": cmd_pick,
         "clips": cmd_clips, "qc": cmd_qc, "finish": cmd_finish}
 
 if __name__ == "__main__":
