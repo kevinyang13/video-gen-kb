@@ -311,8 +311,10 @@ def object_without_reference(shot, locks, masters, f=None):
         # a model-sheet view (skiff_side) or a combo (kyle_in_skiff) shows the object just as its master
         # does, so either satisfies the requirement; a combo also shows whatever it was built from, and
         # a combo built on another combo shows that one's ingredients too (flight_crew -> kyle, skiff, droid)
+        # input may be a master NAME ("yard") or a path ("seed/yard.png"), and either shows the object
         shown = (ref == name or (ref or "").startswith(f"{name}_") or f"_{name}" in (ref or "")
-                 or f"{name}_" in (ref or "") or inp.endswith(f"{name}.png") or name in parts)
+                 or f"{name}_" in (ref or "") or name in parts
+                 or inp == name or inp.startswith(f"{name}_") or inp.endswith(f"{name}.png"))
         if probe and probe in p and not shown:
             missing.append(name)
     return missing
@@ -516,8 +518,15 @@ def cmd_stills(f, args):
         c = still_cfg(f, s)
         ref = resolve_ref(f, st.get("ref"))
         inp = resolve_ref(f, st["input"]) if st.get("input") else None
+        # A diptych carries identity in the left half, so its prompt names no trigger and the LoRA would
+        # bind to nothing -- it would still cost sampling time on every seed. cmd_combos already drops it
+        # in that case; shots did not, which is what made lint fail s3, s6 and s7.
+        cfg = dict(c["config"])
+        trig = trigger_of(f)
+        if trig and trig not in (st.get("prompt") or "").lower():
+            cfg.pop("loras", None)
         env = {"MODEL": c["model"], "STEPS": c["steps"], "CFG": c["cfg"], "STRENGTH": c["strength"],
-               "CONFIG_JSON": json.dumps(c["config"], separators=(",", ":"))}
+               "CONFIG_JSON": json.dumps(cfg, separators=(",", ":"))}
         for seed in c["seeds"]:
             out = d(f, f"seed/{i}_c{seed}.png")
             if out.exists() and not FORCE:
