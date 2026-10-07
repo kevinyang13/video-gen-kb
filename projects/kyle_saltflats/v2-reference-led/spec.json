@@ -1,0 +1,378 @@
+{
+  "order": 24,
+  "id": "kyle_saltflats",
+  "version": "v2-reference-led",
+  "variant": "lora-cli",
+  "title": "Kyle — The Boonta Flats",
+  "date": "2026-10-04",
+  "theme": "realistic",
+  "dt_project": "kyle-saltflats-v2",
+  "status": "planned — 61.25 s across 8 shots",
+  "source": "four reference stills supplied by Kevin, kept in raw/; original film in that tradition",
+  "notes": "Second version, built from scratch against Kevin's reference images rather than from v1. Three things are done differently from the start. The machine is engines-out-front towing a pod on cables, the silhouette the references establish, with the cables written bar-tight and in a single plane -- a trailing cable is the most reliable failure in this repo, so Kevin chose to keep them and QC hard. The pilot is written as a child in every shot he appears in, with the pod as a scale referent, because a generic 'pilot' rendered as an adult every time in v1. And both face shots are positive: a grin that reaches full width in the first second and then holds, which is the construction that survived 7.5 s in lindsey_sparky, after a review showed the last two films had drifted to uniformly grim expressions.",
+  "still": {
+    "model": "flux_2_klein_9b_i8x.ckpt",
+    "size": "1024x576",
+    "steps": 4,
+    "cfg": 1,
+    "shift": 3.0,
+    "sampler": 16,
+    "lora": "kyle_lora_v2_2500_lora_f32.ckpt",
+    "seeds": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "control": "diptych: master on the left carries the design, scene master on the right",
+    "prompt": "see scenes"
+  },
+  "i2v": {
+    "model": "ltx_2.3_22b_distilled_1.1_q8p.ckpt",
+    "size": "1024x576",
+    "frames": 249,
+    "fps": 25,
+    "steps": 8,
+    "cfg": 1,
+    "shift": 5.0,
+    "sampler": 19,
+    "stochasticSamplingGamma": 0.3,
+    "time_min": 10,
+    "note": "249 frames always; trim after QC. Every clip gets a frame-by-frame check on the tow cables."
+  },
+  "post": {
+    "upscale": "Real-ESRGAN x4plus -> 3840x2160",
+    "loop": "none",
+    "music": "best_adventure_ever.mp3"
+  },
+  "scenes": {
+    "locks": {
+      "subject": "kyle_kx boy, a nine-year-old boy with child proportions, this exact face, short dark hair",
+      "pilot": "In the open pod sits kyle_kx boy, a small nine-year-old boy with child proportions, this exact face, wearing a battered open-face racing helmet with round goggles and a sand-coloured padded flight jerkin. He is unmistakably a small child in a machine built for someone far bigger: his head and shoulders barely clear the pod's cowling, the seat rises well above him, and the cockpit looks half empty around his small frame.",
+      "racer": "a home-built desert racer in two parts: two enormous scorched turbine engines running well out in front, side by side and slightly splayed, their wide dark intakes leading and long orange flame blasting backwards from the rear nozzles, and a small open pod trailing behind them carrying the pilot. The engines and the pod are joined by a pair of long steel tow cables that run straight and bar-tight under load, dead taut in a single plane with no slack, no loops and no loose ends, and a faint violet energy binder arcs between the two engines. Burnt copper and gunmetal panels, exposed ribbed casings and riveted plates. The whole machine hovers above the ground with open air beneath it and its shadow on the sand directly below; it has no wheels and nothing touches the ground",
+      "flats": "a vast flat ochre desert under a pale washed-out sky, low sandstone buttes strung along the far horizon, the ground a hard pale dust that lifts in sheets, heat shimmer flattening the distance",
+      "staging": "a crowded open staging ground outside a desert city, dozens of wildly different racing machines laid out in rows with their engines detached and lying on the sand, handlers and mechanics moving between them, pack animals and crates at the edges, a packed crowd behind a rope line in the foreground, fine dust hanging in the air over everything",
+      "arena": "a vast desert arena outside a sandstone city of great domed buildings, an enormous tiered stone grandstand packed solid with spectators running along one side, tall banners on poles, the open course of pale dust sweeping past it and out into the desert",
+      "style": "Cinematic film still from a late-1990s live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scorched metal, hard high desert sun, slight haze and blown highlights, shallow depth of field, visible film grain, warm ochre and sand palette against a pale washed sky. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+      "pace": "Everything moves at natural real-time speed, the full speed of a race, with no slow motion and no speed ramping."
+    },
+    "s1": {
+      "title": "The staging ground at dawn",
+      "note": "no LoRA; ref staging; input seed/staging.png; kept 9.0 s",
+      "still": "Extreme wide establishing shot from slightly above, no face readable at this distance. a crowded open staging ground outside a desert city, dozens of wildly different racing machines laid out in rows with their engines detached and lying on the sand, handlers and mechanics moving between them, pack animals and crates at the edges, a packed crowd behind a rope line in the foreground, fine dust hanging in the air over everything. Low gold morning sun rakes across the ground and throws long shadows off the machines and the people. Cinematic film still from a late-1990s live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scorched metal, hard high desert sun, slight haze and blown highlights, shallow depth of field, visible film grain, warm ochre and sand palette against a pale washed sky. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+      "video": "Slow push in across the staging ground. Fine dust hangs and drifts steadily through the whole frame, handlers move between the machines, the crowd shifts behind the rope line, and heat shimmer rises off the sand. The machines stay where they are. No face comes into frame at any point. Everything moves at natural real-time speed, the full speed of a race, with no slow motion and no speed ramping. Crowd murmur and distant engines, no music."
+    },
+    "s2": {
+      "title": "Strapping in",
+      "note": "LoRA 1.0; ref kyle; input seed/kyle.png; kept 7.0 s",
+      "still": "Tight close-up portrait, head and shoulders, straight on, one person alone in the frame. kyle_kx boy, a nine-year-old boy with child proportions, this exact face, short dark hair, wearing a battered open-face racing helmet with round goggles pushed up on the brow and a sand-coloured padded flight jerkin, sitting down in the open pod with its cowling across the bottom of frame. He is keyed up and happy, his eyes bright and the start of a grin on his face, looking slightly off camera at the course ahead. An even natural skin tone, hard morning sun from one side and warm bounced light off the sand on the other. The staging ground and the crowd are thrown far out of focus behind him. Clean clear air between the camera and his face. The face is well exposed and clearly visible. Razor-sharp focus on the eyes and skin texture. Cinematic film still from a late-1990s live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scorched metal, hard high desert sun, slight haze and blown highlights, shallow depth of field, visible film grain, warm ochre and sand palette against a pale washed sky. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+      "video": "Locked camera. His grin widens into a real open smile over the first second and then settles and holds steady for the rest of the shot without growing further. His head stays level and still and his chin does not lift. Dust drifts past behind him and the crowd moves far out of focus. The light stays constant. Everything moves at natural real-time speed, the full speed of a race, with no slow motion and no speed ramping. Crowd and engine idle, no music."
+    },
+    "s3": {
+      "title": "The cables snap taut",
+      "note": "no LoRA; ref racer; input seed/racer.png; kept 6.0 s",
+      "still": "Extreme close-up detail insert along the machine, no people in frame. A pair of long steel tow cables running from the back of two enormous scorched turbine engines to the nose of the trailing pod, framed tight and side-on so both cables cross the frame as two straight bar-tight horizontal lines under full load, every strand lit by hard sun, with scorched riveted metal and a violet energy binder glowing behind them. The cables are dead straight and rigid with tension, with no slack, no loops and no loose ends anywhere in frame. Macro clarity, very shallow depth of field. Cinematic film still from a late-1990s live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scorched metal, hard high desert sun, slight haze and blown highlights, shallow depth of field, visible film grain, warm ochre and sand palette against a pale washed sky. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+      "video": "Locked camera. The two cables pull from taut to bar-tight and stay rigid and perfectly straight for the whole shot, vibrating very slightly under load, while heat haze pours off the metal behind them and the violet binder flickers. Nothing else moves and nothing comes loose. No person enters the frame at any point. Everything moves at natural real-time speed, the full speed of a race, with no slow motion and no speed ramping. Steel under tension and turbines rising, no music."
+    },
+    "s4": {
+      "title": "The engines light",
+      "note": "LoRA 0.6; ref racer; input seed/racer.png; kept 9.0 s",
+      "still": "Low side-on shot along the ground at engine height. The two enormous scorched turbine engines of a home-built desert racer in two parts: two enormous scorched turbine engines running well out in front, side by side and slightly splayed, their wide dark intakes leading and long orange flame blasting backwards from the rear nozzles, and a small open pod trailing behind them carrying the pilot. The engines and the pod are joined by a pair of long steel tow cables that run straight and bar-tight under load, dead taut in a single plane with no slack, no loops and no loose ends, and a faint violet energy binder arcs between the two engines. Burnt copper and gunmetal panels, exposed ribbed casings and riveted plates. The whole machine hovers above the ground with open air beneath it and its shadow on the sand directly below; it has no wheels and nothing touches the ground, framed with both engines leading at the left of frame and the pod trailing at the right on its two bar-tight cables. Long orange flame blasts backwards out of the rear nozzles and a wall of pale dust lifts off the ground behind them. In the open pod sits kyle_kx boy, a small nine-year-old boy with child proportions, this exact face, wearing a battered open-face racing helmet with round goggles and a sand-coloured padded flight jerkin. He is unmistakably a small child in a machine built for someone far bigger: his head and shoulders barely clear the pod's cowling, the seat rises well above him, and the cockpit looks half empty around his small frame. He is seen small at this distance and his face is not readable. Hard morning sun. The ground ahead is clear open desert. Cinematic film still from a late-1990s live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scorched metal, hard high desert sun, slight haze and blown highlights, shallow depth of field, visible film grain, warm ochre and sand palette against a pale washed sky. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+      "video": "Locked camera low to the ground. The engines catch and settle into a steady roaring burn with long flame streaming backwards, heat haze pouring off the metal, and dust streaming away behind in a continuous sheet. The two cables stay bar-tight and straight throughout. The machine holds its position in the air. The pilot stays low in the pod and his face never turns toward the camera, and no one else enters the frame at any point. Everything moves at natural real-time speed, the full speed of a race, with no slow motion and no speed ramping. Turbines spooling up, no music."
+    },
+    "s5": {
+      "title": "Flat out across the desert",
+      "note": "LoRA 0.6; ref flats; input seed/flats.png; kept 9.5 s",
+      "still": "Wide tracking shot from the side, level with the machine, no face readable at this distance. a vast flat ochre desert under a pale washed-out sky, low sandstone buttes strung along the far horizon, the ground a hard pale dust that lifts in sheets, heat shimmer flattening the distance. A single racer crosses frame at enormous speed, low over the ground: a home-built desert racer in two parts: two enormous scorched turbine engines running well out in front, side by side and slightly splayed, their wide dark intakes leading and long orange flame blasting backwards from the rear nozzles, and a small open pod trailing behind them carrying the pilot. The engines and the pod are joined by a pair of long steel tow cables that run straight and bar-tight under load, dead taut in a single plane with no slack, no loops and no loose ends, and a faint violet energy binder arcs between the two engines. Burnt copper and gunmetal panels, exposed ribbed casings and riveted plates. The whole machine hovers above the ground with open air beneath it and its shadow on the sand directly below; it has no wheels and nothing touches the ground, the two engines leading well ahead with flame streaming back and the pod riding behind on two dead-straight cables, a long boiling wake of pale dust thrown up behind it. In the open pod sits kyle_kx boy, a small nine-year-old boy with child proportions, this exact face, wearing a battered open-face racing helmet with round goggles and a sand-coloured padded flight jerkin. He is unmistakably a small child in a machine built for someone far bigger: his head and shoulders barely clear the pod's cowling, the seat rises well above him, and the cockpit looks half empty around his small frame. He is seen small at this distance and his face is not readable. The ground ahead of the machine is clear and open to the horizon. Cinematic film still from a late-1990s live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scorched metal, hard high desert sun, slight haze and blown highlights, shallow depth of field, visible film grain, warm ochre and sand palette against a pale washed sky. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+      "video": "The camera tracks alongside at the same speed so the machine holds its place in frame while the desert and the distant buttes streak past behind it. The dust wake boils continuously behind and the flame streams back steadily. The two cables stay bar-tight and straight in the same plane for the whole shot. The machine stays level and does not turn toward the camera, and the pilot stays low in the pod with his face never turning toward the camera. Everything moves at natural real-time speed, the full speed of a race, with no slow motion and no speed ramping. Engines at full power and rushing air, no music."
+    },
+    "s6": {
+      "title": "Mid-race",
+      "note": "LoRA 1.0; ref kyle; input seed/kyle.png; kept 7.5 s",
+      "still": "Close-up portrait, frontal, slightly low angle, one person alone in the frame. kyle_kx boy, a nine-year-old boy with child proportions, this exact face, short dark hair, wearing a battered open-face racing helmet with round goggles now down over his eyes and a sand-coloured padded flight jerkin, low in the open pod behind its cowling. His mouth is open in a wide fierce delighted grin, caught mid-shout, his face lit hard and bright by full sun. The ochre desert and pale sky are thrown into a smeared streak of speed far behind him. Clean clear air between the camera and his face. The face is well exposed and clearly visible. Razor-sharp focus on the goggles and skin texture. Cinematic film still from a late-1990s live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scorched metal, hard high desert sun, slight haze and blown highlights, shallow depth of field, visible film grain, warm ochre and sand palette against a pale washed sky. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+      "video": "Locked camera travelling with him. His delighted grin reaches its full width in the first second and then holds steady for the rest of the shot without changing. His head stays level and still and his chin does not lift. The background streaks past continuously behind him and his collar and the helmet straps whip in the airflow. The light stays constant. Everything moves at natural real-time speed, the full speed of a race, with no slow motion and no speed ramping. Engines and rushing air, no music."
+    },
+    "s7": {
+      "title": "Two machines, side by side",
+      "note": "LoRA 0.6; ref flats; input seed/flats.png; kept 9.5 s",
+      "still": "Low wide shot from just off the course, no face readable at this distance. Two racing machines run side by side and very close at enormous speed across a vast flat ochre desert under a pale washed-out sky, low sandstone buttes strung along the far horizon, the ground a hard pale dust that lifts in sheets, heat shimmer flattening the distance. Each one is a home-built desert racer in two parts: two enormous scorched turbine engines running well out in front, side by side and slightly splayed, their wide dark intakes leading and long orange flame blasting backwards from the rear nozzles, and a small open pod trailing behind them carrying the pilot. The engines and the pod are joined by a pair of long steel tow cables that run straight and bar-tight under load, dead taut in a single plane with no slack, no loops and no loose ends, and a faint violet energy binder arcs between the two engines. Burnt copper and gunmetal panels, exposed ribbed casings and riveted plates. The whole machine hovers above the ground with open air beneath it and its shadow on the sand directly below; it has no wheels and nothing touches the ground, their leading engines level with one another and both pods riding behind on bar-tight cables. A dense wall of pale dust boils up between and behind them and hangs in the sun. The ground ahead is clear and open. Cinematic film still from a late-1990s live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scorched metal, hard high desert sun, slight haze and blown highlights, shallow depth of field, visible film grain, warm ochre and sand palette against a pale washed sky. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+      "video": "Locked camera low beside the course as both machines come past together and away, neither pulling ahead. Dust boils up continuously between and behind them and streams along the ground. All four cables stay bar-tight and straight. The pilots stay low in their pods and no face turns toward the camera; nobody else enters the frame at any point. Everything moves at natural real-time speed, the full speed of a race, with no slow motion and no speed ramping. Engines echoing, no music."
+    },
+    "s8": {
+      "title": "Past the grandstand",
+      "note": "no LoRA; ref arena; input seed/arena.png; kept 9.0 s",
+      "still": "Extreme wide final shot from high above the course, no face readable at this distance. a vast desert arena outside a sandstone city of great domed buildings, an enormous tiered stone grandstand packed solid with spectators running along one side, tall banners on poles, the open course of pale dust sweeping past it and out into the desert. A single racer streaks along the course below and past the full length of the grandstand, small against the scale of the arena and the city, dragging a long bright wake of dust behind it into low gold sun. The packed crowd rises in the stands, arms up. The course ahead of the machine is clear and open. Cinematic film still from a late-1990s live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scorched metal, hard high desert sun, slight haze and blown highlights, shallow depth of field, visible film grain, warm ochre and sand palette against a pale washed sky. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+      "video": "Slow rise and push in from above as the machine runs the length of the grandstand, its dust wake spreading and drifting behind it. The crowd in the stands moves continuously and the banners lift in the wind. The camera stays high and no face comes into frame at any point. Everything moves at natural real-time speed, the full speed of a race, with no slow motion and no speed ramping. A roaring crowd and engines, no music."
+    }
+  },
+  "run-spec": {
+    "dir": "projects/kyle_saltflats/v2-reference-led",
+    "name": "kyle_saltflats_v2",
+    "size": [
+      1024,
+      576
+    ],
+    "still": {
+      "model": "flux_2_klein_9b_i8x.ckpt",
+      "steps": 4,
+      "cfg": 1,
+      "config": {
+        "shift": 3.0,
+        "sampler": 16,
+        "loras": [
+          {
+            "file": "kyle_lora_v2_2500_lora_f32.ckpt",
+            "weight": 1.0
+          }
+        ]
+      },
+      "seeds": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "strength": 1.0
+    },
+    "clip": {
+      "model": "ltx_2.3_22b_distilled_1.1_q8p.ckpt",
+      "frames": 249,
+      "steps": 8,
+      "cfg": 1,
+      "config": {
+        "sampler": 19,
+        "shift": 5.0,
+        "stochasticSamplingGamma": 0.3,
+        "fps": 25,
+        "hiresFix": false
+      },
+      "seed": 1,
+      "video_format": "prores422hq"
+    },
+    "masters": {
+      "kyle": "seed/kyle.png",
+      "racer": "seed/racer.png",
+      "staging": "seed/staging.png",
+      "flats": "seed/flats.png",
+      "arena": "seed/arena.png"
+    },
+    "upscale": {
+      "model": "realesrgan-x4plus",
+      "size": [
+        3840,
+        2160
+      ],
+      "fit": "crop",
+      "bitrate": "40M"
+    },
+    "assemble": {
+      "fps": 25,
+      "xfade": 0.75,
+      "clip_audio": true,
+      "bitrate": "40M"
+    },
+    "music": {
+      "file": "projects/kyle_saltflats/v2-reference-led/music/best_adventure_ever.mp3",
+      "start": 0,
+      "vol": 0.45,
+      "fade_in": 1.5,
+      "fade_out": 2.0
+    },
+    "deliver": [
+      {
+        "size": [
+          1920,
+          1080
+        ],
+        "bitrate": "12M"
+      }
+    ],
+    "shots": [
+      {
+        "id": "s1",
+        "still": {
+          "ref": "staging",
+          "input": "seed/staging.png",
+          "prompt": "Extreme wide establishing shot from slightly above, no face readable at this distance. a crowded open staging ground outside a desert city, dozens of wildly different racing machines laid out in rows with their engines detached and lying on the sand, handlers and mechanics moving between them, pack animals and crates at the edges, a packed crowd behind a rope line in the foreground, fine dust hanging in the air over everything. Low gold morning sun rakes across the ground and throws long shadows off the machines and the people. Cinematic film still from a late-1990s live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scorched metal, hard high desert sun, slight haze and blown highlights, shallow depth of field, visible film grain, warm ochre and sand palette against a pale washed sky. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+          "config": {
+            "shift": 3.0,
+            "sampler": 16
+          }
+        },
+        "video_prompt": "Slow push in across the staging ground. Fine dust hangs and drifts steadily through the whole frame, handlers move between the machines, the crowd shifts behind the rope line, and heat shimmer rises off the sand. The machines stay where they are. No face comes into frame at any point. Everything moves at natural real-time speed, the full speed of a race, with no slow motion and no speed ramping. Crowd murmur and distant engines, no music.",
+        "qc_ref": "staging",
+        "take": "clips/s1_v1.mov",
+        "trim": [
+          0,
+          9.0
+        ]
+      },
+      {
+        "id": "s2",
+        "still": {
+          "ref": "kyle",
+          "input": "seed/kyle.png",
+          "prompt": "Tight close-up portrait, head and shoulders, straight on, one person alone in the frame. kyle_kx boy, a nine-year-old boy with child proportions, this exact face, short dark hair, wearing a battered open-face racing helmet with round goggles pushed up on the brow and a sand-coloured padded flight jerkin, sitting down in the open pod with its cowling across the bottom of frame. He is keyed up and happy, his eyes bright and the start of a grin on his face, looking slightly off camera at the course ahead. An even natural skin tone, hard morning sun from one side and warm bounced light off the sand on the other. The staging ground and the crowd are thrown far out of focus behind him. Clean clear air between the camera and his face. The face is well exposed and clearly visible. Razor-sharp focus on the eyes and skin texture. Cinematic film still from a late-1990s live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scorched metal, hard high desert sun, slight haze and blown highlights, shallow depth of field, visible film grain, warm ochre and sand palette against a pale washed sky. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+          "config": {
+            "shift": 3.0,
+            "sampler": 16,
+            "loras": [
+              {
+                "file": "kyle_lora_v2_2500_lora_f32.ckpt",
+                "weight": 1.0
+              }
+            ]
+          }
+        },
+        "video_prompt": "Locked camera. His grin widens into a real open smile over the first second and then settles and holds steady for the rest of the shot without growing further. His head stays level and still and his chin does not lift. Dust drifts past behind him and the crowd moves far out of focus. The light stays constant. Everything moves at natural real-time speed, the full speed of a race, with no slow motion and no speed ramping. Crowd and engine idle, no music.",
+        "qc_ref": "kyle",
+        "take": "clips/s2_v1.mov",
+        "trim": [
+          0,
+          7.0
+        ]
+      },
+      {
+        "id": "s3",
+        "still": {
+          "ref": "racer",
+          "input": "seed/racer.png",
+          "prompt": "Extreme close-up detail insert along the machine, no people in frame. A pair of long steel tow cables running from the back of two enormous scorched turbine engines to the nose of the trailing pod, framed tight and side-on so both cables cross the frame as two straight bar-tight horizontal lines under full load, every strand lit by hard sun, with scorched riveted metal and a violet energy binder glowing behind them. The cables are dead straight and rigid with tension, with no slack, no loops and no loose ends anywhere in frame. Macro clarity, very shallow depth of field. Cinematic film still from a late-1990s live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scorched metal, hard high desert sun, slight haze and blown highlights, shallow depth of field, visible film grain, warm ochre and sand palette against a pale washed sky. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+          "config": {
+            "shift": 3.0,
+            "sampler": 16
+          }
+        },
+        "video_prompt": "Locked camera. The two cables pull from taut to bar-tight and stay rigid and perfectly straight for the whole shot, vibrating very slightly under load, while heat haze pours off the metal behind them and the violet binder flickers. Nothing else moves and nothing comes loose. No person enters the frame at any point. Everything moves at natural real-time speed, the full speed of a race, with no slow motion and no speed ramping. Steel under tension and turbines rising, no music.",
+        "qc_ref": "racer",
+        "take": "clips/s3_v1.mov",
+        "trim": [
+          0,
+          6.0
+        ]
+      },
+      {
+        "id": "s4",
+        "still": {
+          "ref": "racer",
+          "input": "seed/racer.png",
+          "prompt": "Low side-on shot along the ground at engine height. The two enormous scorched turbine engines of a home-built desert racer in two parts: two enormous scorched turbine engines running well out in front, side by side and slightly splayed, their wide dark intakes leading and long orange flame blasting backwards from the rear nozzles, and a small open pod trailing behind them carrying the pilot. The engines and the pod are joined by a pair of long steel tow cables that run straight and bar-tight under load, dead taut in a single plane with no slack, no loops and no loose ends, and a faint violet energy binder arcs between the two engines. Burnt copper and gunmetal panels, exposed ribbed casings and riveted plates. The whole machine hovers above the ground with open air beneath it and its shadow on the sand directly below; it has no wheels and nothing touches the ground, framed with both engines leading at the left of frame and the pod trailing at the right on its two bar-tight cables. Long orange flame blasts backwards out of the rear nozzles and a wall of pale dust lifts off the ground behind them. In the open pod sits kyle_kx boy, a small nine-year-old boy with child proportions, this exact face, wearing a battered open-face racing helmet with round goggles and a sand-coloured padded flight jerkin. He is unmistakably a small child in a machine built for someone far bigger: his head and shoulders barely clear the pod's cowling, the seat rises well above him, and the cockpit looks half empty around his small frame. He is seen small at this distance and his face is not readable. Hard morning sun. The ground ahead is clear open desert. Cinematic film still from a late-1990s live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scorched metal, hard high desert sun, slight haze and blown highlights, shallow depth of field, visible film grain, warm ochre and sand palette against a pale washed sky. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+          "config": {
+            "shift": 3.0,
+            "sampler": 16,
+            "loras": [
+              {
+                "file": "kyle_lora_v2_2500_lora_f32.ckpt",
+                "weight": 0.6
+              }
+            ]
+          }
+        },
+        "video_prompt": "Locked camera low to the ground. The engines catch and settle into a steady roaring burn with long flame streaming backwards, heat haze pouring off the metal, and dust streaming away behind in a continuous sheet. The two cables stay bar-tight and straight throughout. The machine holds its position in the air. The pilot stays low in the pod and his face never turns toward the camera, and no one else enters the frame at any point. Everything moves at natural real-time speed, the full speed of a race, with no slow motion and no speed ramping. Turbines spooling up, no music.",
+        "qc_ref": "racer",
+        "take": "clips/s4_v1.mov",
+        "trim": [
+          0,
+          9.0
+        ]
+      },
+      {
+        "id": "s5",
+        "still": {
+          "ref": "flats",
+          "input": "seed/flats.png",
+          "prompt": "Wide tracking shot from the side, level with the machine, no face readable at this distance. a vast flat ochre desert under a pale washed-out sky, low sandstone buttes strung along the far horizon, the ground a hard pale dust that lifts in sheets, heat shimmer flattening the distance. A single racer crosses frame at enormous speed, low over the ground: a home-built desert racer in two parts: two enormous scorched turbine engines running well out in front, side by side and slightly splayed, their wide dark intakes leading and long orange flame blasting backwards from the rear nozzles, and a small open pod trailing behind them carrying the pilot. The engines and the pod are joined by a pair of long steel tow cables that run straight and bar-tight under load, dead taut in a single plane with no slack, no loops and no loose ends, and a faint violet energy binder arcs between the two engines. Burnt copper and gunmetal panels, exposed ribbed casings and riveted plates. The whole machine hovers above the ground with open air beneath it and its shadow on the sand directly below; it has no wheels and nothing touches the ground, the two engines leading well ahead with flame streaming back and the pod riding behind on two dead-straight cables, a long boiling wake of pale dust thrown up behind it. In the open pod sits kyle_kx boy, a small nine-year-old boy with child proportions, this exact face, wearing a battered open-face racing helmet with round goggles and a sand-coloured padded flight jerkin. He is unmistakably a small child in a machine built for someone far bigger: his head and shoulders barely clear the pod's cowling, the seat rises well above him, and the cockpit looks half empty around his small frame. He is seen small at this distance and his face is not readable. The ground ahead of the machine is clear and open to the horizon. Cinematic film still from a late-1990s live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scorched metal, hard high desert sun, slight haze and blown highlights, shallow depth of field, visible film grain, warm ochre and sand palette against a pale washed sky. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+          "config": {
+            "shift": 3.0,
+            "sampler": 16,
+            "loras": [
+              {
+                "file": "kyle_lora_v2_2500_lora_f32.ckpt",
+                "weight": 0.6
+              }
+            ]
+          }
+        },
+        "video_prompt": "The camera tracks alongside at the same speed so the machine holds its place in frame while the desert and the distant buttes streak past behind it. The dust wake boils continuously behind and the flame streams back steadily. The two cables stay bar-tight and straight in the same plane for the whole shot. The machine stays level and does not turn toward the camera, and the pilot stays low in the pod with his face never turning toward the camera. Everything moves at natural real-time speed, the full speed of a race, with no slow motion and no speed ramping. Engines at full power and rushing air, no music.",
+        "qc_ref": "flats",
+        "take": "clips/s5_v1.mov",
+        "trim": [
+          0,
+          9.5
+        ]
+      },
+      {
+        "id": "s6",
+        "still": {
+          "ref": "kyle",
+          "input": "seed/kyle.png",
+          "prompt": "Close-up portrait, frontal, slightly low angle, one person alone in the frame. kyle_kx boy, a nine-year-old boy with child proportions, this exact face, short dark hair, wearing a battered open-face racing helmet with round goggles now down over his eyes and a sand-coloured padded flight jerkin, low in the open pod behind its cowling. His mouth is open in a wide fierce delighted grin, caught mid-shout, his face lit hard and bright by full sun. The ochre desert and pale sky are thrown into a smeared streak of speed far behind him. Clean clear air between the camera and his face. The face is well exposed and clearly visible. Razor-sharp focus on the goggles and skin texture. Cinematic film still from a late-1990s live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scorched metal, hard high desert sun, slight haze and blown highlights, shallow depth of field, visible film grain, warm ochre and sand palette against a pale washed sky. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+          "config": {
+            "shift": 3.0,
+            "sampler": 16,
+            "loras": [
+              {
+                "file": "kyle_lora_v2_2500_lora_f32.ckpt",
+                "weight": 1.0
+              }
+            ]
+          }
+        },
+        "video_prompt": "Locked camera travelling with him. His delighted grin reaches its full width in the first second and then holds steady for the rest of the shot without changing. His head stays level and still and his chin does not lift. The background streaks past continuously behind him and his collar and the helmet straps whip in the airflow. The light stays constant. Everything moves at natural real-time speed, the full speed of a race, with no slow motion and no speed ramping. Engines and rushing air, no music.",
+        "qc_ref": "kyle",
+        "take": "clips/s6_v1.mov",
+        "trim": [
+          0,
+          7.5
+        ]
+      },
+      {
+        "id": "s7",
+        "still": {
+          "ref": "flats",
+          "input": "seed/flats.png",
+          "prompt": "Low wide shot from just off the course, no face readable at this distance. Two racing machines run side by side and very close at enormous speed across a vast flat ochre desert under a pale washed-out sky, low sandstone buttes strung along the far horizon, the ground a hard pale dust that lifts in sheets, heat shimmer flattening the distance. Each one is a home-built desert racer in two parts: two enormous scorched turbine engines running well out in front, side by side and slightly splayed, their wide dark intakes leading and long orange flame blasting backwards from the rear nozzles, and a small open pod trailing behind them carrying the pilot. The engines and the pod are joined by a pair of long steel tow cables that run straight and bar-tight under load, dead taut in a single plane with no slack, no loops and no loose ends, and a faint violet energy binder arcs between the two engines. Burnt copper and gunmetal panels, exposed ribbed casings and riveted plates. The whole machine hovers above the ground with open air beneath it and its shadow on the sand directly below; it has no wheels and nothing touches the ground, their leading engines level with one another and both pods riding behind on bar-tight cables. A dense wall of pale dust boils up between and behind them and hangs in the sun. The ground ahead is clear and open. Cinematic film still from a late-1990s live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scorched metal, hard high desert sun, slight haze and blown highlights, shallow depth of field, visible film grain, warm ochre and sand palette against a pale washed sky. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+          "config": {
+            "shift": 3.0,
+            "sampler": 16,
+            "loras": [
+              {
+                "file": "kyle_lora_v2_2500_lora_f32.ckpt",
+                "weight": 0.6
+              }
+            ]
+          }
+        },
+        "video_prompt": "Locked camera low beside the course as both machines come past together and away, neither pulling ahead. Dust boils up continuously between and behind them and streams along the ground. All four cables stay bar-tight and straight. The pilots stay low in their pods and no face turns toward the camera; nobody else enters the frame at any point. Everything moves at natural real-time speed, the full speed of a race, with no slow motion and no speed ramping. Engines echoing, no music.",
+        "qc_ref": "flats",
+        "take": "clips/s7_v1.mov",
+        "trim": [
+          0,
+          9.5
+        ]
+      },
+      {
+        "id": "s8",
+        "still": {
+          "ref": "arena",
+          "input": "seed/arena.png",
+          "prompt": "Extreme wide final shot from high above the course, no face readable at this distance. a vast desert arena outside a sandstone city of great domed buildings, an enormous tiered stone grandstand packed solid with spectators running along one side, tall banners on poles, the open course of pale dust sweeping past it and out into the desert. A single racer streaks along the course below and past the full length of the grandstand, small against the scale of the arena and the city, dragging a long bright wake of dust behind it into low gold sun. The packed crowd rises in the stands, arms up. The course ahead of the machine is clear and open. Cinematic film still from a late-1990s live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scorched metal, hard high desert sun, slight haze and blown highlights, shallow depth of field, visible film grain, warm ochre and sand palette against a pale washed sky. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+          "config": {
+            "shift": 3.0,
+            "sampler": 16
+          }
+        },
+        "video_prompt": "Slow rise and push in from above as the machine runs the length of the grandstand, its dust wake spreading and drifting behind it. The crowd in the stands moves continuously and the banners lift in the wind. The camera stays high and no face comes into frame at any point. Everything moves at natural real-time speed, the full speed of a race, with no slow motion and no speed ramping. A roaring crowd and engines, no music.",
+        "qc_ref": "arena",
+        "take": "clips/s8_v1.mov",
+        "trim": [
+          0,
+          9.0
+        ]
+      }
+    ]
+  },
+  "files": []
+}

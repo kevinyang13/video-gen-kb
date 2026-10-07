@@ -676,9 +676,39 @@ silently.</p>
 <p>Timings were re-measured rather than reused from memory, and one estimate was wrong: <code>stills</code> takes
 <strong>21 minutes</strong> for 40 candidates, not the ~40 I had been quoting. Clips 80 min, finish 75 min, about 3 h
 for an eight-shot film plus review.</p>
+<h2>2026-10-06 — the craft changes shape and the pilot is a grown man</h2>
+<p><code>kyle_firstflight</code> was delivered at 60.04 s and Kevin's verdict was that the aircraft is a different
+size and shape in every shot and the pilot is not a child, let alone Kyle. Both were true, and checking
+the spec showed why.</p>
+<p><strong>The skiff is described in five shots and only two were shown a picture of it.</strong> s6 got <code>yard.png</code>,
+s7 and s8 got <code>dunes.png</code> — landscapes. In those three the model had no reference for the craft and
+rebuilt it from the text each time.</p>
+<p><strong><code>still.ref</code> was <code>None</code> on all eight shots — and on every shot of every film in this repo.</strong>
+<code>dt_diptych.sh</code> has a diptych mode whose whole purpose is carrying identity from a reference image into
+a generated scene, <code>film_run.py</code> exposes it, and it has never once been switched on.</p>
+<p><strong>The LoRA was inert where it mattered.</strong> s6 and s7 ran <code>kyle_lora_v2_2500</code> at 0.6 and neither prompt
+contains <code>kyle_kx</code>. A character LoRA with no trigger token loads, costs sampling time and binds to
+nothing.</p>
+<p><strong>And the pilot was written as "a small figure".</strong> s7 did not mention a pilot at all. A generic person
+renders as an adult at any distance — which <code>kyle_saltflats</code> v1 had already proved, and already fixed,
+with a lock that then stayed inside that project's spec while the next film started from a blank page.</p>
+<p>Three changes, all preventive rather than patches to the delivered film:</p>
+<ul>
+<li><strong><a href="shot-locks.html">shot locks</a></strong>, a new page holding the lock paragraphs that have been proven across films — the
+  child-in-a-vehicle lock with its four load-bearing parts, the containment clauses, the hovering-vehicle
+  lock, the held-expression clause and the dark-background clause for faces.</li>
+<li><strong>§12 of <a href="still-geometry-and-review.html">still geometry and review</a></strong>, covering the object-reference rule, the unused diptych, the
+  inert LoRA and the generic-figure failure.</li>
+<li><strong><code>film_run.py check</code> now fails the run</strong> on a person described without the trigger token while a LoRA
+  is applied, and on a person described without any age cue at any distance. It warns on an object
+  described without a reference image, and on a LoRA applied to a faceless shot with no trigger.</li>
+</ul>
+<p>Against the eight existing films the new rules produce two hard failures, both genuine:
+<code>kyle_firstflight</code> s6 and s7, and one macro insert in <code>kyle_debut</code>. The check would have caught this
+film, <code>kyle_saltflats</code> v1, and the next one.</p>
   
 </div>
-<footer>video-gen-kb · built 2026-10-04 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<footer>video-gen-kb · built 2026-10-06 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
 <script>function tt(){var r=document.documentElement,
 d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
 matchMedia('(prefers-color-scheme: dark)').matches);

@@ -904,3 +904,40 @@ silently.
 Timings were re-measured rather than reused from memory, and one estimate was wrong: `stills` takes
 **21 minutes** for 40 candidates, not the ~40 I had been quoting. Clips 80 min, finish 75 min, about 3 h
 for an eight-shot film plus review.
+
+## 2026-10-06 — the craft changes shape and the pilot is a grown man
+
+`kyle_firstflight` was delivered at 60.04 s and Kevin's verdict was that the aircraft is a different
+size and shape in every shot and the pilot is not a child, let alone Kyle. Both were true, and checking
+the spec showed why.
+
+**The skiff is described in five shots and only two were shown a picture of it.** s6 got `yard.png`,
+s7 and s8 got `dunes.png` — landscapes. In those three the model had no reference for the craft and
+rebuilt it from the text each time.
+
+**`still.ref` was `None` on all eight shots — and on every shot of every film in this repo.**
+`dt_diptych.sh` has a diptych mode whose whole purpose is carrying identity from a reference image into
+a generated scene, `film_run.py` exposes it, and it has never once been switched on.
+
+**The LoRA was inert where it mattered.** s6 and s7 ran `kyle_lora_v2_2500` at 0.6 and neither prompt
+contains `kyle_kx`. A character LoRA with no trigger token loads, costs sampling time and binds to
+nothing.
+
+**And the pilot was written as "a small figure".** s7 did not mention a pilot at all. A generic person
+renders as an adult at any distance — which `kyle_saltflats` v1 had already proved, and already fixed,
+with a lock that then stayed inside that project's spec while the next film started from a blank page.
+
+Three changes, all preventive rather than patches to the delivered film:
+
+- **[[shot-locks]]**, a new page holding the lock paragraphs that have been proven across films — the
+  child-in-a-vehicle lock with its four load-bearing parts, the containment clauses, the hovering-vehicle
+  lock, the held-expression clause and the dark-background clause for faces.
+- **§12 of [[still-geometry-and-review]]**, covering the object-reference rule, the unused diptych, the
+  inert LoRA and the generic-figure failure.
+- **`film_run.py check` now fails the run** on a person described without the trigger token while a LoRA
+  is applied, and on a person described without any age cue at any distance. It warns on an object
+  described without a reference image, and on a LoRA applied to a faceless shot with no trigger.
+
+Against the eight existing films the new rules produce two hard failures, both genuine:
+`kyle_firstflight` s6 and s7, and one macro insert in `kyle_debut`. The check would have caught this
+film, `kyle_saltflats` v1, and the next one.

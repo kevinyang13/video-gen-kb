@@ -107,6 +107,16 @@ Ask these once, all together, and record the answers in the plan page's "Decisio
 - **One lock per entity** (character, creature, vehicle, place), 1–2 sentences, pasted verbatim into every prompt that shows it. Name the count: "one boy".
 - **Style lock** (head of every still prompt) and **video tail** (end of every LTX prompt).
 - **Word bans** collected so far: "UFO"/"alien" (invites aliens → write "flying saucer, no aliens visible"), "dragon" for a wingless mount (grows wings), "lightning" for a sky rift (renders a bolt), "wind in his hair" on a face shot (hair restyles over 10 s), negations with klein at CFG 1 (it obeys the noun). Add to this list after every project.
+- **Start from [[shot-locks]], do not write locks from scratch.** The child-in-a-vehicle lock, the
+  containment clauses, the hovering-vehicle lock and the held-expression clause are all there because
+  a film shipped broken without them. A new project writing its own `scenes.locks` from a blank page
+  is how `kyle_firstflight` shipped "a small figure low in the open cockpit" two films after
+  `kyle_saltflats` had already fixed exactly that.
+- **Every shot that shows a recurring object sets `still.ref` to that object's master.** `still.input`
+  carries the scene; `still.ref` carries the thing that must not change. See
+  [[still-geometry-and-review]] §12.
+- **Every shot containing a person carries the LoRA trigger token and the stated age.** A LoRA with no
+  trigger in the prompt is inert, and a generic "figure" renders as an adult at any distance.
 - Store everything in the version's `spec.json`: `scenes.locks` for the locks, each shot's `still.prompt` and `video_prompt` for the wording; the registry pages render it.
 
 ## Phase 3 — Preflight (Claude, 2 min, just before go)
@@ -371,6 +381,7 @@ Rule of thumb: **wall clock ≈ 0.6 h + 0.35 h per shot** (stills + LTX + 25% re
 - Chaining clips longer than 10 s (last frame → next first frame) — planned in [[character-consistency]] §6, not needed yet.
 
 ## Related pages
+- [[shot-locks]]
 - [[running-a-film-yourself]]
 - [[kyle-antarctic-rescue-plan]] — the run this blueprint is distilled from
 - [[headless-cli-pipeline]] — the CLI, strength-1.0 edit mode, the diptych

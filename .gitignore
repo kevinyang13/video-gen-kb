@@ -42,3 +42,10 @@ projects/lindsey_lora/*/raw/
 /collage_preview.jpg
 tools/draw-things-community/
 tools/*.log
+
+# Third-party reference images supplied for a project are kept locally but not published.
+# The repo is public; the specs reference them by filename, which is enough to reproduce a run.
+projects/*/*/raw/*.jpg
+projects/*/*/raw/*.jpeg
+projects/*/*/raw/*.webp
+projects/*/*/raw/*.png

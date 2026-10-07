@@ -1,0 +1,217 @@
+{
+  "order": 25,
+  "id": "kyle_saltflats",
+  "version": "v3-stills-supplied",
+  "variant": "supplied-stills",
+  "title": "Kyle — The Boonta Flats",
+  "date": "2026-10-04",
+  "theme": "realistic",
+  "dt_project": "kyle-saltflats-v3",
+  "status": "clips QC'd 2026-10-04 — 59.85 s planned",
+  "source": "five finished stills supplied by Kevin, kept in raw/ and used unmodified as first frames",
+  "notes": "Third version and a different kind of run: Kevin supplied five finished images and asked for them to be used as the final stills, so there is no still stage at all -- no masters, no candidates, no picks, nothing generated. The film is motion prompts over fixed first frames. Two images carry two shots each with different camera moves, placed non-adjacent, which is what gets the running time to a minute from five images. Every motion prompt holds the machines hovering and keeps faces away from camera, since no still here contains a readable face to propagate. QC trims: s2's push-in overshoots into a blur of metal past frame 170; s6 and s7 both carry LTX's end-of-clip fade (frames 164 and 190), caught by qc_sheet.sh. An eighth clip was added from the arena image with a locked camera to make the minute, placed between the two canyon shots and the finish.",
+  "still": {
+    "model": "none — supplied",
+    "size": "1024x576",
+    "control": "supplied images, scaled-to-fill and centre-cropped from 1376x768 to 1024x576"
+  },
+  "i2v": {
+    "model": "ltx_2.3_22b_distilled_1.1_q8p.ckpt",
+    "size": "1024x576",
+    "frames": 249,
+    "fps": 25,
+    "steps": 8,
+    "cfg": 1,
+    "shift": 5.0,
+    "sampler": 19,
+    "stochasticSamplingGamma": 0.3,
+    "time_min": 10
+  },
+  "post": {
+    "upscale": "Real-ESRGAN x4plus -> 3840x2160",
+    "loop": "none",
+    "music": "best_adventure_ever.mp3"
+  },
+  "scenes": {
+    "locks": {
+      "pace": "Everything moves at natural real-time speed, the full speed of a race, with no slow motion and no speed ramping."
+    },
+    "s1": {
+      "title": "Start line on the flats",
+      "note": "first frame = raw/supplied_18.jpg, supplied unmodified; kept 9.9 s",
+      "still": "supplied image raw/supplied_18.jpg",
+      "video": "Locked camera low beside the line. The whole row of machines holds station hovering just above the pale ground, their exhaust glow pulsing and heat haze rippling off the metal, fine dust drifting steadily across the ground between them and the distant crowd shifting on the terraces behind. The machines stay where they are and do not move off. The pilots stay low in their cockpits and no face turns toward the camera; nobody else enters the frame at any point. Everything moves at natural real-time speed, the full speed of a race, with no slow motion and no speed ramping. Engines idling and a distant crowd, no music."
+    },
+    "s2": {
+      "title": "The arena, moments before the start",
+      "note": "first frame = raw/supplied_14.jpg, supplied unmodified; kept 9.9 s",
+      "still": "supplied image raw/supplied_14.jpg",
+      "video": "Very slow push in along the line of waiting machines. Exhaust flares flicker at the rear nozzles, heat haze pours off the engines, loose dust streams low across the stone, the tall banners lift and fall in the wind and the packed crowd moves continuously on the terraces above. The machines hold their position hovering and do not move off. The pilots stay seated low and no face turns toward the camera; nobody else enters the frame. Everything moves at natural real-time speed, the full speed of a race, with no slow motion and no speed ramping. Engines idling and a roaring crowd, no music."
+    },
+    "s3": {
+      "title": "The ignition panel",
+      "note": "first frame = raw/supplied_17.jpg, supplied unmodified; kept 6.0 s",
+      "still": "supplied image raw/supplied_17.jpg",
+      "video": "Locked camera. The four gauge needles sweep steadily up across their dials and settle, the red ignition button lights and glows, and heat shimmer rises off the scorched metal plate throughout. The brass lever and the panel stay exactly where they are. No person enters the frame at any point. Everything moves at natural real-time speed, the full speed of a race, with no slow motion and no speed ramping. Switches and turbines rising behind, no music."
+    },
+    "s4": {
+      "title": "Into the canyon",
+      "note": "first frame = raw/supplied_16.jpg, supplied unmodified; kept 9.9 s",
+      "still": "supplied image raw/supplied_16.jpg",
+      "video": "The camera travels with the two machines as they run together down the narrow canyon, the rock walls streaking past on both sides. Blue underglow washes along the stone beneath them, red exhaust streams backwards, and dust boils up continuously behind. Both machines stay level and hold their line, neither turning toward the camera. The pilots stay low in their cockpits and no face turns toward the camera. Everything moves at natural real-time speed, the full speed of a race, with no slow motion and no speed ramping. Engines echoing off rock, no music."
+    },
+    "s5": {
+      "title": "Down the line",
+      "note": "first frame = raw/supplied_18.jpg, supplied unmodified; kept 9.0 s",
+      "still": "supplied image raw/supplied_18.jpg",
+      "video": "The camera drifts steadily sideways along the row of machines, the near engines sliding past frame while the crowd terraces track behind. Exhaust glow pulses, heat haze ripples and dust streams low across the ground. The machines hold station hovering and do not move off. No face turns toward the camera and nobody enters the frame. Everything moves at natural real-time speed, the full speed of a race, with no slow motion and no speed ramping. Engines idling, no music."
+    },
+    "s6": {
+      "title": "Flat out between the walls",
+      "note": "first frame = raw/supplied_16.jpg, supplied unmodified; kept 9.0 s",
+      "still": "supplied image raw/supplied_16.jpg",
+      "video": "Locked camera low on the canyon floor as both machines come straight on and past, growing fast in frame and then gone, the rock walls rushing by behind them. Red exhaust streams back, blue underglow sweeps across the stone and a dense wall of dust boils up behind. The pilots stay low and no face turns toward the camera. Everything moves at natural real-time speed, the full speed of a race, with no slow motion and no speed ramping. Engines at full power, no music."
+    },
+    "s7": {
+      "title": "Across the line",
+      "note": "first frame = raw/supplied_15.jpg, supplied unmodified; kept 9.9 s",
+      "still": "supplied image raw/supplied_15.jpg",
+      "video": "Slow rise and push in from high above the arena as the machine runs the length of the course below, its long flame and dust wake spreading and drifting behind it across the ground. The packed crowd on both sets of terraces moves continuously with arms raised and the banners lift in the wind. The camera stays high and no face comes into frame at any point. Everything moves at natural real-time speed, the full speed of a race, with no slow motion and no speed ramping. A roaring crowd and engines, no music."
+    },
+    "s8": {
+      "title": "The line holds",
+      "note": "first frame = raw/supplied_14.jpg, supplied unmodified; kept 9.9 s",
+      "still": "supplied image raw/supplied_14.jpg",
+      "video": "Locked camera low beside the waiting line, no camera movement. The machines hold station hovering just above the stone, exhaust flares flickering at the rear nozzles and heat haze pouring off the metal, while loose dust streams low across the ground and the tall banners lift and fall in the wind. The packed crowd moves continuously on the terraces above. The machines do not move off. The pilots stay seated low and no face turns toward the camera; nobody else enters the frame. Everything moves at natural real-time speed, the full speed of a race, with no slow motion and no speed ramping. Engines idling and a roaring crowd, no music."
+    }
+  },
+  "run-spec": {
+    "dir": "projects/kyle_saltflats/v3-stills-supplied",
+    "name": "kyle_saltflats_v3",
+    "size": [
+      1024,
+      576
+    ],
+    "clip": {
+      "model": "ltx_2.3_22b_distilled_1.1_q8p.ckpt",
+      "frames": 249,
+      "steps": 8,
+      "cfg": 1,
+      "config": {
+        "sampler": 19,
+        "shift": 5.0,
+        "stochasticSamplingGamma": 0.3,
+        "fps": 25,
+        "hiresFix": false
+      },
+      "seed": 1,
+      "video_format": "prores422hq"
+    },
+    "upscale": {
+      "model": "realesrgan-x4plus",
+      "size": [
+        3840,
+        2160
+      ],
+      "fit": "crop",
+      "bitrate": "40M"
+    },
+    "assemble": {
+      "fps": 25,
+      "xfade": 0.75,
+      "clip_audio": true,
+      "bitrate": "40M"
+    },
+    "music": {
+      "file": "projects/kyle_saltflats/v3-stills-supplied/music/best_adventure_ever.mp3",
+      "start": 0,
+      "vol": 0.45,
+      "fade_in": 1.5,
+      "fade_out": 2.0
+    },
+    "deliver": [
+      {
+        "size": [
+          1920,
+          1080
+        ],
+        "bitrate": "12M"
+      }
+    ],
+    "shots": [
+      {
+        "id": "s1",
+        "video_prompt": "Locked camera low beside the line. The whole row of machines holds station hovering just above the pale ground, their exhaust glow pulsing and heat haze rippling off the metal, fine dust drifting steadily across the ground between them and the distant crowd shifting on the terraces behind. The machines stay where they are and do not move off. The pilots stay low in their cockpits and no face turns toward the camera; nobody else enters the frame at any point. Everything moves at natural real-time speed, the full speed of a race, with no slow motion and no speed ramping. Engines idling and a distant crowd, no music.",
+        "take": "clips/s1_v1.mov",
+        "trim": [
+          0,
+          9.9
+        ]
+      },
+      {
+        "id": "s2",
+        "video_prompt": "Very slow push in along the line of waiting machines. Exhaust flares flicker at the rear nozzles, heat haze pours off the engines, loose dust streams low across the stone, the tall banners lift and fall in the wind and the packed crowd moves continuously on the terraces above. The machines hold their position hovering and do not move off. The pilots stay seated low and no face turns toward the camera; nobody else enters the frame. Everything moves at natural real-time speed, the full speed of a race, with no slow motion and no speed ramping. Engines idling and a roaring crowd, no music.",
+        "take": "clips/s2_v1.mov",
+        "trim": [
+          0,
+          6.5
+        ]
+      },
+      {
+        "id": "s3",
+        "video_prompt": "Locked camera. The four gauge needles sweep steadily up across their dials and settle, the red ignition button lights and glows, and heat shimmer rises off the scorched metal plate throughout. The brass lever and the panel stay exactly where they are. No person enters the frame at any point. Everything moves at natural real-time speed, the full speed of a race, with no slow motion and no speed ramping. Switches and turbines rising behind, no music.",
+        "take": "clips/s3_v1.mov",
+        "trim": [
+          0,
+          6.0
+        ]
+      },
+      {
+        "id": "s4",
+        "video_prompt": "The camera travels with the two machines as they run together down the narrow canyon, the rock walls streaking past on both sides. Blue underglow washes along the stone beneath them, red exhaust streams backwards, and dust boils up continuously behind. Both machines stay level and hold their line, neither turning toward the camera. The pilots stay low in their cockpits and no face turns toward the camera. Everything moves at natural real-time speed, the full speed of a race, with no slow motion and no speed ramping. Engines echoing off rock, no music.",
+        "take": "clips/s4_v1.mov",
+        "trim": [
+          0,
+          9.9
+        ]
+      },
+      {
+        "id": "s5",
+        "video_prompt": "The camera drifts steadily sideways along the row of machines, the near engines sliding past frame while the crowd terraces track behind. Exhaust glow pulses, heat haze ripples and dust streams low across the ground. The machines hold station hovering and do not move off. No face turns toward the camera and nobody enters the frame. Everything moves at natural real-time speed, the full speed of a race, with no slow motion and no speed ramping. Engines idling, no music.",
+        "take": "clips/s5_v1.mov",
+        "trim": [
+          0,
+          9.9
+        ]
+      },
+      {
+        "id": "s6",
+        "video_prompt": "Locked camera low on the canyon floor as both machines come straight on and past, growing fast in frame and then gone, the rock walls rushing by behind them. Red exhaust streams back, blue underglow sweeps across the stone and a dense wall of dust boils up behind. The pilots stay low and no face turns toward the camera. Everything moves at natural real-time speed, the full speed of a race, with no slow motion and no speed ramping. Engines at full power, no music.",
+        "take": "clips/s6_v1.mov",
+        "trim": [
+          0,
+          6.0
+        ]
+      },
+      {
+        "id": "s8",
+        "video_prompt": "Locked camera low beside the waiting line, no camera movement. The machines hold station hovering just above the stone, exhaust flares flickering at the rear nozzles and heat haze pouring off the metal, while loose dust streams low across the ground and the tall banners lift and fall in the wind. The packed crowd moves continuously on the terraces above. The machines do not move off. The pilots stay seated low and no face turns toward the camera; nobody else enters the frame. Everything moves at natural real-time speed, the full speed of a race, with no slow motion and no speed ramping. Engines idling and a roaring crowd, no music.",
+        "take": "clips/s8_v1.mov",
+        "trim": [
+          0,
+          9.9
+        ]
+      },
+      {
+        "id": "s7",
+        "video_prompt": "Slow rise and push in from high above the arena as the machine runs the length of the course below, its long flame and dust wake spreading and drifting behind it across the ground. The packed crowd on both sets of terraces moves continuously with arms raised and the banners lift in the wind. The camera stays high and no face comes into frame at any point. Everything moves at natural real-time speed, the full speed of a race, with no slow motion and no speed ramping. A roaring crowd and engines, no music.",
+        "take": "clips/s7_v1.mov",
+        "trim": [
+          0,
+          7.0
+        ]
+      }
+    ]
+  },
+  "files": []
+}

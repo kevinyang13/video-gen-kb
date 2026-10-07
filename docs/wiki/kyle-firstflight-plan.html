@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kyle — First Flight — video-gen-kb</title>
+<style>
+:root{--bg:#0B0D12;--panel:#141822;--panel-2:#1B2130;--stroke:#2A3245;--text:#E6E9F0;
+--muted:#8B94A7;--accent:#F5B84B;--accent-2:#4BC9F5;--on-accent:#12131A;
+--rule:rgba(139,148,167,.22);--code:#F5B84B}
+@media(prefers-color-scheme:light){:root:not([data-theme=dark]){--bg:#F4F1EA;--panel:#fff;
+--panel-2:#FAF8F3;--stroke:#D9D3C6;--text:#16181F;--muted:#5D6473;--accent:#B8781A;
+--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}}
+:root[data-theme=light]{--bg:#F4F1EA;--panel:#fff;--panel-2:#FAF8F3;--stroke:#D9D3C6;
+--text:#16181F;--muted:#5D6473;--accent:#B8781A;--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);
+line-height:1.65;padding:0 1rem 4rem}
+.shell{max-width:840px;margin:0 auto}
+a{color:var(--accent);text-decoration:none;font-weight:600}
+a:hover{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--accent-2);outline-offset:3px;border-radius:4px}
+.bar{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;padding:1.1rem 0;margin-bottom:1.5rem;
+border-bottom:1px solid var(--stroke)}
+.crumb{font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.spacer{flex:1}
+.pill{border:1px solid var(--stroke);background:var(--panel);border-radius:999px;padding:.28rem .8rem;
+font-size:.75rem;font-weight:700;color:var(--text);cursor:pointer;font-family:inherit}
+.pill:hover{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+h1{font-size:clamp(1.7rem,5vw,2.5rem);margin:.2rem 0 1rem;line-height:1.1;letter-spacing:-.015em;text-wrap:balance}
+h2{font-size:1.25rem;margin:2.2rem 0 .7rem;padding-bottom:.35rem;border-bottom:1px solid var(--rule);text-wrap:balance}
+h3{font-size:1.02rem;margin:1.5rem 0 .5rem;color:var(--accent)}
+p{margin:.7rem 0}
+ul,ol{margin:.7rem 0 .7rem 1.3rem}
+li{margin:.28rem 0}
+li::marker{color:var(--accent)}
+em{color:var(--muted)}
+hr{border:none;border-top:1px solid var(--stroke);margin:2rem 0}
+blockquote{border-left:3px solid var(--accent);background:var(--panel);border-radius:0 10px 10px 0;
+padding:.8rem 1.1rem;margin:1.1rem 0;color:var(--muted);font-size:.92rem}
+code{background:var(--panel);border:1px solid var(--stroke);border-radius:5px;padding:.1rem .35rem;
+font-size:.85em;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--code)}
+img{max-width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--stroke);margin:1.1rem 0}
+pre{background:var(--panel);border:1px solid var(--stroke);border-radius:12px;padding:1rem;overflow-x:auto;margin:1.1rem 0}
+pre code{background:none;border:none;padding:0;color:var(--text);font-size:.83rem;line-height:1.55}
+.tw{overflow-x:auto;border:1px solid var(--stroke);border-radius:12px;background:var(--panel);margin:1.1rem 0}
+table{width:100%;border-collapse:collapse;font-size:.85rem;min-width:min(100%,460px)}
+th{background:var(--panel-2);color:var(--accent);text-align:left;padding:.55rem .8rem;font-size:.68rem;
+letter-spacing:.09em;text-transform:uppercase;white-space:nowrap;border-bottom:1px solid var(--stroke)}
+td{padding:.5rem .8rem;border-bottom:1px solid var(--rule);color:var(--muted);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td strong{color:var(--text)}
+.meta{display:flex;flex-wrap:wrap;gap:.4rem .9rem;font-size:.78rem;color:var(--muted);margin:-.4rem 0 1.2rem}
+.meta b{color:var(--text);font-weight:600}
+.missing{color:var(--muted);border-bottom:1px dashed var(--muted);cursor:help}
+.related{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--stroke)}
+.related h2{border:none;margin:0 0 .7rem;font-size:.95rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:0}
+.chips li{margin:0}
+.chips a,.chips .missing{display:inline-block;border:1px solid var(--stroke);background:var(--panel);
+border-radius:999px;padding:.28rem .8rem;font-size:.8rem}
+.chips a:hover{background:var(--accent);color:var(--on-accent);text-decoration:none;border-color:var(--accent)}
+footer{max-width:840px;margin:2.5rem auto 0;padding-top:1.2rem;border-top:1px solid var(--stroke);
+font-size:.75rem;color:var(--muted);text-align:center}
+/* landing */
+.hero{padding:2.4rem 0 1.6rem}
+.kicker{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2)}
+.hero h1{font-size:clamp(2rem,6vw,3.2rem);margin:.35rem 0 .5rem}
+.hero p{color:var(--muted);font-size:1.05rem;max-width:56ch}
+.hw{display:inline-flex;gap:.5rem;align-items:center;margin-top:1rem;border:1px solid var(--stroke);
+background:var(--panel);border-radius:999px;padding:.3rem .9rem;font-size:.78rem;color:var(--muted)}
+.hw .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.sec{margin-top:2.2rem}
+.sec h2{border:none;padding:0;margin:0 0 .8rem;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.9rem}
+.card{display:block;border:1px solid var(--stroke);background:var(--panel);border-radius:14px;padding:1rem 1.1rem;
+color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+.card b{display:block;color:var(--accent);font-size:1rem;margin-bottom:.3rem}
+.card span{font-size:.85rem;color:var(--muted);line-height:1.5}
+.stubs{font-size:.82rem;color:var(--muted);margin-top:.6rem}
+.yt{position:relative;width:100%;aspect-ratio:16/9;border:1px solid var(--stroke);border-radius:12px;overflow:hidden;background:#000;margin:1rem 0}
+.yt.yt-v{aspect-ratio:9/16;max-width:360px}
+.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="bar">
+    <span class="crumb"><a href="../">video-gen-kb</a> / <a href="index.html">Wiki</a></span>
+    <span class="spacer"></span>
+    <button class="pill" onclick="tt()">◐ Theme</button>
+  </nav>
+  <h1>Kyle — First Flight</h1><p class="lede">Sixth LoRA-driven film and the first written to a brief of "minimal face shots, happy": one face shot in eight, a story with a reversal in it, and every long take given to machinery, dust and sky.</p><div class="meta"><span><b>Updated</b> 2026-10-05</span><span><b>Sources</b> no external source; story written for this film. Identity from <code>projects/kyle_lora</code> v2.</span></div>
+<hr />
+<h2>The film</h2>
+<p>A boy rebuilds a wrecked skiff in a desert salvage yard with his repair droid, gets it flying, loses
+both engines over the dunes, and gets them back.</p>
+<p>Eight shots, 59.95 s delivered at 3840×2160.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>shot</th>
+<th>s</th>
+<th>face</th>
+<th>what</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>s1</td>
+<td>9.9</td>
+<td>—</td>
+<td>the salvage yard at dawn</td>
+</tr>
+<tr>
+<td>s2</td>
+<td>7.0</td>
+<td>—</td>
+<td>the droid wakes</td>
+</tr>
+<tr>
+<td>s3</td>
+<td>9.9</td>
+<td>back</td>
+<td>working on the skiff</td>
+</tr>
+<tr>
+<td>s4</td>
+<td>9.0</td>
+<td>—</td>
+<td>the coil spins up</td>
+</tr>
+<tr>
+<td>s5</td>
+<td>6.0</td>
+<td><strong>yes</strong></td>
+<td>it starts</td>
+</tr>
+<tr>
+<td>s6</td>
+<td>9.9</td>
+<td>—</td>
+<td>lift off</td>
+</tr>
+<tr>
+<td>s7</td>
+<td>5.0</td>
+<td>—</td>
+<td>the engines cut</td>
+</tr>
+<tr>
+<td>s8</td>
+<td>8.5</td>
+<td>—</td>
+<td>it catches</td>
+</tr>
+</tbody>
+</table></div>
+<h2>One face shot</h2>
+<p>The brief asked for faces to be minimised, which suits what the previous films established: a frontal
+face is the least reliable thing to put on screen for nine seconds, and backs, machinery and landscape
+are the most reliable. s5 is the only one, and s3 is a back view with a containment clause so nothing
+turns around. Everything else is wrecks, droid, coil, dust and sky — which is also where the long takes
+belong, because those things move on their own.</p>
+<h2>The story had no story</h2>
+<p>The first version was build it, fly it, fly into the sunset. Kevin's verdict was "lame", and he was
+right: no obstacle, nothing at stake, eight pretty shots in a row. The fix cost two stills and no extra
+running time — s7 and s8 became <strong>the engines cut</strong> and <strong>it catches</strong>, with the droid doing the saving,
+which turns it from decoration into a character and pays off its two earlier shots.</p>
+<p>Worth keeping as a rule: <em>happy</em> is not the same as <em>nothing goes wrong</em>. A film with no reversal has
+nothing for the last twenty seconds to be about.</p>
+<h2>What this film added</h2>
+<p><strong>An empty bright sky behind a subject invites invention.</strong> Two separate failures, one cause.</p>
+<ul>
+<li><strong>s5</strong> lost the face to bloom in two passes. I blamed the coil glow in front of him both times. The
+  sharp candidate in each batch was the one with salvage wreckage behind him rather than open sky — a
+  blown-out background plus shallow depth of field was hazing the subject. Putting a wall of rusted hull
+  plating close behind his head fixed it outright. This is <a href="still-geometry-and-review.html">still geometry and review</a> §5 from the
+  other direction: the thing destroying the face was <em>behind</em> it, not between it and the camera.</li>
+<li><strong>s2</strong>, a droid against a plain sky, grew a swarm of winged insects from about frame 99 — manufactured
+  out of the phrase "fine dust drifts past", which gave LTX a motion instruction with nothing in frame to
+  attach it to. Moving the motion onto the droid itself helped; adding "nothing flying through the frame"
+  did not, because negatives never bind. The second pass still carries distant birds and was accepted.</li>
+</ul>
+<p>s1 is the control: the same drifting dust, in a frame full of wrecks for it to move against, invented
+nothing.</p>
+<h2>Process notes</h2>
+<p>Two operational failures, both mine, both worth recording:</p>
+<p><strong>A phase-driven pipeline stalls if nothing wakes the agent.</strong> Each phase was launched by a watcher that
+re-invoked me on completion. One didn't fire, and the project sat idle for three hours with the GPU free.
+The fix is a single script that runs masters → stills → pick → clips → QC → finish in one process, with
+any review step given an automatic fallback — s5's pick is made by Laplacian variance over a centre crop
+rather than by waiting for judgement.</p>
+<p><strong>Archiving a bad take after the loop has passed it does not get it re-rendered.</strong> s2's failed clip was
+archived at 18:08; <code>film_run.py</code> had already moved to s3, so s2 was never regenerated, and <code>finish</code>
+began building a film with a hole in it. Caught at the 4K stage. Re-render first, archive second.</p>
+
+  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="still-geometry-and-review.html">still geometry and review</a></li><li><a href="lindsey-sparky-plan.html">lindsey sparky plan</a></li><li><a href="kyle-steamfield-plan.html">kyle steamfield plan</a></li><li><a href="kyle-lora-plan.html">kyle lora plan</a></li><li><a href="running-a-film-yourself.html">running a film yourself</a></li></ul></div>
+</div>
+<footer>video-gen-kb · built 2026-10-06 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<script>function tt(){var r=document.documentElement,
+d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
+matchMedia('(prefers-color-scheme: dark)').matches);
+r.setAttribute('data-theme',d?'light':'dark');}</script>
+</body>
+</html>

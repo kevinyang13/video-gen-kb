@@ -62,6 +62,7 @@ Each project owns a folder — `projects/<id>/<version>/` — and its plan page 
 
 - [[idea-to-video-blueprint]] — **start here for a new film**: idea → intake questionnaire → storyboard approval → unattended CLI run (masters, diptych stills, LTX batch, QC/redo, upscale, music, report); rules, rubric, time budget, failure playbook
 - [[still-geometry-and-review]] — the prompt patterns that stop broken architecture and wrong-age bodies, and the review gate that stops a broken still being picked
+- [[shot-locks]] — the lock paragraphs that have been proven across films, so a new project starts from them instead of rediscovering them
 - [[repo-structure]] — where everything lives: shared root vs one folder per project, tracked vs generated, how to start a project, what counts as a disposable intermediate
 - [[scripts-reference]] — every pipeline script by production phase, the run-spec that drives them, `film_run.py` (check/stills/pick/clips/qc/finish), options, validation, tests, timings
 - [[runbook-living-painting]] — **start here next time**: click-by-click checklist, settings to verify after every model switch, failure signatures, `scripts/finish_clip.sh`

@@ -275,10 +275,69 @@ This is the limit on §6. "When a face shot keeps failing, stop making it a face
 the replacement shot has to be one whose motion cannot expose what the still never established. Turning a
 failing close-up into a walking back view only helps if the walk stays away from camera.
 
+## 12. A thing that must stay the same needs a picture, and a person needs a name and an age
+
+`kyle_firstflight` shipped with a craft that changes shape between shots and a pilot who is a grown man.
+Both faults have the same root: the prompt described something the model had never been shown, so it
+built a new one from the text each time. Three rules came out of it, and `film_run.py check` now enforces
+all three.
+
+### Every shot that shows a recurring object must be given that object's master
+
+The skiff is described in five shots. Only two of them were handed `skiff.png`; the rest got `yard.png`
+and `dunes.png`, which are landscapes. In those three the model had no reference for the craft at all.
+
+| shot | control image | skiff in frame? |
+|---|---|---|
+| s3, s4 | `skiff.png` | yes — consistent |
+| s6 | `yard.png` | yes — **reinvented** |
+| s7, s8 | `dunes.png` | yes — **reinvented** |
+
+A text lock, however detailed, does not hold a design across eight shots. A picture does. `check` now
+warns when a shot's prompt contains an object lock whose master is neither its `still.ref` nor its
+`still.input`.
+
+### Use the diptych, which exists for exactly this
+
+`dt_diptych.sh` has three modes and the first one is the answer:
+
+> `REF=file IN=file` — diptych: REF left, IN right, edit the pair, keep the right half. **The left half
+> carries identity into the right half.**
+
+`film_run.py` exposes it as a shot's `still.ref`. Across every film in this repo so far, `still.ref` has
+been `None` on every shot — the mechanism built to keep things consistent has never been switched on.
+Set `ref` to the object's master and `input` to the scene's.
+
+### A LoRA with no trigger token in the prompt is inert
+
+`kyle_firstflight` s6 and s7 ran `kyle_lora_v2_2500` at weight 0.6. Neither prompt contains `kyle_kx`.
+The adapter loaded, cost sampling time, and bound to nothing. `check` now treats this as an **error**
+when the face is in frame, and a warning when it is not.
+
+### State the age even when the face is not readable
+
+s6's pilot was written as **"a small figure low in the open cockpit"**. s7 did not mention a pilot at
+all. §2 already says a child at distance renders with adult proportions; a *generic* person renders as
+an adult at any distance, and "small figure" is generic.
+
+This is the same failure `kyle_saltflats` v1 had, where it was fixed with a reusable lock — age, trigger
+token, wardrobe, and the vehicle as a scale referent:
+
+> "In the open cockpit sits **kyle_kx boy, a small nine-year-old boy with child proportions**, this exact
+> face, wearing … He is **unmistakably a small child in a machine built for someone far bigger**: his head
+> and shoulders barely clear the cowling, the seat rises well above him, and the cockpit looks half empty
+> around his small frame."
+
+That lock was written, it worked, and it stayed in that project's spec — so the next film started from a
+blank page and shipped "a small figure". The locks worth reusing now live in [[shot-locks]].
+`check` treats a missing age cue as an **error** whenever a person appears, readable face or not.
+
 ## Related pages
 - [[idea-to-video-blueprint]]
 - [[kyle-lighthouse-plan]]
 - [[lindsey-summit-plan]]
 - [[kyle-steamfield-plan]]
 - [[lindsey-sparky-plan]]
+- [[kyle-firstflight-plan]]
+- [[shot-locks]]
 - [[scripts-reference]]

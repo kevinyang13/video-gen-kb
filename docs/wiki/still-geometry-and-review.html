@@ -397,10 +397,75 @@ fine — but it should be answered rather than ignored, because the cost of bein
 <p>This is the limit on §6. "When a face shot keeps failing, stop making it a face shot" is still right, but
 the replacement shot has to be one whose motion cannot expose what the still never established. Turning a
 failing close-up into a walking back view only helps if the walk stays away from camera.</p>
+<h2>12. A thing that must stay the same needs a picture, and a person needs a name and an age</h2>
+<p><code>kyle_firstflight</code> shipped with a craft that changes shape between shots and a pilot who is a grown man.
+Both faults have the same root: the prompt described something the model had never been shown, so it
+built a new one from the text each time. Three rules came out of it, and <code>film_run.py check</code> now enforces
+all three.</p>
+<h3>Every shot that shows a recurring object must be given that object's master</h3>
+<p>The skiff is described in five shots. Only two of them were handed <code>skiff.png</code>; the rest got <code>yard.png</code>
+and <code>dunes.png</code>, which are landscapes. In those three the model had no reference for the craft at all.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>shot</th>
+<th>control image</th>
+<th>skiff in frame?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>s3, s4</td>
+<td><code>skiff.png</code></td>
+<td>yes — consistent</td>
+</tr>
+<tr>
+<td>s6</td>
+<td><code>yard.png</code></td>
+<td>yes — <strong>reinvented</strong></td>
+</tr>
+<tr>
+<td>s7, s8</td>
+<td><code>dunes.png</code></td>
+<td>yes — <strong>reinvented</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>A text lock, however detailed, does not hold a design across eight shots. A picture does. <code>check</code> now
+warns when a shot's prompt contains an object lock whose master is neither its <code>still.ref</code> nor its
+<code>still.input</code>.</p>
+<h3>Use the diptych, which exists for exactly this</h3>
+<p><code>dt_diptych.sh</code> has three modes and the first one is the answer:</p>
+<blockquote>
+<p><code>REF=file IN=file</code> — diptych: REF left, IN right, edit the pair, keep the right half. <strong>The left half
+carries identity into the right half.</strong></p>
+</blockquote>
+<p><code>film_run.py</code> exposes it as a shot's <code>still.ref</code>. Across every film in this repo so far, <code>still.ref</code> has
+been <code>None</code> on every shot — the mechanism built to keep things consistent has never been switched on.
+Set <code>ref</code> to the object's master and <code>input</code> to the scene's.</p>
+<h3>A LoRA with no trigger token in the prompt is inert</h3>
+<p><code>kyle_firstflight</code> s6 and s7 ran <code>kyle_lora_v2_2500</code> at weight 0.6. Neither prompt contains <code>kyle_kx</code>.
+The adapter loaded, cost sampling time, and bound to nothing. <code>check</code> now treats this as an <strong>error</strong>
+when the face is in frame, and a warning when it is not.</p>
+<h3>State the age even when the face is not readable</h3>
+<p>s6's pilot was written as <strong>"a small figure low in the open cockpit"</strong>. s7 did not mention a pilot at
+all. §2 already says a child at distance renders with adult proportions; a <em>generic</em> person renders as
+an adult at any distance, and "small figure" is generic.</p>
+<p>This is the same failure <code>kyle_saltflats</code> v1 had, where it was fixed with a reusable lock — age, trigger
+token, wardrobe, and the vehicle as a scale referent:</p>
+<blockquote>
+<p>"In the open cockpit sits <strong>kyle_kx boy, a small nine-year-old boy with child proportions</strong>, this exact
+face, wearing … He is <strong>unmistakably a small child in a machine built for someone far bigger</strong>: his head
+and shoulders barely clear the cowling, the seat rises well above him, and the cockpit looks half empty
+around his small frame."</p>
+</blockquote>
+<p>That lock was written, it worked, and it stayed in that project's spec — so the next film started from a
+blank page and shipped "a small figure". The locks worth reusing now live in <a href="shot-locks.html">shot locks</a>.
+<code>check</code> treats a missing age cue as an <strong>error</strong> whenever a person appears, readable face or not.</p>
 
-  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="idea-to-video-blueprint.html">idea to video blueprint</a></li><li><a href="kyle-lighthouse-plan.html">kyle lighthouse plan</a></li><li><a href="lindsey-summit-plan.html">lindsey summit plan</a></li><li><a href="kyle-steamfield-plan.html">kyle steamfield plan</a></li><li><a href="lindsey-sparky-plan.html">lindsey sparky plan</a></li><li><a href="scripts-reference.html">scripts reference</a></li></ul></div>
+  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="idea-to-video-blueprint.html">idea to video blueprint</a></li><li><a href="kyle-lighthouse-plan.html">kyle lighthouse plan</a></li><li><a href="lindsey-summit-plan.html">lindsey summit plan</a></li><li><a href="kyle-steamfield-plan.html">kyle steamfield plan</a></li><li><a href="lindsey-sparky-plan.html">lindsey sparky plan</a></li><li><a href="kyle-firstflight-plan.html">kyle firstflight plan</a></li><li><a href="shot-locks.html">shot locks</a></li><li><a href="scripts-reference.html">scripts reference</a></li></ul></div>
 </div>
-<footer>video-gen-kb · built 2026-10-04 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<footer>video-gen-kb · built 2026-10-06 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
 <script>function tt(){var r=document.documentElement,
 d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
 matchMedia('(prefers-color-scheme: dark)').matches);

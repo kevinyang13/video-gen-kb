@@ -34,7 +34,8 @@ Run-spec (all paths relative to run-spec.dir; every block optional except dir, s
     ]}
 music.file is relative to the repo root. Takes/trims are what `finish` cuts; set them after QC.
 """
-import json, os, re, shlex, shutil, subprocess, sys
+import json
+import os, re, shlex, shutil, subprocess, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -70,6 +71,7 @@ def load(project):
         if not p:
             die(f"no project '{project}': expected projects/{pid}/<version>/spec.json")
         f = p.get("run-spec") or die(f"project '{project}' has no 'run-spec' block")
+        f["_scenes"] = p.get("scenes")          # locks, for the identity and reference checks
     for k in ("dir", "size", "shots"):
         if k not in f:
             die(f"run-spec.{k} missing")
@@ -167,8 +169,80 @@ def faceless_without_containment(shot):
     return not any(k in (shot.get("video_prompt") or "").lower() for k in CONTAINED)
 
 
+
+# A person described generically renders as an adult, and a character LoRA with no trigger token in the
+# prompt is inert -- it costs sampling time and binds to nothing. kyle_firstflight shipped with "a small
+# figure low in the open cockpit" in s6, no figure at all in s7, and the LoRA applied at 0.6 to both.
+# See wiki/still-geometry-and-review.md section 12.
+PERSON = ("figure", "pilot", "boy", "girl", "child", "person", "rider", "driver", "kid")
+AGE_CUES = ("child proportions", "nine-year-old", "eight-year-old", "year-old boy", "year-old girl",
+            "small child's", "child's hand", "a small child")
+
+
+def trigger_of(f):
+    """The LoRA trigger token for this film, e.g. 'kyle_kx', taken from the subject lock."""
+    for src in (f.get("subject_lock"), (f.get("_scenes") or {}).get("locks", {}).get("subject")):
+        if src:
+            m = re.search(r"\b(\w+_kx)\b", src)
+            if m:
+                return m.group(1)
+    return None
+
+
+# Shots that declare themselves empty of people, or faceless; the first kind has no person to identify,
+# the second has a person whose face is not in frame, so a missing trigger is waste rather than a defect.
+NO_PEOPLE = ("no people in frame", "no person in frame", "no people close to the camera")
+NO_FACE = ("no face in frame", "no face readable", "no face is readable")
+
+
+def person_problems(shot, trig, wants_child):
+    """Identity faults in a shot that contains a person: missing trigger, missing age."""
+    p = (shot.get("still", {}).get("prompt") or "").lower()
+    if any(k in p for k in NO_PEOPLE):
+        return []
+    if not any(re.search(r"\b" + n + r"s?\b", p) for n in PERSON):
+        return []
+    out = []
+    has_lora = bool((shot.get("still", {}).get("config") or {}).get("loras"))
+    faceless = any(k in p for k in NO_FACE)
+    if trig and trig not in p:
+        if has_lora and not faceless:
+            out.append(("ERR", f"describes a person but the trigger '{trig}' is absent while the LoRA "
+                               f"is applied -- it binds to nothing"))
+        elif has_lora:
+            out.append(("WARN", f"no face in frame and no trigger '{trig}', but the LoRA is still "
+                                f"applied -- it costs sampling time and binds to nothing"))
+        else:
+            out.append(("WARN", f"describes a person but the trigger '{trig}' is absent"))
+    # The age cue is required even when the face is not readable: a distant or back-turned figure still
+    # renders with adult proportions unless the age is stated, which is the defect kyle_firstflight
+    # shipped with ("a small figure low in the open cockpit") and kyle_saltflats v1 before it.
+    if wants_child and not any(c in p for c in AGE_CUES):
+        out.append(("ERR", "describes a person but never states the age or child proportions "
+                           "-- a generic figure renders as an adult at any distance"))
+    return out
+
+
+def object_without_reference(shot, locks, masters):
+    """Objects the shot describes in full but was given no picture of."""
+    p = (shot.get("still", {}).get("prompt") or "")
+    ref = shot.get("still", {}).get("ref")
+    inp = (shot.get("still", {}).get("input") or "")
+    missing = []
+    for name, text in (locks or {}).items():
+        if name in ("subject", "wardrobe", "style", "pace", "pilot") or name not in (masters or {}):
+            continue
+        probe = text[:48]
+        if probe and probe in p and ref != name and not inp.endswith(f"{name}.png"):
+            missing.append(name)
+    return missing
+
+
 def cmd_check(f, _):
     errs, warns = [], []
+    locks = (f.get("_scenes") or {}).get("locks") or {}
+    trig = trigger_of(f)
+    wants_child = bool(re.search(r"\b(year-old|child proportions)\b", locks.get("subject", "")))
     w, h = f["size"]
     if w % 64 or h % 64:
         errs.append(f"run-spec.size {w}x{h} not multiples of 64")
@@ -211,6 +285,11 @@ def cmd_check(f, _):
         if faceless_without_containment(s):
             warns.append(f"{i}: still has no face and video_prompt never says it stays that way "
                          f"-- anything the motion reveals will be invented (see still-geometry §11)")
+        for level, msg in person_problems(s, trig, wants_child):
+            (errs if level == "ERR" else warns).append(f"{i}: {msg} (see still-geometry §12)")
+        for name in object_without_reference(s, locks, f.get("masters")):
+            warns.append(f"{i}: describes '{name}' in full but was given no picture of it "
+                         f"-- set still.ref to '{name}' or use its master as still.input (§12)")
     total = sum(s["trim"][1] - s["trim"][0] for s in f["shots"] if s.get("trim"))
     if total:
         xf = f.get("assemble", {}).get("xfade", 0.5)

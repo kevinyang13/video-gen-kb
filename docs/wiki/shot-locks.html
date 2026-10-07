@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shot Locks — the reusable ones — video-gen-kb</title>
+<style>
+:root{--bg:#0B0D12;--panel:#141822;--panel-2:#1B2130;--stroke:#2A3245;--text:#E6E9F0;
+--muted:#8B94A7;--accent:#F5B84B;--accent-2:#4BC9F5;--on-accent:#12131A;
+--rule:rgba(139,148,167,.22);--code:#F5B84B}
+@media(prefers-color-scheme:light){:root:not([data-theme=dark]){--bg:#F4F1EA;--panel:#fff;
+--panel-2:#FAF8F3;--stroke:#D9D3C6;--text:#16181F;--muted:#5D6473;--accent:#B8781A;
+--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}}
+:root[data-theme=light]{--bg:#F4F1EA;--panel:#fff;--panel-2:#FAF8F3;--stroke:#D9D3C6;
+--text:#16181F;--muted:#5D6473;--accent:#B8781A;--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);
+line-height:1.65;padding:0 1rem 4rem}
+.shell{max-width:840px;margin:0 auto}
+a{color:var(--accent);text-decoration:none;font-weight:600}
+a:hover{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--accent-2);outline-offset:3px;border-radius:4px}
+.bar{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;padding:1.1rem 0;margin-bottom:1.5rem;
+border-bottom:1px solid var(--stroke)}
+.crumb{font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.spacer{flex:1}
+.pill{border:1px solid var(--stroke);background:var(--panel);border-radius:999px;padding:.28rem .8rem;
+font-size:.75rem;font-weight:700;color:var(--text);cursor:pointer;font-family:inherit}
+.pill:hover{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+h1{font-size:clamp(1.7rem,5vw,2.5rem);margin:.2rem 0 1rem;line-height:1.1;letter-spacing:-.015em;text-wrap:balance}
+h2{font-size:1.25rem;margin:2.2rem 0 .7rem;padding-bottom:.35rem;border-bottom:1px solid var(--rule);text-wrap:balance}
+h3{font-size:1.02rem;margin:1.5rem 0 .5rem;color:var(--accent)}
+p{margin:.7rem 0}
+ul,ol{margin:.7rem 0 .7rem 1.3rem}
+li{margin:.28rem 0}
+li::marker{color:var(--accent)}
+em{color:var(--muted)}
+hr{border:none;border-top:1px solid var(--stroke);margin:2rem 0}
+blockquote{border-left:3px solid var(--accent);background:var(--panel);border-radius:0 10px 10px 0;
+padding:.8rem 1.1rem;margin:1.1rem 0;color:var(--muted);font-size:.92rem}
+code{background:var(--panel);border:1px solid var(--stroke);border-radius:5px;padding:.1rem .35rem;
+font-size:.85em;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--code)}
+img{max-width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--stroke);margin:1.1rem 0}
+pre{background:var(--panel);border:1px solid var(--stroke);border-radius:12px;padding:1rem;overflow-x:auto;margin:1.1rem 0}
+pre code{background:none;border:none;padding:0;color:var(--text);font-size:.83rem;line-height:1.55}
+.tw{overflow-x:auto;border:1px solid var(--stroke);border-radius:12px;background:var(--panel);margin:1.1rem 0}
+table{width:100%;border-collapse:collapse;font-size:.85rem;min-width:min(100%,460px)}
+th{background:var(--panel-2);color:var(--accent);text-align:left;padding:.55rem .8rem;font-size:.68rem;
+letter-spacing:.09em;text-transform:uppercase;white-space:nowrap;border-bottom:1px solid var(--stroke)}
+td{padding:.5rem .8rem;border-bottom:1px solid var(--rule);color:var(--muted);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td strong{color:var(--text)}
+.meta{display:flex;flex-wrap:wrap;gap:.4rem .9rem;font-size:.78rem;color:var(--muted);margin:-.4rem 0 1.2rem}
+.meta b{color:var(--text);font-weight:600}
+.missing{color:var(--muted);border-bottom:1px dashed var(--muted);cursor:help}
+.related{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--stroke)}
+.related h2{border:none;margin:0 0 .7rem;font-size:.95rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:0}
+.chips li{margin:0}
+.chips a,.chips .missing{display:inline-block;border:1px solid var(--stroke);background:var(--panel);
+border-radius:999px;padding:.28rem .8rem;font-size:.8rem}
+.chips a:hover{background:var(--accent);color:var(--on-accent);text-decoration:none;border-color:var(--accent)}
+footer{max-width:840px;margin:2.5rem auto 0;padding-top:1.2rem;border-top:1px solid var(--stroke);
+font-size:.75rem;color:var(--muted);text-align:center}
+/* landing */
+.hero{padding:2.4rem 0 1.6rem}
+.kicker{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2)}
+.hero h1{font-size:clamp(2rem,6vw,3.2rem);margin:.35rem 0 .5rem}
+.hero p{color:var(--muted);font-size:1.05rem;max-width:56ch}
+.hw{display:inline-flex;gap:.5rem;align-items:center;margin-top:1rem;border:1px solid var(--stroke);
+background:var(--panel);border-radius:999px;padding:.3rem .9rem;font-size:.78rem;color:var(--muted)}
+.hw .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.sec{margin-top:2.2rem}
+.sec h2{border:none;padding:0;margin:0 0 .8rem;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.9rem}
+.card{display:block;border:1px solid var(--stroke);background:var(--panel);border-radius:14px;padding:1rem 1.1rem;
+color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+.card b{display:block;color:var(--accent);font-size:1rem;margin-bottom:.3rem}
+.card span{font-size:.85rem;color:var(--muted);line-height:1.5}
+.stubs{font-size:.82rem;color:var(--muted);margin-top:.6rem}
+.yt{position:relative;width:100%;aspect-ratio:16/9;border:1px solid var(--stroke);border-radius:12px;overflow:hidden;background:#000;margin:1rem 0}
+.yt.yt-v{aspect-ratio:9/16;max-width:360px}
+.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="bar">
+    <span class="crumb"><a href="../">video-gen-kb</a> / <a href="index.html">Wiki</a></span>
+    <span class="spacer"></span>
+    <button class="pill" onclick="tt()">◐ Theme</button>
+  </nav>
+  <h1>Shot Locks — the reusable ones</h1><p class="lede">The lock paragraphs that have been written, failed, fixed and proven across the films here, kept in one place so a new project starts from them instead of rediscovering them.</p><div class="meta"><span><b>Updated</b> 2026-10-06</span><span><b>Sources</b> <code>kyle_saltflats</code> v1, <code>kyle_firstflight</code>, <code>lindsey_sparky</code>, <code>kyle_steamfield</code>.</span></div>
+<hr />
+<h2>Why this page exists</h2>
+<p><code>kyle_saltflats</code> v1 shipped pilots who looked like grown men. The fix was a lock stating the age, the
+trigger token, the wardrobe and a scale referent, and it worked. That lock then stayed inside that
+project's <code>spec.json</code>, so <code>kyle_firstflight</code> started from a blank page and shipped <strong>"a small figure low
+in the open cockpit"</strong> — the identical failure, two films later.</p>
+<p>Locks are the part of a spec most worth carrying forward and the part least likely to be, because each
+project writes its own <code>scenes.locks</code> from scratch. Copy from here.</p>
+<h2>A child in or on a vehicle</h2>
+<p>The hardest case: the figure is small in frame, the machine is the subject, and every one of these
+renders as an adult without all four parts.</p>
+<pre><code>In the open cockpit sits kyle_kx boy, a small nine-year-old boy with child proportions, this exact
+face, wearing &lt;wardrobe&gt;. He is unmistakably a small child in a machine built for someone far bigger:
+his head and shoulders barely clear the &lt;cowling/fairing&gt;, the seat rises well above him, his arms are
+short against the controls, and his small frame leaves the cockpit looking half empty around him.
+</code></pre>
+<p>Four parts, all load-bearing:</p>
+<ol>
+<li><strong>The trigger token</strong> — <code>kyle_kx</code> / <code>lindsey_kx</code> / <code>ivy_kx</code>. Without it the LoRA binds to nothing.</li>
+<li><strong>The stated age</strong> — "a small nine-year-old boy with child proportions".</li>
+<li><strong>A scale referent in frame</strong> — the machine itself, said out loud as too big for him.</li>
+<li><strong>The wardrobe</strong>, so he is the same person between shots.</li>
+</ol>
+<p>Add for any shot where the face is small or turned away:</p>
+<pre><code>He is seen small at this distance and his face is not readable.
+</code></pre>
+<h2>A child at full-body distance</h2>
+<pre><code>&lt;trigger&gt; boy, a nine-year-old boy with child proportions, this exact face, &lt;hair&gt;, wearing &lt;wardrobe&gt;,
+&lt;action&gt;. The &lt;door / stair tread / hull / doorway&gt; beside him gives the unmistakable scale of a small
+child against something built for adults.
+</code></pre>
+<h2>Faceless shots — the containment clause</h2>
+<p>A still with no face in it cannot survive a motion that reveals one; see
+<a href="still-geometry-and-review.html">still geometry and review</a> §11. Phrase as what stays, never as what must not happen.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>the still shows</th>
+<th>the clause</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>her back</td>
+<td>"She stays turned away from the camera, her back to us for the whole shot, and does not turn around."</td>
+</tr>
+<tr>
+<td>a person seated, from behind</td>
+<td>"She stays seated in the chair the whole time, her back against the chair back."</td>
+</tr>
+<tr>
+<td>hands only</td>
+<td>"The shot stays on her hands and the desk the whole time; the camera does not tilt up and no face comes into frame."</td>
+</tr>
+<tr>
+<td>a prop or an empty room</td>
+<td>"No person enters the frame at any point."</td>
+</tr>
+<tr>
+<td>a pilot too small to read</td>
+<td>"The pilot stays low in the cockpit and his face never turns toward the camera; nobody else enters the frame."</td>
+</tr>
+</tbody>
+</table></div>
+<h2>A face that has to hold</h2>
+<p>A static expression survives about eight seconds; a changing one costs most of that
+(<a href="still-geometry-and-review.html">still geometry and review</a> §8). Put the peak in the first second and then hold it.</p>
+<pre><code>His &lt;expression&gt; reaches its full width in the first second and then holds steady for the rest of the
+shot without changing. His head stays level and still and his chin does not lift.
+</code></pre>
+<p>And light it against something dark — a blown-out sky behind a face hazes it at shallow depth of field:</p>
+<pre><code>Close behind him stands &lt;a wall of rusted hull plating / dark wreckage&gt; in deep shade, dark and softly
+out of focus, filling the frame behind his head so there is no bright sky anywhere in shot. Nothing
+glowing or bright stands between the camera and his face and the air in front of him is clear.
+</code></pre>
+<h2>A hovering vehicle</h2>
+<p>State what holds it up, or the model will fill the gap with wheels:</p>
+<pre><code>The whole machine hovers a clear metre above the ground with a clean unbroken band of open air beneath
+it from end to end, a hot blue repulsor glow washing down onto the ground, and its hard shadow falling
+directly below it. It has no wheels, no tyres, no axles and no landing legs: nothing touches the ground
+anywhere.
+</code></pre>
+<p>Put the same guarantee in the motion prompt, or it settles over nine seconds:</p>
+<pre><code>The machine stays hovering clear above the ground throughout with open air beneath it the whole time
+and never touches down.
+</code></pre>
+<h2>Pacing</h2>
+<pre><code>Everything moves at natural real-time speed, with no slow motion and no speed ramping.
+</code></pre>
+<h2>What <code>check</code> enforces</h2>
+<p><code>film_run.py PROJECT check</code> fails the run on:</p>
+<ul>
+<li>a shot describing a person with no trigger token while a LoRA is applied and the face is in frame;</li>
+<li>a shot describing a person with no age or child-proportions cue, at any distance.</li>
+</ul>
+<p>and warns on:</p>
+<ul>
+<li>a shot describing a locked object whose master is neither its <code>still.ref</code> nor its <code>still.input</code>;</li>
+<li>a faceless still whose motion prompt carries no containment clause;</li>
+<li>a LoRA applied to a faceless shot with no trigger token — wasted sampling time.</li>
+</ul>
+
+  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="still-geometry-and-review.html">still geometry and review</a></li><li><a href="idea-to-video-blueprint.html">idea to video blueprint</a></li><li><a href="running-a-film-yourself.html">running a film yourself</a></li><li><a href="character-consistency.html">character consistency</a></li></ul></div>
+</div>
+<footer>video-gen-kb · built 2026-10-06 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<script>function tt(){var r=document.documentElement,
+d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
+matchMedia('(prefers-color-scheme: dark)').matches);
+r.setAttribute('data-theme',d?'light':'dark');}</script>
+</body>
+</html>
