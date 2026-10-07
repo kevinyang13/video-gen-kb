@@ -941,3 +941,32 @@ Three changes, all preventive rather than patches to the delivered film:
 Against the eight existing films the new rules produce two hard failures, both genuine:
 `kyle_firstflight` s6 and s7, and one macro insert in `kyle_debut`. The check would have caught this
 film, `kyle_saltflats` v1, and the next one.
+
+## 2026-10-06 — masters get candidates, and sheets carry numbers
+
+Two changes to how seeds and stills are generated, both from failures earlier in the week.
+
+**`film_run.py PROJECT masters`.** Masters were made one seed at a time by hand-written bash, rewritten
+per project — which is backwards, because a master is the most load-bearing image in a film: every shot
+referencing it inherits whatever that single render produced. `kyle_saltflats` needed four attempts at
+its racer and `kyle_firstflight` shipped a squinting Kyle, both for this reason. Masters now get five
+seeds and a labelled sheet exactly like a shot, and `pick <name> <seed>` writes the chosen one to the
+master path. The LoRA is applied only to a master whose prompt carries the trigger token, matching the
+rule `check` enforces on shots.
+
+**Candidate sheets now carry two numbers per tile.** `sharp` is the variance of a Laplacian over the
+centre crop, with `*` on the sharpest; `bg` is mean background luminance, shown when it exceeds 150.
+
+Both come from `kyle_firstflight` s5, whose face was lost to bloom twice while I blamed the light in
+front of it. The numbers separate the three attempts cleanly:
+
+```
+v1 bloomed   sharp c1=310   bg 172-188
+v2 bloomed   sharp c1=398   bg 167-175
+v3 dark bg   sharp c1=460   bg  15-98
+```
+
+The background metric turns out to predict more than bloom. s2 — the droid against a plain bright sky
+that grew an insect swarm, then birds — flags on all five candidates, while the fixed s5 set is clean.
+An empty bright background hazes a face *and* invites the video stage to invent something to fill it, so
+one number catches both.

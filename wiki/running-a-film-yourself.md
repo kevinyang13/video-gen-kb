@@ -33,7 +33,8 @@ which holds GPU memory and roughly halves CLI speed, and starts `caffeinate` for
 ## The seven commands
 
 ```bash
-python3 scripts/film_run.py PROJECT check     # paths, sizes, frame rules, planned length
+python3 scripts/film_run.py PROJECT check     # paths, sizes, frame rules, identity, planned length
+python3 scripts/film_run.py PROJECT masters   # 5 candidates per master -> seed/<name>_c<seed>.png
 python3 scripts/film_run.py PROJECT stills    # 5 candidates per shot -> seed/<id>_c<seed>.png
 python3 scripts/film_run.py PROJECT sheet     # labelled contact sheet -> seed/<id>_sheet.png
 python3 scripts/film_run.py PROJECT pick s1 4 # candidate -> stills/s1.png   (once per shot)
@@ -56,7 +57,11 @@ paragraphs that get pasted into every shot, so each is written once. Read
 [[still-geometry-and-review]] before writing shot prompts; it is the accumulated list of what breaks.
 
 **Picking stills.** `seed/<id>_sheet.png` tiles five candidates and captions each with its seed number,
-so you pick by number rather than position. **Open the shortlist at full size before deciding** — the
+so you pick by number rather than position. Each caption also carries **`sharp <n>`**, the variance of a
+Laplacian over the centre crop, with `*` on the sharpest — and **`bg <n>`** when the background is bright
+enough to risk bloom. Both numbers come from real failures: `kyle_firstflight` s5 lost its face to a
+blown-out sky twice before the cause was found, and s2 grew an insect swarm out of the same empty bright
+background. A tile flagged `bg` is a tile whose clip is likely to invent something. **Open the shortlist at full size before deciding** — the
 failures that matter (a sixth finger, a second person, structure that does not resolve) are invisible at
 tile size. Then `pick <id> <seed>`.
 

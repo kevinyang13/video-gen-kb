@@ -6,6 +6,7 @@ holding the run-spec (handy for tests).
   PROJECT is "<id>" (newest version) or "<id>@<version>", e.g. lost_city@v1-drawthings-ui
   scripts/film_run.py PROJECT check              validate the run-spec (paths, sizes, frame rules)
   scripts/film_run.py PROJECT status             one line per shot: still / candidates / clips / take / 4K
+  scripts/film_run.py PROJECT masters [names]    seed candidates for each master -> seed/<name>_c<seed>.png
   scripts/film_run.py PROJECT stills [ids]       seed candidates for shots with no picked still -> seed/<id>_c<seed>.png
   scripts/film_run.py PROJECT sheet [ids]        label candidates -> seed/<id>_sheet.png (review before picking)
   scripts/film_run.py PROJECT pick ID SEED       candidate -> stills/<id>.png
@@ -337,6 +338,84 @@ def cmd_stills(f, args):
 
 
 
+
+def image_metrics(path):
+    """Sharpness and blown-highlight fraction, the two numbers that caught this repo's still failures.
+
+    Sharpness is the variance of a Laplacian over the centre crop, so a soft or bloomed subject scores
+    low even when the corners are busy. Blown is the fraction of pixels at or near clipping -- a face
+    against an overexposed sky reads high here, which is what hazed kyle_firstflight s5 twice before
+    the cause was found.
+    """
+    try:
+        import numpy as np
+        from PIL import Image
+    except ImportError:
+        return None
+    a = np.asarray(Image.open(path).convert("L"), dtype=float)
+    h, w = a.shape
+    c = a[h // 5:h * 4 // 5, w // 4:w * 3 // 4]
+    lap = (-4 * c[1:-1, 1:-1] + c[:-2, 1:-1] + c[2:, 1:-1] + c[1:-1, :-2] + c[1:-1, 2:])
+    # Background luminance over the top and side borders. A subject in front of a blown sky scores high
+    # here, and that -- not clipping -- is what hazed kyle_firstflight s5 twice: shallow depth of field
+    # against a bright background bleeds over the subject. Clipping alone never caught it (0% every time).
+    bg = float(np.concatenate([a[:h // 6].ravel(), a[:, :w // 8].ravel(), a[:, -w // 8:].ravel()]).mean())
+    return {"sharp": float(lap.var()), "bg": bg, "clip": float((a >= 245).mean())}
+
+
+def metric_label(m, best_sharp):
+    """A short caption, with a mark on the sharpest tile and a flag on a bright background."""
+    if not m:
+        return ""
+    s = f"  sharp {m['sharp']:.0f}"
+    if m["sharp"] >= best_sharp * 0.98:
+        s += "*"
+    if m["bg"] > 150:
+        s += f"  bg {m['bg']:.0f}"
+    return s
+
+
+
+def master_prompt(f, name):
+    """A master's prompt: from run-spec.master_prompts, else .gen/master_<name>.txt."""
+    mp = (f.get("master_prompts") or {}).get(name)
+    if mp:
+        return prompt_path(f, f"master_{name}", mp)
+    q = d(f, f".gen/master_{name}.txt")
+    return q if q.exists() else None
+
+
+def cmd_masters(f, args):
+    """Render candidates for each master, the same way shots get candidates.
+
+    Masters were made one seed at a time by hand, which is backwards: a master is the most load-bearing
+    image in a film because every shot that references it inherits whatever it got on that single roll.
+    The LoRA is applied only to a master whose prompt carries the trigger token, which is the same rule
+    `check` enforces on shots.
+    """
+    names = [a for a in args if not a.startswith("--")] or list(f.get("masters", {}))
+    trig = trigger_of(f)
+    c = still_cfg(f, {})
+    rc = 0
+    for name in names:
+        pf = master_prompt(f, name)
+        if not pf:
+            print(f"{name}: no prompt (run-spec.master_prompts or .gen/master_{name}.txt)")
+            rc |= 1
+            continue
+        cfg = dict(c["config"])
+        if trig and trig not in pf.read_text().lower():
+            cfg.pop("loras", None)                       # a LoRA with no trigger in the prompt is inert
+        env = {"MODEL": c["model"], "STEPS": c["steps"], "CFG": c["cfg"], "STRENGTH": c["strength"],
+               "CONFIG_JSON": json.dumps(cfg, separators=(",", ":"))}
+        for seed in c["seeds"]:
+            out = d(f, f"seed/{name}_c{seed}.png")
+            if out.exists() and not FORCE:
+                continue
+            rc |= run([S / "dt_diptych.sh", "-", "-", pf, out, seed, *c["size"]], env)
+    return rc
+
+
 def cmd_sheet(f, args):
     """Tile a shot's candidates into one labelled sheet, so a pick is by seed number, not by position.
 
@@ -361,14 +440,17 @@ def cmd_sheet(f, args):
         if not cands:
             print(f"{i}: no candidates")
             continue
+        mets = {q: image_metrics(q) for q in cands}
+        best = max((m["sharp"] for m in mets.values() if m), default=0.0)
         ims = []
         for q in cands:
             im = Image.open(q).convert("RGB")
             im = im.resize((tile_w, round(im.height * tile_w / im.width)), Image.LANCZOS)
             seed = q.stem.split("_c")[-1]
+            cap = f"c{seed}" + metric_label(mets[q], best)
             dr = ImageDraw.Draw(im)
-            dr.rectangle([0, 0, 108, 40], fill=(0, 0, 0))
-            dr.text((8, 4), f"c{seed}", fill=(255, 255, 255), font=font)
+            dr.rectangle([0, 0, 24 + int(dr.textlength(cap, font=font)), 40], fill=(0, 0, 0))
+            dr.text((8, 4), cap, fill=(255, 255, 255), font=font)
             ims.append(im)
         tw, th = ims[0].size
         rows = (len(ims) + cols - 1) // cols
@@ -378,7 +460,14 @@ def cmd_sheet(f, args):
         out = d(f, f"seed/{i}_sheet.png")
         if not DRY:
             sheet.save(out)
-        print(f"{i}: {len(ims)} candidates -> {out.relative_to(ROOT)}")
+        note = ""
+        if best:
+            sharpest = max(mets, key=lambda q: mets[q]["sharp"] if mets[q] else -1)
+            bright = [q.stem.split("_c")[-1] for q in cands if mets[q] and mets[q]["bg"] > 150]
+            note = f"  sharpest c{sharpest.stem.split('_c')[-1]}"
+            if bright:
+                note += f", bright background (bloom risk): {', '.join('c' + b for b in bright)}"
+        print(f"{i}: {len(ims)} candidates -> {out.relative_to(ROOT)}{note}")
     return rc
 
 
@@ -387,7 +476,9 @@ def cmd_pick(f, args):
     if len(pos) != 2:
         die("usage: pick ID SEED")
     i, seed = pos
-    src, dst = d(f, f"seed/{i}_c{seed}.png"), d(f, f"stills/{i}.png")
+    src = d(f, f"seed/{i}_c{seed}.png")
+    masters = f.get("masters", {})
+    dst = d(f, masters[i]) if i in masters else d(f, f"stills/{i}.png")
     if not src.exists():
         die(f"no candidate {src}")
     dst.parent.mkdir(parents=True, exist_ok=True)
@@ -489,7 +580,7 @@ def cmd_finish(f, _):
     return 0
 
 
-CMDS = {"check": cmd_check, "status": cmd_status, "stills": cmd_stills, "sheet": cmd_sheet, "pick": cmd_pick,
+CMDS = {"check": cmd_check, "status": cmd_status, "masters": cmd_masters, "stills": cmd_stills, "sheet": cmd_sheet, "pick": cmd_pick,
         "clips": cmd_clips, "qc": cmd_qc, "finish": cmd_finish}
 
 if __name__ == "__main__":

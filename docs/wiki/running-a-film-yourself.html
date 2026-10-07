@@ -111,7 +111,8 @@ work, <code>--dry-run</code> prints the commands without running them.</p>
 <p>The external drive must be mounted; see <a href="model-storage-locations.html">model storage locations</a>. <code>--fix</code> quits the Draw Things app,
 which holds GPU memory and roughly halves CLI speed, and starts <code>caffeinate</code> for 14 h.</p>
 <h2>The seven commands</h2>
-<pre><code class="language-bash">python3 scripts/film_run.py PROJECT check     # paths, sizes, frame rules, planned length
+<pre><code class="language-bash">python3 scripts/film_run.py PROJECT check     # paths, sizes, frame rules, identity, planned length
+python3 scripts/film_run.py PROJECT masters   # 5 candidates per master -&gt; seed/&lt;name&gt;_c&lt;seed&gt;.png
 python3 scripts/film_run.py PROJECT stills    # 5 candidates per shot -&gt; seed/&lt;id&gt;_c&lt;seed&gt;.png
 python3 scripts/film_run.py PROJECT sheet     # labelled contact sheet -&gt; seed/&lt;id&gt;_sheet.png
 python3 scripts/film_run.py PROJECT pick s1 4 # candidate -&gt; stills/s1.png   (once per shot)
@@ -129,7 +130,11 @@ leave open. A render launched from an agent's shell does not survive; see <a hre
 paragraphs that get pasted into every shot, so each is written once. Read
 <a href="still-geometry-and-review.html">still geometry and review</a> before writing shot prompts; it is the accumulated list of what breaks.</p>
 <p><strong>Picking stills.</strong> <code>seed/&lt;id&gt;_sheet.png</code> tiles five candidates and captions each with its seed number,
-so you pick by number rather than position. <strong>Open the shortlist at full size before deciding</strong> — the
+so you pick by number rather than position. Each caption also carries <strong><code>sharp &lt;n&gt;</code></strong>, the variance of a
+Laplacian over the centre crop, with <code>*</code> on the sharpest — and <strong><code>bg &lt;n&gt;</code></strong> when the background is bright
+enough to risk bloom. Both numbers come from real failures: <code>kyle_firstflight</code> s5 lost its face to a
+blown-out sky twice before the cause was found, and s2 grew an insect swarm out of the same empty bright
+background. A tile flagged <code>bg</code> is a tile whose clip is likely to invent something. <strong>Open the shortlist at full size before deciding</strong> — the
 failures that matter (a sixth finger, a second person, structure that does not resolve) are invisible at
 tile size. Then <code>pick &lt;id&gt; &lt;seed&gt;</code>.</p>
 <p><strong>Trimming clips.</strong> <code>seed/&lt;id&gt;_v1_qc.png</code> shows the reference plus six frames across the take. Find where

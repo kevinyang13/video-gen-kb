@@ -330,6 +330,13 @@ color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
 </tbody>
 </table></div>
 <h2>Phase 4 — Seeds: a master for everything that must stay the same</h2>
+<p><strong>Masters get candidates too: <code>film_run.py PROJECT masters</code>.</strong> A master is the most load-bearing image in
+a film — every shot that references it inherits whatever that one render produced — so it gets five seeds
+and a labelled sheet exactly like a shot does, then <code>pick &lt;name&gt; &lt;seed&gt;</code>. Making masters one seed at a
+time by hand is how <code>kyle_saltflats</code> needed four attempts at its racer and <code>kyle_firstflight</code> shipped a
+squinting Kyle.</p>
+<p>The LoRA is applied only to a master whose prompt contains the trigger token, which is the same rule
+<code>check</code> enforces on shots — a LoRA without its trigger is inert.</p>
 <p>A diffusion model keeps no memory between generations (<a href="identity-conditioning.html">identity conditioning</a>). Anything that has to look the same in shot 9 as in shot 2 must be <strong>seeded</strong>: rendered once as a canonical image, then fed into every shot that contains it. Seeds live in <code>&lt;version&gt;/seed/</code> and are listed in the spec's <code>run-spec.masters</code>.</p>
 <p><strong>Seed everything recurring, not just people.</strong> On Bot Builders that meant five children <em>and</em> the LEGO mission table, the competition gym, and three Coastal Roots Farm plates. Lost City seeded the creature, the rider and the city. A location you skip is a location the model re-invents every shot — a different gym each time reads as a different tournament.</p>
 <div class="tw"><table>

@@ -706,6 +706,27 @@ with a lock that then stayed inside that project's spec while the next film star
 <p>Against the eight existing films the new rules produce two hard failures, both genuine:
 <code>kyle_firstflight</code> s6 and s7, and one macro insert in <code>kyle_debut</code>. The check would have caught this
 film, <code>kyle_saltflats</code> v1, and the next one.</p>
+<h2>2026-10-06 — masters get candidates, and sheets carry numbers</h2>
+<p>Two changes to how seeds and stills are generated, both from failures earlier in the week.</p>
+<p><strong><code>film_run.py PROJECT masters</code>.</strong> Masters were made one seed at a time by hand-written bash, rewritten
+per project — which is backwards, because a master is the most load-bearing image in a film: every shot
+referencing it inherits whatever that single render produced. <code>kyle_saltflats</code> needed four attempts at
+its racer and <code>kyle_firstflight</code> shipped a squinting Kyle, both for this reason. Masters now get five
+seeds and a labelled sheet exactly like a shot, and <code>pick &lt;name&gt; &lt;seed&gt;</code> writes the chosen one to the
+master path. The LoRA is applied only to a master whose prompt carries the trigger token, matching the
+rule <code>check</code> enforces on shots.</p>
+<p><strong>Candidate sheets now carry two numbers per tile.</strong> <code>sharp</code> is the variance of a Laplacian over the
+centre crop, with <code>*</code> on the sharpest; <code>bg</code> is mean background luminance, shown when it exceeds 150.</p>
+<p>Both come from <code>kyle_firstflight</code> s5, whose face was lost to bloom twice while I blamed the light in
+front of it. The numbers separate the three attempts cleanly:</p>
+<pre><code>v1 bloomed   sharp c1=310   bg 172-188
+v2 bloomed   sharp c1=398   bg 167-175
+v3 dark bg   sharp c1=460   bg  15-98
+</code></pre>
+<p>The background metric turns out to predict more than bloom. s2 — the droid against a plain bright sky
+that grew an insect swarm, then birds — flags on all five candidates, while the fixed s5 set is clean.
+An empty bright background hazes a face <em>and</em> invites the video stage to invent something to fill it, so
+one number catches both.</p>
   
 </div>
 <footer>video-gen-kb · built 2026-10-06 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
