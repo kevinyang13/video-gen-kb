@@ -422,6 +422,55 @@ two jobs, and the hull loses.</p>
 <p>Splitting it into two renders fixes it, and is why s6 keeps its hull: build a combo master of the group
 on a plain studio backdrop, where nothing else is being invented, then use that combo as the reference
 for the shot that places it in a location. <a href="still-geometry-and-review.html">still geometry and review</a></p>
+<h2>Anything built on a combo is an edit, not a diptych</h2>
+<p>Once a combo master exists, every shot that uses it should run as a <strong>single-image edit with the combo
+as <code>input</code></strong> — not as a diptych with the combo as <code>ref</code>. The instruction is then only <em>keep these
+subjects, replace what is behind and beneath them</em>.</p>
+<p>Three shots proved it in one run. s3, s6 and s7 were diptychs carrying <code>kyle_fixing_skiff</code> or
+<code>flight_crew</code> against an environment plate, and each asked the model to do three jobs at once: preserve
+a multi-subject group, invent a landscape around it, and change the craft's attitude. Every candidate
+failed:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Shot</th>
+<th>As a diptych</th>
+<th>As an edit off the combo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>s3</td>
+<td>empty yard, or a boy beside a painted plank</td>
+<td>boy, droid and hull all correct</td>
+</tr>
+<tr>
+<td>s6</td>
+<td>yellow junk sculpture, sprawled boy, no droid</td>
+<td>all three correct, nacelles lit, dust under the hull</td>
+</tr>
+<tr>
+<td>s7</td>
+<td>angular cardboard shape, boy a dark blob</td>
+<td>all three correct over the dunes</td>
+</tr>
+</tbody>
+</table></div>
+<p>The cost is that the craft keeps the attitude it has in the combo — level, rather than nose-high in the
+falling shot. That is the right trade: the motion belongs to the i2v stage, which already carries it in
+the video prompt, and a correct craft that is level beats a mangled one that is banking.</p>
+<p>A diptych is for the first composition — getting a subject into a group that no master shows yet. After
+that the group is a picture, and a picture is edited, not re-composed.</p>
+<h2>Ranking candidates: detail first, then distance</h2>
+<p>Picking the candidate with the lowest palette distance to its master picks the <strong>emptiest frame</strong>. A
+hazy shot with the subject missing is closer in palette to a pale studio plate than a correctly rendered
+scene is. Unattended, that chose an empty salvage yard for s3 and a bare dust cloud for s6 — both
+genuinely the minimum-distance candidate in their pool.</p>
+<p><code>align</code> therefore keeps only candidates within <code>SHARP_FLOOR</code> (0.85) of the sharpest in the pool, as
+evidence that something is actually drawn, and only then lets palette distance rank those for identity.</p>
+<p><strong>This still cannot see content.</strong> Sharpness proves detail, not correctness: it happily kept a detailed
+yellow junk sculpture. No automatic metric here distinguishes "the right craft" from "a crisp wrong
+one", so a human still looks at the picked stills before the clip stage spends an hour on them.</p>
   <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="still-geometry-and-review.html">still geometry and review</a></li><li><a href="idea-to-video-blueprint.html">idea to video blueprint</a></li><li><a href="running-a-film-yourself.html">running a film yourself</a></li><li><a href="character-consistency.html">character consistency</a></li></ul></div>
 </div>
 <footer>video-gen-kb · built 2026-10-07 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>

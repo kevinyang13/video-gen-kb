@@ -320,3 +320,41 @@ two jobs, and the hull loses.
 Splitting it into two renders fixes it, and is why s6 keeps its hull: build a combo master of the group
 on a plain studio backdrop, where nothing else is being invented, then use that combo as the reference
 for the shot that places it in a location. [[still-geometry-and-review]]
+
+## Anything built on a combo is an edit, not a diptych
+
+Once a combo master exists, every shot that uses it should run as a **single-image edit with the combo
+as `input`** — not as a diptych with the combo as `ref`. The instruction is then only *keep these
+subjects, replace what is behind and beneath them*.
+
+Three shots proved it in one run. s3, s6 and s7 were diptychs carrying `kyle_fixing_skiff` or
+`flight_crew` against an environment plate, and each asked the model to do three jobs at once: preserve
+a multi-subject group, invent a landscape around it, and change the craft's attitude. Every candidate
+failed:
+
+| Shot | As a diptych | As an edit off the combo |
+|---|---|---|
+| s3 | empty yard, or a boy beside a painted plank | boy, droid and hull all correct |
+| s6 | yellow junk sculpture, sprawled boy, no droid | all three correct, nacelles lit, dust under the hull |
+| s7 | angular cardboard shape, boy a dark blob | all three correct over the dunes |
+
+The cost is that the craft keeps the attitude it has in the combo — level, rather than nose-high in the
+falling shot. That is the right trade: the motion belongs to the i2v stage, which already carries it in
+the video prompt, and a correct craft that is level beats a mangled one that is banking.
+
+A diptych is for the first composition — getting a subject into a group that no master shows yet. After
+that the group is a picture, and a picture is edited, not re-composed.
+
+## Ranking candidates: detail first, then distance
+
+Picking the candidate with the lowest palette distance to its master picks the **emptiest frame**. A
+hazy shot with the subject missing is closer in palette to a pale studio plate than a correctly rendered
+scene is. Unattended, that chose an empty salvage yard for s3 and a bare dust cloud for s6 — both
+genuinely the minimum-distance candidate in their pool.
+
+`align` therefore keeps only candidates within `SHARP_FLOOR` (0.85) of the sharpest in the pool, as
+evidence that something is actually drawn, and only then lets palette distance rank those for identity.
+
+**This still cannot see content.** Sharpness proves detail, not correctness: it happily kept a detailed
+yellow junk sculpture. No automatic metric here distinguishes "the right craft" from "a crisp wrong
+one", so a human still looks at the picked stills before the clip stage spends an hour on them.

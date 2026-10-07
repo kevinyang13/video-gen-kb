@@ -243,3 +243,26 @@ s7: picked seed 6, distance 0.4768 to flight_crew.png
 $ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"kyle_lora_v2_2500_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/flight_crew.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/dunes.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/s8.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/s8_c1.png 1 1024 576
 /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/s8_c1.png
 $ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"kyle_lora_v2_2500_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/flight_crew.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/dunes.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/s8.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/s8_c2.png 2 1024 576
+
+=== auto: check ===
+planned length: 65.20 s kept − 7×0.75 fades = 59.95 s
+  WARN  s1: take not rendered yet: clips/s1_v1.mov
+  WARN  s2: take not rendered yet: clips/s2_v1.mov
+  WARN  s3: take not rendered yet: clips/s3_v1.mov
+  WARN  s4: take not rendered yet: clips/s4_v1.mov
+  WARN  s5: take not rendered yet: clips/s5_v1.mov
+  WARN  s6: take not rendered yet: clips/s6_v1.mov
+  WARN  s7: take not rendered yet: clips/s7_v1.mov
+  WARN  s8: take not rendered yet: clips/s8_v1.mov
+check: PASS
+
+=== auto: masters ===
+
+=== auto: combos ===
+
+=== auto: pick-combos ===
+
+=== auto: align ===
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"kyle_lora_v2_2500_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/flight_crew.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/s6.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/s6_c1.png 1 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/s6_c1.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"kyle_lora_v2_2500_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/flight_crew.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/s6.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/s6_c2.png 2 1024 576
