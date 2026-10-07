@@ -262,9 +262,11 @@ def combo_parts(f, name, seen=None):
 
 
 DIPTYCH_MARKERS = ("side by side", "left image", "right image", "image on the left")
+SEPARATION = ("separate thing", "separate machine", "stay separate", "bare uncovered head",
+              "keeps its own", "nothing worn on his head", "nothing worn on her head")
 
 
-def diptych_problems(shot):
+def diptych_problems(shot, f=None):
     """A diptych whose prompt is a scene description throws the subject away.
 
     dt_diptych.sh hstacks REF and IN into one canvas twice the output width, renders it, and keeps the
@@ -294,6 +296,17 @@ def diptych_problems(shot):
             out.append(("WARN", f"still.ref and still.input are both '{base}' -- a diptych of one subject "
                                 f"against itself spends half the canvas and carries nothing in; use a "
                                 f"single-image edit instead"))
+    # A reference holding more than one subject will merge them unless the prompt says where one stops
+    # and the other starts. flight_crew holds a boy and a droid: s6 put the droid's dome and amber lens
+    # on the boy's head, and s7 replaced the boy with a pilot-sized droid. Naming both is not enough --
+    # s6 named both and still merged -- so the prompt has to state the boundary.
+    if f and ref:
+        parts = combo_parts(f, ref)
+        if len(parts) > 1 and not any(k in p for k in SEPARATION):
+            out.append(("WARN", f"still.ref '{ref}' holds more than one subject ({', '.join(sorted(parts))}) "
+                                f"but the prompt never says they stay separate -- state the boundary "
+                                f"(\"two separate things\", a bare uncovered head, the machine keeping its "
+                                f"own body) or they merge"))
     return out
 
 
@@ -407,7 +420,7 @@ def cmd_lint(f, args):
             continue
         rows = lint_shot(s, style)
         rows += [(lvl, msg, "see wiki/shot-locks.md") for lvl, msg in person_problems(s, trig, wants_child)]
-        rows += [(lvl, msg, "see wiki/shot-locks.md") for lvl, msg in diptych_problems(s)]
+        rows += [(lvl, msg, "see wiki/shot-locks.md") for lvl, msg in diptych_problems(s, f)]
         for name in object_without_reference(s, locks, f.get("masters"), f):
             rows.append(("WARN", f"describes '{name}' but was given no picture of it",
                          f"set still.ref to '{name}'"))
@@ -453,7 +466,7 @@ def cmd_check(f, _):
         st = s.get("still", {})
         if st and not (isinstance(st.get("prompt"), str) and st["prompt"].strip()):
             errs.append(f"{i}: still.prompt is empty")
-        for sev, msg in diptych_problems(s):
+        for sev, msg in diptych_problems(s, f):
             (errs if sev == "ERR" else warns).append(f"{i}: {msg}")
         if st.get("input") and not resolve_ref(f, st["input"]).exists():
             warns.append(f"{i}: still.input not made yet: {st['input']}")
@@ -507,6 +520,49 @@ def cmd_status(f, _):
     return 0
 
 
+def still_recipe(f, s):
+    """Everything dt_diptych.sh needs for one shot: the two halves, the env, and the prompt file."""
+    st = s.get("still") or die(f"{s['id']}: no still recipe")
+    c = still_cfg(f, s)
+    ref = resolve_ref(f, st.get("ref"))
+    inp = resolve_ref(f, st["input"]) if st.get("input") else None
+    # A diptych carries identity in the left half, so its prompt names no trigger and the LoRA would
+    # bind to nothing -- it would still cost sampling time on every seed. cmd_combos already drops it
+    # in that case; shots did not, which is what made lint fail s3, s6 and s7.
+    cfg = dict(c["config"])
+    trig = trigger_of(f)
+    if trig and trig not in (st.get("prompt") or "").lower():
+        cfg.pop("loras", None)
+    env = {"MODEL": c["model"], "STEPS": c["steps"], "CFG": c["cfg"], "STRENGTH": c["strength"],
+           "CONFIG_JSON": json.dumps(cfg, separators=(",", ":"))}
+    return st, c, ref, inp, env
+
+
+def render_still(f, s, seed):
+    """One candidate. Returns its path, rendering it only if it is not already there."""
+    st, c, ref, inp, env = still_recipe(f, s)
+    out = d(f, f"seed/{s['id']}_c{seed}.png")
+    if out.exists() and not FORCE:
+        return out, 0
+    rc = run([S / "dt_diptych.sh", ref or "-", inp or "-", prompt_path(f, s["id"], st["prompt"]),
+              out, seed, *c["size"]], env)
+    return out, rc
+
+
+def still_reference(f, s):
+    """The image a shot's candidates should look like: its ref if it has one, else its input.
+
+    An edit-mode shot has no ref -- the master IS the input -- so that is what it must stay faithful to.
+    """
+    st = s.get("still") or {}
+    for key in ("ref", "input"):
+        if st.get(key):
+            p = resolve_ref(f, st[key])
+            if p and p.exists():
+                return p
+    return None
+
+
 def cmd_stills(f, args):
     rc = 0
     for s in ids_arg(f, args):
@@ -514,24 +570,10 @@ def cmd_stills(f, args):
         if d(f, f"stills/{i}.png").exists() and not FORCE:
             print(f"{i}: picked still exists, skipping (--force to regenerate candidates)")
             continue
-        st = s.get("still") or die(f"{i}: no still recipe")
         c = still_cfg(f, s)
-        ref = resolve_ref(f, st.get("ref"))
-        inp = resolve_ref(f, st["input"]) if st.get("input") else None
-        # A diptych carries identity in the left half, so its prompt names no trigger and the LoRA would
-        # bind to nothing -- it would still cost sampling time on every seed. cmd_combos already drops it
-        # in that case; shots did not, which is what made lint fail s3, s6 and s7.
-        cfg = dict(c["config"])
-        trig = trigger_of(f)
-        if trig and trig not in (st.get("prompt") or "").lower():
-            cfg.pop("loras", None)
-        env = {"MODEL": c["model"], "STEPS": c["steps"], "CFG": c["cfg"], "STRENGTH": c["strength"],
-               "CONFIG_JSON": json.dumps(cfg, separators=(",", ":"))}
         for seed in c["seeds"]:
-            out = d(f, f"seed/{i}_c{seed}.png")
-            if out.exists() and not FORCE:
-                continue
-            rc |= run([S / "dt_diptych.sh", ref or "-", inp or "-", prompt_path(f, i, st["prompt"]), out, seed, *c["size"]], env)
+            _, r = render_still(f, s, seed)
+            rc |= r
     return rc
 
 
@@ -944,6 +986,75 @@ def cmd_pick(f, args):
     return 0
 
 
+def cmd_align(f, args):
+    """Render, score every candidate against the master it came from, pick the closest, repeat.
+
+    "Loop until the stills align with the masters" needs a number to loop on. The one available is the
+    palette distance between a candidate and its own reference -- the master, model-sheet view or combo
+    the shot was built from. It is a weak signal in absolute terms, because a scene carries background
+    the studio plate does not, so it is used the only way it is honest: to RANK a shot's own candidates
+    against each other, never to pass or fail a shot against a fixed number.
+
+    The loop is therefore a convergence test, not a threshold test. Each round renders a fresh batch of
+    seeds and keeps the best distance seen. When a round fails to improve on the previous best by more
+    than --gain, more seeds are not buying alignment and the loop stops and picks the best so far.
+    That bounds the work and always terminates, which matters when nobody is awake to stop it.
+    """
+    rounds = int(flag("--rounds", 4))
+    gain = float(flag("--gain", 0.02))
+    todo = [s for s in ids_arg(f, args) if not d(f, f"stills/{s['id']}.png").exists() or FORCE]
+    for s in todo:
+        i = s["id"]
+        rp = still_reference(f, s)
+        if not rp:
+            print(f"{i}: no reference to align against -- rendering once and picking", flush=True)
+            c = still_cfg(f, s)
+            render_still(f, s, c["seeds"][0])
+            cmd_pick(f, [i, str(c["seeds"][0])])
+            continue
+        base = still_cfg(f, s)["seeds"]
+        rpal, best, best_seed, prev = image_palette(rp), None, None, None
+        for r in range(rounds):
+            seeds = [x + r * len(base) for x in base]
+            for seed in seeds:
+                out, _ = render_still(f, s, seed)
+                if not out.exists():
+                    continue
+                dist = palette_distance(rpal, image_palette(out))
+                if best is None or dist < best:
+                    best, best_seed = dist, seed
+            print(f"{i}: round {r + 1} seeds {seeds} -> best {best:.4f} (seed {best_seed}) "
+                  f"vs {rp.name}", flush=True)
+            if prev is not None and prev - best < gain:
+                print(f"{i}: converged -- round {r + 1} improved by {prev - best:.4f}, under {gain}",
+                      flush=True)
+                break
+            prev = best
+        cmd_sheet(f, [i, "--force"])
+        cmd_pick(f, [i, str(best_seed)])
+        print(f"{i}: picked seed {best_seed}, distance {best:.4f} to {rp.name}", flush=True)
+    return 0
+
+
+def cmd_auto(f, args):
+    """The whole film with nobody watching: masters -> combos -> aligned stills -> clips -> qc -> finish.
+
+    Every stage is already a command; this only runs them in order and stops at the first hard failure,
+    so an overnight run cannot quietly skip a stage the way kyle_firstflight v1 shipped with seven clips
+    because a bad take was archived after the loop had passed it.
+    """
+    stages = [("check", cmd_check, []), ("masters", cmd_masters, []), ("combos", cmd_combos, []),
+              ("align", cmd_align, []), ("check", cmd_check, []), ("clips", cmd_clips, []),
+              ("qc", cmd_qc, []), ("finish", cmd_finish, [])]
+    for name, fn, a in stages:
+        print(f"\n=== auto: {name} ===", flush=True)
+        rc = fn(f, a + [x for x in args if x.startswith("--")])
+        if rc:
+            die(f"auto stopped at '{name}' (rc={rc})")
+    print("\n=== auto: done ===", flush=True)
+    return 0
+
+
 def cmd_clips(f, args):
     v = flag("--v", "1")
     rc = 0
@@ -1036,7 +1147,7 @@ def cmd_finish(f, _):
     return 0
 
 
-CMDS = {"check": cmd_check, "status": cmd_status, "lint": cmd_lint, "masters": cmd_masters, "views": cmd_views, "combos": cmd_combos, "eval": cmd_eval, "stills": cmd_stills, "sheet": cmd_sheet, "pick": cmd_pick,
+CMDS = {"check": cmd_check, "status": cmd_status, "lint": cmd_lint, "masters": cmd_masters, "views": cmd_views, "combos": cmd_combos, "eval": cmd_eval, "stills": cmd_stills, "align": cmd_align, "auto": cmd_auto, "sheet": cmd_sheet, "pick": cmd_pick,
         "clips": cmd_clips, "qc": cmd_qc, "finish": cmd_finish}
 
 if __name__ == "__main__":
