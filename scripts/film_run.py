@@ -8,6 +8,7 @@ holding the run-spec (handy for tests).
   scripts/film_run.py PROJECT status             one line per shot: still / candidates / clips / take / 4K
   scripts/film_run.py PROJECT lint [ids]        prompt defects readable without rendering
   scripts/film_run.py PROJECT masters [names]    seed candidates for each master -> seed/<name>_c<seed>.png
+  scripts/film_run.py PROJECT views [names]      picked master -> turnaround + expressions model sheet
   scripts/film_run.py PROJECT stills [ids]       seed candidates for shots with no picked still -> seed/<id>_c<seed>.png
   scripts/film_run.py PROJECT sheet [ids]        label candidates -> seed/<id>_sheet.png (review before picking)
   scripts/film_run.py PROJECT pick ID SEED       candidate -> stills/<id>.png
@@ -500,6 +501,41 @@ def cmd_masters(f, args):
     return rc
 
 
+
+def cmd_views(f, args):
+    """Turn a picked master into a model sheet: turnaround, head, expressions, optional detail.
+
+    A shot's still.ref can only carry what the reference shows. A frontal master gives the model nothing
+    to copy for a profile or a back, so it invents one and the subject changes between shots. With a
+    sheet, each shot references the view that matches its framing: seed/<name>_side.png for a profile
+    shot, _back.png for a back view, _expr_smile.png for the face shot.
+    """
+    names = [a for a in args if not a.startswith("--")] or list(f.get("masters", {}))
+    locks = (f.get("_scenes") or {}).get("locks") or {}
+    rc = 0
+    for name in names:
+        master = d(f, f.get("masters", {}).get(name, f"seed/{name}.png"))
+        if not master.exists():
+            print(f"{name}: no master yet -- run `masters` and `pick {name} <seed>` first")
+            rc |= 1
+            continue
+        subject = locks.get(name) or locks.get("subject") or f"the same {name}"
+        env = {"SUBJECT": subject, "SEED": "1"}
+        spec_views = (f.get("master_views") or {}).get(name) or {}
+        for k in ("VIEWS", "EXPR", "DETAIL", "BACKDROP"):
+            if spec_views.get(k.lower()):
+                env[k] = spec_views[k.lower()]
+        # an object has no expressions; a person does
+        if "EXPR" not in env and name not in ("subject",) and not locks.get("subject", "").startswith(
+                str(subject)[:20]):
+            if name in ("kyle", "lindsey", "ivy") or "boy" in subject or "girl" in subject:
+                env["EXPR"] = "neutral alert smile"
+            else:
+                env["EXPR"] = ""
+        rc |= run([S / "model_sheet.sh", master, d(f, f"seed/{name}"), subject, "1"], env)
+    return rc
+
+
 def cmd_sheet(f, args):
     """Tile a shot's candidates into one labelled sheet, so a pick is by seed number, not by position.
 
@@ -664,7 +700,7 @@ def cmd_finish(f, _):
     return 0
 
 
-CMDS = {"check": cmd_check, "status": cmd_status, "lint": cmd_lint, "masters": cmd_masters, "stills": cmd_stills, "sheet": cmd_sheet, "pick": cmd_pick,
+CMDS = {"check": cmd_check, "status": cmd_status, "lint": cmd_lint, "masters": cmd_masters, "views": cmd_views, "stills": cmd_stills, "sheet": cmd_sheet, "pick": cmd_pick,
         "clips": cmd_clips, "qc": cmd_qc, "finish": cmd_finish}
 
 if __name__ == "__main__":

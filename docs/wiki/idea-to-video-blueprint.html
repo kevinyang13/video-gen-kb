@@ -337,6 +337,10 @@ five candidates and a contact sheet improve <em>picking</em>, and picking is not
 </tbody>
 </table></div>
 <h2>Phase 4 — Seeds: a master for everything that must stay the same</h2>
+<p><strong>Masters are model sheets, not single images.</strong> <code>masters</code> renders five candidates, <code>pick</code> chooses the
+hero view, and <code>views</code> turns it into a turnaround with expression heads on a plain backdrop. Each shot
+then references the view matching its framing. A frontal master referenced by a profile shot gives the
+model nothing to copy, so it invents one — see <a href="shot-locks.html">shot locks</a>.</p>
 <p><strong>Masters get candidates too: <code>film_run.py PROJECT masters</code>.</strong> A master is the most load-bearing image in
 a film — every shot that references it inherits whatever that one render produced — so it gets five seeds
 and a labelled sheet exactly like a shot does, then <code>pick &lt;name&gt; &lt;seed&gt;</code>. Making masters one seed at a

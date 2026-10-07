@@ -996,3 +996,35 @@ New `film_run.py PROJECT lint` reads prompts and reports four defect classes, wi
 Replayed against the originals, lint catches all three historical failures above from the prompt text
 alone. [[shot-locks]] gained a translation table from each negation that failed to the positive form that
 worked, and the blueprint gained a Phase 2b that runs lint before any rendering.
+
+## 2026-10-06 — masters become model sheets
+
+Kevin supplied five production character sheets — turnaround, head, expression row, detail inset, all on
+a plain backdrop — and asked that masters be generated that way.
+
+`scripts/model_sheet.sh` plus `film_run.py PROJECT views`. A picked master becomes `_front`, `_34`,
+`_side`, `_back`, optional expression heads, and a composed `_model.png`. A shot then references the view
+matching its framing instead of a frontal master for everything, which is the fix for the craft changing
+shape between shots in `kyle_firstflight`.
+
+`seed_sheet.sh` had most of this knowledge in its header already, unused since it was written:
+
+> "A single frontal reference gives the model nothing to copy for a profile, so it invents one. With a
+> sheet you crop the angle a shot needs and hand that over as the reference instead."
+
+Three things carried into the new generator:
+
+- **Each view references the previous one.** Side from three-quarter, back from side, halving the rotation
+  per step. A 90-degree turn straight from a frontal reference gives a Janus artifact — front face plus a
+  profile beside it, ear in the middle.
+- **Framing comes from the canvas.** Body views tall, head views square; a head-and-shoulders reference
+  asked for a full body returns head and shoulders.
+- **The backdrop is plain.** A master shot in a location drags that location into every shot referencing
+  it, which is why the supplied sheets are all on white.
+
+Proved on the `kyle_firstflight` droid: four views with the rust pattern, paint, wheels and lens
+consistent across all of them.
+
+One bug found by running it: `EXPR="${EXPR:-...}"` substitutes on empty as well as unset, so passing an
+empty expression list for an object fell through to the default and the droid was asked for a worried
+portrait. It grew a human face inside its dome. Fixed to `${EXPR-...}`; objects pass `EXPR=""`.

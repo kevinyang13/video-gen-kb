@@ -106,6 +106,39 @@ and never touches down.
 Everything moves at natural real-time speed, with no slow motion and no speed ramping.
 ```
 
+## Masters are model sheets, not single images
+
+A shot's `still.ref` can only carry what the reference shows. A single frontal master gives the model
+nothing to copy for a profile or a back, so it invents one — which is why the skiff in
+`kyle_firstflight` is a different craft in every shot that was not handed `skiff.png`.
+
+```bash
+scripts/film_run.py PROJECT masters        # 5 candidates per master
+scripts/film_run.py PROJECT pick kyle 3    # choose the hero view
+scripts/film_run.py PROJECT views          # -> turnaround + expressions model sheet
+```
+
+`views` produces `seed/<name>_front.png`, `_34.png`, `_side.png`, `_back.png`, optional expression heads,
+and a composed `seed/<name>_model.png` for review. A shot then references **the view that matches its
+framing** — `_side` for a profile shot, `_back` for a back view, `_expr_smile` for the face shot — rather
+than a frontal master for everything.
+
+Three things the generator does that a naive turnaround does not:
+
+**Each view references the previous one, not the master.** Side is rendered from the three-quarter, and
+back from the side, which halves the rotation at each step. A 90-degree turn straight from a frontal
+reference produces a Janus artifact: klein keeps the front face and adds a profile beside it with an ear
+in the middle.
+
+**Framing comes from the canvas, not the prompt.** Body views use a tall canvas and head views a square
+one, because asking a head-and-shoulders reference for a "full body shot" returns head and shoulders.
+
+**The backdrop is plain, and that is the point.** A master shot in a location drags that location into
+every shot that references it. Keep masters on a pale studio sweep with no scenery.
+
+For a prop, a vehicle or anything without a face, pass `EXPR=""`. An object asked for a "worried
+portrait" grows a face to be worried with — the droid came back with a human face inside its dome.
+
 ## Turning a negation into something that binds
 
 Across 114 shot prompts in this repo there is about **one authored negation each**, and the most common

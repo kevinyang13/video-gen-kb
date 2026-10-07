@@ -749,6 +749,33 @@ Every one of those things appeared anyway.</p>
 <p>Replayed against the originals, lint catches all three historical failures above from the prompt text
 alone. <a href="shot-locks.html">shot locks</a> gained a translation table from each negation that failed to the positive form that
 worked, and the blueprint gained a Phase 2b that runs lint before any rendering.</p>
+<h2>2026-10-06 — masters become model sheets</h2>
+<p>Kevin supplied five production character sheets — turnaround, head, expression row, detail inset, all on
+a plain backdrop — and asked that masters be generated that way.</p>
+<p><code>scripts/model_sheet.sh</code> plus <code>film_run.py PROJECT views</code>. A picked master becomes <code>_front</code>, <code>_34</code>,
+<code>_side</code>, <code>_back</code>, optional expression heads, and a composed <code>_model.png</code>. A shot then references the view
+matching its framing instead of a frontal master for everything, which is the fix for the craft changing
+shape between shots in <code>kyle_firstflight</code>.</p>
+<p><code>seed_sheet.sh</code> had most of this knowledge in its header already, unused since it was written:</p>
+<blockquote>
+<p>"A single frontal reference gives the model nothing to copy for a profile, so it invents one. With a
+sheet you crop the angle a shot needs and hand that over as the reference instead."</p>
+</blockquote>
+<p>Three things carried into the new generator:</p>
+<ul>
+<li><strong>Each view references the previous one.</strong> Side from three-quarter, back from side, halving the rotation
+  per step. A 90-degree turn straight from a frontal reference gives a Janus artifact — front face plus a
+  profile beside it, ear in the middle.</li>
+<li><strong>Framing comes from the canvas.</strong> Body views tall, head views square; a head-and-shoulders reference
+  asked for a full body returns head and shoulders.</li>
+<li><strong>The backdrop is plain.</strong> A master shot in a location drags that location into every shot referencing
+  it, which is why the supplied sheets are all on white.</li>
+</ul>
+<p>Proved on the <code>kyle_firstflight</code> droid: four views with the rust pattern, paint, wheels and lens
+consistent across all of them.</p>
+<p>One bug found by running it: <code>EXPR="${EXPR:-...}"</code> substitutes on empty as well as unset, so passing an
+empty expression list for an object fell through to the default and the droid was asked for a worried
+portrait. It grew a human face inside its dome. Fixed to <code>${EXPR-...}</code>; objects pass <code>EXPR=""</code>.</p>
   
 </div>
 <footer>video-gen-kb · built 2026-10-06 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
