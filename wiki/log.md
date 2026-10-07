@@ -1028,3 +1028,29 @@ consistent across all of them.
 One bug found by running it: `EXPR="${EXPR:-...}"` substitutes on empty as well as unset, so passing an
 empty expression list for an object fell through to the default and the droid was asked for a worried
 portrait. It grew a human face inside its dome. Fixed to `${EXPR-...}`; objects pass `EXPR=""`.
+
+## 2026-10-06 — a silent default rendered a man holding a model aeroplane
+
+The skiff turnaround in `kyle_firstflight` v2 came back as a man holding a model aeroplane, in all eight
+views. `eval` flagged every one of them as an outlier, which is the first time a check in this repo
+found a defect before a human looked — but Kevin's response was that catching it at eval is too late,
+and he is right.
+
+The cause was in `model_sheet.sh`: one view template, written for a person, and `KIND="${KIND:-person}"`.
+A craft asked for "a full-length view from head to feet, standing square to the camera, arms relaxed at
+the sides" gets a person supplied to own the head and feet. Nothing errored; eight renders completed.
+
+Fixes, in order of how early they catch it:
+
+- **`lint`** refuses a master with no declared kind, before anything renders.
+- **`check`** fails the same way.
+- **`views`** refuses rather than guessing.
+- **`model_sheet.sh`** has no default at all: `: "${KIND:?...}"`.
+- **`eval`** remains the backstop it should have been.
+
+Deriving the kind from the lock text was implemented, tested, and rejected: `dunes` reads as a person
+because the lock says "dune *faces*", and a character described under `subject` rather than its own
+master name reads as neither. A heuristic wrong a fifth of the time is useful in an error message and
+unacceptable as a silent default. It now appears only as a suggestion inside the failure text.
+
+The general rule: **a default that silently selects the wrong template is worse than no default.**

@@ -139,6 +139,30 @@ every shot that references it. Keep masters on a pale studio sweep with no scene
 For a prop, a vehicle or anything without a face, pass `EXPR=""`. An object asked for a "worried
 portrait" grows a face to be worried with — the droid came back with a human face inside its dome.
 
+### A master is a person or an object, and the spec must say which
+
+The two need different view language. A person's turnaround asks for "a full-length view from head to
+feet, standing square to the camera, arms relaxed at the sides". Applied to a craft, klein supplies a
+person to own the head and feet: the `kyle_firstflight` skiff turnaround came back as **a man holding a
+model aeroplane**, in all eight views, with nothing erroring.
+
+```json
+"master_views": {
+  "kyle":  {"kind": "person", "expr": "neutral alert smile"},
+  "skiff": {"kind": "object", "expr": ""},
+  "yard":  {"skip": true}
+}
+```
+
+`kind` is **required** and is never guessed at render time. Deriving it by word-counting the lock was
+tried and is not reliable enough to act on — `dunes` reads as a person because the lock says "dune
+*faces*", and a character whose description lives under `subject` rather than its own master name reads
+as nothing at all. The heuristic survives only inside the error message, as a suggestion to the author.
+
+The general rule this came from: **a default that silently selects the wrong template is worse than no
+default.** Eight renders completed, nothing failed, and the fault was visible only in the picture.
+`check` and `lint` both refuse to proceed without a declared kind.
+
 ## Turning a negation into something that binds
 
 Across 114 shot prompts in this repo there is about **one authored negation each**, and the most common

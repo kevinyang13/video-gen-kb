@@ -117,7 +117,13 @@ def d(f, rel):
 def resolve_ref(f, ref):
     if not ref:
         return None
-    return d(f, f.get("masters", {}).get(ref, ref))
+    masters = f.get("masters", {})
+    if ref in masters:
+        return d(f, masters[ref])
+    # a model-sheet view or a combo: "<master>_<view>" -> seed/<master>_<view>.png
+    if "_" in ref and ref.split("_")[0] in masters or (f.get("combos") or {}).get(ref):
+        return d(f, f"seed/{ref}.png")
+    return d(f, ref)
 
 
 def still_cfg(f, shot):
@@ -238,7 +244,11 @@ def object_without_reference(shot, locks, masters):
         if name in ("subject", "wardrobe", "style", "pace", "pilot") or name not in (masters or {}):
             continue
         probe = text[:48]
-        if probe and probe in p and ref != name and not inp.endswith(f"{name}.png"):
+        # a model-sheet view (skiff_side) or a combo (kyle_in_skiff) shows the object just as its master
+        # does, so either satisfies the requirement
+        shown = (ref == name or (ref or "").startswith(f"{name}_") or f"_{name}" in (ref or "")
+                 or f"{name}_" in (ref or "") or inp.endswith(f"{name}.png"))
+        if probe and probe in p and not shown:
             missing.append(name)
     return missing
 
@@ -291,7 +301,13 @@ def lint_shot(shot, style=""):
 
     # A motion prompt that moves more subjects than the still contains: the video stage must invent the
     # extra one. kyle_saltflats s7 described an overtake between two machines over a still holding one.
-    if re.search(r"\b(a single|one)\b", still) and re.search(r"\b(both|all four|two of them|each other)\b", video):
+    # "both nacelles" is two parts of one craft, not two subjects, so a part noun after the quantifier
+    # does not count. Without this the rule fires on every twin-engined machine in the repo.
+    PARTS = ("nacelle", "engine", "hand", "eye", "arm", "wing", "side", "leg", "foot", "feet", "thruster",
+             "cable", "rail", "door", "sun", "light", "lamp", "shoulder", "ear")
+    plural = re.search(r"\b(both|all four|two of them|each other)\b\s*(\w+)?", video)
+    part_ref = bool(plural and plural.group(2) and any(p in plural.group(2) for p in PARTS))
+    if re.search(r"\b(a single|one)\b", still) and plural and not part_ref:
         out.append(("ERR", "motion prompt acts on more subjects than the still contains",
                     "match the count: either put the second subject in the still or rewrite the motion "
                     "for one"))
@@ -306,6 +322,14 @@ def lint_shot(shot, style=""):
 
 def cmd_lint(f, args):
     """Read every prompt and report what will fail before anything renders."""
+    for name in (f.get("masters") or {}):
+        mv = (f.get("master_views") or {}).get(name) or {}
+        if mv.get("skip"):
+            continue
+        if master_kind(f, name) not in ("person", "object"):
+            print(f'  ERR   master {name}: no declared kind -- object views would be rendered with '
+                  f'anatomy words ("from head to feet, arms relaxed at the sides")\n'
+                  f'        -> set master_views.{name}.kind to "person" or "object"')
     style = ((f.get("_scenes") or {}).get("locks") or {}).get("style", "")
     locks = (f.get("_scenes") or {}).get("locks") or {}
     trig, bad = trigger_of(f), 0
@@ -348,6 +372,10 @@ def cmd_check(f, _):
     for name, path in f.get("masters", {}).items():
         if not d(f, path).exists():
             warns.append(f"master '{name}' not made yet: {path}")
+        mv = (f.get("master_views") or {}).get(name) or {}
+        if not mv.get("skip") and master_kind(f, name) not in ("person", "object"):
+            errs.append(f'master \'{name}\': master_views.{name}.kind must be "person" or "object" '
+                        f'-- object views must not use anatomy words (looks like "{kind_guess(f, name)}")')
     seen = set()
     for s in f["shots"]:
         i = s["id"]
@@ -360,8 +388,14 @@ def cmd_check(f, _):
         if st.get("input") and not d(f, st["input"]).exists():
             warns.append(f"{i}: still.input not made yet: {st['input']}")
         ref = st.get("ref")
-        if ref and ref not in f.get("masters", {}) and not ref.startswith(("stills/", "seed/")):
-            errs.append(f"{i}: still.ref '{ref}' is neither a master name nor a path")
+        if ref:
+            known = (ref in f.get("masters", {}) or ref in (f.get("combos") or {})
+                     or ref.startswith(("stills/", "seed/"))
+                     or ref.split("_")[0] in f.get("masters", {}))
+            if not known:
+                errs.append(f"{i}: still.ref '{ref}' is not a master, a model-sheet view, a combo or a path")
+            elif not resolve_ref(f, ref).exists():
+                warns.append(f"{i}: still.ref '{ref}' not rendered yet ({resolve_ref(f, ref).name})")
         if not (isinstance(s.get("video_prompt"), str) and s["video_prompt"].strip()):
             errs.append(f"{i}: video_prompt is empty")
         if s.get("trim"):
@@ -450,14 +484,14 @@ def image_metrics(path):
     return {"sharp": float(lap.var()), "bg": bg, "clip": float((a >= 245).mean())}
 
 
-def metric_label(m, best_sharp):
+def metric_label(m, best_sharp, plate=False):
     """A short caption, with a mark on the sharpest tile and a flag on a bright background."""
     if not m:
         return ""
     s = f"  sharp {m['sharp']:.0f}"
     if m["sharp"] >= best_sharp * 0.98:
         s += "*"
-    if m["bg"] > 150:
+    if m["bg"] > 150 and not plate:
         s += f"  bg {m['bg']:.0f}"
     return s
 
@@ -504,6 +538,37 @@ def cmd_masters(f, args):
 
 
 
+
+# A master is either a person or an object and the two need different view language. Deriving it from
+# the lock text is reliable when the text actually describes a body, and silently guessing when it does
+# not is how the skiff turnaround became a man holding a model aeroplane. So: derive when the evidence
+# is clear, and refuse when it is not, rather than defaulting.
+PERSON_WORDS = ("boy", "girl", "man", "woman", "child", "person", "face", "hair", "skin", "shoulders",
+                "wearing", "eyes")
+OBJECT_WORDS = ("hull", "machine", "craft", "engine", "vehicle", "droid", "robot", "metal", "panel",
+                "riveted", "wheels", "chassis", "cockpit", "blade", "weapon", "sword", "mount")
+
+
+def master_kind(f, name):
+    """The declared kind. Only ever what the spec says -- never a guess."""
+    return ((f.get("master_views") or {}).get(name) or {}).get("kind")
+
+
+def kind_guess(f, name):
+    """A suggestion for the error message only. Deliberately not used to render anything.
+
+    Word-counting the lock is not reliable enough to act on: 'dune faces' reads as a person and a
+    character lock that lives under `subject` rather than the master's own name reads as nothing. A
+    suggestion that is wrong a fifth of the time is useful in a prompt to the author and unacceptable as
+    a silent default -- which is exactly how the skiff turnaround became a man holding a model aeroplane.
+    """
+    locks = (f.get("_scenes") or {}).get("locks") or {}
+    text = (locks.get(name) or locks.get("subject") or "").lower()
+    p = sum(w in text for w in PERSON_WORDS)
+    o = sum(w in text for w in OBJECT_WORDS)
+    return "person" if p > o else "object" if o else "?"
+
+
 def cmd_views(f, args):
     """Turn a picked master into a model sheet: turnaround, head, expressions, optional detail.
 
@@ -516,17 +581,38 @@ def cmd_views(f, args):
     locks = (f.get("_scenes") or {}).get("locks") or {}
     rc = 0
     for name in names:
+        spec_views = (f.get("master_views") or {}).get(name) or {}
         master = d(f, f.get("masters", {}).get(name, f"seed/{name}.png"))
-        if not master.exists():
+        if not spec_views.get("skip") and not master.exists():
             print(f"{name}: no master yet -- run `masters` and `pick {name} <seed>` first")
             rc |= 1
             continue
         subject = locks.get(name) or locks.get("subject") or f"the same {name}"
         env = {"SUBJECT": subject, "SEED": "1"}
-        spec_views = (f.get("master_views") or {}).get(name) or {}
-        for k in ("VIEWS", "EXPR", "DETAIL", "BACKDROP"):
-            if spec_views.get(k.lower()):
+        if spec_views.get("skip"):
+            # An environment has no turnaround: a location needs camera angles and times of day, not a
+            # rotation. Rotating `yard` or `dunes` produces nonsense.
+            print(f"{name}: skipped (environment -- no turnaround)")
+            continue
+        kind = master_kind(f, name)
+        if kind not in ("person", "object"):
+            print(f'{name}: master_views.{name}.kind is not set -- add "person" or "object" '
+                  f'(looks like "{kind_guess(f, name)}", but this is not guessed at render time)')
+            rc |= 1
+            continue
+        env["KIND"] = kind
+        if kind == "object":
+            env["EXPR"] = ""
+        for k in ("VIEWS", "VIEWS_CCW", "EXPR", "DETAIL", "BACKDROP", "KIND"):
+            if spec_views.get(k.lower()) is not None:
                 env[k] = spec_views[k.lower()]
+        # every combined plate this subject appears in joins its sheet, so one picture shows every way
+        # the subject has to stay the same -- alone and alongside the other locked things
+        extra = [str(d(f, f"seed/{cn}.png")) for cn, cs in (f.get("combos") or {}).items()
+                 if name in (cs.get("ref"), cs.get("input")) or f"{name}_" in cn or f"_{name}" in cn]
+        extra = [x for x in extra if Path(x).exists()]
+        if extra:
+            env["EXTRA"] = " ".join(extra)
         # an object has no expressions; a person does
         if "EXPR" not in env and name not in ("subject",) and not locks.get("subject", "").startswith(
                 str(subject)[:20]):
@@ -591,7 +677,7 @@ def cmd_eval(f, args):
         if not hero.exists():
             continue
         views = sorted(d(f, "seed").glob(f"{name}_*.png"))
-        views = [v for v in views if not re.search(r"_(c\d+|sheet|model)$", v.stem)]
+        views = [v for v in views if not re.search(r"_(c\d+|sheet|model|expr_\w+)$", v.stem)]
         if len(views) < 2:
             print(f"  {name}: no views yet -- run `views {name}`")
             continue
@@ -681,13 +767,20 @@ def cmd_sheet(f, args):
     except OSError:
         font = ImageFont.load_default()
     rc = 0
-    for s in ids_arg(f, args):
-        i = s["id"]
+    # a sheet tiles candidates for a shot, a master or a combo -- anything that produced seed/<x>_c<n>.png
+    pos = [a for a in args if not a.startswith("--")]
+    extra = [p for p in pos if p in (f.get("masters") or {}) or p in (f.get("combos") or {})]
+    shots = [s["id"] for s in ids_arg(f, [a for a in args if a not in extra])] if not extra or \
+        [a for a in pos if a not in extra] else []
+    for i in (extra or shots) if extra else shots:
         cands = sorted(d(f, "seed").glob(f"{i}_c*.png"),
                        key=lambda q: int(re.sub(r"\D", "", q.stem.split("_c")[-1]) or 0))
         if not cands:
             print(f"{i}: no candidates")
             continue
+        # A master is a studio plate: the pale backdrop that signals bloom risk in a scene is the point
+        # here, so the flag is suppressed rather than fired on every master and trained into noise.
+        is_plate = i in (f.get("masters") or {}) or i in (f.get("combos") or {})
         mets = {q: image_metrics(q) for q in cands}
         best = max((m["sharp"] for m in mets.values() if m), default=0.0)
         ims = []
@@ -695,7 +788,7 @@ def cmd_sheet(f, args):
             im = Image.open(q).convert("RGB")
             im = im.resize((tile_w, round(im.height * tile_w / im.width)), Image.LANCZOS)
             seed = q.stem.split("_c")[-1]
-            cap = f"c{seed}" + metric_label(mets[q], best)
+            cap = f"c{seed}" + metric_label(mets[q], best, plate=is_plate)
             dr = ImageDraw.Draw(im)
             dr.rectangle([0, 0, 24 + int(dr.textlength(cap, font=font)), 40], fill=(0, 0, 0))
             dr.text((8, 4), cap, fill=(255, 255, 255), font=font)
@@ -711,7 +804,8 @@ def cmd_sheet(f, args):
         note = ""
         if best:
             sharpest = max(mets, key=lambda q: mets[q]["sharp"] if mets[q] else -1)
-            bright = [q.stem.split("_c")[-1] for q in cands if mets[q] and mets[q]["bg"] > 150]
+            bright = [] if is_plate else [q.stem.split("_c")[-1] for q in cands
+                                          if mets[q] and mets[q]["bg"] > 150]
             note = f"  sharpest c{sharpest.stem.split('_c')[-1]}"
             if bright:
                 note += f", bright background (bloom risk): {', '.join('c' + b for b in bright)}"

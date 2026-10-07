@@ -776,6 +776,27 @@ consistent across all of them.</p>
 <p>One bug found by running it: <code>EXPR="${EXPR:-...}"</code> substitutes on empty as well as unset, so passing an
 empty expression list for an object fell through to the default and the droid was asked for a worried
 portrait. It grew a human face inside its dome. Fixed to <code>${EXPR-...}</code>; objects pass <code>EXPR=""</code>.</p>
+<h2>2026-10-06 — a silent default rendered a man holding a model aeroplane</h2>
+<p>The skiff turnaround in <code>kyle_firstflight</code> v2 came back as a man holding a model aeroplane, in all eight
+views. <code>eval</code> flagged every one of them as an outlier, which is the first time a check in this repo
+found a defect before a human looked — but Kevin's response was that catching it at eval is too late,
+and he is right.</p>
+<p>The cause was in <code>model_sheet.sh</code>: one view template, written for a person, and <code>KIND="${KIND:-person}"</code>.
+A craft asked for "a full-length view from head to feet, standing square to the camera, arms relaxed at
+the sides" gets a person supplied to own the head and feet. Nothing errored; eight renders completed.</p>
+<p>Fixes, in order of how early they catch it:</p>
+<ul>
+<li><strong><code>lint</code></strong> refuses a master with no declared kind, before anything renders.</li>
+<li><strong><code>check</code></strong> fails the same way.</li>
+<li><strong><code>views</code></strong> refuses rather than guessing.</li>
+<li><strong><code>model_sheet.sh</code></strong> has no default at all: <code>: "${KIND:?...}"</code>.</li>
+<li><strong><code>eval</code></strong> remains the backstop it should have been.</li>
+</ul>
+<p>Deriving the kind from the lock text was implemented, tested, and rejected: <code>dunes</code> reads as a person
+because the lock says "dune <em>faces</em>", and a character described under <code>subject</code> rather than its own
+master name reads as neither. A heuristic wrong a fifth of the time is useful in an error message and
+unacceptable as a silent default. It now appears only as a suggestion inside the failure text.</p>
+<p>The general rule: <strong>a default that silently selects the wrong template is worse than no default.</strong></p>
   
 </div>
 <footer>video-gen-kb · built 2026-10-06 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>

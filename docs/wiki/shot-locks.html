@@ -205,6 +205,24 @@ one, because asking a head-and-shoulders reference for a "full body shot" return
 every shot that references it. Keep masters on a pale studio sweep with no scenery.</p>
 <p>For a prop, a vehicle or anything without a face, pass <code>EXPR=""</code>. An object asked for a "worried
 portrait" grows a face to be worried with — the droid came back with a human face inside its dome.</p>
+<h3>A master is a person or an object, and the spec must say which</h3>
+<p>The two need different view language. A person's turnaround asks for "a full-length view from head to
+feet, standing square to the camera, arms relaxed at the sides". Applied to a craft, klein supplies a
+person to own the head and feet: the <code>kyle_firstflight</code> skiff turnaround came back as <strong>a man holding a
+model aeroplane</strong>, in all eight views, with nothing erroring.</p>
+<pre><code class="language-json">&quot;master_views&quot;: {
+  &quot;kyle&quot;:  {&quot;kind&quot;: &quot;person&quot;, &quot;expr&quot;: &quot;neutral alert smile&quot;},
+  &quot;skiff&quot;: {&quot;kind&quot;: &quot;object&quot;, &quot;expr&quot;: &quot;&quot;},
+  &quot;yard&quot;:  {&quot;skip&quot;: true}
+}
+</code></pre>
+<p><code>kind</code> is <strong>required</strong> and is never guessed at render time. Deriving it by word-counting the lock was
+tried and is not reliable enough to act on — <code>dunes</code> reads as a person because the lock says "dune
+<em>faces</em>", and a character whose description lives under <code>subject</code> rather than its own master name reads
+as nothing at all. The heuristic survives only inside the error message, as a suggestion to the author.</p>
+<p>The general rule this came from: <strong>a default that silently selects the wrong template is worse than no
+default.</strong> Eight renders completed, nothing failed, and the fault was visible only in the picture.
+<code>check</code> and <code>lint</code> both refuse to proceed without a declared kind.</p>
 <h2>Turning a negation into something that binds</h2>
 <p>Across 114 shot prompts in this repo there is about <strong>one authored negation each</strong>, and the most common
 ones are a list of this project's documented failures:</p>

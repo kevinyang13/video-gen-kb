@@ -1,0 +1,160 @@
+PHASE masters 18:40
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"kyle_lora_v2_2500_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/master_kyle.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_c1.png 1 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_c1.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"kyle_lora_v2_2500_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/master_kyle.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_c2.png 2 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_c2.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"kyle_lora_v2_2500_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/master_kyle.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_c3.png 3 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_c3.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"kyle_lora_v2_2500_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/master_kyle.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_c4.png 4 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_c4.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"kyle_lora_v2_2500_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/master_kyle.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_c5.png 5 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_c5.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/master_droid.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/droid_c1.png 1 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/droid_c1.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/master_droid.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/droid_c2.png 2 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/droid_c2.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/master_droid.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/droid_c3.png 3 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/droid_c3.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/master_droid.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/droid_c4.png 4 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/droid_c4.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/master_droid.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/droid_c5.png 5 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/droid_c5.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/master_skiff.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/skiff_c1.png 1 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/skiff_c1.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/master_skiff.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/skiff_c2.png 2 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/skiff_c2.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/master_skiff.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/skiff_c3.png 3 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/skiff_c3.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/master_skiff.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/skiff_c4.png 4 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/skiff_c4.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/master_skiff.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/skiff_c5.png 5 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/skiff_c5.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/master_yard.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/yard_c1.png 1 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/yard_c1.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/master_yard.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/yard_c2.png 2 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/yard_c2.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/master_yard.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/yard_c3.png 3 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/yard_c3.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/master_yard.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/yard_c4.png 4 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/yard_c4.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/master_yard.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/yard_c5.png 5 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/yard_c5.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/master_dunes.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/dunes_c1.png 1 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/dunes_c1.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/master_dunes.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/dunes_c2.png 2 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/dunes_c2.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/master_dunes.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/dunes_c3.png 3 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/dunes_c3.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/master_dunes.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/dunes_c4.png 4 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/dunes_c4.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/master_dunes.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/dunes_c5.png 5 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/dunes_c5.png
+film_run: unknown shot 'kyle' (have s1, s2, s3, s4, s5, s6, s7, s8)
+PHASE masters-done 18:55
+PHASE combos 19:10
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"kyle_lora_v2_2500_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/skiff.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/combo_kyle_in_skiff.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_in_skiff_c1.png 1 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_in_skiff_c1.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"kyle_lora_v2_2500_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/skiff.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/combo_kyle_in_skiff.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_in_skiff_c2.png 2 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_in_skiff_c2.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"kyle_lora_v2_2500_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/skiff.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/combo_kyle_in_skiff.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_in_skiff_c3.png 3 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_in_skiff_c3.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"kyle_lora_v2_2500_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/skiff.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/combo_kyle_in_skiff.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_in_skiff_c4.png 4 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_in_skiff_c4.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"kyle_lora_v2_2500_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/skiff.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/combo_kyle_in_skiff.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_in_skiff_c5.png 5 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_in_skiff_c5.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"kyle_lora_v2_2500_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/droid.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/combo_kyle_with_droid.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_with_droid_c1.png 1 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_with_droid_c1.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"kyle_lora_v2_2500_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/droid.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/combo_kyle_with_droid.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_with_droid_c2.png 2 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_with_droid_c2.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"kyle_lora_v2_2500_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/droid.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/combo_kyle_with_droid.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_with_droid_c3.png 3 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_with_droid_c3.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"kyle_lora_v2_2500_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/droid.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/combo_kyle_with_droid.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_with_droid_c4.png 4 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_with_droid_c4.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"kyle_lora_v2_2500_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/droid.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/combo_kyle_with_droid.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_with_droid_c5.png 5 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_with_droid_c5.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"kyle_lora_v2_2500_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_in_skiff.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/droid.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/combo_flight_crew.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/flight_crew_c1.png 1 1024 576
+dt_diptych: REF not found: /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_in_skiff.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"kyle_lora_v2_2500_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_in_skiff.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/droid.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/combo_flight_crew.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/flight_crew_c2.png 2 1024 576
+dt_diptych: REF not found: /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_in_skiff.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"kyle_lora_v2_2500_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_in_skiff.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/droid.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/combo_flight_crew.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/flight_crew_c3.png 3 1024 576
+dt_diptych: REF not found: /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_in_skiff.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"kyle_lora_v2_2500_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_in_skiff.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/droid.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/combo_flight_crew.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/flight_crew_c4.png 4 1024 576
+dt_diptych: REF not found: /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_in_skiff.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"kyle_lora_v2_2500_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_in_skiff.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/droid.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/combo_flight_crew.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/flight_crew_c5.png 5 1024 576
+dt_diptych: REF not found: /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_in_skiff.png
+kyle_in_skiff: 5 candidates -> projects/kyle_firstflight/v2-sheets/seed/kyle_in_skiff_sheet.png  sharpest c3
+kyle_with_droid: 5 candidates -> projects/kyle_firstflight/v2-sheets/seed/kyle_with_droid_sheet.png  sharpest c3
+flight_crew: no candidates
+PHASE views 19:24
+$ SUBJECT='kyle_kx boy, a nine-year-old boy with child proportions, this exact face, short dark hair' SEED=1 EXPR='neutral alert smile' /Users/kevinyang/dev/video-gen-kb/scripts/model_sheet.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle 'kyle_kx boy, a nine-year-old boy with child proportions, this exact face, short dark hair' 1
+  view front (ref kyle.png) …
+  view 45 (ref kyle_front.png) …
+  view 90 (ref kyle_45.png) …
+  view 135 (ref kyle_90.png) …
+  view 180 (ref kyle_135.png) …
+  view 315 (ref kyle_front.png) …
+  view 270 (ref kyle_315.png) …
+  view 225 (ref kyle_270.png) …
+  expression neutral …
+  expression alert …
+  expression smile …
+model sheet: /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_model.png  (11 views)
+$ SUBJECT='a small battered repair droid about knee height: a domed swivelling head with a single wide amber lens, a riveted barrel body in faded white and blue paint scoured back to bare metal, two stubby manipulator arms folded at its sides and three squat tracked feet, small status lights blinking along its flank' SEED=1 EXPR='' /Users/kevinyang/dev/video-gen-kb/scripts/model_sheet.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/droid.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/droid 'a small battered repair droid about knee height: a domed swivelling head with a single wide amber lens, a riveted barrel body in faded white and blue paint scoured back to bare metal, two stubby manipulator arms folded at its sides and three squat tracked feet, small status lights blinking along its flank' 1
+  view front (ref droid.png) …
+  view 45 (ref droid_front.png) …
+  view 90 (ref droid_45.png) …
+  view 135 (ref droid_90.png) …
+  view 180 (ref droid_135.png) …
+  view 315 (ref droid_front.png) …
+  view 270 (ref droid_315.png) …
+  view 225 (ref droid_270.png) …
+model sheet: /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/droid_model.png  (8 views)
+$ SUBJECT='a small home-built single-seat desert skiff: a slender riveted hull the length of a rowing boat, an open cockpit with a low curved windscreen, a pair of stubby swept fins at the stern and two scavenged thruster nacelles slung underneath, every panel a different salvaged colour, patched and bolted and clearly rebuilt from wrecks' SEED=1 EXPR='' /Users/kevinyang/dev/video-gen-kb/scripts/model_sheet.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/skiff.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/skiff 'a small home-built single-seat desert skiff: a slender riveted hull the length of a rowing boat, an open cockpit with a low curved windscreen, a pair of stubby swept fins at the stern and two scavenged thruster nacelles slung underneath, every panel a different salvaged colour, patched and bolted and clearly rebuilt from wrecks' 1
+  view front (ref skiff.png) …
+  view 45 (ref skiff_front.png) …
+  view 90 (ref skiff_45.png) …
+  view 135 (ref skiff_90.png) …
+  view 180 (ref skiff_135.png) …
+  view 315 (ref skiff_front.png) …
+  view 270 (ref skiff_315.png) …
+  view 225 (ref skiff_270.png) …
+model sheet: /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/skiff_model.png  (8 views)
+yard: skipped (environment -- no turnaround)
+dunes: skipped (environment -- no turnaround)
+PHASE eval 19:41
+masters — views compared pairwise (outlier = the view that wandered):
+  kyle       135              0.019
+  kyle       180              0.016
+  kyle       225              0.022
+  kyle       270              0.013
+  kyle       315              0.016
+  kyle       45               0.016
+  kyle       90               0.012
+  kyle       front            0.021
+  droid      135              0.046
+  droid      180              0.081  OUTLIER
+  droid      225              0.041
+  droid      270              0.045
+  droid      315              0.046
+  droid      45               0.042
+  droid      90               0.040
+  droid      front            0.078  OUTLIER
+  skiff      135              0.152  OUTLIER
+  skiff      180              0.183  OUTLIER
+  skiff      225              0.098  OUTLIER
+  skiff      270              0.087  OUTLIER
+  skiff      315              0.134  OUTLIER
+  skiff      45               0.105  OUTLIER
+  skiff      90               0.090  OUTLIER
+  skiff      front            0.194  OUTLIER
+  yard: no views yet -- run `views yard`
+  dunes: no views yet -- run `views dunes`
+stills — each picked still against the master it references (ranking, not a verdict):
+PHASE masters-complete 19:41
+PHASE object-views 19:44
+$ SUBJECT='a small home-built single-seat desert skiff: a slender riveted hull the length of a rowing boat, an open cockpit with a low curved windscreen, a pair of stubby swept fins at the stern and two scavenged thruster nacelles slung underneath, every panel a different salvaged colour, patched and bolted and clearly rebuilt from wrecks' SEED=1 KIND=object EXPR='' /Users/kevinyang/dev/video-gen-kb/scripts/model_sheet.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/skiff.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/skiff 'a small home-built single-seat desert skiff: a slender riveted hull the length of a rowing boat, an open cockpit with a low curved windscreen, a pair of stubby swept fins at the stern and two scavenged thruster nacelles slung underneath, every panel a different salvaged colour, patched and bolted and clearly rebuilt from wrecks' 1
+  view front (ref skiff.png) …
+  view 45 (ref skiff_front.png) …
+  view 90 (ref skiff_45.png) …
+  view 135 (ref skiff_90.png) …
+  view 180 (ref skiff_135.png) …
