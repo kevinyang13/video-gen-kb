@@ -340,6 +340,8 @@ def object_without_reference(shot, locks, masters, f=None):
 # a contradiction the model cannot resolve, a motion instruction with nothing in frame to attach to, or
 # atmosphere with no stated position. See wiki/still-geometry-and-review.md and wiki/shot-locks.md.
 
+SHARP_FLOOR = 0.85   # a candidate below this share of the sharpest is missing its subject
+
 NEG_RE = re.compile(r"\b(?:no|without|never|not)\s+([a-z]+(?:\s+[a-z]+)?)")
 # phrases every style lock carries; they are conventions the model does honour, not authored negations
 NEG_SKIP = ("cartoon", "text", "lettering", "logos", "logo", "watermark", "illustration")
@@ -1013,16 +1015,24 @@ def cmd_align(f, args):
             cmd_pick(f, [i, str(c["seeds"][0])])
             continue
         base = still_cfg(f, s)["seeds"]
-        rpal, best, best_seed, prev = image_palette(rp), None, None, None
+        rpal, best, best_seed, prev, pool = image_palette(rp), None, None, None, {}
         for r in range(rounds):
             seeds = [x + r * len(base) for x in base]
             for seed in seeds:
                 out, _ = render_still(f, s, seed)
                 if not out.exists():
                     continue
-                dist = palette_distance(rpal, image_palette(out))
-                if best is None or dist < best:
-                    best, best_seed = dist, seed
+                mt = image_metrics(out) or {"sharp": 0.0}
+                pool[seed] = (palette_distance(rpal, image_palette(out)), mt["sharp"])
+            # Distance alone picks the EMPTIEST frame. A hazy shot with the subject missing is closer in
+            # palette to a pale studio plate than a correctly rendered scene is, so minimising distance
+            # chose an empty salvage yard for s3 and a bare dust cloud for s6. Sharpness is the check that
+            # something is actually drawn: keep only the candidates in the top band of detail, then let
+            # distance rank those for identity.
+            top = max(v[1] for v in pool.values()) or 1.0
+            live = {k: v for k, v in pool.items() if v[1] >= top * SHARP_FLOOR} or pool
+            best_seed = min(live, key=lambda k: live[k][0])
+            best = live[best_seed][0]
             print(f"{i}: round {r + 1} seeds {seeds} -> best {best:.4f} (seed {best_seed}) "
                   f"vs {rp.name}", flush=True)
             if prev is not None and prev - best < gain:
