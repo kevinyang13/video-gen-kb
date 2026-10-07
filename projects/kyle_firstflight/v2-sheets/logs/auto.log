@@ -20,3 +20,30 @@ $ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift
 $ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_with_droid.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/skiff.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/combo_kyle_fixing_skiff.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_fixing_skiff_c2.png 2 1024 576
 /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_fixing_skiff_c2.png
 $ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_with_droid.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/skiff.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/combo_kyle_fixing_skiff.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_fixing_skiff_c3.png 3 1024 576
+
+=== auto: check ===
+planned length: 65.20 s kept − 7×0.75 fades = 59.95 s
+  WARN  s1: take not rendered yet: clips/s1_v1.mov
+  WARN  s2: take not rendered yet: clips/s2_v1.mov
+  WARN  s3: still.ref 'kyle_fixing_skiff' not rendered yet (kyle_fixing_skiff.png)
+  WARN  s3: take not rendered yet: clips/s3_v1.mov
+  WARN  s4: take not rendered yet: clips/s4_v1.mov
+  WARN  s5: take not rendered yet: clips/s5_v1.mov
+  WARN  s6: take not rendered yet: clips/s6_v1.mov
+  WARN  s7: take not rendered yet: clips/s7_v1.mov
+  WARN  s8: take not rendered yet: clips/s8_v1.mov
+check: PASS
+
+=== auto: masters ===
+
+=== auto: combos ===
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_with_droid.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/skiff.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/combo_kyle_fixing_skiff.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_fixing_skiff_c1.png 1 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_fixing_skiff_c1.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_with_droid.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/skiff.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/combo_kyle_fixing_skiff.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_fixing_skiff_c2.png 2 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_fixing_skiff_c2.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_with_droid.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/skiff.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/combo_kyle_fixing_skiff.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_fixing_skiff_c3.png 3 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/kyle_fixing_skiff_c3.png
+
+=== auto: align ===
+s1: round 1 seeds [1, 2, 3] -> best 0.1414 (seed 2) vs yard.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/yard.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/.gen/s1.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v2-sheets/seed/s1_c4.png 4 1024 576

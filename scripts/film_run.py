@@ -1036,6 +1036,32 @@ def cmd_align(f, args):
     return 0
 
 
+def pick_combos(f, args):
+    """Pick any combo that has candidates but no picked image.
+
+    `combos` renders candidates; only `pick` writes seed/<name>.png, which is what resolve_ref reads.
+    Unattended, nobody is there to choose, and a shot referencing an unpicked combo hands dt_diptych a
+    REF that does not exist and dies. The candidate kept is the one closest to the combo's own input --
+    the thing it was supposed to preserve.
+    """
+    for name, spec in (f.get("combos") or {}).items():
+        if d(f, f"seed/{name}.png").exists() and not FORCE:
+            continue
+        cands = sorted(d(f, "seed").glob(f"{name}_c*.png"))
+        if not cands:
+            continue
+        base = resolve_ref(f, spec.get("input") or spec.get("ref"))
+        if base and base.exists():
+            bp = image_palette(base)
+            best = min(cands, key=lambda c: palette_distance(bp, image_palette(c)))
+        else:
+            best = max(cands, key=lambda c: (image_metrics(c) or {"sharp": 0})["sharp"])
+        seed = best.stem.rsplit("_c", 1)[1]
+        cmd_sheet(f, [name, "--force"])
+        cmd_pick(f, [name, seed])
+    return 0
+
+
 def cmd_auto(f, args):
     """The whole film with nobody watching: masters -> combos -> aligned stills -> clips -> qc -> finish.
 
@@ -1043,7 +1069,7 @@ def cmd_auto(f, args):
     so an overnight run cannot quietly skip a stage the way kyle_firstflight v1 shipped with seven clips
     because a bad take was archived after the loop had passed it.
     """
-    stages = [("check", cmd_check, []), ("masters", cmd_masters, []), ("combos", cmd_combos, []),
+    stages = [("check", cmd_check, []), ("masters", cmd_masters, []), ("combos", cmd_combos, []), ("pick-combos", pick_combos, []),
               ("align", cmd_align, []), ("check", cmd_check, []), ("clips", cmd_clips, []),
               ("qc", cmd_qc, []), ("finish", cmd_finish, [])]
     for name, fn, a in stages:
