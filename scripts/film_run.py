@@ -315,7 +315,13 @@ def object_without_reference(shot, locks, masters, f=None):
     p = (shot.get("still", {}).get("prompt") or "")
     ref = shot.get("still", {}).get("ref")
     inp = (shot.get("still", {}).get("input") or "")
-    parts = combo_parts(f, ref) if (f and ref) else set()
+    # A combo can arrive as ref (diptych) or as input (single-image edit off the combo, which is
+    # now the normal form). Following only ref missed every edit-off-combo shot.
+    parts = set()
+    if f:
+        for src in (ref, inp):
+            if src:
+                parts |= combo_parts(f, src)
     missing = []
     for name, text in (locks or {}).items():
         if name in ("subject", "wardrobe", "style", "pace", "pilot") or name not in (masters or {}):
