@@ -4,7 +4,7 @@
 
 **Sources**: n/a
 
-**Last updated**: 2026-09-23
+**Last updated**: 2026-10-07
 
 ---
 
@@ -74,6 +74,7 @@ Each project owns a folder — `projects/<id>/<version>/` — and its plan page 
 ## Concepts
 
 - [[identity-conditioning]] — why a character can stay the same: text embeddings vs reference-image tokens vs adapters vs LoRA weights vs first-frame latent; the mechanism behind every consistency tool
+- [[consistency-by-control]] — consistency comes from constraining, not sampling: `controls[]` gives the CLI ControlNet after all, conditioning schedules beat weights, silhouettes survive a scene change but markings do not, and what is ruled out on Apple Silicon
 
 _(stubs referenced but not yet written: frame-interpolation, depth-parallax, ffmpeg-pipeline)_
 

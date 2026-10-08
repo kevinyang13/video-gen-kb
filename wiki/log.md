@@ -1076,3 +1076,14 @@ Recorded in [[shot-locks]].
 and Kyle are now the same in every shot they appear in. Built on model-sheet masters with four combos,
 stills picked by the new `align` loop, and one clip re-rendered after its camera move destroyed the
 hull. Findings in [[shot-locks]].
+
+## 2026-10-07 — research: consistency by control, not by sampling
+Deep research into how professional pipelines keep characters, objects and environments consistent, after
+the candidate-and-rank approach cost three prompt rewrites and six candidates on a single shot. New page
+[[consistency-by-control]]. The load-bearing finding is a correction: `draw-things-cli` has had ControlNet
+all along through `controls[]` in `--config-json` — already documented in [[headless-cli-pipeline]] §1 and
+contradicted in session anyway. Also: klein 9B is last of four in the only rigorous object-fidelity
+benchmark (16.8%); silhouette failure is only 1.5% while logo/text is 20.1%; IP-Adapter/InstantID/PuLID
+have no confirmed MPS support and are face-embedding-based so could not hold a vehicle regardless; and no
+published test of a made-up mechanical object across shots exists anywhere. Report and notes under
+`reports/` and `research_notes/`.

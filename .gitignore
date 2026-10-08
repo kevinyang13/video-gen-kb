@@ -49,3 +49,6 @@ projects/*/*/raw/*.jpg
 projects/*/*/raw/*.jpeg
 projects/*/*/raw/*.webp
 projects/*/*/raw/*.png
+
+# deep research working notes (the delivered report is tracked, its scratch notes are not)
+research_notes/

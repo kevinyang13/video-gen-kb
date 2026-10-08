@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Consistency by Control, Not by Sampling — video-gen-kb</title>
+<style>
+:root{--bg:#0B0D12;--panel:#141822;--panel-2:#1B2130;--stroke:#2A3245;--text:#E6E9F0;
+--muted:#8B94A7;--accent:#F5B84B;--accent-2:#4BC9F5;--on-accent:#12131A;
+--rule:rgba(139,148,167,.22);--code:#F5B84B}
+@media(prefers-color-scheme:light){:root:not([data-theme=dark]){--bg:#F4F1EA;--panel:#fff;
+--panel-2:#FAF8F3;--stroke:#D9D3C6;--text:#16181F;--muted:#5D6473;--accent:#B8781A;
+--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}}
+:root[data-theme=light]{--bg:#F4F1EA;--panel:#fff;--panel-2:#FAF8F3;--stroke:#D9D3C6;
+--text:#16181F;--muted:#5D6473;--accent:#B8781A;--accent-2:#1E86B0;--rule:rgba(22,24,31,.14);--code:#8A5A0E}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);
+line-height:1.65;padding:0 1rem 4rem}
+.shell{max-width:840px;margin:0 auto}
+a{color:var(--accent);text-decoration:none;font-weight:600}
+a:hover{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--accent-2);outline-offset:3px;border-radius:4px}
+.bar{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;padding:1.1rem 0;margin-bottom:1.5rem;
+border-bottom:1px solid var(--stroke)}
+.crumb{font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.spacer{flex:1}
+.pill{border:1px solid var(--stroke);background:var(--panel);border-radius:999px;padding:.28rem .8rem;
+font-size:.75rem;font-weight:700;color:var(--text);cursor:pointer;font-family:inherit}
+.pill:hover{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+h1{font-size:clamp(1.7rem,5vw,2.5rem);margin:.2rem 0 1rem;line-height:1.1;letter-spacing:-.015em;text-wrap:balance}
+h2{font-size:1.25rem;margin:2.2rem 0 .7rem;padding-bottom:.35rem;border-bottom:1px solid var(--rule);text-wrap:balance}
+h3{font-size:1.02rem;margin:1.5rem 0 .5rem;color:var(--accent)}
+p{margin:.7rem 0}
+ul,ol{margin:.7rem 0 .7rem 1.3rem}
+li{margin:.28rem 0}
+li::marker{color:var(--accent)}
+em{color:var(--muted)}
+hr{border:none;border-top:1px solid var(--stroke);margin:2rem 0}
+blockquote{border-left:3px solid var(--accent);background:var(--panel);border-radius:0 10px 10px 0;
+padding:.8rem 1.1rem;margin:1.1rem 0;color:var(--muted);font-size:.92rem}
+code{background:var(--panel);border:1px solid var(--stroke);border-radius:5px;padding:.1rem .35rem;
+font-size:.85em;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--code)}
+img{max-width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--stroke);margin:1.1rem 0}
+pre{background:var(--panel);border:1px solid var(--stroke);border-radius:12px;padding:1rem;overflow-x:auto;margin:1.1rem 0}
+pre code{background:none;border:none;padding:0;color:var(--text);font-size:.83rem;line-height:1.55}
+.tw{overflow-x:auto;border:1px solid var(--stroke);border-radius:12px;background:var(--panel);margin:1.1rem 0}
+table{width:100%;border-collapse:collapse;font-size:.85rem;min-width:min(100%,460px)}
+th{background:var(--panel-2);color:var(--accent);text-align:left;padding:.55rem .8rem;font-size:.68rem;
+letter-spacing:.09em;text-transform:uppercase;white-space:nowrap;border-bottom:1px solid var(--stroke)}
+td{padding:.5rem .8rem;border-bottom:1px solid var(--rule);color:var(--muted);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td strong{color:var(--text)}
+.meta{display:flex;flex-wrap:wrap;gap:.4rem .9rem;font-size:.78rem;color:var(--muted);margin:-.4rem 0 1.2rem}
+.meta b{color:var(--text);font-weight:600}
+.missing{color:var(--muted);border-bottom:1px dashed var(--muted);cursor:help}
+.related{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--stroke)}
+.related h2{border:none;margin:0 0 .7rem;font-size:.95rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:0}
+.chips li{margin:0}
+.chips a,.chips .missing{display:inline-block;border:1px solid var(--stroke);background:var(--panel);
+border-radius:999px;padding:.28rem .8rem;font-size:.8rem}
+.chips a:hover{background:var(--accent);color:var(--on-accent);text-decoration:none;border-color:var(--accent)}
+footer{max-width:840px;margin:2.5rem auto 0;padding-top:1.2rem;border-top:1px solid var(--stroke);
+font-size:.75rem;color:var(--muted);text-align:center}
+/* landing */
+.hero{padding:2.4rem 0 1.6rem}
+.kicker{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2)}
+.hero h1{font-size:clamp(2rem,6vw,3.2rem);margin:.35rem 0 .5rem}
+.hero p{color:var(--muted);font-size:1.05rem;max-width:56ch}
+.hw{display:inline-flex;gap:.5rem;align-items:center;margin-top:1rem;border:1px solid var(--stroke);
+background:var(--panel);border-radius:999px;padding:.3rem .9rem;font-size:.78rem;color:var(--muted)}
+.hw .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.sec{margin-top:2.2rem}
+.sec h2{border:none;padding:0;margin:0 0 .8rem;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.9rem}
+.card{display:block;border:1px solid var(--stroke);background:var(--panel);border-radius:14px;padding:1rem 1.1rem;
+color:var(--text);font-weight:400;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+.card b{display:block;color:var(--accent);font-size:1rem;margin-bottom:.3rem}
+.card span{font-size:.85rem;color:var(--muted);line-height:1.5}
+.stubs{font-size:.82rem;color:var(--muted);margin-top:.6rem}
+.yt{position:relative;width:100%;aspect-ratio:16/9;border:1px solid var(--stroke);border-radius:12px;overflow:hidden;background:#000;margin:1rem 0}
+.yt.yt-v{aspect-ratio:9/16;max-width:360px}
+.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="bar">
+    <span class="crumb"><a href="../">video-gen-kb</a> / <a href="index.html">Wiki</a></span>
+    <span class="spacer"></span>
+    <button class="pill" onclick="tt()">◐ Theme</button>
+  </nav>
+  <h1>Consistency by Control, Not by Sampling</h1><p class="lede">Professional pipelines do not get consistency by generating candidates and picking the best one — they move the decision out of the sampler. Composition comes from a camera in a 3D scene, geometry from a depth map, identity from trained weights, and the sampler is left to render surface. This page records the research behind that shift, the Apple Silicon boundary it has to live inside, and the one correction that makes it possible here: <code>draw-things-cli</code> has had ControlNet all along, through <code>--config-json</code>.</p><div class="meta"><span><b>Updated</b> 2026-10-07</span><span><b>Sources</b> <code>reports/AI video character consistency pipelines.md</code> (deep research, 2026-10-07) and its notes in <code>research_notes/AI video character consistency pipelines/</code>; links inline. Measured timings are from this machine via <a href="headless-cli-pipeline.html">headless cli pipeline</a> and <a href="draw-things-setup.html">draw things setup</a>. Failures referenced are our own, recorded in <a href="shot-locks.html">shot locks</a> and <a href="still-geometry-and-review.html">still geometry and review</a>.</span></div>
+<hr />
+<h2>1. The correction: ControlNet was never missing</h2>
+<p><code>draw-things-cli</code> exposes 23 flags and none of them is <code>--controlnet</code>, which led this project to conclude that structural conditioning was unavailable on a Mac. That conclusion was wrong, and <strong>our own wiki already said so</strong>: <a href="headless-cli-pipeline.html">headless cli pipeline</a> §1 lists <code>controls[]</code> among the <code>JSGenerationConfiguration</code> keys accepted by <code>--config-json</code>, alongside <code>loras[]</code>, <code>refinerModel</code>, <code>hiresFix*</code> and <code>upscaler</code> (source: <a href="https://github.com/drawthingsai/draw-things-community">draw-things-community</a>, <code>ScriptModels.swift</code>).</p>
+<p>Configuration precedence is model-recommended settings → <code>--config-json</code>/<code>--config-file</code> → explicit flags. Anything the GUI exposes, the JSON layer accepts.</p>
+<p><strong>What this unlocks</strong>: per-shot geometry becomes an <em>input</em> rather than an outcome. A depth or canny map rendered from a camera you chose can be handed to the same klein render that currently receives only a prompt and a reference image — so hull proportions, nacelle placement, ground contact, subject scale and framing stop being re-rolled per seed. The two worst failures in <a href="shot-locks.html">shot locks</a> — the "flat delta-wing" that replaced the skiff whenever the model had to invent a yard around it, and the "angular cardboard shape" in <code>kyle_firstflight</code> s7 — are both the signature of layout being decided by noise in the first few sampling steps with nothing holding it.</p>
+<p><strong>Four firm limits</strong>:</p>
+<ul>
+<li>ControlNet is the <strong>structural half only</strong>. It carries no identity; it is normally paired with a LoRA or an adapter.</li>
+<li><strong>Per-reference Moodboard weights are not reachable headlessly.</strong> <code>setMoodboardImageWeight(weight, index)</code> lives in the in-app JS scripting layer and needs the app running.</li>
+<li><strong>Repeatable multi-<code>--image</code> exists only in <code>main</code></strong>, not the shipped binary. Building <code>main</code> here failed compiling <code>ccv_nnc_mfa</code> Metal kernels at step 524/1254. Re-check against the Homebrew formula before designing around the diptych workaround — a newer release would remove the need for it.</li>
+<li>The A1111-compatible HTTP API on port 7860 has <strong>no vocabulary for Moodboard or video</strong>.</li>
+</ul>
+<h2>2. The frame shift</h2>
+<p>The current pipeline treats generation as a <em>search</em>: produce candidates, score them, pick. Every improvement inside that frame is an improvement to the scorer. The professional pattern is not a better scorer — it is removing the search.</p>
+<p>This reframes a result we already measured. The <code>align</code> stage's discovery that lowest palette distance selects the <em>emptiest</em> frame was not a bug in the metric. <strong>No appearance metric over whole frames can distinguish a correct render from a confident wrong one</strong>, and the fix is to stop asking one to.</p>
+<h2>3. The Apple Silicon boundary</h2>
+<p>Stop considering these:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Ruled out</th>
+<th>Evidence class</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FP8 checkpoints (<code>Float8_e4m3fn</code> on Metal)</td>
+<td>Proven; issue still open April 2026</td>
+</tr>
+<tr>
+<td>Triton, SageAttention, xformers, flash-attention, <code>torch.compile</code></td>
+<td>Proven</td>
+</tr>
+<tr>
+<td>Nunchaku</td>
+<td>Absence of evidence, not a published refusal</td>
+</tr>
+<tr>
+<td>ai-toolkit FLUX LoRA training on MPS</td>
+<td>Closed "not planned"; no convergence</td>
+</tr>
+<tr>
+<td><strong>IP-Adapter, InstantID, PuLID</strong></td>
+<td><strong>No confirmed working MPS report in either direction</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>The identity half of the conditioning stack does not survive on Metal; the structural half does. And for this project the adapters are moot regardless: IP-Adapter FaceID, InstantID and PuLID are built on InsightFace/ArcFace <strong>face-recognition</strong> embeddings, which structurally cannot represent a skiff or a droid. Only plain IP-Adapter/Plus (SD-era), FLUX Redux, and multi-reference instruction-edit models are subject-agnostic — and Redux is a <em>variation</em> adapter that no source benchmarks for identity preservation.</p>
+<p>Note also that the DiT transition (FLUX/Qwen/Wan) broke exactly the SD-era techniques that monkey-patch attention: <strong>Reference-Only ControlNet and Attention Couple / regional prompting do not exist for FLUX, Qwen or Wan.</strong> Adapters, ControlNets and reference latents do. That rule is predictive for any new DiT base.</p>
+<h2>4. Determinism is a schedule, not a weight</h2>
+<p>The mechanism is <em>when</em> conditioning applies, not how hard:</p>
+<ul>
+<li><strong>Structure front-loaded</strong> at <code>start_percent 0</code> — shape is decided in the first steps.</li>
+<li><strong>Identity released</strong> at <code>end ≈ 0.65–0.8</code>.</li>
+<li><strong>Last ~20% free</strong>, or the output goes rigid and overcooked.</li>
+</ul>
+<p>Published per-mode strengths, from the Shakker-Labs <a href="https://huggingface.co/Shakker-Labs/FLUX.1-dev-ControlNet-Union-Pro-2.0">FLUX.1-dev-ControlNet-Union-Pro-2.0</a> model card (scale / guidance_end):</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Scale</th>
+<th>Guidance end</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Canny</td>
+<td>0.7</td>
+<td>0.8</td>
+</tr>
+<tr>
+<td>Soft edge</td>
+<td>0.7</td>
+<td>0.8</td>
+</tr>
+<tr>
+<td>Depth</td>
+<td>0.8</td>
+<td>0.8</td>
+</tr>
+<tr>
+<td>Pose</td>
+<td>0.9</td>
+<td>0.65</td>
+</tr>
+<tr>
+<td>Gray</td>
+<td>0.9</td>
+<td>0.8</td>
+</tr>
+</tbody>
+</table></div>
+<p>Pose needs the highest strength but the <strong>earliest</strong> release.</p>
+<p><strong>Node defaults are wrong.</strong> FLUX union nodes default to strength 1.0 on a 0–10 range; Wan VACE defaults to 1.0 on a 0–1000 range — against recommendations of 0.15–0.8. Set them explicitly.</p>
+<p>Two cautions: BFL's own page now marks <strong>FLUX.1 Depth and Canny deprecated</strong>, with HF weights "for reference only", so FLUX structural control means community unions. And a 2026 RL paper names a <strong>collapse mode</strong> where edit models inflate consistency scores by copying the reference scene — "preserved identity" can mean stasis rather than control.</p>
+<h2>5. Silhouettes survive; markings do not</h2>
+<p>The only rigorous object-fidelity benchmark found is <a href="https://photoroom.com/blog/top-editing-image-models-maintain-product-details-only-28-of-the-time">Photoroom's</a>: 850 products, 10 annotators, 3+ reviews each, fail-if-any-flag.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Clean passes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nano Banana 2</td>
+<td>29.0%</td>
+</tr>
+<tr>
+<td>Nano Banana Pro</td>
+<td>28.2%</td>
+</tr>
+<tr>
+<td>GPT Image 2 Medium</td>
+<td>27.2%</td>
+</tr>
+<tr>
+<td><strong>FLUX.2 Klein 9B</strong></td>
+<td><strong>16.8%</strong> (plus 28% outright invalid)</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Klein 9B — this project's still model — is last.</strong></p>
+<p>The failure breakdown matters more than the ranking, and it inverts the intuition:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Failure</th>
+<th>Rate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Logo / text distortion</td>
+<td>20.1%</td>
+</tr>
+<tr>
+<td>Missing or changed elements</td>
+<td>12.5%</td>
+</tr>
+<tr>
+<td><strong>Shape / cut / fit change</strong></td>
+<td><strong>1.5%</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>The silhouette is the <em>safest</em> thing in the frame. The danger is concentrated in markings, lettering and small parts. <strong>Design rule: keep the skiff's surface deliberately plain, give it one asymmetric marking for orientation, and composite insignia back in rather than asking the sampler to reproduce them.</strong></p>
+<h2>6. One reference per visible side</h2>
+<p>A made-up object needs a reference for every side that appears on screen, or the model invents the hidden geometry. Runware's test: a front-only reference produced a plain denim back; adding a back reference brought through an embroidered design the prompt never mentioned.</p>
+<p>This validates the turnarounds <code>seed_sheet.sh</code> already produces — but changes how they are used. The 8 views are <strong>production inputs to be selected per shot</strong>, not just a consistency check at the master stage.</p>
+<p>Reference budgets differ by an order of magnitude, and by design: Gemini 14 total in <em>typed</em> slots (10 object + 4 character) &gt; FLUX 3 Image 10 positional with bounding boxes &gt; FLUX.2 8 API / 6 dev / <strong>4 klein</strong> &gt; Seedream 6 &gt; Qwen-Image-Edit ~3.</p>
+<p>BFL publishes a role taxonomy worth adopting — <strong>Subject / Product / Setting / Style</strong>, where <em>Product</em> is "an object whose shape, color, or label should stay the same" — with the template: <em>"Put the ceramic mug from image 2 on the shelf in image 1, keeping the mug's glaze and the room unchanged."</em> Bounding boxes are documented as "a strong hint, not a hard constraint."</p>
+<p><strong>Prompt form is not portable across families.</strong> BFL documents <em>imperative</em> instructions; Qwen's own examples are <em>spatial scene descriptions</em> ("The magician bear is on the left..."). Keep per-model templates. Our instruction-form edit prompts match BFL's pattern and should stay.</p>
+<h2>7. The 3D proxy: real, but not standard practice</h2>
+<p>The premise "model the hero asset in 3D, render exact angles, style with depth ControlNet" is <strong>overstated as professional practice</strong>. It is the highest-effort end of a spectrum, and practitioners who document the whole spectrum recommend cheaper options for most shots — Flick's own table marks render-passes-plus-ControlNet "High effort, Very high control" and recommends motion reference for the bulk of narrative work. No journalist-verified brand commercial or music video breakdown credits this pipeline. Autodesk has shipped 3D-as-direction-layer tooling (Flow Studio), and the framing there is that <em>the 3D scene does not necessarily produce the final pixels</em> — it sets staging, composition and camera.</p>
+<p>The documented recipe, when you do use it:</p>
+<ul>
+<li><strong>Untextured, silhouette-accurate proxy.</strong> Texture is irrelevant.</li>
+<li><strong>Camera placed first</strong>, before anything else.</li>
+<li><strong>Export depth + clay.</strong> Clay is called the single most useful pass; derive <strong>Canny from the clay</strong> rather than rendering Freestyle.</li>
+<li><strong>Normalise depth with a fixed near/far across the whole shot</strong>, or the geometry breathes.</li>
+<li><strong>Cryptomatte masks</strong> per asset for region-locked regeneration.</li>
+<li><strong>Render at the generator's resolution</strong>, divisible by 64 — not 4K.</li>
+</ul>
+<p>Two findings make this cheaper than it sounds. <strong>Coarse proxies suffice</strong> — LooseControl and 3DProxyImg both show a rough structural carrier is enough, and the known image-to-3D failure modes (hair, joints, decals, back-side geometry) do not matter for a depth proxy of a hull. And <strong>the child figure should not be hand-modelled</strong>: toyxyz's Blender rig emits depth, normal, canny, OpenPose and segmentation from one posed rig in a single render.</p>
+<p>For the fictional craft: TRELLIS.2 (MIT, local) or Rodin Gen-2.5 (hosted, aimed at hard-surface props). Blender on an M4 Max benchmarks around an RTX 4070 / 3080 Ti, so the 3D half is free here. The maintained bridge is <a href="https://github.com/alexisrolland/ComfyUI-Blender">ComfyUI-Blender</a> (v4.5.1, 2026-07); AIGODLIKE's BlenderAI-node looks stale.</p>
+<p><strong>Lighting continuity is explicitly unsolved</strong> by the 3D layer — the generated clip supplies its own lighting. That is recovered in post (§10).</p>
+<h2>8. Video: what actually accepts a reference</h2>
+<ul>
+<li><strong>VACE</strong> is the only system whose docs explicitly name <em>objects</em> ("inject people or objects of your choice"), and the only one where reference stills + masks + control video + keyframes + a custom LoRA can be stacked. <strong>No Mac benchmark for it exists anywhere.</strong></li>
+<li><strong>Wan 3.0 is API-only</strong>; no weights on HF/GitHub/ModelScope. <strong>Wan 2.2 remains the current open generation.</strong></li>
+<li><strong>LTX-2.5</strong> has native keyframe conditioning (documented token mechanism) but <strong>no reference-identity conditioning</strong> in the base model — there is an open feature request, filled meanwhile by community LoRA/prefix-injection nodes.</li>
+<li><strong>Reference and keyframes are often mutually exclusive.</strong> Seedance 2.5's API <em>rejects</em> reference fields on first/last-frame requests; MiniMax H3 cannot combine them; Kling 2.6 cannot do start-frame + element reference (gated to 3.0). Veo 3.1, Kling 3.0 and Luma Ray3 allow both. Some APIs silently ignore the field and still bill.</li>
+<li>Reference ceilings: Seedance 30, Vidu 15, Wan 3.0 10, MiniMax/Seedance-2 9, Kling 4/element, <strong>Veo only 3</strong> — too few for a four-view vehicle turnaround.</li>
+</ul>
+<p>The practitioner product tests show a <strong>stability/motion tradeoff, not a consistency ranking</strong>: the models that "hold" a product best are often the ones barely moving the camera.</p>
+<h2>9. What a LoRA actually buys</h2>
+<p><strong>A LoRA locks the look, not the geometry.</strong> Part-count failure is a documented <em>base-model</em> weakness — diffusion models cannot count. The recommended architecture is <strong>LoRA for appearance + ControlNet canny/depth for structure</strong>, plus a programmatic checker.</p>
+<p>Consensus hyperparameters for an object LoRA: rank 16–32, alpha ≤ rank, LR 1e-4 (5e-5 if unstable), batch 2 with grad-accum 2, 1,000–3,000 steps, 10–50 images. Caption with <strong>trigger + the object's own class noun</strong> (<code>skslume lamp</code>), cover <em>defining</em> features — seams, openings, controls, material response — rather than a mechanical turnaround, and <strong>vary framing hard</strong>, because FLUX learns composition as part of the subject.</p>
+<p><strong>The format trap</strong>: a <code>.safetensors</code> LoRA passed to <code>draw-things-cli</code> <strong>runs without error and silently has no effect</strong>. Draw Things needs its own <code>&lt;name&gt;_lora_f16.ckpt</code> registered in <code>custom_lora.json</code>; the app converts on UI import, the CLI does not. Conversion <em>out</em> of Draw Things is effectively broken for quantised tensors.</p>
+<p>One number is genuinely missing: <strong>no measured LoRA-training wall-clock for FLUX-class models on any M4 Max exists in any source.</strong> Whether local training is an afternoon or a week is unknown. Note this contradicts nothing in <a href="character-consistency.html">character consistency</a> §LoRA, which records klein local training crashing at step 0 — that remains the open issue to re-check.</p>
+<h2>10. The evidence gap, and the benchmark we could run</h2>
+<p><strong>There is no published side-by-side test of a made-up mechanical object held across multiple shots.</strong> Every identity benchmark found is face-only; every practitioner product test uses a real consumer good — a mug, a serum bottle, headphones — with one or two generations per model.</p>
+<p>The VideoMemory paper publishes a reusable prop-consistency metric that adapts directly to a vehicle: <strong>Grounded SAM to localise the object, then DINOv2 features compared against the reference.</strong> This repo already has the apparatus — turnarounds, contact sheets, fixed seeds, a pairwise-views evaluator with a published calibration. Swapping <code>film_run.py</code>'s palette histogram for masked DINOv2 is roughly an afternoon, and would produce the benchmark that does not publicly exist.</p>
+<h2>11. Keep, replace, and the order to do it in</h2>
+<p><strong>Keep — these already match professional practice:</strong></p>
+<ul>
+<li>Model-sheet master turnarounds (Kling's element system independently converged on 1 main + 3 supplementary references with named angles).</li>
+<li>Combo / composed-group masters on a plain backdrop — the correct answer to "preserve a group <em>and</em> invent a landscape is two jobs, and the hull loses".</li>
+<li>Instruction-form edit prompts at <code>--strength 1.0</code>, matching BFL's imperative template.</li>
+<li>The <strong>edit-off-combo rule</strong> — once a group is a picture, it is edited, not re-composed. This has no published equivalent; it is the best piece of local craft in the repo.</li>
+<li>Locked-camera video prompts stated positively.</li>
+</ul>
+<p><strong>Replace:</strong></p>
+<ul>
+<li>Candidate generation as the mechanism for getting composition right.</li>
+<li>Palette distance as the identity metric.</li>
+<li>Text-only invention of the skiff's geometry in any shot where it must match.</li>
+<li>Any plan that waits for an identity adapter on Apple Silicon.</li>
+</ul>
+<p><strong>Adoption order, biggest gain first:</strong></p>
+<ol>
+<li><strong>Prove <code>controls[]</code> works headlessly</strong> — depth map of the existing skiff master, one shot, depth 0.8 / start 0 / end 0.8. One evening; it either unlocks everything downstream or it does not.</li>
+<li><strong>Swap <code>eval</code>'s palette metric for masked DINOv2.</strong> Cheapest change in the list, and every later decision depends on being able to measure drift.</li>
+<li><strong>Blockout and pass-render the shots that already failed</strong> — <code>kyle_firstflight</code> s3, s6, s7 are documented failures with known-good comparisons, so they are a ready-made A/B.</li>
+<li><strong>Train a skiff LoRA</strong> at rank 32 / alpha 16 from turnaround plus proxy renders — accepting that it locks the look while ControlNet locks the geometry.</li>
+<li>Only then consider the droid's own adapter or cloud GPU work.</li>
+</ol>
+<p><strong>48 GB is not the binding constraint; time is.</strong> Largest confirmed single load is ~24 GB. Planning rates measured here: klein 9B still 1280×768 = <strong>27–35 s</strong>; klein diptych = <strong>45–60 s</strong>; LTX-2.3 10 s clip @1024×576 = <strong>9 min 41 s</strong>; Wan 2.2 I2V 81 f @576×1280 = <strong>24 min</strong>. For contrast, ComfyUI + Wan 2.2 GGUF on an M1 Max took <strong>1 h 22 min for 2 seconds</strong>.</p>
+
+  <div class="related"><h2>Related pages</h2><ul class="chips"><li><a href="headless-cli-pipeline.html">headless cli pipeline</a> — where <code>controls[]</code> was already documented, and the measured CLI timings</li><li><a href="shot-locks.html">shot locks</a> — the reusable locks library; the failures this page explains structurally</li><li><a href="still-geometry-and-review.html">still geometry and review</a> — the review rules these findings extend</li><li><a href="character-consistency.html">character consistency</a> — the character-focused predecessor (2026-09-21), still correct on faces</li><li><a href="identity-conditioning.html">identity conditioning</a> — the mechanism behind every consistency tool</li><li><a href="apple-silicon-inference.html">apple silicon inference</a> — the FP8 trap and memory planning</li><li><a href="running-a-film-yourself.html">running a film yourself</a> — the command sequence this would change</li></ul></div>
+</div>
+<footer>video-gen-kb · built 2026-10-07 · <a href="../">Home</a> · <a href="index.html">Wiki index</a> · <a href="log.html">Log</a></footer>
+<script>function tt(){var r=document.documentElement,
+d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&
+matchMedia('(prefers-color-scheme: dark)').matches);
+r.setAttribute('data-theme',d?'light':'dark');}</script>
+</body>
+</html>
