@@ -60,3 +60,108 @@ check: PASS
 
 === auto: combos ===
 $ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/kyle.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/skiff.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/.gen/combo_kyle_fixing_skiff.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/kyle_fixing_skiff_c1.png 1 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/kyle_fixing_skiff_c1.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/kyle.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/skiff.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/.gen/combo_kyle_fixing_skiff.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/kyle_fixing_skiff_c2.png 2 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/kyle_fixing_skiff_c2.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/kyle.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/skiff.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/.gen/combo_kyle_fixing_skiff.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/kyle_fixing_skiff_c3.png 3 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/kyle_fixing_skiff_c3.png
+
+=== auto: pick-combos ===
+kyle_fixing_skiff: 3 candidates -> projects/kyle_firstflight/v3-nodroid/seed/kyle_fixing_skiff_sheet.png  sharpest c3
+kyle_fixing_skiff: picked seed 1 -> projects/kyle_firstflight/v3-nodroid/seed/kyle_fixing_skiff.png
+
+=== auto: align ===
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/yard.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/.gen/s1.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s1_c1.png 1 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s1_c1.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/yard.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/.gen/s1.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s1_c2.png 2 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s1_c2.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/yard.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/.gen/s1.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s1_c3.png 3 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s1_c3.png
+s1: round 1 seeds [1, 2, 3] -> best 0.1039 (seed 3) vs yard.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/yard.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/.gen/s1.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s1_c4.png 4 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s1_c4.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/yard.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/.gen/s1.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s1_c5.png 5 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s1_c5.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/yard.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/.gen/s1.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s1_c6.png 6 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s1_c6.png
+s1: round 2 seeds [4, 5, 6] -> best 0.0282 (seed 4) vs yard.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/yard.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/.gen/s1.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s1_c7.png 7 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s1_c7.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/yard.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/.gen/s1.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s1_c8.png 8 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s1_c8.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/yard.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/.gen/s1.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s1_c9.png 9 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s1_c9.png
+s1: round 3 seeds [7, 8, 9] -> best 0.0282 (seed 4) vs yard.png
+s1: converged -- round 3 improved by 0.0000, under 0.02
+s1: 9 candidates -> projects/kyle_firstflight/v3-nodroid/seed/s1_sheet.png  sharpest c4, bright background (bloom risk): c1, c3, c5, c8
+s1: picked seed 4 -> projects/kyle_firstflight/v3-nodroid/stills/s1.png
+s1: picked seed 4, distance 0.0282 to yard.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/skiff_90.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/.gen/s2.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s2_c1.png 1 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s2_c1.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/skiff_90.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/.gen/s2.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s2_c2.png 2 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s2_c2.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/skiff_90.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/.gen/s2.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s2_c3.png 3 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s2_c3.png
+s2: round 1 seeds [1, 2, 3] -> best 0.6722 (seed 1) vs skiff_90.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/skiff_90.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/.gen/s2.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s2_c4.png 4 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s2_c4.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/skiff_90.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/.gen/s2.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s2_c5.png 5 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s2_c5.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/skiff_90.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/.gen/s2.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s2_c6.png 6 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s2_c6.png
+s2: round 2 seeds [4, 5, 6] -> best 0.6722 (seed 1) vs skiff_90.png
+s2: converged -- round 2 improved by 0.0000, under 0.02
+s2: 6 candidates -> projects/kyle_firstflight/v3-nodroid/seed/s2_sheet.png  sharpest c1
+s2: picked seed 1 -> projects/kyle_firstflight/v3-nodroid/stills/s2.png
+s2: picked seed 1, distance 0.6722 to skiff_90.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"kyle_lora_v2_2500_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/kyle_fixing_skiff.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/.gen/s3.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s3_c1.png 1 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s3_c1.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"kyle_lora_v2_2500_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/kyle_fixing_skiff.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/.gen/s3.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s3_c2.png 2 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s3_c2.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"kyle_lora_v2_2500_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/kyle_fixing_skiff.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/.gen/s3.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s3_c3.png 3 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s3_c3.png
+s3: round 1 seeds [1, 2, 3] -> best 0.5677 (seed 1) vs kyle_fixing_skiff.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"kyle_lora_v2_2500_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/kyle_fixing_skiff.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/.gen/s3.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s3_c4.png 4 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s3_c4.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"kyle_lora_v2_2500_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/kyle_fixing_skiff.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/.gen/s3.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s3_c5.png 5 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s3_c5.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"kyle_lora_v2_2500_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/kyle_fixing_skiff.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/.gen/s3.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s3_c6.png 6 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s3_c6.png
+s3: round 2 seeds [4, 5, 6] -> best 0.5596 (seed 6) vs kyle_fixing_skiff.png
+s3: converged -- round 2 improved by 0.0081, under 0.02
+s3: 6 candidates -> projects/kyle_firstflight/v3-nodroid/seed/s3_sheet.png  sharpest c6
+s3: picked seed 6 -> projects/kyle_firstflight/v3-nodroid/stills/s3.png
+s3: picked seed 6, distance 0.5596 to kyle_fixing_skiff.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"kyle_lora_v2_2500_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/kyle_in_skiff.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/.gen/s4.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s4_c1.png 1 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s4_c1.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"kyle_lora_v2_2500_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/kyle_in_skiff.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/.gen/s4.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s4_c2.png 2 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s4_c2.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"kyle_lora_v2_2500_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/kyle_in_skiff.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/.gen/s4.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s4_c3.png 3 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s4_c3.png
+s4: round 1 seeds [1, 2, 3] -> best 0.5161 (seed 1) vs kyle_in_skiff.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"kyle_lora_v2_2500_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/kyle_in_skiff.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/.gen/s4.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s4_c4.png 4 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s4_c4.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"kyle_lora_v2_2500_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/kyle_in_skiff.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/.gen/s4.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s4_c5.png 5 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s4_c5.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"kyle_lora_v2_2500_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/kyle_in_skiff.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/.gen/s4.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s4_c6.png 6 1024 576
+
+=== auto: check ===
+planned length: 65.20 s kept − 7×0.75 fades = 59.95 s
+  WARN  s1: take not rendered yet: clips/s1_v1.mov
+  WARN  s2: take not rendered yet: clips/s2_v1.mov
+  WARN  s3: take not rendered yet: clips/s3_v1.mov
+  WARN  s4: take not rendered yet: clips/s4_v1.mov
+  WARN  s5: take not rendered yet: clips/s5_v1.mov
+  WARN  s6: take not rendered yet: clips/s6_v1.mov
+  WARN  s7: take not rendered yet: clips/s7_v1.mov
+  WARN  s8: take not rendered yet: clips/s8_v1.mov
+check: PASS
+
+=== auto: masters ===
+
+=== auto: combos ===
+
+=== auto: pick-combos ===
+
+=== auto: align ===
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"kyle_lora_v2_2500_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/kyle_fixing_skiff.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/.gen/s3.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s3_c1.png 1 1024 576
