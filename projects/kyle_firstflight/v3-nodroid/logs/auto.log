@@ -1,0 +1,62 @@
+
+=== auto: check ===
+planned length: 65.20 s kept − 7×0.75 fades = 59.95 s
+  WARN  s1: take not rendered yet: clips/s1_v1.mov
+  WARN  s2: take not rendered yet: clips/s2_v1.mov
+  WARN  s3: still.input not made yet: kyle_fixing_skiff
+  WARN  s3: take not rendered yet: clips/s3_v1.mov
+  WARN  s3: still has no face and video_prompt never says it stays that way -- anything the motion reveals will be invented (see still-geometry §11)
+  WARN  s4: take not rendered yet: clips/s4_v1.mov
+  WARN  s5: take not rendered yet: clips/s5_v1.mov
+  WARN  s6: take not rendered yet: clips/s6_v1.mov
+  WARN  s7: take not rendered yet: clips/s7_v1.mov
+  WARN  s8: take not rendered yet: clips/s8_v1.mov
+check: PASS
+
+=== auto: masters ===
+kyle: no prompt (run-spec.master_prompts or .gen/master_kyle.txt)
+skiff: no prompt (run-spec.master_prompts or .gen/master_skiff.txt)
+yard: no prompt (run-spec.master_prompts or .gen/master_yard.txt)
+dunes: no prompt (run-spec.master_prompts or .gen/master_dunes.txt)
+kyle_face: no prompt (run-spec.master_prompts or .gen/master_kyle_face.txt)
+film_run: auto stopped at 'masters' (rc=1)
+
+=== auto: check ===
+planned length: 65.20 s kept − 7×0.75 fades = 59.95 s
+  WARN  s1: take not rendered yet: clips/s1_v1.mov
+  WARN  s2: take not rendered yet: clips/s2_v1.mov
+  WARN  s3: still.input not made yet: kyle_fixing_skiff
+  WARN  s3: take not rendered yet: clips/s3_v1.mov
+  WARN  s3: still has no face and video_prompt never says it stays that way -- anything the motion reveals will be invented (see still-geometry §11)
+  WARN  s4: take not rendered yet: clips/s4_v1.mov
+  WARN  s5: take not rendered yet: clips/s5_v1.mov
+  WARN  s6: take not rendered yet: clips/s6_v1.mov
+  WARN  s7: take not rendered yet: clips/s7_v1.mov
+  WARN  s8: take not rendered yet: clips/s8_v1.mov
+check: PASS
+
+=== auto: masters ===
+
+=== auto: combos ===
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/kyle.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/skiff.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/.gen/combo_kyle_in_skiff.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/kyle_in_skiff_c1.png 1 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/kyle_in_skiff_c1.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/kyle.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/skiff.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/.gen/combo_kyle_in_skiff.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/kyle_in_skiff_c2.png 2 1024 576
+
+=== auto: check ===
+planned length: 65.20 s kept − 7×0.75 fades = 59.95 s
+  WARN  s1: take not rendered yet: clips/s1_v1.mov
+  WARN  s2: take not rendered yet: clips/s2_v1.mov
+  WARN  s3: still.input not made yet: kyle_fixing_skiff
+  WARN  s3: take not rendered yet: clips/s3_v1.mov
+  WARN  s3: still has no face and video_prompt never says it stays that way -- anything the motion reveals will be invented (see still-geometry §11)
+  WARN  s4: take not rendered yet: clips/s4_v1.mov
+  WARN  s5: take not rendered yet: clips/s5_v1.mov
+  WARN  s6: take not rendered yet: clips/s6_v1.mov
+  WARN  s7: take not rendered yet: clips/s7_v1.mov
+  WARN  s8: take not rendered yet: clips/s8_v1.mov
+check: PASS
+
+=== auto: masters ===
+
+=== auto: combos ===
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/kyle.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/skiff.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/.gen/combo_kyle_fixing_skiff.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/kyle_fixing_skiff_c1.png 1 1024 576

@@ -646,6 +646,11 @@ def cmd_masters(f, args):
     c = still_cfg(f, {})
     rc = 0
     for name in names:
+        # A master that already exists is done -- it may have been picked here, or carried over from an
+        # earlier version, and a carried-over master has no prompt in this spec. Demanding one failed the
+        # whole unattended run at the first stage on kyle_firstflight v3, whose masters were all copied in.
+        if d(f, f.get("masters", {}).get(name, f"seed/{name}.png")).exists() and not FORCE:
+            continue
         pf = master_prompt(f, name)
         if not pf:
             print(f"{name}: no prompt (run-spec.master_prompts or .gen/master_{name}.txt)")
@@ -865,6 +870,11 @@ def cmd_combos(f, args):
     trig = trigger_of(f)
     rc = 0
     for name in names:
+        # Same rule as masters: a combo that already has its picked image is done. v3 carried
+        # kyle_in_skiff over from v2, and re-rendering it would have thrown away a combo chosen by eye
+        # and replaced it with whatever this run's palette ranking preferred.
+        if d(f, f"seed/{name}.png").exists() and not FORCE:
+            continue
         spec = combos.get(name) or die(f"no combo '{name}'")
         a = resolve_ref(f, spec.get("ref"))
         b = resolve_ref(f, spec.get("input")) if spec.get("input") else None
