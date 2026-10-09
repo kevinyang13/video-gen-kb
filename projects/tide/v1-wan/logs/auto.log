@@ -1,0 +1,21 @@
+
+=== auto: check ===
+planned length: 30.00 s kept − 5×0.0 fades = 30.00 s
+  WARN  s1: take not rendered yet: clips/s1_v1.mov
+  WARN  s2: take not rendered yet: clips/s2_v1.mov
+  WARN  s3: take not rendered yet: clips/s3_v1.mov
+  WARN  s4: take not rendered yet: clips/s4_v1.mov
+  WARN  s5: take not rendered yet: clips/s5_v1.mov
+  WARN  s5: still has no face and video_prompt never says it stays that way -- anything the motion reveals will be invented (see still-geometry §11)
+  WARN  s6: take not rendered yet: clips/s6_v1.mov
+check: PASS
+
+=== auto: masters ===
+
+=== auto: combos ===
+no run-spec.combos block
+
+=== auto: pick-combos ===
+
+=== auto: align ===
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/.gen/s1.txt /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s1_c1.png 1 1024 576

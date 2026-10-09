@@ -1,0 +1,22 @@
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"lindsey_lora_2000_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/lindsey_orbit/v1-drone/.gen/s1.txt /Users/kevinyang/dev/video-gen-kb/projects/lindsey_orbit/v1-drone/seed/s1_c1.png 1 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/lindsey_orbit/v1-drone/seed/s1_c1.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"lindsey_lora_2000_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/lindsey_orbit/v1-drone/.gen/s1.txt /Users/kevinyang/dev/video-gen-kb/projects/lindsey_orbit/v1-drone/seed/s1_c2.png 2 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/lindsey_orbit/v1-drone/seed/s1_c2.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"lindsey_lora_2000_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/lindsey_orbit/v1-drone/.gen/s1.txt /Users/kevinyang/dev/video-gen-kb/projects/lindsey_orbit/v1-drone/seed/s1_c3.png 3 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/lindsey_orbit/v1-drone/seed/s1_c3.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"lindsey_lora_2000_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/lindsey_orbit/v1-drone/.gen/s1.txt /Users/kevinyang/dev/video-gen-kb/projects/lindsey_orbit/v1-drone/seed/s1_c1.png 1 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/lindsey_orbit/v1-drone/seed/s1_c1.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"lindsey_lora_2000_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/lindsey_orbit/v1-drone/.gen/s1.txt /Users/kevinyang/dev/video-gen-kb/projects/lindsey_orbit/v1-drone/seed/s1_c2.png 2 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/lindsey_orbit/v1-drone/seed/s1_c2.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16,"loras":[{"file":"lindsey_lora_2000_lora_f32.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/lindsey_orbit/v1-drone/.gen/s1.txt /Users/kevinyang/dev/video-gen-kb/projects/lindsey_orbit/v1-drone/seed/s1_c3.png 3 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/lindsey_orbit/v1-drone/seed/s1_c3.png
+$ MODEL=ltx_2.3_22b_distilled_1.1_q8p.ckpt VIDEO_FORMAT=prores422hq STEPS=8 CFG=1 FRAMES=249 CONFIG_JSON='{"sampler":19,"shift":5.0,"stochasticSamplingGamma":0.3,"fps":25,"hiresFix":false}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_clip.sh /Users/kevinyang/dev/video-gen-kb/projects/lindsey_orbit/v1-drone/stills/s1.png /Users/kevinyang/dev/video-gen-kb/projects/lindsey_orbit/v1-drone/.gen/s1_v.txt /Users/kevinyang/dev/video-gen-kb/projects/lindsey_orbit/v1-drone/clips/s1_v1.mov 1 1024 576
+dt_clip: /Users/kevinyang/dev/video-gen-kb/projects/lindsey_orbit/v1-drone/clips/s1_v1.mov  1024x576  249 frames  603s
+/Users/kevinyang/dev/video-gen-kb/projects/lindsey_orbit/v1-drone/clips/s1_v1.mov
+$ MODEL=ltx_2.3_22b_distilled_1.1_q8p.ckpt VIDEO_FORMAT=prores422hq STEPS=8 CFG=1 FRAMES=249 CONFIG_JSON='{"sampler":19,"shift":5.0,"stochasticSamplingGamma":0.3,"fps":25,"hiresFix":false}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_clip.sh /Users/kevinyang/dev/video-gen-kb/projects/lindsey_orbit/v1-drone/stills/s1.png /Users/kevinyang/dev/video-gen-kb/projects/lindsey_orbit/v1-drone/.gen/s1_v.txt /Users/kevinyang/dev/video-gen-kb/projects/lindsey_orbit/v1-drone/clips/s1_v1.mov 1 1024 576
+dt_clip: /Users/kevinyang/dev/video-gen-kb/projects/lindsey_orbit/v1-drone/clips/s1_v1.mov  1024x576  249 frames  638s
+/Users/kevinyang/dev/video-gen-kb/projects/lindsey_orbit/v1-drone/clips/s1_v1.mov
+dt_clip: projects/lindsey_orbit/v1-drone/clips/s1_wan.mov  1024x576  81 frames  1119s
+projects/lindsey_orbit/v1-drone/clips/s1_wan.mov
+hevc,3840,2160,yuv420p10le,81
+4k: /Users/kevinyang/dev/video-gen-kb/projects/lindsey_orbit/v1-drone/final/lindsey_orbit_4k.mp4

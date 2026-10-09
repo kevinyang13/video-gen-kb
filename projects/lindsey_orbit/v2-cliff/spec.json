@@ -1,0 +1,129 @@
+{
+  "order": 27,
+  "id": "lindsey_orbit",
+  "version": "v2-cliff",
+  "variant": "v2-cliff",
+  "title": "Lindsey: Clifftop Orbit",
+  "date": "2026-10-08",
+  "theme": "realistic",
+  "status": "rendering",
+  "source": "single 10 s aerial orbit on a sea cliff; lindsey_lora; Wan 2.2 I2V",
+  "notes": "v1 established that LTX-2.3 cannot hold a locked-distance orbit -- it pulled back 6.9x on two different prompts -- while Wan 2.2 held the subject to a 1.6x change. v2 uses Wan at 161 frames (4k+1) for the full 10 s at 16 fps. The motion prompt describes camera and motion only, per wan22-i2v-locked-image-settings.",
+  "still": {
+    "model": "flux_2_klein_9b_i8x.ckpt",
+    "size": "1024x576",
+    "steps": 4,
+    "cfg": 1,
+    "shift": 3.0,
+    "sampler": 16,
+    "lora": "lindsey_lora_2000_lora_f32.ckpt",
+    "seeds": [
+      1,
+      2,
+      3
+    ]
+  },
+  "i2v": {
+    "model": "wan_v2.2_a14b_hne_i2v_i8x.ckpt",
+    "frames": 161,
+    "fps": 16
+  },
+  "post": {
+    "upscale": "Real-ESRGAN 4K"
+  },
+  "scenes": {
+    "locks": {
+      "subject": "lindsey_kx girl, a nine-year-old girl, this exact face, long dark hair loose with natural flyaway strands, wearing a simple pale sun-faded cotton dress",
+      "style": "Cinematic aerial film still, photoreal skin and natural fabric, late golden-hour sunlight, visible film grain. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark."
+    }
+  },
+  "files": [],
+  "run-spec": {
+    "dir": "projects/lindsey_orbit/v2-cliff",
+    "name": "lindsey_orbit_cliff",
+    "size": [
+      1024,
+      576
+    ],
+    "still": {
+      "model": "flux_2_klein_9b_i8x.ckpt",
+      "steps": 4,
+      "cfg": 1,
+      "config": {
+        "shift": 3.0,
+        "sampler": 16,
+        "loras": [
+          {
+            "file": "lindsey_lora_2000_lora_f32.ckpt",
+            "weight": 1.0
+          }
+        ]
+      },
+      "seeds": [
+        1,
+        2,
+        3
+      ],
+      "strength": 1.0
+    },
+    "clip": {
+      "model": "wan_v2.2_a14b_hne_i2v_i8x.ckpt",
+      "frames": 161,
+      "steps": 4,
+      "cfg": 1,
+      "config": {
+        "sampler": 17,
+        "shift": 5.0,
+        "fps": 16,
+        "refinerModel": "wan_v2.2_a14b_lne_i2v_i8x.ckpt",
+        "refinerStart": 0.1,
+        "loras": [
+          {
+            "file": "wan_v2.2_a14b_hne_i2v_lightning_251022_lora_f16.ckpt",
+            "weight": 1.0
+          }
+        ]
+      },
+      "seed": 1,
+      "video_format": "prores422hq"
+    },
+    "masters": {},
+    "master_views": {},
+    "combos": {},
+    "upscale": {
+      "w": 3840,
+      "h": 2160,
+      "fit": "crop",
+      "bitrate": "40M"
+    },
+    "assemble": {
+      "fps": 16,
+      "xfade": 0.0,
+      "clip_audio": true
+    },
+    "deliver": [
+      {
+        "w": 3840,
+        "h": 2160
+      },
+      {
+        "w": 1920,
+        "h": 1080
+      }
+    ],
+    "shots": [
+      {
+        "id": "s1",
+        "still": {
+          "prompt": "Wide shot from the side at her own eye level, one person alone in the frame, sitting on the right third of the frame with the open ocean filling the left. lindsey_kx girl, a nine-year-old girl, this exact face, long dark hair pulled back into a loose braid over one shoulder with soft strands loose around her face, wearing rolled-up blue jeans, a thin horizontal-striped t-shirt and an open dusty-pink knitted cardigan, sitting in profile on the flat rock lip at the very edge of a coastal bluff, both legs hanging straight down over the drop with her bare feet dangling in open air, one hand resting flat on the rock beside her, her face in profile gazing out at the horizon. Below and beyond her the cliff falls away to dark rocks and breaking surf, and a rugged headland coastline recedes into soft haze along the shore. The sun is setting low over the sea, laying a pale gold path across the water and rimming her face, braid and shoulder with warm light. Dry golden grass and scrub grow along the clifftop behind her. Her profile is clearly lit against the bright water, with sharp focus on her face and on the rock she sits on. Cinematic film still, photoreal skin and natural fabric, soft warm sunset light, shallow depth of field on the far headlands, visible film grain. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark."
+        },
+        "video_prompt": "Slow orbit. The camera arcs steadily sideways in front of her, staying at the same height and the same distance throughout, so she stays the same size and stays in the same part of the frame. The headland and the sea slide slowly across behind her. She keeps gazing out at the horizon and stays in profile, her braid and the hem of her cardigan stirring in the wind, her dangling feet swinging very slightly. The surf breaks and moves on the rocks far below.",
+        "take": "clips/s1_v1.mov",
+        "trim": [
+          0,
+          10.0
+        ]
+      }
+    ]
+  }
+}

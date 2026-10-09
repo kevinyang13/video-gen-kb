@@ -391,3 +391,56 @@ $ MODEL=ltx_2.3_22b_distilled_1.1_q8p.ckpt VIDEO_FORMAT=prores422hq STEPS=8 CFG=
 dt_clip: exists, skipping: /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s4_v1.mov
 /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s4_v1.mov
 $ MODEL=ltx_2.3_22b_distilled_1.1_q8p.ckpt VIDEO_FORMAT=prores422hq STEPS=8 CFG=1 FRAMES=249 CONFIG_JSON='{"sampler":19,"shift":5.0,"stochasticSamplingGamma":0.3,"fps":25,"hiresFix":false}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_clip.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/stills/s5.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/.gen/s5_v.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s5_v1.mov 1 1024 576
+dt_clip: /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s5_v1.mov  1024x576  249 frames  601s
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s5_v1.mov
+$ MODEL=ltx_2.3_22b_distilled_1.1_q8p.ckpt VIDEO_FORMAT=prores422hq STEPS=8 CFG=1 FRAMES=249 CONFIG_JSON='{"sampler":19,"shift":5.0,"stochasticSamplingGamma":0.3,"fps":25,"hiresFix":false}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_clip.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/stills/s6.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/.gen/s6_v.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s6_v1.mov 1 1024 576
+dt_clip: exists, skipping: /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s6_v1.mov
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s6_v1.mov
+$ MODEL=ltx_2.3_22b_distilled_1.1_q8p.ckpt VIDEO_FORMAT=prores422hq STEPS=8 CFG=1 FRAMES=249 CONFIG_JSON='{"sampler":19,"shift":5.0,"stochasticSamplingGamma":0.3,"fps":25,"hiresFix":false}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_clip.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/stills/s7.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/.gen/s7_v.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s7_v1.mov 1 1024 576
+dt_clip: exists, skipping: /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s7_v1.mov
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s7_v1.mov
+$ MODEL=ltx_2.3_22b_distilled_1.1_q8p.ckpt VIDEO_FORMAT=prores422hq STEPS=8 CFG=1 FRAMES=249 CONFIG_JSON='{"sampler":19,"shift":5.0,"stochasticSamplingGamma":0.3,"fps":25,"hiresFix":false}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_clip.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/stills/s8.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/.gen/s8_v.txt /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s8_v1.mov 1 1024 576
+dt_clip: exists, skipping: /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s8_v1.mov
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s8_v1.mov
+
+=== auto: qc ===
+$ /Users/kevinyang/dev/video-gen-kb/scripts/qc_sheet.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s1_v1.mov /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s1_v1_qc.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/stills/s1.png
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s1_v1_qc.png  (frames: 0 62 124 186 248 of 249; no end fade)
+$ /Users/kevinyang/dev/video-gen-kb/scripts/qc_sheet.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s2_v1.mov /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s2_v1_qc.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/stills/s2.png
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s2_v1_qc.png  (frames: 0 62 124 186 248 of 249; no end fade)
+$ /Users/kevinyang/dev/video-gen-kb/scripts/qc_sheet.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s3_v1.mov /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s3_v1_qc.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/stills/s3.png
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s3_v1_qc.png  (frames: 0 62 124 186 248 of 249; no end fade)
+$ /Users/kevinyang/dev/video-gen-kb/scripts/qc_sheet.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s4_v1.mov /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s4_v1_qc.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/stills/s4.png
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s4_v1_qc.png  (frames: 0 62 124 186 248 of 249; no end fade)
+$ /Users/kevinyang/dev/video-gen-kb/scripts/qc_sheet.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s5_v1.mov /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s5_v1_qc.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/stills/s5.png
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s5_v1_qc.png  (frames: 0 62 124 186 248 of 249; no end fade)
+$ /Users/kevinyang/dev/video-gen-kb/scripts/qc_sheet.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s6_v1.mov /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s6_v1_qc.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/stills/s6.png
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s6_v1_qc.png  (frames: 0 62 124 186 248 of 249; no end fade)
+$ /Users/kevinyang/dev/video-gen-kb/scripts/qc_sheet.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s7_v1.mov /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s7_v1_qc.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/stills/s7.png
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s7_v1_qc.png  (frames: 0 62 124 186 248 of 249; no end fade)
+$ /Users/kevinyang/dev/video-gen-kb/scripts/qc_sheet.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s8_v1.mov /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s8_v1_qc.png /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/stills/s8.png
+/Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/seed/s8_v1_qc.png  (frames: 0 62 124 186 248 of 249; no end fade)
+
+=== auto: finish ===
+$ ffmpeg -nostdin -v error -y -i /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s1_v1.mov -vf trim=start=0:end=9.9,setpts=PTS-STARTPTS -af atrim=start=0:end=9.9,asetpts=PTS-STARTPTS -c:v prores_ks -profile:v 3 -c:a pcm_s16le /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s1_t.mov
+$ W=3840 H=2160 FIT=crop BITRATE=40M KEEP_FRAMES=0 KEEP_AUDIO=1 /Users/kevinyang/dev/video-gen-kb/scripts/upscale_4k.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s1_t.mov /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s1 realesrgan-x4plus
+hevc,3840,2160,yuv420p10le,248
+4k: /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s1_4k.mp4
+$ ffmpeg -nostdin -v error -y -i /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s2_v1.mov -vf trim=start=0:end=8.0,setpts=PTS-STARTPTS -af atrim=start=0:end=8.0,asetpts=PTS-STARTPTS -c:v prores_ks -profile:v 3 -c:a pcm_s16le /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s2_t.mov
+$ W=3840 H=2160 FIT=crop BITRATE=40M KEEP_FRAMES=0 KEEP_AUDIO=1 /Users/kevinyang/dev/video-gen-kb/scripts/upscale_4k.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s2_t.mov /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s2 realesrgan-x4plus
+hevc,3840,2160,yuv420p10le,200
+4k: /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s2_4k.mp4
+$ ffmpeg -nostdin -v error -y -i /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s3_v1.mov -vf trim=start=0:end=9.9,setpts=PTS-STARTPTS -af atrim=start=0:end=9.9,asetpts=PTS-STARTPTS -c:v prores_ks -profile:v 3 -c:a pcm_s16le /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s3_t.mov
+$ W=3840 H=2160 FIT=crop BITRATE=40M KEEP_FRAMES=0 KEEP_AUDIO=1 /Users/kevinyang/dev/video-gen-kb/scripts/upscale_4k.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s3_t.mov /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s3 realesrgan-x4plus
+hevc,3840,2160,yuv420p10le,248
+4k: /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s3_4k.mp4
+$ ffmpeg -nostdin -v error -y -i /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s4_v1.mov -vf trim=start=0:end=8.0,setpts=PTS-STARTPTS -af atrim=start=0:end=8.0,asetpts=PTS-STARTPTS -c:v prores_ks -profile:v 3 -c:a pcm_s16le /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s4_t.mov
+$ W=3840 H=2160 FIT=crop BITRATE=40M KEEP_FRAMES=0 KEEP_AUDIO=1 /Users/kevinyang/dev/video-gen-kb/scripts/upscale_4k.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s4_t.mov /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s4 realesrgan-x4plus
+hevc,3840,2160,yuv420p10le,200
+4k: /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s4_4k.mp4
+$ ffmpeg -nostdin -v error -y -i /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s5_v1.mov -vf trim=start=0:end=6.0,setpts=PTS-STARTPTS -af atrim=start=0:end=6.0,asetpts=PTS-STARTPTS -c:v prores_ks -profile:v 3 -c:a pcm_s16le /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s5_t.mov
+$ W=3840 H=2160 FIT=crop BITRATE=40M KEEP_FRAMES=0 KEEP_AUDIO=1 /Users/kevinyang/dev/video-gen-kb/scripts/upscale_4k.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s5_t.mov /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s5 realesrgan-x4plus
+hevc,3840,2160,yuv420p10le,150
+4k: /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s5_4k.mp4
+$ ffmpeg -nostdin -v error -y -i /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s6_v1.mov -vf trim=start=0:end=9.9,setpts=PTS-STARTPTS -af atrim=start=0:end=9.9,asetpts=PTS-STARTPTS -c:v prores_ks -profile:v 3 -c:a pcm_s16le /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s6_t.mov
+$ W=3840 H=2160 FIT=crop BITRATE=40M KEEP_FRAMES=0 KEEP_AUDIO=1 /Users/kevinyang/dev/video-gen-kb/scripts/upscale_4k.sh /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s6_t.mov /Users/kevinyang/dev/video-gen-kb/projects/kyle_firstflight/v3-nodroid/clips/s6 realesrgan-x4plus

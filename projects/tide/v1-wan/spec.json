@@ -1,0 +1,182 @@
+{
+  "order": 28,
+  "id": "tide",
+  "version": "v1-wan",
+  "variant": "v1-wan",
+  "title": "Tide",
+  "date": "2026-10-08",
+  "theme": "realistic",
+  "status": "rendering",
+  "source": "original; a coastal day from first light to dusk, six shots, no characters",
+  "notes": "Deliberately has no recurring character or object. Every consistency failure in this repo has come from holding a subject across cuts; a landscape film removes that axis entirely, so each still stands alone and only the grade has to carry continuity. Wan 2.2 I2V throughout -- LTX is not used, having been measured adding a 6.9x pull-back on a locked-camera shot. 6 x 81 frames at 16 fps, hard cuts, 30.0 s.",
+  "still": {
+    "model": "flux_2_klein_9b_i8x.ckpt",
+    "size": "1024x576",
+    "steps": 4,
+    "cfg": 1,
+    "shift": 3.0,
+    "sampler": 16,
+    "seeds": [
+      1,
+      2,
+      3
+    ]
+  },
+  "i2v": {
+    "model": "wan_v2.2_a14b_hne_i2v_i8x.ckpt",
+    "frames": 81,
+    "fps": 16
+  },
+  "post": {
+    "upscale": "Real-ESRGAN 4K",
+    "assemble": "hard cuts"
+  },
+  "scenes": {
+    "locks": {
+      "style": "Cinematic film still, anamorphic 35mm on film stock, photoreal water and wet rock, visible film grain. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark."
+    }
+  },
+  "files": [],
+  "run-spec": {
+    "dir": "projects/tide/v1-wan",
+    "name": "tide",
+    "size": [
+      1024,
+      576
+    ],
+    "still": {
+      "model": "flux_2_klein_9b_i8x.ckpt",
+      "steps": 4,
+      "cfg": 1,
+      "config": {
+        "shift": 3.0,
+        "sampler": 16
+      },
+      "seeds": [
+        1,
+        2,
+        3
+      ],
+      "strength": 1.0
+    },
+    "clip": {
+      "model": "wan_v2.2_a14b_hne_i2v_i8x.ckpt",
+      "frames": 81,
+      "steps": 4,
+      "cfg": 1,
+      "config": {
+        "sampler": 17,
+        "shift": 5.0,
+        "fps": 16,
+        "refinerModel": "wan_v2.2_a14b_lne_i2v_i8x.ckpt",
+        "refinerStart": 0.1,
+        "loras": [
+          {
+            "file": "wan_v2.2_a14b_hne_i2v_lightning_251022_lora_f16.ckpt",
+            "weight": 1.0
+          }
+        ]
+      },
+      "seed": 1,
+      "video_format": "prores422hq"
+    },
+    "masters": {},
+    "master_views": {},
+    "combos": {},
+    "upscale": {
+      "w": 3840,
+      "h": 2160,
+      "fit": "crop",
+      "bitrate": "40M"
+    },
+    "assemble": {
+      "fps": 16,
+      "xfade": 0.0,
+      "clip_audio": true
+    },
+    "deliver": [
+      {
+        "w": 3840,
+        "h": 2160
+      },
+      {
+        "w": 1920,
+        "h": 1080
+      }
+    ],
+    "shots": [
+      {
+        "id": "s1",
+        "still": {
+          "prompt": "Wide landscape, no people and no boats anywhere in the frame. First light over a cold northern coast: three tall sea stacks standing out of a flat calm ocean, low banks of sea mist lying on the water between them, the sun just clearing the horizon behind the furthest stack and laying a thin band of pale gold across the water. Deep blue-grey sky above, wet black rock in the foreground. Cinematic film still, anamorphic 35mm on film stock, photoreal water and wet rock, visible film grain. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark."
+        },
+        "video_prompt": "Locked camera, no movement at all. The mist drifts very slowly across the water from left to right and the sea surface heaves in long slow swells. The light on the water brightens almost imperceptibly. Nothing enters the frame. Everything moves at natural real-time speed, with no slow motion and no speed ramping. Distant surf, no music.",
+        "take": "clips/s1_v1.mov",
+        "trim": [
+          0,
+          5.0
+        ]
+      },
+      {
+        "id": "s2",
+        "still": {
+          "prompt": "Tight low shot close to the water, no people in the frame. A heavy green wave rearing and breaking over a shelf of black volcanic rock, thick white foam pouring off the rock in sheets and spray lifting into the air, backlit by low morning sun so the spray glows. Shallow depth of field on the foam. Cinematic film still, anamorphic 35mm on film stock, photoreal water and wet rock, visible film grain. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark."
+        },
+        "video_prompt": "Locked camera, no movement at all. The wave rears, breaks over the rock and drains away in sheets of foam, spray lifting and falling. Water only. Everything moves at natural real-time speed, with no slow motion and no speed ramping. Heavy surf, no music.",
+        "take": "clips/s2_v1.mov",
+        "trim": [
+          0,
+          5.0
+        ]
+      },
+      {
+        "id": "s3",
+        "still": {
+          "prompt": "Straight-down aerial view from high above, no people and no boats in the frame. Shallow tropical water over a sand bank, the colour running from deep blue through turquoise to almost white where the sand rises, long sinuous ripple patterns combed into the sand by the current, a thin line of white surf crossing one corner. Bright midday sun, high contrast. Cinematic film still, anamorphic 35mm on film stock, photoreal water and wet rock, visible film grain. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark."
+        },
+        "video_prompt": "The camera drifts very slowly straight forward over the water, keeping the same height, the view sliding steadily across the sand bank. The water surface shimmers and the surf line moves. Nothing else changes. Everything moves at natural real-time speed, with no slow motion and no speed ramping. Light surf, no music.",
+        "take": "clips/s3_v1.mov",
+        "trim": [
+          0,
+          5.0
+        ]
+      },
+      {
+        "id": "s4",
+        "still": {
+          "prompt": "Low shot into tall dune grass, no people in the frame, the horizon high in the frame. Dense marram grass covering a sand dune, each blade sharp against a hazy blue afternoon sky, a scoop of pale sand showing through at the base, the sea a thin blue line far beyond the crest. Warm side light raking across the grass. Cinematic film still, anamorphic 35mm on film stock, photoreal water and wet rock, visible film grain. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark."
+        },
+        "video_prompt": "Locked camera, no movement at all. Strong steady wind combs the grass in long travelling waves from one side of the frame to the other, the blades bending and springing back, loose sand streaming off the crest. Everything moves at natural real-time speed, with no slow motion and no speed ramping. Wind, no music.",
+        "take": "clips/s4_v1.mov",
+        "trim": [
+          0,
+          5.0
+        ]
+      },
+      {
+        "id": "s5",
+        "still": {
+          "prompt": "Wide low shot along a flat wet beach at golden hour, no people and no animals in the frame. Long parallel lines of surf running in across the shallows, the wet sand mirroring a sky of orange and pink, the sun low and huge just above the water throwing a broad gold path straight toward the camera, spray from the breaking lines lit from behind. Cinematic film still, anamorphic 35mm on film stock, photoreal water and wet rock, visible film grain. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark."
+        },
+        "video_prompt": "Locked camera, no movement at all. Successive lines of surf run in toward the camera, break and slide up the wet sand in thin sheets, then drain back and leave the sand mirroring the sky. The sun's reflection shivers on the water. Everything moves at natural real-time speed, with no slow motion and no speed ramping. Surf, no music.",
+        "take": "clips/s5_v1.mov",
+        "trim": [
+          0,
+          5.0
+        ]
+      },
+      {
+        "id": "s6",
+        "still": {
+          "prompt": "Close shot of a tide pool at dusk, no people in the frame. A still rock pool set in dark wet basalt, its surface a perfect mirror holding the last deep blue and ember-orange of the sky, strands of olive seaweed and small barnacled stones under the water, the dark silhouette of a sea stack reflected in the pool. Last light, deep cool shadows, the first faint star in the sky above. Cinematic film still, anamorphic 35mm on film stock, photoreal water and wet rock, visible film grain. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark."
+        },
+        "video_prompt": "Locked camera, no movement at all. The surface of the pool ripples very gently as a thin trickle of water runs in from one side, the reflected sky wobbling and settling. The seaweed sways slightly under the water. The light fades almost imperceptibly. Everything moves at natural real-time speed, with no slow motion and no speed ramping. Faint distant surf, no music.",
+        "take": "clips/s6_v1.mov",
+        "trim": [
+          0,
+          5.0
+        ]
+      }
+    ]
+  }
+}

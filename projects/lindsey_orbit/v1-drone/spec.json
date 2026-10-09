@@ -1,0 +1,123 @@
+{
+  "order": 26,
+  "id": "lindsey_orbit",
+  "version": "v1-drone",
+  "variant": "v1-drone",
+  "title": "Lindsey: Drone Orbit",
+  "date": "2026-10-08",
+  "theme": "realistic",
+  "status": "rendering",
+  "source": "single 10 s aerial orbit; lindsey_lora",
+  "notes": "One shot, so cross-shot consistency is not in play -- the only risk is the orbit, which is the move measured to break identity by revealing sides the still never contained. Mitigated by arcing roughly a quarter turn rather than a full circle and having her turn with the camera, so her face stays toward the lens throughout.",
+  "still": {
+    "model": "flux_2_klein_9b_i8x.ckpt",
+    "size": "1024x576",
+    "steps": 4,
+    "cfg": 1,
+    "shift": 3.0,
+    "sampler": 16,
+    "lora": "lindsey_lora_2000_lora_f32.ckpt",
+    "seeds": [
+      1,
+      2,
+      3
+    ]
+  },
+  "i2v": {
+    "model": "ltx_2.3_22b_distilled_1.1_q8p.ckpt",
+    "frames": 249,
+    "fps": 25
+  },
+  "post": {
+    "upscale": "Real-ESRGAN 4K"
+  },
+  "scenes": {
+    "locks": {
+      "subject": "lindsey_kx girl, a nine-year-old girl, this exact face, long dark hair loose with natural flyaway strands, wearing a simple pale sun-faded cotton dress",
+      "style": "Cinematic aerial film still, photoreal skin and natural fabric, late golden-hour sunlight, visible film grain, warm green and gold palette. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark."
+    }
+  },
+  "files": [],
+  "run-spec": {
+    "dir": "projects/lindsey_orbit/v1-drone",
+    "name": "lindsey_orbit",
+    "size": [
+      1024,
+      576
+    ],
+    "still": {
+      "model": "flux_2_klein_9b_i8x.ckpt",
+      "steps": 4,
+      "cfg": 1,
+      "config": {
+        "shift": 3.0,
+        "sampler": 16,
+        "loras": [
+          {
+            "file": "lindsey_lora_2000_lora_f32.ckpt",
+            "weight": 1.0
+          }
+        ]
+      },
+      "seeds": [
+        1,
+        2,
+        3
+      ],
+      "strength": 1.0
+    },
+    "clip": {
+      "model": "ltx_2.3_22b_distilled_1.1_q8p.ckpt",
+      "frames": 249,
+      "steps": 8,
+      "cfg": 1,
+      "config": {
+        "sampler": 19,
+        "shift": 5.0,
+        "stochasticSamplingGamma": 0.3,
+        "fps": 25,
+        "hiresFix": false
+      },
+      "seed": 1,
+      "video_format": "prores422hq"
+    },
+    "masters": {},
+    "master_views": {},
+    "combos": {},
+    "upscale": {
+      "w": 3840,
+      "h": 2160,
+      "fit": "crop",
+      "bitrate": "40M"
+    },
+    "assemble": {
+      "fps": 25,
+      "xfade": 0.0,
+      "clip_audio": true
+    },
+    "deliver": [
+      {
+        "w": 3840,
+        "h": 2160
+      },
+      {
+        "w": 1920,
+        "h": 1080
+      }
+    ],
+    "shots": [
+      {
+        "id": "s1",
+        "still": {
+          "prompt": "Drone shot from about three metres above her and a little in front, looking down at her at a shallow angle, one person alone in the frame, centred and filling much of the frame from the waist up. lindsey_kx girl, a nine-year-old girl, this exact face, long dark hair loose with natural flyaway strands, wearing a simple pale sun-faded cotton dress, standing alone in the middle of a wide open meadow of tall summer grass, her face tilted up toward the camera and her arms held a little away from her sides, laughing. The meadow runs flat and open in every direction around her with nothing close to her and clear space on all sides, the grass combed into long waves by the wind, a few pale wildflowers through it, low golden sunlight raking across the field and throwing her long shadow out across the grass. Her head and shoulders are large in the frame, her face turned fully up to the camera, brightly lit and well exposed, with razor-sharp focus on her eyes and skin texture. Cinematic aerial film still, photoreal skin and natural fabric, late golden-hour sunlight, visible film grain, warm green and gold palette. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark."
+        },
+        "video_prompt": "She stays exactly the same size in the frame from the first frame to the last, filling the same amount of the picture throughout, and stays centred in the middle of the frame the whole time. The camera holds at the same height above the grass and the same short distance from her for the entire shot, and slides steadily sideways around her in a smooth arc, so the meadow behind her slides horizontally across the background and her shadow swings slowly around her feet. She turns slowly in place to follow the camera, so her face stays turned up toward the lens for the whole shot. She keeps laughing, and her hair and the hem of her dress move in the wind while the tall grass ripples in long waves around her. Nobody else enters the frame. Everything moves at natural real-time speed, with no slow motion and no speed ramping. Wind across grass, no music.",
+        "take": "clips/s1_v1.mov",
+        "trim": [
+          0,
+          9.9
+        ]
+      }
+    ]
+  }
+}

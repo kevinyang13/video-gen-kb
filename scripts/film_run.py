@@ -1041,10 +1041,23 @@ def cmd_align(f, args):
         i = s["id"]
         rp = still_reference(f, s)
         if not rp:
-            print(f"{i}: no reference to align against -- rendering once and picking", flush=True)
+            # No master to align against -- a landscape shot invents its own frame. Sharpness is then
+            # the only signal there is, so roll the whole seed set and keep the crispest rather than
+            # taking the first one blind.
             c = still_cfg(f, s)
-            render_still(f, s, c["seeds"][0])
-            cmd_pick(f, [i, str(c["seeds"][0])])
+            pool = {}
+            for seed in c["seeds"]:
+                out, _ = render_still(f, s, seed)
+                if out.exists():
+                    pool[seed] = (image_metrics(out) or {"sharp": 0.0})["sharp"]
+            if not pool:
+                print(f"{i}: nothing rendered", flush=True)
+                continue
+            best_seed = max(pool, key=pool.get)
+            cmd_sheet(f, [i, "--force"])
+            cmd_pick(f, [i, str(best_seed)])
+            print(f"{i}: no reference -- picked seed {best_seed} on sharpness "
+                  f"({pool[best_seed]:.0f} of {len(pool)})", flush=True)
             continue
         base = still_cfg(f, s)["seeds"]
         rpal, best, best_seed, prev, pool = image_palette(rp), None, None, None, {}
