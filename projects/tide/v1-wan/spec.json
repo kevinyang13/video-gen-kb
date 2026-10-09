@@ -96,12 +96,16 @@
     },
     "deliver": [
       {
-        "w": 3840,
-        "h": 2160
+        "size": [
+          3840,
+          2160
+        ]
       },
       {
-        "w": 1920,
-        "h": 1080
+        "size": [
+          1920,
+          1080
+        ]
       }
     ],
     "shots": [
@@ -178,5 +182,6 @@
         ]
       }
     ]
-  }
+  },
+  "dt_project": "none \u2014 draw-things-cli via scripts/film_run.py"
 }

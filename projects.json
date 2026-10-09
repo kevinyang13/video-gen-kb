@@ -2291,6 +2291,344 @@
       ]
     },
     {
+      "id": "kyle_firstflight",
+      "version": "v3-nodroid",
+      "variant": "v3-nodroid",
+      "title": "Kyle: First Flight (v3, no droid)",
+      "date": "2026-10-07",
+      "theme": "realistic",
+      "status": "stopped",
+      "source": "v2-sheets masters, rebuilt with the style lock fixed and the droid cut",
+      "notes": "Kyle and the skiff only. Built on v2's masters. The style lock no longer mandates haze, shallow depth of field or a huge pale sky -- that global clause was measured as the sole cause of v2 s5's nine failed candidates (bg 77 -> 9 from removing it alone, same seed, same input). Atmosphere and sky are now placed per shot. Every scene shot is a single-image edit off a combo master, never a diptych. Stopped partway through the 4K pass (5 of 8 shots upscaled); the 8 stills and 8 clips are on disk at 1080p.",
+      "still": {
+        "model": "flux_2_klein_9b_i8x.ckpt",
+        "size": "1024x576",
+        "steps": 4,
+        "cfg": 1,
+        "shift": 3.0,
+        "sampler": 16,
+        "lora": "kyle_lora_v2_2500_lora_f32.ckpt",
+        "seeds": [
+          1,
+          2,
+          3
+        ],
+        "control": "one master per shot",
+        "prompt": "see scenes"
+      },
+      "i2v": {
+        "model": "ltx_2.3_22b_distilled_1.1_q8p.ckpt",
+        "frames": 249,
+        "fps": 25
+      },
+      "post": {
+        "upscale": "Real-ESRGAN 4K",
+        "assemble": "crossfade 0.75"
+      },
+      "scenes": {
+        "locks": {
+          "subject": "kyle_kx boy, a nine-year-old boy with child proportions, this exact face, short dark hair, wearing a sun-bleached sand-coloured tunic with the sleeves pushed up, a wide utility belt and cracked leather work gloves",
+          "skiff": "the same slender riveted boat hull, the same open cockpit with its low curved windscreen, the same stubby swept fins at the stern and the same two thruster nacelles slung underneath, with every patched salvaged panel the colour it already is",
+          "style": "Cinematic film still from a live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scuffed painted metal, visible film grain, sand and rust palette. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark."
+        }
+      },
+      "files": [],
+      "run-spec": {
+        "dir": "projects/kyle_firstflight/v3-nodroid",
+        "name": "kyle_firstflight_v3",
+        "size": [
+          1024,
+          576
+        ],
+        "still": {
+          "model": "flux_2_klein_9b_i8x.ckpt",
+          "steps": 4,
+          "cfg": 1,
+          "config": {
+            "shift": 3.0,
+            "sampler": 16
+          },
+          "seeds": [
+            1,
+            2,
+            3
+          ],
+          "strength": 1.0
+        },
+        "clip": {
+          "model": "ltx_2.3_22b_distilled_1.1_q8p.ckpt",
+          "frames": 249,
+          "steps": 8,
+          "cfg": 1,
+          "config": {
+            "sampler": 19,
+            "shift": 5.0,
+            "stochasticSamplingGamma": 0.3,
+            "fps": 25,
+            "hiresFix": false
+          },
+          "seed": 1,
+          "video_format": "prores422hq"
+        },
+        "masters": {
+          "kyle": "seed/kyle.png",
+          "skiff": "seed/skiff.png",
+          "yard": "seed/yard.png",
+          "dunes": "seed/dunes.png",
+          "kyle_face": "seed/kyle_face.png"
+        },
+        "master_views": {
+          "kyle": {
+            "kind": "person",
+            "expr": "neutral alert smile"
+          },
+          "skiff": {
+            "kind": "object",
+            "expr": ""
+          },
+          "yard": {
+            "skip": true
+          },
+          "dunes": {
+            "skip": true
+          },
+          "kyle_face": {
+            "skip": true
+          }
+        },
+        "combos": {
+          "kyle_in_skiff": {
+            "ref": "kyle",
+            "input": "skiff",
+            "strength": 1.0,
+            "prompt": "Two images side by side. Keep the left image completely unchanged. Re-render the right image so that the boy from the left image is now sitting down inside the open cockpit of the craft, piloting it, with his hands on the controls and only his head, shoulders and arms showing above the cowling. He has exactly the same face, the same hair and the same clothing as the boy on the left. The craft itself stays exactly the same machine with the same hull, the same patched panels, the same fins and the same nacelles, unchanged except for the boy now seated in it. He is a small nine-year-old boy with child proportions and the cockpit is clearly built for someone far bigger than him."
+          },
+          "kyle_fixing_skiff": {
+            "ref": "kyle",
+            "input": "skiff",
+            "strength": 1.0,
+            "prompt": "Two images side by side. Keep the left image completely unchanged. Re-render the right image so that the boy from the left image is now kneeling on the ground beside the craft with his back to the camera, leaning in over an open engine panel in the hull. He has exactly the same face, the same hair and the same clothing as the boy on the left. The craft keeps the exact shape it already has: the same slender riveted boat hull, the same open cockpit with its low curved windscreen, the same pair of stubby swept fins at the stern, the same two thruster nacelles slung underneath and the same patched salvaged panels in their own colours. He is a nine-year-old boy with child proportions and the craft is far longer than he is tall. Both are inside the frame together on the same plain pale grey studio backdrop with the same soft even lighting."
+          }
+        },
+        "upscale": {
+          "w": 3840,
+          "h": 2160,
+          "fit": "crop",
+          "bitrate": "40M"
+        },
+        "assemble": {
+          "fps": 25,
+          "xfade": 0.75,
+          "clip_audio": true
+        },
+        "deliver": [
+          {
+            "w": 3840,
+            "h": 2160
+          },
+          {
+            "w": 1920,
+            "h": 1080
+          }
+        ],
+        "shots": [
+          {
+            "id": "s1",
+            "still": {
+              "input": "yard",
+              "prompt": "Keep this desert salvage yard exactly as it is. Extreme wide establishing shot with no people and no vehicles flying in it. Rows of broken hulls, stripped engine casings, gantries and cable spools recede into the distance, drifts of fine dust banked against the wrecks, two pale suns low in a huge washed sky, low gold light raking between the wrecks and throwing long shadows. The foreground is clear open sand. Cinematic film still from a live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scuffed painted metal, visible film grain, sand and rust palette. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+              "config": {
+                "shift": 3.0,
+                "sampler": 16
+              }
+            },
+            "video_prompt": "The camera stays exactly where it is and pushes in very slowly down the lane between the wrecks. Fine dust drifts across the sand and heat shimmer rises off the metal. Nothing enters the frame and no person appears at any point. Everything moves at natural real-time speed, with no slow motion and no speed ramping. Wind across sand, no music.",
+            "take": "clips/s1_v1.mov",
+            "trim": [
+              0,
+              9.9
+            ]
+          },
+          {
+            "id": "s2",
+            "still": {
+              "input": "skiff_90",
+              "prompt": "Keep this craft exactly as it is, the same machine with the same hull and the same panels. Extreme close-up detail insert with no people in frame, framed tight on one scavenged thruster nacelle slung under the riveted hull. Its exposed copper induction coil begins to spin and glow a deep orange inside the housing, heat shimmer lifting off the metal, loose sand streaming away beneath it. Warm low sun across the scuffed paint, macro clarity. Cinematic film still from a live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scuffed painted metal, visible film grain, sand and rust palette. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+              "config": {
+                "shift": 3.0,
+                "sampler": 16
+              }
+            },
+            "video_prompt": "The camera stays exactly where it is. The copper coil spins up and its glow strengthens steadily from a dull ember to a hard orange, heat shimmer rising off the housing and loose sand streaming away beneath it. No person appears at any point. Everything moves at natural real-time speed, with no slow motion and no speed ramping. A rising electrical whine, no music.",
+            "take": "clips/s2_v1.mov",
+            "trim": [
+              0,
+              8.0
+            ]
+          },
+          {
+            "id": "s3",
+            "still": {
+              "input": "kyle_fixing_skiff",
+              "prompt": "Keep the boy and the craft exactly as they are, in the same places, at the same sizes and in the same poses. Change only what is behind and beneath them: replace the plain studio backdrop and floor with a vast desert salvage yard at dawn, so they are now on open windblown sand with rows of broken hulls, stripped engine casings and gantries receding behind them under a low gold sun, long shadows running across the sand and clear open sand in the foreground. Seen from the same side as the left image, in a wide shot. The boy is kyle_kx boy, a nine-year-old boy with child proportions, this exact face, short dark hair, wearing a sun-bleached sand-coloured tunic with the sleeves pushed up, a wide utility belt and cracked leather work gloves, kneeling on the sand beside the craft exactly as he already is, leaning in over the hull with his face turned away from the camera, his own short dark hair on his head and nothing worn over it. The craft keeps the same slender riveted boat hull, the same open cockpit with its low curved windscreen, the same stubby swept fins at the stern and the same two thruster nacelles slung underneath, with every patched salvaged panel the colour it already is. Cinematic film still from a live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scuffed painted metal, visible film grain, sand and rust palette. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+              "config": {
+                "shift": 3.0,
+                "sampler": 16,
+                "loras": [
+                  {
+                    "file": "kyle_lora_v2_2500_lora_f32.ckpt",
+                    "weight": 1.0
+                  }
+                ]
+              }
+            },
+            "video_prompt": "The camera stays exactly where it is, locked off, and does not move or change angle. The boy straightens up from the open engine panel and stands, still with his back to the camera and his face away from the camera throughout, and looks along the hull of the craft. The craft stays exactly where it is. Dust drifts across the sand behind them. Nobody else enters the frame. Everything moves at natural real-time speed, with no slow motion and no speed ramping. Wind and the clink of a tool, no music.",
+            "take": "clips/s3_v1.mov",
+            "trim": [
+              0,
+              9.9
+            ]
+          },
+          {
+            "id": "s4",
+            "still": {
+              "input": "kyle_in_skiff",
+              "prompt": "Keep the boy and the craft exactly as they are, in the same places, at the same sizes and in the same poses, seen from the same side. Change only what is behind and beneath them: replace the plain studio backdrop and floor with the desert salvage yard, so the craft now rests on open sand with wrecks and gantries standing behind it under a low gold sun. The boy is kyle_kx boy, a nine-year-old boy with child proportions, this exact face, short dark hair, wearing a sun-bleached sand-coloured tunic with the sleeves pushed up, a wide utility belt and cracked leather work gloves, sitting down inside the open cockpit with both hands on the controls and only his head, shoulders and arms above the cowling, his own short dark hair on his head and nothing worn over it. The craft keeps the same slender riveted boat hull, the same open cockpit with its low curved windscreen, the same stubby swept fins at the stern and the same two thruster nacelles slung underneath, with every patched salvaged panel the colour it already is. Cinematic film still from a live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scuffed painted metal, visible film grain, sand and rust palette. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+              "config": {
+                "shift": 3.0,
+                "sampler": 16,
+                "loras": [
+                  {
+                    "file": "kyle_lora_v2_2500_lora_f32.ckpt",
+                    "weight": 1.0
+                  }
+                ]
+              }
+            },
+            "video_prompt": "The camera stays exactly where it is, locked off at the side, and does not move or change angle. The boy settles his hands on the controls and takes a breath, his shoulders rising and falling once. The craft stays exactly where it is on the sand. Nobody else enters the frame. Everything moves at natural real-time speed, with no slow motion and no speed ramping. Wind and a low idle hum, no music.",
+            "take": "clips/s4_v1.mov",
+            "trim": [
+              0,
+              8.0
+            ]
+          },
+          {
+            "id": "s5",
+            "still": {
+              "input": "kyle_face",
+              "prompt": "Close-up portrait, head and shoulders, frontal, slightly low angle, one person alone in the frame. kyle_kx boy, a nine-year-old boy with child proportions, this exact face, short dark hair, wearing a sun-bleached sand-coloured tunic with the sleeves pushed up, a wide utility belt and cracked leather work gloves, his eyes wide and his mouth open in a broad delighted grin, looking just past the camera. Strong warm daylight falls full on his face from the front and slightly to one side, so his face is the brightest thing in the frame, brightly and evenly lit and well exposed, with razor-sharp focus on his eyes and on his skin texture. A wall of rusted salvaged hull plating stands close behind his head, filling the frame behind him and lit dimmer than he is. The air between the camera and his face is clear. Cinematic film still from a live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scuffed painted metal, visible film grain, sand and rust palette. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+              "config": {
+                "shift": 3.0,
+                "sampler": 16,
+                "loras": [
+                  {
+                    "file": "kyle_lora_v2_2500_lora_f32.ckpt",
+                    "weight": 1.0
+                  }
+                ]
+              }
+            },
+            "video_prompt": "The camera stays exactly where it is, locked off, and does not move or change angle. He holds the same broad delighted grin for the whole shot without changing expression, blinking once, his head turning only very slightly. His face stays toward the camera throughout. Nobody else enters the frame. Everything moves at natural real-time speed, with no slow motion and no speed ramping. Wind and a rising hum, no music.",
+            "take": "clips/s5_v1.mov",
+            "trim": [
+              0,
+              6.0
+            ]
+          },
+          {
+            "id": "s6",
+            "still": {
+              "input": "kyle_in_skiff",
+              "prompt": "Keep the boy and the craft exactly as they are, in the same places, at the same sizes and in the same poses, seen from the same side. Change only what is around and beneath them: replace the plain studio backdrop and floor with a desert salvage yard, so the craft is now hovering low over open sand in the middle of rows of broken hulls and gantries under a low gold sun. Seen in a wide low shot from the sand. Both thruster nacelles glow hot orange, a ring of dust blasts outwards across the sand beneath the hull, and a clear band of daylight shows between the hull and the ground. The boy is kyle_kx boy, a nine-year-old boy with child proportions, this exact face, short dark hair, wearing a sun-bleached sand-coloured tunic with the sleeves pushed up, a wide utility belt and cracked leather work gloves, sitting down in the open cockpit with his hands on the controls, a small child in a craft built for someone far bigger, his head and shoulders barely clearing the cowling. The craft keeps the same slender riveted boat hull, the same open cockpit with its low curved windscreen, the same stubby swept fins at the stern and the same two thruster nacelles slung underneath, with every patched salvaged panel the colour it already is. Cinematic film still from a live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scuffed painted metal, visible film grain, sand and rust palette. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+              "config": {
+                "shift": 3.0,
+                "sampler": 16,
+                "loras": [
+                  {
+                    "file": "kyle_lora_v2_2500_lora_f32.ckpt",
+                    "weight": 1.0
+                  }
+                ]
+              }
+            },
+            "video_prompt": "The camera stays exactly where it is, locked off low on the sand, and does not move or change angle. The craft rises steadily straight up off the ground, the ring of dust blasting outwards and settling, both nacelles burning hot orange throughout. The boy stays sitting in the cockpit with his hands on the controls. Nobody else enters the frame. Everything moves at natural real-time speed, with no slow motion and no speed ramping. Thrusters rising, no music.",
+            "take": "clips/s6_v1.mov",
+            "trim": [
+              0,
+              9.9
+            ]
+          },
+          {
+            "id": "s7",
+            "still": {
+              "input": "kyle_in_skiff",
+              "prompt": "Keep the boy and the craft exactly as they are, in the same places, at the same sizes and in the same poses, seen from the same side. Change only what is around and beneath them: replace the plain studio backdrop and floor with an endless ocean of red-gold sand dunes running to a horizon where two pale suns are setting together under a sky going from deep blue overhead to warm gold, so the craft is now out over the dunes with a dune crest close below the hull. Seen in a wide low shot from below and to one side. Both thruster nacelles are dark and cold and a thin trail of grey smoke tears off one housing. The air between the camera and the craft is clear. The boy is kyle_kx boy, a nine-year-old boy with child proportions, this exact face, short dark hair, wearing a sun-bleached sand-coloured tunic with the sleeves pushed up, a wide utility belt and cracked leather work gloves, sitting low in the open cockpit gripping the controls with the dune coming up at him. The craft keeps the same slender riveted boat hull, the same open cockpit with its low curved windscreen, the same stubby swept fins at the stern and the same two thruster nacelles slung underneath, with every patched salvaged panel the colour it already is. Cinematic film still from a live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scuffed painted metal, visible film grain, sand and rust palette. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+              "config": {
+                "shift": 3.0,
+                "sampler": 16,
+                "loras": [
+                  {
+                    "file": "kyle_lora_v2_2500_lora_f32.ckpt",
+                    "weight": 1.0
+                  }
+                ]
+              }
+            },
+            "video_prompt": "The camera stays exactly where it is, locked off at the side, and does not move, orbit or change angle at any point. The craft stays side-on to the camera for the whole shot, sinking steadily downward toward the dune below with its nose dipping slightly. Grey smoke tears continuously off the one dead housing and loose sand streams past the hull. Both nacelles stay completely dark with no flame on them at any point. The boy stays sitting low in the cockpit with his hands on the controls. Nobody else enters the frame. Everything moves at natural real-time speed, with no slow motion and no speed ramping. Wind and a dead engine turning over, no music.",
+            "take": "clips/s7_v1.mov",
+            "trim": [
+              0,
+              5.0
+            ]
+          },
+          {
+            "id": "s8",
+            "still": {
+              "input": "kyle_in_skiff",
+              "prompt": "Keep the boy and the craft exactly as they are, in the same places, at the same sizes and in the same poses, seen from the same side. Change only what is around and beneath them: replace the plain studio backdrop and floor with an endless ocean of red-gold sand dunes falling away below, under a vast sky going from deep blue overhead to warm gold at the horizon where two pale suns are setting together, so the craft is now climbing away above a dune crest with the open sky ahead of it clear all the way to the suns. Seen in an extreme wide final shot from behind and below. Both thruster nacelles blaze white-orange with a hard burst of flame and a great fan of sand is blasted up off the dune beneath and behind it. The boy is kyle_kx boy, a nine-year-old boy with child proportions, this exact face, short dark hair, wearing a sun-bleached sand-coloured tunic with the sleeves pushed up, a wide utility belt and cracked leather work gloves, small at this distance at the controls. The craft keeps the same slender riveted boat hull, the same open cockpit with its low curved windscreen, the same stubby swept fins at the stern and the same two thruster nacelles slung underneath, with every patched salvaged panel the colour it already is. Cinematic film still from a live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scuffed painted metal, visible film grain, sand and rust palette. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
+              "config": {
+                "shift": 3.0,
+                "sampler": 16,
+                "loras": [
+                  {
+                    "file": "kyle_lora_v2_2500_lora_f32.ckpt",
+                    "weight": 1.0
+                  }
+                ]
+              }
+            },
+            "video_prompt": "Slow rise as the craft climbs steadily away from the camera toward the two setting suns, shrinking into the light. Both nacelles burn hard and steady throughout and the fan of blasted sand spreads and drifts behind it. The camera does not orbit or change angle. No person enters the frame at any point. Everything moves at natural real-time speed, with no slow motion and no speed ramping. Thrusters rising, then receding, no music.",
+            "take": "clips/s8_v1.mov",
+            "trim": [
+              0,
+              8.5
+            ]
+          }
+        ]
+      },
+      "dt_project": "none — draw-things-cli via scripts/film_run.py",
+      "versions": [
+        {
+          "version": "v1-lora-cli",
+          "variant": "lora-cli",
+          "status": "clips QC'd 2026-10-05 — 59.95 s planned",
+          "youtube": null
+        },
+        {
+          "version": "v2-sheets",
+          "variant": "lora-cli",
+          "status": "delivered",
+          "youtube": null
+        },
+        {
+          "version": "v3-nodroid",
+          "variant": "v3-nodroid",
+          "status": "stopped",
+          "youtube": null
+        }
+      ]
+    },
+    {
       "id": "kyle_saltflats",
       "version": "v3-stills-supplied",
       "variant": "supplied-stills",
@@ -2909,434 +3247,6 @@
       ]
     },
     {
-      "id": "kyle_firstflight",
-      "version": "v2-sheets",
-      "variant": "lora-cli",
-      "title": "Kyle — First Flight",
-      "date": "2026-10-07",
-      "theme": "realistic",
-      "dt_project": "kyle-firstflight",
-      "status": "delivered",
-      "source": "original film in the desert science-fiction tradition; no external source",
-      "notes": "Rebuilt on the model-sheet pipeline after v1 shipped with an aircraft that changed shape and size between shots and an adult in the cockpit. 60.04 s, 3840x2160 HEVC 25 fps, -19.2 LUFS. Masters: kyle (person, 8 views + 3 expressions), skiff and droid (object, 8 views each), yard and dunes as single plates. Combos: kyle_with_droid, kyle_in_skiff, flight_crew (chained), kyle_fixing_skiff. The decisive change was mode per shot: a shot built on a combo runs as a single-image EDIT with the combo as input, never as a diptych -- as diptychs s3, s6 and s7 failed every candidate. Stills were picked by `align`, which ranks a shot's own candidates by sharpness first (proof the subject is drawn) then palette distance to the master (identity). s7's clip had to be re-rendered: its video prompt moved the camera below a side-on still and the hull turned into a wheeled machine over 249 frames.",
-      "still": {
-        "model": "flux_2_klein_9b_i8x.ckpt",
-        "size": "1024x576",
-        "steps": 4,
-        "cfg": 1,
-        "shift": 3.0,
-        "sampler": 16,
-        "lora": "kyle_lora_v2_2500_lora_f32.ckpt",
-        "seeds": [
-          1,
-          2,
-          3
-        ],
-        "control": "one master per shot",
-        "prompt": "see scenes"
-      },
-      "i2v": {
-        "model": "ltx_2.3_22b_distilled_1.1_q8p.ckpt",
-        "size": "1024x576",
-        "frames": 249,
-        "fps": 25,
-        "steps": 8,
-        "cfg": 1,
-        "shift": 5.0,
-        "sampler": 19,
-        "stochasticSamplingGamma": 0.3,
-        "time_min": 10
-      },
-      "post": {
-        "upscale": "Real-ESRGAN x4plus -> 3840x2160",
-        "loop": "none",
-        "music": "best_adventure_ever.mp3"
-      },
-      "scenes": {
-        "locks": {
-          "subject": "kyle_kx boy, a nine-year-old boy with child proportions, this exact face, short dark hair",
-          "wardrobe": "a sun-bleached sand-coloured tunic with the sleeves pushed up, a wide utility belt, and cracked leather work gloves",
-          "droid": "a small battered repair droid about knee height: a domed swivelling head with a single wide amber lens, a riveted barrel body in faded white and blue paint scoured back to bare metal, two stubby manipulator arms folded at its sides and three squat tracked feet, small status lights blinking along its flank",
-          "skiff": "a small home-built single-seat desert skiff: a slender riveted hull the length of a rowing boat, an open cockpit with a low curved windscreen, a pair of stubby swept fins at the stern and two scavenged thruster nacelles slung underneath, every panel a different salvaged colour, patched and bolted and clearly rebuilt from wrecks",
-          "yard": "a vast desert salvage yard at dawn, rows of broken hulls and stripped engine casings half-buried in sand, gantries and cable spools, drifts of fine dust banked against the wrecks, two pale suns low in a huge washed sky",
-          "dunes": "an endless ocean of red-gold sand dunes under a vast sky going from deep blue overhead to warm gold at the horizon, long shadows running down the dune faces, two pale suns setting together",
-          "style": "Cinematic film still from a live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scuffed painted metal, warm low sun, slight haze, shallow depth of field, visible film grain, sand and rust palette against a huge pale sky. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
-          "pace": "Everything moves at natural real-time speed, with no slow motion and no speed ramping.",
-          "pilot": "In the open cockpit sits kyle_kx boy, a small nine-year-old boy with child proportions, this exact face, short dark hair, wearing a sun-bleached sand-coloured tunic with the sleeves pushed up. He is unmistakably a small child in a craft built for someone far bigger: his head and shoulders barely clear the cowling, the seat rises well above him, and the cockpit looks half empty around his small frame."
-        },
-        "s1": {
-          "title": "The salvage yard at dawn",
-          "note": "no LoRA; input seed/yard.png; kept 8.5 s",
-          "still": "Extreme wide establishing shot, no people in frame. a vast desert salvage yard at dawn, rows of broken hulls and stripped engine casings half-buried in sand, gantries and cable spools, drifts of fine dust banked against the wrecks, two pale suns low in a huge washed sky. Low gold light rakes between the wrecks and throws long shadows across the sand. The foreground is clear open sand. Cinematic film still from a live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scuffed painted metal, warm low sun, slight haze, shallow depth of field, visible film grain, sand and rust palette against a huge pale sky. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
-          "video": "Very slow push in across the yard. Fine dust drifts steadily between the wrecks, loose cable ends sway, heat haze rises off the metal and the light creeps slowly warmer. The wrecks stay exactly where they are. No person enters the frame at any point. Everything moves at natural real-time speed, with no slow motion and no speed ramping. Wind over metal, no music."
-        },
-        "s2": {
-          "title": "The droid wakes",
-          "note": "no LoRA; input seed/droid.png; kept 7.0 s. v2: v1 grew a swarm of winged insects out of 'fine dust drifts past'. v2 still grows distant birds from ~frame 99: the positive fix (motion on the droid) helped but the added negative ('nothing flying through the frame') did not bind, as negatives never do. Accepted -- they read as desert birds, unlike v1's close insect swarm",
-          "still": "Extreme close-up detail insert, no people in frame. a small battered repair droid about knee height: a domed swivelling head with a single wide amber lens, a riveted barrel body in faded white and blue paint scoured back to bare metal, two stubby manipulator arms folded at its sides and three squat tracked feet, small status lights blinking along its flank, framed tight on its domed head and shoulders, the amber lens lit and glowing, status lights blinking in sequence along its flank, fine sand caught in every seam. Warm low sun raking across the scoured paint. Macro clarity, very shallow depth of field. Cinematic film still from a live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scuffed painted metal, warm low sun, slight haze, shallow depth of field, visible film grain, sand and rust palette against a huge pale sky. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
-          "video": "Locked camera. The domed head swivels slowly from one side to the other and settles, the amber lens brightens, and the status lights blink steadily in sequence throughout. The sky behind it stays completely empty and clear with nothing moving in it and nothing flying through the frame at any point. The droid stays where it is. No person enters the frame at any point. Everything moves at natural real-time speed, with no slow motion and no speed ramping. Servos and small beeps, no music."
-        },
-        "s3": {
-          "title": "Working on the skiff",
-          "note": "LoRA 0.6; input seed/skiff.png; kept 9.0 s",
-          "still": "Wide shot from behind and slightly above, one person alone in the frame. Seen from behind, kyle_kx boy, a nine-year-old boy with child proportions, this exact face, short dark hair, wearing a sun-bleached sand-coloured tunic with the sleeves pushed up, a wide utility belt, and cracked leather work gloves, kneeling beside a small home-built single-seat desert skiff: a slender riveted hull the length of a rowing boat, an open cockpit with a low curved windscreen, a pair of stubby swept fins at the stern and two scavenged thruster nacelles slung underneath, every panel a different salvaged colour, patched and bolted and clearly rebuilt from wrecks with his back to the camera, leaning in over an open engine panel. a small battered repair droid about knee height: a domed swivelling head with a single wide amber lens, a riveted barrel body in faded white and blue paint scoured back to bare metal, two stubby manipulator arms folded at its sides and three squat tracked feet, small status lights blinking along its flank stands beside him. A desert salvage yard stretches out beyond them under a low gold sun. He is seen small at this distance and his face is not readable. The foreground is clear open sand. Cinematic film still from a live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scuffed painted metal, warm low sun, slight haze, shallow depth of field, visible film grain, sand and rust palette against a huge pale sky. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
-          "video": "Locked camera. He stays kneeling with his back to the camera the whole time and does not turn around. His shoulders move slightly as he works at the open panel, the droid's head swivels and its lights blink, and dust drifts steadily across the yard behind them. The light stays constant. Everything moves at natural real-time speed, with no slow motion and no speed ramping. Tools on metal and wind, no music."
-        },
-        "s4": {
-          "title": "The coil spins up",
-          "note": "no LoRA; input seed/skiff.png; kept 6.5 s",
-          "still": "Extreme close-up detail insert, no people in frame. A scavenged thruster nacelle slung under a riveted hull, its exposed copper induction coil beginning to spin and glow a deep orange inside the housing, heat shimmer lifting off the metal, loose sand streaming away beneath it. Warm low sun across the scuffed paint. Macro clarity, very shallow depth of field. Cinematic film still from a live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scuffed painted metal, warm low sun, slight haze, shallow depth of field, visible film grain, sand and rust palette against a huge pale sky. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
-          "video": "Locked camera. The copper coil spins up steadily and its glow builds and holds, heat shimmer pours off the housing, and loose sand streams continuously away underneath. The nacelle stays exactly where it is. No person enters the frame at any point. Everything moves at natural real-time speed, with no slow motion and no speed ramping. A rising electrical whine, no music."
-        },
-        "s5": {
-          "title": "It starts",
-          "note": "LoRA 1.0; input seed/kyle.png; kept 7.0 s. v2: v1's glow was placed in front of the face and bloomed across it. v3: bloom came from the blown sky behind him, not the coil; background is now dark wreckage. clip trimmed to 6.0 s: grin builds rather than peaking, and the face ages past frame 198",
-          "still": "Close-up portrait, head and shoulders, frontal, slightly low angle, one person alone in the frame. kyle_kx boy, a nine-year-old boy with child proportions, this exact face, short dark hair, wearing a sun-bleached sand-coloured tunic with the sleeves pushed up, a wide utility belt, and cracked leather work gloves, his eyes wide and his mouth open in a broad delighted grin, looking just past the camera at the skiff. A warm orange glow from the skiff's coil comes from low and to one side, just out of frame behind his near shoulder, modelling one side of his face. Close behind him stands a wall of rusted salvaged hull plating in deep shade, dark and softly out of focus, filling the frame behind his head so there is no bright sky anywhere in shot. Nothing glowing or bright stands between the camera and his face, the air in front of him is clear and clean, and his face is sharp against the dark metal behind it. An even natural skin tone. Clean clear air between the camera and his face. The face is well exposed and clearly visible. Razor-sharp focus on the eyes and skin texture. Cinematic film still from a live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scuffed painted metal, warm low sun, slight haze, shallow depth of field, visible film grain, sand and rust palette against a huge pale sky. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
-          "video": "Locked camera. His grin reaches its full width in the first second and then holds steady for the rest of the shot without changing. His head stays level and still and his chin does not lift. The warm light flickers very slightly on his face and his hair moves in the wind. Everything moves at natural real-time speed, with no slow motion and no speed ramping. An engine catching, no music."
-        },
-        "s6": {
-          "title": "Lift off",
-          "note": "LoRA 0.6; input seed/yard.png; kept 9.5 s",
-          "still": "Wide low shot from the sand, no face readable at this distance. a small home-built single-seat desert skiff: a slender riveted hull the length of a rowing boat, an open cockpit with a low curved windscreen, a pair of stubby swept fins at the stern and two scavenged thruster nacelles slung underneath, every panel a different salvaged colour, patched and bolted and clearly rebuilt from wrecks lifting clear of the ground in the middle of a salvage yard, a ring of dust blasting outwards beneath it and its two nacelles glowing orange, In the open cockpit sits kyle_kx boy, a small nine-year-old boy with child proportions, this exact face, short dark hair, wearing a sun-bleached sand-coloured tunic with the sleeves pushed up. He is unmistakably a small child in a craft built for someone far bigger: his head and shoulders barely clear the cowling, the seat rises well above him, and the cockpit looks half empty around his small frame. a small battered repair droid about knee height: a domed swivelling head with a single wide amber lens, a riveted barrel body in faded white and blue paint scoured back to bare metal, two stubby manipulator arms folded at its sides and three squat tracked feet, small status lights blinking along its flank clamped behind the seat. He is seen small at this distance and his face is not readable. The ground beneath the skiff is open and clear, with a band of daylight showing under the hull. Cinematic film still from a live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scuffed painted metal, warm low sun, slight haze, shallow depth of field, visible film grain, sand and rust palette against a huge pale sky. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
-          "video": "Locked camera low on the sand. The skiff rises steadily and holds, a ring of dust blasting outwards and rolling away beneath it continuously, the nacelle glow pulsing and heat haze pouring off the hull. It stays clear of the ground the whole time. The pilot stays low in the cockpit and his face never turns toward the camera; nobody else enters the frame. Everything moves at natural real-time speed, with no slow motion and no speed ramping. Thrusters and blown sand, no music."
-        },
-        "s7": {
-          "title": "The engines cut",
-          "note": "LoRA 0.6; input seed/dunes.png; kept 9.5 s. v2: the film had no reversal; this is it. clip cut to 5.0 s: the push-in grows the craft until the pilot is readable",
-          "still": "Wide low shot from below and to one side, no face readable at this distance. an endless ocean of red-gold sand dunes under a vast sky going from deep blue overhead to warm gold at the horizon, long shadows running down the dune faces, two pale suns setting together. a small home-built single-seat desert skiff: a slender riveted hull the length of a rowing boat, an open cockpit with a low curved windscreen, a pair of stubby swept fins at the stern and two scavenged thruster nacelles slung underneath, every panel a different salvaged colour, patched and bolted and clearly rebuilt from wrecks caught mid-fall, nose high and slewing, dropping fast toward a dune crest with both thruster nacelles dark and dead, no glow and no flame anywhere on it, a thin trail of grey smoke tearing off one housing. A small figure sits low in the open cockpit and a small battered repair droid about knee height: a domed swivelling head with a single wide amber lens, a riveted barrel body in faded white and blue paint scoured back to bare metal, two stubby manipulator arms folded at its sides and three squat tracked feet, small status lights blinking along its flank is clamped behind the seat with its domed head spun hard around to the open engine panel, amber lens blazing and status lights flashing red along its flank. He is seen small at this distance and his face is not readable. The dune face rushes up close below the hull. The air between the camera and the craft is clear. In the open cockpit sits kyle_kx boy, a small nine-year-old boy with child proportions, this exact face, short dark hair, wearing a sun-bleached sand-coloured tunic with the sleeves pushed up. He is unmistakably a small child in a craft built for someone far bigger: his head and shoulders barely clear the cowling, the seat rises well above him, and the cockpit looks half empty around his small frame. He is seen small at this distance and his face is not readable. Cinematic film still from a live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scuffed painted metal, warm low sun, slight haze, shallow depth of field, visible film grain, sand and rust palette against a huge pale sky. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
-          "video": "The camera holds below the falling craft as it drops steadily toward the dune, nose slewing, grey smoke tearing continuously off the dead housing and loose sand streaming up past the hull. The droid's domed head stays turned to the engine panel with its lens blazing and its red lights flashing throughout. Both nacelles stay completely dark with no flame on them at any point. The pilot stays low in the cockpit and his face never turns toward the camera; nobody else enters the frame. Everything moves at natural real-time speed, with no slow motion and no speed ramping. Wind and a dead engine turning over, no music."
-        },
-        "s8": {
-          "title": "It catches",
-          "note": "no LoRA; input seed/dunes.png; kept 9.5 s. v2: the recovery and the climb out. clip cut to 8.5 s: the craft is lost in the suns by frame 248",
-          "still": "Extreme wide final shot from behind and below, no face readable at this distance. an endless ocean of red-gold sand dunes under a vast sky going from deep blue overhead to warm gold at the horizon, long shadows running down the dune faces, two pale suns setting together. a small home-built single-seat desert skiff: a slender riveted hull the length of a rowing boat, an open cockpit with a low curved windscreen, a pair of stubby swept fins at the stern and two scavenged thruster nacelles slung underneath, every panel a different salvaged colour, patched and bolted and clearly rebuilt from wrecks pulling up hard out of its fall just above the dune crest, both thruster nacelles blazing white-orange again with a hard burst of flame, a great fan of sand blasted up off the dune behind and beneath it, climbing away from the camera toward two pale suns setting together on the horizon. He is seen small at this distance and his face is not readable. The sky ahead of it is open and clear all the way to the suns. Cinematic film still from a live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scuffed painted metal, warm low sun, slight haze, shallow depth of field, visible film grain, sand and rust palette against a huge pale sky. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
-          "video": "Slow rise as the skiff pulls up out of the dune and climbs steadily away toward the two setting suns, shrinking into the light. Both nacelles burn hard and steady throughout, the fan of blasted sand spreads and drifts behind it, and the long shadows run across the dunes below. No person enters the frame at any point. Everything moves at natural real-time speed, with no slow motion and no speed ramping. Thrusters catching and rising, then receding, no music."
-        }
-      },
-      "run-spec": {
-        "dir": "projects/kyle_firstflight/v2-sheets",
-        "name": "kyle_firstflight_v2",
-        "size": [
-          1024,
-          576
-        ],
-        "still": {
-          "model": "flux_2_klein_9b_i8x.ckpt",
-          "steps": 4,
-          "cfg": 1,
-          "config": {
-            "shift": 3.0,
-            "sampler": 16,
-            "loras": [
-              {
-                "file": "kyle_lora_v2_2500_lora_f32.ckpt",
-                "weight": 1.0
-              }
-            ]
-          },
-          "seeds": [
-            1,
-            2,
-            3
-          ],
-          "strength": 1.0
-        },
-        "clip": {
-          "model": "ltx_2.3_22b_distilled_1.1_q8p.ckpt",
-          "frames": 249,
-          "steps": 8,
-          "cfg": 1,
-          "config": {
-            "sampler": 19,
-            "shift": 5.0,
-            "stochasticSamplingGamma": 0.3,
-            "fps": 25,
-            "hiresFix": false
-          },
-          "seed": 1,
-          "video_format": "prores422hq"
-        },
-        "masters": {
-          "kyle": "seed/kyle.png",
-          "droid": "seed/droid.png",
-          "skiff": "seed/skiff.png",
-          "yard": "seed/yard.png",
-          "dunes": "seed/dunes.png"
-        },
-        "upscale": {
-          "model": "realesrgan-x4plus",
-          "size": [
-            3840,
-            2160
-          ],
-          "fit": "crop",
-          "bitrate": "40M"
-        },
-        "assemble": {
-          "fps": 25,
-          "xfade": 0.75,
-          "clip_audio": true,
-          "bitrate": "40M"
-        },
-        "music": {
-          "file": "projects/kyle_firstflight/v2-sheets/music/best_adventure_ever.mp3",
-          "start": 0,
-          "vol": 0.8,
-          "fade_in": 1.5,
-          "fade_out": 2.5
-        },
-        "deliver": [
-          {
-            "size": [
-              1920,
-              1080
-            ],
-            "bitrate": "12M"
-          }
-        ],
-        "shots": [
-          {
-            "id": "s1",
-            "still": {
-              "input": "yard",
-              "prompt": "Extreme wide establishing shot, no people in frame. a vast desert salvage yard at dawn, rows of broken hulls and stripped engine casings half-buried in sand, gantries and cable spools, drifts of fine dust banked against the wrecks, two pale suns low in a huge washed sky. Low gold light rakes between the wrecks and throws long shadows across the sand. The foreground is clear open sand. Cinematic film still from a live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scuffed painted metal, warm low sun, slight haze, shallow depth of field, visible film grain, sand and rust palette against a huge pale sky. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
-              "config": {
-                "shift": 3.0,
-                "sampler": 16
-              }
-            },
-            "video_prompt": "Very slow push in across the yard. Fine dust drifts steadily between the wrecks, loose cable ends sway, heat haze rises off the metal and the light creeps slowly warmer. The wrecks stay exactly where they are. No person enters the frame at any point. Everything moves at natural real-time speed, with no slow motion and no speed ramping. Wind over metal, no music.",
-            "qc_ref": "yard",
-            "take": "clips/s1_v1.mov",
-            "trim": [
-              0,
-              9.9
-            ]
-          },
-          {
-            "id": "s2",
-            "still": {
-              "input": "droid_front",
-              "prompt": "Extreme close-up detail insert, no people in frame. a small battered repair droid about knee height: a domed swivelling head with a single wide amber lens, a riveted barrel body in faded white and blue paint scoured back to bare metal, two stubby manipulator arms folded at its sides and three squat tracked feet, small status lights blinking along its flank, framed tight on its domed head and shoulders, the amber lens lit and glowing, status lights blinking in sequence along its flank, fine sand caught in every seam. Warm low sun raking across the scoured paint. Macro clarity, very shallow depth of field. Cinematic film still from a live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scuffed painted metal, warm low sun, slight haze, shallow depth of field, visible film grain, sand and rust palette against a huge pale sky. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
-              "config": {
-                "shift": 3.0,
-                "sampler": 16
-              }
-            },
-            "video_prompt": "Locked camera. The domed head swivels slowly from one side to the other and settles, the amber lens brightens, and the status lights blink steadily in sequence throughout. The sky behind it stays completely empty and clear with nothing moving in it and nothing flying through the frame at any point. The droid stays where it is. No person enters the frame at any point. Everything moves at natural real-time speed, with no slow motion and no speed ramping. Servos and small beeps, no music.",
-            "qc_ref": "droid",
-            "take": "clips/s2_v1.mov",
-            "trim": [
-              0,
-              7.0
-            ]
-          },
-          {
-            "id": "s3",
-            "still": {
-              "input": "kyle_fixing_skiff",
-              "prompt": "Keep the boy, the craft and the small repair droid exactly as they are, in the same places, at the same sizes and in the same poses. Change only what is behind and beneath them: replace the plain studio backdrop and floor with a vast desert salvage yard at dawn, so that they are now standing on open windblown sand with rows of broken hulls, stripped engine casings, gantries and cable spools receding behind them under a low gold sun, long shadows running across the sand, and clear open sand in the foreground. The boy is kyle_kx boy, a nine-year-old boy with child proportions, and he keeps kneeling beside the craft with his back to the camera, leaning in over the open engine panel, with his own short dark hair on his head and nothing worn over it, his sun-bleached sand-coloured tunic, wide utility belt and cracked leather work gloves. The craft keeps its own slender riveted boat hull, its open cockpit and low curved windscreen, its stubby swept fins and its two thruster nacelles slung underneath, with every patched salvaged panel the colour it already is. The droid keeps its own metal body, its domed head, its single amber lens and its tracked feet, standing on the sand beside him. Warm low sun, slight haze, visible film grain. Cinematic film still from a live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scuffed painted metal, sand and rust palette against a huge pale sky. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
-              "config": {
-                "shift": 3.0,
-                "sampler": 16,
-                "loras": [
-                  {
-                    "file": "kyle_lora_v2_2500_lora_f32.ckpt",
-                    "weight": 1.0
-                  }
-                ]
-              }
-            },
-            "video_prompt": "Locked camera. He stays kneeling with his back to the camera the whole time and does not turn around. His shoulders move slightly as he works at the open panel, the droid's head swivels and its lights blink, and dust drifts steadily across the yard behind them. The light stays constant. Everything moves at natural real-time speed, with no slow motion and no speed ramping. Tools on metal and wind, no music.",
-            "qc_ref": "skiff",
-            "take": "clips/s3_v1.mov",
-            "trim": [
-              0,
-              9.9
-            ]
-          },
-          {
-            "id": "s4",
-            "still": {
-              "input": "skiff_90",
-              "prompt": "Extreme close-up detail insert, no people in frame. A scavenged thruster nacelle slung under a riveted hull, its exposed copper induction coil beginning to spin and glow a deep orange inside the housing, heat shimmer lifting off the metal, loose sand streaming away beneath it. Warm low sun across the scuffed paint. Macro clarity, very shallow depth of field. Cinematic film still from a live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scuffed painted metal, warm low sun, slight haze, shallow depth of field, visible film grain, sand and rust palette against a huge pale sky. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
-              "config": {
-                "shift": 3.0,
-                "sampler": 16
-              }
-            },
-            "video_prompt": "Locked camera. The copper coil spins up steadily and its glow builds and holds, heat shimmer pours off the housing, and loose sand streams continuously away underneath. The nacelle stays exactly where it is. No person enters the frame at any point. Everything moves at natural real-time speed, with no slow motion and no speed ramping. A rising electrical whine, no music.",
-            "qc_ref": "skiff",
-            "take": "clips/s4_v1.mov",
-            "trim": [
-              0,
-              9.0
-            ]
-          },
-          {
-            "id": "s5",
-            "still": {
-              "input": "kyle_expr_smile",
-              "prompt": "Close-up portrait, head and shoulders, frontal, slightly low angle, one person alone in the frame. kyle_kx boy, a nine-year-old boy with child proportions, this exact face, short dark hair, wearing a sun-bleached sand-coloured tunic with the sleeves pushed up, a wide utility belt, and cracked leather work gloves, his eyes wide and his mouth open in a broad delighted grin, looking just past the camera at the skiff. A warm orange glow from the skiff's coil comes from low and to one side, just out of frame behind his near shoulder, modelling one side of his face. Close behind him stands a wall of rusted salvaged hull plating in deep shade, dark and softly out of focus, filling the frame behind his head so there is no bright sky anywhere in shot. Nothing glowing or bright stands between the camera and his face, the air in front of him is clear and clean, and his face is sharp against the dark metal behind it. An even natural skin tone. Clean clear air between the camera and his face. The face is well exposed and clearly visible. Razor-sharp focus on the eyes and skin texture. Cinematic film still from a live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scuffed painted metal, warm low sun, slight haze, shallow depth of field, visible film grain, sand and rust palette against a huge pale sky. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
-              "config": {
-                "shift": 3.0,
-                "sampler": 16,
-                "loras": [
-                  {
-                    "file": "kyle_lora_v2_2500_lora_f32.ckpt",
-                    "weight": 1.0
-                  }
-                ]
-              }
-            },
-            "video_prompt": "Locked camera. His grin reaches its full width in the first second and then holds steady for the rest of the shot without changing. His head stays level and still and his chin does not lift. The warm light flickers very slightly on his face and his hair moves in the wind. Everything moves at natural real-time speed, with no slow motion and no speed ramping. An engine catching, no music.",
-            "qc_ref": "kyle",
-            "take": "clips/s5_v1.mov",
-            "trim": [
-              0,
-              6.0
-            ]
-          },
-          {
-            "id": "s6",
-            "still": {
-              "input": "flight_crew",
-              "prompt": "Keep the craft, the boy and the small repair droid exactly as they are, in the same places, at the same sizes and in the same poses, seen from the same side. The craft keeps its own slender riveted boat hull, its open cockpit and low curved windscreen, its stubby swept fins and its two thruster nacelles slung underneath, with every patched salvaged panel the colour it already is. The boy is kyle_kx boy, a nine-year-old boy with child proportions, keeping his own short dark hair on his head and nothing worn over it, his own face and bare skin and his sun-bleached sand-coloured tunic, still sitting down in the open cockpit with his hands on the controls. The droid keeps its own metal body, its domed head and its single amber lens, still riding in the hull behind his seat. Change only what is around and beneath them: replace the plain studio backdrop and floor with a desert salvage yard, so the craft is now hovering low over open sand in the middle of rows of broken hulls, gantries and stripped engine casings under a low gold sun. Both thruster nacelles glow hot orange, a ring of dust blasts outwards across the sand beneath the hull, and a clear band of daylight shows between the hull and the ground. Warm low sun, slight haze. Cinematic film still from a live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scuffed painted metal, visible film grain, sand and rust palette. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
-              "config": {
-                "shift": 3.0,
-                "sampler": 16,
-                "loras": [
-                  {
-                    "file": "kyle_lora_v2_2500_lora_f32.ckpt",
-                    "weight": 1.0
-                  }
-                ]
-              }
-            },
-            "video_prompt": "Locked camera low on the sand. The skiff rises steadily and holds, a ring of dust blasting outwards and rolling away beneath it continuously, the nacelle glow pulsing and heat haze pouring off the hull. It stays clear of the ground the whole time. The pilot stays low in the cockpit and his face never turns toward the camera; nobody else enters the frame. Everything moves at natural real-time speed, with no slow motion and no speed ramping. Thrusters and blown sand, no music.",
-            "qc_ref": "yard",
-            "take": "clips/s6_v1.mov",
-            "trim": [
-              0,
-              9.9
-            ]
-          },
-          {
-            "id": "s7",
-            "still": {
-              "input": "flight_crew",
-              "prompt": "Keep the craft, the boy and the small repair droid exactly as they are, in the same places, at the same sizes and in the same poses, seen from the same side. The craft keeps its own slender riveted boat hull, its open cockpit and low curved windscreen, its stubby swept fins and its two thruster nacelles slung underneath, with every patched salvaged panel the colour it already is. The boy is kyle_kx boy, a nine-year-old boy with child proportions, keeping his own short dark hair on his head and nothing worn over it, his own face and bare skin and his sun-bleached sand-coloured tunic, still sitting down in the open cockpit with his hands on the controls. The droid keeps its own metal body, its domed head and its single amber lens, still riding in the hull behind his seat. Change only what is around and beneath them: replace the plain studio backdrop and floor with an endless ocean of red-gold sand dunes running to a horizon where two pale suns are setting together, under a sky going from deep blue overhead to warm gold, so the craft is now out over the dunes with a dune crest close below the hull. Both thruster nacelles are dark and cold and a thin trail of grey smoke tears off one housing. The air between the camera and the craft is clear. Cinematic film still from a live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scuffed painted metal, visible film grain, sand and rust palette. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
-              "config": {
-                "shift": 3.0,
-                "sampler": 16,
-                "loras": [
-                  {
-                    "file": "kyle_lora_v2_2500_lora_f32.ckpt",
-                    "weight": 1.0
-                  }
-                ]
-              }
-            },
-            "video_prompt": "The camera stays exactly where it is, locked off at the side, and does not move, orbit or change angle at any point. The craft stays side-on to the camera for the whole shot, sinking steadily downward toward the dune below with its nose dipping slightly. Grey smoke tears continuously off the one dead housing and loose sand streams past the hull. Both nacelles stay completely dark with no flame on them at any point. The boy stays sitting low in the cockpit with his hands on the controls and his face away from the camera, and the droid stays exactly where it is in the hull behind his seat; nobody else enters the frame. Everything moves at natural real-time speed, with no slow motion and no speed ramping. Wind and a dead engine turning over, no music.",
-            "qc_ref": "dunes",
-            "take": "clips/s7_v1.mov",
-            "trim": [
-              0,
-              5.0
-            ]
-          },
-          {
-            "id": "s8",
-            "still": {
-              "input": "flight_crew",
-              "prompt": "Keep the craft, the boy and the small repair droid exactly as they are, in the same places, at the same sizes and in the same poses, seen from the same side. The craft keeps its own slender riveted boat hull, its open cockpit and low curved windscreen, its stubby swept fins and its two thruster nacelles slung underneath, with every patched salvaged panel the colour it already is. The boy is kyle_kx boy, a nine-year-old boy with child proportions, keeping his own short dark hair on his head and nothing worn over it, his own face and bare skin and his sun-bleached sand-coloured tunic, still sitting down in the open cockpit with his hands on the controls. The droid keeps its own metal body, its domed head and its single amber lens, still riding in the hull behind his seat. Change only what is around and beneath them: replace the plain studio backdrop and floor with an endless ocean of red-gold sand dunes falling away below, under a vast sky going from deep blue overhead to warm gold at the horizon where two pale suns are setting together, so the craft is now climbing away above a dune crest with the open sky ahead of it clear all the way to the suns. Both thruster nacelles blaze white-orange with a hard burst of flame and a great fan of sand is blasted up off the dune beneath and behind it. Cinematic film still from a live-action science-fiction adventure, anamorphic 35mm on film stock, photoreal skin and scuffed painted metal, visible film grain, sand and rust palette. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark.",
-              "config": {
-                "shift": 3.0,
-                "sampler": 16,
-                "loras": [
-                  {
-                    "file": "kyle_lora_v2_2500_lora_f32.ckpt",
-                    "weight": 1.0
-                  }
-                ]
-              }
-            },
-            "video_prompt": "Slow rise as the skiff pulls up out of the dune and climbs steadily away toward the two setting suns, shrinking into the light. Both nacelles burn hard and steady throughout, the fan of blasted sand spreads and drifts behind it, and the long shadows run across the dunes below. No person enters the frame at any point. Everything moves at natural real-time speed, with no slow motion and no speed ramping. Thrusters catching and rising, then receding, no music.",
-            "qc_ref": "dunes",
-            "take": "clips/s8_v1.mov",
-            "trim": [
-              0,
-              8.5
-            ]
-          }
-        ],
-        "combos": {
-          "kyle_in_skiff": {
-            "ref": "kyle",
-            "input": "skiff",
-            "strength": 1.0,
-            "prompt": "Two images side by side. Keep the left image completely unchanged. Re-render the right image so that the boy from the left image is now sitting down inside the open cockpit of the craft, piloting it, with his hands on the controls and only his head, shoulders and arms showing above the cowling. He has exactly the same face, the same hair and the same clothing as the boy on the left. The craft itself stays exactly the same machine with the same hull, the same patched panels, the same fins and the same nacelles, unchanged except for the boy now seated in it. He is a small nine-year-old boy with child proportions and the cockpit is clearly built for someone far bigger than him."
-          },
-          "kyle_with_droid": {
-            "ref": "kyle",
-            "input": "droid",
-            "strength": 1.0,
-            "prompt": "Two images side by side. Keep the left image completely unchanged. Re-render the right image so that the boy from the left image is kneeling on the ground beside the droid with one hand resting on it, both of them fully in frame. He has exactly the same face, the same hair and the same clothing as the boy on the left. The droid stays exactly the same machine with the same dome, the same amber lens, the same blue and white panels and the same tracked feet, unchanged except for the boy now kneeling beside it. He is a small nine-year-old boy with child proportions and the droid comes up to about his knee."
-          },
-          "flight_crew": {
-            "ref": "droid",
-            "input": "kyle_in_skiff",
-            "prompt": "Two images side by side. Keep the left image completely unchanged. Re-render the right image so that the small battered repair droid from the left image is now fitted into the hull of the craft directly behind the boy's seat, facing forward, clamped down into a recess so that its dome and the top of its body stand above the hull line and its amber lens looks ahead over the boy's shoulder. The droid is exactly the same machine as the one on the left, with the same dome, the same amber lens, the same blue and white panels and the same rust and paint wear. The boy and the craft stay exactly as they already are in the right image: the same boy with the same face, the same hair and the same clothing, still sitting down inside the open cockpit with his hands on the controls and only his head, shoulders and arms above the cowling, and the same hull, the same patched panels, the same fins and the same nacelles. Everything in the right image is unchanged except for the droid now riding in the hull behind him. He is a small nine-year-old boy with child proportions and the droid is about the size of his torso. Both of them and the whole craft are inside the frame, on the same plain pale grey studio backdrop with the same soft even lighting.",
-            "strength": 1.0
-          },
-          "kyle_fixing_skiff": {
-            "ref": "kyle_with_droid",
-            "input": "skiff",
-            "strength": 1.0,
-            "prompt": "Two images side by side. Keep the left image completely unchanged. Re-render the right image so that the boy from the left image is now kneeling on the ground beside the craft with his back to the camera, leaning in over an open engine panel in the hull, and the small repair droid from the left image is standing on the ground close beside him. The craft keeps the exact shape it already has: the same slender riveted boat hull, the same open cockpit with its low curved windscreen, the same pair of stubby swept fins at the stern, the same two thruster nacelles slung underneath and the same patched salvaged panels in their own colours. They are three separate things and stay separate: the boy is a living child with his own short dark hair on his head and nothing worn over it, his own face and bare skin, wearing a sun-bleached sand-coloured tunic, a wide utility belt and cracked leather work gloves; the droid is a small machine only about knee height on him, far shorter than he is, keeping its own metal body, its own domed head and single amber lens on its own tracked feet; the craft keeps its own hull. He is a nine-year-old boy with child proportions and the craft is far longer than he is tall. All three are inside the frame together on the same plain pale grey studio backdrop with the same soft even lighting."
-          }
-        },
-        "master_views": {
-          "droid": {
-            "kind": "object",
-            "expr": ""
-          },
-          "skiff": {
-            "kind": "object",
-            "expr": ""
-          },
-          "kyle": {
-            "kind": "person",
-            "expr": "neutral alert smile"
-          },
-          "yard": {
-            "skip": true
-          },
-          "dunes": {
-            "skip": true
-          }
-        }
-      },
-      "files": [
-        "final/kyle_firstflight_v2_3840x2160.mp4",
-        "final/kyle_firstflight_v2_1920x1080.mp4"
-      ],
-      "versions": [
-        {
-          "version": "v1-lora-cli",
-          "variant": "lora-cli",
-          "status": "clips QC'd 2026-10-05 — 59.95 s planned",
-          "youtube": null
-        },
-        {
-          "version": "v2-sheets",
-          "variant": "lora-cli",
-          "status": "delivered",
-          "youtube": null
-        }
-      ]
-    },
-    {
       "id": "kyle_lighthouse",
       "version": "v1-lora-cli",
       "variant": "Fourth LoRA-driven film, and the first chosen for a subject whose motion animates itself — fire, surf and spray — so the long takes need nothing from the model that it can get wrong.",
@@ -3725,6 +3635,149 @@
       ]
     },
     {
+      "id": "lindsey_orbit",
+      "version": "v2-cliff",
+      "variant": "v2-cliff",
+      "title": "Lindsey: Clifftop Orbit",
+      "date": "2026-10-08",
+      "theme": "realistic",
+      "status": "rendering",
+      "source": "single 10 s aerial orbit on a sea cliff; lindsey_lora; Wan 2.2 I2V",
+      "notes": "v1 established that LTX-2.3 cannot hold a locked-distance orbit -- it pulled back 6.9x on two different prompts -- while Wan 2.2 held the subject to a 1.6x change. v2 uses Wan at 161 frames (4k+1) for the full 10 s at 16 fps. The motion prompt describes camera and motion only, per wan22-i2v-locked-image-settings.",
+      "still": {
+        "model": "flux_2_klein_9b_i8x.ckpt",
+        "size": "1024x576",
+        "steps": 4,
+        "cfg": 1,
+        "shift": 3.0,
+        "sampler": 16,
+        "lora": "lindsey_lora_2000_lora_f32.ckpt",
+        "seeds": [
+          1,
+          2,
+          3
+        ]
+      },
+      "i2v": {
+        "model": "wan_v2.2_a14b_hne_i2v_i8x.ckpt",
+        "frames": 161,
+        "fps": 16
+      },
+      "post": {
+        "upscale": "Real-ESRGAN 4K"
+      },
+      "scenes": {
+        "locks": {
+          "subject": "lindsey_kx girl, a nine-year-old girl, this exact face, long dark hair loose with natural flyaway strands, wearing a simple pale sun-faded cotton dress",
+          "style": "Cinematic aerial film still, photoreal skin and natural fabric, late golden-hour sunlight, visible film grain. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark."
+        }
+      },
+      "files": [],
+      "run-spec": {
+        "dir": "projects/lindsey_orbit/v2-cliff",
+        "name": "lindsey_orbit_cliff",
+        "size": [
+          1024,
+          576
+        ],
+        "still": {
+          "model": "flux_2_klein_9b_i8x.ckpt",
+          "steps": 4,
+          "cfg": 1,
+          "config": {
+            "shift": 3.0,
+            "sampler": 16,
+            "loras": [
+              {
+                "file": "lindsey_lora_2000_lora_f32.ckpt",
+                "weight": 1.0
+              }
+            ]
+          },
+          "seeds": [
+            1,
+            2,
+            3
+          ],
+          "strength": 1.0
+        },
+        "clip": {
+          "model": "wan_v2.2_a14b_hne_i2v_i8x.ckpt",
+          "frames": 161,
+          "steps": 4,
+          "cfg": 1,
+          "config": {
+            "sampler": 17,
+            "shift": 5.0,
+            "fps": 16,
+            "refinerModel": "wan_v2.2_a14b_lne_i2v_i8x.ckpt",
+            "refinerStart": 0.1,
+            "loras": [
+              {
+                "file": "wan_v2.2_a14b_hne_i2v_lightning_251022_lora_f16.ckpt",
+                "weight": 1.0
+              }
+            ]
+          },
+          "seed": 1,
+          "video_format": "prores422hq"
+        },
+        "masters": {},
+        "master_views": {},
+        "combos": {},
+        "upscale": {
+          "w": 3840,
+          "h": 2160,
+          "fit": "crop",
+          "bitrate": "40M"
+        },
+        "assemble": {
+          "fps": 16,
+          "xfade": 0.0,
+          "clip_audio": true
+        },
+        "deliver": [
+          {
+            "w": 3840,
+            "h": 2160
+          },
+          {
+            "w": 1920,
+            "h": 1080
+          }
+        ],
+        "shots": [
+          {
+            "id": "s1",
+            "still": {
+              "prompt": "Wide shot from the side at her own eye level, one person alone in the frame, sitting on the right third of the frame with the open ocean filling the left. lindsey_kx girl, a nine-year-old girl, this exact face, long dark hair pulled back into a loose braid over one shoulder with soft strands loose around her face, wearing rolled-up blue jeans, a thin horizontal-striped t-shirt and an open dusty-pink knitted cardigan, sitting in profile on the flat rock lip at the very edge of a coastal bluff, both legs hanging straight down over the drop with her bare feet dangling in open air, one hand resting flat on the rock beside her, her face in profile gazing out at the horizon. Below and beyond her the cliff falls away to dark rocks and breaking surf, and a rugged headland coastline recedes into soft haze along the shore. The sun is setting low over the sea, laying a pale gold path across the water and rimming her face, braid and shoulder with warm light. Dry golden grass and scrub grow along the clifftop behind her. Her profile is clearly lit against the bright water, with sharp focus on her face and on the rock she sits on. Cinematic film still, photoreal skin and natural fabric, soft warm sunset light, shallow depth of field on the far headlands, visible film grain. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark."
+            },
+            "video_prompt": "Slow orbit. The camera arcs steadily sideways in front of her, staying at the same height and the same distance throughout, so she stays the same size and stays in the same part of the frame. The headland and the sea slide slowly across behind her. She keeps gazing out at the horizon and stays in profile, her braid and the hem of her cardigan stirring in the wind, her dangling feet swinging very slightly. The surf breaks and moves on the rocks far below.",
+            "take": "clips/s1_v1.mov",
+            "trim": [
+              0,
+              10.0
+            ]
+          }
+        ]
+      },
+      "dt_project": "none — draw-things-cli via scripts/film_run.py",
+      "versions": [
+        {
+          "version": "v1-drone",
+          "variant": "v1-drone",
+          "status": "rendering",
+          "youtube": null
+        },
+        {
+          "version": "v2-cliff",
+          "variant": "v2-cliff",
+          "status": "rendering",
+          "youtube": null
+        }
+      ]
+    },
+    {
       "id": "kyle_lora",
       "version": "v2-photo-dataset",
       "variant": "Second Kyle dataset, built to break the close-up/white-wall/blue-t-shirt correlation that caps v1 at close framing.",
@@ -3792,6 +3845,192 @@
           "youtube": null
         }
       ]
+    },
+    {
+      "id": "tide",
+      "version": "v1-wan",
+      "variant": "v1-wan",
+      "title": "Tide",
+      "date": "2026-10-08",
+      "theme": "realistic",
+      "status": "rendering",
+      "source": "original; a coastal day from first light to dusk, six shots, no characters",
+      "notes": "Deliberately has no recurring character or object. Every consistency failure in this repo has come from holding a subject across cuts; a landscape film removes that axis entirely, so each still stands alone and only the grade has to carry continuity. Wan 2.2 I2V throughout -- LTX is not used, having been measured adding a 6.9x pull-back on a locked-camera shot. 6 x 81 frames at 16 fps, hard cuts, 30.0 s.",
+      "still": {
+        "model": "flux_2_klein_9b_i8x.ckpt",
+        "size": "1024x576",
+        "steps": 4,
+        "cfg": 1,
+        "shift": 3.0,
+        "sampler": 16,
+        "seeds": [
+          1,
+          2,
+          3
+        ]
+      },
+      "i2v": {
+        "model": "wan_v2.2_a14b_hne_i2v_i8x.ckpt",
+        "frames": 81,
+        "fps": 16
+      },
+      "post": {
+        "upscale": "Real-ESRGAN 4K",
+        "assemble": "hard cuts"
+      },
+      "scenes": {
+        "locks": {
+          "style": "Cinematic film still, anamorphic 35mm on film stock, photoreal water and wet rock, visible film grain. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark."
+        }
+      },
+      "files": [],
+      "run-spec": {
+        "dir": "projects/tide/v1-wan",
+        "name": "tide",
+        "size": [
+          1024,
+          576
+        ],
+        "still": {
+          "model": "flux_2_klein_9b_i8x.ckpt",
+          "steps": 4,
+          "cfg": 1,
+          "config": {
+            "shift": 3.0,
+            "sampler": 16
+          },
+          "seeds": [
+            1,
+            2,
+            3
+          ],
+          "strength": 1.0
+        },
+        "clip": {
+          "model": "wan_v2.2_a14b_hne_i2v_i8x.ckpt",
+          "frames": 81,
+          "steps": 4,
+          "cfg": 1,
+          "config": {
+            "sampler": 17,
+            "shift": 5.0,
+            "fps": 16,
+            "refinerModel": "wan_v2.2_a14b_lne_i2v_i8x.ckpt",
+            "refinerStart": 0.1,
+            "loras": [
+              {
+                "file": "wan_v2.2_a14b_hne_i2v_lightning_251022_lora_f16.ckpt",
+                "weight": 1.0
+              }
+            ]
+          },
+          "seed": 1,
+          "video_format": "prores422hq"
+        },
+        "masters": {},
+        "master_views": {},
+        "combos": {},
+        "upscale": {
+          "w": 3840,
+          "h": 2160,
+          "fit": "crop",
+          "bitrate": "40M"
+        },
+        "assemble": {
+          "fps": 16,
+          "xfade": 0.0,
+          "clip_audio": true
+        },
+        "deliver": [
+          {
+            "size": [
+              3840,
+              2160
+            ]
+          },
+          {
+            "size": [
+              1920,
+              1080
+            ]
+          }
+        ],
+        "shots": [
+          {
+            "id": "s1",
+            "still": {
+              "prompt": "Wide landscape, no people and no boats anywhere in the frame. First light over a cold northern coast: three tall sea stacks standing out of a flat calm ocean, low banks of sea mist lying on the water between them, the sun just clearing the horizon behind the furthest stack and laying a thin band of pale gold across the water. Deep blue-grey sky above, wet black rock in the foreground. Cinematic film still, anamorphic 35mm on film stock, photoreal water and wet rock, visible film grain. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark."
+            },
+            "video_prompt": "Locked camera, no movement at all. The mist drifts very slowly across the water from left to right and the sea surface heaves in long slow swells. The light on the water brightens almost imperceptibly. Nothing enters the frame. Everything moves at natural real-time speed, with no slow motion and no speed ramping. Distant surf, no music.",
+            "take": "clips/s1_v1.mov",
+            "trim": [
+              0,
+              5.0
+            ]
+          },
+          {
+            "id": "s2",
+            "still": {
+              "prompt": "Tight low shot close to the water, no people in the frame. A heavy green wave rearing and breaking over a shelf of black volcanic rock, thick white foam pouring off the rock in sheets and spray lifting into the air, backlit by low morning sun so the spray glows. Shallow depth of field on the foam. Cinematic film still, anamorphic 35mm on film stock, photoreal water and wet rock, visible film grain. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark."
+            },
+            "video_prompt": "Locked camera, no movement at all. The wave rears, breaks over the rock and drains away in sheets of foam, spray lifting and falling. Water only. Everything moves at natural real-time speed, with no slow motion and no speed ramping. Heavy surf, no music.",
+            "take": "clips/s2_v1.mov",
+            "trim": [
+              0,
+              5.0
+            ]
+          },
+          {
+            "id": "s3",
+            "still": {
+              "prompt": "Straight-down aerial view from high above, no people and no boats in the frame. Shallow tropical water over a sand bank, the colour running from deep blue through turquoise to almost white where the sand rises, long sinuous ripple patterns combed into the sand by the current, a thin line of white surf crossing one corner. Bright midday sun, high contrast. Cinematic film still, anamorphic 35mm on film stock, photoreal water and wet rock, visible film grain. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark."
+            },
+            "video_prompt": "The camera drifts very slowly straight forward over the water, keeping the same height, the view sliding steadily across the sand bank. The water surface shimmers and the surf line moves. Nothing else changes. Everything moves at natural real-time speed, with no slow motion and no speed ramping. Light surf, no music.",
+            "take": "clips/s3_v1.mov",
+            "trim": [
+              0,
+              5.0
+            ]
+          },
+          {
+            "id": "s4",
+            "still": {
+              "prompt": "Low shot into tall dune grass, no people in the frame, the horizon high in the frame. Dense marram grass covering a sand dune, each blade sharp against a hazy blue afternoon sky, a scoop of pale sand showing through at the base, the sea a thin blue line far beyond the crest. Warm side light raking across the grass. Cinematic film still, anamorphic 35mm on film stock, photoreal water and wet rock, visible film grain. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark."
+            },
+            "video_prompt": "Locked camera, no movement at all. Strong steady wind combs the grass in long travelling waves from one side of the frame to the other, the blades bending and springing back, loose sand streaming off the crest. Everything moves at natural real-time speed, with no slow motion and no speed ramping. Wind, no music.",
+            "take": "clips/s4_v1.mov",
+            "trim": [
+              0,
+              5.0
+            ]
+          },
+          {
+            "id": "s5",
+            "still": {
+              "prompt": "Wide low shot along a flat wet beach at golden hour, no people and no animals in the frame. Long parallel lines of surf running in across the shallows, the wet sand mirroring a sky of orange and pink, the sun low and huge just above the water throwing a broad gold path straight toward the camera, spray from the breaking lines lit from behind. Cinematic film still, anamorphic 35mm on film stock, photoreal water and wet rock, visible film grain. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark."
+            },
+            "video_prompt": "Locked camera, no movement at all. Successive lines of surf run in toward the camera, break and slide up the wet sand in thin sheets, then drain back and leave the sand mirroring the sky. The sun's reflection shivers on the water. Everything moves at natural real-time speed, with no slow motion and no speed ramping. Surf, no music.",
+            "take": "clips/s5_v1.mov",
+            "trim": [
+              0,
+              5.0
+            ]
+          },
+          {
+            "id": "s6",
+            "still": {
+              "prompt": "Close shot of a tide pool at dusk, no people in the frame. A still rock pool set in dark wet basalt, its surface a perfect mirror holding the last deep blue and ember-orange of the sky, strands of olive seaweed and small barnacled stones under the water, the dark silhouette of a sea stack reflected in the pool. Last light, deep cool shadows, the first faint star in the sky above. Cinematic film still, anamorphic 35mm on film stock, photoreal water and wet rock, visible film grain. Photorealistic, no cartoon or illustration styling, no text, no lettering, no logos, no watermark."
+            },
+            "video_prompt": "Locked camera, no movement at all. The surface of the pool ripples very gently as a thin trickle of water runs in from one side, the reflected sky wobbling and settling. The seaweed sways slightly under the water. The light fades almost imperceptibly. Everything moves at natural real-time speed, with no slow motion and no speed ramping. Faint distant surf, no music.",
+            "take": "clips/s6_v1.mov",
+            "trim": [
+              0,
+              5.0
+            ]
+          }
+        ]
+      },
+      "dt_project": "none — draw-things-cli via scripts/film_run.py"
     },
     {
       "id": "yang_family_lora",

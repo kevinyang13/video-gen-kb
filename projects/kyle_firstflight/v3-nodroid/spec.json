@@ -6,9 +6,9 @@
   "title": "Kyle: First Flight (v3, no droid)",
   "date": "2026-10-07",
   "theme": "realistic",
-  "status": "rendering",
+  "status": "stopped",
   "source": "v2-sheets masters, rebuilt with the style lock fixed and the droid cut",
-  "notes": "Kyle and the skiff only. Built on v2's masters. The style lock no longer mandates haze, shallow depth of field or a huge pale sky -- that global clause was measured as the sole cause of v2 s5's nine failed candidates (bg 77 -> 9 from removing it alone, same seed, same input). Atmosphere and sky are now placed per shot. Every scene shot is a single-image edit off a combo master, never a diptych.",
+  "notes": "Kyle and the skiff only. Built on v2's masters. The style lock no longer mandates haze, shallow depth of field or a huge pale sky -- that global clause was measured as the sole cause of v2 s5's nine failed candidates (bg 77 -> 9 from removing it alone, same seed, same input). Atmosphere and sky are now placed per shot. Every scene shot is a single-image edit off a combo master, never a diptych. Stopped partway through the 4K pass (5 of 8 shots upscaled); the 8 stills and 8 clips are on disk at 1080p.",
   "still": {
     "model": "flux_2_klein_9b_i8x.ckpt",
     "size": "1024x576",
@@ -314,5 +314,6 @@
         ]
       }
     ]
-  }
+  },
+  "dt_project": "none \u2014 draw-things-cli via scripts/film_run.py"
 }

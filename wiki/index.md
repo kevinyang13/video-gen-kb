@@ -75,6 +75,7 @@ Each project owns a folder — `projects/<id>/<version>/` — and its plan page 
 
 - [[identity-conditioning]] — why a character can stay the same: text embeddings vs reference-image tokens vs adapters vs LoRA weights vs first-frame latent; the mechanism behind every consistency tool
 - [[consistency-by-control]] — consistency comes from constraining, not sampling: `controls[]` gives the CLI ControlNet after all, conditioning schedules beat weights, silhouettes survive a scene change but markings do not, and what is ruled out on Apple Silicon
+- [[i2v-subject-consistency]] — keeping a subject intact through image-to-video: the six rules ranked by what they bought, and LTX vs Wan measured on camera obedience (6.9x vs 1.6x) and cost (3.4-5.4x)
 
 _(stubs referenced but not yet written: frame-interpolation, depth-parallax, ffmpeg-pipeline)_
 

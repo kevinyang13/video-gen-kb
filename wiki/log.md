@@ -1087,3 +1087,11 @@ benchmark (16.8%); silhouette failure is only 1.5% while logo/text is 20.1%; IP-
 have no confirmed MPS support and are face-embedding-based so could not hold a vehicle regardless; and no
 published test of a made-up mechanical object across shots exists anywhere. Report and notes under
 `reports/` and `research_notes/`.
+
+## 2026-10-09 — i2v subject consistency, and LTX vs Wan measured
+New page [[i2v-subject-consistency]]. Six rules for holding a subject through the clip stage, ranked by
+measured effect, with the controlled result behind rule 1: the same still with a camera-move prompt lost
+the subject entirely over 249 frames, and with a locked camera held. Plus the first real LTX/Wan
+comparison on this machine — LTX shrinks a subject 6.9x on a locked-distance orbit where Wan holds to
+1.6x, but Wan costs 3.4-5.4x more per second of footage and scales worse than linearly with frame count.
+Refines the one-line verdict in [[image-to-video-models]], which was right on speed and silent on camera.

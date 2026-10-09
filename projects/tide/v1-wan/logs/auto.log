@@ -19,3 +19,140 @@ no run-spec.combos block
 
 === auto: align ===
 $ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/.gen/s1.txt /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s1_c1.png 1 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s1_c1.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/.gen/s1.txt /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s1_c2.png 2 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s1_c2.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/.gen/s1.txt /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s1_c3.png 3 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s1_c3.png
+s1: 3 candidates -> projects/tide/v1-wan/seed/s1_sheet.png  sharpest c3
+s1: picked seed 3 -> projects/tide/v1-wan/stills/s1.png
+s1: no reference -- picked seed 3 on sharpness (780 of 3)
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/.gen/s2.txt /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s2_c1.png 1 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s2_c1.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/.gen/s2.txt /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s2_c2.png 2 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s2_c2.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/.gen/s2.txt /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s2_c3.png 3 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s2_c3.png
+s2: 3 candidates -> projects/tide/v1-wan/seed/s2_sheet.png  sharpest c1, bright background (bloom risk): c2
+s2: picked seed 1 -> projects/tide/v1-wan/stills/s2.png
+s2: no reference -- picked seed 1 on sharpness (1677 of 3)
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/.gen/s3.txt /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s3_c1.png 1 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s3_c1.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/.gen/s3.txt /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s3_c2.png 2 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s3_c2.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/.gen/s3.txt /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s3_c3.png 3 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s3_c3.png
+s3: 3 candidates -> projects/tide/v1-wan/seed/s3_sheet.png  sharpest c3
+s3: picked seed 3 -> projects/tide/v1-wan/stills/s3.png
+s3: no reference -- picked seed 3 on sharpness (2628 of 3)
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/.gen/s4.txt /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s4_c1.png 1 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s4_c1.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/.gen/s4.txt /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s4_c2.png 2 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s4_c2.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/.gen/s4.txt /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s4_c3.png 3 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s4_c3.png
+s4: 3 candidates -> projects/tide/v1-wan/seed/s4_sheet.png  sharpest c1
+s4: picked seed 1 -> projects/tide/v1-wan/stills/s4.png
+s4: no reference -- picked seed 1 on sharpness (9567 of 3)
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/.gen/s5.txt /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s5_c1.png 1 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s5_c1.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/.gen/s5.txt /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s5_c2.png 2 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s5_c2.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/.gen/s5.txt /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s5_c3.png 3 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s5_c3.png
+s5: 3 candidates -> projects/tide/v1-wan/seed/s5_sheet.png  sharpest c1
+s5: picked seed 1 -> projects/tide/v1-wan/stills/s5.png
+s5: no reference -- picked seed 1 on sharpness (1018 of 3)
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/.gen/s6.txt /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s6_c1.png 1 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s6_c1.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/.gen/s6.txt /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s6_c2.png 2 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s6_c2.png
+$ MODEL=flux_2_klein_9b_i8x.ckpt STEPS=4 CFG=1 STRENGTH=1.0 CONFIG_JSON='{"shift":3.0,"sampler":16}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_diptych.sh - - /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/.gen/s6.txt /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s6_c3.png 3 1024 576
+/Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s6_c3.png
+s6: 3 candidates -> projects/tide/v1-wan/seed/s6_sheet.png  sharpest c3
+s6: picked seed 3 -> projects/tide/v1-wan/stills/s6.png
+s6: no reference -- picked seed 3 on sharpness (766 of 3)
+
+=== auto: check ===
+planned length: 30.00 s kept − 5×0.0 fades = 30.00 s
+  WARN  s1: take not rendered yet: clips/s1_v1.mov
+  WARN  s2: take not rendered yet: clips/s2_v1.mov
+  WARN  s3: take not rendered yet: clips/s3_v1.mov
+  WARN  s4: take not rendered yet: clips/s4_v1.mov
+  WARN  s5: take not rendered yet: clips/s5_v1.mov
+  WARN  s5: still has no face and video_prompt never says it stays that way -- anything the motion reveals will be invented (see still-geometry §11)
+  WARN  s6: take not rendered yet: clips/s6_v1.mov
+check: PASS
+
+=== auto: clips ===
+$ MODEL=wan_v2.2_a14b_hne_i2v_i8x.ckpt VIDEO_FORMAT=prores422hq STEPS=4 CFG=1 FRAMES=81 CONFIG_JSON='{"sampler":17,"shift":5.0,"fps":16,"refinerModel":"wan_v2.2_a14b_lne_i2v_i8x.ckpt","refinerStart":0.1,"loras":[{"file":"wan_v2.2_a14b_hne_i2v_lightning_251022_lora_f16.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_clip.sh /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/stills/s1.png /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/.gen/s1_v.txt /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s1_v1.mov 1 1024 576
+dt_clip: /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s1_v1.mov  1024x576  81 frames  1031s
+/Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s1_v1.mov
+$ MODEL=wan_v2.2_a14b_hne_i2v_i8x.ckpt VIDEO_FORMAT=prores422hq STEPS=4 CFG=1 FRAMES=81 CONFIG_JSON='{"sampler":17,"shift":5.0,"fps":16,"refinerModel":"wan_v2.2_a14b_lne_i2v_i8x.ckpt","refinerStart":0.1,"loras":[{"file":"wan_v2.2_a14b_hne_i2v_lightning_251022_lora_f16.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_clip.sh /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/stills/s2.png /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/.gen/s2_v.txt /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s2_v1.mov 1 1024 576
+dt_clip: /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s2_v1.mov  1024x576  81 frames  1027s
+/Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s2_v1.mov
+$ MODEL=wan_v2.2_a14b_hne_i2v_i8x.ckpt VIDEO_FORMAT=prores422hq STEPS=4 CFG=1 FRAMES=81 CONFIG_JSON='{"sampler":17,"shift":5.0,"fps":16,"refinerModel":"wan_v2.2_a14b_lne_i2v_i8x.ckpt","refinerStart":0.1,"loras":[{"file":"wan_v2.2_a14b_hne_i2v_lightning_251022_lora_f16.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_clip.sh /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/stills/s3.png /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/.gen/s3_v.txt /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s3_v1.mov 1 1024 576
+dt_clip: /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s3_v1.mov  1024x576  81 frames  1026s
+/Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s3_v1.mov
+$ MODEL=wan_v2.2_a14b_hne_i2v_i8x.ckpt VIDEO_FORMAT=prores422hq STEPS=4 CFG=1 FRAMES=81 CONFIG_JSON='{"sampler":17,"shift":5.0,"fps":16,"refinerModel":"wan_v2.2_a14b_lne_i2v_i8x.ckpt","refinerStart":0.1,"loras":[{"file":"wan_v2.2_a14b_hne_i2v_lightning_251022_lora_f16.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_clip.sh /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/stills/s4.png /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/.gen/s4_v.txt /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s4_v1.mov 1 1024 576
+dt_clip: /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s4_v1.mov  1024x576  81 frames  1032s
+/Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s4_v1.mov
+$ MODEL=wan_v2.2_a14b_hne_i2v_i8x.ckpt VIDEO_FORMAT=prores422hq STEPS=4 CFG=1 FRAMES=81 CONFIG_JSON='{"sampler":17,"shift":5.0,"fps":16,"refinerModel":"wan_v2.2_a14b_lne_i2v_i8x.ckpt","refinerStart":0.1,"loras":[{"file":"wan_v2.2_a14b_hne_i2v_lightning_251022_lora_f16.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_clip.sh /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/stills/s5.png /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/.gen/s5_v.txt /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s5_v1.mov 1 1024 576
+dt_clip: /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s5_v1.mov  1024x576  81 frames  1027s
+/Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s5_v1.mov
+$ MODEL=wan_v2.2_a14b_hne_i2v_i8x.ckpt VIDEO_FORMAT=prores422hq STEPS=4 CFG=1 FRAMES=81 CONFIG_JSON='{"sampler":17,"shift":5.0,"fps":16,"refinerModel":"wan_v2.2_a14b_lne_i2v_i8x.ckpt","refinerStart":0.1,"loras":[{"file":"wan_v2.2_a14b_hne_i2v_lightning_251022_lora_f16.ckpt","weight":1.0}]}' /Users/kevinyang/dev/video-gen-kb/scripts/dt_clip.sh /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/stills/s6.png /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/.gen/s6_v.txt /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s6_v1.mov 1 1024 576
+dt_clip: /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s6_v1.mov  1024x576  81 frames  1027s
+/Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s6_v1.mov
+
+=== auto: qc ===
+$ /Users/kevinyang/dev/video-gen-kb/scripts/qc_sheet.sh /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s1_v1.mov /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s1_v1_qc.png /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/stills/s1.png
+/Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s1_v1_qc.png  (frames: 0 20 40 60 80 of 81; no end fade)
+$ /Users/kevinyang/dev/video-gen-kb/scripts/qc_sheet.sh /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s2_v1.mov /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s2_v1_qc.png /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/stills/s2.png
+/Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s2_v1_qc.png  (frames: 0 20 40 60 80 of 81; no end fade)
+$ /Users/kevinyang/dev/video-gen-kb/scripts/qc_sheet.sh /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s3_v1.mov /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s3_v1_qc.png /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/stills/s3.png
+/Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s3_v1_qc.png  (frames: 0 20 40 60 80 of 81; no end fade)
+$ /Users/kevinyang/dev/video-gen-kb/scripts/qc_sheet.sh /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s4_v1.mov /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s4_v1_qc.png /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/stills/s4.png
+/Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s4_v1_qc.png  (frames: 0 20 40 60 80 of 81; no end fade)
+$ /Users/kevinyang/dev/video-gen-kb/scripts/qc_sheet.sh /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s5_v1.mov /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s5_v1_qc.png /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/stills/s5.png
+/Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s5_v1_qc.png  (frames: 0 20 40 60 80 of 81; no end fade)
+$ /Users/kevinyang/dev/video-gen-kb/scripts/qc_sheet.sh /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s6_v1.mov /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s6_v1_qc.png /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/stills/s6.png
+/Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/seed/s6_v1_qc.png  (frames: 0 20 40 60 80 of 81; no end fade)
+
+=== auto: finish ===
+$ ffmpeg -nostdin -v error -y -i /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s1_v1.mov -vf trim=start=0:end=5.0,setpts=PTS-STARTPTS -af atrim=start=0:end=5.0,asetpts=PTS-STARTPTS -c:v prores_ks -profile:v 3 -c:a pcm_s16le /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s1_t.mov
+$ W=3840 H=2160 FIT=crop BITRATE=40M KEEP_FRAMES=0 KEEP_AUDIO=1 /Users/kevinyang/dev/video-gen-kb/scripts/upscale_4k.sh /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s1_t.mov /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s1 realesrgan-x4plus
+hevc,3840,2160,yuv420p10le,80
+4k: /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s1_4k.mp4
+$ ffmpeg -nostdin -v error -y -i /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s2_v1.mov -vf trim=start=0:end=5.0,setpts=PTS-STARTPTS -af atrim=start=0:end=5.0,asetpts=PTS-STARTPTS -c:v prores_ks -profile:v 3 -c:a pcm_s16le /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s2_t.mov
+$ W=3840 H=2160 FIT=crop BITRATE=40M KEEP_FRAMES=0 KEEP_AUDIO=1 /Users/kevinyang/dev/video-gen-kb/scripts/upscale_4k.sh /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s2_t.mov /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s2 realesrgan-x4plus
+hevc,3840,2160,yuv420p10le,80
+4k: /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s2_4k.mp4
+$ ffmpeg -nostdin -v error -y -i /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s3_v1.mov -vf trim=start=0:end=5.0,setpts=PTS-STARTPTS -af atrim=start=0:end=5.0,asetpts=PTS-STARTPTS -c:v prores_ks -profile:v 3 -c:a pcm_s16le /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s3_t.mov
+$ W=3840 H=2160 FIT=crop BITRATE=40M KEEP_FRAMES=0 KEEP_AUDIO=1 /Users/kevinyang/dev/video-gen-kb/scripts/upscale_4k.sh /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s3_t.mov /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s3 realesrgan-x4plus
+hevc,3840,2160,yuv420p10le,80
+4k: /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s3_4k.mp4
+$ ffmpeg -nostdin -v error -y -i /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s4_v1.mov -vf trim=start=0:end=5.0,setpts=PTS-STARTPTS -af atrim=start=0:end=5.0,asetpts=PTS-STARTPTS -c:v prores_ks -profile:v 3 -c:a pcm_s16le /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s4_t.mov
+$ W=3840 H=2160 FIT=crop BITRATE=40M KEEP_FRAMES=0 KEEP_AUDIO=1 /Users/kevinyang/dev/video-gen-kb/scripts/upscale_4k.sh /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s4_t.mov /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s4 realesrgan-x4plus
+hevc,3840,2160,yuv420p10le,80
+4k: /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s4_4k.mp4
+$ ffmpeg -nostdin -v error -y -i /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s5_v1.mov -vf trim=start=0:end=5.0,setpts=PTS-STARTPTS -af atrim=start=0:end=5.0,asetpts=PTS-STARTPTS -c:v prores_ks -profile:v 3 -c:a pcm_s16le /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s5_t.mov
+$ W=3840 H=2160 FIT=crop BITRATE=40M KEEP_FRAMES=0 KEEP_AUDIO=1 /Users/kevinyang/dev/video-gen-kb/scripts/upscale_4k.sh /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s5_t.mov /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s5 realesrgan-x4plus
+hevc,3840,2160,yuv420p10le,80
+4k: /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s5_4k.mp4
+$ ffmpeg -nostdin -v error -y -i /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s6_v1.mov -vf trim=start=0:end=5.0,setpts=PTS-STARTPTS -af atrim=start=0:end=5.0,asetpts=PTS-STARTPTS -c:v prores_ks -profile:v 3 -c:a pcm_s16le /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s6_t.mov
+$ W=3840 H=2160 FIT=crop BITRATE=40M KEEP_FRAMES=0 KEEP_AUDIO=1 /Users/kevinyang/dev/video-gen-kb/scripts/upscale_4k.sh /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s6_t.mov /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s6 realesrgan-x4plus
+hevc,3840,2160,yuv420p10le,80
+4k: /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s6_4k.mp4
+$ W=3840 H=2160 FPS=16 XFADE=0.0 BITRATE=40M CLIP_AUDIO=1 /Users/kevinyang/dev/video-gen-kb/scripts/assemble_film.sh /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/final/tide_3840x2160.mp4 /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s1_4k.mp4 /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s2_4k.mp4 /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s3_4k.mp4 /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s4_4k.mp4 /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s5_4k.mp4 /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/clips/s6_4k.mp4
+film: /Users/kevinyang/dev/video-gen-kb/projects/tide/v1-wan/final/tide_3840x2160.mp4 (30.000000s, expected 30.0s)
+Traceback (most recent call last):
+  File "/Users/kevinyang/dev/video-gen-kb/scripts/film_run.py", line 1244, in <module>
+    sys.exit(CMDS[pos[1]](spec, pos[2:]))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinyang/dev/video-gen-kb/scripts/film_run.py", line 1136, in cmd_auto
+    rc = fn(f, a + [x for x in args if x.startswith("--")])
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinyang/dev/video-gen-kb/scripts/film_run.py", line 1227, in cmd_finish
+    w, h = dl["size"]
+           ~~^^^^^^^^
+KeyError: 'size'

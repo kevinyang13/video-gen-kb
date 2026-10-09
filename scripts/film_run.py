@@ -1224,7 +1224,10 @@ def cmd_finish(f, _):
     if run([S / "assemble_film.sh", master, *outs], env):
         die("assemble failed")
     for dl in f.get("deliver", []):
-        w, h = dl["size"]
+        # Accept both spellings. Every other block in a run-spec takes w/h as separate keys, so writing
+        # deliver that way is the natural mistake -- and it crashed `finish` AFTER the 4K master was
+        # already assembled, which is the worst possible place to fail.
+        w, h = dl["size"] if "size" in dl else (dl["w"], dl["h"])
         run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-i", master, "-vf", f"scale={w}:{h}:flags=lanczos",
              "-c:v", "hevc_videotoolbox", "-b:v", dl.get("bitrate", "12M"), "-tag:v", "hvc1", "-c:a", "copy",
              "-movflags", "+faststart", fin / f"{name}_{w}x{h}.mp4"])
