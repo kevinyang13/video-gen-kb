@@ -90,8 +90,23 @@ def flag(name, default=None):
     return default
 
 
+def flag_values(argv=None):
+    """Every token that is the VALUE of a --flag, so ids_arg never mistakes one for a shot id.
+
+    `align s5 --rounds 3` read the 3 as a shot and died with "unknown shot '3'". Listing the two
+    flags that happened to take values was never going to hold as more flags appeared.
+    """
+    argv = argv if argv is not None else sys.argv
+    vals, skip = set(), False
+    for i, a in enumerate(argv):
+        if a.startswith("--") and i + 1 < len(argv) and not argv[i + 1].startswith("--"):
+            vals.add(argv[i + 1])
+    return vals
+
+
 def ids_arg(f, args):
-    ids = [a for a in args if not a.startswith("--") and a not in (flag("--v"), flag("--seed"))]
+    taken = flag_values()
+    ids = [a for a in args if not a.startswith("--") and a not in taken]
     known = [s["id"] for s in f["shots"]]
     for i in ids:
         if i not in known:
